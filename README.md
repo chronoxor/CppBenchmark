@@ -1,2 +1,2 @@
-# cppbenchmark
+# CppBenchmark
 C++ Benchmark Library
