@@ -10,7 +10,7 @@
 
 namespace {
 
-#ifdef _WIN32
+#if defined(_WIN32)
 // Helper function to count set bits in the processor mask
 DWORD CountSetBits(ULONG_PTR pBitMask)
 {
@@ -34,7 +34,7 @@ namespace CppBenchmark {
 
 std::string System::CpuArchitecture()
 {
-#ifdef _WIN32
+#if defined(_WIN32)
     HKEY hKey;
     LONG lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     if (lError != ERROR_SUCCESS)
@@ -62,7 +62,7 @@ int System::CpuPhysicalCores()
 
 std::pair<int, int> System::CpuTotalCores()
 {
-#ifdef _WIN32
+#if defined(_WIN32)
     BOOL allocated = FALSE;
     PSYSTEM_LOGICAL_PROCESSOR_INFORMATION pBuffer = NULL;
     DWORD dwLength = 0;
@@ -115,7 +115,7 @@ std::pair<int, int> System::CpuTotalCores()
 
 int64_t System::CpuClockSpeed()
 {
-#ifdef _WIN32
+#if defined(_WIN32)
     HKEY hKey;
     long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     if (lError != ERROR_SUCCESS)
@@ -139,7 +139,7 @@ bool System::CpuHyperThreading()
 
 int64_t System::RamTotal()
 {
-#ifdef _WIN32
+#if defined(_WIN32)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
@@ -149,7 +149,7 @@ int64_t System::RamTotal()
 
 int64_t System::RamFree()
 {
-#ifdef _WIN32
+#if defined(_WIN32)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
