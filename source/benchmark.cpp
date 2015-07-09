@@ -30,7 +30,9 @@ void Benchmark::Launch(std::function<void (const Benchmark&, const Context&, int
             while ((iterations >= 0) || (nanoseconds >= 0))
             {
                 auto start = std::chrono::high_resolution_clock::now();
+                _root.metrics().StartIteration();
                 Run(context);
+                _root.metrics().StopIteration();
                 auto stop = std::chrono::high_resolution_clock::now();
                 // Special check for single iteration launch (default settings)
                 if ((iterations == 0) && (nanoseconds == 0))

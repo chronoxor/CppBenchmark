@@ -13,6 +13,7 @@ namespace CppBenchmark {
 
 class PhaseMetrics
 {
+    friend class Benchmark;
     friend class PhaseCore;
 
 public:

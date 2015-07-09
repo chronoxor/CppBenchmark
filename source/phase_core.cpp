@@ -18,7 +18,7 @@ std::shared_ptr<Phase> PhaseCore::Start(const std::string& phase)
         result = it->second;
 
     // Start new iteration for the phase
-    _metrics.StartIteration();
+    result->_metrics.StartIteration();
 
     return result;
 }

@@ -35,7 +35,7 @@ private:
     std::vector<std::shared_ptr<Benchmark>> _benchmarks;
     std::vector<std::shared_ptr<Reporter>> _reporters;
 
-    void ReportPhase(Reporter& reporter, const PhaseCore& phase);
+    void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name);
 };
 
 } // namespace CppBenchmark
