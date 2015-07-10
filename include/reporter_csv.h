@@ -1,0 +1,38 @@
+//
+// Created by Ivan Shynkarenka on 10.07.2015.
+//
+
+#ifndef CPPBENCHMARK_REPORTER_CSV_H
+#define CPPBENCHMARK_REPORTER_CSV_H
+
+#include "reporter.h"
+
+#include <ostream>
+
+namespace CppBenchmark {
+
+class ReporterCSV : Reporter
+{
+public:
+    ReporterCSV(std::ostream& stream) : _stream(stream) {}
+    ReporterCSV(const ReporterCSV&) = delete;
+    ReporterCSV(ReporterCSV&&) = delete;
+    ~ReporterCSV() = default;
+
+    ReporterCSV& operator=(const ReporterCSV&) = delete;
+    ReporterCSV& operator=(ReporterCSV&&) = delete;
+
+    void ReportHeader() override;
+    void ReportSystem() override {}
+    void ReportEnvironment() override {}
+    void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) override {}
+    void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) override;
+    void ReportFooter() override {}
+
+private:
+    std::ostream& _stream;
+};
+
+} // namespace CppBenchmark
+
+#endif // CPPBENCHMARK_REPORTER_CSV_H

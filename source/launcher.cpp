@@ -29,8 +29,9 @@ void Launcher::Launch(const std::string& pattern,
     for (auto benchmark : _benchmarks) {
         if (std::regex_match(benchmark->name(), matcher)) {
             for (auto reporter : _reporters) {
-                reporter->ReportBenchmark(benchmark->name(), benchmark->_root.metrics(), benchmark->_settings);
-                ReportPhase(*reporter, benchmark->_root, benchmark->name());
+                reporter->ReportBenchmark(*benchmark, benchmark->_settings);
+                for (auto root_phase : benchmark->_benchmarks)
+                    ReportPhase(*reporter, *root_phase, root_phase->name());
             }
         }
     }
@@ -42,10 +43,10 @@ void Launcher::Launch(const std::string& pattern,
 
 void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name)
 {
+    reporter.ReportPhase(phase, phase.metrics());
     for (auto child : phase._child) {
-        std::string child_name = name + '.' + child.second->name();
-        reporter.ReportPhase(child_name, child.second->metrics());
-        ReportPhase(reporter, *child.second, child_name);
+        std::string child_name = name + '.' + child->name();
+        ReportPhase(reporter, *child, child_name);
     }
 }
 

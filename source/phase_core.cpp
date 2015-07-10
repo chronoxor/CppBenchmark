@@ -4,6 +4,8 @@
 
 #include "phase_core.h"
 
+#include <algorithm>
+
 namespace CppBenchmark {
 
 std::shared_ptr<Phase> PhaseCore::Start(const std::string& phase)
@@ -11,13 +13,15 @@ std::shared_ptr<Phase> PhaseCore::Start(const std::string& phase)
     std::shared_ptr<PhaseCore> result;
 
     // Find or create a sub phase with the given name
-    auto it = _child.find(phase);
-    if (it == _child.end())
-        result = _child.emplace(phase, std::make_shared<PhaseCore>(phase)).first->second;
+    auto it = std::find_if(_child.begin(), _child.end(), [&phase] (std::shared_ptr<PhaseCore>& item) { return item->name() == phase; });
+    if (it == _child.end()) {
+        result = std::make_shared<PhaseCore>(phase);
+        _child.emplace_back(result);
+    }
     else
-        result = it->second;
+        result = *it;
 
-    // Start new iteration for the phase
+    // Start new iteration for the child phase
     result->_metrics.StartIteration();
 
     return result;
@@ -25,7 +29,7 @@ std::shared_ptr<Phase> PhaseCore::Start(const std::string& phase)
 
 void PhaseCore::Stop()
 {
-    // End the current iteration for the phase
+    // End the current iteration for the current phase
     _metrics.StopIteration();
 }
 

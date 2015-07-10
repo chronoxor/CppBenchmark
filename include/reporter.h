@@ -23,8 +23,8 @@ public:
     virtual void ReportHeader() = 0;
     virtual void ReportSystem() = 0;
     virtual void ReportEnvironment() = 0;
-    virtual void ReportBenchmark(const std::string& name, const PhaseMetrics& metrics, const Settings& settings) = 0;
-    virtual void ReportPhase(const std::string& name, const PhaseMetrics& metrics) = 0;
+    virtual void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) = 0;
+    virtual void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) = 0;
     virtual void ReportFooter() = 0;
 };
 

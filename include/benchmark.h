@@ -17,7 +17,7 @@ class Benchmark : public Phase
 
 public:
     explicit Benchmark(const std::string& name, const Settings& settings = Settings::Default)
-            : _root(name),
+            : _name(name),
               _settings(settings)
     {}
     Benchmark(const Benchmark&) = delete;
@@ -28,18 +28,16 @@ public:
     Benchmark& operator=(Benchmark&&) = delete;
 
     // Implementation of Phase
-    virtual const std::string& name() const
-    { return _root.name(); }
-    virtual const PhaseMetrics& metrics() const
-    { return _root.metrics(); }
-    virtual PhaseMetrics& metrics()
-    { return _root.metrics(); }
-    virtual std::shared_ptr<Phase> Start(const std::string& phase)
-    { return _root.Start(phase); }
-    virtual void Stop()
-    { _root.Stop(); }
-    virtual std::shared_ptr<PhaseScope> Scope(const std::string& phase)
-    { return _root.Scope(phase); }
+    const std::string& name() const override
+    { return _current->name(); }
+    const PhaseMetrics& metrics() const override
+    { return _current->metrics(); }
+    std::shared_ptr<Phase> Start(const std::string& phase) override
+    { return _current->Start(phase); }
+    void Stop() override
+    { _current->Stop(); }
+    std::shared_ptr<PhaseScope> Scope(const std::string& phase) override
+    { return _current->Scope(phase); }
 
 protected:
     virtual void Initialize() {}
@@ -47,8 +45,12 @@ protected:
     virtual void Cleanup() {}
 
 private:
-    PhaseCore _root;
+    std::string _name;
     Settings _settings;
+    std::shared_ptr<PhaseCore> _current;
+    std::vector<std::shared_ptr<PhaseCore>> _benchmarks;
+
+    std::shared_ptr<PhaseCore> UpdateCurrentBenchmark(const Context& context);
 
     void Launch(std::function<void (const Benchmark&, const Context&, int)> onLaunching = [](const Benchmark&, const Context&, int){},
                 std::function<void (const Benchmark&, const Context&, int)> onLaunched = [](const Benchmark&, const Context&, int){});

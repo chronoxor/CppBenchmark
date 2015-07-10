@@ -5,7 +5,7 @@
 #ifndef CPPBENCHMARK_PHASE_CORE_H
 #define CPPBENCHMARK_PHASE_CORE_H
 
-#include <map>
+#include <vector>
 
 #include "phase_metrics.h"
 #include "phase_scope.h"
@@ -14,6 +14,7 @@ namespace CppBenchmark {
 
 class PhaseCore : public Phase
 {
+    friend class Benchmark;
     friend class Launcher;
 
 public:
@@ -26,16 +27,15 @@ public:
     PhaseCore& operator=(PhaseCore&&) = delete;
 
     // Implementation of Phase
-    virtual const std::string& name() const { return _name; }
-    virtual const PhaseMetrics& metrics() const { return _metrics; }
-    virtual PhaseMetrics& metrics() { return _metrics; }
-    virtual std::shared_ptr<Phase> Start(const std::string& phase);
-    virtual void Stop();
-    virtual std::shared_ptr<PhaseScope> Scope(const std::string& phase);
+    const std::string& name() const override { return _name; }
+    const PhaseMetrics& metrics() const override { return _metrics; }
+    std::shared_ptr<Phase> Start(const std::string& phase) override;
+    void Stop() override;
+    std::shared_ptr<PhaseScope> Scope(const std::string& phase) override;
 
 private:
     std::string _name;
-    std::map<std::string, std::shared_ptr<PhaseCore>> _child;
+    std::vector<std::shared_ptr<PhaseCore>> _child;
     PhaseMetrics _metrics;
 };
 

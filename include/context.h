@@ -5,6 +5,8 @@
 #ifndef CPPBENCHMARK_CONTEXT_H
 #define CPPBENCHMARK_CONTEXT_H
 
+#include <string>
+
 namespace CppBenchmark {
 
 class Context
@@ -23,6 +25,8 @@ public:
     int x() const { return _x; }
     int y() const { return _y; }
     int z() const { return _z; }
+
+    friend std::string to_string(const Context& instance);
 
 private:
     int _x;

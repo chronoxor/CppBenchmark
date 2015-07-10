@@ -27,12 +27,11 @@ public:
     explicit operator bool() const noexcept { return _ptr_phase ? true : false; }
 
     // Implementation of Phase
-    virtual const std::string& name() const { return _ptr_phase ? _ptr_phase->name() : EMPTY_NAME; }
-    virtual const PhaseMetrics& metrics() const { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
-    virtual PhaseMetrics& metrics() { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
-    virtual std::shared_ptr<Phase> Start(const std::string& phase);
-    virtual void Stop();
-    virtual std::shared_ptr<PhaseScope> Scope(const std::string& phase);
+    const std::string& name() const override { return _ptr_phase ? _ptr_phase->name() : EMPTY_NAME; }
+    const PhaseMetrics& metrics() const override { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
+    std::shared_ptr<Phase> Start(const std::string& phase) override;
+    void Stop() override;
+    std::shared_ptr<PhaseScope> Scope(const std::string& phase) override;
 
 private:
     std::shared_ptr<Phase> _ptr_phase;

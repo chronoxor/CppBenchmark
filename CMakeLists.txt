@@ -17,6 +17,7 @@ set(SOURCE_FILES
     source/phase_metrics.cpp
     source/phase_scope.cpp
     source/reporter.cpp
+    source/reporter_csv.cpp
     source/settings.cpp
     source/system.cpp)
 add_library(cppbenchmark ${SOURCE_FILES})
