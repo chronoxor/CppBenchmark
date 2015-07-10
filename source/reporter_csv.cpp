@@ -14,7 +14,7 @@ void ReporterCSV::ReportHeader()
 void ReporterCSV::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
 {
     _stream
-    << phase.name()
+    << '"' << phase.name() << '"'
     << metrics.avg_time()
     << metrics.min_time()
     << metrics.max_time()
