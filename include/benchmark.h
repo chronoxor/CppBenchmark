@@ -15,6 +15,8 @@ class Benchmark : public Phase
 {
     friend class Launcher;
 
+    static PhaseMetrics EMPTY_METRICS;
+
 public:
     explicit Benchmark(const std::string& name, const Settings& settings = Settings::Default)
             : _name(name),
@@ -29,15 +31,15 @@ public:
 
     // Implementation of Phase
     const std::string& name() const override
-    { return _current->name(); }
+    { return _current ? _current->name() : _name; }
     const PhaseMetrics& metrics() const override
-    { return _current->metrics(); }
+    { return _current ? _current->metrics() : EMPTY_METRICS; }
     std::shared_ptr<Phase> Start(const std::string& phase) override
-    { return _current->Start(phase); }
+    { return _current ? _current->Start(phase) : nullptr; }
     void Stop() override
-    { _current->Stop(); }
+    { if (_current) _current->Stop(); }
     std::shared_ptr<PhaseScope> Scope(const std::string& phase) override
-    { return _current->Scope(phase); }
+    { return _current ? _current->Scope(phase) : nullptr; }
 
 protected:
     virtual void Initialize() {}
@@ -50,7 +52,8 @@ private:
     std::shared_ptr<PhaseCore> _current;
     std::vector<std::shared_ptr<PhaseCore>> _benchmarks;
 
-    std::shared_ptr<PhaseCore> UpdateCurrentBenchmark(const Context& context);
+    void ResetCurrentBenchmark();
+    void UpdateCurrentBenchmark(const Context& context);
 
     void Launch(std::function<void (const Benchmark&, const Context&, int)> onLaunching = [](const Benchmark&, const Context&, int){},
                 std::function<void (const Benchmark&, const Context&, int)> onLaunched = [](const Benchmark&, const Context&, int){});

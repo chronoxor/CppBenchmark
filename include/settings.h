@@ -26,6 +26,11 @@ public:
     Settings& operator=(const Settings&) = default;
     Settings& operator=(Settings&&) = default;
 
+    int attempts() const { return _attempts; }
+    int64_t iterations() const { return _iterations; }
+    int64_t nanoseconds() const { return _nanoseconds; }
+    const std::vector<std::tuple<int, int, int>> params() const { return _params; }
+
     Settings& Attempts(int attempts);
 
     Settings& Iterations(int64_t iterations);

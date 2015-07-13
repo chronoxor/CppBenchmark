@@ -7,14 +7,14 @@
 
 #include "reporter.h"
 
-#include <ostream>
+#include <iostream>
 
 namespace CppBenchmark {
 
 class ReporterCSV : Reporter
 {
 public:
-    ReporterCSV(std::ostream& stream) : _stream(stream) {}
+    ReporterCSV(std::ostream& stream = std::cout) : _stream(stream) {}
     ReporterCSV(const ReporterCSV&) = delete;
     ReporterCSV(ReporterCSV&&) = delete;
     ~ReporterCSV() = default;

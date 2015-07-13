@@ -6,7 +6,6 @@
 #define CPPBENCHMARK_ENVIRONMENT_H
 
 #include <ctime>
-#include <string>
 
 namespace CppBenchmark {
 
@@ -21,13 +20,14 @@ public:
     Environment& operator=(const Environment&) = delete;
     Environment& operator=(Environment&&) = delete;
 
-    static time_t Timestamp();
     static bool Is32BitOS();
     static bool Is64BitOS();
     static bool Is32BitProcess();
     static bool Is64BitProcess();
     static bool IsDebug();
     static bool IsRelease();
+
+    static time_t Timestamp();
 };
 
 } // namespace CppBenchmark

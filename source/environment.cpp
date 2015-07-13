@@ -12,11 +12,6 @@
 
 namespace CppBenchmark {
 
-time_t Environment::Timestamp()
-{
-    return std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-}
-
 bool Environment::Is32BitOS()
 {
     return !Is64BitOS();
@@ -58,6 +53,11 @@ bool Environment::IsRelease()
 #else
     return false;
 #endif
+}
+
+time_t Environment::Timestamp()
+{
+    return std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 }
 
 } // namespace CppBenchmark

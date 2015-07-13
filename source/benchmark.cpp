@@ -8,7 +8,15 @@
 
 namespace CppBenchmark {
 
-std::shared_ptr<PhaseCore> Benchmark::UpdateCurrentBenchmark(const Context& context)
+PhaseMetrics Benchmark::EMPTY_METRICS = PhaseMetrics();
+
+void Benchmark::ResetCurrentBenchmark()
+{
+    // Reset the current benchmark
+    _current.reset();
+}
+
+void Benchmark::UpdateCurrentBenchmark(const Context& context)
 {
     std::string name = _name + to_string(context);
     std::shared_ptr<PhaseCore> result;
@@ -24,8 +32,6 @@ std::shared_ptr<PhaseCore> Benchmark::UpdateCurrentBenchmark(const Context& cont
 
     // Update the current benchmark
     _current = result;
-
-    return result;
 }
 
 void Benchmark::Launch(std::function<void (const Benchmark&, const Context&, int)> onLaunching,
@@ -67,6 +73,8 @@ void Benchmark::Launch(std::function<void (const Benchmark&, const Context&, int
             }
             // Call launched notification
             onLaunched(*this, context, attempt);
+            // Reset the current benchmark
+            ResetCurrentBenchmark();
         }
 
         // Cleanup benchmark

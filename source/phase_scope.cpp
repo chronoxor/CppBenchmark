@@ -16,10 +16,7 @@ PhaseScope::~PhaseScope()
 
 std::shared_ptr<Phase> PhaseScope::Start(const std::string& phase)
 {
-    if (_ptr_phase)
-        return _ptr_phase->Start(phase);
-    else
-        return _ptr_phase;
+    return _ptr_phase ? _ptr_phase->Start(phase) : nullptr;
 }
 
 void PhaseScope::Stop()
@@ -32,10 +29,7 @@ void PhaseScope::Stop()
 
 std::shared_ptr<PhaseScope> PhaseScope::Scope(const std::string& phase)
 {
-    if (_ptr_phase)
-        return _ptr_phase->Scope(phase);
-    else
-        return std::shared_ptr<PhaseScope>();
+    return _ptr_phase ? _ptr_phase->Scope(phase) : nullptr;
 }
 
 } // namespace CppBenchmark

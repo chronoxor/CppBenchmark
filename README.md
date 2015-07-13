@@ -2,8 +2,6 @@
 C++ Benchmark Library
 
 # Todo
-* Console reporter
-* CSV reporter
 * JSON reporter
 
 * Console launcher
