@@ -34,12 +34,12 @@ public:
     { return _current ? _current->name() : _name; }
     const PhaseMetrics& metrics() const override
     { return _current ? _current->metrics() : EMPTY_METRICS; }
-    std::shared_ptr<Phase> Start(const std::string& phase) override
-    { return _current ? _current->Start(phase) : nullptr; }
-    void Stop() override
-    { if (_current) _current->Stop(); }
-    std::shared_ptr<PhaseScope> Scope(const std::string& phase) override
-    { return _current ? _current->Scope(phase) : nullptr; }
+    std::shared_ptr<Phase> StartPhase(const std::string& phase) override
+    { return _current ? _current->StartPhase(phase) : nullptr; }
+    void StopPhase() override
+    { if (_current) _current->StopPhase(); }
+    std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) override
+    { return _current ? _current->ScopePhase(phase) : nullptr; }
 
 protected:
     virtual void Initialize() {}
@@ -55,8 +55,17 @@ private:
     void ResetCurrentBenchmark();
     void UpdateCurrentBenchmark(const Context& context);
 
-    void Launch(std::function<void (const Benchmark&, const Context&, int)> onLaunching = [](const Benchmark&, const Context&, int){},
-                std::function<void (const Benchmark&, const Context&, int)> onLaunched = [](const Benchmark&, const Context&, int){});
+    void ResetMetrics();
+    void ResetMetrics(PhaseCore& phase);
+
+    void ChooseBestMetrics();
+    void ChooseBestMetrics(PhaseCore& phase);
+
+    void UpdateFinalMetrics();
+    void UpdateFinalMetrics(const std::string& name, PhaseCore& phase);
+
+    void Launch(/*std::function<void (const Benchmark&, const Context&, int)> onLaunching = [](const Benchmark&, const Context&, int){},
+                std::function<void (const Benchmark&, const Context&, int)> onLaunched = [](const Benchmark&, const Context&, int){}*/);
 };
 
 } // namespace CppBenchmark

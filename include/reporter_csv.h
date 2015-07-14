@@ -11,7 +11,7 @@
 
 namespace CppBenchmark {
 
-class ReporterCSV : Reporter
+class ReporterCSV : public Reporter
 {
 public:
     ReporterCSV(std::ostream& stream = std::cout) : _stream(stream) {}

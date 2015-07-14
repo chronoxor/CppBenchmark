@@ -11,10 +11,10 @@
 
 namespace CppBenchmark {
 
-class ReporterJSON : Reporter
+class ReporterJSON : public Reporter
 {
 public:
-    ReporterJSON(std::ostream& stream = std::cout) : _stream(stream), _indent(2, ' ') {}
+    ReporterJSON(std::ostream& stream = std::cout) : _stream(stream) {}
     ReporterJSON(const ReporterJSON&) = delete;
     ReporterJSON(ReporterJSON&&) = delete;
     ~ReporterJSON() = default;
@@ -39,7 +39,6 @@ public:
 
 private:
     std::ostream& _stream;
-    std::string _indent;
     bool _benchmark_comma;
     bool _phase_comma;
 };

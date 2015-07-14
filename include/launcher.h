@@ -27,9 +27,9 @@ public:
     void AddReporter(std::shared_ptr<Reporter> reporter) { _reporters.emplace_back(reporter); }
     void ClearAllReporters() { _reporters.clear(); }
 
-    void Launch(const std::string& pattern = ".",
+    void Launch(const std::string& pattern = ".+"/*,
                 std::function<void (const Benchmark&, const Context&, int)> onLaunching = [](const Benchmark&, const Context&, int){},
-                std::function<void (const Benchmark&, const Context&, int)> onLaunched = [](const Benchmark&, const Context&, int){});
+                std::function<void (const Benchmark&, const Context&, int)> onLaunched = [](const Benchmark&, const Context&, int){}*/);
 
 private:
     std::vector<std::shared_ptr<Benchmark>> _benchmarks;

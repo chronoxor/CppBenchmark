@@ -8,15 +8,15 @@
 
 namespace CppBenchmark {
 
-void Launcher::Launch(const std::string& pattern,
+void Launcher::Launch(const std::string& pattern/*,
                       std::function<void (const Benchmark&, const Context&, int)> onLaunching,
-                      std::function<void (const Benchmark&, const Context&, int)> onLaunched)
+                      std::function<void (const Benchmark&, const Context&, int)> onLaunched*/)
 {
     // Launch all suitable benchmarks
     std::regex matcher(pattern);
     for (auto benchmark : _benchmarks)
         if (std::regex_match(benchmark->name(), matcher))
-            benchmark->Launch(onLaunching, onLaunched);
+            benchmark->Launch(/*onLaunching, onLaunched*/);
 
     // Report header, system & environment
     for (auto reporter : _reporters) {

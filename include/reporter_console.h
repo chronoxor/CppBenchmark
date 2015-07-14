@@ -11,7 +11,7 @@
 
 namespace CppBenchmark {
 
-class ReporterConsole : Reporter
+class ReporterConsole : public Reporter
 {
 public:
     ReporterConsole(std::ostream& stream = std::cout) : _stream(stream) {}
@@ -30,6 +30,7 @@ public:
     void ReportFooter() override;
 
     static std::string GenerateSeparator(char ch);
+    static std::string GenerateClockSpeed(int64_t hertz);
     static std::string GenerateSize(int64_t bytes);
     static std::string GenerateTime(int64_t nanoseconds);
 

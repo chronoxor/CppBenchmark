@@ -70,7 +70,7 @@ Settings& Settings::ParamRange(int from, int to)
             from = to;
             to = from;
         }
-        for (int i = from; i < to; ++i)
+        for (int i = from; i <= to; ++i)
             _params.emplace_back(std::tuple<int, int, int>(i, -1, -1));
     }
     return *this;
@@ -112,8 +112,8 @@ Settings& Settings::PairRange(int from1, int to1, int from2, int to2)
             from2 = to2;
             to2 = from2;
         }
-        for (int i = from1; i < to1; ++i)
-            for (int j = from2; i < to2; ++j)
+        for (int i = from1; i <= to1; ++i)
+            for (int j = from2; j <= to2; ++j)
                 _params.emplace_back(std::tuple<int, int, int>(i, j, -1));
     }
     return *this;
@@ -170,9 +170,9 @@ Settings& Settings::TripleRange(int from1, int to1, int from2, int to2, int from
             from3 = to3;
             to3 = from3;
         }
-        for (int i = from1; i < to1; ++i)
-            for (int j = from2; i < to2; ++j)
-                for (int k = from3; i < to3; ++k)
+        for (int i = from1; i <= to1; ++i)
+            for (int j = from2; j <= to2; ++j)
+                for (int k = from3; k <= to3; ++k)
                     _params.emplace_back(std::tuple<int, int, int>(i, j, k));
     }
     return *this;

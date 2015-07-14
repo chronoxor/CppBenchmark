@@ -20,10 +20,10 @@ public:
     virtual const std::string& name() const = 0;
     virtual const PhaseMetrics& metrics() const = 0;
 
-    virtual std::shared_ptr<Phase> Start(const std::string& phase) = 0;
-    virtual void Stop() = 0;
+    virtual std::shared_ptr<Phase> StartPhase(const std::string& phase) = 0;
+    virtual void StopPhase() = 0;
 
-    virtual std::shared_ptr<PhaseScope> Scope(const std::string& phase) = 0;
+    virtual std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) = 0;
 };
 
 } // namespace CppBenchmark

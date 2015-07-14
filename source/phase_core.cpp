@@ -8,7 +8,7 @@
 
 namespace CppBenchmark {
 
-std::shared_ptr<Phase> PhaseCore::Start(const std::string& phase)
+std::shared_ptr<Phase> PhaseCore::StartPhase(const std::string& phase)
 {
     std::shared_ptr<PhaseCore> result;
 
@@ -27,15 +27,15 @@ std::shared_ptr<Phase> PhaseCore::Start(const std::string& phase)
     return result;
 }
 
-void PhaseCore::Stop()
+void PhaseCore::StopPhase()
 {
     // End the current iteration for the current phase
     _metrics.StopIteration();
 }
 
-std::shared_ptr<PhaseScope> PhaseCore::Scope(const std::string& phase)
+std::shared_ptr<PhaseScope> PhaseCore::ScopePhase(const std::string& phase)
 {
-    return std::make_shared<PhaseScope>(Start(phase));
+    return std::make_shared<PhaseScope>(StartPhase(phase));
 }
 
 } // namespace CppBenchmark

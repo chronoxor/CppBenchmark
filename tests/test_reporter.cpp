@@ -8,6 +8,25 @@
 
 using namespace CppBenchmark;
 
+TEST_CASE("Clock speed string generator", "[CppBenchmark][Reporter][Console]")
+{
+    REQUIRE(ReporterConsole::GenerateClockSpeed(0ll) == "0 Hz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(512ll) == "512 Hz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(999ll) == "999 Hz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(1000ll) == "1.000 kHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(1001ll) == "1.001 kHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(1500ll) == "1.500 kHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(1543ll) == "1.543 kHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(999999ll) == "999.999 kHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(1000000ll) == "1.000 MHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(1001234ll) == "1.001 MHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(500001234ll) == "500.001 MHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(999999999ll) == "999.999 MHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(1000000000ll) == "1.000 GHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(500000000000ll) == "500.000 GHz");
+    REQUIRE(ReporterConsole::GenerateClockSpeed(500123456789ll) == "500.123 GHz");
+}
+
 TEST_CASE("Size string generator", "[CppBenchmark][Reporter][Console]")
 {
     REQUIRE(ReporterConsole::GenerateSize(0ll) == "0 bytes");

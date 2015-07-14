@@ -8,43 +8,55 @@
 #include "system.h"
 #include "version.h"
 
+namespace {
+
+std::string indent1 = std::string(2, ' ');
+std::string indent2 = std::string(4, ' ');
+std::string indent3 = std::string(6, ' ');
+std::string indent4 = std::string(8, ' ');
+std::string indent5 = std::string(10, ' ');
+std::string indent6 = std::string(12, ' ');
+std::string indent7 = std::string(14, ' ');
+
+} // namespace
+
 namespace CppBenchmark {
 
 void ReporterJSON::ReportHeader()
 {
     _stream << "{\n";
-    _stream << _indent << "\"version\": \"" << version << "\",\n";
+    _stream << indent1 << "\"version\": \"" << version << "\",\n";
 }
 
 void ReporterJSON::ReportSystem()
 {
-    _stream << _indent << "\"system\": {\n";
-    _stream << _indent << _indent << "\"cpu_architecture\": \"" << System::CpuArchitecture() << "\",\n";
-    _stream << _indent << _indent << "\"cpu_logical_cores\": " << System::CpuLogicalCores() << ",\n";
-    _stream << _indent << _indent << "\"cpu_physical_cores\": " << System::CpuPhysicalCores() << ",\n";
-    _stream << _indent << _indent << "\"cpu_clock_speed\": " << System::CpuClockSpeed() << ",\n";
-    _stream << _indent << _indent << "\"cpu_hyper_threading\": " << (System::CpuHyperThreading() ? "true" : "false") << ",\n";
-    _stream << _indent << _indent << "\"ram_total\": " << System::RamTotal() << ",\n";
-    _stream << _indent << _indent << "\"ram_free\": " << System::RamFree() << "\n";
-    _stream << _indent << "},\n";
+    _stream << indent1 << "\"system\": {\n";
+    _stream << indent2 << "\"cpu_architecture\": \"" << System::CpuArchitecture() << "\",\n";
+    _stream << indent2 << "\"cpu_logical_cores\": " << System::CpuLogicalCores() << ",\n";
+    _stream << indent2 << "\"cpu_physical_cores\": " << System::CpuPhysicalCores() << ",\n";
+    _stream << indent2 << "\"cpu_clock_speed\": " << System::CpuClockSpeed() << ",\n";
+    _stream << indent2 << "\"cpu_hyper_threading\": " << (System::CpuHyperThreading() ? "true" : "false") << ",\n";
+    _stream << indent2 << "\"ram_total\": " << System::RamTotal() << ",\n";
+    _stream << indent2 << "\"ram_free\": " << System::RamFree() << "\n";
+    _stream << indent1 << "},\n";
 }
 
 void ReporterJSON::ReportEnvironment()
 {
-    _stream << _indent << "\"environment\": {\n";
-    _stream << _indent << _indent << "\"is_64_bit_os\": " << (Environment::Is64BitOS() ? "true" : "false") << ",\n";
-    _stream << _indent << _indent << "\"is_32_bit_os\": " << (Environment::Is32BitOS() ? "true" : "false") << ",\n";
-    _stream << _indent << _indent << "\"is_64_bit_process\": " << (Environment::Is64BitProcess() ? "true" : "false") << ",\n";
-    _stream << _indent << _indent << "\"is_32_bit_process\": " << (Environment::Is32BitProcess() ? "true" : "false") << ",\n";
-    _stream << _indent << _indent << "\"is_debug\": " << (Environment::IsDebug() ? "true" : "false") << ",\n";
-    _stream << _indent << _indent << "\"is_release\": " << (Environment::IsRelease() ? "true" : "false") << ",\n";
-    _stream << _indent << _indent << "\"timestamp\": " << Environment::Timestamp() << ",\n";
-    _stream << _indent << "},\n";
+    _stream << indent1 << "\"environment\": {\n";
+    _stream << indent2 << "\"is_64_bit_os\": " << (Environment::Is64BitOS() ? "true" : "false") << ",\n";
+    _stream << indent2 << "\"is_32_bit_os\": " << (Environment::Is32BitOS() ? "true" : "false") << ",\n";
+    _stream << indent2 << "\"is_64_bit_process\": " << (Environment::Is64BitProcess() ? "true" : "false") << ",\n";
+    _stream << indent2 << "\"is_32_bit_process\": " << (Environment::Is32BitProcess() ? "true" : "false") << ",\n";
+    _stream << indent2 << "\"is_debug\": " << (Environment::IsDebug() ? "true" : "false") << ",\n";
+    _stream << indent2 << "\"is_release\": " << (Environment::IsRelease() ? "true" : "false") << ",\n";
+    _stream << indent2 << "\"timestamp\": " << Environment::Timestamp() << "\n";
+    _stream << indent1 << "},\n";
 }
 
 void ReporterJSON::ReportBenchmarksHeader()
 {
-    _stream << _indent << "\"benchmarks\": [\n";
+    _stream << indent1 << "\"benchmarks\": [\n";
 
     // Reset benchmark comma
     _benchmark_comma = false;
@@ -53,7 +65,7 @@ void ReporterJSON::ReportBenchmarksHeader()
 void ReporterJSON::ReportBenchmarksFooter()
 {
     _stream << '\n';
-    _stream << _indent << "]\n";
+    _stream << indent1 << "]\n";
 }
 
 void ReporterJSON::ReportBenchmarkHeader()
@@ -61,28 +73,30 @@ void ReporterJSON::ReportBenchmarkHeader()
     if (_benchmark_comma) {
         _stream << ",\n";
     }
-    _stream << _indent << _indent << "\"benchmark\": {\n";
+    _stream << indent2 << "{\n";
+    _stream << indent3 << "\"benchmark\": {\n";
     _benchmark_comma = true;
 }
 
 void ReporterJSON::ReportBenchmarkFooter()
 {
-    _stream << _indent << _indent << "}";
+    _stream << indent3 <<  "}\n";
+    _stream << indent2 <<  "}";
 }
 
 void ReporterJSON::ReportBenchmark(const Benchmark& benchmark, const Settings& settings)
 {
-    _stream << _indent << _indent << _indent << "\"name\": \"" << benchmark.name() << "\",\n";
-    _stream << _indent << _indent << _indent << "\"attempts\": " << settings.attempts() << ",\n";
+    _stream << indent4 << "\"name\": \"" << benchmark.name() << "\",\n";
+    _stream << indent4 << "\"attempts\": " << settings.attempts() << ",\n";
     if (settings.iterations() > 0)
-        _stream << _indent << _indent << _indent << "\"iterations\": " << settings.iterations() << ",\n";
+        _stream << indent4 << "\"iterations\": " << settings.iterations() << ",\n";
     if (settings.nanoseconds() > 0)
-        _stream << _indent << _indent << _indent << "\"nanoseconds\": " << settings.nanoseconds() << ",\n";
+        _stream << indent4 << "\"nanoseconds\": " << settings.nanoseconds() << ",\n";
 }
 
 void ReporterJSON::ReportPhasesHeader()
 {
-    _stream << _indent << _indent << _indent << "\"phases\": [\n";
+    _stream << indent4 << "\"phases\": [\n";
 
     // Reset phase comma
     _phase_comma = false;
@@ -91,7 +105,7 @@ void ReporterJSON::ReportPhasesHeader()
 void ReporterJSON::ReportPhasesFooter()
 {
     _stream << '\n';
-    _stream << _indent << _indent << _indent << "]\n";
+    _stream << indent4 << "]\n";
 }
 
 void ReporterJSON::ReportPhaseHeader()
@@ -99,28 +113,30 @@ void ReporterJSON::ReportPhaseHeader()
     if (_phase_comma) {
         _stream << ",\n";
     }
-    _stream << _indent << _indent << _indent << _indent << "\"phase\": {\n";
+    _stream << indent5 << "{\n";
+    _stream << indent6 << "\"phase\": {\n";
     _phase_comma = true;
 }
 
 void ReporterJSON::ReportPhaseFooter()
 {
-    _stream << _indent << _indent << _indent << _indent << "}";
+    _stream << indent6 << "}\n";
+    _stream << indent5 << "}";
 }
 
 void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
 {
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"name\": \"" << phase.name() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"avg_time\": \"" << metrics.avg_time() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"min_time\": \"" << metrics.min_time() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"max_time\": \"" << metrics.max_time() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"total_time\": \"" << metrics.total_time() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"total_iterations\": \"" << metrics.total_iterations() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"total_items\": \"" << metrics.total_items() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"total_bytes\": \"" << metrics.total_bytes() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"iterations_per_second\": \"" << metrics.iterations_per_second() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"items_per_second\": \"" << metrics.items_per_second() << "\",\n";
-    _stream << _indent << _indent << _indent << _indent << _indent << "\"bytes_per_second\": \"" << metrics.bytes_per_second() << "\",\n";
+    _stream << indent7 << "\"name\": \"" << phase.name() << "\",\n";
+    _stream << indent7 << "\"avg_time\": " << metrics.avg_time() << ",\n";
+    _stream << indent7 << "\"min_time\": " << metrics.min_time() << ",\n";
+    _stream << indent7 << "\"max_time\": " << metrics.max_time() << ",\n";
+    _stream << indent7 << "\"total_time\": " << metrics.total_time() << ",\n";
+    _stream << indent7 << "\"total_iterations\": " << metrics.total_iterations() << ",\n";
+    _stream << indent7 << "\"total_items\": " << metrics.total_items() << ",\n";
+    _stream << indent7 << "\"total_bytes\": " << metrics.total_bytes() << ",\n";
+    _stream << indent7 << "\"iterations_per_second\": " << metrics.iterations_per_second() << ",\n";
+    _stream << indent7 << "\"items_per_second\": " << metrics.items_per_second() << ",\n";
+    _stream << indent7 << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
 }
 
 void ReporterJSON::ReportFooter()

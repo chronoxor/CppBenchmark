@@ -25,7 +25,7 @@ void ReporterConsole::ReportSystem()
     _stream << "CPU architecutre: " << System::CpuArchitecture() << std::endl;
     _stream << "CPU logical cores: " << System::CpuLogicalCores() << std::endl;
     _stream << "CPU physical cores: " << System::CpuPhysicalCores() << std::endl;
-    _stream << "CPU clock speed: " << System::CpuClockSpeed() << " Mhz" << std::endl;
+    _stream << "CPU clock speed: " << GenerateClockSpeed(System::CpuClockSpeed()) << std::endl;
     _stream << "CPU Hyper-Threading: " << (System::CpuHyperThreading() ? "enabled" : "disabled") << std::endl;
     _stream << "RAM total: " << GenerateSize(System::RamTotal()) << std::endl;
     _stream << "RAM free: " << GenerateSize(System::RamFree()) << std::endl;
@@ -38,8 +38,8 @@ void ReporterConsole::ReportEnvironment()
     _stream << "Process version: " << (Environment::Is64BitProcess() ? "64-bit" : (Environment::Is32BitProcess() ? "32-bit" : "<unknown>")) << std::endl;
     _stream << "Process configuaraion: " << (Environment::IsDebug() ? "Debug" : (Environment::IsRelease() ? "Release" : "<unknown>")) << std::endl;
     time_t timestamp = Environment::Timestamp();
-    _stream << "Local timestamp: " << std::asctime(std::localtime(&timestamp)) << std::endl;
-    _stream << "UTC timestamp: " << std::asctime(std::gmtime(&timestamp)) << std::endl;
+    _stream << "Local timestamp: " << std::asctime(std::localtime(&timestamp));
+    _stream << "UTC timestamp: " << std::asctime(std::gmtime(&timestamp));
 }
 
 void ReporterConsole::ReportBenchmark(const Benchmark& benchmark, const Settings& settings)
@@ -77,6 +77,31 @@ void ReporterConsole::ReportFooter()
 std::string ReporterConsole::GenerateSeparator(char ch)
 {
     return std::string(79, ch);
+}
+
+std::string ReporterConsole::GenerateClockSpeed(int64_t hertz)
+{
+    std::ostringstream stream;
+
+    if (hertz >= 1000000000ll) {
+        int64_t gigahertz = hertz / 1000000000ll;
+        int64_t megahertz = (hertz % 1000000000ll) / 1000000ll;
+        stream << gigahertz << '.' << ((megahertz < 100) ? "0" : "") << ((megahertz < 10) ? "0" : "") << megahertz << " GHz";
+    }
+    else if (hertz >= 1000000) {
+        int64_t megahertz = hertz / 1000000;
+        int64_t kilohertz = (hertz % 1000000) / 1000;
+        stream << megahertz << '.' << ((kilohertz < 100) ? "0" : "") << ((kilohertz < 10) ? "0" : "") << kilohertz << " MHz";
+    }
+    else if (hertz >= 1000) {
+        int64_t kilohertz = hertz / 1000;
+        hertz = hertz % 1000;
+        stream << kilohertz << '.' << ((hertz < 100) ? "0" : "") << ((hertz < 10) ? "0" : "") << hertz << " kHz";
+    }
+    else
+        stream << hertz << " Hz";
+
+    return stream.str();
 }
 
 std::string ReporterConsole::GenerateSize(int64_t bytes)

@@ -13,9 +13,9 @@ std::string to_string(const Context& instance)
     else if ((instance.y() < 0) && (instance.z() < 0))
         return '(' + std::to_string(instance.x()) + ')';
     else if ((instance.z() < 0))
-        return '(' + std::to_string(instance.x()) + ", " + std::to_string(instance.y()) + ')';
+        return '(' + std::to_string(instance.x()) + ',' + std::to_string(instance.y()) + ')';
     else
-        return '(' + std::to_string(instance.x()) + ", " + std::to_string(instance.y()) + ", " + std::to_string(instance.z()) + ')';
+        return '(' + std::to_string(instance.x()) + ',' + std::to_string(instance.y()) + ',' + std::to_string(instance.z()) + ')';
 }
 
 } // namespace CppBenchmark
