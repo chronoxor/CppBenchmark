@@ -27,6 +27,7 @@ add_library(cppbenchmark ${SOURCE_FILES})
 set(TESTS_SOURCE_FILES
     tests/catch.cpp
     tests/test_environment.cpp
+    tests/test_reporter.cpp
     tests/test_system.cpp)
 add_executable(cppbenchmark-tests ${TESTS_SOURCE_FILES})
 target_link_libraries(cppbenchmark-tests cppbenchmark)

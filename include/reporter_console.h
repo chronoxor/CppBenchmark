@@ -29,12 +29,12 @@ public:
     void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) override;
     void ReportFooter() override;
 
+    static std::string GenerateSeparator(char ch);
+    static std::string GenerateSize(int64_t bytes);
+    static std::string GenerateTime(int64_t nanoseconds);
+
 private:
     std::ostream& _stream;
-
-    std::string ReportSeparator(char ch);
-    std::string ReportSize(int64_t bytes);
-    std::string ReportTime(int64_t nanoseconds);
 };
 
 } // namespace CppBenchmark
