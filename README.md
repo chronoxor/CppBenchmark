@@ -2,8 +2,6 @@
 C++ Benchmark Library
 
 # Todo
-* JSON reporter
-
 * Console launcher
 
 * Samples

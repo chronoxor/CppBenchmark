@@ -19,6 +19,7 @@ set(SOURCE_FILES
     source/reporter.cpp
     source/reporter_console.cpp
     source/reporter_csv.cpp
+    source/reporter_json.cpp
     source/settings.cpp
     source/system.cpp)
 add_library(cppbenchmark ${SOURCE_FILES})

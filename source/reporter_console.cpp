@@ -15,13 +15,13 @@ namespace CppBenchmark {
 
 void ReporterConsole::ReportHeader()
 {
-    GenerateSeparator('=');
+    _stream << GenerateSeparator('=') << std::endl;
     _stream << "CppBenchmark Library. Version " << version << std::endl;
 }
 
 void ReporterConsole::ReportSystem()
 {
-    GenerateSeparator('=');
+    _stream << GenerateSeparator('=') << std::endl;
     _stream << "CPU architecutre: " << System::CpuArchitecture() << std::endl;
     _stream << "CPU logical cores: " << System::CpuLogicalCores() << std::endl;
     _stream << "CPU physical cores: " << System::CpuPhysicalCores() << std::endl;
@@ -33,7 +33,7 @@ void ReporterConsole::ReportSystem()
 
 void ReporterConsole::ReportEnvironment()
 {
-    GenerateSeparator('=');
+    _stream << GenerateSeparator('=') << std::endl;
     _stream << "OS version: " << (Environment::Is64BitOS() ? "64-bit" : (Environment::Is32BitOS() ? "32-bit" : "<unknown>")) << std::endl;
     _stream << "Process version: " << (Environment::Is64BitProcess() ? "64-bit" : (Environment::Is32BitProcess() ? "32-bit" : "<unknown>")) << std::endl;
     _stream << "Process configuaraion: " << (Environment::IsDebug() ? "Debug" : (Environment::IsRelease() ? "Release" : "<unknown>")) << std::endl;
@@ -44,7 +44,7 @@ void ReporterConsole::ReportEnvironment()
 
 void ReporterConsole::ReportBenchmark(const Benchmark& benchmark, const Settings& settings)
 {
-    GenerateSeparator('=');
+    _stream << GenerateSeparator('=') << std::endl;
     _stream << "Benchmark: " << benchmark.name() << std::endl;
     _stream << "Attempts: " << settings.attempts() << std::endl;
     if (settings.iterations() > 0)
@@ -55,7 +55,7 @@ void ReporterConsole::ReportBenchmark(const Benchmark& benchmark, const Settings
 
 void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
 {
-    GenerateSeparator('-');
+    _stream << GenerateSeparator('-') << std::endl;
     _stream << "Phase: " << phase.name() << std::endl;
     _stream << "Avg time: " << GenerateTime(metrics.avg_time()) << std::endl;
     _stream << "Min time: " << GenerateTime(metrics.min_time()) << std::endl;
@@ -71,18 +71,12 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
 
 void ReporterConsole::ReportFooter()
 {
-    GenerateSeparator('=');
+    _stream << GenerateSeparator('=') << std::endl;
 }
 
 std::string ReporterConsole::GenerateSeparator(char ch)
 {
-    std::ostringstream stream;
-
-    for (int i = 0; i < 79; ++i)
-        stream << ch;
-    stream << std::endl;
-
-    return stream.str();
+    return std::string(79, ch);
 }
 
 std::string ReporterConsole::GenerateSize(int64_t bytes)

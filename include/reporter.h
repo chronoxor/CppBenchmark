@@ -20,12 +20,20 @@ public:
     Reporter& operator=(const Reporter&) = delete;
     Reporter& operator=(Reporter&&) = delete;
 
-    virtual void ReportHeader() = 0;
-    virtual void ReportSystem() = 0;
-    virtual void ReportEnvironment() = 0;
-    virtual void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) = 0;
+    virtual void ReportHeader() {}
+    virtual void ReportSystem() {}
+    virtual void ReportEnvironment() {}
+    virtual void ReportBenchmarksHeader() {}
+    virtual void ReportBenchmarksFooter() {}
+    virtual void ReportBenchmarkHeader() {}
+    virtual void ReportBenchmarkFooter() {}
+    virtual void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) {}
+    virtual void ReportPhasesHeader() {}
+    virtual void ReportPhasesFooter() {}
+    virtual void ReportPhaseHeader() {}
+    virtual void ReportPhaseFooter() {}
     virtual void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) = 0;
-    virtual void ReportFooter() = 0;
+    virtual void ReportFooter() {}
 };
 
 } // namespace CppBenchmark

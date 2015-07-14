@@ -23,11 +23,7 @@ public:
     ReporterCSV& operator=(ReporterCSV&&) = delete;
 
     void ReportHeader() override;
-    void ReportSystem() override {}
-    void ReportEnvironment() override {}
-    void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) override {}
     void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) override;
-    void ReportFooter() override {}
 
 private:
     std::ostream& _stream;
