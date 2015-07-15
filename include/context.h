@@ -11,7 +11,7 @@ namespace CppBenchmark {
 
 class Context
 {
-    friend class Benchmark;
+    friend class Launcher;
 
 public:
     Context() = delete;

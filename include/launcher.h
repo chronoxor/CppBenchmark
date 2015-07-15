@@ -27,15 +27,31 @@ public:
     void AddReporter(std::shared_ptr<Reporter> reporter) { _reporters.emplace_back(reporter); }
     void ClearAllReporters() { _reporters.clear(); }
 
-    void Launch(const std::string& pattern = ".+"/*,
-                std::function<void (const Benchmark&, const Context&, int)> onLaunching = [](const Benchmark&, const Context&, int){},
-                std::function<void (const Benchmark&, const Context&, int)> onLaunched = [](const Benchmark&, const Context&, int){}*/);
+    void Launch(const std::string& pattern = "");
+
+protected:
+    virtual void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) {}
+    virtual void onLaunched(const Benchmark& benchmark, const Context& context, int attempt) {}
 
 private:
     std::vector<std::shared_ptr<Benchmark>> _benchmarks;
     std::vector<std::shared_ptr<Reporter>> _reporters;
 
+    void LaunchBenchmark(Benchmark& benchmark);
+
     void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name);
+
+    static void ResetBenchmark(Benchmark& benchmark);
+    static void UpdateBenchmark(Benchmark& benchmark, const Context& context);
+
+    static void ResetBenchmarkMetrics(Benchmark& benchmark);
+    static void ResetBenchmarkMetrics(PhaseCore& phase);
+
+    static void ChooseBestBenchmarkMetrics(Benchmark& benchmark);
+    static void ChooseBestBenchmarkMetrics(PhaseCore& phase);
+
+    static void UpdateFinalBenchmarkMetrics(Benchmark& benchmark);
+    static void UpdateFinalBenchmarkMetrics(PhaseCore& phase, const std::string& name);
 };
 
 } // namespace CppBenchmark

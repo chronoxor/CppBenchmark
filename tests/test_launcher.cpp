@@ -61,6 +61,23 @@ private:
     int _cleanups;
 };
 
+class TestLauncher : public Launcher
+{
+public:
+    TestLauncher() : _launching(0), _launched(0) {}
+
+    int launching() { return _launching; }
+    int launched() { return _launched; }
+
+protected:
+    void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) override { _launching++; }
+    void onLaunched(const Benchmark& benchmark, const Context& context, int attempt) override { _launched++; }
+
+private:
+    int _launching;
+    int _launched;
+};
+
 TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
 {
     // Prepare benchmark
@@ -76,14 +93,14 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
     std::shared_ptr<ReporterJSON> reporter_json = std::make_shared<ReporterJSON>(stream_json);
 
     // Prepare launcher
-    Launcher launcher;
+    TestLauncher launcher;
     launcher.AddBenchmark(benchmark);
     launcher.AddReporter(reporter_console);
     launcher.AddReporter(reporter_csv);
     launcher.AddReporter(reporter_json);
 
     // Launch
-    launcher.Launch();
+    launcher.Launch(".es.");
 
     // Collect benchmark reports
     std::string report_console = stream_console.str();
@@ -103,4 +120,8 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
     REQUIRE(benchmark->initializations() == settings.attempts());
     REQUIRE(benchmark->runs() == (settings.params().size() * settings.attempts() * settings.iterations()));
     REQUIRE(benchmark->cleanups() == benchmark->initializations());
+
+    // Test launcher state
+    REQUIRE(launcher.launching() == (settings.params().size() * settings.attempts()));
+    REQUIRE(launcher.launching() == launcher.launched());
 }

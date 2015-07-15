@@ -50,22 +50,7 @@ private:
     std::string _name;
     Settings _settings;
     std::shared_ptr<PhaseCore> _current;
-    std::vector<std::shared_ptr<PhaseCore>> _benchmarks;
-
-    void ResetCurrentBenchmark();
-    void UpdateCurrentBenchmark(const Context& context);
-
-    void ResetMetrics();
-    void ResetMetrics(PhaseCore& phase);
-
-    void ChooseBestMetrics();
-    void ChooseBestMetrics(PhaseCore& phase);
-
-    void UpdateFinalMetrics();
-    void UpdateFinalMetrics(const std::string& name, PhaseCore& phase);
-
-    void Launch(/*std::function<void (const Benchmark&, const Context&, int)> onLaunching = [](const Benchmark&, const Context&, int){},
-                std::function<void (const Benchmark&, const Context&, int)> onLaunched = [](const Benchmark&, const Context&, int){}*/);
+    std::vector<std::shared_ptr<PhaseCore>> _phases;
 };
 
 } // namespace CppBenchmark

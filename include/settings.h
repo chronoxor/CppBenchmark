@@ -13,7 +13,7 @@ namespace CppBenchmark {
 
 class Settings
 {
-    friend class Benchmark;
+    friend class Launcher;
 
 public:
     static const Settings Default;

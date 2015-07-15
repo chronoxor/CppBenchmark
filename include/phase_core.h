@@ -15,7 +15,6 @@ namespace CppBenchmark {
 
 class PhaseCore : public Phase
 {
-    friend class Benchmark;
     friend class Launcher;
 
 public:
