@@ -8,7 +8,9 @@
 #include <windows.h>
 #endif
 
-namespace {
+namespace CppBenchmark {
+
+namespace Internals {
 
 #if defined(_WIN32)
 // Helper function to count set bits in the processor mask
@@ -28,9 +30,7 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
 }
 #endif
 
-} // namespace
-
-namespace CppBenchmark {
+} // namespace Internals
 
 std::string System::CpuArchitecture()
 {
@@ -93,7 +93,7 @@ std::pair<int, int> System::CpuTotalCores()
         switch (pCurrent->Relationship)
         {
             case RelationProcessorCore:
-                result.first += CountSetBits(pCurrent->ProcessorMask);
+                result.first += Internals::CountSetBits(pCurrent->ProcessorMask);
                 result.second += 1;
                 break;
             case RelationNumaNode:
