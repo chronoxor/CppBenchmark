@@ -5,7 +5,6 @@
 #ifndef CPPBENCHMARK_MACROS_H
 #define CPPBENCHMARK_MACROS_H
 
-#include "benchmark_function.h"
 #include "launcher_console.h"
 
 namespace CppBenchmark {
@@ -15,10 +14,8 @@ namespace Internals {
 class BenchmarkRegistrator
 {
 public:
-    BenchmarkRegistrator(std::shared_ptr<BenchmarkFunction> benchmark)
-    {
-        LauncherConsole::GetInstance().AddBenchmark(benchmark);
-    }
+    explicit BenchmarkRegistrator(std::shared_ptr<Benchmark> benchmark)
+    { LauncherConsole::GetInstance().AddBenchmark(benchmark); }
 };
 
 } // namespace Internals
@@ -29,17 +26,41 @@ public:
 #define BENCHMARK_INTERNAL_UNIQUE_NAME_LINE(name, line) BENCHMARK_INTERNAL_UNIQUE_NAME_LINE2(name, line)
 #define BENCHMARK_INTERNAL_UNIQUE_NAME(name) BENCHMARK_INTERNAL_UNIQUE_NAME_LINE(name, __LINE__)
 
-#define BENCHMARK_MAIN()                                    \
-int main(int argc, char** argv)                             \
-{                                                           \
-    LauncherConsole::GetInstance().Initialize(argc, argv);  \
-    LauncherConsole::GetInstance().Launch();                \
-    return 0;                                               \
+#define BENCHMARK_MAIN()\
+int main(int argc, char** argv)\
+{\
+    LauncherConsole::GetInstance().Initialize(argc, argv);\
+    LauncherConsole::GetInstance().Launch();\
+    return 0;\
 }
 
-#define BENCHMARK(name)                                                                                                                                                                                         \
-static void BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)(Context& context);                                                                                                                              \
-namespace { CppBenchmark::Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BenchmarkFunction>(name, &BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__))); }   \
-static void BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)(Context& context)
+#define BENCHMARK(...)\
+namespace {\
+    class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public CppBenchmark::Benchmark\
+    {\
+    public:\
+        using Benchmark::Benchmark;\
+    protected:\
+        void Run(Context& context) override;\
+    };\
+    CppBenchmark::Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
+}\
+void BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& context)
+
+#define BENCHMARK_FIXTURE(fixture, ...)\
+namespace {\
+    class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public CppBenchmark::Benchmark, public fixture\
+    {\
+    public:\
+        using Benchmark::Benchmark;\
+    protected:\
+        void Run(Context& context) override;\
+    };\
+    CppBenchmark::Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
+}\
+void BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& context)
+
+#define BENCHMARK_CLASS(type, ...)\
+namespace { CppBenchmark::Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(__VA_ARGS__)); }
 
 #endif // CPPBENCHMARK_MACROS_H

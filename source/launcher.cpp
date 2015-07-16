@@ -75,7 +75,7 @@ void Launcher::LaunchBenchmark(Benchmark& benchmark)
         for (auto param : benchmark._settings._params) {
 
             // Prepare benchmark context
-            Context context(benchmark, std::get<0>(param), std::get<1>(param), std::get<2>(param));
+            Context context(std::get<0>(param), std::get<1>(param), std::get<2>(param));
 
             // Get or create the current benchmark
             UpdateBenchmark(benchmark, context);
@@ -141,9 +141,9 @@ void Launcher::ResetBenchmark(Benchmark& benchmark)
     benchmark._current.reset();
 }
 
-void Launcher::UpdateBenchmark(Benchmark& benchmark, const Context& context)
+void Launcher::UpdateBenchmark(Benchmark& benchmark, Context& context)
 {
-    std::string name = benchmark._name + to_string(context);
+    std::string name = benchmark.name() + to_string(context);
     std::shared_ptr<PhaseCore> result;
 
     // Find or create root phase for the given context
@@ -157,6 +157,7 @@ void Launcher::UpdateBenchmark(Benchmark& benchmark, const Context& context)
 
     // Update the current benchmark
     benchmark._current = result;
+    context._current = result;
 }
 
 void Launcher::ResetBenchmarkMetrics(Benchmark& benchmark)

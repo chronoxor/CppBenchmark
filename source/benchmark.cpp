@@ -6,6 +6,4 @@
 
 namespace CppBenchmark {
 
-PhaseMetrics Benchmark::EMPTY_METRICS = PhaseMetrics();
-
 } // namespace CppBenchmark

@@ -45,7 +45,7 @@ private:
     void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name);
 
     static void ResetBenchmark(Benchmark& benchmark);
-    static void UpdateBenchmark(Benchmark& benchmark, const Context& context);
+    static void UpdateBenchmark(Benchmark& benchmark, Context& context);
 
     static void ResetBenchmarkMetrics(Benchmark& benchmark);
     static void ResetBenchmarkMetrics(PhaseCore& phase);

@@ -11,17 +11,12 @@
 
 namespace CppBenchmark {
 
-class Benchmark : public Phase
+class Benchmark
 {
     friend class Launcher;
 
-    static PhaseMetrics EMPTY_METRICS;
-
 public:
-    explicit Benchmark(const std::string& name, const Settings& settings = Settings::Default)
-            : _name(name),
-              _settings(settings)
-    {}
+    explicit Benchmark(const std::string& name, const Settings& settings = Settings()) : _name(name), _settings(settings) {}
     Benchmark(const Benchmark&) = delete;
     Benchmark(Benchmark&&) = delete;
     virtual ~Benchmark() = default;
@@ -29,17 +24,7 @@ public:
     Benchmark& operator=(const Benchmark&) = delete;
     Benchmark& operator=(Benchmark&&) = delete;
 
-    // Implementation of Phase
-    const std::string& name() const override
-    { return _current ? _current->name() : _name; }
-    const PhaseMetrics& metrics() const override
-    { return _current ? _current->metrics() : EMPTY_METRICS; }
-    std::shared_ptr<Phase> StartPhase(const std::string& phase) override
-    { return _current ? _current->StartPhase(phase) : nullptr; }
-    void StopPhase() override
-    { if (_current) _current->StopPhase(); }
-    std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) override
-    { return _current ? _current->ScopePhase(phase) : nullptr; }
+    const std::string& name() const { return _name; }
 
 protected:
     virtual void Initialize() {}

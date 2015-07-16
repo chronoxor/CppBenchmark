@@ -16,9 +16,7 @@ class Settings
     friend class Launcher;
 
 public:
-    static const Settings Default;
-
-    Settings() = default;
+    Settings() : _attempts(10), _iterations(0), _nanoseconds(0) {}
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;
     ~Settings() = default;

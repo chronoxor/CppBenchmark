@@ -6,8 +6,6 @@
 
 namespace CppBenchmark {
 
-const Settings Settings::Default = Settings().Attempts(10);
-
 Settings& Settings::Attempts(int attempts)
 {
     _attempts = (attempts > 0) ? attempts : 10;

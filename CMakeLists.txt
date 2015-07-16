@@ -9,7 +9,6 @@ include(cmake/SetCompilerWarningAll.cmake)
 include_directories(include)
 set(SOURCE_FILES
     source/benchmark.cpp
-    source/benchmark_function.cpp
     source/context.cpp
     source/environment.cpp
     source/launcher.cpp

@@ -13,7 +13,7 @@ using namespace CppBenchmark;
 class TestBenchmark : public Benchmark
 {
 public:
-    explicit TestBenchmark(const std::string& name, const Settings& settings = Settings::Default)
+    explicit TestBenchmark(const std::string& name, const Settings& settings = Settings())
             : Benchmark(name, settings),
               _initializations(0),
               _runs(0),
@@ -57,7 +57,7 @@ private:
     int _cleanups;
 };
 
-BENCHMARK("Test")
+BENCHMARK("Test", Settings().Param(0).Param(2).Param(4))
 {
     auto phase1 = context.StartPhase("Phase1");
     std::this_thread::yield();
@@ -78,16 +78,21 @@ BENCHMARK("Test")
     phase3->StopPhase();
 }
 
-BENCHMARK_MAIN()
-
-/*
-int main(int argc, char** argv)
+struct abc
 {
-    Settings settings = Settings().Attempts(5).Iterations(10).TripleRange(0, 1, 0, 1, 0, 1);
-    std::shared_ptr<TestBenchmark> benchmark = std::make_shared<TestBenchmark>("Test", settings);
+public:
+    abc() { std::cout << "abc::abc()" << std::endl; i=100; }
+    ~abc() { std::cout << "abc::~abc()" << std::endl; }
 
-    LauncherConsole::GetInstance().Initialize(argc, argv);
-    LauncherConsole::GetInstance().AddBenchmark(benchmark);
-    LauncherConsole::GetInstance().Launch();
+protected:
+    int i;
+};
+
+BENCHMARK_FIXTURE(abc, "Test", Settings().Param(100))
+{
+    std::cout << "abc::i = " << i << std::endl;
 }
-*/
+
+BENCHMARK_CLASS(TestBenchmark, "Test", Settings().Param(200))
+
+BENCHMARK_MAIN()
