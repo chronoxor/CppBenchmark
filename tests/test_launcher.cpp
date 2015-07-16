@@ -31,13 +31,13 @@ public:
 
 protected:
     virtual void Initialize() { _initializations++; }
-    virtual void Run(const Context& context)
+    virtual void Run(Context& context)
     {
-        auto phase1 = StartPhase("Phase1");
+        auto phase1 = context.StartPhase("Phase1");
         std::this_thread::yield();
         phase1->StopPhase();
         {
-            auto phase2 = ScopePhase("Phase2");
+            auto phase2 = context.ScopePhase("Phase2");
             {
                 auto phase21 = phase2->ScopePhase("Phase2.1");
                 std::this_thread::sleep_for(std::chrono::milliseconds(context.x()));
@@ -47,7 +47,7 @@ protected:
                 std::this_thread::sleep_for(std::chrono::milliseconds(context.y()));
             }
         }
-        auto phase3 = StartPhase("Phase3");
+        auto phase3 = context.StartPhase("Phase3");
         std::this_thread::sleep_for(std::chrono::milliseconds(context.z()));
         phase3->StopPhase();
 
@@ -68,6 +68,8 @@ public:
 
     int launching() { return _launching; }
     int launched() { return _launched; }
+
+    void Launch() override { LaunchWithFilter(".es."); }
 
 protected:
     void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) override { _launching++; }
@@ -100,7 +102,7 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
     launcher.AddReporter(reporter_json);
 
     // Launch
-    launcher.Launch(".es.");
+    launcher.Launch();
 
     // Collect benchmark reports
     std::string report_console = stream_console.str();
@@ -111,10 +113,6 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
     REQUIRE(report_console.size() > 0);
     REQUIRE(report_csv.size() > 0);
     REQUIRE(report_json.size() > 0);
-
-    std::cout << report_console << std::endl;
-    std::cout << report_csv << std::endl;
-    std::cout << report_json << std::endl;
 
     // Test benchmark state
     REQUIRE(benchmark->initializations() == settings.attempts());

@@ -7,9 +7,11 @@
 
 #include <string>
 
+#include "phase.h"
+
 namespace CppBenchmark {
 
-class Context
+class Context : public Phase
 {
     friend class Launcher;
 
@@ -28,12 +30,20 @@ public:
 
     friend std::string to_string(const Context& instance);
 
+    // Implementation of Phase
+    const std::string& name() const override { return _phase.name(); }
+    const PhaseMetrics& metrics() const override { return _phase.metrics(); }
+    std::shared_ptr<Phase> StartPhase(const std::string& phase) override { return _phase.StartPhase(phase); }
+    void StopPhase() override { _phase.StopPhase(); }
+    std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) override { return _phase.ScopePhase(phase); }
+
 private:
+    Phase& _phase;
     int _x;
     int _y;
     int _z;
 
-    Context(int x, int y, int z) : _x(x), _y(y), _z(z) {}
+    Context(Phase& phase, int x, int y, int z) : _phase(phase), _x(x), _y(y), _z(z) {}
 };
 
 } // namespace CppBenchmark

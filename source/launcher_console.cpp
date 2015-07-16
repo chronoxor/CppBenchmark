@@ -1,0 +1,90 @@
+//
+// Created by Ivan Shynkarenka on 16.07.2015.
+//
+
+#include "launcher_console.h"
+
+#include "option_parser.h"
+#include "reporter_console.h"
+#include "reporter_csv.h"
+#include "reporter_json.h"
+#include "version.h"
+
+namespace CppBenchmark {
+
+void LauncherConsole::Initialize(int argc, char** argv)
+{
+    auto parser = optparse::OptionParser().version(version);
+
+    const char* output[] = { "console", "csv", "json" };
+
+    parser.add_option("-h", "--help").help("Show help");
+    parser.add_option("-f", "--filter").help("Filter benchmarks by the given regexp pattern");
+    parser.add_option("-l", "--list").action("store_true").help("List all avaliable benchmarks");
+    parser.add_option("-o", "--output").choices(&output[0], &output[3]).set_default(output[0]).help("Output format (console, csv, json). Default: %default");
+    parser.add_option("-s", "--silent").action("store_true").help("Launch in silent mode");
+
+    optparse::Values options = parser.parse_args(argc, argv);
+
+    // Check for double initialization
+    if (_init) {
+        parser.error("Console launcher double initialization!");
+    }
+
+    // Print help
+    if (options.get("help")) {
+        parser.print_help();
+        parser.exit();
+    }
+
+    // Setup console launcher parameters
+    _list = options.get("list");
+    _silent = options.get("silent");
+    if (options.is_set("filter"))
+        _filter = options["filter"];
+    if (options.is_set("output"))
+        _output = options["output"];
+
+    // Add required reporter
+    if (_output == output[0])
+        AddReporter(std::make_shared<ReporterConsole>());
+    else if (_output == output[1])
+        AddReporter(std::make_shared<ReporterCSV>());
+    else if (_output == output[2])
+        AddReporter(std::make_shared<ReporterJSON>());
+
+    // Update initialization flag
+    _init = true;
+}
+
+void LauncherConsole::Launch()
+{
+    if (_list) {
+        // List all suitable benchmarks
+        MatchWithFilter(_filter, [this](Benchmark& benchmark) {
+            std::cout << benchmark.name() << std::endl;
+        });
+    }
+    else {
+        // Launch all suitable benchmarks
+        LaunchWithFilter(_filter);
+    }
+}
+
+void LauncherConsole::onLaunching(const Benchmark& benchmark, const Context& context, int attempt)
+{
+    if (_silent)
+        return;
+
+    std::cout << "Launching " << benchmark.name() << ". Attempt " << attempt << "...";
+}
+
+void LauncherConsole::onLaunched(const Benchmark& benchmark, const Context& context, int attempt)
+{
+    if (_silent)
+        return;
+
+    std::cout << "Done!" << std::endl;
+}
+
+} // namespace CppBenchmark

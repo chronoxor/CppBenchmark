@@ -24,11 +24,14 @@ public:
     PhaseScope& operator=(const PhaseScope&) noexcept = default;
     PhaseScope& operator=(PhaseScope&&) noexcept = default;
 
-    explicit operator bool() const noexcept { return _ptr_phase ? true : false; }
+    explicit operator bool() const noexcept
+    { return _ptr_phase ? true : false; }
 
     // Implementation of Phase
-    const std::string& name() const override { return _ptr_phase ? _ptr_phase->name() : EMPTY_NAME; }
-    const PhaseMetrics& metrics() const override { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
+    const std::string& name() const override
+    { return _ptr_phase ? _ptr_phase->name() : EMPTY_NAME; }
+    const PhaseMetrics& metrics() const override
+    { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override;
     void StopPhase() override;
     std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) override;

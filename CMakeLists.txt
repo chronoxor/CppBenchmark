@@ -9,9 +9,12 @@ include(cmake/SetCompilerWarningAll.cmake)
 include_directories(include)
 set(SOURCE_FILES
     source/benchmark.cpp
+    source/benchmark_function.cpp
     source/context.cpp
     source/environment.cpp
     source/launcher.cpp
+    source/launcher_console.cpp
+    source/option_parser.cpp
     source/phase.cpp
     source/phase_core.cpp
     source/phase_metrics.cpp
@@ -23,6 +26,9 @@ set(SOURCE_FILES
     source/settings.cpp
     source/system.cpp)
 add_library(cppbenchmark ${SOURCE_FILES})
+
+add_executable(cppbenchmark-main main.cpp)
+target_link_libraries(cppbenchmark-main cppbenchmark)
 
 # Tests
 set(TESTS_SOURCE_FILES

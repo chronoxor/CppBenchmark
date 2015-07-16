@@ -40,14 +40,20 @@ public:
     int64_t total_items() const { return _total_items; }
     int64_t total_bytes() const { return _total_bytes; }
 
-    int64_t avg_time() const { return (_total_iterations > 0) ? (_total_time / _total_iterations) : 0; }
+    int64_t avg_time() const
+    { return (_total_iterations > 0) ? (_total_time / _total_iterations) : 0; }
 
-    double iterations_per_second() const { return (_total_time > 0) ? (((double)_total_iterations / (double)_total_time) * 1000000000.0) : 0.0; }
-    double items_per_second() const { return (_total_time > 0) ? (((double)_total_items / (double)_total_time) * 1000000000.0) : 0.0; }
-    double bytes_per_second() const { return (_total_time > 0) ? (((double)_total_bytes / (double)_total_time) * 1000000000.0) : 0.0; }
+    double iterations_per_second() const
+    { return (_total_time > 0) ? (((double)_total_iterations / (double)_total_time) * 1000000000.0) : 0.0; }
+    double items_per_second() const
+    { return (_total_time > 0) ? (((double)_total_items / (double)_total_time) * 1000000000.0) : 0.0; }
+    double bytes_per_second() const
+    { return (_total_time > 0) ? (((double)_total_bytes / (double)_total_time) * 1000000000.0) : 0.0; }
 
-    void AddItems(int64_t items) { if (_is_started) _total_items += items; }
-    void AddBytes(int64_t bytes) { if (_is_started) _total_bytes += bytes; }
+    void AddItems(int64_t items)
+    { if (_is_started) _total_items += items; }
+    void AddBytes(int64_t bytes)
+    { if (_is_started) _total_bytes += bytes; }
 
 private:
     int64_t _min_time;

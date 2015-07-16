@@ -8,13 +8,21 @@
 
 namespace CppBenchmark {
 
-void Launcher::Launch(const std::string& pattern)
+void Launcher::MatchWithFilter(const std::string& pattern, std::function<void (Benchmark& benchmark)> action)
 {
-    // Launch all suitable benchmarks
     std::regex matcher(pattern);
+
     for (auto benchmark : _benchmarks)
         if (pattern.empty() || std::regex_match(benchmark->name(), matcher))
-            LaunchBenchmark(*benchmark);
+            action(*benchmark);
+}
+
+void Launcher::LaunchWithFilter(const std::string& pattern)
+{
+    // Launch all suitable benchmarks
+    MatchWithFilter(pattern, [this](Benchmark& benchmark) {
+        LaunchBenchmark(benchmark);
+    });
 
     // Report header, system & environment
     for (auto reporter : _reporters) {
@@ -25,20 +33,18 @@ void Launcher::Launch(const std::string& pattern)
     }
 
     // Report benchmark results
-    for (auto benchmark : _benchmarks) {
-        if (std::regex_match(benchmark->name(), matcher)) {
-            for (auto reporter : _reporters) {
-                reporter->ReportBenchmarkHeader();
-                reporter->ReportBenchmark(*benchmark, benchmark->_settings);
-                reporter->ReportPhasesHeader();
-                for (auto root_phase : benchmark->_phases) {
-                    ReportPhase(*reporter, *root_phase, root_phase->name());
-                }
-                reporter->ReportPhasesFooter();
-                reporter->ReportBenchmarkFooter();
+    MatchWithFilter(pattern, [this](Benchmark& benchmark) {
+        for (auto reporter : _reporters) {
+            reporter->ReportBenchmarkHeader();
+            reporter->ReportBenchmark(benchmark, benchmark._settings);
+            reporter->ReportPhasesHeader();
+            for (auto root_phase : benchmark._phases) {
+                ReportPhase(*reporter, *root_phase, root_phase->name());
             }
+            reporter->ReportPhasesFooter();
+            reporter->ReportBenchmarkFooter();
         }
-    }
+    });
 
     // Report footer
     for (auto reporter : _reporters) {
@@ -50,10 +56,13 @@ void Launcher::Launch(const std::string& pattern)
 void Launcher::LaunchBenchmark(Benchmark& benchmark)
 {
     // Make several attempts of execution...
-    for (int attempt = 0; attempt < benchmark._settings._attempts; ++attempt) {
+    for (int attempt = 1; attempt <= benchmark._settings._attempts; ++attempt) {
+
+        // Reset the current benchmark
+        ResetBenchmark(benchmark);
 
         // Reset metrics for the current attempt
-        ResetBenchmark(benchmark);
+        ResetBenchmarkMetrics(benchmark);
 
         // Initialize benchmark
         benchmark.Initialize();
@@ -66,7 +75,7 @@ void Launcher::LaunchBenchmark(Benchmark& benchmark)
         for (auto param : benchmark._settings._params) {
 
             // Prepare benchmark context
-            Context context(std::get<0>(param), std::get<1>(param), std::get<2>(param));
+            Context context(benchmark, std::get<0>(param), std::get<1>(param), std::get<2>(param));
 
             // Get or create the current benchmark
             UpdateBenchmark(benchmark, context);

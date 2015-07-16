@@ -43,7 +43,7 @@ public:
 
 protected:
     virtual void Initialize() {}
-    virtual void Run(const Context& context) = 0;
+    virtual void Run(Context& context) = 0;
     virtual void Cleanup() {}
 
 private:
