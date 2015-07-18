@@ -16,7 +16,10 @@ class Settings
     friend class Launcher;
 
 public:
-    Settings() : _attempts(10), _iterations(0), _nanoseconds(0) {}
+    Settings() : _attempts(5), _iterations(0), _nanoseconds(0) {}
+    Settings(int param) : Settings() { Param(param); }
+    Settings(int param1, int param2) : Settings() { Pair(param1, param2); }
+    Settings(int param1, int param2, int param3) : Settings() { Triple(param1, param2, param3); }
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;
     ~Settings() = default;

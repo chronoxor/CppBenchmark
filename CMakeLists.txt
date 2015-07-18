@@ -26,8 +26,9 @@ set(SOURCE_FILES
     source/system.cpp)
 add_library(cppbenchmark ${SOURCE_FILES})
 
-add_executable(cppbenchmark-main main.cpp)
-target_link_libraries(cppbenchmark-main cppbenchmark)
+# Examples
+add_executable(cppbenchmark-example-stl-containers-insert examples/stl_containers_insert.cpp)
+target_link_libraries(cppbenchmark-example-stl-containers-insert cppbenchmark)
 
 # Tests
 set(TESTS_SOURCE_FILES

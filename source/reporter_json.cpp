@@ -4,6 +4,8 @@
 
 #include "reporter_json.h"
 
+#include <iomanip>
+
 #include "environment.h"
 #include "system.h"
 #include "version.h"
@@ -131,12 +133,18 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
     _stream << Internals::indent7 << "\"min_time\": " << metrics.min_time() << ",\n";
     _stream << Internals::indent7 << "\"max_time\": " << metrics.max_time() << ",\n";
     _stream << Internals::indent7 << "\"total_time\": " << metrics.total_time() << ",\n";
-    _stream << Internals::indent7 << "\"total_iterations\": " << metrics.total_iterations() << ",\n";
-    _stream << Internals::indent7 << "\"total_items\": " << metrics.total_items() << ",\n";
-    _stream << Internals::indent7 << "\"total_bytes\": " << metrics.total_bytes() << ",\n";
-    _stream << Internals::indent7 << "\"iterations_per_second\": " << metrics.iterations_per_second() << ",\n";
-    _stream << Internals::indent7 << "\"items_per_second\": " << metrics.items_per_second() << ",\n";
-    _stream << Internals::indent7 << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
+    if (metrics.total_iterations() > 1)
+        _stream << Internals::indent7 << "\"total_iterations\": " << metrics.total_iterations() << ",\n";
+    if (metrics.total_items() > 0)
+        _stream << Internals::indent7 << "\"total_items\": " << metrics.total_items() << ",\n";
+    if (metrics.total_bytes() > 0)
+        _stream << Internals::indent7 << "\"total_bytes\": " << metrics.total_bytes() << ",\n";
+    if (metrics.total_iterations() > 1)
+        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"iterations_per_second\": " << metrics.iterations_per_second() << ",\n";
+    if (metrics.total_items() > 0)
+        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"items_per_second\": " << metrics.items_per_second() << ",\n";
+    if (metrics.total_bytes() > 0)
+        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
 }
 
 void ReporterJSON::ReportFooter()

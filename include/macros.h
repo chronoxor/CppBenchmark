@@ -29,8 +29,8 @@ public:
 #define BENCHMARK_MAIN()\
 int main(int argc, char** argv)\
 {\
-    LauncherConsole::GetInstance().Initialize(argc, argv);\
-    LauncherConsole::GetInstance().Launch();\
+    CppBenchmark::LauncherConsole::GetInstance().Initialize(argc, argv);\
+    CppBenchmark::LauncherConsole::GetInstance().Launch();\
     return 0;\
 }
 
@@ -41,11 +41,11 @@ namespace {\
     public:\
         using Benchmark::Benchmark;\
     protected:\
-        void Run(Context& context) override;\
+        void Run(CppBenchmark::Context& context) override;\
     };\
     CppBenchmark::Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
 }\
-void BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& context)
+void BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(CppBenchmark::Context& context)
 
 #define BENCHMARK_FIXTURE(fixture, ...)\
 namespace {\
@@ -54,7 +54,7 @@ namespace {\
     public:\
         using Benchmark::Benchmark;\
     protected:\
-        void Run(Context& context) override;\
+        void Run(CppBenchmark::Context& context) override;\
     };\
     CppBenchmark::Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
 }\

@@ -30,6 +30,7 @@ public:
     // Implementation of Phase
     const std::string& name() const override { return _name; }
     const PhaseMetrics& metrics() const override { return _metrics; }
+    PhaseMetrics& metrics() override { return _metrics; }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override;
     void StopPhase() override;
     std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) override;

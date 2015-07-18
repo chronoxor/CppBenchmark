@@ -5,6 +5,7 @@
 #include "reporter_console.h"
 
 #include <ctime>
+#include <iomanip>
 #include <sstream>
 
 #include "environment.h"
@@ -61,12 +62,18 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
     _stream << "Min time: " << GenerateTime(metrics.min_time()) << std::endl;
     _stream << "Max time: " << GenerateTime(metrics.max_time()) << std::endl;
     _stream << "Total time: " << GenerateTime(metrics.total_time()) << std::endl;
-    _stream << "Total iterations: " << metrics.total_iterations() << std::endl;
-    _stream << "Total items: " << metrics.total_items() << std::endl;
-    _stream << "Total bytes: " << GenerateSize(metrics.total_bytes()) << std::endl;
-    _stream << "Iterations throughput: " << metrics.iterations_per_second() << " / second" << std::endl;
-    _stream << "Items throughput: " << metrics.items_per_second() << " / second" << std::endl;
-    _stream << "Bytes throughput: " << GenerateSize(metrics.bytes_per_second()) << " / second" << std::endl;
+    if (metrics.total_iterations() > 1)
+        _stream << "Total iterations: " << metrics.total_iterations() << std::endl;
+    if (metrics.total_items() > 0)
+        _stream << "Total items: " << metrics.total_items() << std::endl;
+    if (metrics.total_bytes() > 0)
+        _stream << "Total bytes: " << GenerateSize(metrics.total_bytes()) << std::endl;
+    if (metrics.total_iterations() > 1)
+        _stream << "Iterations throughput: " << std::fixed << std::setprecision(3) << metrics.iterations_per_second() << " / second" << std::endl;
+    if (metrics.total_items() > 0)
+        _stream << "Items throughput: " << std::fixed << std::setprecision(3) << metrics.items_per_second() << " / second" << std::endl;
+    if (metrics.total_bytes() > 0)
+        _stream << "Bytes throughput: " << GenerateSize((int64_t)metrics.bytes_per_second()) << " / second" << std::endl;
 }
 
 void ReporterConsole::ReportFooter()

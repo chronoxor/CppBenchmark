@@ -4,6 +4,8 @@
 
 #include "reporter_csv.h"
 
+#include <iomanip>
+
 namespace CppBenchmark {
 
 void ReporterCSV::ReportHeader()
@@ -22,9 +24,9 @@ void ReporterCSV::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metric
     << metrics.total_iterations() << ','
     << metrics.total_items() << ','
     << metrics.total_bytes() << ','
-    << metrics.iterations_per_second() << ','
-    << metrics.items_per_second() << ','
-    << metrics.bytes_per_second() << '\n';
+    << std::fixed << std::setprecision(3) << metrics.iterations_per_second() << ','
+    << std::fixed << std::setprecision(3) << metrics.items_per_second() << ','
+    << std::fixed << std::setprecision(3) << metrics.bytes_per_second() << '\n';
 }
 
 } // namespace CppBenchmark

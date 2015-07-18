@@ -32,6 +32,8 @@ public:
     { return _ptr_phase ? _ptr_phase->name() : EMPTY_NAME; }
     const PhaseMetrics& metrics() const override
     { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
+    PhaseMetrics& metrics() override
+    { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override;
     void StopPhase() override;
     std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) override;
