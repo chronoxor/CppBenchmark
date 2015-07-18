@@ -8,9 +8,7 @@
 #include <list>
 #include <vector>
 
-const int items = 10000000;
-
-BENCHMARK("std::list<int>.push_back", items)
+BENCHMARK("std::list<int>.push_back", 10000000)
 {
     std::list<int> l;
     for (int i = 0; i < context.x(); ++i) {
@@ -19,7 +17,7 @@ BENCHMARK("std::list<int>.push_back", items)
     }
 }
 
-BENCHMARK("std::vector<int>.push_back", items)
+BENCHMARK("std::vector<int>.push_back", 10000000)
 {
     std::vector<int> v;
     for (int i = 0; i < context.x(); ++i) {
@@ -28,7 +26,7 @@ BENCHMARK("std::vector<int>.push_back", items)
     }
 }
 
-BENCHMARK("std::deque<int>.push_back", items)
+BENCHMARK("std::deque<int>.push_back", 10000000)
 {
     std::deque<int> d;
     for (int i = 0; i < context.x(); ++i) {
