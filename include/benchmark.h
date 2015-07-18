@@ -5,13 +5,14 @@
 #ifndef CPPBENCHMARK_BENCHMARK_H
 #define CPPBENCHMARK_BENCHMARK_H
 
+#include "benchmark_fixture.h"
 #include "context.h"
 #include "phase_core.h"
 #include "settings.h"
 
 namespace CppBenchmark {
 
-class Benchmark
+class Benchmark : public virtual BenchmarkFixture
 {
     friend class Launcher;
 
@@ -27,9 +28,7 @@ public:
     const std::string& name() const { return _name; }
 
 protected:
-    virtual void Initialize() {}
     virtual void Run(Context& context) = 0;
-    virtual void Cleanup() {}
 
 private:
     std::string _name;

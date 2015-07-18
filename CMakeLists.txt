@@ -27,6 +27,8 @@ set(SOURCE_FILES
 add_library(cppbenchmark ${SOURCE_FILES})
 
 # Examples
+add_executable(cppbenchmark-example-fwrite examples/fwrite.cpp)
+target_link_libraries(cppbenchmark-example-fwrite cppbenchmark)
 add_executable(cppbenchmark-example-stl-containers-insert examples/stl_containers_insert.cpp)
 target_link_libraries(cppbenchmark-example-stl-containers-insert cppbenchmark)
 

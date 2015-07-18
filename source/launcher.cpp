@@ -64,9 +64,6 @@ void Launcher::LaunchBenchmark(Benchmark& benchmark)
         // Reset metrics for the current attempt
         ResetBenchmarkMetrics(benchmark);
 
-        // Initialize benchmark
-        benchmark.Initialize();
-
         // Run benchmark at least once
         if (benchmark._settings._params.empty())
             benchmark._settings._params.emplace_back(-1, -1, -1);
@@ -82,6 +79,9 @@ void Launcher::LaunchBenchmark(Benchmark& benchmark)
 
             // Call launching notification
             onLaunching(benchmark, context, attempt);
+
+            // Initialize benchmark
+            benchmark.Initialize(context);
 
             // Run benchmark with the current context
             int64_t iterations = benchmark._settings._iterations;
@@ -106,15 +106,15 @@ void Launcher::LaunchBenchmark(Benchmark& benchmark)
                 nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
             }
 
+            // Cleanup benchmark
+            benchmark.Cleanup(context);
+
             // Call launched notification
             onLaunched(benchmark, context, attempt);
 
             // Reset the current benchmark
             ResetBenchmark(benchmark);
         }
-
-        // Cleanup benchmark
-        benchmark.Cleanup();
 
         // Choose best metrics for the current attempt
         ChooseBestBenchmarkMetrics(benchmark);
