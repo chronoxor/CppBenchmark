@@ -30,8 +30,8 @@ public:
     int cleanups() const { return _cleanups; }
 
 protected:
-    virtual void Initialize() { _initializations++; }
-    virtual void Run(Context& context)
+    void Initialize(Context& context) override { _initializations++; }
+    void Run(Context& context) override
     {
         auto phase1 = context.StartPhase("Phase1");
         std::this_thread::yield();
@@ -53,7 +53,7 @@ protected:
 
         _runs++;
     }
-    virtual void Cleanup() { _cleanups++; }
+    void Cleanup(Context& context) override { _cleanups++; }
 
 private:
     int _initializations;
@@ -115,7 +115,7 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
     REQUIRE(report_json.size() > 0);
 
     // Test benchmark state
-    REQUIRE(benchmark->initializations() == settings.attempts());
+    REQUIRE(benchmark->initializations() == (settings.params().size() * settings.attempts()));
     REQUIRE(benchmark->runs() == (settings.params().size() * settings.attempts() * settings.iterations()));
     REQUIRE(benchmark->cleanups() == benchmark->initializations());
 
