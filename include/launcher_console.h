@@ -20,12 +20,14 @@ public:
     LauncherConsole& operator=(LauncherConsole&&) = delete;
 
     void Initialize(int argc, char** argv);
-    void Launch() override;
+    void Launch();
+    void Report();
 
     static LauncherConsole& GetInstance()
     { static LauncherConsole instance; return instance; }
 
 protected:
+    // Implementation of LauncherHanlder
     void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) override;
     void onLaunched(const Benchmark& benchmark, const Context& context, int attempt) override;
 
@@ -35,8 +37,9 @@ private:
     bool _silent;
     std::string _filter;
     std::string _output;
+    std::string _type;
 
-    LauncherConsole() : _init(false), _list(false), _silent(false), _filter(""), _output("console") {}
+    LauncherConsole() : _init(false), _list(false), _silent(false), _filter(""), _output("console"), _type("best") {}
 };
 
 } // namespace CppBenchmark

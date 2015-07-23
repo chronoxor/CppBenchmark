@@ -14,7 +14,7 @@ namespace CppBenchmark {
 class ReporterConsole : public Reporter
 {
 public:
-    ReporterConsole(std::ostream& stream = std::cout) : _stream(stream) {}
+    ReporterConsole(std::ostream& stream = std::cout, MetricsReportingType type = eReportBest) : _stream(stream), _type(type) {}
     ReporterConsole(const ReporterConsole&) = delete;
     ReporterConsole(ReporterConsole&&) = delete;
     ~ReporterConsole() = default;
@@ -26,7 +26,7 @@ public:
     void ReportSystem() override;
     void ReportEnvironment() override;
     void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) override;
-    void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) override;
+    void ReportPhase(const PhaseCore& phase, const PhaseMetrics& best, const PhaseMetrics& worst) override;
     void ReportFooter() override;
 
     static std::string GenerateSeparator(char ch);
@@ -36,6 +36,10 @@ public:
 
 private:
     std::ostream& _stream;
+    MetricsReportingType _type;
+
+    template <typename T>
+    T ReportValue(T best, T worst) { return (_type == eReportBest) ? best : ((_type == eReportWorst) ? worst : ((best > worst) ? (best - worst) : (worst - best)));}
 };
 
 } // namespace CppBenchmark

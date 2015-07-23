@@ -89,6 +89,7 @@ void ReporterJSON::ReportBenchmarkFooter()
 void ReporterJSON::ReportBenchmark(const Benchmark& benchmark, const Settings& settings)
 {
     _stream << Internals::indent4 << "\"name\": \"" << benchmark.name() << "\",\n";
+    _stream << Internals::indent4 << "\"metrics\": \"" << to_string(_type) << "\",\n";
     _stream << Internals::indent4 << "\"attempts\": " << settings.attempts() << ",\n";
     if (settings.iterations() > 0)
         _stream << Internals::indent4 << "\"iterations\": " << settings.iterations() << ",\n";
@@ -126,25 +127,25 @@ void ReporterJSON::ReportPhaseFooter()
     _stream << Internals::indent5 << "}";
 }
 
-void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
+void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& best, const PhaseMetrics& worst)
 {
     _stream << Internals::indent7 << "\"name\": \"" << phase.name() << "\",\n";
-    _stream << Internals::indent7 << "\"avg_time\": " << metrics.avg_time() << ",\n";
-    _stream << Internals::indent7 << "\"min_time\": " << metrics.min_time() << ",\n";
-    _stream << Internals::indent7 << "\"max_time\": " << metrics.max_time() << ",\n";
-    _stream << Internals::indent7 << "\"total_time\": " << metrics.total_time() << ",\n";
-    if (metrics.total_iterations() > 1)
-        _stream << Internals::indent7 << "\"total_iterations\": " << metrics.total_iterations() << ",\n";
-    if (metrics.total_items() > 0)
-        _stream << Internals::indent7 << "\"total_items\": " << metrics.total_items() << ",\n";
-    if (metrics.total_bytes() > 0)
-        _stream << Internals::indent7 << "\"total_bytes\": " << metrics.total_bytes() << ",\n";
-    if (metrics.total_iterations() > 1)
-        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"iterations_per_second\": " << metrics.iterations_per_second() << ",\n";
-    if (metrics.total_items() > 0)
-        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"items_per_second\": " << metrics.items_per_second() << ",\n";
-    if (metrics.total_bytes() > 0)
-        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
+    _stream << Internals::indent7 << "\"avg_time\": " << ReportValue(best.avg_time(), worst.avg_time()) << ",\n";
+    _stream << Internals::indent7 << "\"min_time\": " << ReportValue(best.min_time(), worst.min_time()) << ",\n";
+    _stream << Internals::indent7 << "\"max_time\": " << ReportValue(best.max_time(), worst.max_time()) << ",\n";
+    _stream << Internals::indent7 << "\"total_time\": " << ReportValue(best.total_time(), worst.total_time()) << ",\n";
+    if ((best.total_iterations() > 1) || (worst.total_iterations() > 1))
+        _stream << Internals::indent7 << "\"total_iterations\": " << ReportValue(best.total_iterations(), worst.total_iterations()) << ",\n";
+    if ((best.total_items() > 0) || (worst.total_items() > 0))
+        _stream << Internals::indent7 << "\"total_items\": " << ReportValue(best.total_items(), worst.total_items()) << ",\n";
+    if ((best.total_bytes() > 0) || (worst.total_bytes() > 0))
+        _stream << Internals::indent7 << "\"total_bytes\": " << ReportValue(best.total_bytes(), worst.total_bytes()) << ",\n";
+    if ((best.total_iterations() > 1) || (worst.total_iterations() > 1))
+        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"iterations_per_second\": " << ReportValue(best.iterations_per_second(), worst.iterations_per_second()) << ",\n";
+    if ((best.total_items() > 0) || (worst.total_items() > 0))
+        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"items_per_second\": " << ReportValue(best.items_per_second(), worst.items_per_second()) << ",\n";
+    if ((best.total_bytes() > 0) || (worst.total_bytes() > 0))
+        _stream << Internals::indent7 << std::fixed << std::setprecision(3) << "\"bytes_per_second\": " << ReportValue(best.bytes_per_second(), worst.bytes_per_second()) << "\n";
 }
 
 void ReporterJSON::ReportFooter()

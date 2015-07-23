@@ -30,13 +30,15 @@ public:
     // Implementation of Phase
     const std::string& name() const override
     { return _ptr_phase ? _ptr_phase->name() : EMPTY_NAME; }
-    const PhaseMetrics& metrics() const override
-    { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
-    PhaseMetrics& metrics() override
-    { return _ptr_phase ? _ptr_phase->metrics() : EMPTY_METRICS; }
+    const PhaseMetrics& best() const override
+    { return _ptr_phase ? _ptr_phase->best() : EMPTY_METRICS; }
+    const PhaseMetrics& worst() const override
+    { return _ptr_phase ? _ptr_phase->worst() : EMPTY_METRICS; }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override;
+    std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) override;
     void StopPhase() override;
     std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) override;
+    std::shared_ptr<PhaseScope> ScopePhaseThreadSafe(const std::string& phase) override;
 
 private:
     std::shared_ptr<Phase> _ptr_phase;

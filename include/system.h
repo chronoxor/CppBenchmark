@@ -29,6 +29,8 @@ public:
 
     static int64_t RamTotal();
     static int64_t RamFree();
+
+    static int CurrentThreadId();
 };
 
 } // namespace CppBenchmark

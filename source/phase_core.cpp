@@ -3,6 +3,7 @@
 //
 
 #include "phase_core.h"
+#include "system.h"
 
 #include <algorithm>
 
@@ -22,7 +23,31 @@ std::shared_ptr<Phase> PhaseCore::StartPhase(const std::string& phase)
         result = *it;
 
     // Start new iteration for the child phase
-    result->_metrics.StartIteration();
+    result->StartIteration();
+
+    return result;
+}
+
+std::shared_ptr<Phase> PhaseCore::StartPhaseThreadSafe(const std::string& phase)
+{
+    std::shared_ptr<PhaseCore> result;
+
+    // Update phase collection under lock guard...
+    {
+        std::lock_guard<std::mutex> lock(_mutex);
+
+        // Find or create a sub phase with the given name
+        auto it = std::find_if(_child.begin(), _child.end(), [&phase](std::shared_ptr<PhaseCore>& item) { return ((item->name() == phase) && (item->_thread == System::CurrentThreadId())); });
+        if (it == _child.end()) {
+            result = std::make_shared<PhaseCore>(phase);
+            _child.emplace_back(result);
+        }
+        else
+            result = *it;
+    }
+
+    // Start new iteration for the child phase
+    result->StartIteration();
 
     return result;
 }
@@ -30,12 +55,26 @@ std::shared_ptr<Phase> PhaseCore::StartPhase(const std::string& phase)
 void PhaseCore::StopPhase()
 {
     // End the current iteration for the current phase
+    StopIteration();
+}
+
+void PhaseCore::StartIteration()
+{
+    _metrics.StartIteration();
+}
+
+void PhaseCore::StopIteration()
+{
     _metrics.StopIteration();
 }
 
-std::shared_ptr<PhaseScope> PhaseCore::ScopePhase(const std::string& phase)
+void PhaseCore::Update()
 {
-    return std::make_shared<PhaseScope>(StartPhase(phase));
+    if (_metrics.total_time() < _best.total_time())
+        _best = _metrics;
+    if (_metrics.total_time() > _worst.total_time())
+        _worst = _metrics;
+    _metrics = PhaseMetrics();
 }
 
 } // namespace CppBenchmark

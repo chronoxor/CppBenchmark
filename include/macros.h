@@ -31,6 +31,7 @@ int main(int argc, char** argv)\
 {\
     CppBenchmark::LauncherConsole::GetInstance().Initialize(argc, argv);\
     CppBenchmark::LauncherConsole::GetInstance().Launch();\
+    CppBenchmark::LauncherConsole::GetInstance().Report();\
     return 0;\
 }
 
@@ -59,6 +60,32 @@ namespace CppBenchmark {\
     Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& context)
+
+#define BENCHMARK_THREADS(...)\
+namespace CppBenchmark {\
+    class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public BenchmarkThreads\
+    {\
+    public:\
+        using BenchmarkThreads::BenchmarkThreads;\
+    protected:\
+        void RunThread(ContextThread& context) override;\
+    };\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
+}\
+void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(CppBenchmark::ContextThread& context)
+
+#define BENCHMARK_THREADS_FIXTURE(fixture, ...)\
+namespace CppBenchmark {\
+    class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public BenchmarkThreads, public fixture\
+    {\
+    public:\
+        using BenchmarkThreads::BenchmarkThreads;\
+    protected:\
+        void RunThread(ContextThread& context) override;\
+    };\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
+}\
+void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(ContextThread& context)
 
 #define BENCHMARK_CLASS(type, ...)\
 namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(__VA_ARGS__)); }

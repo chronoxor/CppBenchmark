@@ -13,7 +13,8 @@ namespace CppBenchmark {
 
 class Settings
 {
-    friend class Launcher;
+    friend class Benchmark;
+    friend class BenchmarkThreads;
 
 public:
     Settings() : _attempts(5), _iterations(0), _nanoseconds(0) {}
@@ -30,6 +31,7 @@ public:
     int attempts() const { return _attempts; }
     int64_t iterations() const { return _iterations; }
     int64_t nanoseconds() const { return _nanoseconds; }
+    const std::vector<int> threads() const { return _threads; }
     const std::vector<std::tuple<int, int, int>> params() const { return _params; }
 
     Settings& Attempts(int attempts);
@@ -41,6 +43,10 @@ public:
     Settings& Seconds(int64_t seconds);
     Settings& Minutes(int64_t minutes);
     Settings& Hours(int64_t hours);
+
+    Settings& Threads(int threads);
+    Settings& ThreadsRange(int from, int to);
+    Settings& ThreadsRange(int from, int to, std::function<int (int, int, int)> selector);
 
     Settings& Param(int value);
     Settings& ParamRange(int from, int to);
@@ -61,6 +67,7 @@ private:
     int _attempts;
     int64_t _iterations;
     int64_t _nanoseconds;
+    std::vector<int> _threads;
     std::vector<std::tuple<int, int, int>> _params;
 };
 

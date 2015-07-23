@@ -8,7 +8,7 @@
 #include <queue>
 #include <vector>
 
-class SortFixture : public virtual CppBenchmark::BenchmarkFixture
+class SortFixture : public virtual CppBenchmark::Fixture
 {
 protected:
     std::vector<int> items;

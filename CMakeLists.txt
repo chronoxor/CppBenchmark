@@ -9,7 +9,11 @@ include(cmake/SetCompilerWarningAll.cmake)
 include_directories(include)
 set(SOURCE_FILES
     source/benchmark.cpp
+    source/benchmark_threads.cpp
     source/context.cpp
+    source/context_thread.cpp
+    source/fixture.cpp
+    source/fixture_threads.cpp
     source/environment.cpp
     source/launcher.cpp
     source/launcher_console.cpp
@@ -23,16 +27,19 @@ set(SOURCE_FILES
     source/reporter_csv.cpp
     source/reporter_json.cpp
     source/settings.cpp
+    source/settings_threads.cpp
     source/system.cpp)
 add_library(cppbenchmark ${SOURCE_FILES})
 
 # Examples
+add_executable(cppbenchmark-example-containers examples/containers.cpp)
+target_link_libraries(cppbenchmark-example-containers cppbenchmark)
 add_executable(cppbenchmark-example-fwrite examples/fwrite.cpp)
 target_link_libraries(cppbenchmark-example-fwrite cppbenchmark)
 add_executable(cppbenchmark-example-sort examples/sort.cpp)
 target_link_libraries(cppbenchmark-example-sort cppbenchmark)
-add_executable(cppbenchmark-example-stl-containers-insert examples/stl_containers_insert.cpp)
-target_link_libraries(cppbenchmark-example-stl-containers-insert cppbenchmark)
+add_executable(cppbenchmark-example-threads examples/threads.cpp)
+target_link_libraries(cppbenchmark-example-threads cppbenchmark)
 
 # Tests
 set(TESTS_SOURCE_FILES

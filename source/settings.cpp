@@ -54,6 +54,44 @@ Settings& Settings::Hours(int64_t hours)
     return *this;
 }
 
+Settings& Settings::Threads(int threads)
+{
+    if (threads > 0)
+        _threads.emplace_back(threads);
+    return *this;
+}
+
+Settings& Settings::ThreadsRange(int from, int to)
+{
+    if ((from > 0) && (to > 0)) {
+        if (from > to) {
+            from = to;
+            to = from;
+        }
+        for (int i = from; i <= to; ++i)
+            _threads.emplace_back(i);
+    }
+    return *this;
+}
+
+Settings& Settings::ThreadsRange(int from, int to, std::function<int (int, int, int)> selector)
+{
+    if ((from > 0) && (to > 0)) {
+        if (from > to) {
+            from = to;
+            to = from;
+        }
+        // Select the first value
+        int result = selector(from, to, from);
+        while ((result >= from) && (result <= to)) {
+            _threads.emplace_back(result);
+            // Select the next value
+            result = selector(from, to, result);
+        }
+    }
+    return *this;
+}
+
 Settings& Settings::Param(int value)
 {
     if (value >= 0)
@@ -82,7 +120,7 @@ Settings& Settings::ParamRange(int from, int to, std::function<int (int, int, in
             to = from;
         }
         // Select the first value
-        int result = selector(from, to, -1);
+        int result = selector(from, to, from);
         while ((result >= from) && (result <= to)) {
             _params.emplace_back(std::tuple<int, int, int>(result, -1, -1));
             // Select the next value
@@ -130,10 +168,10 @@ Settings& Settings::PairRange(int from1, int to1, std::function<int (int, int, i
             to2 = from2;
         }
         // Select the first value
-        int result1 = selector1(from1, to1, -1);
+        int result1 = selector1(from1, to1, from1);
         while ((result1 >= from1) && (result1 <= to1)) {
             // Select the second value
-            int result2 = selector2(from2, to2, -1);
+            int result2 = selector2(from2, to2, from2);
             while ((result2 >= from2) && (result2 <= to2)) {
                 _params.emplace_back(std::tuple<int, int, int>(result1, result2, -1));
                 // Select the next value
@@ -194,13 +232,13 @@ Settings& Settings::TripleRange(int from1, int to1, std::function<int (int, int,
             to3 = from3;
         }
         // Select the first value
-        int result1 = selector1(from1, to1, -1);
+        int result1 = selector1(from1, to1, from1);
         while ((result1 >= from1) && (result1 <= to1)) {
             // Select the second value
-            int result2 = selector2(from2, to2, -1);
+            int result2 = selector2(from2, to2, from2);
             while ((result2 >= from2) && (result2 <= to2)) {
                 // Select the third value
-                int result3 = selector3(from3, to3, -1);
+                int result3 = selector3(from3, to3, from3);
                 while ((result3 >= from3) && (result3 <= to3)) {
                     _params.emplace_back(std::tuple<int, int, int>(result1, result2, result3));
                     // Select the next value

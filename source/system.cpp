@@ -157,4 +157,11 @@ int64_t System::RamFree()
 #endif
 }
 
+int System::CurrentThreadId()
+{
+#if defined(_WIN32)
+    return GetCurrentThreadId();
+#endif
+}
+
 } // namespace CppBenchmark

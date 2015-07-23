@@ -69,7 +69,7 @@ public:
     int launching() { return _launching; }
     int launched() { return _launched; }
 
-    void Launch() override { LaunchWithFilter(".es."); }
+    void Launch() { Launcher::Launch(".es."); }
 
 protected:
     void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) override { _launching++; }
@@ -86,27 +86,29 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
     Settings settings = Settings().Attempts(5).Iterations(10).TripleRange(0, 1, 0, 1, 0, 1);
     std::shared_ptr<TestBenchmark> benchmark = std::make_shared<TestBenchmark>("Test", settings);
 
-    // Prepare reporters
-    std::ostringstream stream_console;
-    std::shared_ptr<ReporterConsole> reporter_console = std::make_shared<ReporterConsole>(stream_console);
-    std::ostringstream stream_csv;
-    std::shared_ptr<ReporterCSV> reporter_csv = std::make_shared<ReporterCSV>(stream_csv);
-    std::ostringstream stream_json;
-    std::shared_ptr<ReporterJSON> reporter_json = std::make_shared<ReporterJSON>(stream_json);
-
     // Prepare launcher
     TestLauncher launcher;
     launcher.AddBenchmark(benchmark);
-    launcher.AddReporter(reporter_console);
-    launcher.AddReporter(reporter_csv);
-    launcher.AddReporter(reporter_json);
 
     // Launch
     launcher.Launch();
 
-    // Collect benchmark reports
+    // Console benchmark report
+    std::ostringstream stream_console;
+    ReporterConsole reporter_console(stream_console);
+    launcher.Report(reporter_console);
     std::string report_console = stream_console.str();
+
+    // CSV benchmark report
+    std::ostringstream stream_csv;
+    ReporterCSV reporter_csv(stream_csv);
+    launcher.Report(reporter_csv);
     std::string report_csv = stream_csv.str();
+
+    // JSON benchmark report
+    std::ostringstream stream_json;
+    ReporterJSON reporter_json(stream_json);
+    launcher.Report(reporter_json);
     std::string report_json = stream_json.str();
 
     // Test benchmark reports
