@@ -6,7 +6,7 @@
 
 namespace CppBenchmark {
 
-void PhaseMetrics::StartIteration()
+void PhaseMetrics::StartIteration() noexcept
 {
     // Do nothing if already started!
     if (_is_started)
@@ -20,7 +20,7 @@ void PhaseMetrics::StartIteration()
     _start_time = std::chrono::high_resolution_clock::now();
 }
 
-void PhaseMetrics::StopIteration()
+void PhaseMetrics::StopIteration() noexcept
 {
     // Do nothing if not already started!
     if (!_is_started)

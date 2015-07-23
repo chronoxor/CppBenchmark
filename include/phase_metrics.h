@@ -32,26 +32,26 @@ public:
     PhaseMetrics& operator=(const PhaseMetrics&) noexcept = default;
     PhaseMetrics& operator=(PhaseMetrics&&) noexcept = default;
 
-    int64_t min_time() const { return _min_time; }
-    int64_t max_time() const { return _max_time; }
-    int64_t total_time() const { return _total_time; }
-    int64_t total_iterations() const { return _total_iterations; }
-    int64_t total_items() const { return _total_items; }
-    int64_t total_bytes() const { return _total_bytes; }
+    int64_t min_time() const noexcept { return _min_time; }
+    int64_t max_time() const noexcept { return _max_time; }
+    int64_t total_time() const noexcept { return _total_time; }
+    int64_t total_iterations() const noexcept { return _total_iterations; }
+    int64_t total_items() const noexcept { return _total_items; }
+    int64_t total_bytes() const noexcept { return _total_bytes; }
 
-    int64_t avg_time() const
+    int64_t avg_time() const noexcept
     { return (_total_iterations > 0) ? (_total_time / _total_iterations) : 0; }
 
-    double iterations_per_second() const
+    double iterations_per_second() const noexcept
     { return (_total_time > 0) ? (((double)_total_iterations / (double)_total_time) * 1000000000.0) : 0.0; }
-    double items_per_second() const
+    double items_per_second() const noexcept
     { return (_total_time > 0) ? (((double)_total_items / (double)_total_time) * 1000000000.0) : 0.0; }
-    double bytes_per_second() const
+    double bytes_per_second() const noexcept
     { return (_total_time > 0) ? (((double)_total_bytes / (double)_total_time) * 1000000000.0) : 0.0; }
 
-    void AddItems(int64_t items)
+    void AddItems(int64_t items) noexcept
     { if (_is_started) _total_items += items; }
-    void AddBytes(int64_t bytes)
+    void AddBytes(int64_t bytes) noexcept
     { if (_is_started) _total_bytes += bytes; }
 
 private:
@@ -66,8 +66,8 @@ private:
     std::chrono::high_resolution_clock::time_point _start_time;
     std::chrono::high_resolution_clock::time_point _stop_time;
 
-    void StartIteration();
-    void StopIteration();
+    void StartIteration() noexcept;
+    void StopIteration() noexcept;
 };
 
 } // namespace CppBenchmark

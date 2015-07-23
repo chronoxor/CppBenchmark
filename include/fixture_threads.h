@@ -13,17 +13,17 @@ namespace CppBenchmark {
 class FixtureThreads : public virtual Fixture
 {
 public:
-    FixtureThreads() = default;
-    FixtureThreads(const FixtureThreads&) = default;
-    FixtureThreads(FixtureThreads&&) = default;
-    virtual ~FixtureThreads() = default;
+    FixtureThreads() noexcept = default;
+    FixtureThreads(const FixtureThreads&) noexcept = default;
+    FixtureThreads(FixtureThreads&&) noexcept = default;
+    virtual ~FixtureThreads() noexcept = default;
 
-    FixtureThreads& operator=(const FixtureThreads&) = default;
-    FixtureThreads& operator=(FixtureThreads&&) = default;
+    FixtureThreads& operator=(const FixtureThreads&) noexcept = default;
+    FixtureThreads& operator=(FixtureThreads&&) noexcept = default;
 
 protected:
-    virtual void InitializeThread(ContextThread& context) {}
-    virtual void CleanupThread(ContextThread& context) {}
+    virtual void InitializeThread(ContextThread&) {}
+    virtual void CleanupThread(ContextThread&) {}
 };
 
 } // namespace CppBenchmark

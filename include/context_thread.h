@@ -15,21 +15,21 @@ class ContextThread : public Context
 
 public:
     ContextThread() = delete;
-    ContextThread(const ContextThread&) = default;
-    ContextThread(ContextThread&&) = default;
-    ~ContextThread() = default;
+    ContextThread(const ContextThread&) noexcept = default;
+    ContextThread(ContextThread&&) noexcept = default;
+    ~ContextThread() noexcept = default;
 
-    ContextThread& operator=(const ContextThread&) = default;
-    ContextThread& operator=(ContextThread&&) = default;
+    ContextThread& operator=(const ContextThread&) noexcept = default;
+    ContextThread& operator=(ContextThread&&) noexcept = default;
 
-    int threads() const { return _threads; }
+    int threads() const noexcept { return _threads; }
 
     std::string to_string() const override;
 
 private:
     int _threads;
 
-    ContextThread(int threads, int x, int y, int z) : Context(x, y, z), _threads(threads) {}
+    ContextThread(int threads, int x, int y, int z) noexcept : Context(x, y, z), _threads(threads) {}
 };
 
 } // namespace CppBenchmark

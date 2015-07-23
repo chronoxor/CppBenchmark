@@ -17,7 +17,7 @@ namespace CppBenchmark {
 void ReporterConsole::ReportHeader()
 {
     _stream << GenerateSeparator('=') << std::endl;
-    _stream << "CppBenchmark Library. Version " << version << std::endl;
+    _stream << "CppBenchmark Report. Version " << version << std::endl;
 }
 
 void ReporterConsole::ReportSystem()
@@ -37,7 +37,7 @@ void ReporterConsole::ReportEnvironment()
     _stream << GenerateSeparator('=') << std::endl;
     _stream << "OS version: " << (Environment::Is64BitOS() ? "64-bit" : (Environment::Is32BitOS() ? "32-bit" : "<unknown>")) << std::endl;
     _stream << "Process version: " << (Environment::Is64BitProcess() ? "64-bit" : (Environment::Is32BitProcess() ? "32-bit" : "<unknown>")) << std::endl;
-    _stream << "Process configuaraion: " << (Environment::IsDebug() ? "Debug" : (Environment::IsRelease() ? "Release" : "<unknown>")) << std::endl;
+    _stream << "Process configuaraion: " << (Environment::IsDebug() ? "debug" : (Environment::IsRelease() ? "release" : "<unknown>")) << std::endl;
     time_t timestamp = Environment::Timestamp();
     _stream << "Local timestamp: " << std::asctime(std::localtime(&timestamp));
     _stream << "UTC timestamp: " << std::asctime(std::gmtime(&timestamp));

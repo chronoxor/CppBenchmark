@@ -17,18 +17,18 @@ class Context : public Phase
 
 public:
     Context() = delete;
-    Context(const Context&) = default;
-    Context(Context&&) = default;
-    ~Context() = default;
+    Context(const Context&) noexcept = default;
+    Context(Context&&) noexcept = default;
+    ~Context() noexcept = default;
 
-    Context& operator=(const Context&) = default;
-    Context& operator=(Context&&) = default;
+    Context& operator=(const Context&) noexcept = default;
+    Context& operator=(Context&&) noexcept = default;
 
-    int x() const { return _x; }
-    int y() const { return _y; }
-    int z() const { return _z; }
+    int x() const noexcept { return _x; }
+    int y() const noexcept { return _y; }
+    int z() const noexcept { return _z; }
 
-    PhaseMetrics& metrics() { return *_metrics; }
+    PhaseMetrics& metrics() noexcept { return *_metrics; }
 
     virtual std::string to_string() const;
 
@@ -49,7 +49,7 @@ protected:
     PhaseCore* _current;
     PhaseMetrics* _metrics;
 
-    Context(int x, int y, int z) : _x(x), _y(y), _z(z) {}
+    Context(int x, int y, int z) noexcept : _x(x), _y(y), _z(z) {}
 };
 
 } // namespace CppBenchmark

@@ -31,7 +31,7 @@ protected:
         for (size_t i = 0; i < items.size(); ++i)
         {
             // Set the current item as minimal
-            int min = i;
+            size_t min = i;
 
             // Found in rest items another minimal
             for (size_t j = i + 1; j < items.size(); ++j)
@@ -199,16 +199,16 @@ protected:
     }
 
 private:
-    void ShellSortInternal(std::vector<int>& items, size_t d)
+    void ShellSortInternal(std::vector<int>& subitems, size_t d)
     {
-        for (size_t i = d; i < items.size(); ++i)
+        for (size_t i = d; i < subitems.size(); ++i)
         {
             // Take the next item
             for (size_t j = i + 1; j >= d + 1; j -= d)
             {
                 // Check the current item with the previous one
-                if (items[j - 1] < items[j - d - 1])
-                    std::swap(items[j - 1], items[j - d - 1]);
+                if (subitems[j - 1] < subitems[j - d - 1])
+                    std::swap(subitems[j - 1], subitems[j - d - 1]);
             }
         }
     }
@@ -287,10 +287,10 @@ protected:
     }
 
 private:
-    void QuickSortInternal(std::vector<int>& items, size_t left, size_t right)
+    void QuickSortInternal(std::vector<int>& subitems, size_t left, size_t right)
     {
         // Choose the pivot item
-        int pivot = items[left + ((right - left) / 2) - 1];
+        int pivot = subitems[left + ((right - left) / 2) - 1];
 
         size_t l = left;
         size_t r = right;
@@ -298,16 +298,16 @@ private:
         while (l <= r)
         {
             // Move left if item is less than pivot
-            while ((l < right) && (items[l - 1] < pivot))
+            while ((l < right) && (subitems[l - 1] < pivot))
                 l++;
             // Move right if item is less than pivot
-            while ((r > left) && (items[r - 1] > pivot))
+            while ((r > left) && (subitems[r - 1] > pivot))
                 r--;
 
             if (l <= r)
             {
                 // Swap left and right items
-                std::swap(items[l - 1], items[r - 1]);
+                std::swap(subitems[l - 1], subitems[r - 1]);
 
                 // Move left and right indexes
                 ++l;
@@ -317,10 +317,10 @@ private:
 
         // Perform quick sort operation for the left sub items
         if (left < r)
-            QuickSortInternal(items, left, r);
+            QuickSortInternal(subitems, left, r);
         // Perform quick sort operation for the right sub items
         if (l < right)
-            QuickSortInternal(items, l, right);
+            QuickSortInternal(subitems, l, right);
     }
 };
 
@@ -338,10 +338,10 @@ protected:
     }
 
 private:
-    void QuickSort3Internal(std::vector<int>& items, size_t left, size_t right)
+    void QuickSort3Internal(std::vector<int>& subitems, size_t left, size_t right)
     {
         // Choose the pivot item
-        int pivot = items[left + ((right - left) / 2) - 1];
+        int pivot = subitems[left + ((right - left) / 2) - 1];
 
         size_t bl = left;
         size_t br = right;
@@ -352,28 +352,28 @@ private:
         while (l <= r)
         {
             // Move left if item is less than pivot
-            while ((l < right) && (items[l - 1] < pivot))
+            while ((l < right) && (subitems[l - 1] < pivot))
                 l++;
             // Move right if item is less than pivot
-            while ((r > left) && (items[r - 1] > pivot))
+            while ((r > left) && (subitems[r - 1] > pivot))
                 r--;
 
             if (l <= r)
             {
                 // Swap left and right items
-                std::swap(items[l - 1], items[r - 1]);
+                std::swap(subitems[l - 1], subitems[r - 1]);
 
                 // Move equals to the left
-                if (items[l - 1] == pivot)
+                if (subitems[l - 1] == pivot)
                 {
-                    std::swap(items[bl - 1], items[l - 1]);
+                    std::swap(subitems[bl - 1], subitems[l - 1]);
                     bl++;
                 }
 
                 // Move equals to the right
-                if (items[r - 1] == pivot)
+                if (subitems[r - 1] == pivot)
                 {
-                    std::swap(items[br - 1], items[r - 1]);
+                    std::swap(subitems[br - 1], subitems[r - 1]);
                     br++;
                 }
 
@@ -385,17 +385,17 @@ private:
 
         // Swap left equals with the lower items
         for (size_t k = left; (k < bl) && (r > left); ++k, --r)
-            std::swap(items[k - 1], items[r - 1]);
+            std::swap(subitems[k - 1], subitems[r - 1]);
         // Swap right equals with the upper items
         for (size_t k = right; (k > br) && (l < right); --k, ++l)
-            std::swap(items[k - 1], items[l - 1]);
+            std::swap(subitems[k - 1], subitems[l - 1]);
 
         // Perform quick sort operation for the left sub items
         if (left < r)
-            QuickSort3Internal(items, left, r);
+            QuickSort3Internal(subitems, left, r);
         // Perform quick sort operation for the right sub items
         if (l < right)
-            QuickSort3Internal(items, l, right);
+            QuickSort3Internal(subitems, l, right);
     }
 };
 

@@ -12,17 +12,17 @@ namespace CppBenchmark {
 class Fixture
 {
 public:
-    Fixture() = default;
-    Fixture(const Fixture&) = default;
-    Fixture(Fixture&&) = default;
-    virtual ~Fixture() = default;
+    Fixture() noexcept = default;
+    Fixture(const Fixture&) noexcept = default;
+    Fixture(Fixture&&) noexcept = default;
+    virtual ~Fixture() noexcept = default;
 
-    Fixture& operator=(const Fixture&) = default;
-    Fixture& operator=(Fixture&&) = default;
+    Fixture& operator=(const Fixture&) noexcept = default;
+    Fixture& operator=(Fixture&&) noexcept = default;
 
 protected:
-    virtual void Initialize(Context& context) {}
-    virtual void Cleanup(Context& context) {}
+    virtual void Initialize(Context&) {}
+    virtual void Cleanup(Context&) {}
 };
 
 } // namespace CppBenchmark

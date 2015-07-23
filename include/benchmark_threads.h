@@ -36,7 +36,7 @@ private:
     void Launch(LauncherHandler* handler) override;
 
     // Hide base benchmark run method
-    void Run(Context& context) override {}
+    void Run(Context&) override {}
 };
 
 } // namespace CppBenchmark

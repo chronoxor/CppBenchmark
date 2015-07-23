@@ -102,15 +102,15 @@ void LauncherConsole::onLaunching(const Benchmark& benchmark, const Context& con
     if (_silent)
         return;
 
-    std::cout << "Launching " << benchmark.name() << context.to_string() << ". Attempt " << attempt << "...";
+    std::cerr << "Launching " << benchmark.name() << context.to_string() << ". Attempt " << attempt << "...";
 }
 
-void LauncherConsole::onLaunched(const Benchmark& benchmark, const Context& context, int attempt)
+void LauncherConsole::onLaunched(const Benchmark&, const Context&, int)
 {
     if (_silent)
         return;
 
-    std::cout << "Done!" << std::endl;
+    std::cerr << "Done!" << std::endl;
 }
 
 } // namespace CppBenchmark

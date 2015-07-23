@@ -26,7 +26,7 @@ protected:
     int counter;
 };
 
-BENCHMARK_THREADS_FIXTURE(UnsynchronizedFixture, "unsynchronized++", Settings().ThreadsRange(1, 32, [](int from, int to, int result) {return (result * 2); }).Param(10000000))
+BENCHMARK_THREADS_FIXTURE(UnsynchronizedFixture, "unsynchronized++", Settings().ThreadsRange(1, 32, [](int, int, int result) {return (result * 2); }).Param(10000000))
 {
     for (int i = 0; i < context.x(); ++i) {
         counter++;
@@ -34,7 +34,7 @@ BENCHMARK_THREADS_FIXTURE(UnsynchronizedFixture, "unsynchronized++", Settings().
     }
 }
 
-BENCHMARK_THREADS_FIXTURE(AtomicFixture, "std::atomic++", Settings().ThreadsRange(1, 32, [](int from, int to, int result) {return (result * 2); }).Param(10000000))
+BENCHMARK_THREADS_FIXTURE(AtomicFixture, "std::atomic++", Settings().ThreadsRange(1, 32, [](int, int, int result) {return (result * 2); }).Param(10000000))
 {
     for (int i = 0; i < context.x(); ++i) {
         counter++;
@@ -42,7 +42,7 @@ BENCHMARK_THREADS_FIXTURE(AtomicFixture, "std::atomic++", Settings().ThreadsRang
     }
 }
 
-BENCHMARK_THREADS_FIXTURE(MutexFixture, "std::mutex++", Settings().ThreadsRange(1, 32, [](int from, int to, int result) {return (result * 2); }).Param(100000))
+BENCHMARK_THREADS_FIXTURE(MutexFixture, "std::mutex++", Settings().ThreadsRange(1, 32, [](int, int, int result) {return (result * 2); }).Param(100000))
 {
     for (int i = 0; i < context.x(); ++i) {
         std::lock_guard<std::mutex> lock(mutex);
