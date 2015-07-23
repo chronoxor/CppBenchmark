@@ -1,4 +1,4 @@
 cd ..
 if not exist "build" mkdir build
 cd build
-cmake -G "MSYS Makefiles" ..
+cmake -DCMAKE_BUILD_TYPE=Release -G "MSYS Makefiles" ..
