@@ -36,7 +36,7 @@ public:
     virtual void ReportBenchmarksFooter() {}
     virtual void ReportBenchmarkHeader() {}
     virtual void ReportBenchmarkFooter() {}
-    virtual void ReportBenchmark(const Benchmark&, const Settings&) {}
+    virtual void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) {}
     virtual void ReportPhasesHeader() {}
     virtual void ReportPhasesFooter() {}
     virtual void ReportPhaseHeader() {}

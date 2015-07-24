@@ -35,7 +35,7 @@ int main(int argc, char** argv)\
     return 0;\
 }
 
-#define BENCHMARK(...)\
+#define BENCHMARK(name, ...)\
 namespace CppBenchmark {\
     class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public Benchmark\
     {\
@@ -44,11 +44,11 @@ namespace CppBenchmark {\
     protected:\
         void Run(Context& context) override;\
     };\
-    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(name, Benchmark::TSettings(__VA_ARGS__)));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(CppBenchmark::Context& context)
 
-#define BENCHMARK_FIXTURE(fixture, ...)\
+#define BENCHMARK_FIXTURE(fixture, name, ...)\
 namespace CppBenchmark {\
     class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public Benchmark, public fixture\
     {\
@@ -57,11 +57,11 @@ namespace CppBenchmark {\
     protected:\
         void Run(Context& context) override;\
     };\
-    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(name, Benchmark::TSettings(__VA_ARGS__)));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& context)
 
-#define BENCHMARK_THREADS(...)\
+#define BENCHMARK_THREADS(name, ...)\
 namespace CppBenchmark {\
     class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public BenchmarkThreads\
     {\
@@ -70,11 +70,11 @@ namespace CppBenchmark {\
     protected:\
         void RunThread(ContextThread& context) override;\
     };\
-    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(name, BenchmarkThreads::TSettings(__VA_ARGS__)));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(CppBenchmark::ContextThread& context)
 
-#define BENCHMARK_THREADS_FIXTURE(fixture, ...)\
+#define BENCHMARK_THREADS_FIXTURE(fixture, name, ...)\
 namespace CppBenchmark {\
     class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public BenchmarkThreads, public fixture\
     {\
@@ -83,11 +83,11 @@ namespace CppBenchmark {\
     protected:\
         void RunThread(ContextThread& context) override;\
     };\
-    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(name, BenchmarkThreads::TSettings(__VA_ARGS__)));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(ContextThread& context)
 
-#define BENCHMARK_CLASS(type, ...)\
-namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(__VA_ARGS__)); }
+#define BENCHMARK_CLASS(type, name, ...)\
+namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(name, type::TSettings(__VA_ARGS__))); }
 
 #endif // CPPBENCHMARK_MACROS_H

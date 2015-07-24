@@ -8,6 +8,9 @@
 #include <queue>
 #include <vector>
 
+const int slow_size = 10000;
+const int fast_size = 1000000;
+
 class SortFixture : public virtual CppBenchmark::Fixture
 {
 protected:
@@ -457,15 +460,15 @@ protected:
     }
 };
 
-BENCHMARK_CLASS(SelectionSort, "SelectionSort", 10000)
-BENCHMARK_CLASS(BubbleSort, "BubbleSort", 10000)
-BENCHMARK_CLASS(ShakerSort, "ShakerSort", 10000)
-BENCHMARK_CLASS(GnomeSort, "GnomeSort", 10000)
-BENCHMARK_CLASS(InsertSort, "InsertSort", 10000)
-BENCHMARK_CLASS(ShellSort, "ShellSort", 10000)
-BENCHMARK_CLASS(MergeSort, "MergeSort", 1000000)
-BENCHMARK_CLASS(QuickSort, "QuickSort", 1000000)
-BENCHMARK_CLASS(QuickSort3, "QuickSort3", 1000000)
-BENCHMARK_CLASS(RadixSort, "RadixSort", 1000000)
+BENCHMARK_CLASS(SelectionSort, "SelectionSort", Settings().Param(slow_size))
+BENCHMARK_CLASS(BubbleSort, "BubbleSort", Settings().Param(slow_size))
+BENCHMARK_CLASS(ShakerSort, "ShakerSort", Settings().Param(slow_size))
+BENCHMARK_CLASS(GnomeSort, "GnomeSort", Settings().Param(slow_size))
+BENCHMARK_CLASS(InsertSort, "InsertSort", Settings().Param(slow_size))
+BENCHMARK_CLASS(ShellSort, "ShellSort", Settings().Param(slow_size))
+BENCHMARK_CLASS(MergeSort, "MergeSort", Settings().Param(fast_size))
+BENCHMARK_CLASS(QuickSort, "QuickSort", Settings().Param(fast_size))
+BENCHMARK_CLASS(QuickSort3, "QuickSort3", Settings().Param(fast_size))
+BENCHMARK_CLASS(RadixSort, "RadixSort", Settings().Param(fast_size))
 
 BENCHMARK_MAIN()

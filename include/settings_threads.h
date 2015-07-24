@@ -13,12 +13,11 @@ namespace CppBenchmark {
 class SettingsThreads : public Settings
 {
 public:
-    SettingsThreads(int threads = System::CpuPhysicalCores()) : Settings() { Threads(threads); }
-    SettingsThreads(int threads, int param) : SettingsThreads(threads) { Param(param); }
-    SettingsThreads(int threads, int param1, int param2) : SettingsThreads(threads) { Pair(param1, param2); }
-    SettingsThreads(int threads, int param1, int param2, int param3) : SettingsThreads(threads) { Triple(param1, param2, param3); }
-    SettingsThreads(const Settings& settings) : Settings(settings) {}
+    SettingsThreads(int iterations = 1) : Settings(iterations) {}
+    SettingsThreads(int iterations, int threads) : SettingsThreads(iterations) { Threads(threads); }
+    SettingsThreads(const Settings& settings) : Settings(settings) {}	
     SettingsThreads(const SettingsThreads&) = default;
+    SettingsThreads(Settings&& settings) : Settings(settings) {}	
     SettingsThreads(SettingsThreads&&) = default;
     ~SettingsThreads() = default;
 

@@ -32,6 +32,10 @@ public:
 
     virtual std::string to_string() const;
 
+    bool canceled() const noexcept { return _canceled; }
+
+    void Cancel() noexcept { _canceled = true; }
+
     // Implementation of Phase
     const std::string& name() const override { return _current->name(); }
     const PhaseMetrics& best() const override { return _current->best(); }
@@ -46,10 +50,11 @@ protected:
     int _x;
     int _y;
     int _z;
+    bool _canceled;
     PhaseCore* _current;
     PhaseMetrics* _metrics;
 
-    Context(int x, int y, int z) noexcept : _x(x), _y(y), _z(z) {}
+    Context(int x, int y, int z) noexcept : _x(x), _y(y), _z(z), _canceled(false) {}
 };
 
 } // namespace CppBenchmark

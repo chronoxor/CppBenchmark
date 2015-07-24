@@ -19,7 +19,9 @@ class Benchmark : public virtual Fixture
     friend class Launcher;
 
 public:
-    explicit Benchmark(const std::string& name, const Settings& settings = Settings())
+    typedef Settings TSettings;	
+
+    explicit Benchmark(const std::string& name, const TSettings& settings = TSettings())
             : _launched(false),
               _name(name),
               _settings(settings)

@@ -19,6 +19,7 @@ namespace CppBenchmark {
 class PhaseCore : public Phase
 {
     friend class Benchmark;
+    friend class BenchmarkMPMC;
     friend class BenchmarkThreads;
     friend class Launcher;
     friend class PhaseSingleThread;

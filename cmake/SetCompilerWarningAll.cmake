@@ -8,7 +8,7 @@ if(CMAKE_BUILD_TOOL MATCHES "(MSBuild|msdev|devenv|nmake)")
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
   endif()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX /wd4127 /wd4250 /wd4702")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX /wd4100 /wd4127 /wd4250 /wd4702")
 
   set(CMAKE_C_WARNING_LEVEL 4)
   if(CMAKE_C_FLAGS MATCHES "/W[0-4]")
@@ -16,7 +16,7 @@ if(CMAKE_BUILD_TOOL MATCHES "(MSBuild|msdev|devenv|nmake)")
   else()
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4")
   endif()
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /WX /wd4127 /wd4250 /wd4702")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /WX /wd4100 /wd4127 /wd4250 /wd4702")
 
 elseif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
 

@@ -8,31 +8,28 @@
 #include <list>
 #include <vector>
 
-BENCHMARK("std::list<int>.push_back", 10000000)
+const int iterations = 10000000;
+
+template <typename T>
+class ContainerFixture
 {
-    std::list<int> l;
-    for (int i = 0; i < context.x(); ++i) {
-        l.push_back(i);
-        context.metrics().AddItems(1);
-    }
+protected:
+    T container;
+};
+
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back", iterations)
+{
+    container.push_back(0);
 }
 
-BENCHMARK("std::vector<int>.push_back", 10000000)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.push_back", iterations)
 {
-    std::vector<int> v;
-    for (int i = 0; i < context.x(); ++i) {
-        v.push_back(i);
-        context.metrics().AddItems(1);
-    }
+    container.push_back(0);
 }
 
-BENCHMARK("std::deque<int>.push_back", 10000000)
+BENCHMARK_FIXTURE(ContainerFixture<std::deque<int>>, "std::deque<int>.push_back", iterations)
 {
-    std::deque<int> d;
-    for (int i = 0; i < context.x(); ++i) {
-        d.push_back(i);
-        context.metrics().AddItems(1);
-    }
+    container.push_back(0);
 }
 
 BENCHMARK_MAIN()

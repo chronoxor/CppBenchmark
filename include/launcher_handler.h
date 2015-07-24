@@ -13,6 +13,7 @@ namespace CppBenchmark {
 class LauncherHandler
 {
     friend class Benchmark;
+    friend class BenchmarkMPMC;
     friend class BenchmarkThreads;
 
 public:
@@ -25,8 +26,8 @@ public:
     LauncherHandler& operator=(LauncherHandler&&) = default;
 
 protected:
-    virtual void onLaunching(const Benchmark&, const Context&, int) {}
-    virtual void onLaunched(const Benchmark&, const Context&, int) {}
+    virtual void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) {}
+    virtual void onLaunched(const Benchmark& benchmark, const Context& context, int attempt) {}
 };
 
 } // namespace CppBenchmark

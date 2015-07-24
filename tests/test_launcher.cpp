@@ -30,7 +30,7 @@ public:
     int cleanups() const { return _cleanups; }
 
 protected:
-    void Initialize(Context&) override { _initializations++; }
+    void Initialize(Context& context) override { _initializations++; }
     void Run(Context& context) override
     {
         auto phase1 = context.StartPhase("Phase1");
@@ -53,7 +53,7 @@ protected:
 
         _runs++;
     }
-    void Cleanup(Context&) override { _cleanups++; }
+    void Cleanup(Context& context) override { _cleanups++; }
 
 private:
     int _initializations;
@@ -72,8 +72,8 @@ public:
     void Launch() { Launcher::Launch(".es."); }
 
 protected:
-    void onLaunching(const Benchmark&, const Context&, int) override { _launching++; }
-    void onLaunched(const Benchmark&, const Context&, int) override { _launched++; }
+    void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) override { _launching++; }
+    void onLaunched(const Benchmark& benchmark, const Context& context, int attempt) override { _launched++; }
 
 private:
     int _launching;

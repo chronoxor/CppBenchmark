@@ -15,15 +15,15 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
     for (int attempt = 1; attempt <= _settings.attempts(); ++attempt) {
 
         // Run benchmark at least for N threads where N is hardware core count
-        if (_settings._threads.empty())
-            _settings._threads.emplace_back(System::CpuPhysicalCores());
+        if (_settings_threads._threads.empty())
+            _settings_threads._threads.emplace_back(System::CpuPhysicalCores());
 
         // Run benchmark at least once
         if (_settings._params.empty())
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every threads count
-        for (auto threads : _settings.threads()) {
+        for (auto threads : _settings_threads.threads()) {
 
             // Run benchmark for every input parameter (single, pair, triple)
             for (auto param : _settings.params()) {
@@ -34,24 +34,21 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 // Initialize the current benchmark
                 InitBenchmarkContext(context);
 
-                // Call launching notification
+                // Call launching notification...
                 handler->onLaunching(*this, context, attempt);
 
-                // Initialize benchmark
+                // Call initialize benchmark method...
                 Initialize(context);
 
                 // Run benchmark with the current context
                 int64_t iterations = _settings.iterations();
                 int64_t nanoseconds = _settings.nanoseconds();
 
-                // Special check for default settings
-                if ((iterations == 0) && (nanoseconds == 0))
-                    iterations = 1;
-
                 // Start benchmark root phase iteration
                 context._current->StartIteration();
+                context._metrics->AddIterations(1);
 
-                // Start benchmark threads
+                // Start benchmark threads as futures
                 for (int i = 0; i < threads; ++i) {
                     _futures.push_back(
                             std::async(std::launch::async,
@@ -71,17 +68,19 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                                            thread_context._current = thread_phase_core;
                                            thread_context._metrics = &thread_phase_core->metrics();
 
-                                           // Initialize benchmark thread
+                                           // Call initialize thread method...
                                            InitializeThread(thread_context);
 
-                                           // Run benchmark thread
-                                           while ((thread_iterations > 0) || (thread_nanoseconds > 0))
+                                           thread_phase_core->StartIteration();
+                                           while (!thread_context.canceled() && ((thread_iterations > 0) || (thread_nanoseconds > 0)))
                                            {
+                                               // Add new metrics iteration
+                                               thread_context._metrics->AddIterations(1);
+
                                                auto start = std::chrono::high_resolution_clock::now();
 
-                                               thread_phase_core->StartIteration();
+                                               // Run thread method...
                                                RunThread(thread_context);
-                                               thread_phase_core->StopIteration();
 
                                                auto stop = std::chrono::high_resolution_clock::now();
 
@@ -89,8 +88,9 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                                                thread_iterations -= 1;
                                                thread_nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
                                            }
+                                           thread_phase_core->StopIteration();
 
-                                           // Cleanup benchmark thread
+                                           // Call cleanup thread method...
                                            CleanupThread(thread_context);
 
                                            // Update thread safe phase metrics
@@ -101,20 +101,23 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                                        }));
                 }
 
-                // Wait for all benchmark threads
+                // Wait for all futures
                 for (auto& future : _futures) {
                     if (future.valid()) {
                         future.wait();
                     }
                 };
 
+                // Clear futures collection
+                _futures.clear();
+
                 // Stop benchmark root phase iteration
                 context._current->StopIteration();
 
-                // Cleanup benchmark
+                // Call cleanup benchmark method...
                 Cleanup(context);
 
-                // Call launched notification
+                // Call launched notification...
                 handler->onLaunched(*this, context, attempt);
 
                 // Update benchmark root phase metrics

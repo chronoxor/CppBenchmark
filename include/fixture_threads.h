@@ -22,8 +22,8 @@ public:
     FixtureThreads& operator=(FixtureThreads&&) noexcept = default;
 
 protected:
-    virtual void InitializeThread(ContextThread&) {}
-    virtual void CleanupThread(ContextThread&) {}
+    virtual void InitializeThread(ContextThread& context) {}
+    virtual void CleanupThread(ContextThread& context) {}
 };
 
 } // namespace CppBenchmark

@@ -21,8 +21,8 @@ public:
     Fixture& operator=(Fixture&&) noexcept = default;
 
 protected:
-    virtual void Initialize(Context&) {}
-    virtual void Cleanup(Context&) {}
+    virtual void Initialize(Context& context) {}
+    virtual void Cleanup(Context& context) {}
 };
 
 } // namespace CppBenchmark

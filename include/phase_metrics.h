@@ -49,6 +49,8 @@ public:
     double bytes_per_second() const noexcept
     { return (_total_time > 0) ? (((double)_total_bytes / (double)_total_time) * 1000000000.0) : 0.0; }
 
+    void AddIterations(int64_t iterations) noexcept
+    { if (_is_started) _total_iterations += iterations; }
     void AddItems(int64_t items) noexcept
     { if (_is_started) _total_items += items; }
     void AddBytes(int64_t bytes) noexcept
@@ -65,6 +67,7 @@ private:
     bool _is_started;
     std::chrono::high_resolution_clock::time_point _start_time;
     std::chrono::high_resolution_clock::time_point _stop_time;
+    int64_t _start_iteration;
 
     void StartIteration() noexcept;
     void StopIteration() noexcept;

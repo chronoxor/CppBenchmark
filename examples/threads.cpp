@@ -7,6 +7,9 @@
 #include <atomic>
 #include <mutex>
 
+const int iterations = 10000000;
+const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 32, [](int from, int to, int result) { return (result * 2); });
+
 class UnsynchronizedFixture
 {
 protected:
@@ -26,29 +29,20 @@ protected:
     int counter;
 };
 
-BENCHMARK_THREADS_FIXTURE(UnsynchronizedFixture, "unsynchronized++", Settings().ThreadsRange(1, 32, [](int, int, int result) {return (result * 2); }).Param(10000000))
+BENCHMARK_THREADS_FIXTURE(UnsynchronizedFixture, "unsynchronized++", settings)
 {
-    for (int i = 0; i < context.x(); ++i) {
-        counter++;
-        context.metrics().AddItems(1);
-    }
+    counter++;
 }
 
-BENCHMARK_THREADS_FIXTURE(AtomicFixture, "std::atomic++", Settings().ThreadsRange(1, 32, [](int, int, int result) {return (result * 2); }).Param(10000000))
+BENCHMARK_THREADS_FIXTURE(AtomicFixture, "std::atomic++", settings)
 {
-    for (int i = 0; i < context.x(); ++i) {
-        counter++;
-        context.metrics().AddItems(1);
-    }
+    counter++;
 }
 
-BENCHMARK_THREADS_FIXTURE(MutexFixture, "std::mutex++", Settings().ThreadsRange(1, 32, [](int, int, int result) {return (result * 2); }).Param(100000))
+BENCHMARK_THREADS_FIXTURE(MutexFixture, "std::mutex++", settings)
 {
-    for (int i = 0; i < context.x(); ++i) {
-        std::lock_guard<std::mutex> lock(mutex);
-        counter++;
-        context.metrics().AddItems(1);
-    }
+    std::lock_guard<std::mutex> lock(mutex);
+    counter++;
 }
 
 BENCHMARK_MAIN()

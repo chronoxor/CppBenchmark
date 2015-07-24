@@ -29,27 +29,26 @@ void Benchmark::Launch(LauncherHandler* handler)
             // Initialize the current benchmark
             InitBenchmarkContext(context);
 
-            // Call launching notification
+            // Call launching notification...
             handler->onLaunching(*this, context, attempt);
 
-            // Initialize benchmark
+            // Call initialize benchmark method...
             Initialize(context);
 
             // Run benchmark with the current context
             int64_t iterations = _settings.iterations();
             int64_t nanoseconds = _settings.nanoseconds();
 
-            // Special check for default settings
-            if ((iterations == 0) && (nanoseconds == 0))
-                iterations = 1;
-
-            while ((iterations > 0) || (nanoseconds > 0))
+            context._current->StartIteration();
+            while (!context.canceled() && ((iterations > 0) || (nanoseconds > 0)))
             {
+                // Add new metrics iteration
+                context._metrics->AddIterations(1);
+
                 auto start = std::chrono::high_resolution_clock::now();
 
-                context._current->StartIteration();
+                // Run benchmark method...
                 Run(context);
-                context._current->StopIteration();
 
                 auto stop = std::chrono::high_resolution_clock::now();
 
@@ -57,11 +56,12 @@ void Benchmark::Launch(LauncherHandler* handler)
                 iterations -= 1;
                 nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
             }
+            context._current->StopIteration();
 
-            // Cleanup benchmark
+            // Call cleanup benchmark method...
             Cleanup(context);
 
-            // Call launched notification
+            // Call launched notification...
             handler->onLaunched(*this, context, attempt);
         }
 

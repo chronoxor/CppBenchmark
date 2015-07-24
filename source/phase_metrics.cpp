@@ -12,12 +12,10 @@ void PhaseMetrics::StartIteration() noexcept
     if (_is_started)
         return;
 
-    // Update iterations counter
-    _total_iterations += 1;
-
     // Start high resolution timer
     _is_started = true;
     _start_time = std::chrono::high_resolution_clock::now();
+    _start_iteration = _total_iterations;
 }
 
 void PhaseMetrics::StopIteration() noexcept
@@ -33,11 +31,17 @@ void PhaseMetrics::StopIteration() noexcept
     // Get phase duration
     int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(_stop_time - _start_time).count();
 
+    // Get phase iterations count
+    int64_t iterations = _total_iterations - _start_iteration;
+
+    // Get phase iteration delta
+    int64_t delta = duration / iterations;
+
     // Update time counters
-    if (duration < _min_time)
-        _min_time = duration;
-    if (duration > _max_time)
-        _max_time = duration;
+    if (delta < _min_time)
+        _min_time = delta;
+    if (delta > _max_time)
+        _max_time = delta;
     _total_time += duration;
 }
 

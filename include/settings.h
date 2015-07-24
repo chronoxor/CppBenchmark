@@ -14,13 +14,11 @@ namespace CppBenchmark {
 class Settings
 {
     friend class Benchmark;
+    friend class BenchmarkMPMC;
     friend class BenchmarkThreads;
 
 public:
-    Settings() : _attempts(5), _iterations(0), _nanoseconds(0) {}
-    Settings(int param) : Settings() { Param(param); }
-    Settings(int param1, int param2) : Settings() { Pair(param1, param2); }
-    Settings(int param1, int param2, int param3) : Settings() { Triple(param1, param2, param3); }
+    Settings(int iterations = 1) : _attempts(5), _iterations(iterations), _nanoseconds(0) {}
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;
     ~Settings() = default;
@@ -31,7 +29,8 @@ public:
     int attempts() const { return _attempts; }
     int64_t iterations() const { return _iterations; }
     int64_t nanoseconds() const { return _nanoseconds; }
-    const std::vector<int> threads() const { return _threads; }
+    const std::vector<int> threads() const { return _threads; }	
+    const std::vector<std::tuple<int, int>> mpmc() const { return _mpmc; }	
     const std::vector<std::tuple<int, int, int>> params() const { return _params; }
 
     Settings& Attempts(int attempts);
@@ -47,6 +46,11 @@ public:
     Settings& Threads(int threads);
     Settings& ThreadsRange(int from, int to);
     Settings& ThreadsRange(int from, int to, std::function<int (int, int, int)> selector);
+
+    Settings& MPMC(int producers, int consumers);
+    Settings& MPMCRange(int producers_from, int producers_to, int consumers_from, int consumers_to);
+    Settings& MPMCRange(int producers_from, int producers_to, std::function<int (int, int, int)> producers_selector,
+                        int consumers_from, int consumers_to, std::function<int (int, int, int)> consumers_selector);
 
     Settings& Param(int value);
     Settings& ParamRange(int from, int to);
@@ -68,6 +72,7 @@ private:
     int64_t _iterations;
     int64_t _nanoseconds;
     std::vector<int> _threads;
+    std::vector<std::tuple<int, int>> _mpmc;
     std::vector<std::tuple<int, int, int>> _params;
 };
 

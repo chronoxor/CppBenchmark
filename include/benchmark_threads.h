@@ -17,8 +17,10 @@ namespace CppBenchmark {
 class BenchmarkThreads : public Benchmark, public virtual FixtureThreads
 {
 public:
-    explicit BenchmarkThreads(const std::string& name, const SettingsThreads& settings = SettingsThreads())
-            : Benchmark(name, settings)
+    typedef SettingsThreads TSettings;			
+
+    explicit BenchmarkThreads(const std::string& name, const TSettings& settings = TSettings())
+            : Benchmark(name, settings), _settings_threads(settings)
     {}
     BenchmarkThreads(const BenchmarkThreads&) = delete;
     BenchmarkThreads(BenchmarkThreads&&) = delete;
@@ -31,12 +33,13 @@ protected:
     virtual void RunThread(ContextThread& context) = 0;
 
 private:
+    SettingsThreads _settings_threads;
     std::vector<std::future<void>> _futures;
 
     void Launch(LauncherHandler* handler) override;
 
     // Hide base benchmark run method
-    void Run(Context&) override {}
+    void Run(Context& context) override {}
 };
 
 } // namespace CppBenchmark

@@ -105,7 +105,7 @@ void LauncherConsole::onLaunching(const Benchmark& benchmark, const Context& con
     std::cerr << "Launching " << benchmark.name() << context.to_string() << ". Attempt " << attempt << "...";
 }
 
-void LauncherConsole::onLaunched(const Benchmark&, const Context&, int)
+void LauncherConsole::onLaunched(const Benchmark& benchmark, const Context& context, int attempt)
 {
     if (_silent)
         return;

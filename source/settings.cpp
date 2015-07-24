@@ -8,13 +8,13 @@ namespace CppBenchmark {
 
 Settings& Settings::Attempts(int attempts)
 {
-    _attempts = (attempts > 0) ? attempts : 10;
+    _attempts = (attempts > 0) ? attempts : 5;
     return *this;
 }
 
 Settings& Settings::Iterations(int64_t iterations)
 {
-    _iterations = (iterations > 0) ? iterations : 0;
+    _iterations = (iterations > 0) ? iterations : 1;
     return *this;
 }
 
@@ -92,10 +92,64 @@ Settings& Settings::ThreadsRange(int from, int to, std::function<int (int, int, 
     return *this;
 }
 
+Settings& Settings::MPMC(int producers, int consumers)
+{
+    if ((producers > 0) && (consumers > 0))
+        _mpmc.emplace_back(producers, consumers);
+    return *this;
+}
+
+Settings& Settings::MPMCRange(int producers_from, int producers_to, int consumers_from, int consumers_to)
+{
+    if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0)) {
+        if (producers_from > producers_to) {
+            producers_from = producers_to;
+            producers_to = producers_from;
+        }
+        if (consumers_from > consumers_to) {
+            consumers_from = consumers_to;
+            consumers_to = consumers_from;
+        }
+        for (int i = producers_from; i <= producers_to; ++i)
+            for (int j = consumers_from; j <= consumers_to; ++j)
+                _mpmc.emplace_back(i, j);
+    }
+    return *this;
+}
+
+Settings& Settings::MPMCRange(int producers_from, int producers_to, std::function<int (int, int, int)> producers_selector,
+                              int consumers_from, int consumers_to, std::function<int (int, int, int)> consumers_selector)
+{
+    if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0)) {
+        if (producers_from > producers_to) {
+            producers_from = producers_to;
+            producers_to = producers_from;
+        }
+        if (consumers_from > consumers_to) {
+            consumers_from = consumers_to;
+            consumers_to = consumers_from;
+        }
+        // Select the first value
+        int result1 = producers_selector(producers_from, producers_to, producers_from);
+        while ((result1 >= producers_from) && (result1 <= producers_to)) {
+            // Select the second value
+            int result2 = consumers_selector(consumers_from, consumers_to, consumers_from);
+            while ((result2 >= consumers_from) && (result2 <= consumers_to)) {
+                _mpmc.emplace_back(result1, result2);
+                // Select the next value
+                result2 = consumers_selector(consumers_from, consumers_to, result2);
+            }
+            // Select the next value
+            result1 = producers_selector(producers_from, producers_to, result1);
+        }
+    }
+    return *this;
+}
+
 Settings& Settings::Param(int value)
 {
     if (value >= 0)
-        _params.emplace_back(std::tuple<int, int, int>(value, -1, -1));
+        _params.emplace_back(value, -1, -1);
     return *this;
 }
 
@@ -107,7 +161,7 @@ Settings& Settings::ParamRange(int from, int to)
             to = from;
         }
         for (int i = from; i <= to; ++i)
-            _params.emplace_back(std::tuple<int, int, int>(i, -1, -1));
+            _params.emplace_back(i, -1, -1);
     }
     return *this;
 }
@@ -122,7 +176,7 @@ Settings& Settings::ParamRange(int from, int to, std::function<int (int, int, in
         // Select the first value
         int result = selector(from, to, from);
         while ((result >= from) && (result <= to)) {
-            _params.emplace_back(std::tuple<int, int, int>(result, -1, -1));
+            _params.emplace_back(result, -1, -1);
             // Select the next value
             result = selector(from, to, result);
         }
@@ -133,7 +187,7 @@ Settings& Settings::ParamRange(int from, int to, std::function<int (int, int, in
 Settings& Settings::Pair(int value1, int value2)
 {
     if ((value1 >= 0) && (value2 >= 0))
-        _params.emplace_back(std::tuple<int, int, int>(value1, value2, -1));
+        _params.emplace_back(value1, value2, -1);
     return *this;
 }
 
@@ -150,7 +204,7 @@ Settings& Settings::PairRange(int from1, int to1, int from2, int to2)
         }
         for (int i = from1; i <= to1; ++i)
             for (int j = from2; j <= to2; ++j)
-                _params.emplace_back(std::tuple<int, int, int>(i, j, -1));
+                _params.emplace_back(i, j, -1);
     }
     return *this;
 }
@@ -173,7 +227,7 @@ Settings& Settings::PairRange(int from1, int to1, std::function<int (int, int, i
             // Select the second value
             int result2 = selector2(from2, to2, from2);
             while ((result2 >= from2) && (result2 <= to2)) {
-                _params.emplace_back(std::tuple<int, int, int>(result1, result2, -1));
+                _params.emplace_back(result1, result2, -1);
                 // Select the next value
                 result2 = selector2(from2, to2, result2);
             }
@@ -187,7 +241,7 @@ Settings& Settings::PairRange(int from1, int to1, std::function<int (int, int, i
 Settings& Settings::Triple(int value1, int value2, int value3)
 {
     if ((value1 >= 0) && (value2 >= 0) && (value3 >= 0))
-        _params.emplace_back(std::tuple<int, int, int>(value1, value2, value3));
+        _params.emplace_back(value1, value2, value3);
     return *this;
 }
 
@@ -209,7 +263,7 @@ Settings& Settings::TripleRange(int from1, int to1, int from2, int to2, int from
         for (int i = from1; i <= to1; ++i)
             for (int j = from2; j <= to2; ++j)
                 for (int k = from3; k <= to3; ++k)
-                    _params.emplace_back(std::tuple<int, int, int>(i, j, k));
+                    _params.emplace_back(i, j, k);
     }
     return *this;
 }
@@ -240,7 +294,7 @@ Settings& Settings::TripleRange(int from1, int to1, std::function<int (int, int,
                 // Select the third value
                 int result3 = selector3(from3, to3, from3);
                 while ((result3 >= from3) && (result3 <= to3)) {
-                    _params.emplace_back(std::tuple<int, int, int>(result1, result2, result3));
+                    _params.emplace_back(result1, result2, result3);
                     // Select the next value
                     result3 = selector3(from3, to3, result3);
                 }

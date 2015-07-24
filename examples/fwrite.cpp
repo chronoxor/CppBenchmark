@@ -6,6 +6,11 @@
 
 #include <array>
 
+const int iterations = 100000;
+const int chunk_size_from = 32;
+const int chunk_size_to = 4096;
+const auto settings = CppBenchmark::Settings().Iterations(iterations).ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int result) { return (result * 2); });
+
 class FileFixture
 {
 public:
@@ -26,16 +31,16 @@ public:
 
 protected:
     FILE* file;
-    std::array<char, 1048576> buffer;
+    std::array<char, chunk_size_to> buffer;
 };
 
-BENCHMARK_FIXTURE(FileFixture, "fwrite", Settings().ParamRange(32, 4096, [](int, int, int result) {return (result * 2); }).Iterations(100000))
+BENCHMARK_FIXTURE(FileFixture, "fwrite", settings)
 {
     fwrite(buffer.data(), sizeof(char), context.x(), file);
     context.metrics().AddBytes(context.x());
 }
 
-BENCHMARK_FIXTURE(FileFixture, "fwrite+fflush", Settings().ParamRange(32, 4096, [](int, int, int result) {return (result * 2); }).Iterations(100000))
+BENCHMARK_FIXTURE(FileFixture, "fwrite+fflush", settings)
 {
     fwrite(buffer.data(), sizeof(char), context.x(), file);
     fflush(file);

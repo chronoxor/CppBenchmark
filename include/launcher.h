@@ -6,6 +6,7 @@
 #define CPPBENCHMARK_LAUNCHER_H
 
 #include "benchmark.h"
+#include "benchmark_mpmc.h"
 #include "benchmark_threads.h"
 #include "launcher_handler.h"
 #include "reporter.h"
