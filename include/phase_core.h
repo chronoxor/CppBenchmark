@@ -58,9 +58,11 @@ protected:
     PhaseMetrics _best;
     PhaseMetrics _worst;
 
-    void StartIteration();
-    void StopIteration();
-    void Update();
+    void StartPhaseMetrics() { _metrics.StartPhase(); }
+    void StartIterationMetrics() { _metrics.StartIteration(); }
+    void StopIterationMetrics() { _metrics.StopIteration(); }
+    void StopPhaseMetrics() { _metrics.StopPhase(); }
+    void ChooseBestWorstMetrics();
 };
 
 } // namespace CppBenchmark

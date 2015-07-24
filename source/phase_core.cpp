@@ -23,7 +23,8 @@ std::shared_ptr<Phase> PhaseCore::StartPhase(const std::string& phase)
         result = *it;
 
     // Start new iteration for the child phase
-    result->StartIteration();
+    result->StartPhaseMetrics();
+    result->StartIterationMetrics();
 
     return result;
 }
@@ -47,7 +48,8 @@ std::shared_ptr<Phase> PhaseCore::StartPhaseThreadSafe(const std::string& phase)
     }
 
     // Start new iteration for the child phase
-    result->StartIteration();
+    result->StartPhaseMetrics();
+    result->StartIterationMetrics();
 
     return result;
 }
@@ -55,20 +57,11 @@ std::shared_ptr<Phase> PhaseCore::StartPhaseThreadSafe(const std::string& phase)
 void PhaseCore::StopPhase()
 {
     // End the current iteration for the current phase
-    StopIteration();
+    StopIterationMetrics();
+    StopPhaseMetrics();
 }
 
-void PhaseCore::StartIteration()
-{
-    _metrics.StartIteration();
-}
-
-void PhaseCore::StopIteration()
-{
-    _metrics.StopIteration();
-}
-
-void PhaseCore::Update()
+void PhaseCore::ChooseBestWorstMetrics()
 {
     if (_metrics.total_time() < _best.total_time())
         _best = _metrics;

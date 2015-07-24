@@ -22,8 +22,7 @@ public:
               _total_time(0),
               _total_iterations(0),
               _total_items(0),
-              _total_bytes(0),
-              _is_started(false)
+              _total_bytes(0)
     {};
     PhaseMetrics(const PhaseMetrics&) noexcept = default;
     PhaseMetrics(PhaseMetrics&& instance) noexcept = default;
@@ -50,11 +49,11 @@ public:
     { return (_total_time > 0) ? (((double)_total_bytes / (double)_total_time) * 1000000000.0) : 0.0; }
 
     void AddIterations(int64_t iterations) noexcept
-    { if (_is_started) _total_iterations += iterations; }
+    { _total_iterations += iterations; }
     void AddItems(int64_t items) noexcept
-    { if (_is_started) _total_items += items; }
+    { _total_items += items; }
     void AddBytes(int64_t bytes) noexcept
-    { if (_is_started) _total_bytes += bytes; }
+    { _total_bytes += bytes; }
 
 private:
     int64_t _min_time;
@@ -64,13 +63,13 @@ private:
     int64_t _total_items;
     int64_t _total_bytes;
 
-    bool _is_started;
-    std::chrono::high_resolution_clock::time_point _start_time;
-    std::chrono::high_resolution_clock::time_point _stop_time;
-    int64_t _start_iteration;
+    std::chrono::high_resolution_clock::time_point _phase_time;
+    std::chrono::high_resolution_clock::time_point _iteration_time;
 
+    void StartPhase() noexcept;
     void StartIteration() noexcept;
     void StopIteration() noexcept;
+    void StopPhase() noexcept;
 };
 
 } // namespace CppBenchmark

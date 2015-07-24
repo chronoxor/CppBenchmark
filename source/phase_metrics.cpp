@@ -6,43 +6,37 @@
 
 namespace CppBenchmark {
 
+void PhaseMetrics::StartPhase() noexcept
+{
+    _phase_time = std::chrono::high_resolution_clock::now();
+}
+
 void PhaseMetrics::StartIteration() noexcept
 {
-    // Do nothing if already started!
-    if (_is_started)
-        return;
-
-    // Start high resolution timer
-    _is_started = true;
-    _start_time = std::chrono::high_resolution_clock::now();
-    _start_iteration = _total_iterations;
+	AddIterations(1);
+    _iteration_time = std::chrono::high_resolution_clock::now();
 }
 
 void PhaseMetrics::StopIteration() noexcept
 {
-    // Do nothing if not already started!
-    if (!_is_started)
-        return;
-
-    // Stop high resolution timer
-    _stop_time = std::chrono::high_resolution_clock::now();
-    _is_started = false;
-
-    // Get phase duration
-    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(_stop_time - _start_time).count();
-
-    // Get phase iterations count
-    int64_t iterations = _total_iterations - _start_iteration;
-
-    // Get phase iteration delta
-    int64_t delta = duration / iterations;
+    // Get iteration duration
+    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - _iteration_time).count();
 
     // Update time counters
-    if (delta < _min_time)
-        _min_time = delta;
-    if (delta > _max_time)
-        _max_time = delta;
+    if (duration < _min_time)
+        _min_time = duration;
+    if (duration > _max_time)
+        _max_time = duration;
+}
+
+void PhaseMetrics::StopPhase() noexcept
+{
+    // Get phase duration
+    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - _phase_time).count();
+
+    // Update total time counter
     _total_time += duration;
 }
 
 } // namespace CppBenchmark
+

@@ -45,8 +45,8 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 int64_t nanoseconds = _settings.nanoseconds();
 
                 // Start benchmark root phase iteration
-                context._current->StartIteration();
-                context._metrics->AddIterations(1);
+                context._current->StartPhaseMetrics();
+                context._current->StartIterationMetrics();
 
                 // Start benchmark threads as futures
                 for (int i = 0; i < threads; ++i) {
@@ -71,16 +71,15 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                                            // Call initialize thread method...
                                            InitializeThread(thread_context);
 
-                                           thread_phase_core->StartIteration();
+                                           thread_context._current->StartPhaseMetrics();
                                            while (!thread_context.canceled() && ((thread_iterations > 0) || (thread_nanoseconds > 0)))
                                            {
-                                               // Add new metrics iteration
-                                               thread_context._metrics->AddIterations(1);
-
                                                auto start = std::chrono::high_resolution_clock::now();
 
                                                // Run thread method...
+                                               thread_context._current->StartIterationMetrics();
                                                RunThread(thread_context);
+                                               thread_context._current->StopIterationMetrics();
 
                                                auto stop = std::chrono::high_resolution_clock::now();
 
@@ -88,13 +87,13 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                                                thread_iterations -= 1;
                                                thread_nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
                                            }
-                                           thread_phase_core->StopIteration();
+                                           thread_context._current->StopPhaseMetrics();
 
                                            // Call cleanup thread method...
                                            CleanupThread(thread_context);
 
                                            // Update thread safe phase metrics
-                                           UpdateBenchmarkMetrics(*thread_phase_core);
+                                           UpdateBenchmarkMetrics(*thread_context._current);
 
                                            // Stop thread safe phase
                                            thread_phase->StopPhase();
@@ -112,7 +111,8 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 _futures.clear();
 
                 // Stop benchmark root phase iteration
-                context._current->StopIteration();
+                context._current->StopIterationMetrics();
+                context._current->StopPhaseMetrics();
 
                 // Call cleanup benchmark method...
                 Cleanup(context);
@@ -121,7 +121,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 handler->onLaunched(*this, context, attempt);
 
                 // Update benchmark root phase metrics
-                context._current->Update();
+                context._current->ChooseBestWorstMetrics();
             }
         }
     }

@@ -39,16 +39,15 @@ void Benchmark::Launch(LauncherHandler* handler)
             int64_t iterations = _settings.iterations();
             int64_t nanoseconds = _settings.nanoseconds();
 
-            context._current->StartIteration();
+            context._current->StartPhaseMetrics();
             while (!context.canceled() && ((iterations > 0) || (nanoseconds > 0)))
             {
-                // Add new metrics iteration
-                context._metrics->AddIterations(1);
-
                 auto start = std::chrono::high_resolution_clock::now();
 
                 // Run benchmark method...
+                context._current->StartIterationMetrics();
                 Run(context);
+                context._current->StopIterationMetrics();
 
                 auto stop = std::chrono::high_resolution_clock::now();
 
@@ -56,7 +55,7 @@ void Benchmark::Launch(LauncherHandler* handler)
                 iterations -= 1;
                 nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
             }
-            context._current->StopIteration();
+            context._current->StopPhaseMetrics();
 
             // Call cleanup benchmark method...
             Cleanup(context);
@@ -108,7 +107,7 @@ void Benchmark::UpdateBenchmarkMetrics(PhaseCore& phase)
 {
     for (auto it = phase._child.begin(); it != phase._child.end(); ++it)
         UpdateBenchmarkMetrics(**it);
-    phase.Update();
+    phase.ChooseBestWorstMetrics();
 }
 
 void Benchmark::UpdateBenchmarkThreads()
