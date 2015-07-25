@@ -6,37 +6,42 @@
 
 namespace CppBenchmark {
 
-void PhaseMetrics::StartPhase() noexcept
+int64_t PhaseMetrics::time_per_iteration() const noexcept
 {
-    _phase_time = std::chrono::high_resolution_clock::now();
+    return (_total_iterations > 0) ? (_total_time / _total_iterations) : 0;
 }
 
-void PhaseMetrics::StartIteration() noexcept
+int64_t PhaseMetrics::iterations_per_second() const noexcept
 {
-	AddIterations(1);
-    _iteration_time = std::chrono::high_resolution_clock::now();
+    if (_total_time <= 0)
+        return 0;
+
+    if (_total_iterations < 1000000000)
+        return (_total_iterations * 1000000000) / _total_time;
+    else
+        return (_total_iterations / _total_time) * 1000000000;
 }
 
-void PhaseMetrics::StopIteration() noexcept
+int64_t PhaseMetrics::items_per_second() const noexcept
 {
-    // Get iteration duration
-    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - _iteration_time).count();
+    if (_total_time <= 0)
+        return 0;
 
-    // Update time counters
-    if (duration < _min_time)
-        _min_time = duration;
-    if (duration > _max_time)
-        _max_time = duration;
+    if (_total_items < 1000000000)
+        return (_total_items * 1000000000) / _total_time;
+    else
+        return (_total_items / _total_time) * 1000000000;
 }
 
-void PhaseMetrics::StopPhase() noexcept
+int64_t PhaseMetrics::bytes_per_second() const noexcept
 {
-    // Get phase duration
-    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - _phase_time).count();
+    if (_total_time <= 0)
+        return 0;
 
-    // Update total time counter
-    _total_time += duration;
+    if (_total_bytes < 1000000000)
+        return (_total_bytes * 1000000000) / _total_time;
+    else
+        return (_total_bytes / _total_time) * 1000000000;
 }
 
 } // namespace CppBenchmark
-

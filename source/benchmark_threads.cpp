@@ -40,13 +40,12 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 // Call initialize benchmark method...
                 Initialize(context);
 
-                // Run benchmark with the current context
                 int64_t iterations = _settings.iterations();
                 int64_t nanoseconds = _settings.nanoseconds();
 
                 // Start benchmark root phase iteration
-                context._current->StartPhaseMetrics();
-                context._current->StartIterationMetrics();
+                context._current->StartCollectingMetrics();
+                context._metrics->AddIterations(1);
 
                 // Start benchmark threads as futures
                 for (int i = 0; i < threads; ++i) {
@@ -54,9 +53,6 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                             std::async(std::launch::async,
                                        [this, &context, threads, iterations, nanoseconds]()
                                        {
-                                           int64_t thread_iterations = iterations;
-                                           int64_t thread_nanoseconds = nanoseconds;
-
                                            // Clone thread context
                                            ContextThread thread_context(context);
 
@@ -71,23 +67,33 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                                            // Call initialize thread method...
                                            InitializeThread(thread_context);
 
-                                           thread_context._current->StartPhaseMetrics();
+                                           int64_t thread_iterations = iterations;
+                                           int64_t thread_nanoseconds = nanoseconds;
+
+                                           std::chrono::time_point<std::chrono::high_resolution_clock> thread_start;
+                                           std::chrono::time_point<std::chrono::high_resolution_clock> thread_stop;
+
+                                           thread_context._current->StartCollectingMetrics();
                                            while (!thread_context.canceled() && ((thread_iterations > 0) || (thread_nanoseconds > 0)))
                                            {
-                                               auto start = std::chrono::high_resolution_clock::now();
+                                               // Add new metrics iteration
+                                               thread_context._metrics->AddIterations(1);
+
+                                               if (thread_nanoseconds > 0)
+                                                   thread_start = std::chrono::high_resolution_clock::now();
 
                                                // Run thread method...
-                                               thread_context._current->StartIterationMetrics();
                                                RunThread(thread_context);
-                                               thread_context._current->StopIterationMetrics();
 
-                                               auto stop = std::chrono::high_resolution_clock::now();
+                                               if (thread_nanoseconds > 0) {
+                                                   thread_stop = std::chrono::high_resolution_clock::now();
+                                                   thread_nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(thread_stop - thread_start).count();
+                                               }
 
                                                // Decrement iteration counters
                                                thread_iterations -= 1;
-                                               thread_nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
                                            }
-                                           thread_context._current->StopPhaseMetrics();
+                                           thread_context._current->StopCollectingMetrics();
 
                                            // Call cleanup thread method...
                                            CleanupThread(thread_context);
@@ -111,8 +117,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 _futures.clear();
 
                 // Stop benchmark root phase iteration
-                context._current->StopIterationMetrics();
-                context._current->StopPhaseMetrics();
+                context._current->StopCollectingMetrics();
 
                 // Call cleanup benchmark method...
                 Cleanup(context);

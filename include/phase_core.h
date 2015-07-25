@@ -58,10 +58,8 @@ protected:
     PhaseMetrics _best;
     PhaseMetrics _worst;
 
-    void StartPhaseMetrics() { _metrics.StartPhase(); }
-    void StartIterationMetrics() { _metrics.StartIteration(); }
-    void StopIterationMetrics() { _metrics.StopIteration(); }
-    void StopPhaseMetrics() { _metrics.StopPhase(); }
+    void StartCollectingMetrics() { _metrics.StartCollecting(); }
+    void StopCollectingMetrics() { _metrics.StopCollecting(); }
     void ChooseBestWorstMetrics();
 };
 

@@ -35,27 +35,33 @@ void Benchmark::Launch(LauncherHandler* handler)
             // Call initialize benchmark method...
             Initialize(context);
 
-            // Run benchmark with the current context
             int64_t iterations = _settings.iterations();
             int64_t nanoseconds = _settings.nanoseconds();
 
-            context._current->StartPhaseMetrics();
+            std::chrono::time_point<std::chrono::high_resolution_clock> start;
+            std::chrono::time_point<std::chrono::high_resolution_clock> stop;
+
+            context._current->StartCollectingMetrics();
             while (!context.canceled() && ((iterations > 0) || (nanoseconds > 0)))
             {
-                auto start = std::chrono::high_resolution_clock::now();
+                // Add new metrics iteration
+                context._metrics->AddIterations(1);
+
+                if (nanoseconds > 0)
+                    start = std::chrono::high_resolution_clock::now();
 
                 // Run benchmark method...
-                context._current->StartIterationMetrics();
                 Run(context);
-                context._current->StopIterationMetrics();
 
-                auto stop = std::chrono::high_resolution_clock::now();
+                if (nanoseconds > 0) {
+                    stop = std::chrono::high_resolution_clock::now();
+                    nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
+                }
 
                 // Decrement iteration counters
                 iterations -= 1;
-                nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
             }
-            context._current->StopPhaseMetrics();
+            context._current->StopCollectingMetrics();
 
             // Call cleanup benchmark method...
             Cleanup(context);

@@ -5,7 +5,6 @@
 #include "reporter_console.h"
 
 #include <ctime>
-#include <iomanip>
 #include <sstream>
 
 #include "environment.h"
@@ -17,7 +16,7 @@ namespace CppBenchmark {
 void ReporterConsole::ReportHeader()
 {
     _stream << GenerateSeparator('=') << std::endl;
-    _stream << "CppBenchmark Report. Version " << version << std::endl;
+    _stream << "CppBenchmark report. Version " << version << std::endl;
 }
 
 void ReporterConsole::ReportSystem()
@@ -59,22 +58,21 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& be
 {
     _stream << GenerateSeparator('-') << std::endl;
     _stream << "Phase: " << phase.name() << std::endl;
-    _stream << "Avg time: " << GenerateTime(ReportValue(best.avg_time(), worst.avg_time())) << std::endl;
-    _stream << "Min time: " << GenerateTime(ReportValue(best.min_time(), worst.min_time())) << std::endl;
-    _stream << "Max time: " << GenerateTime(ReportValue(best.max_time(), worst.max_time())) << std::endl;
     _stream << "Total time: " << GenerateTime(ReportValue(best.total_time(), worst.total_time())) << std::endl;
-    if ((best.total_iterations() > 1) || (worst.total_iterations() > 1))
+    if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
         _stream << "Total iterations: " << ReportValue(best.total_iterations(), worst.total_iterations()) << std::endl;
-    if ((best.total_items() > 0) || (worst.total_items() > 0))
+    if ((best.total_items() > 0) && (worst.total_items() > 0))
         _stream << "Total items: " << ReportValue(best.total_items(), worst.total_items()) << std::endl;
-    if ((best.total_bytes() > 0) || (worst.total_bytes() > 0))
+    if ((best.total_bytes() > 0) && (worst.total_bytes() > 0))
         _stream << "Total bytes: " << GenerateSize(ReportValue(best.total_bytes(), worst.total_bytes())) << std::endl;
-    if ((best.total_iterations() > 1) || (worst.total_iterations() > 1))
-        _stream << "Iterations throughput: " << std::fixed << std::setprecision(3) << ReportValue(best.iterations_per_second(), worst.iterations_per_second()) << " / second" << std::endl;
-    if ((best.total_items() > 0) || (worst.total_items() > 0))
-        _stream << "Items throughput: " << std::fixed << std::setprecision(3) << ReportValue(best.items_per_second(), worst.items_per_second()) << " / second" << std::endl;
-    if ((best.total_bytes() > 0) || (worst.total_bytes() > 0))
-        _stream << "Bytes throughput: " << GenerateSize((int64_t)ReportValue(best.bytes_per_second(), worst.bytes_per_second())) << " / second" << std::endl;
+    if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
+        _stream << "Average time: " << GenerateTime(ReportValue(best.time_per_iteration(), worst.time_per_iteration())) << " / iteration" << std::endl;
+    if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
+        _stream << "Iterations throughput: " << ReportValue(best.iterations_per_second(), worst.iterations_per_second()) << " / second" << std::endl;
+    if ((best.total_items() > 0) && (worst.total_items() > 0))
+        _stream << "Items throughput: " << ReportValue(best.items_per_second(), worst.items_per_second()) << " / second" << std::endl;
+    if ((best.total_bytes() > 0) && (worst.total_bytes() > 0))
+        _stream << "Bytes throughput: " << GenerateSize(ReportValue(best.bytes_per_second(), worst.bytes_per_second())) << " / second" << std::endl;
 }
 
 void ReporterConsole::ReportFooter()
