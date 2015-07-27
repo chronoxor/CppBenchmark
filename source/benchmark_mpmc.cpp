@@ -4,8 +4,6 @@
 
 #include "benchmark_mpmc.h"
 
-#include <iostream>
-
 #include "launcher_handler.h"
 #include "system.h"
 
@@ -52,8 +50,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                 context._current->StartCollectingMetrics();
                 context._metrics->AddIterations(1);
 
-                std::cout << std::endl << "Start producers... " << producers << std::endl;
-
                 // Start benchmark producers as futures
                 for (int i = 0; i < producers; ++i) {
                     _threads.push_back(std::thread([this, &context, infinite, iterations, i]()
@@ -78,8 +74,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                         std::chrono::time_point<std::chrono::high_resolution_clock> producer_start;
                         std::chrono::time_point<std::chrono::high_resolution_clock> producer_stop;
 
-                        std::cout << "Start producer - " << i << std::endl;
-
                         producer_context._current->StartCollectingMetrics();
                         while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_iterations > 0)))
                         {
@@ -94,8 +88,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                         }
                         producer_context._current->StopCollectingMetrics();
 
-                        std::cout << "End producer - " << i << std::endl;
-
                         // Call cleanup producer method...
                         CleanupProducer(producer_context);
 
@@ -106,8 +98,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                         producer_phase->StopPhase();
                     }));
                 }
-
-                std::cout << "Start consumers... " << consumers << std::endl;
 
                 // Start benchmark consumers as futures
                 for (int i = 0; i < consumers; ++i) {
@@ -130,8 +120,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                         std::chrono::time_point<std::chrono::high_resolution_clock> consumer_start;
                         std::chrono::time_point<std::chrono::high_resolution_clock> consumer_stop;
 
-                        std::cout << "Start consumer - " << i << std::endl;
-
                         consumer_context._current->StartCollectingMetrics();
                         while (!consumer_context.consume_stopped() && !consumer_context.canceled())
                         {
@@ -142,8 +130,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                             RunConsumer(consumer_context);
                         }
                         consumer_context._current->StopCollectingMetrics();
-
-                        std::cout << "Stop consumer - " << i << std::endl;
 
                         // Call cleanup consumer method...
                         CleanupConsumer(consumer_context);
@@ -156,14 +142,10 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                     }));
                 }
 
-                std::cout << "Wait threads... " << std::endl;
-
                 // Wait for all threads
                 for (auto& thread : _threads) {
                     thread.join();
                 };
-
-                std::cout << "Wait threads done!" << std::endl;
 
                 // Clear threads collection
                 _threads.clear();
