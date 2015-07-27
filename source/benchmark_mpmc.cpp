@@ -45,7 +45,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
 
                 bool infinite = _settings.infinite();
                 int64_t iterations = _settings.iterations();
-                int64_t nanoseconds = _settings.nanoseconds();
 
                 // Start benchmark root phase iteration
                 context._current->StartCollectingMetrics();
@@ -55,7 +54,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                 for (int i = 0; i < producers; ++i) {
                     _futures.push_back(
                             std::async(std::launch::async,
-                                       [this, &context, infinite, iterations, nanoseconds]()
+                                       [this, &context, infinite, iterations]()
                                        {
                                            // Clone producer context
                                            ContextMPMC producer_context(context);
@@ -73,27 +72,18 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
 
                                            bool producer_infinite = infinite;
                                            int64_t producer_iterations = iterations;
-                                           int64_t producer_nanoseconds = nanoseconds;
 
                                            std::chrono::time_point<std::chrono::high_resolution_clock> producer_start;
                                            std::chrono::time_point<std::chrono::high_resolution_clock> producer_stop;
 
                                            producer_context._current->StartCollectingMetrics();
-                                           while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_iterations > 0) || (producer_nanoseconds > 0)))
+                                           while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_iterations > 0)))
                                            {
                                                // Add new metrics iteration
                                                producer_context._metrics->AddIterations(1);
 
-                                               if (producer_nanoseconds > 0)
-                                                   producer_start = std::chrono::high_resolution_clock::now();
-
                                                // Run producer method...
                                                RunProducer(producer_context);
-
-                                               if (producer_nanoseconds > 0) {
-                                                   producer_stop = std::chrono::high_resolution_clock::now();
-                                                   producer_nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(producer_stop - producer_start).count();
-                                               }
 
                                                // Decrement iteration counters
                                                producer_iterations -= 1;

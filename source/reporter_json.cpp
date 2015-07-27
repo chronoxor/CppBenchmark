@@ -91,8 +91,6 @@ void ReporterJSON::ReportBenchmark(const Benchmark& benchmark, const Settings& s
     _stream << Internals::indent4 << "\"attempts\": " << settings.attempts() << ",\n";
     if (settings.iterations() > 0)
         _stream << Internals::indent4 << "\"iterations\": " << settings.iterations() << ",\n";
-    if (settings.nanoseconds() > 0)
-        _stream << Internals::indent4 << "\"nanoseconds\": " << settings.nanoseconds() << ",\n";
 }
 
 void ReporterJSON::ReportPhasesHeader()

@@ -18,7 +18,7 @@ class Settings
     friend class BenchmarkThreads;
 
 public:
-    Settings(int iterations = 1) : _attempts(5), _infinite(false), _iterations(iterations), _nanoseconds(0) {}
+    Settings(int iterations = 1) : _attempts(5), _infinite(false), _iterations(iterations) {}
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;
     ~Settings() = default;
@@ -29,8 +29,7 @@ public:
     int attempts() const { return _attempts; }
     bool infinite() const { return _infinite; }
     int64_t iterations() const { return _iterations; }
-    int64_t nanoseconds() const { return _nanoseconds; }
-    const std::vector<int> threads() const { return _threads; }	
+    const std::vector<int> threads() const { return _threads; }
     const std::vector<std::tuple<int, int>> mpmc() const { return _mpmc; }	
     const std::vector<std::tuple<int, int, int>> params() const { return _params; }
 
@@ -38,12 +37,6 @@ public:
 
     Settings& Infinite();
     Settings& Iterations(int64_t iterations);
-    Settings& Nanoseconds(int64_t nanoseconds);
-    Settings& Microseconds(int64_t microseconds);
-    Settings& Milliseconds(int64_t milliseconds);
-    Settings& Seconds(int64_t seconds);
-    Settings& Minutes(int64_t minutes);
-    Settings& Hours(int64_t hours);
 
     Settings& Threads(int threads);
     Settings& ThreadsRange(int from, int to);
@@ -73,7 +66,6 @@ private:
     int _attempts;
     bool _infinite;
     int64_t _iterations;
-    int64_t _nanoseconds;
     std::vector<int> _threads;
     std::vector<std::tuple<int, int>> _mpmc;
     std::vector<std::tuple<int, int, int>> _params;

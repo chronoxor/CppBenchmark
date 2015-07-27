@@ -37,27 +37,18 @@ void Benchmark::Launch(LauncherHandler* handler)
 
             bool infinite = _settings.infinite();
             int64_t iterations = _settings.iterations();
-            int64_t nanoseconds = _settings.nanoseconds();
 
             std::chrono::time_point<std::chrono::high_resolution_clock> start;
             std::chrono::time_point<std::chrono::high_resolution_clock> stop;
 
             context._current->StartCollectingMetrics();
-            while (!context.canceled() && (infinite || (iterations > 0) || (nanoseconds > 0)))
+            while (!context.canceled() && (infinite || (iterations > 0)))
             {
                 // Add new metrics iteration
                 context._metrics->AddIterations(1);
 
-                if (nanoseconds > 0)
-                    start = std::chrono::high_resolution_clock::now();
-
                 // Run benchmark method...
                 Run(context);
-
-                if (nanoseconds > 0) {
-                    stop = std::chrono::high_resolution_clock::now();
-                    nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
-                }
 
                 // Decrement iteration counters
                 iterations -= 1;

@@ -50,8 +50,6 @@ void ReporterConsole::ReportBenchmark(const Benchmark& benchmark, const Settings
     _stream << "Attempts: " << settings.attempts() << std::endl;
     if (settings.iterations() > 0)
         _stream << "Iterations: " << settings.iterations() << std::endl;
-    if (settings.nanoseconds() > 0)
-        _stream << "Timer: " << GenerateTime(settings.nanoseconds()) << std::endl;
 }
 
 void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& best, const PhaseMetrics& worst)
