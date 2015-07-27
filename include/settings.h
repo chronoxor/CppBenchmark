@@ -40,27 +40,27 @@ public:
 
     Settings& Threads(int threads);
     Settings& ThreadsRange(int from, int to);
-    Settings& ThreadsRange(int from, int to, std::function<int (int, int, int)> selector);
+    Settings& ThreadsRange(int from, int to, std::function<int (int, int, int&)> selector);
 
     Settings& MPMC(int producers, int consumers);
     Settings& MPMCRange(int producers_from, int producers_to, int consumers_from, int consumers_to);
-    Settings& MPMCRange(int producers_from, int producers_to, std::function<int (int, int, int)> producers_selector,
-                        int consumers_from, int consumers_to, std::function<int (int, int, int)> consumers_selector);
+    Settings& MPMCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
+                        int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector);
 
     Settings& Param(int value);
     Settings& ParamRange(int from, int to);
-    Settings& ParamRange(int from, int to, std::function<int (int, int, int)> selector);
+    Settings& ParamRange(int from, int to, std::function<int (int, int, int&)> selector);
 
     Settings& Pair(int value1, int value2);
     Settings& PairRange(int from1, int to1, int from2, int to2);
-    Settings& PairRange(int from1, int to1, std::function<int (int, int, int)> selector1,
-                        int from2, int to2, std::function<int (int, int, int)> selector2);
+    Settings& PairRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
+                        int from2, int to2, std::function<int (int, int, int&)> selector2);
 
     Settings& Triple(int value1, int value2, int value3);
     Settings& TripleRange(int from1, int to1, int from2, int to2, int from3, int to3);
-    Settings& TripleRange(int from1, int to1, std::function<int (int, int, int)> selector1,
-                          int from2, int to2, std::function<int (int, int, int)> selector2,
-                          int from3, int to3, std::function<int (int, int, int)> selector3);
+    Settings& TripleRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
+                          int from2, int to2, std::function<int (int, int, int&)> selector2,
+                          int from3, int to3, std::function<int (int, int, int&)> selector3);
 
 private:
     int _attempts;

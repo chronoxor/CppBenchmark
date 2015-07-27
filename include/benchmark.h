@@ -16,6 +16,8 @@ class LauncherHandler;
 
 class Benchmark : public virtual Fixture
 {
+    friend class BenchmarkMPMC;
+    friend class BenchmarkThreads;
     friend class Launcher;
 
 public:
@@ -38,14 +40,14 @@ public:
     const std::string& name() const { return _name; }
 
 protected:
+    virtual void Run(Context& context) = 0;
+
+private:
     bool _launched;
     std::string _name;
     Settings _settings;
     std::vector<std::shared_ptr<PhaseCore>> _phases;
 
-    virtual void Run(Context& context) = 0;
-
-protected:
     virtual void Launch(LauncherHandler* handler);
 
     void InitBenchmarkContext(Context& context);

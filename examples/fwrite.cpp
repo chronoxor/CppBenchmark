@@ -9,7 +9,7 @@
 const int iterations = 100000;
 const int chunk_size_from = 32;
 const int chunk_size_to = 4096;
-const auto settings = CppBenchmark::Settings().Iterations(iterations).ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int result) { return (result * 2); });
+const auto settings = CppBenchmark::Settings().Iterations(iterations).ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
 class FileFixture
 {

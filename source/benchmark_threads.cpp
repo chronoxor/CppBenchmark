@@ -15,15 +15,15 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
     for (int attempt = 1; attempt <= _settings.attempts(); ++attempt) {
 
         // Run benchmark at least for N threads where N is hardware core count
-        if (_settings_threads._threads.empty())
-            _settings_threads._threads.emplace_back(System::CpuPhysicalCores());
+        if (_settings._threads.empty())
+            _settings._threads.emplace_back(System::CpuPhysicalCores());
 
         // Run benchmark at least once
         if (_settings._params.empty())
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every threads count
-        for (auto threads : _settings_threads.threads()) {
+        for (auto threads : _settings.threads()) {
 
             // Run benchmark for every input parameter (single, pair, triple)
             for (auto param : _settings.params()) {
@@ -47,66 +47,62 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 context._current->StartCollectingMetrics();
                 context._metrics->AddIterations(1);
 
-                // Start benchmark threads as futures
+                // Start benchmark threads
                 for (int i = 0; i < threads; ++i) {
-                    _futures.push_back(
-                            std::async(std::launch::async,
-                                       [this, &context, threads, infinite, iterations]()
-                                       {
-                                           // Clone thread context
-                                           ContextThread thread_context(context);
+                    _threads.push_back(std::thread([this, &context, threads, infinite, iterations]()
+                    {
+                        // Clone thread context
+                        ContextThread thread_context(context);
 
-                                           // Create and start thread safe phase
-                                           std::shared_ptr<Phase> thread_phase = context.StartPhaseThreadSafe("thread");
-                                           PhaseCore* thread_phase_core = dynamic_cast<PhaseCore*>(thread_phase.get());
+                        // Create and start thread safe phase
+                        std::shared_ptr<Phase> thread_phase = context.StartPhaseThreadSafe("thread");
+                        PhaseCore* thread_phase_core = dynamic_cast<PhaseCore*>(thread_phase.get());
 
-                                           // Update thread context
-                                           thread_context._current = thread_phase_core;
-                                           thread_context._metrics = &thread_phase_core->metrics();
+                        // Update thread context
+                        thread_context._current = thread_phase_core;
+                        thread_context._metrics = &thread_phase_core->metrics();
 
-                                           // Call initialize thread method...
-                                           InitializeThread(thread_context);
+                        // Call initialize thread method...
+                        InitializeThread(thread_context);
 
-                                           bool thread_infinite = infinite;
-                                           int64_t thread_iterations = iterations;
+                        bool thread_infinite = infinite;
+                        int64_t thread_iterations = iterations;
 
-                                           std::chrono::time_point<std::chrono::high_resolution_clock> thread_start;
-                                           std::chrono::time_point<std::chrono::high_resolution_clock> thread_stop;
+                        std::chrono::time_point<std::chrono::high_resolution_clock> thread_start;
+                        std::chrono::time_point<std::chrono::high_resolution_clock> thread_stop;
 
-                                           thread_context._current->StartCollectingMetrics();
-                                           while (!thread_context.canceled() && (thread_infinite || (thread_iterations > 0)))
-                                           {
-                                               // Add new metrics iteration
-                                               thread_context._metrics->AddIterations(1);
+                        thread_context._current->StartCollectingMetrics();
+                        while (!thread_context.canceled() && (thread_infinite || (thread_iterations > 0)))
+                        {
+                            // Add new metrics iteration
+                            thread_context._metrics->AddIterations(1);
 
-                                               // Run thread method...
-                                               RunThread(thread_context);
+                            // Run thread method...
+                            RunThread(thread_context);
 
-                                               // Decrement iteration counters
-                                               thread_iterations -= 1;
-                                           }
-                                           thread_context._current->StopCollectingMetrics();
+                            // Decrement iteration counters
+                            thread_iterations -= 1;
+                        }
+                        thread_context._current->StopCollectingMetrics();
 
-                                           // Call cleanup thread method...
-                                           CleanupThread(thread_context);
+                        // Call cleanup thread method...
+                        CleanupThread(thread_context);
 
-                                           // Update thread safe phase metrics
-                                           UpdateBenchmarkMetrics(*thread_context._current);
+                        // Update thread safe phase metrics
+                        UpdateBenchmarkMetrics(*thread_context._current);
 
-                                           // Stop thread safe phase
-                                           thread_phase->StopPhase();
-                                       }));
+                        // Stop thread safe phase
+                        thread_phase->StopPhase();
+                    }));
                 }
 
-                // Wait for all futures
-                for (auto& future : _futures) {
-                    if (future.valid()) {
-                        future.wait();
-                    }
+                // Wait for all threads
+                for (auto& thread : _threads) {
+                    thread.join();
                 };
 
-                // Clear futures collection
-                _futures.clear();
+                // Clear threads collection
+                _threads.clear();
 
                 // Stop benchmark root phase iteration
                 context._current->StopCollectingMetrics();

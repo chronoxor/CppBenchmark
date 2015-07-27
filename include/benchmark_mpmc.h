@@ -5,24 +5,21 @@
 #ifndef CPPBENCHMARK_BENCHMARK_MPMC_H
 #define CPPBENCHMARK_BENCHMARK_MPMC_H
 
-#include <future>
+#include <thread>
 
-#include "benchmark.h"
+#include "benchmark_threads.h"
 #include "context_mpmc.h"
 #include "fixture_mpmc.h"
 #include "settings_mpmc.h"
 
 namespace CppBenchmark {
 
-class BenchmarkMPMC : public Benchmark, public virtual FixtureMPMC
+class BenchmarkMPMC : public BenchmarkThreads, public virtual FixtureMPMC
 {
 public:
     typedef SettingsMPMC TSettings;		
 	
-    explicit BenchmarkMPMC(const std::string& name, const TSettings& settings = TSettings())
-            : Benchmark(name, settings),
-              _settings_mpmc(settings)
-    {}
+    explicit BenchmarkMPMC(const std::string& name, const TSettings& settings = TSettings()) : BenchmarkThreads(name, settings) {}
     BenchmarkMPMC(const BenchmarkMPMC&) = delete;
     BenchmarkMPMC(BenchmarkMPMC&&) = delete;
     virtual ~BenchmarkMPMC() = default;
@@ -35,13 +32,10 @@ protected:
     virtual void RunConsumer(ContextMPMC& context) = 0;
 
 private:
-    SettingsMPMC _settings_mpmc;
-    std::vector<std::future<void>> _futures;
-
     void Launch(LauncherHandler* handler) override;
 
-    // Hide base benchmark run method
-    void Run(Context& context) override {}
+    // Hide base benchmark run thread method
+    void RunThread(ContextThread& context) override {}
 };
 
 } // namespace CppBenchmark

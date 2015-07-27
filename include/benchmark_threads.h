@@ -5,7 +5,7 @@
 #ifndef CPPBENCHMARK_BENCHMARK_THREADS_H
 #define CPPBENCHMARK_BENCHMARK_THREADS_H
 
-#include <future>
+#include <thread>
 
 #include "benchmark.h"
 #include "context_thread.h"
@@ -16,13 +16,12 @@ namespace CppBenchmark {
 
 class BenchmarkThreads : public Benchmark, public virtual FixtureThreads
 {
+    friend class BenchmarkMPMC;
+
 public:
     typedef SettingsThreads TSettings;			
 
-    explicit BenchmarkThreads(const std::string& name, const TSettings& settings = TSettings())
-            : Benchmark(name, settings),
-              _settings_threads(settings)
-    {}
+    explicit BenchmarkThreads(const std::string& name, const TSettings& settings = TSettings()) : Benchmark(name, settings) {}
     BenchmarkThreads(const BenchmarkThreads&) = delete;
     BenchmarkThreads(BenchmarkThreads&&) = delete;
     virtual ~BenchmarkThreads() = default;
@@ -34,8 +33,7 @@ protected:
     virtual void RunThread(ContextThread& context) = 0;
 
 private:
-    SettingsThreads _settings_threads;
-    std::vector<std::future<void>> _futures;
+    std::vector<std::thread> _threads;
 
     void Launch(LauncherHandler* handler) override;
 

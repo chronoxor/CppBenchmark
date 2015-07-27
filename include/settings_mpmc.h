@@ -5,18 +5,18 @@
 #ifndef CPPBENCHMARK_SETTINGS_MPMC_H
 #define CPPBENCHMARK_SETTINGS_MPMC_H
 
-#include "settings.h"
+#include "settings_threads.h"
 
 namespace CppBenchmark {
 
-class SettingsMPMC : public Settings
+class SettingsMPMC : public SettingsThreads
 {
 public:
-    SettingsMPMC(int iterations = 1) : Settings(iterations) {}
+    SettingsMPMC(int iterations = 1) : SettingsThreads(iterations) {}
     SettingsMPMC(int iterations, int producers, int consumers) : SettingsMPMC(iterations) { MPMC(producers, consumers); }
-    SettingsMPMC(const Settings& settings) : Settings(settings) {}
+    SettingsMPMC(const Settings& settings) : SettingsThreads(settings) {}
     SettingsMPMC(const SettingsMPMC&) = default;
-    SettingsMPMC(Settings&& settings) : Settings(settings) {}
+    SettingsMPMC(Settings&& settings) : SettingsThreads(settings) {}
     SettingsMPMC(SettingsMPMC&&) = default;
     ~SettingsMPMC() = default;
 

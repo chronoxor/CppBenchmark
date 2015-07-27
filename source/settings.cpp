@@ -45,7 +45,7 @@ Settings& Settings::ThreadsRange(int from, int to)
     return *this;
 }
 
-Settings& Settings::ThreadsRange(int from, int to, std::function<int (int, int, int)> selector)
+Settings& Settings::ThreadsRange(int from, int to, std::function<int (int, int, int&)> selector)
 {
     if ((from > 0) && (to > 0)) {
         if (from > to) {
@@ -53,11 +53,12 @@ Settings& Settings::ThreadsRange(int from, int to, std::function<int (int, int, 
             to = from;
         }
         // Select the first value
-        int result = selector(from, to, from);
+        int current = from;
+        int result = selector(from, to, current);
         while ((result >= from) && (result <= to)) {
             _threads.emplace_back(result);
             // Select the next value
-            result = selector(from, to, result);
+            result = selector(from, to, current);
         }
     }
     return *this;
@@ -88,8 +89,8 @@ Settings& Settings::MPMCRange(int producers_from, int producers_to, int consumer
     return *this;
 }
 
-Settings& Settings::MPMCRange(int producers_from, int producers_to, std::function<int (int, int, int)> producers_selector,
-                              int consumers_from, int consumers_to, std::function<int (int, int, int)> consumers_selector)
+Settings& Settings::MPMCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
+                              int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector)
 {
     if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0)) {
         if (producers_from > producers_to) {
@@ -101,17 +102,19 @@ Settings& Settings::MPMCRange(int producers_from, int producers_to, std::functio
             consumers_to = consumers_from;
         }
         // Select the first value
-        int result1 = producers_selector(producers_from, producers_to, producers_from);
+        int current1 = producers_from;
+        int result1 = producers_selector(producers_from, producers_to, current1);
         while ((result1 >= producers_from) && (result1 <= producers_to)) {
             // Select the second value
-            int result2 = consumers_selector(consumers_from, consumers_to, consumers_from);
+            int current2 = consumers_from;
+            int result2 = consumers_selector(consumers_from, consumers_to, current2);
             while ((result2 >= consumers_from) && (result2 <= consumers_to)) {
                 _mpmc.emplace_back(result1, result2);
                 // Select the next value
-                result2 = consumers_selector(consumers_from, consumers_to, result2);
+                result2 = consumers_selector(consumers_from, consumers_to, current2);
             }
             // Select the next value
-            result1 = producers_selector(producers_from, producers_to, result1);
+            result1 = producers_selector(producers_from, producers_to, current1);
         }
     }
     return *this;
@@ -137,7 +140,7 @@ Settings& Settings::ParamRange(int from, int to)
     return *this;
 }
 
-Settings& Settings::ParamRange(int from, int to, std::function<int (int, int, int)> selector)
+Settings& Settings::ParamRange(int from, int to, std::function<int (int, int, int&)> selector)
 {
     if ((from >= 0) && (to >= 0)) {
         if (from > to) {
@@ -145,11 +148,12 @@ Settings& Settings::ParamRange(int from, int to, std::function<int (int, int, in
             to = from;
         }
         // Select the first value
-        int result = selector(from, to, from);
+        int current = from;
+        int result = selector(from, to, current);
         while ((result >= from) && (result <= to)) {
             _params.emplace_back(result, -1, -1);
             // Select the next value
-            result = selector(from, to, result);
+            result = selector(from, to, current);
         }
     }
     return *this;
@@ -180,8 +184,8 @@ Settings& Settings::PairRange(int from1, int to1, int from2, int to2)
     return *this;
 }
 
-Settings& Settings::PairRange(int from1, int to1, std::function<int (int, int, int)> selector1,
-                              int from2, int to2, std::function<int (int, int, int)> selector2)
+Settings& Settings::PairRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
+                              int from2, int to2, std::function<int (int, int, int&)> selector2)
 {
     if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0)) {
         if (from1 > to1) {
@@ -193,17 +197,19 @@ Settings& Settings::PairRange(int from1, int to1, std::function<int (int, int, i
             to2 = from2;
         }
         // Select the first value
-        int result1 = selector1(from1, to1, from1);
+        int current1 = from1;
+        int result1 = selector1(from1, to1, current1);
         while ((result1 >= from1) && (result1 <= to1)) {
             // Select the second value
-            int result2 = selector2(from2, to2, from2);
+            int current2 = from2;
+            int result2 = selector2(from2, to2, current2);
             while ((result2 >= from2) && (result2 <= to2)) {
                 _params.emplace_back(result1, result2, -1);
                 // Select the next value
-                result2 = selector2(from2, to2, result2);
+                result2 = selector2(from2, to2, current2);
             }
             // Select the next value
-            result1 = selector1(from1, to1, result1);
+            result1 = selector1(from1, to1, current1);
         }
     }
     return *this;
@@ -239,9 +245,9 @@ Settings& Settings::TripleRange(int from1, int to1, int from2, int to2, int from
     return *this;
 }
 
-Settings& Settings::TripleRange(int from1, int to1, std::function<int (int, int, int)> selector1,
-                                int from2, int to2, std::function<int (int, int, int)> selector2,
-                                int from3, int to3, std::function<int (int, int, int)> selector3)
+Settings& Settings::TripleRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
+                                int from2, int to2, std::function<int (int, int, int&)> selector2,
+                                int from3, int to3, std::function<int (int, int, int&)> selector3)
 {
     if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0)) {
         if (from1 > to1) {
@@ -257,23 +263,26 @@ Settings& Settings::TripleRange(int from1, int to1, std::function<int (int, int,
             to3 = from3;
         }
         // Select the first value
-        int result1 = selector1(from1, to1, from1);
+        int current1 = from1;
+        int result1 = selector1(from1, to1, current1);
         while ((result1 >= from1) && (result1 <= to1)) {
             // Select the second value
-            int result2 = selector2(from2, to2, from2);
+            int current2 = from2;
+            int result2 = selector2(from2, to2, current2);
             while ((result2 >= from2) && (result2 <= to2)) {
                 // Select the third value
-                int result3 = selector3(from3, to3, from3);
+                int current3 = from3;
+                int result3 = selector3(from3, to3, current3);
                 while ((result3 >= from3) && (result3 <= to3)) {
                     _params.emplace_back(result1, result2, result3);
                     // Select the next value
-                    result3 = selector3(from3, to3, result3);
+                    result3 = selector3(from3, to3, current3);
                 }
                 // Select the next value
-                result2 = selector2(from2, to2, result2);
+                result2 = selector2(from2, to2, current2);
             }
             // Select the next value
-            result1 = selector1(from1, to1, result1);
+            result1 = selector1(from1, to1, current1);
         }
     }
     return *this;
