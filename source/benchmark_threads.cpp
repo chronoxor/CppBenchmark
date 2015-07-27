@@ -40,6 +40,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 // Call initialize benchmark method...
                 Initialize(context);
 
+                bool infinite = _settings.infinite();
                 int64_t iterations = _settings.iterations();
                 int64_t nanoseconds = _settings.nanoseconds();
 
@@ -51,7 +52,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 for (int i = 0; i < threads; ++i) {
                     _futures.push_back(
                             std::async(std::launch::async,
-                                       [this, &context, threads, iterations, nanoseconds]()
+                                       [this, &context, threads, infinite, iterations, nanoseconds]()
                                        {
                                            // Clone thread context
                                            ContextThread thread_context(context);
@@ -67,6 +68,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                                            // Call initialize thread method...
                                            InitializeThread(thread_context);
 
+                                           bool thread_infinite = infinite;
                                            int64_t thread_iterations = iterations;
                                            int64_t thread_nanoseconds = nanoseconds;
 
@@ -74,7 +76,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                                            std::chrono::time_point<std::chrono::high_resolution_clock> thread_stop;
 
                                            thread_context._current->StartCollectingMetrics();
-                                           while (!thread_context.canceled() && ((thread_iterations > 0) || (thread_nanoseconds > 0)))
+                                           while (!thread_context.canceled() && (thread_infinite || (thread_iterations > 0) || (thread_nanoseconds > 0)))
                                            {
                                                // Add new metrics iteration
                                                thread_context._metrics->AddIterations(1);

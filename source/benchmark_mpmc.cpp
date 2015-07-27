@@ -43,6 +43,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                 // Call initialize benchmark method...
                 Initialize(context);
 
+                bool infinite = _settings.infinite();
                 int64_t iterations = _settings.iterations();
                 int64_t nanoseconds = _settings.nanoseconds();
 
@@ -54,7 +55,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                 for (int i = 0; i < producers; ++i) {
                     _futures.push_back(
                             std::async(std::launch::async,
-                                       [this, &context, iterations, nanoseconds]()
+                                       [this, &context, infinite, iterations, nanoseconds]()
                                        {
                                            // Clone producer context
                                            ContextMPMC producer_context(context);
@@ -70,6 +71,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                                            // Call initialize producer method...
                                            InitializeProducer(producer_context);
 
+                                           bool producer_infinite = infinite;
                                            int64_t producer_iterations = iterations;
                                            int64_t producer_nanoseconds = nanoseconds;
 
@@ -77,7 +79,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                                            std::chrono::time_point<std::chrono::high_resolution_clock> producer_stop;
 
                                            producer_context._current->StartCollectingMetrics();
-                                           while (!producer_context.canceled() && ((producer_iterations > 0) || (producer_nanoseconds > 0)))
+                                           while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_iterations > 0) || (producer_nanoseconds > 0)))
                                            {
                                                // Add new metrics iteration
                                                producer_context._metrics->AddIterations(1);
@@ -113,7 +115,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                 for (int i = 0; i < consumers; ++i) {
                     _futures.push_back(
                             std::async(std::launch::async,
-                                       [this, &context, iterations, nanoseconds]()
+                                       [this, &context]()
                                        {
                                            // Clone consumer context
                                            ContextMPMC consumer_context(context);
@@ -129,31 +131,17 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                                            // Call initialize consumer method...
                                            InitializeConsumer(consumer_context);
 
-                                           int64_t consumer_iterations = iterations;
-                                           int64_t consumer_nanoseconds = nanoseconds;
-
                                            std::chrono::time_point<std::chrono::high_resolution_clock> consumer_start;
                                            std::chrono::time_point<std::chrono::high_resolution_clock> consumer_stop;
 
                                            consumer_context._current->StartCollectingMetrics();
-                                           while (!consumer_context.canceled() && ((consumer_iterations > 0) || (consumer_nanoseconds > 0)))
+                                           while (!consumer_context.consume_stopped() && !consumer_context.canceled())
                                            {
                                                // Add new metrics iteration
                                                consumer_context._metrics->AddIterations(1);
 
-                                               if (consumer_nanoseconds > 0)
-                                                   consumer_start = std::chrono::high_resolution_clock::now();
-
                                                // Run consumer method...
                                                RunConsumer(consumer_context);
-
-                                               if (consumer_nanoseconds > 0) {
-                                                   consumer_stop = std::chrono::high_resolution_clock::now();
-                                                   consumer_nanoseconds -= std::chrono::duration_cast<std::chrono::nanoseconds>(consumer_stop - consumer_start).count();
-                                               }
-
-                                               // Decrement iteration counters
-                                               consumer_iterations -= 1;
                                            }
                                            consumer_context._current->StopCollectingMetrics();
 

@@ -5,6 +5,7 @@
 #ifndef CPPBENCHMARK_CONTEXT_H
 #define CPPBENCHMARK_CONTEXT_H
 
+#include <atomic>
 #include <string>
 
 #include "phase_core.h"
@@ -30,11 +31,10 @@ public:
 
     PhaseMetrics& metrics() noexcept { return *_metrics; }
 
+    bool canceled() const noexcept { return *_canceled; }
+    void Cancel() noexcept { *_canceled = true; }
+
     virtual std::string to_string() const;
-
-    bool canceled() const noexcept { return _canceled; }
-
-    void Cancel() noexcept { _canceled = true; }
 
     // Implementation of Phase
     const std::string& name() const override { return _current->name(); }
@@ -50,11 +50,16 @@ protected:
     int _x;
     int _y;
     int _z;
-    bool _canceled;
     PhaseCore* _current;
     PhaseMetrics* _metrics;
+    std::shared_ptr<std::atomic<bool>> _canceled;
 
-    Context(int x, int y, int z) noexcept : _x(x), _y(y), _z(z), _canceled(false) {}
+    Context(int x, int y, int z) noexcept
+            : _x(x),
+              _y(y),
+              _z(z),
+              _canceled(std::make_shared<std::atomic<bool>>(false))
+    {}
 };
 
 } // namespace CppBenchmark

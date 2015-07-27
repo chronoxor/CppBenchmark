@@ -18,7 +18,7 @@ class Settings
     friend class BenchmarkThreads;
 
 public:
-    Settings(int iterations = 1) : _attempts(5), _iterations(iterations), _nanoseconds(0) {}
+    Settings(int iterations = 1) : _attempts(5), _infinite(false), _iterations(iterations), _nanoseconds(0) {}
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;
     ~Settings() = default;
@@ -27,6 +27,7 @@ public:
     Settings& operator=(Settings&&) = default;
 
     int attempts() const { return _attempts; }
+    bool infinite() const { return _infinite; }
     int64_t iterations() const { return _iterations; }
     int64_t nanoseconds() const { return _nanoseconds; }
     const std::vector<int> threads() const { return _threads; }	
@@ -35,6 +36,7 @@ public:
 
     Settings& Attempts(int attempts);
 
+    Settings& Infinite();
     Settings& Iterations(int64_t iterations);
     Settings& Nanoseconds(int64_t nanoseconds);
     Settings& Microseconds(int64_t microseconds);
@@ -69,6 +71,7 @@ public:
 
 private:
     int _attempts;
+    bool _infinite;
     int64_t _iterations;
     int64_t _nanoseconds;
     std::vector<int> _threads;

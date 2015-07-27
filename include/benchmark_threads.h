@@ -20,7 +20,8 @@ public:
     typedef SettingsThreads TSettings;			
 
     explicit BenchmarkThreads(const std::string& name, const TSettings& settings = TSettings())
-            : Benchmark(name, settings), _settings_threads(settings)
+            : Benchmark(name, settings),
+              _settings_threads(settings)
     {}
     BenchmarkThreads(const BenchmarkThreads&) = delete;
     BenchmarkThreads(BenchmarkThreads&&) = delete;

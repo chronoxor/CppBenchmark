@@ -12,44 +12,57 @@ Settings& Settings::Attempts(int attempts)
     return *this;
 }
 
+Settings& Settings::Infinite()
+{
+    _infinite = true;
+    return *this;
+}
+
 Settings& Settings::Iterations(int64_t iterations)
 {
+    _infinite = false;
     _iterations = (iterations > 0) ? iterations : 1;
     return *this;
 }
 
 Settings& Settings::Nanoseconds(int64_t nanoseconds)
 {
+    _infinite = false;
     _nanoseconds = (nanoseconds > 0) ? nanoseconds : 0;
     return *this;
 }
 
 Settings& Settings::Microseconds(int64_t microseconds)
 {
+    _infinite = false;
     _nanoseconds = (microseconds > 0) ? (microseconds * 1000) : 0;
     return *this;
 }
 
 Settings& Settings::Milliseconds(int64_t milliseconds)
 {
+    _infinite = false;
     _nanoseconds = (milliseconds > 0) ? (milliseconds * 1000 * 1000) : 0;
     return *this;
 }
 
 Settings& Settings::Seconds(int64_t seconds)
 {
+    _infinite = false;
     _nanoseconds = (seconds > 0) ? (seconds * 1000 * 1000 * 1000) : 0;
     return *this;
 }
 
 Settings& Settings::Minutes(int64_t minutes)
 {
+    _infinite = false;
     _nanoseconds = (minutes > 0) ? (minutes * 1000 * 1000 * 1000 * 60) : 0;
     return *this;
 }
 
 Settings& Settings::Hours(int64_t hours)
 {
+    _infinite = false;
     _nanoseconds = (hours > 0) ? (hours * 1000 * 1000 * 1000 * 60 * 60) : 0;
     return *this;
 }

@@ -20,7 +20,8 @@ public:
     typedef SettingsMPMC TSettings;		
 	
     explicit BenchmarkMPMC(const std::string& name, const TSettings& settings = TSettings())
-            : Benchmark(name, settings), _settings_mpmc(settings)
+            : Benchmark(name, settings),
+              _settings_mpmc(settings)
     {}
     BenchmarkMPMC(const BenchmarkMPMC&) = delete;
     BenchmarkMPMC(BenchmarkMPMC&&) = delete;
