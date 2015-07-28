@@ -22,8 +22,6 @@ class PhaseCore : public Phase
     friend class BenchmarkMPMC;
     friend class BenchmarkThreads;
     friend class Launcher;
-    friend class PhaseSingleThread;
-    friend class PhaseThreadSafe;
 
 public:
     explicit PhaseCore(const std::string& name) : _name(name), _thread(System::CurrentThreadId())
@@ -58,9 +56,10 @@ protected:
     PhaseMetrics _best;
     PhaseMetrics _worst;
 
-    void StartCollectingMetrics() { _metrics.StartCollecting(); }
-    void StopCollectingMetrics() { _metrics.StopCollecting(); }
-    void ChooseBestWorstMetrics();
+    void StartCollectingMetrics() noexcept { _metrics.StartCollecting(); }
+    void StopCollectingMetrics() noexcept { _metrics.StopCollecting(); }
+    void ChooseMinMaxTimeMetrics() noexcept;	
+    void ChooseBestWorstMetrics() noexcept;
 };
 
 } // namespace CppBenchmark

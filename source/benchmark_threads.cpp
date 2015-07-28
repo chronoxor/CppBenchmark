@@ -90,6 +90,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*thread_context._current);
+                        UpdateBenchmarkMetricsRoot(*thread_context._current);
 
                         // Stop thread safe phase
                         thread_phase->StopPhase();
@@ -114,7 +115,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 handler->onLaunched(*this, context, attempt);
 
                 // Update benchmark root phase metrics
-                context._current->ChooseBestWorstMetrics();
+                UpdateBenchmarkMetricsRoot(*context._current);
             }
         }
     }

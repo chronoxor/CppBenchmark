@@ -93,6 +93,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*producer_context._current);
+                        UpdateBenchmarkMetricsRoot(*producer_context._current);
 
                         // Stop thread safe phase
                         producer_phase->StopPhase();
@@ -136,6 +137,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*consumer_context._current);
+                        UpdateBenchmarkMetricsRoot(*consumer_context._current);
 
                         // Stop thread safe phase
                         consumer_phase->StopPhase();
@@ -160,7 +162,7 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                 handler->onLaunched(*this, context, attempt);
 
                 // Update benchmark root phase metrics
-                context._current->ChooseBestWorstMetrics();
+                UpdateBenchmarkMetricsRoot(*context._current);
             }
         }
     }

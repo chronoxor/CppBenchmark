@@ -56,6 +56,11 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& be
 {
     _stream << GenerateSeparator('-') << std::endl;
     _stream << "Phase: " << phase.name() << std::endl;
+    if ((best.total_iterations() > 1) && (worst.total_iterations() > 1)) {
+        _stream << "Average time: " << GenerateTime(ReportValue(best.avg_time(), worst.avg_time())) << " / iteration" << std::endl;
+        _stream << "Minimal time: " << GenerateTime(ReportValue(best.min_time(), worst.min_time())) << " / iteration" << std::endl;
+        _stream << "Maximal time: " << GenerateTime(ReportValue(best.max_time(), worst.max_time())) << " / iteration" << std::endl;
+    }
     _stream << "Total time: " << GenerateTime(ReportValue(best.total_time(), worst.total_time())) << std::endl;
     if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
         _stream << "Total iterations: " << ReportValue(best.total_iterations(), worst.total_iterations()) << std::endl;
@@ -63,8 +68,6 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& be
         _stream << "Total items: " << ReportValue(best.total_items(), worst.total_items()) << std::endl;
     if ((best.total_bytes() > 0) && (worst.total_bytes() > 0))
         _stream << "Total bytes: " << GenerateSize(ReportValue(best.total_bytes(), worst.total_bytes())) << std::endl;
-    if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
-        _stream << "Average time: " << GenerateTime(ReportValue(best.time_per_iteration(), worst.time_per_iteration())) << " / iteration" << std::endl;
     if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
         _stream << "Iterations throughput: " << ReportValue(best.iterations_per_second(), worst.iterations_per_second()) << " / second" << std::endl;
     if ((best.total_items() > 0) && (worst.total_items() > 0))

@@ -126,6 +126,11 @@ void ReporterJSON::ReportPhaseFooter()
 void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& best, const PhaseMetrics& worst)
 {
     _stream << Internals::indent7 << "\"name\": \"" << phase.name() << "\",\n";
+    if ((best.total_iterations() > 1) && (worst.total_iterations() > 1)) {
+        _stream << Internals::indent7 << "\"avg_time\": " << ReportValue(best.avg_time(), worst.avg_time()) << ",\n";
+        _stream << Internals::indent7 << "\"min_time\": " << ReportValue(best.min_time(), worst.min_time()) << ",\n";
+        _stream << Internals::indent7 << "\"max_time\": " << ReportValue(best.max_time(), worst.max_time()) << ",\n";
+    }
     _stream << Internals::indent7 << "\"total_time\": " << ReportValue(best.total_time(), worst.total_time()) << ",\n";
     if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
         _stream << Internals::indent7 << "\"total_iterations\": " << ReportValue(best.total_iterations(), worst.total_iterations()) << ",\n";
@@ -133,8 +138,6 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& best,
         _stream << Internals::indent7 << "\"total_items\": " << ReportValue(best.total_items(), worst.total_items()) << ",\n";
     if ((best.total_bytes() > 0) && (worst.total_bytes() > 0))
         _stream << Internals::indent7 << "\"total_bytes\": " << ReportValue(best.total_bytes(), worst.total_bytes()) << ",\n";
-    if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
-        _stream << Internals::indent7 << "\"time_per_iteration\": " << ReportValue(best.time_per_iteration(), worst.time_per_iteration()) << ",\n";
     if ((best.total_iterations() > 1) && (worst.total_iterations() > 1))
         _stream << Internals::indent7 << "\"iterations_per_second\": " << ReportValue(best.iterations_per_second(), worst.iterations_per_second()) << ",\n";
     if ((best.total_items() > 0) && (worst.total_items() > 0))

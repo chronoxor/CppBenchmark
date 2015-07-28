@@ -54,6 +54,7 @@ private:
 
     void UpdateBenchmarkMetrics();
     void UpdateBenchmarkMetrics(PhaseCore& phase);
+    void UpdateBenchmarkMetricsRoot(PhaseCore& phase);
 
     void UpdateBenchmarkThreads();
     void UpdateBenchmarkThreads(PhaseCore& phase);

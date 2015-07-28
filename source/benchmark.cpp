@@ -97,14 +97,22 @@ void Benchmark::InitBenchmarkContext(Context& context)
 
 void Benchmark::UpdateBenchmarkMetrics()
 {
-    for (auto it = _phases.begin(); it != _phases.end(); ++it)
+    for (auto it = _phases.begin(); it != _phases.end(); ++it) {
+        (*it)->ChooseMinMaxTimeMetrics();	
         UpdateBenchmarkMetrics(**it);
+    }
 }
 
 void Benchmark::UpdateBenchmarkMetrics(PhaseCore& phase)
 {
     for (auto it = phase._child.begin(); it != phase._child.end(); ++it)
         UpdateBenchmarkMetrics(**it);
+    phase.ChooseBestWorstMetrics();
+}
+
+void Benchmark::UpdateBenchmarkMetricsRoot(PhaseCore& phase)
+{
+    phase.ChooseMinMaxTimeMetrics();
     phase.ChooseBestWorstMetrics();
 }
 
@@ -120,13 +128,16 @@ void Benchmark::UpdateBenchmarkThreads(PhaseCore& phase)
     for (auto it = phase._child.begin(); it != phase._child.end(); ++it) {
         for (auto next = it + 1; next != phase._child.end(); ++next) {
             if ((*it)->name() == (*next)->name()) {
+
                 // Merge metrics results
                 if ((*next)->_best.total_time() < (*it)->_best.total_time())
                     (*it)->_best = (*next)->_best;
                 if ((*next)->_worst.total_time() > (*it)->_worst.total_time())
                     (*it)->_worst = (*next)->_worst;
+
                 // Append child phases
                 (*it)->_child.insert((*it)->_child.end(), (*next)->_child.begin(), (*next)->_child.end());
+
                 // Mark to delete
                 (*next)->_thread = 0;
             }
