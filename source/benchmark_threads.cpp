@@ -60,7 +60,8 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
 
                         // Update thread context
                         thread_context._current = thread_phase_core;
-                        thread_context._metrics = &thread_phase_core->metrics();
+                        thread_context._metrics = &thread_phase_core->current();
+                        thread_context._metrics->AddIterations(-1);
 
                         // Call initialize thread method...
                         InitializeThread(thread_context);
@@ -90,7 +91,6 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*thread_context._current);
-                        UpdateBenchmarkMetricsRoot(*thread_context._current);
 
                         // Stop thread safe phase
                         thread_phase->StopPhase();
@@ -114,8 +114,9 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 // Call launched notification...
                 handler->onLaunched(*this, context, attempt);
 
-                // Update benchmark root phase metrics
-                UpdateBenchmarkMetricsRoot(*context._current);
+                // Update benchmark root metrics for the current attempt
+                context._current->MergeMetrics();
+                context._current->ResetMetrics();
             }
         }
     }

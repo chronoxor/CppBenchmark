@@ -19,13 +19,11 @@ void LauncherConsole::Initialize(int argc, char** argv)
     auto parser = optparse::OptionParser().version(version);
 
     const char* output[] = { "console", "csv", "json" };
-    const char* type[] = { "best", "worst", "diff" };
 
     parser.add_option("-h", "--help").help("Show help");
     parser.add_option("-f", "--filter").help("Filter benchmarks by the given regexp pattern");
     parser.add_option("-l", "--list").action("store_true").help("List all avaliable benchmarks");
     parser.add_option("-o", "--output").choices(&output[0], &output[3]).set_default(output[0]).help("Output format (console, csv, json). Default: %default");
-    parser.add_option("-t", "--type").choices(&type[0], &type[3]).set_default(type[0]).help("Metrics reporting type (best, worst, diff). Default: %default");
     parser.add_option("-s", "--silent").action("store_true").help("Launch in silent mode");
 
     optparse::Values options = parser.parse_args(argc, argv);
@@ -48,8 +46,6 @@ void LauncherConsole::Initialize(int argc, char** argv)
         _filter = options["filter"];
     if (options.is_set("output"))
         _output = options["output"];
-    if (options.is_set("type"))
-        _type = options["type"];
 
     // Update initialization flag
     _init = true;
@@ -75,24 +71,16 @@ void LauncherConsole::Launch()
 
 void LauncherConsole::Report()
 {
-    MetricsReportingType type = eReportBest;
-    if (_type == "best")
-        type = eReportBest;
-    else if (_type == "worst")
-        type = eReportWorst;
-    else if (_type == "diff")
-        type = eReportDiff;
-
     if (_output == "console") {
-        ReporterConsole reporter(std::cout, type);
+        ReporterConsole reporter(std::cout);
         Launcher::Report(reporter);
     }
     else if (_output == "csv") {
-        ReporterCSV reporter(std::cout, type);
+        ReporterCSV reporter(std::cout);
         Launcher::Report(reporter);
     }
     else if (_output == "json") {
-        ReporterJSON reporter(std::cout, type);
+        ReporterJSON reporter(std::cout);
         Launcher::Report(reporter);
     }
 }

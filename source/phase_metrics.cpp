@@ -56,13 +56,14 @@ int64_t PhaseMetrics::bytes_per_second() const noexcept
 
 void PhaseMetrics::StartCollecting() noexcept
 {
-    _timestamp = std::chrono::high_resolution_clock::now(); 
+    _timestamp = std::chrono::high_resolution_clock::now();
 }
 
 void PhaseMetrics::StopCollecting() noexcept
 {
     // Get iteration duration
-    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - _timestamp).count();
+    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
+            std::chrono::high_resolution_clock::now() - _timestamp).count();
 
     // Update time counters
     if (duration < _min_time)
@@ -70,6 +71,25 @@ void PhaseMetrics::StopCollecting() noexcept
     if (duration > _max_time)
         _max_time = duration;
     _total_time += duration;
+}
+
+void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics) noexcept
+{
+    // Choose best min time
+    if (metrics._min_time < _min_time)
+        _min_time = metrics._min_time;
+
+    // Choose best max time
+    if (metrics._max_time > _max_time)
+        _max_time = metrics._max_time;
+
+    // Choose best total time with iterations, items and bytes
+    if (metrics._total_time < _total_time) {
+        _total_time = metrics._total_time;
+        _total_iterations = metrics._total_iterations;
+        _total_items = metrics._total_items;
+        _total_bytes = metrics._total_bytes;
+    }
 }
 
 } // namespace CppBenchmark

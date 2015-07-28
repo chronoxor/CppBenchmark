@@ -37,9 +37,8 @@ private:
     bool _silent;
     std::string _filter;
     std::string _output;
-    std::string _type;
 
-    LauncherConsole() : _init(false), _list(false), _silent(false), _filter(""), _output("console"), _type("best") {}
+    LauncherConsole() : _init(false), _list(false), _silent(false), _filter(""), _output("console") {}
 };
 
 } // namespace CppBenchmark

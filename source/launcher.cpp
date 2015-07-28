@@ -14,10 +14,8 @@ void Launcher::Launch(const std::string& pattern)
 
     // For all registered benchmarks...
     for (auto benchmark : _benchmarks) {
-
         // Match benchmark name with the given pattern
         if (pattern.empty() || std::regex_match(benchmark->name(), matcher)) {
-
             // Launch benchmark
             benchmark->Launch(this);
         }
@@ -56,7 +54,7 @@ void Launcher::Report(Reporter& reporter)
 void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name)
 {
     reporter.ReportPhaseHeader();
-    reporter.ReportPhase(phase, phase.best(), phase.worst());
+    reporter.ReportPhase(phase, phase.metrics());
     reporter.ReportPhaseFooter();
     for (auto child : phase._child) {
         std::string child_name = name + '.' + child->name();

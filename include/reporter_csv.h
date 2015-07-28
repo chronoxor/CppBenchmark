@@ -14,7 +14,7 @@ namespace CppBenchmark {
 class ReporterCSV : public Reporter
 {
 public:
-    ReporterCSV(std::ostream& stream = std::cout, MetricsReportingType type = eReportBest) : _stream(stream), _type(type) {}
+    ReporterCSV(std::ostream& stream = std::cout) : _stream(stream) {}
     ReporterCSV(const ReporterCSV&) = delete;
     ReporterCSV(ReporterCSV&&) = delete;
     ~ReporterCSV() = default;
@@ -23,14 +23,10 @@ public:
     ReporterCSV& operator=(ReporterCSV&&) = delete;
 
     void ReportHeader() override;
-    void ReportPhase(const PhaseCore& phase, const PhaseMetrics& best, const PhaseMetrics& worst) override;
+    void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) override;
 
 private:
     std::ostream& _stream;
-    MetricsReportingType _type;
-
-    template <typename T>
-    T ReportValue(T best, T worst) { return (_type == eReportBest) ? best : ((_type == eReportWorst) ? worst : ((best > worst) ? (best - worst) : (worst - best)));}
 };
 
 } // namespace CppBenchmark

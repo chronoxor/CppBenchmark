@@ -63,7 +63,8 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
 
                         // Update producer context
                         producer_context._current = producer_phase_core;
-                        producer_context._metrics = &producer_phase_core->metrics();
+                        producer_context._metrics = &producer_phase_core->current();
+                        producer_context._metrics->AddIterations(-1);
 
                         // Call initialize producer method...
                         InitializeProducer(producer_context);
@@ -93,7 +94,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*producer_context._current);
-                        UpdateBenchmarkMetricsRoot(*producer_context._current);
 
                         // Stop thread safe phase
                         producer_phase->StopPhase();
@@ -113,7 +113,8 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
 
                         // Update consumer context
                         consumer_context._current = consumer_phase_core;
-                        consumer_context._metrics = &consumer_phase_core->metrics();
+                        consumer_context._metrics = &consumer_phase_core->current();
+                        consumer_context._metrics->AddIterations(-1);
 
                         // Call initialize consumer method...
                         InitializeConsumer(consumer_context);
@@ -137,7 +138,6 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*consumer_context._current);
-                        UpdateBenchmarkMetricsRoot(*consumer_context._current);
 
                         // Stop thread safe phase
                         consumer_phase->StopPhase();
@@ -161,8 +161,9 @@ void BenchmarkMPMC::Launch(LauncherHandler* handler)
                 // Call launched notification...
                 handler->onLaunched(*this, context, attempt);
 
-                // Update benchmark root phase metrics
-                UpdateBenchmarkMetricsRoot(*context._current);
+                // Update benchmark root metrics for the current attempt
+                context._current->MergeMetrics();
+                context._current->ResetMetrics();
             }
         }
     }

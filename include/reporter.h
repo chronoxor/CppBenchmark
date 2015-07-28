@@ -9,15 +9,6 @@
 
 namespace CppBenchmark {
 
-enum MetricsReportingType
-{
-    eReportBest,
-    eReportWorst,
-    eReportDiff
-};
-
-std::string to_string(MetricsReportingType value);
-
 class Reporter
 {
 public:
@@ -41,7 +32,7 @@ public:
     virtual void ReportPhasesFooter() {}
     virtual void ReportPhaseHeader() {}
     virtual void ReportPhaseFooter() {}
-    virtual void ReportPhase(const PhaseCore& phase, const PhaseMetrics& best, const PhaseMetrics& worst) = 0;
+    virtual void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) = 0;
     virtual void ReportFooter() {}
 };
 

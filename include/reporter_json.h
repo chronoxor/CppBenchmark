@@ -14,7 +14,7 @@ namespace CppBenchmark {
 class ReporterJSON : public Reporter
 {
 public:
-    ReporterJSON(std::ostream& stream = std::cout, MetricsReportingType type = eReportBest) : _stream(stream), _type(type) {}
+    ReporterJSON(std::ostream& stream = std::cout) : _stream(stream) {}
     ReporterJSON(const ReporterJSON&) = delete;
     ReporterJSON(ReporterJSON&&) = delete;
     ~ReporterJSON() = default;
@@ -34,17 +34,13 @@ public:
     void ReportPhasesFooter() override;
     void ReportPhaseHeader() override;
     void ReportPhaseFooter() override;
-    void ReportPhase(const PhaseCore& phase, const PhaseMetrics& best, const PhaseMetrics& worst) override;
+    void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) override;
     void ReportFooter() override;
 
 private:
     std::ostream& _stream;
-    MetricsReportingType _type;
     bool _benchmark_comma;
     bool _phase_comma;
-
-    template <typename T>
-    T ReportValue(T best, T worst) { return (_type == eReportBest) ? best : ((_type == eReportWorst) ? worst : ((best > worst) ? (best - worst) : (worst - best)));}
 };
 
 } // namespace CppBenchmark

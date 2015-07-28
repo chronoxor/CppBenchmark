@@ -62,7 +62,7 @@ void Benchmark::Launch(LauncherHandler* handler)
             handler->onLaunched(*this, context, attempt);
         }
 
-        // Update metrics for the current attempt
+        // Update benchmark root metrics for the current attempt
         UpdateBenchmarkMetrics();
     }
 
@@ -92,28 +92,21 @@ void Benchmark::InitBenchmarkContext(Context& context)
 
     // Update the current benchmark
     context._current = result.get();
-    context._metrics = &result->metrics();
+    context._metrics = &result->current();
 }
 
 void Benchmark::UpdateBenchmarkMetrics()
 {
-    for (auto it = _phases.begin(); it != _phases.end(); ++it) {
-        (*it)->ChooseMinMaxTimeMetrics();	
+    for (auto it = _phases.begin(); it != _phases.end(); ++it)
         UpdateBenchmarkMetrics(**it);
-    }
 }
 
 void Benchmark::UpdateBenchmarkMetrics(PhaseCore& phase)
 {
     for (auto it = phase._child.begin(); it != phase._child.end(); ++it)
         UpdateBenchmarkMetrics(**it);
-    phase.ChooseBestWorstMetrics();
-}
-
-void Benchmark::UpdateBenchmarkMetricsRoot(PhaseCore& phase)
-{
-    phase.ChooseMinMaxTimeMetrics();
-    phase.ChooseBestWorstMetrics();
+    phase.MergeMetrics();
+    phase.ResetMetrics();
 }
 
 void Benchmark::UpdateBenchmarkThreads()
@@ -130,10 +123,7 @@ void Benchmark::UpdateBenchmarkThreads(PhaseCore& phase)
             if ((*it)->name() == (*next)->name()) {
 
                 // Merge metrics results
-                if ((*next)->_best.total_time() < (*it)->_best.total_time())
-                    (*it)->_best = (*next)->_best;
-                if ((*next)->_worst.total_time() > (*it)->_worst.total_time())
-                    (*it)->_worst = (*next)->_worst;
+                (*it)->MergeMetrics(**next);
 
                 // Append child phases
                 (*it)->_child.insert((*it)->_child.end(), (*next)->_child.begin(), (*next)->_child.end());

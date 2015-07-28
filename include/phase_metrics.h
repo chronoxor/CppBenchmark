@@ -63,6 +63,8 @@ private:
 
     void StartCollecting() noexcept;
     void StopCollecting() noexcept;
+
+    void MergeMetrics(const PhaseMetrics& metrics) noexcept;
 };
 
 } // namespace CppBenchmark

@@ -38,8 +38,7 @@ public:
 
     // Implementation of Phase
     const std::string& name() const override { return _current->name(); }
-    const PhaseMetrics& best() const override { return _current->best(); }
-    const PhaseMetrics& worst() const override { return _current->worst(); }
+    const PhaseMetrics& metrics() const override { return _current->metrics(); }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override { return _current->StartPhase(phase); }
     std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) override { return _current->StartPhaseThreadSafe(phase); }
     void StopPhase() override { _current->StopPhase(); }

@@ -18,8 +18,7 @@ class Phase
 {
 public:
     virtual const std::string& name() const = 0;
-    virtual const PhaseMetrics& best() const = 0;
-    virtual const PhaseMetrics& worst() const = 0;
+    virtual const PhaseMetrics& metrics() const = 0;
 
     virtual std::shared_ptr<Phase> StartPhase(const std::string& phase) = 0;
     virtual std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) = 0;

@@ -25,7 +25,7 @@ class PhaseCore : public Phase
 
 public:
     explicit PhaseCore(const std::string& name) : _name(name), _thread(System::CurrentThreadId())
-    { _best._total_time = std::numeric_limits<int64_t>::max(); _worst._total_time = 0; }
+    { _metrics_result._total_time = std::numeric_limits<int64_t>::max(); }
     PhaseCore(const PhaseCore&) = delete;
     PhaseCore(PhaseCore&&) = delete;
     virtual ~PhaseCore() = default;
@@ -33,15 +33,14 @@ public:
     PhaseCore& operator=(const PhaseCore&) = delete;
     PhaseCore& operator=(PhaseCore&&) = delete;
 
-    PhaseMetrics& metrics() { return _metrics; }
+    PhaseMetrics& current() { return _metrics_current; }
 
     // Implementation of Phase
     const std::string& name() const override { return _name; }
-    const PhaseMetrics& best() const override { return _best; }
-    const PhaseMetrics& worst() const override { return _worst; }
+    const PhaseMetrics& metrics() const override { return _metrics_result; }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override;
     std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) override;
-    void StopPhase() override;
+    void StopPhase() override { StopCollectingMetrics(); }
     std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) override
     { return std::make_shared<PhaseScope>(StartPhase(phase)); }
     std::shared_ptr<PhaseScope> ScopePhaseThreadSafe(const std::string& phase) override
@@ -52,14 +51,19 @@ protected:
     std::string _name;
     int _thread;
     std::vector<std::shared_ptr<PhaseCore>> _child;
-    PhaseMetrics _metrics;
-    PhaseMetrics _best;
-    PhaseMetrics _worst;
+    PhaseMetrics _metrics_current;
+    PhaseMetrics _metrics_result;
 
-    void StartCollectingMetrics() noexcept { _metrics.StartCollecting(); }
-    void StopCollectingMetrics() noexcept { _metrics.StopCollecting(); }
-    void ChooseMinMaxTimeMetrics() noexcept;	
-    void ChooseBestWorstMetrics() noexcept;
+    void StartCollectingMetrics() noexcept
+    { _metrics_current.StartCollecting(); }
+    void StopCollectingMetrics() noexcept
+    { _metrics_current.StopCollecting(); }
+    void MergeMetrics() noexcept
+    { _metrics_result.MergeMetrics(_metrics_current); }
+    void MergeMetrics(const PhaseCore& phase) noexcept
+    { _metrics_result.MergeMetrics(phase._metrics_result); }
+    void ResetMetrics() noexcept
+    { _metrics_current = PhaseMetrics(); }
 };
 
 } // namespace CppBenchmark
