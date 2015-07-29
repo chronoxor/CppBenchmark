@@ -43,7 +43,7 @@ install(TARGETS ${INSTALL_TARGETS}
 # Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-  set(DOXYGEN "Doxygen")
+  set(DOXYGEN "doxygen")
   project(${DOXYGEN})
   add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "${PROJECT_SOURCE_DIR}/documents/Doxyfile" WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/documents")
   add_custom_target(${DOXYGEN} DEPENDS "Doxyfile")
