@@ -11,7 +11,12 @@
 
 namespace CppBenchmark {
 
-void Benchmark::Launch(LauncherHandler* handler)
+int Benchmark::CountLaunches() const
+{
+    return _settings.attempts() * (_settings.params().empty() ? 1 : (int)_settings.params().size());
+}
+
+void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
 {
     // Make several attempts of execution...
     for (int attempt = 1; attempt <= _settings.attempts(); ++attempt) {
@@ -30,7 +35,7 @@ void Benchmark::Launch(LauncherHandler* handler)
             InitBenchmarkContext(context);
 
             // Call launching notification...
-            handler->onLaunching(*this, context, attempt);
+            handler.onLaunching(++current, total, *this, context, attempt);
 
             // Call initialize benchmark method...
             Initialize(context);
@@ -59,7 +64,7 @@ void Benchmark::Launch(LauncherHandler* handler)
             Cleanup(context);
 
             // Call launched notification...
-            handler->onLaunched(*this, context, attempt);
+            handler.onLaunched(current, total, *this, context, attempt);
         }
 
         // Update benchmark root metrics for the current attempt

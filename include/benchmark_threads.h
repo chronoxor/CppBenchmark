@@ -35,7 +35,8 @@ protected:
 private:
     std::vector<std::thread> _threads;
 
-    void Launch(LauncherHandler* handler) override;
+    int CountLaunches() const override;
+    void Launch(int& current, int total, LauncherHandler& handler) override;
 
     // Hide base benchmark run method
     void Run(Context& context) override {}

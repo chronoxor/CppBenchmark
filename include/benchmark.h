@@ -21,7 +21,7 @@ class Benchmark : public virtual Fixture
     friend class Launcher;
 
 public:
-    typedef Settings TSettings;	
+    typedef Settings TSettings;
 
     explicit Benchmark(const std::string& name, const TSettings& settings = TSettings())
             : _launched(false),
@@ -35,8 +35,6 @@ public:
     Benchmark& operator=(const Benchmark&) = delete;
     Benchmark& operator=(Benchmark&&) = delete;
 
-    bool is_launched() const { return _launched; }
-
     const std::string& name() const { return _name; }
 
 protected:
@@ -48,7 +46,8 @@ private:
     Settings _settings;
     std::vector<std::shared_ptr<PhaseCore>> _phases;
 
-    virtual void Launch(LauncherHandler* handler);
+    virtual int CountLaunches() const;
+    virtual void Launch(int& current, int total, LauncherHandler& handler);
 
     void InitBenchmarkContext(Context& context);
 

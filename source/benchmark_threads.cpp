@@ -9,7 +9,12 @@
 
 namespace CppBenchmark {
 
-void BenchmarkThreads::Launch(LauncherHandler* handler)
+int BenchmarkThreads::CountLaunches() const
+{
+    return _settings.attempts() * (_settings.threads().empty() ? 1 : (int)_settings.threads().size()) * (_settings.params().empty() ? 1 : (int)_settings.params().size());
+}
+
+void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
 {
     // Make several attempts of execution...
     for (int attempt = 1; attempt <= _settings.attempts(); ++attempt) {
@@ -35,7 +40,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 InitBenchmarkContext(context);
 
                 // Call launching notification...
-                handler->onLaunching(*this, context, attempt);
+                handler.onLaunching(++current, total, *this, context, attempt);
 
                 // Call initialize benchmark method...
                 Initialize(context);
@@ -98,9 +103,8 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 }
 
                 // Wait for all threads
-                for (auto& thread : _threads) {
+                for (auto& thread : _threads)
                     thread.join();
-                };
 
                 // Clear threads collection
                 _threads.clear();
@@ -112,7 +116,7 @@ void BenchmarkThreads::Launch(LauncherHandler* handler)
                 Cleanup(context);
 
                 // Call launched notification...
-                handler->onLaunched(*this, context, attempt);
+                handler.onLaunched(current, total, *this, context, attempt);
 
                 // Update benchmark root metrics for the current attempt
                 context._current->MergeMetrics();

@@ -26,8 +26,8 @@ public:
     LauncherHandler& operator=(LauncherHandler&&) = default;
 
 protected:
-    virtual void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) {}
-    virtual void onLaunched(const Benchmark& benchmark, const Context& context, int attempt) {}
+    virtual void onLaunching(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) {}
+    virtual void onLaunched(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) {}
 };
 
 } // namespace CppBenchmark

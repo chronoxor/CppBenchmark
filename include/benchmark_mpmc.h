@@ -32,7 +32,8 @@ protected:
     virtual void RunConsumer(ContextMPMC& context) = 0;
 
 private:
-    void Launch(LauncherHandler* handler) override;
+    int CountLaunches() const override;
+    void Launch(int& current, int total, LauncherHandler& handler) override;
 
     // Hide base benchmark run thread method
     void RunThread(ContextThread& context) override {}

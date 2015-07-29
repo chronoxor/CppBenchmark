@@ -72,8 +72,8 @@ public:
     void Launch() { Launcher::Launch(".es."); }
 
 protected:
-    void onLaunching(const Benchmark& benchmark, const Context& context, int attempt) override { _launching++; }
-    void onLaunched(const Benchmark& benchmark, const Context& context, int attempt) override { _launched++; }
+    void onLaunching(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) override { _launching++; }
+    void onLaunched(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) override { _launched++; }
 
 private:
     int _launching;

@@ -10,16 +10,23 @@ namespace CppBenchmark {
 
 void Launcher::Launch(const std::string& pattern)
 {
-    std::regex matcher(pattern);
+    int current = 0;
+    int total = 0;
+    std::vector<std::shared_ptr<Benchmark>> benchmarks;
 
-    // For all registered benchmarks...
+    // Filter benchmarks
+    std::regex matcher(pattern);
     for (auto benchmark : _benchmarks) {
         // Match benchmark name with the given pattern
         if (pattern.empty() || std::regex_match(benchmark->name(), matcher)) {
-            // Launch benchmark
-            benchmark->Launch(this);
+            total += benchmark->CountLaunches();
+            benchmarks.push_back(benchmark);
         }
     }
+
+    // Launch filtered benchmarks
+    for (auto benchmark : benchmarks)
+        benchmark->Launch(current, total, *this);
 }
 
 void Launcher::Report(Reporter& reporter)
@@ -33,7 +40,7 @@ void Launcher::Report(Reporter& reporter)
     // For all registered benchmarks...
     for (auto benchmark : _benchmarks) {
         // Filter performed benchmarks
-        if (benchmark->is_launched()) {
+        if (benchmark->_launched) {
             // Report benchmark results
             reporter.ReportBenchmarkHeader();
             reporter.ReportBenchmark(*benchmark, benchmark->_settings);

@@ -4,8 +4,10 @@
 
 #include "launcher_console.h"
 
+#include <iomanip>
 #include <regex>
 
+#include "console.h"
 #include "option_parser.h"
 #include "reporter_console.h"
 #include "reporter_csv.h"
@@ -85,20 +87,20 @@ void LauncherConsole::Report()
     }
 }
 
-void LauncherConsole::onLaunching(const Benchmark& benchmark, const Context& context, int attempt)
+void LauncherConsole::onLaunching(int current, int total, const Benchmark& benchmark, const Context& context, int attempt)
 {
     if (_silent)
         return;
 
-    std::cerr << "Launching " << benchmark.name() << context.to_string() << ". Attempt " << attempt << "...";
+    std::cerr << DARKGREY << "[" << std::setw(3) << (100 * current / total) << "%] " << GREY << "Launching " << LIGHTCYAN << benchmark.name() << context.to_string() << GREY << ". Attempt " << WHITE << attempt << GREY << "...";
 }
 
-void LauncherConsole::onLaunched(const Benchmark& benchmark, const Context& context, int attempt)
+void LauncherConsole::onLaunched(int current, int total, const Benchmark& benchmark, const Context& context, int attempt)
 {
     if (_silent)
         return;
 
-    std::cerr << "Done!" << std::endl;
+    std::cerr << LIGHTGREEN << "Done!" << std::endl;
 }
 
 } // namespace CppBenchmark

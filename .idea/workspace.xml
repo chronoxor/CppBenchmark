@@ -24,29 +24,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3701edfd-3577-46a3-8ad8-44a5d9a3019b" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Workspace\Projects\CppBenchmark\source\reporter.cpp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="DELETED" beforePath="Z:\Projects\Contributions\CppBenchmark\bin\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="Z:\Projects\Contributions\CppBenchmark\scripts\04-clean.bat" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/benchmark.cpp" afterPath="$PROJECT_DIR$/source/benchmark.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/benchmark.h" afterPath="$PROJECT_DIR$/include/benchmark.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/benchmark_mpmc.cpp" afterPath="$PROJECT_DIR$/source/benchmark_mpmc.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/benchmark_mpmc.h" afterPath="$PROJECT_DIR$/include/benchmark_mpmc.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/benchmark_threads.cpp" afterPath="$PROJECT_DIR$/source/benchmark_threads.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/context.h" afterPath="$PROJECT_DIR$/include/context.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/benchmark_threads.h" afterPath="$PROJECT_DIR$/include/benchmark_threads.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/launcher.cpp" afterPath="$PROJECT_DIR$/source/launcher.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/launcher_console.cpp" afterPath="$PROJECT_DIR$/source/launcher_console.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/launcher_console.h" afterPath="$PROJECT_DIR$/include/launcher_console.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/phase.h" afterPath="$PROJECT_DIR$/include/phase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/phase_core.cpp" afterPath="$PROJECT_DIR$/source/phase_core.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/phase_core.h" afterPath="$PROJECT_DIR$/include/phase_core.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/phase_metrics.cpp" afterPath="$PROJECT_DIR$/source/phase_metrics.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/phase_metrics.h" afterPath="$PROJECT_DIR$/include/phase_metrics.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/phase_scope.h" afterPath="$PROJECT_DIR$/include/phase_scope.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/reporter.h" afterPath="$PROJECT_DIR$/include/reporter.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/launcher_handler.h" afterPath="$PROJECT_DIR$/include/launcher_handler.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/reporter_console.cpp" afterPath="$PROJECT_DIR$/source/reporter_console.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/reporter_console.h" afterPath="$PROJECT_DIR$/include/reporter_console.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/reporter_csv.cpp" afterPath="$PROJECT_DIR$/source/reporter_csv.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/reporter_csv.h" afterPath="$PROJECT_DIR$/include/reporter_csv.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/reporter_json.cpp" afterPath="$PROJECT_DIR$/source/reporter_json.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/reporter_json.h" afterPath="$PROJECT_DIR$/include/reporter_json.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_launcher.cpp" afterPath="$PROJECT_DIR$/tests/test_launcher.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cppbenchmark.iws" />
@@ -68,31 +62,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="benchmark_threads.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/benchmark_threads.cpp">
+      <file leaf-file-name="console.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/console.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="118" column="49" selection-start-line="116" selection-start-column="0" selection-end-line="118" selection-end-column="49" />
+              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="phase_core.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/phase_core.cpp">
+      <file leaf-file-name="console.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/console.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="58" column="12" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
-              <folding />
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#53#73#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="launcher.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/launcher.cpp">
+      <file leaf-file-name="context.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/context.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -102,71 +98,71 @@
         <entry file="file://$PROJECT_DIR$/source/launcher_console.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="benchmark_mpmc.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/source/benchmark_mpmc.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67444575">
-              <caret line="104" column="55" selection-start-line="104" selection-start-column="55" selection-end-line="104" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="benchmark.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/benchmark.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="25" selection-start-line="107" selection-start-column="0" selection-end-line="108" selection-end-column="25" />
+              <caret line="102" column="42" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
               <folding>
-                <element signature="e#53#75#0" expanded="true" />
+                <element signature="e#53#82#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stl_iterator.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../Soft/MinGW/mingw64/x86_64-w64-mingw32/include/c++/bits/stl_iterator.h">
+      <file leaf-file-name="context_thread.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/context_thread.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="843" column="0" selection-start-line="843" selection-start-column="0" selection-end-line="843" selection-end-column="0" />
+              <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stl_vector.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../Soft/MinGW/mingw64/x86_64-w64-mingw32/include/c++/bits/stl_vector.h">
+      <file leaf-file-name="environment.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/environment.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="565" column="0" selection-start-line="565" selection-start-column="0" selection-end-line="565" selection-end-column="0" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="phase_core.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/phase_core.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-              <folding>
-                <element signature="e#122#139#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reporter_console.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="reporter_console.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/reporter_console.cpp">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.47028688">
+              <caret line="69" column="54" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+              <folding>
+                <element signature="e#53#82#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fixture.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/fixture.h">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="87" column="62" selection-start-line="87" selection-start-column="62" selection-end-line="87" selection-end-column="62" />
+              <caret line="24" column="24" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fixture_mpmc.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/fixture_mpmc.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="option_parser.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/option_parser.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -180,9 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/source/context.cpp" />
-        <option value="$PROJECT_DIR$/source/context_thread.cpp" />
-        <option value="$PROJECT_DIR$/include/phase_base.h" />
         <option value="$PROJECT_DIR$/source/phase_base.cpp" />
         <option value="$PROJECT_DIR$/cmake/SetCompilerFeatures.cmake" />
         <option value="$PROJECT_DIR$/include/settings_mpmc.cpp" />
@@ -195,7 +188,6 @@
         <option value="$PROJECT_DIR$/examples/folly/ProducerConsumerQueue.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/include/launcher_handler.h" />
         <option value="$PROJECT_DIR$/examples/atomic.cpp" />
         <option value="$PROJECT_DIR$/examples/containers.cpp" />
         <option value="$PROJECT_DIR$/examples/sort.cpp" />
@@ -205,8 +197,6 @@
         <option value="$PROJECT_DIR$/examples/threads.cpp" />
         <option value="$PROJECT_DIR$/include/settings.h" />
         <option value="$PROJECT_DIR$/include/settings_mpmc.h" />
-        <option value="$PROJECT_DIR$/include/benchmark_threads.h" />
-        <option value="$PROJECT_DIR$/include/benchmark_mpmc.h" />
         <option value="$PROJECT_DIR$/examples/spsc.cpp" />
         <option value="$PROJECT_DIR$/examples/mpsc.cpp" />
         <option value="$PROJECT_DIR$/examples/mpmc.cpp" />
@@ -220,17 +210,23 @@
         <option value="$PROJECT_DIR$/include/reporter_json.h" />
         <option value="$PROJECT_DIR$/source/reporter_csv.cpp" />
         <option value="$PROJECT_DIR$/source/reporter_json.cpp" />
-        <option value="$PROJECT_DIR$/include/launcher_console.h" />
-        <option value="$PROJECT_DIR$/source/launcher_console.cpp" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/include/benchmark.h" />
-        <option value="$PROJECT_DIR$/source/benchmark.cpp" />
         <option value="$PROJECT_DIR$/include/phase_core.h" />
-        <option value="$PROJECT_DIR$/source/launcher.cpp" />
-        <option value="$PROJECT_DIR$/source/reporter_console.cpp" />
         <option value="$PROJECT_DIR$/source/phase_core.cpp" />
-        <option value="$PROJECT_DIR$/source/benchmark_threads.cpp" />
+        <option value="$PROJECT_DIR$/include/launcher_handler.h" />
+        <option value="$PROJECT_DIR$/include/launcher_console.h" />
+        <option value="$PROJECT_DIR$/tests/test_launcher.cpp" />
+        <option value="$PROJECT_DIR$/include/benchmark.h" />
+        <option value="$PROJECT_DIR$/include/benchmark_mpmc.h" />
+        <option value="$PROJECT_DIR$/include/benchmark_threads.h" />
+        <option value="$PROJECT_DIR$/source/benchmark.cpp" />
         <option value="$PROJECT_DIR$/source/benchmark_mpmc.cpp" />
+        <option value="$PROJECT_DIR$/source/benchmark_threads.cpp" />
+        <option value="$PROJECT_DIR$/source/launcher.cpp" />
+        <option value="$PROJECT_DIR$/source/console.cpp" />
+        <option value="$PROJECT_DIR$/include/console.h" />
+        <option value="$PROJECT_DIR$/source/launcher_console.cpp" />
+        <option value="$PROJECT_DIR$/source/reporter_console.cpp" />
       </list>
     </option>
   </component>
@@ -245,8 +241,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="2368" />
-    <option name="height" value="1308" />
+    <option name="width" value="2576" />
+    <option name="height" value="1554" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -358,13 +354,14 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Workspace/Projects/CppBenchmark/include/reporter.h" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/source/console.cpp" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Workspace\Projects\CppBenchmark\source" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.cppbenchmark-example-threads">
+  <component name="RunManager" selected="Application.cppbenchmark-example-containers">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark" CONFIG_NAME="Debug">
       <envs />
       <method />
@@ -450,20 +447,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2368" height="1308" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1554" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11437075" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1140625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2625" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27139875" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26210237" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27109268" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3434238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30583334" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30567083" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -486,14 +483,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/source/launcher.cpp</url>
-          <line>56</line>
-          <option name="timeStamp" value="139" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="145" />
+      <option name="time" value="149" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -504,66 +494,10 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/containers.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="32" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/fwrite.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="188" selection-start-line="11" selection-start-column="148" selection-end-line="11" selection-end-column="188" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/settings.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/threads.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/sort.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="462" column="0" selection-start-line="462" selection-start-column="0" selection-end-line="462" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/context_mpmc.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="24" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/fixture_threads.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/fixture_mpmc.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/fixture.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -606,7 +540,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -614,28 +547,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
-          <folding>
-            <marker date="1437995510755" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1437995510755" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/benchmark_threads.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="e#136#153#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/benchmark_mpmc.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -643,7 +554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="6" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -651,7 +561,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="9" selection-start-line="38" selection-start-column="0" selection-end-line="42" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -659,7 +568,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="9" selection-start-line="39" selection-start-column="0" selection-end-line="43" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -667,15 +575,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_launcher.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -683,7 +582,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -691,7 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -699,7 +596,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -707,7 +603,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -715,7 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="80" selection-start-line="34" selection-start-column="80" selection-end-line="34" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -723,7 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -731,7 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -739,7 +631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -747,15 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="127" column="41" selection-start-line="127" selection-start-column="41" selection-end-line="127" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/launcher_console.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="99" selection-start-line="40" selection-start-column="99" selection-end-line="40" selection-end-column="99" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -763,15 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/launcher.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -779,15 +652,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.72">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/benchmark.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -795,9 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="59" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="59" />
-          <folding>
-            <element signature="e#128#145#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -805,6 +666,139 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/phase_core.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/phase_core.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="1" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+          <folding>
+            <marker date="1438118689948" expanded="true" signature="143:1702" placeholder="{...}" />
+            <marker date="1438118689948" expanded="true" signature="217:369" placeholder="{...}" />
+            <marker date="1438118689948" expanded="true" signature="1696:1699" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_launcher.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/launcher_handler.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/benchmark.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="12" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/benchmark_mpmc.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="16" selection-start-line="165" selection-start-column="16" selection-end-line="165" selection-end-column="16" />
+          <folding>
+            <element signature="e#53#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/benchmark_threads.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="118" column="16" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/launcher.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/launcher_console.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/environment.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/system.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="6" selection-start-line="36" selection-start-column="0" selection-end-line="49" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/launcher.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/benchmark.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="65" selection-start-line="49" selection-start-column="65" selection-end-line="49" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/benchmark_mpmc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="57" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/benchmark_threads.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="57" selection-start-line="38" selection-start-column="57" selection-end-line="38" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/context_mpmc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -817,6 +811,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/environment.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/fixture.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/fixture_mpmc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/option_parser.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/context.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -825,18 +851,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Soft/MinGW/mingw64/x86_64-w64-mingw32/include/c++/bits/stl_vector.h">
+    <entry file="file://$PROJECT_DIR$/source/console.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="565" column="0" selection-start-line="565" selection-start-column="0" selection-end-line="565" selection-end-column="0" />
-          <folding />
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#53#73#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Soft/MinGW/mingw64/x86_64-w64-mingw32/include/c++/bits/stl_iterator.h">
+    <entry file="file://$PROJECT_DIR$/include/console.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="843" column="0" selection-start-line="843" selection-start-column="0" selection-end-line="843" selection-end-column="0" />
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -844,68 +872,20 @@
     <entry file="file://$PROJECT_DIR$/source/launcher_console.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/launcher.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding />
+          <caret line="102" column="42" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
+          <folding>
+            <element signature="e#53#82#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/reporter_console.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="87" column="62" selection-start-line="87" selection-start-column="62" selection-end-line="87" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/phase_core.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.47028688">
+          <caret line="69" column="54" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
           <folding>
-            <element signature="e#122#139#0" expanded="true" />
+            <element signature="e#53#82#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/phase_core.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="12" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/benchmark.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="25" selection-start-line="107" selection-start-column="0" selection-end-line="108" selection-end-column="25" />
-          <folding>
-            <element signature="e#53#75#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/benchmark_threads.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="49" selection-start-line="116" selection-start-column="0" selection-end-line="118" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/benchmark_mpmc.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67444575">
-          <caret line="104" column="55" selection-start-line="104" selection-start-column="55" selection-end-line="104" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
