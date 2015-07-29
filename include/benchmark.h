@@ -1,7 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 01.07.2015.
-//
-
+/*!
+    \file benchmark.h
+    \brief Benchmark base class definition
+    \author Ivan Shynkarenka
+    \date 06.07.2015
+    \copyright MIT License
+*/
 #ifndef CPPBENCHMARK_BENCHMARK_H
 #define CPPBENCHMARK_BENCHMARK_H
 
@@ -14,6 +17,10 @@ namespace CppBenchmark {
 
 class LauncherHandler;
 
+//! Benchmark base class
+/*!
+    Provides necessary interface to perform single thread benchmark
+*/
 class Benchmark : public virtual Fixture
 {
     friend class BenchmarkMPMC;
@@ -21,8 +28,14 @@ class Benchmark : public virtual Fixture
     friend class Launcher;
 
 public:
+    //! Benchmark settings type
     typedef Settings TSettings;
 
+    //! Default class constructor
+    /*!
+        \param name - Benchmark name
+        \param settings - Benchmark settings
+    */
     explicit Benchmark(const std::string& name, const TSettings& settings = TSettings())
             : _launched(false),
               _name(name),
@@ -30,14 +43,22 @@ public:
     {}
     Benchmark(const Benchmark&) = delete;
     Benchmark(Benchmark&&) = delete;
+    //! Virtual destructor
     virtual ~Benchmark() = default;
 
     Benchmark& operator=(const Benchmark&) = delete;
     Benchmark& operator=(Benchmark&&) = delete;
 
+    //! Get benchmark name
     const std::string& name() const { return _name; }
 
 protected:
+    //! Benchmark run method
+    /*!
+        Should be implemented to provide code fragment to measure
+
+        \param context - Benchmark running context
+    */
     virtual void Run(Context& context) = 0;
 
 private:

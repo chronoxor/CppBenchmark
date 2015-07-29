@@ -10,6 +10,7 @@
 
 namespace CppBenchmark {
 
+//! @cond
 namespace Internals {
 
 #if defined(_WIN32)
@@ -31,6 +32,7 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
 #endif
 
 } // namespace Internals
+//! @endcond
 
 std::string System::CpuArchitecture()
 {

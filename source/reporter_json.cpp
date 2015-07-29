@@ -10,6 +10,7 @@
 
 namespace CppBenchmark {
 
+//! @cond
 namespace Internals {
 
 std::string indent1 = std::string(2, ' ');
@@ -21,6 +22,7 @@ std::string indent6 = std::string(12, ' ');
 std::string indent7 = std::string(14, ' ');
 
 } // namespace Internals
+//! @endcond
 
 void ReporterJSON::ReportHeader()
 {
