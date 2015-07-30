@@ -14,7 +14,7 @@ namespace CppBenchmark {
 class Settings
 {
     friend class Benchmark;
-    friend class BenchmarkMPMC;
+    friend class BenchmarkPC;
     friend class BenchmarkThreads;
 
 public:
@@ -30,7 +30,7 @@ public:
     bool infinite() const { return _infinite; }
     int64_t iterations() const { return _iterations; }
     const std::vector<int> threads() const { return _threads; }
-    const std::vector<std::tuple<int, int>> mpmc() const { return _mpmc; }	
+    const std::vector<std::tuple<int, int>> pc() const { return _pc; }
     const std::vector<std::tuple<int, int, int>> params() const { return _params; }
 
     Settings& Attempts(int attempts);
@@ -42,10 +42,10 @@ public:
     Settings& ThreadsRange(int from, int to);
     Settings& ThreadsRange(int from, int to, std::function<int (int, int, int&)> selector);
 
-    Settings& MPMC(int producers, int consumers);
-    Settings& MPMCRange(int producers_from, int producers_to, int consumers_from, int consumers_to);
-    Settings& MPMCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
-                        int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector);
+    Settings& PC(int producers, int consumers);
+    Settings& PCRange(int producers_from, int producers_to, int consumers_from, int consumers_to);
+    Settings& PCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
+                      int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector);
 
     Settings& Param(int value);
     Settings& ParamRange(int from, int to);
@@ -67,7 +67,7 @@ private:
     bool _infinite;
     int64_t _iterations;
     std::vector<int> _threads;
-    std::vector<std::tuple<int, int>> _mpmc;
+    std::vector<std::tuple<int, int>> _pc;
     std::vector<std::tuple<int, int, int>> _params;
 };
 

@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 09.07.2015.
-//
+/*!
+    \file environment.cpp
+    \brief Environment management static class implementation
+    \author Ivan Shynkarenka
+    \date 09.07.2015
+    \copyright MIT License
+*/
 
 #include "environment.h"
 

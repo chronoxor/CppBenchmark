@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 21.07.2015.
-//
+/*!
+    \file benchmark_threads.h
+    \brief Threads benchmark base class definition
+    \author Ivan Shynkarenka
+    \date 21.07.2015
+    \copyright MIT License
+*/
 
 #ifndef CPPBENCHMARK_BENCHMARK_THREADS_H
 #define CPPBENCHMARK_BENCHMARK_THREADS_H
@@ -14,13 +18,23 @@
 
 namespace CppBenchmark {
 
+//! Threads benchmark base class
+/*!
+    Provides interface to perform benchmark in multi-thread environment.
+*/
 class BenchmarkThreads : public Benchmark, public virtual FixtureThreads
 {
-    friend class BenchmarkMPMC;
+    friend class BenchmarkPC;
 
 public:
-    typedef SettingsThreads TSettings;			
+    //! BenchmarkThreads settings type
+    typedef SettingsThreads TSettings;
 
+    //! Default class constructor
+    /*!
+        \param name - Benchmark name
+        \param settings - Benchmark settings
+    */
     explicit BenchmarkThreads(const std::string& name, const TSettings& settings = TSettings()) : Benchmark(name, settings) {}
     BenchmarkThreads(const BenchmarkThreads&) = delete;
     BenchmarkThreads(BenchmarkThreads&&) = delete;
@@ -30,6 +44,12 @@ public:
     BenchmarkThreads& operator=(BenchmarkThreads&&) = delete;
 
 protected:
+    //! Thread run method
+    /*!
+        Should be implemented to provide code which will be executed in separate thread!
+
+        \param context - Thread running context
+    */
     virtual void RunThread(ContextThread& context) = 0;
 
 private:
@@ -41,6 +61,8 @@ private:
     // Hide base benchmark run method
     void Run(Context& context) override {}
 };
+
+/*! \example threads.cpp Threads integer increment benchmark */
 
 } // namespace CppBenchmark
 

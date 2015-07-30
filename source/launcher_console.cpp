@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 16.07.2015.
-//
+/*!
+    \file launcher_console.cpp
+    \brief Console launcher implementation
+    \author Ivan Shynkarenka
+    \date 16.07.2015
+    \copyright MIT License
+*/
 
 #include "launcher_console.h"
 

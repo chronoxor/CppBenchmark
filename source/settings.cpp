@@ -64,14 +64,14 @@ Settings& Settings::ThreadsRange(int from, int to, std::function<int (int, int, 
     return *this;
 }
 
-Settings& Settings::MPMC(int producers, int consumers)
+Settings& Settings::PC(int producers, int consumers)
 {
     if ((producers > 0) && (consumers > 0))
-        _mpmc.emplace_back(producers, consumers);
+        _pc.emplace_back(producers, consumers);
     return *this;
 }
 
-Settings& Settings::MPMCRange(int producers_from, int producers_to, int consumers_from, int consumers_to)
+Settings& Settings::PCRange(int producers_from, int producers_to, int consumers_from, int consumers_to)
 {
     if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0)) {
         if (producers_from > producers_to) {
@@ -84,12 +84,12 @@ Settings& Settings::MPMCRange(int producers_from, int producers_to, int consumer
         }
         for (int i = producers_from; i <= producers_to; ++i)
             for (int j = consumers_from; j <= consumers_to; ++j)
-                _mpmc.emplace_back(i, j);
+                _pc.emplace_back(i, j);
     }
     return *this;
 }
 
-Settings& Settings::MPMCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
+Settings& Settings::PCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
                               int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector)
 {
     if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0)) {
@@ -109,7 +109,7 @@ Settings& Settings::MPMCRange(int producers_from, int producers_to, std::functio
             int current2 = consumers_from;
             int result2 = consumers_selector(consumers_from, consumers_to, current2);
             while ((result2 >= consumers_from) && (result2 <= consumers_to)) {
-                _mpmc.emplace_back(result1, result2);
+                _pc.emplace_back(result1, result2);
                 // Select the next value
                 result2 = consumers_selector(consumers_from, consumers_to, current2);
             }

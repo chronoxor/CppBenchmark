@@ -2,25 +2,25 @@
 // Created by Ivan Shynkarenka on 24.07.2015.
 //
 
-#ifndef CPPBENCHMARK_CONTEXT_MPMC_H
-#define CPPBENCHMARK_CONTEXT_MPMC_H
+#ifndef CPPBENCHMARK_CONTEXT_PC_H
+#define CPPBENCHMARK_CONTEXT_PC_H
 
 #include "context.h"
 
 namespace CppBenchmark {
 
-class ContextMPMC : public Context
+class ContextPC : public Context
 {
-    friend class BenchmarkMPMC;
+    friend class BenchmarkPC;
 
 public:
-    ContextMPMC() = delete;
-    ContextMPMC(const ContextMPMC&) noexcept = default;
-    ContextMPMC(ContextMPMC&&) noexcept = default;
-    ~ContextMPMC() noexcept = default;
+    ContextPC() = delete;
+    ContextPC(const ContextPC&) noexcept = default;
+    ContextPC(ContextPC&&) noexcept = default;
+    ~ContextPC() noexcept = default;
 
-    ContextMPMC& operator=(const ContextMPMC&) noexcept = default;
-    ContextMPMC& operator=(ContextMPMC&&) noexcept = default;
+    ContextPC& operator=(const ContextPC&) noexcept = default;
+    ContextPC& operator=(ContextPC&&) noexcept = default;
 
     int producers() const noexcept { return _producers; }
     int consumers() const noexcept { return _consumers; }
@@ -38,7 +38,7 @@ private:
     std::shared_ptr<std::atomic<bool>> _produce_stopped;
     std::shared_ptr<std::atomic<bool>> _consume_stopped;
 
-    ContextMPMC(int producers, int consumers, int x, int y, int z) noexcept
+    ContextPC(int producers, int consumers, int x, int y, int z) noexcept
             : Context(x, y, z),
               _producers(producers),
               _consumers(consumers),
@@ -49,4 +49,4 @@ private:
 
 } // namespace CppBenchmark
 
-#endif // CPPBENCHMARK_CONTEXT_MPMC_H
+#endif // CPPBENCHMARK_CONTEXT_PC_H

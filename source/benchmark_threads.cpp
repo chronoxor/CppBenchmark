@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 21.07.2015.
-//
+/*!
+    \file benchmark_threads.cpp
+    \brief Threads benchmark base class implementation
+    \author Ivan Shynkarenka
+    \date 21.07.2015
+    \copyright MIT License
+*/
 
 #include "benchmark_threads.h"
 

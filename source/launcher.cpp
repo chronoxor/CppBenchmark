@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 07.07.2015.
-//
+/*!
+    \file launcher.cpp
+    \brief Launcher base class implementation
+    \author Ivan Shynkarenka
+    \date 07.07.2015
+    \copyright MIT License
+*/
 
 #include "launcher.h"
 

@@ -5,6 +5,7 @@
     \date 16.07.2015
     \copyright MIT License
 */
+
 #ifndef CPPBENCHMARK_MACROS_H
 #define CPPBENCHMARK_MACROS_H
 
@@ -181,7 +182,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(Cont
 //! Benchmark class register macro
 /*!
     Register a new benchmark based on a child class of a \a type with a given \a name and \a settings. You should
-    inherit \a type from Benchmark, BenchmarkThreads or BenchmarkMPMC and implement all necessary benchmark methods.
+    inherit \a type from Benchmark, BenchmarkThreads or BenchmarkPC and implement all necessary benchmark methods.
 
     Example:
     \code{.cpp}

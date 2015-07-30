@@ -5,6 +5,7 @@
     \date 06.07.2015
     \copyright MIT License
 */
+
 #ifndef CPPBENCHMARK_BENCHMARK_H
 #define CPPBENCHMARK_BENCHMARK_H
 
@@ -19,11 +20,11 @@ class LauncherHandler;
 
 //! Benchmark base class
 /*!
-    Provides necessary interface to perform single thread benchmark
+    Provides interface to perform single thread benchmark.
 */
 class Benchmark : public virtual Fixture
 {
-    friend class BenchmarkMPMC;
+    friend class BenchmarkPC;
     friend class BenchmarkThreads;
     friend class Launcher;
 
@@ -43,7 +44,6 @@ public:
     {}
     Benchmark(const Benchmark&) = delete;
     Benchmark(Benchmark&&) = delete;
-    //! Virtual destructor
     virtual ~Benchmark() = default;
 
     Benchmark& operator=(const Benchmark&) = delete;
@@ -55,7 +55,7 @@ public:
 protected:
     //! Benchmark run method
     /*!
-        Should be implemented to provide code fragment to measure
+        Should be implemented to provide code fragment to measure.
 
         \param context - Benchmark running context
     */
@@ -81,6 +81,11 @@ private:
     void UpdateBenchmarkNames();
     void UpdateBenchmarkNames(PhaseCore& phase, const std::string& name);
 };
+
+/*! \example atomic.cpp Atomic operations benchmark */
+/*! \example containers.cpp Containers push back benchmark */
+/*! \example fwrite.cpp File write benchmark */
+/*! \example sort.cpp Sort algorithms benchmark */
 
 } // namespace CppBenchmark
 

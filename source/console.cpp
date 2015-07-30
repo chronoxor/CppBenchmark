@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 29.07.2015.
-//
+/*!
+    \file console.cpp
+    \brief Console management static class implementation
+    \author Ivan Shynkarenka
+    \date 29.07.2015
+    \copyright MIT License
+*/
 
 #include "console.h"
 

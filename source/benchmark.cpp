@@ -5,6 +5,7 @@
     \date 06.07.2015
     \copyright MIT License
 */
+
 #include "benchmark.h"
 
 #include <algorithm>

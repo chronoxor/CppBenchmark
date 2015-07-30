@@ -1,43 +1,47 @@
-//
-// Created by Ivan Shynkarenka on 24.07.2015.
-//
+/*!
+    \file benchmark_pc.cpp
+    \brief Producers/Consumers benchmark base class implementation
+    \author Ivan Shynkarenka
+    \date 24.07.2015
+    \copyright MIT License
+*/
 
-#include "benchmark_mpmc.h"
+#include "benchmark_pc.h"
 
 #include "launcher_handler.h"
 #include "system.h"
 
 namespace CppBenchmark {
 
-int BenchmarkMPMC::CountLaunches() const
+int BenchmarkPC::CountLaunches() const
 {
-    return _settings.attempts() * (_settings.mpmc().empty() ? 1 : (int)_settings.mpmc().size()) * (_settings.params().empty() ? 1 : (int)_settings.params().size());
+    return _settings.attempts() * (_settings.pc().empty() ? 1 : (int)_settings.pc().size()) * (_settings.params().empty() ? 1 : (int)_settings.params().size());
 }
 
-void BenchmarkMPMC::Launch(int& current, int total, LauncherHandler& handler)
+void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 {
     // Make several attempts of execution...
     for (int attempt = 1; attempt <= _settings.attempts(); ++attempt) {
 
         // Run benchmark at least for 1 producer and 1 consumer
-        if (_settings._mpmc.empty())
-            _settings._mpmc.emplace_back(1, 1);
+        if (_settings._pc.empty())
+            _settings._pc.emplace_back(1, 1);
 
         // Run benchmark at least once
         if (_settings._params.empty())
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every producers/consumers pair
-        for (auto mpmc : _settings.mpmc()) {
+        for (auto pc : _settings.pc()) {
 
-            int producers = std::get<0>(mpmc);
-            int consumers = std::get<1>(mpmc);
+            int producers = std::get<0>(pc);
+            int consumers = std::get<1>(pc);
 
             // Run benchmark for every input parameter (single, pair, triple)
             for (auto param : _settings.params()) {
 
                 // Prepare benchmark context
-                ContextMPMC context(producers, consumers, std::get<0>(param), std::get<1>(param), std::get<2>(param));
+                ContextPC context(producers, consumers, std::get<0>(param), std::get<1>(param), std::get<2>(param));
 
                 // Initialize the current benchmark
                 InitBenchmarkContext(context);
@@ -60,7 +64,7 @@ void BenchmarkMPMC::Launch(int& current, int total, LauncherHandler& handler)
                     _threads.push_back(std::thread([this, &context, infinite, iterations, i]()
                     {
                         // Clone producer context
-                        ContextMPMC producer_context(context);
+                        ContextPC producer_context(context);
 
                         // Create and start thread safe phase
                         std::shared_ptr<Phase> producer_phase = context.StartPhaseThreadSafe("producer");
@@ -110,7 +114,7 @@ void BenchmarkMPMC::Launch(int& current, int total, LauncherHandler& handler)
                     _threads.push_back(std::thread([this, &context, i]()
                     {
                         // Clone consumer context
-                        ContextMPMC consumer_context(context);
+                        ContextPC consumer_context(context);
 
                         // Create and start thread safe phase
                         std::shared_ptr<Phase> consumer_phase = context.StartPhaseThreadSafe("consumer");

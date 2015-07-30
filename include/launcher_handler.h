@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 22.07.2015.
-//
+/*!
+    \file launcher_handler.h
+    \brief Launcher handler definition
+    \author Ivan Shynkarenka
+    \date 22.07.2015
+    \copyright MIT License
+*/
 
 #ifndef CPPBENCHMARK_LAUNCHER_HANDLER_H
 #define CPPBENCHMARK_LAUNCHER_HANDLER_H
@@ -10,10 +14,14 @@
 
 namespace CppBenchmark {
 
+//! Launcher handler
+/*!
+    Provides interface to handle progress notifications from benchmark launcher.
+*/
 class LauncherHandler
 {
     friend class Benchmark;
-    friend class BenchmarkMPMC;
+    friend class BenchmarkPC;
     friend class BenchmarkThreads;
 
 public:
@@ -26,7 +34,27 @@ public:
     LauncherHandler& operator=(LauncherHandler&&) = default;
 
 protected:
+    //! Handle benchmark launching notification
+    /*!
+        This method is called before launching the given benchmark.
+
+        \param current - Current benchmark number
+        \param total - Total benchmarks
+        \param benchmark - Benchmark
+        \param context - Benchmark running context
+        \param attempt - Benchmark attempt
+    */
     virtual void onLaunching(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) {}
+    //! Handle benchmark launched notification
+    /*!
+        This method is called after launched the given benchmark.
+
+        \param current - Current benchmark number
+        \param total - Total benchmarks
+        \param benchmark - Benchmark
+        \param context - Benchmark running context
+        \param attempt - Benchmark attempt
+    */
     virtual void onLaunched(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) {}
 };
 

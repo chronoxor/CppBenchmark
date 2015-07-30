@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 06.07.2015.
-//
+/*!
+    \file system.h
+    \brief System management static class implementation
+    \author Ivan Shynkarenka
+    \date 06.07.2015
+    \copyright MIT License
+*/
 
 #include "system.h"
 
