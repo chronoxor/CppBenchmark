@@ -14,13 +14,13 @@
 
 const int queue_bound_size = 65536;
 const int items_to_produce = 10000000;
-const auto settings = CppBenchmark::Settings().Infinite().MPMC(1, 1);
+const auto settings = CppBenchmark::Settings().Infinite().PC(1, 1);
 
 template <class TReaderWriterQueue>
-class ReaderWriterQueueBenchmark : public CppBenchmark::BenchmarkMPMC
+class ReaderWriterQueueBenchmark : public CppBenchmark::BenchmarkPC
 {
 public:
-    using BenchmarkMPMC::BenchmarkMPMC;
+    using BenchmarkPC::BenchmarkPC;
 
 protected:
     void Initialize(CppBenchmark::Context&) override
@@ -34,7 +34,7 @@ protected:
         _queue.reset();
     }
 
-    void RunProducer(CppBenchmark::ContextMPMC& context) override
+    void RunProducer(CppBenchmark::ContextPC& context) override
     {
     	if (_count >= items_to_produce) {
             if (_queue->try_enqueue(0))
@@ -46,7 +46,7 @@ protected:
             ++_count;
     }
 
-    void RunConsumer(CppBenchmark::ContextMPMC& context) override
+    void RunConsumer(CppBenchmark::ContextPC& context) override
     {
         int value = -1;
         if (_queue->try_dequeue(value) && (value == 0))
@@ -58,10 +58,10 @@ private:
     std::atomic<int> _count;
 };
 
-class ProducerConsumerQueueBenchmark : public CppBenchmark::BenchmarkMPMC
+class ProducerConsumerQueueBenchmark : public CppBenchmark::BenchmarkPC
 {
 public:
-    using BenchmarkMPMC::BenchmarkMPMC;
+    using BenchmarkPC::BenchmarkPC;
 
 protected:
     void Initialize(CppBenchmark::Context&) override
@@ -75,7 +75,7 @@ protected:
         _queue.reset();
     }
 
-    void RunProducer(CppBenchmark::ContextMPMC& context) override
+    void RunProducer(CppBenchmark::ContextPC& context) override
     {
         if (_count >= items_to_produce) {
             if (_queue->write(0))
@@ -87,7 +87,7 @@ protected:
             ++_count;
     }
 
-    void RunConsumer(CppBenchmark::ContextMPMC& context) override
+    void RunConsumer(CppBenchmark::ContextPC& context) override
     {
         int value = -1;
         if (_queue->read(value) && (value == 0))
@@ -99,10 +99,10 @@ private:
     std::atomic<int> _count;
 };
 
-class SPSCQueueBenchmark : public CppBenchmark::BenchmarkMPMC
+class SPSCQueueBenchmark : public CppBenchmark::BenchmarkPC
 {
 public:
-    using BenchmarkMPMC::BenchmarkMPMC;
+    using BenchmarkPC::BenchmarkPC;
 
 protected:
     void Initialize(CppBenchmark::Context&) override
@@ -116,7 +116,7 @@ protected:
         _queue.reset();
     }
 
-    void RunProducer(CppBenchmark::ContextMPMC& context) override
+    void RunProducer(CppBenchmark::ContextPC& context) override
     {
         if (_count >= items_to_produce) {
             _queue->enqueue(0);
@@ -127,7 +127,7 @@ protected:
         _queue->enqueue(_count++);
     }
 
-    void RunConsumer(CppBenchmark::ContextMPMC& context) override
+    void RunConsumer(CppBenchmark::ContextPC& context) override
     {
         int value = -1;
         if (_queue->dequeue(value) && (value == 0))
@@ -139,10 +139,10 @@ private:
     std::atomic<int> _count;
 };
 
-class SPSCBoundedQueueBenchmark : public CppBenchmark::BenchmarkMPMC
+class SPSCBoundedQueueBenchmark : public CppBenchmark::BenchmarkPC
 {
 public:
-    using BenchmarkMPMC::BenchmarkMPMC;
+    using BenchmarkPC::BenchmarkPC;
 
 protected:
     void Initialize(CppBenchmark::Context&) override
@@ -156,7 +156,7 @@ protected:
         _queue.reset();
     }
 
-    void RunProducer(CppBenchmark::ContextMPMC& context) override
+    void RunProducer(CppBenchmark::ContextPC& context) override
     {
         if (_count >= items_to_produce) {
             int value = 0;
@@ -170,7 +170,7 @@ protected:
             ++_count;
     }
 
-    void RunConsumer(CppBenchmark::ContextMPMC& context) override
+    void RunConsumer(CppBenchmark::ContextPC& context) override
     {
         int value = -1;
         if (_queue->dequeue(value) && (value == 0))

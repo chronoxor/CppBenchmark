@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 14.07.2015.
-//
+/*!
+    \file reporter_json.h
+    \brief JSON reporter definition
+    \author Ivan Shynkarenka
+    \date 14.07.2015
+    \copyright MIT License
+*/
 
 #ifndef CPPBENCHMARK_REPORTER_JSON_H
 #define CPPBENCHMARK_REPORTER_JSON_H
@@ -11,9 +15,21 @@
 
 namespace CppBenchmark {
 
+//! JSON reporter
+/*!
+    Reports benchmarks results in JSON format.
+
+    More information about JSON format you can find here: https://en.wikipedia.org/wiki/Comma-separated_values
+*/
 class ReporterJSON : public Reporter
 {
 public:
+    //! Default class constructor
+    /*!
+        Initialize reporter with an output stream. Default output stream is std::cout.
+
+        \param stream - Output stream
+    */
     ReporterJSON(std::ostream& stream = std::cout) : _stream(stream) {}
     ReporterJSON(const ReporterJSON&) = delete;
     ReporterJSON(ReporterJSON&&) = delete;
@@ -22,6 +38,7 @@ public:
     ReporterJSON& operator=(const ReporterJSON&) = delete;
     ReporterJSON& operator=(ReporterJSON&&) = delete;
 
+    // Implementation of Reporter
     void ReportHeader() override;
     void ReportSystem() override;
     void ReportEnvironment() override;

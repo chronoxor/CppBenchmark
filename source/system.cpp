@@ -1,5 +1,5 @@
 /*!
-    \file system.h
+    \file system.cpp
     \brief System management static class implementation
     \author Ivan Shynkarenka
     \date 06.07.2015

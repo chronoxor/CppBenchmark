@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 14.07.2015.
-//
+/*!
+    \file reporter_json.cpp
+    \brief JSON reporter implementation
+    \author Ivan Shynkarenka
+    \date 14.07.2015
+    \copyright MIT License
+*/
 
 #include "reporter_json.h"
 

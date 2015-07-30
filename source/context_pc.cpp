@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 24.07.2015.
-//
+/*!
+    \file context_pc.cpp
+    \brief Benchmark producer/consumer running context implementation
+    \author Ivan Shynkarenka
+    \date 24.07.2015
+    \copyright MIT License
+*/
 
 #include "context_pc.h"
 

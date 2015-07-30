@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 02.07.2015.
-//
+/*!
+    \file phase_scope.cpp
+    \brief Benchmark phase scope implementation
+    \author Ivan Shynkarenka
+    \date 02.07.2015
+    \copyright MIT License
+*/
 
 #include "phase_scope.h"
 
@@ -16,30 +20,30 @@ PhaseScope::~PhaseScope()
 
 std::shared_ptr<Phase> PhaseScope::StartPhase(const std::string& phase)
 {
-    return _ptr_phase ? _ptr_phase->StartPhase(phase) : nullptr;
+    return _phase ? _phase->StartPhase(phase) : nullptr;
 }
 
 std::shared_ptr<Phase> PhaseScope::StartPhaseThreadSafe(const std::string& phase)
 {
-    return _ptr_phase ? _ptr_phase->StartPhaseThreadSafe(phase) : nullptr;
+    return _phase ? _phase->StartPhaseThreadSafe(phase) : nullptr;
 }
 
 void PhaseScope::StopPhase()
 {
-    if (_ptr_phase) {
-        _ptr_phase->StopPhase();
-        _ptr_phase.reset();
+    if (_phase) {
+        _phase->StopPhase();
+        _phase.reset();
     }
 }
 
 std::shared_ptr<PhaseScope> PhaseScope::ScopePhase(const std::string& phase)
 {
-    return _ptr_phase ? _ptr_phase->ScopePhase(phase) : nullptr;
+    return _phase ? _phase->ScopePhase(phase) : nullptr;
 }
 
 std::shared_ptr<PhaseScope> PhaseScope::ScopePhaseThreadSafe(const std::string& phase)
 {
-    return _ptr_phase ? _ptr_phase->ScopePhaseThreadSafe(phase) : nullptr;
+    return _phase ? _phase->ScopePhaseThreadSafe(phase) : nullptr;
 }
 
 } // namespace CppBenchmark

@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 10.07.2015.
-//
+/*!
+    \file reporter_csv.cpp
+    \brief Comma-separated values (CSV) reporter implementation
+    \author Ivan Shynkarenka
+    \date 10.07.2015
+    \copyright MIT License
+*/
 
 #include "reporter_csv.h"
 

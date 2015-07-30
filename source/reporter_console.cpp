@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 13.07.2015.
-//
+/*!
+    \file reporter_console.cpp
+    \brief Console reporter implementation
+    \author Ivan Shynkarenka
+    \date 13.07.2015
+    \copyright MIT License
+*/
 
 #include "reporter_console.h"
 
@@ -28,8 +32,8 @@ void ReporterConsole::ReportSystem()
     _stream << WHITE << "CPU physical cores: " << LIGHTGREEN << System::CpuPhysicalCores() << std::endl;
     _stream << WHITE << "CPU clock speed: " << LIGHTGREEN << GenerateClockSpeed(System::CpuClockSpeed()) << std::endl;
     _stream << WHITE << "CPU Hyper-Threading: " << LIGHTGREEN << (System::CpuHyperThreading() ? "enabled" : "disabled") << std::endl;
-    _stream << WHITE << "RAM total: " << YELLOW << GenerateSize(System::RamTotal()) << std::endl;
-    _stream << WHITE << "RAM free: " << YELLOW << GenerateSize(System::RamFree()) << std::endl;
+    _stream << WHITE << "RAM total: " << YELLOW << GenerateDataSize(System::RamTotal()) << std::endl;
+    _stream << WHITE << "RAM free: " << YELLOW << GenerateDataSize(System::RamFree()) << std::endl;
 }
 
 void ReporterConsole::ReportEnvironment()
@@ -57,23 +61,23 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
     _stream << DARKGREY << GenerateSeparator('-') << std::endl;
     _stream << WHITE << "Phase: " << LIGHTCYAN << phase.name() << std::endl;
     if (metrics.total_iterations() > 1) {
-        _stream << WHITE << "Average time: " << YELLOW << GenerateTime(metrics.avg_time()) << " / iteration" << std::endl;
-        _stream << WHITE << "Minimal time: " << YELLOW << GenerateTime(metrics.min_time()) << " / iteration" << std::endl;
-        _stream << WHITE << "Maximal time: " << YELLOW << GenerateTime(metrics.max_time()) << " / iteration" << std::endl;
+        _stream << WHITE << "Average time: " << YELLOW << GenerateTimePeriod(metrics.avg_time()) << " / iteration" << std::endl;
+        _stream << WHITE << "Minimal time: " << YELLOW << GenerateTimePeriod(metrics.min_time()) << " / iteration" << std::endl;
+        _stream << WHITE << "Maximal time: " << YELLOW << GenerateTimePeriod(metrics.max_time()) << " / iteration" << std::endl;
     }
-    _stream << WHITE << "Total time: " << LIGHTRED << GenerateTime(metrics.total_time()) << std::endl;
+    _stream << WHITE << "Total time: " << LIGHTRED << GenerateTimePeriod(metrics.total_time()) << std::endl;
     if (metrics.total_iterations() > 1)
         _stream << WHITE << "Total iterations: " << LIGHTGREEN << metrics.total_iterations() << std::endl;
     if (metrics.total_items() > 0)
         _stream << WHITE << "Total items: " << LIGHTMAGENTA << metrics.total_items() << std::endl;
     if (metrics.total_bytes() > 0)
-        _stream << WHITE << "Total bytes: " << MAGENTA << GenerateSize(metrics.total_bytes()) << std::endl;
+        _stream << WHITE << "Total bytes: " << MAGENTA << GenerateDataSize(metrics.total_bytes()) << std::endl;
     if (metrics.total_iterations() > 1)
         _stream << WHITE << "Iterations throughput: " << LIGHTGREEN << metrics.iterations_per_second() << " / second" << std::endl;
     if (metrics.total_items() > 0)
         _stream << WHITE << "Items throughput: " << LIGHTMAGENTA << metrics.items_per_second() << " / second" << std::endl;
     if (metrics.total_bytes() > 0)
-        _stream << WHITE << "Bytes throughput: " << MAGENTA << GenerateSize(metrics.bytes_per_second()) << " / second" << std::endl;
+        _stream << WHITE << "Bytes throughput: " << MAGENTA << GenerateDataSize(metrics.bytes_per_second()) << " / second" << std::endl;
 }
 
 void ReporterConsole::ReportFooter()
@@ -111,7 +115,7 @@ std::string ReporterConsole::GenerateClockSpeed(int64_t hertz)
     return stream.str();
 }
 
-std::string ReporterConsole::GenerateSize(int64_t bytes)
+std::string ReporterConsole::GenerateDataSize(int64_t bytes)
 {
     std::ostringstream stream;
 
@@ -141,7 +145,7 @@ std::string ReporterConsole::GenerateSize(int64_t bytes)
     return stream.str();
 }
 
-std::string ReporterConsole::GenerateTime(int64_t nanoseconds)
+std::string ReporterConsole::GenerateTimePeriod(int64_t nanoseconds)
 {
     std::ostringstream stream;
 

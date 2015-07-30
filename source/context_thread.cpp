@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 21.07.2015.
-//
+/*!
+    \file context_thread.cpp
+    \brief Benchmark thread running context implementation
+    \author Ivan Shynkarenka
+    \date 21.07.2015
+    \copyright MIT License
+*/
 
 #include "context_thread.h"
 

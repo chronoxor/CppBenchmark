@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 07.07.2015.
-//
+/*!
+    \file context.h
+    \brief Benchmark running context definition
+    \author Ivan Shynkarenka
+    \date 07.07.2015
+    \copyright MIT License
+*/
 
 #ifndef CPPBENCHMARK_CONTEXT_H
 #define CPPBENCHMARK_CONTEXT_H
@@ -12,6 +16,14 @@
 
 namespace CppBenchmark {
 
+//! Benchmark running context
+/*!
+    Provides access to the current benchmark context information:
+    - Benchmark parameters (x, y, z)
+    - Benchmark metrics
+    - Benchmark cancellation methods
+    - Benchmark phase management methods
+*/
 class Context : public Phase
 {
     friend class Benchmark;
@@ -25,15 +37,27 @@ public:
     Context& operator=(const Context&) noexcept = default;
     Context& operator=(Context&&) noexcept = default;
 
+    //! Benchmark first parameter. Valid only if not negative!
     int x() const noexcept { return _x; }
+    //! Benchmark second parameter. Valid only if not negative!
     int y() const noexcept { return _y; }
+    //! Benchmark third parameter. Valid only if not negative!
     int z() const noexcept { return _z; }
 
+    //! Benchmark mutable metrics
+    /*!
+        Benchmark mutable metrics can be used to increase iterations count with PhaseMetrics.AddIterations()
+        method, register processed items with PhaseMetrics.AddItems() method, register processed bytes with
+        PhaseMetrics.AddBytes() method.
+    */
     PhaseMetrics& metrics() noexcept { return *_metrics; }
 
+    //! Is benchmark execution canceled?
     bool canceled() const noexcept { return *_canceled; }
+    //! Cancel benchmark execution
     void Cancel() noexcept { *_canceled = true; }
 
+    //! Get name of the current benchmark running context
     virtual std::string to_string() const;
 
     // Implementation of Phase
@@ -46,13 +70,25 @@ public:
     std::shared_ptr<PhaseScope> ScopePhaseThreadSafe(const std::string& phase) override { return _current->ScopePhaseThreadSafe(phase); }
 
 protected:
+    //! Benchmark first parameter. Valid only if not negative!
     int _x;
+    //! Benchmark second parameter. Valid only if not negative!
     int _y;
+    //! Benchmark third parameter. Valid only if not negative!
     int _z;
+    //! Current benchmark phase
     PhaseCore* _current;
+    //! Current benchmark metrics
     PhaseMetrics* _metrics;
+    //! Benchmark canceled flag
     std::shared_ptr<std::atomic<bool>> _canceled;
 
+    //! Create benchmark running context
+    /*!
+        \param x - Benchmark first parameter
+        \param y - Benchmark second parameter
+        \param z - Benchmark third parameter
+    */
     Context(int x, int y, int z) noexcept
             : _x(x),
               _y(y),
