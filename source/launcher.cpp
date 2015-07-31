@@ -68,7 +68,7 @@ void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
     reporter.ReportPhase(phase, phase.metrics());
     reporter.ReportPhaseFooter();
     for (auto child : phase._child) {
-        std::string child_name = name + '.' + child->name();
+        std::string child_name = name + "." + child->name();
         ReportPhase(reporter, *child, child_name);
     }
 }

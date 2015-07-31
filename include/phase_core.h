@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 02.07.2015.
-//
+/*!
+    \file phase_core.h
+    \brief Benchmark phase core definition
+    \author Ivan Shynkarenka
+    \date 02.07.2015
+    \copyright MIT License
+*/
 
 #ifndef CPPBENCHMARK_PHASE_CORE_H
 #define CPPBENCHMARK_PHASE_CORE_H
@@ -16,6 +20,10 @@
 
 namespace CppBenchmark {
 
+//! Benchmark phase core
+/*!
+    Implementation of the Phase interface.
+*/
 class PhaseCore : public Phase
 {
     friend class Benchmark;
@@ -24,6 +32,10 @@ class PhaseCore : public Phase
     friend class Launcher;
 
 public:
+    //! Create a new benchmark phase core with a given name
+    /*!
+        \param name - Benchmark phase name
+    */
     explicit PhaseCore(const std::string& name) : _name(name), _thread(System::CurrentThreadId())
     { _metrics_result._total_time = std::numeric_limits<int64_t>::max(); }
     PhaseCore(const PhaseCore&) = delete;
@@ -33,6 +45,7 @@ public:
     PhaseCore& operator=(const PhaseCore&) = delete;
     PhaseCore& operator=(PhaseCore&&) = delete;
 
+    //! Current benchmark phase metrics
     PhaseMetrics& current() { return _metrics_current; }
 
     // Implementation of Phase
@@ -47,21 +60,32 @@ public:
     { return std::make_shared<PhaseScope>(StartPhaseThreadSafe(phase)); }
 
 protected:
+    //! Synchronization mutex
     std::mutex _mutex;
+    //! Phase name
     std::string _name;
+    //! Thread Id
     int _thread;
+    //! Child phases container
     std::vector<std::shared_ptr<PhaseCore>> _child;
+    //! Current phase metrics
     PhaseMetrics _metrics_current;
+    //! Result phase metrics
     PhaseMetrics _metrics_result;
 
+    //! Start collecting metrics in the current phase
     void StartCollectingMetrics() noexcept
     { _metrics_current.StartCollecting(); }
+    //! Stop collecting metrics in the current phase
     void StopCollectingMetrics() noexcept
     { _metrics_current.StopCollecting(); }
+    //! Merge phase metrics (current to result)
     void MergeMetrics() noexcept
     { _metrics_result.MergeMetrics(_metrics_current); }
+    //! Merge metrics of the two phases
     void MergeMetrics(const PhaseCore& phase) noexcept
     { _metrics_result.MergeMetrics(phase._metrics_result); }
+    //! Reset current phase metrics
     void ResetMetrics() noexcept
     { _metrics_current = PhaseMetrics(); }
 };

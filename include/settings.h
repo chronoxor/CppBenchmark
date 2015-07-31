@@ -49,11 +49,11 @@ public:
     //! Get count of iterations
     int64_t iterations() const { return _iterations; }
     //! Get collection of independent threads counts in a benchmark plan
-    const std::vector<int> threads() const { return _threads; }
+    const std::vector<int>& threads() const { return _threads; }
     //! Get collection of independent producers/consumers counts in a benchmark plan
-    const std::vector<std::tuple<int, int>> pc() const { return _pc; }
+    const std::vector<std::tuple<int, int>>& pc() const { return _pc; }
     //! Get collection of independent parameters in a benchmark plan
-    const std::vector<std::tuple<int, int, int>> params() const { return _params; }
+    const std::vector<std::tuple<int, int, int>>& params() const { return _params; }
 
     //! Set independent benchmark attempts
     /*!

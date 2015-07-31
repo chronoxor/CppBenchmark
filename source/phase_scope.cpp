@@ -10,8 +10,8 @@
 
 namespace CppBenchmark {
 
-const std::string PhaseScope::EMPTY_NAME = "<none>";
-PhaseMetrics PhaseScope::EMPTY_METRICS = PhaseMetrics();
+const std::string PhaseScope::EMPTY_NAME("<none>");
+PhaseMetrics PhaseScope::EMPTY_METRICS;
 
 PhaseScope::~PhaseScope()
 {

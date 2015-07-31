@@ -9,7 +9,6 @@
 #include "benchmark.h"
 
 #include <algorithm>
-#include <chrono>
 
 #include "launcher_handler.h"
 
@@ -46,9 +45,6 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
 
             bool infinite = _settings.infinite();
             int64_t iterations = _settings.iterations();
-
-            std::chrono::time_point<std::chrono::high_resolution_clock> start;
-            std::chrono::time_point<std::chrono::high_resolution_clock> stop;
 
             context._current->StartCollectingMetrics();
             while (!context.canceled() && (infinite || (iterations > 0)))
@@ -163,9 +159,8 @@ void Benchmark::UpdateBenchmarkNames()
 void Benchmark::UpdateBenchmarkNames(PhaseCore& phase, const std::string& name)
 {
     for (auto it = phase._child.begin(); it != phase._child.end(); ++it)
-        UpdateBenchmarkNames(**it, name + '.' + (*it)->name());
+        UpdateBenchmarkNames(**it, name + "." + (*it)->name());
     phase._name = name;
-
 }
 
 } // namespace CppBenchmark

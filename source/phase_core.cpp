@@ -1,9 +1,12 @@
-//
-// Created by Ivan Shynkarenka on 03.07.2015.
-//
+/*!
+    \file phase_core.cpp
+    \brief Benchmark phase core implementation
+    \author Ivan Shynkarenka
+    \date 02.07.2015
+    \copyright MIT License
+*/
 
 #include "phase_core.h"
-#include "system.h"
 
 #include <algorithm>
 

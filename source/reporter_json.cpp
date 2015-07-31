@@ -8,8 +8,9 @@
 
 #include "reporter_json.h"
 
+#include <set>
+
 #include "environment.h"
-#include "system.h"
 #include "version.h"
 
 namespace CppBenchmark {
@@ -24,6 +25,7 @@ std::string indent4 = std::string(8, ' ');
 std::string indent5 = std::string(10, ' ');
 std::string indent6 = std::string(12, ' ');
 std::string indent7 = std::string(14, ' ');
+std::string indent8 = std::string(16, ' ');
 
 } // namespace Internals
 //! @endcond
@@ -149,6 +151,33 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
         _stream << Internals::indent7 << "\"items_per_second\": " << metrics.items_per_second() << ",\n";
     if (metrics.total_bytes() > 0)
         _stream << Internals::indent7 << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
+    _stream << Internals::indent7 << "\"custom\": [";
+    if ((metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0)) {
+        std::set<std::string> names;
+        for (auto it : metrics.custom_int())
+            names.insert(it.first);
+        for (auto it : metrics.custom_str())
+            names.insert(it.first);
+        bool comma = false;
+        for (auto name : names) {
+            auto it_int = metrics.custom_int().find(name);
+            if (it_int != metrics.custom_int().end()) {
+                if (comma)
+                    _stream << ',';
+                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_int->first << "\": " << it_int->second << " }";
+                comma = true;
+            }
+            auto it_str = metrics.custom_str().find(name);
+            if (it_str != metrics.custom_str().end()) {
+                if (comma)
+                    _stream << ',';
+                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_str->first << "\": \"" << it_str->second << "\" }";
+                comma = true;
+            }
+        }
+    }
+    _stream << '\n';
+    _stream << Internals::indent7 << "]\n";
 }
 
 void ReporterJSON::ReportFooter()

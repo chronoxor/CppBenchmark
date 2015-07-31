@@ -38,7 +38,7 @@ public:
         \param argc - Arguments count
         \param argv - Arguments values
     */
-    void Initialize(int argc, char** argv);
+    void Initialize(const int argc, char const* const* const argv);
     //! Launch benchmarks executions and show progress in console
     void Launch();
     //! Report benchmarks results in console

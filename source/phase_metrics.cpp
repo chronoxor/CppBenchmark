@@ -1,6 +1,10 @@
-//
-// Created by Ivan Shynkarenka on 03.07.2015.
-//
+/*!
+    \file phase_metrics.cpp
+    \brief Benchmark phase metrics implementation
+    \author Ivan Shynkarenka
+    \date 03.07.2015
+    \copyright MIT License
+*/
 
 #include "phase_metrics.h"
 
@@ -62,8 +66,7 @@ void PhaseMetrics::StartCollecting() noexcept
 void PhaseMetrics::StopCollecting() noexcept
 {
     // Get iteration duration
-    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(
-            std::chrono::high_resolution_clock::now() - _timestamp).count();
+    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - _timestamp).count();
 
     // Update time counters
     if (duration < _min_time)
@@ -83,12 +86,21 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics) noexcept
     if (metrics._max_time > _max_time)
         _max_time = metrics._max_time;
 
+    // Merge custom hash tables
+    _custom_int.insert(metrics._custom_int.begin(), metrics._custom_int.end());
+    _custom_str.insert(metrics._custom_str.begin(), metrics._custom_str.end());
+
     // Choose best total time with iterations, items and bytes
     if (metrics._total_time < _total_time) {
         _total_time = metrics._total_time;
         _total_iterations = metrics._total_iterations;
         _total_items = metrics._total_items;
         _total_bytes = metrics._total_bytes;
+        // Overwrite metrics custom hash tables
+        for (auto& it : metrics._custom_int)
+            _custom_int[it.first] = it.second;
+        for (auto& it : metrics._custom_str)
+            _custom_str[it.first] = it.second;
     }
 }
 

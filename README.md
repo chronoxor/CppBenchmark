@@ -2,5 +2,6 @@
 C++ Benchmark Library
 
 # Todo
-* Doxygen documentation
+* Port to Linux
+* Doxygen summary
 * Github documentation

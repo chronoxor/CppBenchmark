@@ -51,6 +51,13 @@ protected:
         std::this_thread::sleep_for(std::chrono::milliseconds(context.z()));
         phase3->StopPhase();
 
+        context.metrics().SetCustom("AAA", 123);
+        context.metrics().SetCustom("BBB", 456);
+        context.metrics().SetCustom("CCC", 789);
+        context.metrics().SetCustom("AAA", "aaa");
+        context.metrics().SetCustom("BBB", "bbb");
+        context.metrics().SetCustom("CCC", "ccc");
+
         _runs++;
     }
     void Cleanup(Context& context) override { _cleanups++; }

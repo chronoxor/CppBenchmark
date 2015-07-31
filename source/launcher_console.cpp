@@ -20,7 +20,7 @@
 
 namespace CppBenchmark {
 
-void LauncherConsole::Initialize(int argc, char** argv)
+void LauncherConsole::Initialize(const int argc, char const* const* const argv)
 {
     auto parser = optparse::OptionParser().version(version);
 
