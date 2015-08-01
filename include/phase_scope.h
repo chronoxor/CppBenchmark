@@ -9,7 +9,7 @@
 #ifndef CPPBENCHMARK_PHASE_SCOPE_H
 #define CPPBENCHMARK_PHASE_SCOPE_H
 
-#include "Phase.h"
+#include "phase.h"
 
 namespace CppBenchmark {
 
