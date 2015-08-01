@@ -68,7 +68,7 @@ std::string System::CpuArchitecture()
     static std::regex pattern("model name\\s*: (.*)");
 
     std::cmatch matches;
-    return (std::regex_match(cpuinfo, matches, pattern)) ? results[1] : "<unknown>";
+    return (std::regex_match(cpuinfo, matches, pattern)) ? matches[1] : std::string("<unknown>");
 #endif
 }
 
@@ -161,7 +161,7 @@ int64_t System::CpuClockSpeed()
     static std::regex pattern("cpu MHz\\s*: (.*)");
 
     std::cmatch matches;
-    return (std::regex_match(cpuinfo, matches, pattern)) ? atoi(results[1]) : -1;
+    return (std::regex_match(cpuinfo, matches, pattern)) ? atoi(matches[1]) : -1;
 #endif
 }
 
