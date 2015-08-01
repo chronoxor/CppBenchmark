@@ -33,7 +33,7 @@ bool Environment::Is64BitOS()
     return IsWow64Process(GetCurrentProcess(), &bWow64Process) && bWow64Process;
 #endif
 #elif defined(linux) || defined(__linux) || defined(__linux__)
-    stat buffer;
+    struct stat buffer;
     return (stat("/lib64/ld-linux-x86-64.so.2", &buffer) == 0);
 #endif
 }
