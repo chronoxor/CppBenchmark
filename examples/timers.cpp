@@ -2,25 +2,26 @@
 // Created by Ivan Shynkarenka on 31.07.2015.
 //
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 #define _WIN32_WINNT 0x0601
-#include <windows.h>
-#undef max
-#undef min
-#endif
-
-#ifdef __unix__
-#include <time.h>
 #endif
 
 #include "macros.h"
 
 #include <limits>
 
+#if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#undef max
+#undef min
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+#include <time.h>
+#endif
+
 const int iterations = 10000000;
 
 BENCHMARK("std::chrono::high_resolution_clock::now", iterations)
-{                	
+{
     static auto timestamp = std::chrono::high_resolution_clock::now();
     static int64_t resolution = std::numeric_limits<int64_t>::max();
 

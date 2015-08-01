@@ -8,8 +8,16 @@
 
 #include "system.h"
 
-#ifdef _WIN32
+#include <fstream>
+#include <regex>
+#include <streambuf>
+
+#if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+#include <sys/sysinfo.h>
+#include <pthread.h>
+#include <unistd.h>
 #endif
 
 namespace CppBenchmark {
@@ -17,7 +25,7 @@ namespace CppBenchmark {
 //! @cond
 namespace Internals {
 
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
 // Helper function to count set bits in the processor mask
 DWORD CountSetBits(ULONG_PTR pBitMask)
 {
@@ -40,19 +48,27 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
 
 std::string System::CpuArchitecture()
 {
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
     HKEY hKey;
     LONG lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     if (lError != ERROR_SUCCESS)
-        return 0;
+        return "<unknown>";
 
     CHAR pBuffer[_MAX_PATH] = { 0 };
     DWORD dwBufferSize = _MAX_PATH;
     lError = RegQueryValueEx(hKey, "ProcessorNameString", NULL, NULL, (LPBYTE)pBuffer, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
-        return 0;
+        return "<unknown>";
 
     return std::string(pBuffer);
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    std::ifstream stream("/proc/cpuinfo");
+    std::string cpuinfo((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
+
+    static std::regex pattern("model name\\s*: (.*)");
+
+    std::cmatch matches;
+    return (std::regex_match(cpuinfo, matches, pattern)) ? results[1] : "<unknown>";
 #endif
 }
 
@@ -68,7 +84,7 @@ int System::CpuPhysicalCores()
 
 std::pair<int, int> System::CpuTotalCores()
 {
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
     BOOL allocated = FALSE;
     PSYSTEM_LOGICAL_PROCESSOR_INFORMATION pBuffer = NULL;
     DWORD dwLength = 0;
@@ -116,12 +132,16 @@ std::pair<int, int> System::CpuTotalCores()
     free(pBuffer);
 
     return result;
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    long processors = sysconf(_SC_NPROCESSORS_ONLN);
+    std::pair<int, int> result(processors, processors);
+    return result;
 #endif
 }
 
 int64_t System::CpuClockSpeed()
 {
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
     HKEY hKey;
     long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     if (lError != ERROR_SUCCESS)
@@ -134,6 +154,14 @@ int64_t System::CpuClockSpeed()
         return -1;
 
     return dwMHz * 1000 * 1000;
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    std::ifstream stream("/proc/cpuinfo");
+    std::string cpuinfo((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
+
+    static std::regex pattern("cpu MHz\\s*: (.*)");
+
+    std::cmatch matches;
+    return (std::regex_match(cpuinfo, matches, pattern)) ? atoi(results[1]) : -1;
 #endif
 }
 
@@ -145,28 +173,36 @@ bool System::CpuHyperThreading()
 
 int64_t System::RamTotal()
 {
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
     return status.ullTotalPhys;
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    struct sysinfo;
+    return (sysinfo(&sysinfo) == 0) ? sysinfo.totalram : -1;
 #endif
 }
 
 int64_t System::RamFree()
 {
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
     return status.ullAvailPhys;
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    struct sysinfo;
+    return (sysinfo(&sysinfo) == 0) ? sysinfo.freeram : -1;
 #endif
 }
 
 int System::CurrentThreadId()
 {
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(_WIN64)
     return GetCurrentThreadId();
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    return pthread_self();
 #endif
 }
 

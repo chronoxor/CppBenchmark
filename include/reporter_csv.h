@@ -9,9 +9,9 @@
 #ifndef CPPBENCHMARK_REPORTER_CSV_H
 #define CPPBENCHMARK_REPORTER_CSV_H
 
-#include "reporter.h"
-
 #include <iostream>
+
+#include "reporter.h"
 
 namespace CppBenchmark {
 
