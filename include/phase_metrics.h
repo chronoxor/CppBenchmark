@@ -39,7 +39,7 @@ class PhaseMetrics
 
 public:
     //! Default constructor
-    PhaseMetrics() noexcept
+    PhaseMetrics()
             : _min_time(std::numeric_limits<int64_t>::max()),
               _max_time(std::numeric_limits<int64_t>::min()),
               _total_time(0),
@@ -47,12 +47,12 @@ public:
               _total_items(0),
               _total_bytes(0)
     {};
-    PhaseMetrics(const PhaseMetrics&) noexcept = default;
-    PhaseMetrics(PhaseMetrics&& instance) noexcept = default;
+    PhaseMetrics(const PhaseMetrics&) = default;
+    PhaseMetrics(PhaseMetrics&& instance) = default;
     ~PhaseMetrics() = default;
 
-    PhaseMetrics& operator=(const PhaseMetrics&) noexcept = default;
-    PhaseMetrics& operator=(PhaseMetrics&&) noexcept = default;
+    PhaseMetrics& operator=(const PhaseMetrics&) = default;
+    PhaseMetrics& operator=(PhaseMetrics&&) = default;
 
     //! Get average time of the phase execution
     int64_t avg_time() const noexcept;
@@ -106,19 +106,19 @@ public:
         \param name - Name
         \param value - Value
     */
-    void SetCustom(const std::string& name, int value) noexcept
+    void SetCustom(const std::string& name, int value)
     { _custom_int[name] = value; }
     //! Set custom string value
     /*!
         \param name - Name
         \param value - Value
     */
-    void SetCustom(const std::string& name, const std::string& value) noexcept
+    void SetCustom(const std::string& name, const std::string& value)
     { _custom_str[name] = value; }
 
 private:
     int64_t _min_time;
-    int64_t _max_time;	
+    int64_t _max_time;
     int64_t _total_time;
     int64_t _total_iterations;
     int64_t _total_items;
@@ -131,7 +131,7 @@ private:
     void StartCollecting() noexcept;
     void StopCollecting() noexcept;
 
-    void MergeMetrics(const PhaseMetrics& metrics) noexcept;
+    void MergeMetrics(const PhaseMetrics& metrics);
 };
 
 } // namespace CppBenchmark

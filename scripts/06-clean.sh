@@ -1,0 +1,2 @@
+cd ..
+rm -r build

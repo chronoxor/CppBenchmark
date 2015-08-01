@@ -76,7 +76,7 @@ void PhaseMetrics::StopCollecting() noexcept
     _total_time += duration;
 }
 
-void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics) noexcept
+void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
 {
     // Choose best min time
     if (metrics._min_time < _min_time)

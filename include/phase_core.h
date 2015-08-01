@@ -80,13 +80,13 @@ protected:
     void StopCollectingMetrics() noexcept
     { _metrics_current.StopCollecting(); }
     //! Merge phase metrics (current to result)
-    void MergeMetrics() noexcept
+    void MergeMetrics()
     { _metrics_result.MergeMetrics(_metrics_current); }
     //! Merge metrics of the two phases
-    void MergeMetrics(const PhaseCore& phase) noexcept
+    void MergeMetrics(const PhaseCore& phase)
     { _metrics_result.MergeMetrics(phase._metrics_result); }
     //! Reset current phase metrics
-    void ResetMetrics() noexcept
+    void ResetMetrics()
     { _metrics_current = PhaseMetrics(); }
 };
 

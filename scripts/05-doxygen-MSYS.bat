@@ -1,3 +1,3 @@
 cd ..
 cd build
-mingw32-make doxygen
+mingw32-make -j8 doxygen

@@ -1,3 +1,3 @@
 cd ..
 cd build
-mingw32-make all
+mingw32-make -j8 all
