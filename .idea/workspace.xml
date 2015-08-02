@@ -53,17 +53,17 @@
       <file leaf-file-name="system.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/system.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.772067">
-              <caret line="229" column="17" selection-start-line="229" selection-start-column="4" selection-end-line="229" selection-end-column="17" />
+            <state vertical-scroll-proportion="-0.91843575">
+              <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
               <folding>
                 <element signature="e#163#182#0" expanded="true" />
-                <element signature="e#341#406#0" expanded="true" />
-                <element signature="e#1579#1876#0" expanded="true" />
-                <element signature="e#3651#3774#0" expanded="true" />
-                <element signature="e#4349#4679#0" expanded="true" />
-                <element signature="e#5083#5152#0" expanded="true" />
-                <element signature="e#5426#5494#0" expanded="true" />
-                <element signature="e#5673#5695#0" expanded="true" />
+                <element signature="e#356#421#0" expanded="true" />
+                <element signature="e#1594#1891#0" expanded="true" />
+                <element signature="e#5056#5386#0" expanded="true" />
+                <element signature="e#5790#5859#0" expanded="true" />
+                <element signature="e#6133#6201#0" expanded="true" />
+                <element signature="e#6380#6402#0" expanded="true" />
+                <element signature="e#6897#7042#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -460,7 +460,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1140625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36168742" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36168742" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27109268" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -895,17 +895,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/system.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.772067">
-          <caret line="229" column="17" selection-start-line="229" selection-start-column="4" selection-end-line="229" selection-end-column="17" />
+        <state vertical-scroll-proportion="-0.91843575">
+          <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
           <folding>
             <element signature="e#163#182#0" expanded="true" />
-            <element signature="e#341#406#0" expanded="true" />
-            <element signature="e#1579#1876#0" expanded="true" />
-            <element signature="e#3651#3774#0" expanded="true" />
-            <element signature="e#4349#4679#0" expanded="true" />
-            <element signature="e#5083#5152#0" expanded="true" />
-            <element signature="e#5426#5494#0" expanded="true" />
-            <element signature="e#5673#5695#0" expanded="true" />
+            <element signature="e#356#421#0" expanded="true" />
+            <element signature="e#1594#1891#0" expanded="true" />
+            <element signature="e#5056#5386#0" expanded="true" />
+            <element signature="e#5790#5859#0" expanded="true" />
+            <element signature="e#6133#6201#0" expanded="true" />
+            <element signature="e#6380#6402#0" expanded="true" />
+            <element signature="e#6897#7042#0" expanded="true" />
           </folding>
         </state>
       </provider>

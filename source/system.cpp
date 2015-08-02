@@ -10,6 +10,7 @@
 
 #include <fstream>
 #include <regex>
+#include <set>
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
@@ -136,9 +137,28 @@ std::pair<int, int> System::CpuTotalCores()
 
     return result;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    long processors = sysconf(_SC_NPROCESSORS_ONLN);
-    std::pair<int, int> result(processors, processors);
-    return result;
+    static std::regex logical_pattern("processor(.*): (.*)");
+    static std::regex physical_pattern("physical id(.*): (.*)");
+
+    std::set<int> logical_set;
+    std::set<int> physical_set;
+
+    std::string line;
+    std::ifstream stream("/proc/cpuinfo");
+    while (getline(stream, line)) {
+
+        // Match logical processor pattern
+        std::smatch logical_matches;
+        if (std::regex_match(line, logical_matches, logical_pattern))
+            logical_set.insert(atoi(logical_matches[2].str().c_str()));
+
+        // Match physical processor pattern
+        std::smatch physical_matches;
+        if (std::regex_match(line, physical_matches, physical_pattern))
+            physical_set.insert(atoi(physical_matches[2].str().c_str()));
+    }
+
+    return std::make_pair(logical_set.size(), physical_set.size());
 #endif
 }
 
@@ -228,7 +248,7 @@ int64_t System::Timestamp()
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     struct timespec timestamp;
     clock_gettime(CLOCK_REALTIME, &timestamp);
-    return timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
+    return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
 #endif
 }
 
