@@ -62,14 +62,14 @@ std::string System::CpuArchitecture()
 
     return std::string(pBuffer);
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    static std::regex pattern("model name\\s*: (.*)");
+    static std::regex pattern("model name(.*): (.*)");
 
     std::string line;
     std::ifstream stream("/proc/cpuinfo");
     while (getline(stream, line)) {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
-            return matches[1];
+            return matches[2];
     }
 
     return "<unknown>";
@@ -159,17 +159,17 @@ int64_t System::CpuClockSpeed()
 
     return dwMHz * 1000 * 1000;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    static std::regex pattern("cpu MHz\\s*: (.*)");
+    static std::regex pattern("cpu MHz(.*): (.*)");
 
     std::string line;
     std::ifstream stream("/proc/cpuinfo");
     while (getline(stream, line)) {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
-            return matches[1];
+            return atoll(matches[1].str().c_str());
     }
 
-    return "<unknown>";
+    return -1;
 #endif
 }
 
