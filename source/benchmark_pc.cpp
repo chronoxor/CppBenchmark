@@ -100,9 +100,6 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*producer_context._current);
-
-                        // Stop thread safe phase
-                        producer_phase->StopPhase();
                     }));
                 }
 
@@ -141,9 +138,6 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*consumer_context._current);
-
-                        // Stop thread safe phase
-                        consumer_phase->StopPhase();
                     }));
                 }
 

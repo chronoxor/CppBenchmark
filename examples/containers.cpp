@@ -11,10 +11,13 @@
 const int iterations = 10000000;
 
 template <typename T>
-class ContainerFixture
+class ContainerFixture : public virtual CppBenchmark::Fixture
 {
 protected:
     T container;
+
+    void Initialize(CppBenchmark::Context&) override { container = T(); }
+    void Cleanup(CppBenchmark::Context&) override { container.clear(); }
 };
 
 BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back", iterations)

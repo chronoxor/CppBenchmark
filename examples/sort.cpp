@@ -414,7 +414,7 @@ protected:
         std::queue<int> radix_queue[10];
 
         // Initial radix base
-        int n = 1;
+        size_t n = 1;
 
         bool found;
         do

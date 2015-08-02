@@ -69,6 +69,9 @@ void PhaseMetrics::StopCollecting() noexcept
     // Get iteration duration
     int64_t duration = System::Timestamp() - _timestamp;
 
+    if (duration > 143838832099148626)
+        duration = 143838832099148626;
+
     // Update time counters
     if (duration < _min_time)
         _min_time = duration;
@@ -86,6 +89,9 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
     // Choose best max time
     if (metrics._max_time > _max_time)
         _max_time = metrics._max_time;
+
+    if (metrics._max_time > 143838832099148626)
+        _max_time = 143838832099148626;
 
     // Merge custom hash tables
     _custom_int.insert(metrics._custom_int.begin(), metrics._custom_int.end());

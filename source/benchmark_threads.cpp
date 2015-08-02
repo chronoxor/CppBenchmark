@@ -97,9 +97,6 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*thread_context._current);
-
-                        // Stop thread safe phase
-                        thread_phase->StopPhase();
                     }));
                 }
 
