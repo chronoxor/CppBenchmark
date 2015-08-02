@@ -62,13 +62,17 @@ std::string System::CpuArchitecture()
 
     return std::string(pBuffer);
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    std::ifstream stream("/proc/cpuinfo");
-    std::string cpuinfo((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
-
     static std::regex pattern("model name\\s*: (.*)");
 
-    std::smatch matches;
-    return (std::regex_match(cpuinfo, matches, pattern)) ? matches[1] : std::string("<unknown>");
+    std::string line;
+    std::ifstream stream("/proc/cpuinfo");
+    while (getline(stream, line)) {
+        std::smatch matches;
+        if (std::regex_match(line, matches, pattern))
+            return matches[1];
+    }
+
+    return "<unknown>";
 #endif
 }
 
@@ -155,13 +159,17 @@ int64_t System::CpuClockSpeed()
 
     return dwMHz * 1000 * 1000;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    std::ifstream stream("/proc/cpuinfo");
-    std::string cpuinfo((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
-
     static std::regex pattern("cpu MHz\\s*: (.*)");
 
-    std::smatch matches;
-    return (std::regex_match(cpuinfo, matches, pattern)) ? atoi(matches[1].str().c_str()) : -1;
+    std::string line;
+    std::ifstream stream("/proc/cpuinfo");
+    while (getline(stream, line)) {
+        std::smatch matches;
+        if (std::regex_match(line, matches, pattern))
+            return matches[1];
+    }
+
+    return "<unknown>";
 #endif
 }
 

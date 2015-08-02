@@ -29,22 +29,22 @@ void Console::SetColor(Color color)
     SetConsoleTextAttribute(hConsole, (WORD)color);
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     const char* colors[] = {
-        "\033[22;30m",
-        "\033[22;31m",
-        "\033[22;32m",
-        "\033[22;33m",
-        "\033[22;34m",
-        "\033[22;35m",
-        "\033[22;36m",
-        "\033[22;37m",
-        "\033[01;30m",
-        "\033[01;31m",
-        "\033[01;32m",
-        "\033[01;33m",
-        "\033[01;34m",
-        "\033[01;35m",
-        "\033[01;36m",
-        "\033[01;37m"
+        "\033[22;30m",  // Black color
+        "\033[22;34m",  // Blue color
+        "\033[22;32m",  // Green color
+        "\033[22;36m",  // Cyan color
+        "\033[22;31m",  // Red color
+        "\033[22;35m",  // Magenta color
+        "\033[22;33m",  // Brown color
+        "\033[22;37m",  // Grey color
+        "\033[01;30m",  // Dark grey color
+        "\033[01;34m",  // Light blue color
+        "\033[01;32m",  // Light green color
+        "\033[01;36m",  // Light cyan color
+        "\033[01;31m",  // Light red color
+        "\033[01;35m",  // Light magenta color
+        "\033[01;33m",  // Yellow color
+        "\033[01;37m"   // White color
     };
     std::cout << colors[color - BLACK];
 #endif
