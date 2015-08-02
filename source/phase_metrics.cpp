@@ -7,6 +7,7 @@
 */
 
 #include "phase_metrics.h"
+#include "system.h"
 
 namespace CppBenchmark {
 
@@ -60,13 +61,13 @@ int64_t PhaseMetrics::bytes_per_second() const noexcept
 
 void PhaseMetrics::StartCollecting() noexcept
 {
-    _timestamp = std::chrono::high_resolution_clock::now();
+    _timestamp = System::Timestamp();
 }
 
 void PhaseMetrics::StopCollecting() noexcept
 {
     // Get iteration duration
-    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - _timestamp).count();
+    int64_t duration = System::Timestamp() - _timestamp;
 
     // Update time counters
     if (duration < _min_time)

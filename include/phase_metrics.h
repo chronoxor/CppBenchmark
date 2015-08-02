@@ -9,7 +9,6 @@
 #ifndef CPPBENCHMARK_PHASE_METRICS_H
 #define CPPBENCHMARK_PHASE_METRICS_H
 
-#include <chrono>
 #include <cstdint>
 #include <limits>
 #include <unordered_map>
@@ -126,7 +125,7 @@ private:
     std::unordered_map<std::string, int> _custom_int;
     std::unordered_map<std::string, std::string> _custom_str;
 
-    std::chrono::high_resolution_clock::time_point _timestamp;
+    int64_t _timestamp;
 
     void StartCollecting() noexcept;
     void StopCollecting() noexcept;

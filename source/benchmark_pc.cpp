@@ -81,9 +81,6 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         bool producer_infinite = infinite;
                         int64_t producer_iterations = iterations;
 
-                        std::chrono::time_point<std::chrono::high_resolution_clock> producer_start;
-                        std::chrono::time_point<std::chrono::high_resolution_clock> producer_stop;
-
                         producer_context._current->StartCollectingMetrics();
                         while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_iterations > 0)))
                         {
@@ -127,9 +124,6 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 
                         // Call initialize consumer method...
                         InitializeConsumer(consumer_context);
-
-                        std::chrono::time_point<std::chrono::high_resolution_clock> consumer_start;
-                        std::chrono::time_point<std::chrono::high_resolution_clock> consumer_stop;
 
                         consumer_context._current->StartCollectingMetrics();
                         while (!consumer_context.consume_stopped() && !consumer_context.canceled())

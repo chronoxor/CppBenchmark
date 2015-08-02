@@ -48,6 +48,9 @@ public:
 
     //! Current thread Id
     static int CurrentThreadId();
+
+    //! Get timestamp in nanoseconds
+    static int64_t Timestamp();
 };
 
 } // namespace CppBenchmark

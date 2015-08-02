@@ -78,9 +78,6 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                         bool thread_infinite = infinite;
                         int64_t thread_iterations = iterations;
 
-                        std::chrono::time_point<std::chrono::high_resolution_clock> thread_start;
-                        std::chrono::time_point<std::chrono::high_resolution_clock> thread_stop;
-
                         thread_context._current->StartCollectingMetrics();
                         while (!thread_context.canceled() && (thread_infinite || (thread_iterations > 0)))
                         {

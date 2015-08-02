@@ -213,4 +213,23 @@ int System::CurrentThreadId()
 #endif
 }
 
+int64_t System::Timestamp()
+{
+#if defined(_WIN32) || defined(_WIN64)
+    static LARGE_INTEGER frequency{0};
+    static BOOL initialized = QueryPerformanceFrequency(&frequency);
+    if (initialized) {
+        LARGE_INTEGER timestamp{0};
+        QueryPerformanceCounter(&timestamp);
+        return (timestamp.QuadPart * 1000 * 1000 * 1000) / frequency.QuadPart;
+    }
+    else
+        return GetTickCount() * 1000 * 1000;
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    struct timespec timestamp;
+    clock_gettime(CLOCK_REALTIME, &timestamp);
+    return timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
+#endif
+}
+
 } // namespace CppBenchmark
