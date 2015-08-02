@@ -6,6 +6,9 @@ include(cmake/SetCompilerFeatures.cmake)
 include(cmake/SetCompilerWarningAll.cmake)
 include(cmake/SetCrtSecureWarningsOff.cmake)
 
+# External packages
+find_package(Threads REQUIRED)
+
 # Library
 include_directories(include)
 file(GLOB_RECURSE HEADER_FILES "${PROJECT_SOURCE_DIR}/source/*.h")
@@ -19,7 +22,7 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
   string(REGEX REPLACE "(.*)\\.cpp" "\\1" EXAMPLE_NAME ${EXAMPLE_FILE})
   set(EXAMPLE_TARGET "cppbenchmark-example-${EXAMPLE_NAME}")
   add_executable(${EXAMPLE_TARGET} ${PROJECT_SOURCE_DIR}/examples/${EXAMPLE_FILE})
-  target_link_libraries(${EXAMPLE_TARGET} cppbenchmark)
+  target_link_libraries(${EXAMPLE_TARGET} cppbenchmark Threads::Threads)
   list(APPEND INSTALL_TARGETS ${EXAMPLE_TARGET})
 endforeach()
 
@@ -27,7 +30,7 @@ endforeach()
 file(GLOB_RECURSE TESTS_HEADER_FILES "${PROJECT_SOURCE_DIR}/tests/*.h")
 file(GLOB_RECURSE TESTS_SOURCE_FILES "${PROJECT_SOURCE_DIR}/tests/*.cpp")
 add_executable(cppbenchmark-tests ${TESTS_HEADER_FILES} ${TESTS_SOURCE_FILES})
-target_link_libraries(cppbenchmark-tests cppbenchmark)
+target_link_libraries(cppbenchmark-tests cppbenchmark Threads::Threads)
 list(APPEND INSTALL_TARGETS cppbenchmark-tests)
 
 # CTest

@@ -67,7 +67,7 @@ std::string System::CpuArchitecture()
 
     static std::regex pattern("model name\\s*: (.*)");
 
-    std::cmatch matches;
+    std::smatch matches;
     return (std::regex_match(cpuinfo, matches, pattern)) ? matches[1] : std::string("<unknown>");
 #endif
 }
@@ -160,8 +160,8 @@ int64_t System::CpuClockSpeed()
 
     static std::regex pattern("cpu MHz\\s*: (.*)");
 
-    std::cmatch matches;
-    return (std::regex_match(cpuinfo, matches, pattern)) ? atoi(matches[1]) : -1;
+    std::smatch matches;
+    return (std::regex_match(cpuinfo, matches, pattern)) ? atoi(matches[1].str().c_str()) : -1;
 #endif
 }
 
@@ -179,8 +179,8 @@ int64_t System::RamTotal()
     GlobalMemoryStatusEx(&status);
     return status.ullTotalPhys;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    struct sysinfo;
-    return (sysinfo(&sysinfo) == 0) ? sysinfo.totalram : -1;
+    struct sysinfo si;
+    return (sysinfo(&si) == 0) ? si.totalram : -1;
 #endif
 }
 
@@ -192,8 +192,8 @@ int64_t System::RamFree()
     GlobalMemoryStatusEx(&status);
     return status.ullAvailPhys;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    struct sysinfo;
-    return (sysinfo(&sysinfo) == 0) ? sysinfo.freeram : -1;
+    struct sysinfo si;
+    return (sysinfo(&si) == 0) ? si.freeram : -1;
 #endif
 }
 
