@@ -106,10 +106,10 @@ BENCHMARK("QueryPerformanceCounter", iterations)
 #ifdef __unix__
 BENCHMARK("clock_gettime", iterations)
 {
-    static timespec timestamp{0};
+    static struct timespec timestamp{0};
     static int64_t resolution = std::numeric_limits<int64_t>::max();
 
-    timespec current;
+    struct timespec current;
     clock_gettime(CLOCK_REALTIME, &current);
     int64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
     if ((duration > 0) && (duration < resolution)) {
