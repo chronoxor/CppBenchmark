@@ -10,7 +10,6 @@
 
 #include <fstream>
 #include <regex>
-#include <streambuf>
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
@@ -166,7 +165,7 @@ int64_t System::CpuClockSpeed()
     while (getline(stream, line)) {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
-            return (int64_t)(atod(matches[1].str().c_str()) * 1000 * 1000);
+            return (int64_t)(atof(matches[2].str().c_str()) * 1000 * 1000);
     }
 
     return -1;
