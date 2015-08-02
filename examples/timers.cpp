@@ -8,6 +8,8 @@
 
 #include "macros.h"
 
+#include <chrono>
+#include <ctime>
 #include <limits>
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -19,6 +21,20 @@
 #endif
 
 const int iterations = 10000000;
+
+BENCHMARK("clock", iterations)
+{
+    static auto timestamp = clock();
+    static int64_t resolution = std::numeric_limits<int64_t>::max();
+
+    auto current = clock();
+    int64_t duration = current - timestamp;
+    if ((duration > 0) && (duration < resolution)) {
+        timestamp = current;
+        resolution = duration;
+        context.metrics().SetCustom("Resolution", (int)(resolution * 1000 * 1000 * 1000 / CLOCKS_PER_SEC));
+    }
+}
 
 BENCHMARK("std::chrono::high_resolution_clock::now", iterations)
 {
