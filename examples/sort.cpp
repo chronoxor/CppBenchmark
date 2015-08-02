@@ -426,7 +426,7 @@ protected:
             for (size_t i = 0; i < items.size(); ++i)
             {
                 // Get the base item value
-                int base = items[i] / n;
+                size_t base = items[i] / n;
 
                 // Update found flag
                 found |= base > 0;
