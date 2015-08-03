@@ -7,7 +7,7 @@ C++ Benchmark Library
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys))
     * [Linux](#linux)
   * [Requirements](#requirements)
-  * [Todo](#Todo)
+  * [Todo](#todo)
 
 #How to build?
 ## Windows (Visaul Studio 2015)
