@@ -16,6 +16,7 @@ C++ Benchmark Library
     * [Example 6: Benchmark class](#example-6-benchmark-class)
     * [Example 7: Benchmark I/O operations](#example-7-benchmark-io-operations)
     * [Example 8: Benchmark threads](#example-8-benchmark-threads)     
+    * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)          
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -616,6 +617,95 @@ Maximal time: 173 ns / iteration
 Total time: 1.563 s
 Total iterations: 10000000
 Iterations throughput: 6396501 / second
+===============================================================================
+```
+
+##Example 9: Benchmark threads with fixture
+```C++
+#include "cppbenchmark.h"
+
+#include <atomic>
+#include <mutex>
+
+const int iterations = 10000000;
+
+// Create settings for the benchmark which will make 10000000 iterations for each
+// set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
+const auto settings = CppBenchmark::Settings()
+    .Iterations(iterations)
+    .ThreadsRange(1, 8, [](int from, int to, int& result)
+    {
+        int r = result;
+        result *= 2;
+        return r;
+    });
+
+class MutexFixture
+{
+protected:
+    std::mutex mutex;
+    int counter;
+};
+
+BENCHMARK_THREADS_FIXTURE(MutexFixture, "std::mutex++", settings)
+{
+    std::lock_guard<std::mutex> lock(mutex);
+    counter++;
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::mutex++
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: std::mutex++(threads:1)
+Total time: 262.405 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex++(threads:1).thread
+Average time: 26 ns / iteration
+Minimal time: 26 ns / iteration
+Maximal time: 26 ns / iteration
+Total time: 261.509 ms
+Total iterations: 10000000
+Iterations throughput: 38239493 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex++(threads:2)
+Total time: 519.033 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex++(threads:2).thread
+Average time: 29 ns / iteration
+Minimal time: 29 ns / iteration
+Maximal time: 52 ns / iteration
+Total time: 290.182 ms
+Total iterations: 10000000
+Iterations throughput: 34461096 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex++(threads:4)
+Total time: 1.138 s
+-------------------------------------------------------------------------------
+Phase: std::mutex++(threads:4).thread
+Average time: 86 ns / iteration
+Minimal time: 86 ns / iteration
+Maximal time: 115 ns / iteration
+Total time: 864.450 ms
+Total iterations: 10000000
+Iterations throughput: 11568048 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex++(threads:8)
+Total time: 2.462 s
+-------------------------------------------------------------------------------
+Phase: std::mutex++(threads:8).thread
+Average time: 92 ns / iteration
+Minimal time: 92 ns / iteration
+Maximal time: 255 ns / iteration
+Total time: 926.653 ms
+Total iterations: 10000000
+Iterations throughput: 10791514 / second
 ===============================================================================
 ```
 
