@@ -4,8 +4,8 @@ C++ Benchmark Library
 #Contents
   * [Requirements](#requirements)
   * [How to build?](#how-to-build)
-    * [Windows (Visaul Studio 2015)](#windows-visaul-studio-2015))
-    * [Windows (MinGW with MSYS)](#windows-mingw-with-msys))
+    * [Windows (Visaul Studio 2015)](#windows-visaul-studio-2015)
+    * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
     * [Linux](#linux)
   * [Todo](#todo)
 
