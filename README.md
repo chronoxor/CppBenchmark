@@ -7,6 +7,8 @@ C++ Benchmark Library
     * [Windows (Visaul Studio 2015)](#windows-visaul-studio-2015)
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
     * [Linux](#linux)
+  * [How to use?](#how-to-use)
+  * [Example 1: Micro benchmark of a function call](#example-1-micro-benchmark-of-a-function-call)
   * [Todo](#todo)
 
 # Requirements
@@ -49,6 +51,22 @@ cd CppBenchmark\scripts
 03-tests.bat
 04-install-unix.sh
 05-doxygen-unix.sh
+```
+
+#How to use?
+##Example 1: Micro benchmark of a function call
+```C++
+#include "cppbenchmark.h"
+
+#include <math.h>
+
+// Micro benchmark a sin() call for 100000000 times. Make 5 attemtps (by default) and choose one with the best time result.
+BENCHMARK("sin", 100000000)
+{
+    sin((rand() / (RAND_MAX + 1.0)));
+}
+
+BENCHMARK_MAIN()
 ```
 
 # Todo
