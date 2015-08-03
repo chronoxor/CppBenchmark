@@ -84,7 +84,9 @@ private:
 
 /*! \example atomic.cpp Atomic operations benchmark */
 /*! \example containers.cpp Containers push back benchmark */
+/*! \example fpu.cpp FPU benchmark */
 /*! \example fwrite.cpp File write benchmark */
+/*! \example random.cpp Random distribution benchmark */
 /*! \example sort.cpp Sort algorithms benchmark */
 
 } // namespace CppBenchmark

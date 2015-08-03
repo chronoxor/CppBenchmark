@@ -30,7 +30,7 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
     parser.add_option("-f", "--filter").help("Filter benchmarks by the given regexp pattern");
     parser.add_option("-l", "--list").action("store_true").help("List all avaliable benchmarks");
     parser.add_option("-o", "--output").choices(&output[0], &output[3]).set_default(output[0]).help("Output format (console, csv, json). Default: %default");
-    parser.add_option("-s", "--silent").action("store_true").help("Launch in silent mode");
+    parser.add_option("-s", "--silent").action("store_true").help("Launch in silent mode. No progress will be shown!");
 
     optparse::Values options = parser.parse_args(argc, argv);
 

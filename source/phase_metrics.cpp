@@ -31,10 +31,7 @@ int64_t PhaseMetrics::iterations_per_second() const noexcept
     if (_total_time <= 0)
         return 0;
 
-    if (_total_iterations < 1000000000)
-        return (_total_iterations * 1000000000) / _total_time;
-    else
-        return (_total_iterations / _total_time) * 1000000000;
+    return (_total_iterations * 1000000000) / _total_time;
 }
 
 int64_t PhaseMetrics::items_per_second() const noexcept
@@ -42,10 +39,7 @@ int64_t PhaseMetrics::items_per_second() const noexcept
     if (_total_time <= 0)
         return 0;
 
-    if (_total_items < 1000000000)
-        return (_total_items * 1000000000) / _total_time;
-    else
-        return (_total_items / _total_time) * 1000000000;
+    return (_total_items * 1000000000) / _total_time;
 }
 
 int64_t PhaseMetrics::bytes_per_second() const noexcept
@@ -53,10 +47,7 @@ int64_t PhaseMetrics::bytes_per_second() const noexcept
     if (_total_time <= 0)
         return 0;
 
-    if (_total_bytes < 1000000000)
-        return (_total_bytes * 1000000000) / _total_time;
-    else
-        return (_total_bytes / _total_time) * 1000000000;
+    return (_total_bytes * 1000000000) / _total_time;
 }
 
 void PhaseMetrics::StartCollecting() noexcept
