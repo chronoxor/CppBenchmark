@@ -59,13 +59,13 @@ cd CppBenchmark\scripts
 ```
 
 #How to create a benchmark?
-1 [Build CppBenchmark library](#how-to-build)
-2 Create a new *.cpp file
-3 Insert #include "cppbenchmark.h"
-4 Add benchmark code (examples for different scenarios you can find below)
-5 Insert BENCHMARK_MAIN() at the end
-6 Compile the *.cpp file and link it over CppBenchmark library
-7 Run it (see also possible [command line options](#command-line-options))
+1. [Build CppBenchmark library](#how-to-build)
+2. Create a new *.cpp file
+3. Insert #include "cppbenchmark.h"
+4. Add benchmark code (examples for different scenarios you can find below)
+5. Insert BENCHMARK_MAIN() at the end
+6. Compile the *.cpp file and link it over CppBenchmark library
+7. Run it (see also possible [command line options](#command-line-options))
 
 ##Example 1: Benchmark of a function call
 ```C++
