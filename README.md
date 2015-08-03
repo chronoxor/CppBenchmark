@@ -11,6 +11,7 @@ C++ Benchmark Library
     * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
     * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation) 
     * [Example 3: Benchmark with static fixture](#example-3-benchmark-with-static-fixture)
+    * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -225,6 +226,88 @@ Maximal time: 681.929 mcs / iteration
 Total time: 667.515 ms
 Total iterations: 1000
 Iterations throughput: 1498 / second
+===============================================================================
+```
+
+##Example 4: Benchmark with dynamic fixture
+Dynamic fixture can be used to prepare benchmark before each attempt with 
+Initialize() / Cleanup() methods. You can access to the current benchmark
+context in dynamic fixture methods.
+```C++
+#include "macros.h"
+
+#include <deque>
+#include <list>
+#include <vector>
+
+const int iterations = 10000000;
+
+template <typename T>
+class ContainerFixture : public virtual CppBenchmark::Fixture
+{
+protected:
+    T container;
+
+    void Initialize(CppBenchmark::Context&) override { container = T(); }
+    void Cleanup(CppBenchmark::Context&) override { container.clear(); }
+};
+
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back", iterations)
+{
+    container.push_back(0);
+}
+
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.push_back", iterations)
+{
+    container.push_back(0);
+}
+
+BENCHMARK_FIXTURE(ContainerFixture<std::deque<int>>, "std::deque<int>.push_back", iterations)
+{
+    container.push_back(0);
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::list<int>.push_back
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: std::list<int>.push_back()
+Average time: 50 ns / iteration
+Minimal time: 50 ns / iteration
+Maximal time: 53 ns / iteration
+Total time: 505.169 ms
+Total iterations: 10000000
+Iterations throughput: 19795348 / second
+===============================================================================
+Benchmark: std::vector<int>.push_back
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: std::vector<int>.push_back()
+Average time: 9 ns / iteration
+Minimal time: 9 ns / iteration
+Maximal time: 10 ns / iteration
+Total time: 97.252 ms
+Total iterations: 10000000
+Iterations throughput: 102824688 / second
+===============================================================================
+Benchmark: std::deque<int>.push_back
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: std::deque<int>.push_back()
+Average time: 21 ns / iteration
+Minimal time: 21 ns / iteration
+Maximal time: 22 ns / iteration
+Total time: 218.826 ms
+Total iterations: 10000000
+Iterations throughput: 45698221 / second
 ===============================================================================
 ```
 
