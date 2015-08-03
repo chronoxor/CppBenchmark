@@ -742,6 +742,9 @@ Iterations throughput: 9322229 / second
 #include <queue>
 
 const int items_to_produce = 10000000;
+
+// Create settings for the benchmark which will create 1 producer and 1 consumer 
+// and launch producer in inifinite loop.
 const auto settings = CppBenchmark::Settings().Infinite().PC(1, 1);
 
 class MutexQueueBenchmark : public CppBenchmark::BenchmarkPC
