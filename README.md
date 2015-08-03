@@ -37,6 +37,8 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 * [Benchmark I/O throughput](#example-7-benchmark-io-operations)
 * [Benchmark threads](#example-8-benchmark-threads)
 * [Benchmark producers/consumers pattern](#example-10-benchmark-single-producer-single-consumer-pattern)
+* Different reporting formats: colored console output, csv, json
+* [Supports modern compilers and platfroms](#requirements)
 
 # Requirements
 * Windows 7 / Windows 10
