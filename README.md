@@ -1063,4 +1063,3 @@ When you create and build a benchmark you can run it with the following command 
 
 # Todo
 * Doxygen summary
-* Github documentation
