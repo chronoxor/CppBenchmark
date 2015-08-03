@@ -8,7 +8,8 @@ C++ Benchmark Library
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
     * [Linux](#linux)
   * [How to use?](#how-to-use)
-  * [Example 1: Micro benchmark of a function call](#example-1-micro-benchmark-of-a-function-call)
+    * [Example 1: Micro benchmark of a function call](#example-1-micro-benchmark-of-a-function-call)
+    * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation) 
   * [Todo](#todo)
 
 # Requirements
@@ -19,6 +20,7 @@ C++ Benchmark Library
 * [CMake 3.3.0](http://www.cmake.org/download/)
 
 #How to build?
+
 ## Windows (Visaul Studio 2015)
 ```
 git clone https://github.com/chronoxor/CppBenchmark.git
@@ -54,17 +56,34 @@ cd CppBenchmark\scripts
 ```
 
 #How to use?
+
 ##Example 1: Micro benchmark of a function call
 ```C++
 #include "cppbenchmark.h"
 
 #include <math.h>
 
-// Micro benchmark a sin() call for 1000000000 times. 
+// Micro benchmark sin() call for 1000000000 times. 
 // Make 5 attemtps (by default) and choose one with the best time result.
 BENCHMARK("sin", 1000000000)
 {
     sin(123.456);
+}
+
+BENCHMARK_MAIN()
+```
+
+##Example 2: Benchmark with cancelation
+```C++
+#include "cppbenchmark.h"
+
+// Benchmark rand() call until it returns 0. 
+// Benchmark will print iterations count required to get 'rand() == 0' case.
+// Make 10 attemtps and choose one with the best time result.
+BENCHMARK("rand-till-zero", Settings().Infinite())
+{
+    if (rand() == 0)
+        context.Cancel();
 }
 
 BENCHMARK_MAIN()
