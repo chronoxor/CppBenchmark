@@ -8,7 +8,7 @@ C++ Benchmark Library
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
     * [Linux](#linux)
   * [How to use?](#how-to-use)
-    * [Example 1: Micro benchmark of a function call](#example-1-micro-benchmark-of-a-function-call)
+    * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
     * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation) 
   * [Todo](#todo)
 
@@ -57,13 +57,13 @@ cd CppBenchmark\scripts
 
 #How to use?
 
-##Example 1: Micro benchmark of a function call
+##Example 1: Benchmark of a function call
 ```C++
 #include "cppbenchmark.h"
 
 #include <math.h>
 
-// Micro benchmark sin() call for 1000000000 times. 
+// Benchmark sin() call for 1000000000 times.
 // Make 5 attemtps (by default) and choose one with the best time result.
 BENCHMARK("sin", 1000000000)
 {
