@@ -60,7 +60,8 @@ cd CppBenchmark\scripts
 
 #include <math.h>
 
-// Micro benchmark a sin() call for 100000000 times. Make 5 attemtps (by default) and choose one with the best time result.
+// Micro benchmark a sin() call for 100000000 times. 
+// Make 5 attemtps (by default) and choose one with the best time result.
 BENCHMARK("sin", 100000000)
 {
     sin((rand() / (RAND_MAX + 1.0)));
