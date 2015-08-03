@@ -17,7 +17,8 @@ C++ Benchmark Library
     * [Example 7: Benchmark I/O operations](#example-7-benchmark-io-operations)
     * [Example 8: Benchmark threads](#example-8-benchmark-threads)     
     * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)         
-    * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)          
+    * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)         
+    * [Example 11: Benchmark multiple producers, multiple consumers pattern](#example-11-benchmark-multiple-producers-multiple-consumers-pattern)          
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -856,6 +857,199 @@ Maximal time: 67 ns / iteration
 Total time: 650.805 ms
 Total iterations: 10124742
 Iterations throughput: 15557246 / second
+===============================================================================
+```
+
+##Example 11: Benchmark multiple producers, multiple consumers pattern
+```C++
+#include "cppbenchmark.h"
+
+#include <mutex>
+#include <queue>
+
+const int items_to_produce = 10000000;
+
+// Create settings for the benchmark which will create 1/2/4/8 producers and 1/2/4/8 consumers
+// and launch all producers in inifinite loop.
+const auto settings = CppBenchmark::Settings()
+    .Infinite()
+    .PCRange(
+        1, 8, [](int producers_from, int producers_to, int& producers_result)
+        {
+            int r = producers_result;
+            producers_result *= 2;
+            return r;
+        },
+        1, 8, [](int consumers_from, int consumers_to, int& consumers_result)
+        {
+            int r = consumers_result;
+            consumers_result *= 2;
+            return r;
+        }
+    );
+
+class MutexQueueBenchmark : public CppBenchmark::BenchmarkPC
+{
+public:
+    using BenchmarkPC::BenchmarkPC;
+
+protected:
+    void Initialize(CppBenchmark::Context& context) override
+    {
+        _queue = std::queue<int>();
+        _count = 0;
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        // Benchmark cleanup code can be placed here...
+    }
+
+    void InitializeProducer(CppBenchmark::ContextPC& context) override
+    {
+        // Producer initialize code can be placed here...
+    }
+
+    void CleanupProducer(CppBenchmark::ContextPC& context) override
+    {
+        // Producer cleanup code can be placed here...
+    }
+
+    void InitializeConsumer(CppBenchmark::ContextPC& context) override
+    {
+        // Consumer initialize code can be placed here...
+    }
+
+    void CleanupConsumer(CppBenchmark::ContextPC& context) override
+    {
+        // Consumer cleanup code can be placed here...
+    }
+
+    void RunProducer(CppBenchmark::ContextPC& context) override
+    {
+    	std::lock_guard<std::mutex> lock(_mutex);
+
+        // Check if we need to stop production...
+        if (_count >= items_to_produce) {
+            _queue.push(0);
+            context.StopProduce();
+            return;
+        }
+
+        // Produce item
+        _queue.push(++_count);
+    }
+
+    void RunConsumer(CppBenchmark::ContextPC& context) override
+    {
+    	std::lock_guard<std::mutex> lock(_mutex);
+
+    	if (_queue.size() > 0) {
+            // Consume item
+            int value = _queue.front();
+            _queue.pop();
+            // Check if we need to stop consumption...
+            if (value == 0) {
+                context.StopConsume();
+                return;
+            }
+        }
+    }
+
+private:
+    std::mutex _mutex;
+    std::queue<int> _queue;
+    int _count;
+};
+
+BENCHMARK_CLASS(MutexQueueBenchmark, "std::mutex+std::queue<int>", settings)
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::mutex+std::queue<int>
+Attempts: 5
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1)
+Total time: 681.430 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1).producer
+Average time: 42 ns / iteration
+Minimal time: 42 ns / iteration
+Maximal time: 120 ns / iteration
+Total time: 427.075 ms
+Total iterations: 10000001
+Iterations throughput: 23415052 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1).consumer
+Average time: 67 ns / iteration
+Minimal time: 67 ns / iteration
+Maximal time: 120 ns / iteration
+Total time: 679.235 ms
+Total iterations: 10000001
+Iterations throughput: 14722437 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:2)
+Total time: 623.887 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:2).producer
+Average time: 58 ns / iteration
+Minimal time: 58 ns / iteration
+Maximal time: 103 ns / iteration
+Total time: 582.786 ms
+Total iterations: 10000001
+Iterations throughput: 17158941 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:2).consumer
+Average time: 125 ns / iteration
+Minimal time: 125 ns / iteration
+Maximal time: 208 ns / iteration
+Total time: 622.654 ms
+Total iterations: 4963799
+Iterations throughput: 7971989 / second
+-------------------------------------------------------------------------------
+...
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:4)
+Total time: 820.237 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:4).producer
+Average time: 835 ns / iteration
+Minimal time: 835 ns / iteration
+Maximal time: 1.032 mcs / iteration
+Total time: 606.745 ms
+Total iterations: 725823
+Iterations throughput: 1196256 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:4).consumer
+Average time: 213 ns / iteration
+Minimal time: 213 ns / iteration
+Maximal time: 264 ns / iteration
+Total time: 755.649 ms
+Total iterations: 3543116
+Iterations throughput: 4688834 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:8)
+Total time: 824.811 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:8).producer
+Average time: 485 ns / iteration
+Minimal time: 485 ns / iteration
+Maximal time: 565 ns / iteration
+Total time: 743.897 ms
+Total iterations: 1533043
+Iterations throughput: 2060824 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:8).consumer
+Average time: 489 ns / iteration
+Minimal time: 489 ns / iteration
+Maximal time: 648 ns / iteration
+Total time: 676.364 ms
+Total iterations: 1382941
+Iterations throughput: 2044668 / second
 ===============================================================================
 ```
 
