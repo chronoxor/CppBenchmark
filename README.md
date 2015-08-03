@@ -10,6 +10,7 @@ C++ Benchmark Library
   * [How to create a benchmark?](#how-to-create-a-benchmark)
     * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
     * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation) 
+    * [Example 3: Benchmark with static fixture](#example-3-benchmark-with-static-fixture)
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -120,6 +121,110 @@ Maximal time: 513 ns / iteration
 Total time: 94.234 mcs
 Total iterations: 3716
 Iterations throughput: 39433750 / second
+===============================================================================
+```
+
+##Example 3: Benchmark with static fixture
+Static fixture will be constructed once per each benchmark, will be the same for 
+each attempt / iteration and will be destructed at the end of the benchmark.
+```C++
+#include "macros.h"
+
+#include <list>
+#include <vector>
+
+const int iterations = 1000;
+
+template <typename T>
+class ContainerFixture
+{
+protected:
+    T container;
+
+    ContainerFixture()
+    {
+        for (int i = 0; i < 1000000; ++i)
+            container.push_back(rand());
+    }
+};
+
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.forward", iterations)
+{
+    for (auto it = container.begin(); it != container.end(); ++it)
+        ++(*it);
+}
+
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.backward", iterations)
+{
+    for (auto it = container.rbegin(); it != container.rend(); ++it)
+        ++(*it);
+}
+
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.forward", iterations)
+{
+    for (auto it = container.begin(); it != container.end(); ++it)
+        ++(*it);
+}
+
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.backward", iterations)
+{
+    for (auto it = container.rbegin(); it != container.rend(); ++it)
+        ++(*it);
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::list<int>.forward
+Attempts: 5
+Iterations: 1000
+-------------------------------------------------------------------------------
+Phase: std::list<int>.forward()
+Average time: 6.055 ms / iteration
+Minimal time: 6.055 ms / iteration
+Maximal time: 6.337 ms / iteration
+Total time: 6.055 s
+Total iterations: 1000
+Iterations throughput: 165 / second
+===============================================================================
+Benchmark: std::list<int>.backward
+Attempts: 5
+Iterations: 1000
+-------------------------------------------------------------------------------
+Phase: std::list<int>.backward()
+Average time: 6.075 ms / iteration
+Minimal time: 6.075 ms / iteration
+Maximal time: 6.935 ms / iteration
+Total time: 6.075 s
+Total iterations: 1000
+Iterations throughput: 164 / second
+===============================================================================
+Benchmark: std::vector<int>.forward
+Attempts: 5
+Iterations: 1000
+-------------------------------------------------------------------------------
+Phase: std::vector<int>.forward()
+Average time: 663.003 mcs / iteration
+Minimal time: 663.003 mcs / iteration
+Maximal time: 678.439 mcs / iteration
+Total time: 663.003 ms
+Total iterations: 1000
+Iterations throughput: 1508 / second
+===============================================================================
+Benchmark: std::vector<int>.backward
+Attempts: 5
+Iterations: 1000
+-------------------------------------------------------------------------------
+Phase: std::vector<int>.backward()
+Average time: 667.515 mcs / iteration
+Minimal time: 667.515 mcs / iteration
+Maximal time: 681.929 mcs / iteration
+Total time: 667.515 ms
+Total iterations: 1000
+Iterations throughput: 1498 / second
 ===============================================================================
 ```
 
