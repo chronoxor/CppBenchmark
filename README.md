@@ -14,6 +14,11 @@ C++ Benchmark Library
     * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
     * [Example 6: Benchmark class](#example-6-benchmark-class)
+    * [Example 7: Benchmark I/O operations](#example-7-benchmark-io-operations)
+    * [Example 8: Benchmark threads](#example-8-benchmark-threads)     
+    * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)         
+    * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)         
+    * [Example 11: Benchmark multiple producers, multiple consumers pattern](#example-11-benchmark-multiple-producers-multiple-consumers-pattern)          
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -378,7 +383,8 @@ Items throughput: 15524528 / second
 
 ##Example 6: Benchmark class
 You can also create a benchmark by inheriting from CppBenchmark::Benchmark class
-and implementing Run() method.
+and implementing Run() method. You can use AddItems() method of a benchmark context 
+metrics to register processed items.
 ```C++
 #include "cppbenchmark.h"
 
@@ -430,6 +436,623 @@ Items throughput: 15421124 / second
 ===============================================================================
 ```
 
+##Example 7: Benchmark I/O operations
+You can use AddBytes() method of a benchmark context metrics to register processed data.
+```C++
+#include "cppbenchmark.h"
+
+#include <array>
+
+const int iterations = 100000;
+const int chunk_size_from = 32;
+const int chunk_size_to = 4096;
+
+// Create settings for the benchmark which will make 100000 iterations for each chunk size 
+// scaled from 32 bytes to 4096 bytes (32, 64, 128, 256, 512, 1024, 2048, 4096).
+const auto settings = CppBenchmark::Settings()
+    .Iterations(iterations)
+    .ParamRange(
+        chunk_size_from, chunk_size_to, [](int from, int to, int& result) 
+        { 
+            int r = result; 
+            result *= 2; 
+            return r; 
+        }
+    );
+
+class FileFixture
+{
+public:
+    FileFixture()
+    {
+        // Open file for binary write
+        file = fopen("fwrite.out", "wb");
+    }
+
+    ~FileFixture()
+    {
+        // Close file
+        fclose(file);
+
+        // Delete file
+        remove("fwrite.out");
+    }
+
+protected:
+    FILE* file;
+    std::array<char, chunk_size_to> buffer;
+};
+
+BENCHMARK_FIXTURE(FileFixture, "fwrite", settings)
+{
+    fwrite(buffer.data(), sizeof(char), context.x(), file);
+    context.metrics().AddBytes(context.x());
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: fwrite
+Attempts: 5
+Iterations: 100000
+-------------------------------------------------------------------------------
+Phase: fwrite(32)
+Average time: 66 ns / iteration
+Minimal time: 66 ns / iteration
+Maximal time: 78 ns / iteration
+Total time: 6.608 ms
+Total iterations: 100000
+Total bytes: 3.053 MiB
+Iterations throughput: 15131818 / second
+Bytes throughput: 461.805 MiB / second
+-------------------------------------------------------------------------------
+Phase: fwrite(64)
+Average time: 93 ns / iteration
+Minimal time: 93 ns / iteration
+Maximal time: 134 ns / iteration
+Total time: 9.380 ms
+Total iterations: 100000
+Total bytes: 6.106 MiB
+Iterations throughput: 10660950 / second
+Bytes throughput: 650.709 MiB / second
+-------------------------------------------------------------------------------
+...
+-------------------------------------------------------------------------------
+Phase: fwrite(2048)
+Average time: 1.846 mcs / iteration
+Minimal time: 1.846 mcs / iteration
+Maximal time: 2.299 mcs / iteration
+Total time: 184.605 ms
+Total iterations: 100000
+Total bytes: 195.320 MiB
+Iterations throughput: 541696 / second
+Bytes throughput: 1.034 GiB / second
+-------------------------------------------------------------------------------
+Phase: fwrite(4096)
+Average time: 3.687 mcs / iteration
+Minimal time: 3.687 mcs / iteration
+Maximal time: 4.617 mcs / iteration
+Total time: 368.788 ms
+Total iterations: 100000
+Total bytes: 390.640 MiB
+Iterations throughput: 271157 / second
+Bytes throughput: 1.035 GiB / second
+===============================================================================
+```
+
+##Example 8: Benchmark threads
+```C++
+#include "cppbenchmark.h"
+
+#include <atomic>
+
+const int iterations = 10000000;
+
+// Create settings for the benchmark which will make 10000000 iterations for each
+// set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
+const auto settings = CppBenchmark::Settings()
+    .Iterations(iterations)
+    .ThreadsRange(
+        1, 8, [](int from, int to, int& result)
+        {
+            int r = result;
+            result *= 2;
+            return r;
+        }
+    );
+
+BENCHMARK_THREADS("std::atomic++", settings)
+{
+    static std::atomic<int> counter = 0;
+    counter++;
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::atomic++
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:1)
+Total time: 63.254 ms
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:1).thread
+Average time: 6 ns / iteration
+Minimal time: 6 ns / iteration
+Maximal time: 7 ns / iteration
+Total time: 62.809 ms
+Total iterations: 10000000
+Iterations throughput: 159210567 / second
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:2)
+Total time: 362.933 ms
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:2).thread
+Average time: 36 ns / iteration
+Minimal time: 36 ns / iteration
+Maximal time: 53 ns / iteration
+Total time: 361.762 ms
+Total iterations: 10000000
+Iterations throughput: 27642410 / second
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:4)
+Total time: 927.259 ms
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:4).thread
+Average time: 89 ns / iteration
+Minimal time: 89 ns / iteration
+Maximal time: 94 ns / iteration
+Total time: 898.358 ms
+Total iterations: 10000000
+Iterations throughput: 11131419 / second
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:8)
+Total time: 1.723 s
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:8).thread
+Average time: 156 ns / iteration
+Minimal time: 156 ns / iteration
+Maximal time: 173 ns / iteration
+Total time: 1.563 s
+Total iterations: 10000000
+Iterations throughput: 6396501 / second
+===============================================================================
+```
+
+##Example 9: Benchmark threads with fixture
+```C++
+#include "cppbenchmark.h"
+
+#include <mutex>
+#include <unordered_map>
+
+const int iterations = 10000000;
+
+// Create settings for the benchmark which will make 10000000 iterations for each
+// set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
+const auto settings = CppBenchmark::Settings()
+    .Iterations(iterations)
+    .ThreadsRange(
+        1, 8, [](int from, int to, int& result)
+        {
+            int r = result;
+            result *= 2;
+            return r;
+        }
+    );
+
+class MutexFixture1
+{
+protected:
+    std::mutex mutex;
+    int counter;
+};
+
+class MutexFixture2 : public virtual CppBenchmark::FixtureThreads
+{
+protected:
+    std::mutex mutex;
+    std::unordered_map<std::thread::id, int> counter;
+
+    void InitializeThread(CppBenchmark::ContextThread& context) override
+    {
+        std::lock_guard<std::mutex> lock(mutex);
+        counter[std::this_thread::get_id()] = 0;
+    }
+
+    void CleanupThread(CppBenchmark::ContextThread& context) override
+    {
+        // Thread cleanup code can be placed here...
+    }
+};
+
+BENCHMARK_THREADS_FIXTURE(MutexFixture1, "std::mutex+global", settings)
+{
+    std::lock_guard<std::mutex> lock(mutex);
+    counter++;
+}
+
+BENCHMARK_THREADS_FIXTURE(MutexFixture2, "std::mutex+local", settings)
+{
+    std::lock_guard<std::mutex> lock(mutex);
+    counter[std::this_thread::get_id()]++;
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::mutex+local
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: std::mutex+local(threads:1)
+Total time: 317.020 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+local(threads:1).thread
+Average time: 31 ns / iteration
+Minimal time: 31 ns / iteration
+Maximal time: 34 ns / iteration
+Total time: 316.620 ms
+Total iterations: 10000000
+Iterations throughput: 31583526 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+local(threads:2)
+Total time: 625.352 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+local(threads:2).thread
+Average time: 40 ns / iteration
+Minimal time: 40 ns / iteration
+Maximal time: 64 ns / iteration
+Total time: 401.583 ms
+Total iterations: 10000000
+Iterations throughput: 24901424 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+local(threads:4)
+Total time: 1.414 s
+-------------------------------------------------------------------------------
+Phase: std::mutex+local(threads:4).thread
+Average time: 81 ns / iteration
+Minimal time: 81 ns / iteration
+Maximal time: 143 ns / iteration
+Total time: 811.919 ms
+Total iterations: 10000000
+Iterations throughput: 12316484 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+local(threads:8)
+Total time: 3.327 s
+-------------------------------------------------------------------------------
+Phase: std::mutex+local(threads:8).thread
+Average time: 107 ns / iteration
+Minimal time: 107 ns / iteration
+Maximal time: 339 ns / iteration
+Total time: 1.072 s
+Total iterations: 10000000
+Iterations throughput: 9322229 / second
+===============================================================================
+```
+
+##Example 10: Benchmark single producer, single consumer pattern
+```C++
+#include "cppbenchmark.h"
+
+#include <mutex>
+#include <queue>
+
+const int items_to_produce = 10000000;
+
+// Create settings for the benchmark which will create 1 producer and 1 consumer 
+// and launch producer in inifinite loop.
+const auto settings = CppBenchmark::Settings().Infinite().PC(1, 1);
+
+class MutexQueueBenchmark : public CppBenchmark::BenchmarkPC
+{
+public:
+    using BenchmarkPC::BenchmarkPC;
+
+protected:
+    void Initialize(CppBenchmark::Context& context) override
+    {
+        _queue = std::queue<int>();
+        _count = 0;
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        // Benchmark cleanup code can be placed here...
+    }
+
+    void InitializeProducer(CppBenchmark::ContextPC& context) override
+    {
+        // Producer initialize code can be placed here...
+    }
+
+    void CleanupProducer(CppBenchmark::ContextPC& context) override
+    {
+        // Producer cleanup code can be placed here...
+    }
+
+    void InitializeConsumer(CppBenchmark::ContextPC& context) override
+    {
+        // Consumer initialize code can be placed here...
+    }
+
+    void CleanupConsumer(CppBenchmark::ContextPC& context) override
+    {
+        // Consumer cleanup code can be placed here...
+    }
+
+    void RunProducer(CppBenchmark::ContextPC& context) override
+    {
+    	std::lock_guard<std::mutex> lock(_mutex);
+
+        // Check if we need to stop production...
+        if (_count >= items_to_produce) {
+            _queue.push(0);
+            context.StopProduce();
+            return;
+        }
+
+        // Produce item
+        _queue.push(++_count);
+    }
+
+    void RunConsumer(CppBenchmark::ContextPC& context) override
+    {
+    	std::lock_guard<std::mutex> lock(_mutex);
+
+    	if (_queue.size() > 0) {
+            // Consume item
+            int value = _queue.front();
+            _queue.pop();
+            // Check if we need to stop consumption...
+            if (value == 0) {
+                context.StopConsume();
+                return;
+            }
+        }
+    }
+
+private:
+    std::mutex _mutex;
+    std::queue<int> _queue;
+    int _count;
+};
+
+BENCHMARK_CLASS(MutexQueueBenchmark, "std::mutex+std::queue<int>", settings)
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::mutex+std::queue<int>
+Attempts: 5
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1)
+Total time: 652.176 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1).producer
+Average time: 50 ns / iteration
+Minimal time: 50 ns / iteration
+Maximal time: 53 ns / iteration
+Total time: 509.201 ms
+Total iterations: 10000001
+Iterations throughput: 19638574 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1).consumer
+Average time: 64 ns / iteration
+Minimal time: 64 ns / iteration
+Maximal time: 67 ns / iteration
+Total time: 650.805 ms
+Total iterations: 10124742
+Iterations throughput: 15557246 / second
+===============================================================================
+```
+
+##Example 11: Benchmark multiple producers, multiple consumers pattern
+```C++
+#include "cppbenchmark.h"
+
+#include <mutex>
+#include <queue>
+
+const int items_to_produce = 10000000;
+
+// Create settings for the benchmark which will create 1/2/4/8 producers and 1/2/4/8 consumers
+// and launch all producers in inifinite loop.
+const auto settings = CppBenchmark::Settings()
+    .Infinite()
+    .PCRange(
+        1, 8, [](int producers_from, int producers_to, int& producers_result)
+        {
+            int r = producers_result;
+            producers_result *= 2;
+            return r;
+        },
+        1, 8, [](int consumers_from, int consumers_to, int& consumers_result)
+        {
+            int r = consumers_result;
+            consumers_result *= 2;
+            return r;
+        }
+    );
+
+class MutexQueueBenchmark : public CppBenchmark::BenchmarkPC
+{
+public:
+    using BenchmarkPC::BenchmarkPC;
+
+protected:
+    void Initialize(CppBenchmark::Context& context) override
+    {
+        _queue = std::queue<int>();
+        _count = 0;
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        // Benchmark cleanup code can be placed here...
+    }
+
+    void InitializeProducer(CppBenchmark::ContextPC& context) override
+    {
+        // Producer initialize code can be placed here...
+    }
+
+    void CleanupProducer(CppBenchmark::ContextPC& context) override
+    {
+        // Producer cleanup code can be placed here...
+    }
+
+    void InitializeConsumer(CppBenchmark::ContextPC& context) override
+    {
+        // Consumer initialize code can be placed here...
+    }
+
+    void CleanupConsumer(CppBenchmark::ContextPC& context) override
+    {
+        // Consumer cleanup code can be placed here...
+    }
+
+    void RunProducer(CppBenchmark::ContextPC& context) override
+    {
+    	std::lock_guard<std::mutex> lock(_mutex);
+
+        // Check if we need to stop production...
+        if (_count >= items_to_produce) {
+            _queue.push(0);
+            context.StopProduce();
+            return;
+        }
+
+        // Produce item
+        _queue.push(++_count);
+    }
+
+    void RunConsumer(CppBenchmark::ContextPC& context) override
+    {
+    	std::lock_guard<std::mutex> lock(_mutex);
+
+    	if (_queue.size() > 0) {
+            // Consume item
+            int value = _queue.front();
+            _queue.pop();
+            // Check if we need to stop consumption...
+            if (value == 0) {
+                context.StopConsume();
+                return;
+            }
+        }
+    }
+
+private:
+    std::mutex _mutex;
+    std::queue<int> _queue;
+    int _count;
+};
+
+BENCHMARK_CLASS(MutexQueueBenchmark, "std::mutex+std::queue<int>", settings)
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::mutex+std::queue<int>
+Attempts: 5
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1)
+Total time: 681.430 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1).producer
+Average time: 42 ns / iteration
+Minimal time: 42 ns / iteration
+Maximal time: 120 ns / iteration
+Total time: 427.075 ms
+Total iterations: 10000001
+Iterations throughput: 23415052 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1).consumer
+Average time: 67 ns / iteration
+Minimal time: 67 ns / iteration
+Maximal time: 120 ns / iteration
+Total time: 679.235 ms
+Total iterations: 10000001
+Iterations throughput: 14722437 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:2)
+Total time: 623.887 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:2).producer
+Average time: 58 ns / iteration
+Minimal time: 58 ns / iteration
+Maximal time: 103 ns / iteration
+Total time: 582.786 ms
+Total iterations: 10000001
+Iterations throughput: 17158941 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:2).consumer
+Average time: 125 ns / iteration
+Minimal time: 125 ns / iteration
+Maximal time: 208 ns / iteration
+Total time: 622.654 ms
+Total iterations: 4963799
+Iterations throughput: 7971989 / second
+-------------------------------------------------------------------------------
+...
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:4)
+Total time: 820.237 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:4).producer
+Average time: 835 ns / iteration
+Minimal time: 835 ns / iteration
+Maximal time: 1.032 mcs / iteration
+Total time: 606.745 ms
+Total iterations: 725823
+Iterations throughput: 1196256 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:4).consumer
+Average time: 213 ns / iteration
+Minimal time: 213 ns / iteration
+Maximal time: 264 ns / iteration
+Total time: 755.649 ms
+Total iterations: 3543116
+Iterations throughput: 4688834 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:8)
+Total time: 824.811 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:8).producer
+Average time: 485 ns / iteration
+Minimal time: 485 ns / iteration
+Maximal time: 565 ns / iteration
+Total time: 743.897 ms
+Total iterations: 1533043
+Iterations throughput: 2060824 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:8,consumers:8).consumer
+Average time: 489 ns / iteration
+Minimal time: 489 ns / iteration
+Maximal time: 648 ns / iteration
+Total time: 676.364 ms
+Total iterations: 1382941
+Iterations throughput: 2044668 / second
+===============================================================================
+```
+
 #Command line options
 When you create and build a benchmark you can run it with the following command line options:
 * **-h, --help** - Show help
@@ -440,4 +1063,3 @@ When you create and build a benchmark you can run it with the following command 
 
 # Todo
 * Doxygen summary
-* Github documentation
