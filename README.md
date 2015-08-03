@@ -5,7 +5,8 @@ CppBenchmark library has lots of [features](#features) and allows to make benchm
 [different kind of scenarios](#benchmark-examples) such as micro-benchmarks, benchmarks 
 with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
-#Contents
+# Contents
+  * [Features](#features)
   * [Requirements](#requirements)
   * [How to build?](#how-to-build)
     * [Windows (Visaul Studio 2015)](#windows-visaul-studio-2015)
@@ -26,6 +27,12 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
     * [Example 11: Benchmark multiple producers, multiple consumers pattern](#example-11-benchmark-multiple-producers-multiple-consumers-pattern)
   * [Command line options](#command-line-options)
   * [Todo](#todo)
+
+# Features
+* [Micro-benchmarks](#example-1-benchmark-of-a-function-call)
+* Benchmarks with [static fixtures](#example-3-benchmark-with-static-fixture) and [dynamic fixtures](#example-4-benchmark-with-dynamic-fixture)
+* Benchmarks with [parameters](#example-5-benchmark-with-parameters) (single, pair, triple parameters, ranges, ranges with selectors) 
+* [Benchmark infinite run with cancelation](#example-2-benchmark-with-cancelation)
 
 # Requirements
 * Windows 7 / Windows 10
@@ -70,7 +77,7 @@ cd CppBenchmark\scripts
 05-doxygen-unix.sh
 ```
 
-#How to create a benchmark?
+# How to create a benchmark?
 1. [Build CppBenchmark library](#how-to-build)
 2. Create a new *.cpp file
 3. Insert #include "cppbenchmark.h"
@@ -79,9 +86,9 @@ cd CppBenchmark\scripts
 6. Compile the *.cpp file and link it over CppBenchmark library
 7. Run it (see also possible [command line options](#command-line-options))
 
-#Benchmark examples
+# Benchmark examples
 
-##Example 1: Benchmark of a function call
+## Example 1: Benchmark of a function call
 ```C++
 #include "cppbenchmark.h"
 
@@ -114,7 +121,7 @@ Iterations throughput: 411732889 / second
 ===============================================================================
 ```
 
-##Example 2: Benchmark with cancelation
+## Example 2: Benchmark with cancelation
 ```C++
 #include "cppbenchmark.h"
 
@@ -146,7 +153,7 @@ Iterations throughput: 39433750 / second
 ===============================================================================
 ```
 
-##Example 3: Benchmark with static fixture
+## Example 3: Benchmark with static fixture
 Static fixture will be constructed once per each benchmark, will be the same for
 each attempt / iteration and will be destructed at the end of the benchmark.
 ```C++
@@ -250,7 +257,7 @@ Iterations throughput: 1498 / second
 ===============================================================================
 ```
 
-##Example 4: Benchmark with dynamic fixture
+## Example 4: Benchmark with dynamic fixture
 Dynamic fixture can be used to prepare benchmark before each attempt with
 Initialize() / Cleanup() methods. You can access to the current benchmark
 context in dynamic fixture methods.
@@ -332,7 +339,7 @@ Iterations throughput: 45698221 / second
 ===============================================================================
 ```
 
-##Example 5: Benchmark with parameters
+## Example 5: Benchmark with parameters
 Additional parameters can be provided to benchmark with settings using fluent
 syntax. Parameters can be single, pair or tripple, provided as a value, as a
 range, or with a range and selector function. Benchmark will be launched for
@@ -388,7 +395,7 @@ Items throughput: 15524528 / second
 ===============================================================================
 ```
 
-##Example 6: Benchmark class
+## Example 6: Benchmark class
 You can also create a benchmark by inheriting from CppBenchmark::Benchmark class
 and implementing Run() method. You can use AddItems() method of a benchmark context
 metrics to register processed items.
@@ -443,7 +450,7 @@ Items throughput: 15421124 / second
 ===============================================================================
 ```
 
-##Example 7: Benchmark I/O operations
+## Example 7: Benchmark I/O operations
 You can use AddBytes() method of a benchmark context metrics to register processed data.
 ```C++
 #include "cppbenchmark.h"
@@ -550,7 +557,7 @@ Bytes throughput: 1.035 GiB / second
 ===============================================================================
 ```
 
-##Example 8: Benchmark threads
+## Example 8: Benchmark threads
 ```C++
 #include "cppbenchmark.h"
 
@@ -633,7 +640,7 @@ Iterations throughput: 6396501 / second
 ===============================================================================
 ```
 
-##Example 9: Benchmark threads with fixture
+## Example 9: Benchmark threads with fixture
 ```C++
 #include "cppbenchmark.h"
 
@@ -748,7 +755,7 @@ Iterations throughput: 9322229 / second
 ===============================================================================
 ```
 
-##Example 10: Benchmark single producer, single consumer pattern
+## Example 10: Benchmark single producer, single consumer pattern
 ```C++
 #include "cppbenchmark.h"
 
@@ -867,7 +874,7 @@ Iterations throughput: 15557246 / second
 ===============================================================================
 ```
 
-##Example 11: Benchmark multiple producers, multiple consumers pattern
+## Example 11: Benchmark multiple producers, multiple consumers pattern
 ```C++
 #include "cppbenchmark.h"
 
@@ -1060,7 +1067,7 @@ Iterations throughput: 2044668 / second
 ===============================================================================
 ```
 
-#Command line options
+# Command line options
 When you create and build a benchmark you can run it with the following command line options:
 * **-h, --help** - Show help
 * **-f, --filter** - Filter benchmarks by the given regexp pattern
@@ -1070,4 +1077,3 @@ When you create and build a benchmark you can run it with the following command 
 
 # Todo
 * Doxygen summary
-..
