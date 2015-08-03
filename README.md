@@ -7,9 +7,10 @@ C++ Benchmark Library
     * [Windows (Visaul Studio 2015)](#windows-visaul-studio-2015)
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
     * [Linux](#linux)
-  * [How to use?](#how-to-use)
+  * [How to create a benchmark?](#how-to-create-a-benchmark)
     * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
     * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation) 
+  * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
 # Requirements
@@ -55,7 +56,7 @@ cd CppBenchmark\scripts
 05-doxygen-unix.sh
 ```
 
-#How to use?
+#How to create a benchmark?
 
 ##Example 1: Benchmark of a function call
 ```C++
@@ -88,6 +89,14 @@ BENCHMARK("rand-till-zero", Settings().Infinite().Attempts(10))
 
 BENCHMARK_MAIN()
 ```
+
+#Command line options
+When you create and build a benchmark you can run it with the following command line options:
+-h / --help - Show help
+-f / --filter - Filter benchmarks by the given regexp pattern
+-l / --list - List all avaliable benchmarks
+-o / --output - Output format (console, csv, json). Default: console
+-s / --silent - Launch in silent mode. No progress will be shown!
 
 # Todo
 * Doxygen summary
