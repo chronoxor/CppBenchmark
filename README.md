@@ -111,7 +111,7 @@ Report fragment is the following:
 ```
 ===============================================================================
 Benchmark: rand-till-zero
-Attempts: 5
+Attempts: 10
 -------------------------------------------------------------------------------
 Phase: rand-till-zero()
 Average time: 25 ns / iteration
