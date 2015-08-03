@@ -14,7 +14,7 @@ C++ Benchmark Library
     * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
     * [Example 6: Benchmark class](#example-6-benchmark-class)
-    * [Example 7: Benchmark I/O operations](#example-7-benchmark-i-i-operations)
+    * [Example 7: Benchmark I/O operations](#example-7-benchmark-io-operations)
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
