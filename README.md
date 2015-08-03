@@ -2,12 +2,19 @@
 C++ Benchmark Library
 
 #Contents
+  * [Requirements](#requirements)
   * [How to build?](#how-to-build)
     * [Windows (Visaul Studio 2015)](#windows-visaul-studio-2015))
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys))
     * [Linux](#linux)
-  * [Requirements](#requirements)
   * [Todo](#todo)
+
+# Requirements
+* Windows 7 / Windows 10
+* Linux
+* [Visual Studio 2015](https://www.visualstudio.com/)
+* GCC 5.0.0
+* [CMake 3.3.0](http://www.cmake.org/download/)
 
 #How to build?
 ## Windows (Visaul Studio 2015)
@@ -43,13 +50,6 @@ cd CppBenchmark\scripts
 04-install-unix.sh
 05-doxygen-unix.sh
 ```
-
-# Requirements
-* Windows 7 / Windows 10
-* Linux
-* Visual Studio 2015
-* GCC 5.0.0
-* CMake 3.3.0
 
 # Todo
 * Doxygen summary
