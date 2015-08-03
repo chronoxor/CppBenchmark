@@ -13,6 +13,7 @@ C++ Benchmark Library
     * [Example 3: Benchmark with static fixture](#example-3-benchmark-with-static-fixture)
     * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
+    * [Example 6: Benchmark class](#example-6-benchmark-class) 
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -382,6 +383,60 @@ Total iterations: 100
 Total items: 100000000
 Iterations throughput: 89 / second
 Items throughput: 89843624 / second
+===============================================================================
+```
+
+##Example 5: Benchmark class
+You can also create a benchmark by inheriting from CppBenchmark::Benchmark class
+and implementing Run() method.
+```C++
+#include "cppbenchmark.h"
+
+#include <algorithm>
+#include <vector>
+
+class StdSort : public CppBenchmark::Benchmark
+{
+public:
+    using Benchmark::Benchmark;	
+
+protected:
+    std::vector<int> items;	
+
+    void Initialize(CppBenchmark::Context& context) override
+    {
+        items.resize(context.x());
+        std::generate(items.begin(), items.end(), rand);
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override 
+    { 
+        items.clear(); 
+    }
+
+    void Run(CppBenchmark::Context& context) override
+    {
+        std::sort(items.begin(), items.end());
+        context.metrics().AddItems(items.size());
+    }
+};
+
+BENCHMARK_CLASS(StdSort, "std::sort", Settings().Param(10000000))
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::sort
+Attempts: 5
+Iterations: 1
+-------------------------------------------------------------------------------
+Phase: std::sort(10000000)
+Total time: 648.461 ms
+Total items: 10000000
+Items throughput: 15421124 / second
 ===============================================================================
 ```
 
