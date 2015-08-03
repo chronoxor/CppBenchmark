@@ -16,7 +16,8 @@ C++ Benchmark Library
     * [Example 6: Benchmark class](#example-6-benchmark-class)
     * [Example 7: Benchmark I/O operations](#example-7-benchmark-io-operations)
     * [Example 8: Benchmark threads](#example-8-benchmark-threads)     
-    * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)          
+    * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)         
+    * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)          
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -706,6 +707,128 @@ Maximal time: 255 ns / iteration
 Total time: 926.653 ms
 Total iterations: 10000000
 Iterations throughput: 10791514 / second
+===============================================================================
+```
+
+##Example 10: Benchmark single producer, single consumer pattern
+```C++
+#include "cppbenchmark.h"
+
+#include <mutex>
+#include <queue>
+
+const int items_to_produce = 10000000;
+const auto settings = CppBenchmark::Settings().Infinite().PC(1, 1);
+
+class MutexQueueBenchmark : public CppBenchmark::BenchmarkPC
+{
+public:
+    using BenchmarkPC::BenchmarkPC;
+
+protected:
+    void Initialize(CppBenchmark::Context& context) override
+    {
+        _queue = std::queue<int>();
+        _count = 0;
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        // Benchmark cleanup code might be placed here...
+    }
+
+    void InitializeProducer(CppBenchmark::ContextPC& context) override
+    {
+        // Producer initialize code might be placed here...
+    }
+
+    void CleanupProducer(CppBenchmark::ContextPC& context) override
+    {
+        // Producer cleanup code might be placed here...
+    }
+
+    void InitializeConsumer(CppBenchmark::ContextPC& context) override
+    {
+        // Consumer initialize code might be placed here...
+    }
+
+    void CleanupConsumer(CppBenchmark::ContextPC& context) override
+    {
+        // Consumer cleanup code might be placed here...
+    }
+
+    void RunProducer(CppBenchmark::ContextPC& context) override
+    {
+    	std::lock_guard<std::mutex> lock(_mutex);
+
+        // Check if we need to stop production...
+        if (_count >= items_to_produce) {
+            _queue.push(0);
+            context.StopProduce();
+            return;
+        }
+
+        // Produce item
+        _queue.push(++_count);
+        context.metrics().AddItems(1);
+    }
+
+    void RunConsumer(CppBenchmark::ContextPC& context) override
+    {
+    	std::lock_guard<std::mutex> lock(_mutex);
+
+    	if (_queue.size() > 0) {
+            int value = _queue.front();
+            // Check if we need to stop consumption...
+            if (value == 0) {
+                context.StopConsume();
+                return;
+            }
+            // Consume item
+            _queue.pop();
+            context.metrics().AddItems(1);
+        }
+    }
+
+private:
+    std::mutex _mutex;
+    std::queue<int> _queue;
+    int _count;
+};
+
+BENCHMARK_CLASS(MutexQueueBenchmark, "std::mutex+std::queue<int>", settings)
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::mutex+std::queue<int>
+Attempts: 5
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1)
+Total time: 656.487 ms
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1).producer
+Average time: 46 ns / iteration
+Minimal time: 46 ns / iteration
+Maximal time: 55 ns / iteration
+Total time: 460.023 ms
+Total iterations: 10000001
+Total items: 10000000
+Iterations throughput: 21737999 / second
+Items throughput: 21737997 / second
+-------------------------------------------------------------------------------
+Phase: std::mutex+std::queue<int>(producers:1,consumers:1).consumer
+Average time: 65 ns / iteration
+Minimal time: 65 ns / iteration
+Maximal time: 69 ns / iteration
+Total time: 655.412 ms
+Total iterations: 10000001
+Total items: 10000000
+Iterations throughput: 15257556 / second
+Items throughput: 15257555 / second
 ===============================================================================
 ```
 
