@@ -450,12 +450,14 @@ const int chunk_size_to = 4096;
 // scaled from 32 bytes to 4096 bytes (32, 64, 128, 256, 512, 1024, 2048, 4096).
 const auto settings = CppBenchmark::Settings()
     .Iterations(iterations)
-    .ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int& result) 
-    { 
-        int r = result; 
-        result *= 2; 
-        return r; 
-    });
+    .ParamRange(
+        chunk_size_from, chunk_size_to, [](int from, int to, int& result) 
+        { 
+            int r = result; 
+            result *= 2; 
+            return r; 
+        }
+    );
 
 class FileFixture
 {
@@ -552,12 +554,14 @@ const int iterations = 10000000;
 // set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
 const auto settings = CppBenchmark::Settings()
     .Iterations(iterations)
-    .ThreadsRange(1, 8, [](int from, int to, int& result)
-    {
-        int r = result;
-        result *= 2;
-        return r;
-    });
+    .ThreadsRange(
+        1, 8, [](int from, int to, int& result)
+        {
+            int r = result;
+            result *= 2;
+            return r;
+        }
+    );
 
 BENCHMARK_THREADS("std::atomic++", settings)
 {
@@ -634,12 +638,14 @@ const int iterations = 10000000;
 // set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
 const auto settings = CppBenchmark::Settings()
     .Iterations(iterations)
-    .ThreadsRange(1, 8, [](int from, int to, int& result)
-    {
-        int r = result;
-        result *= 2;
-        return r;
-    });
+    .ThreadsRange(
+        1, 8, [](int from, int to, int& result)
+        {
+            int r = result;
+            result *= 2;
+            return r;
+        }
+    );
 
 class MutexFixture1
 {
