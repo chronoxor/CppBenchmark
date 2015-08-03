@@ -15,6 +15,7 @@ C++ Benchmark Library
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
     * [Example 6: Benchmark class](#example-6-benchmark-class)
     * [Example 7: Benchmark I/O operations](#example-7-benchmark-io-operations)
+    * [Example 8: Benchmark threads](#example-8-benchmark-threads)     
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -534,6 +535,87 @@ Total iterations: 100000
 Total bytes: 390.640 MiB
 Iterations throughput: 271157 / second
 Bytes throughput: 1.035 GiB / second
+===============================================================================
+```
+
+##Example 8: Benchmark threads
+```C++
+#include "cppbenchmark.h"
+
+#include <atomic>
+
+const int iterations = 10000000;
+
+// Create settings for the benchmark which will make 10000000 iterations for each
+// set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
+const auto settings = CppBenchmark::Settings()
+    .Iterations(iterations)
+    .ThreadsRange(1, 8, [](int from, int to, int& result)
+    {
+        int r = result;
+        result *= 2;
+        return r;
+    });
+
+BENCHMARK_THREADS("std::atomic++", settings)
+{
+    static std::atomic<int> counter = 0;
+    counter++;
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::atomic++
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:1)
+Total time: 63.254 ms
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:1).thread
+Average time: 6 ns / iteration
+Minimal time: 6 ns / iteration
+Maximal time: 7 ns / iteration
+Total time: 62.809 ms
+Total iterations: 10000000
+Iterations throughput: 159210567 / second
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:2)
+Total time: 362.933 ms
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:2).thread
+Average time: 36 ns / iteration
+Minimal time: 36 ns / iteration
+Maximal time: 53 ns / iteration
+Total time: 361.762 ms
+Total iterations: 10000000
+Iterations throughput: 27642410 / second
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:4)
+Total time: 927.259 ms
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:4).thread
+Average time: 89 ns / iteration
+Minimal time: 89 ns / iteration
+Maximal time: 94 ns / iteration
+Total time: 898.358 ms
+Total iterations: 10000000
+Iterations throughput: 11131419 / second
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:8)
+Total time: 1.723 s
+-------------------------------------------------------------------------------
+Phase: std::atomic++(threads:8).thread
+Average time: 156 ns / iteration
+Minimal time: 156 ns / iteration
+Maximal time: 173 ns / iteration
+Total time: 1.563 s
+Total iterations: 10000000
+Iterations throughput: 6396501 / second
 ===============================================================================
 ```
 
