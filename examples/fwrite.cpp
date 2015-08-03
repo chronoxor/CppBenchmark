@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 18.07.2015.
 //
 
-#include "macros.h"
+#include "cppbenchmark.h"
 
 #include <array>
 

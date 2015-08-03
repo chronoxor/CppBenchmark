@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 23.07.2015.
 //
 
-#include "macros.h"
+#include "cppbenchmark.h"
 
 #include <atomic>
 #include <mutex>

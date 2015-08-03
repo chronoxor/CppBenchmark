@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 24.07.2015.
 //
 
-#include "macros.h"
+#include "cppbenchmark.h"
 
 #include <atomic>
 #include <memory>
@@ -23,13 +23,13 @@ public:
     using BenchmarkPC::BenchmarkPC;
 
 protected:
-    void Initialize(CppBenchmark::Context&) override
+    void Initialize(CppBenchmark::Context& context) override
     {
         _queue = std::make_shared<TConcurrentQueue>();
         _count = 1;
     }
 
-    void Cleanup(CppBenchmark::Context&) override
+    void Cleanup(CppBenchmark::Context& context) override
     {
         _queue.reset();
     }
@@ -64,13 +64,13 @@ public:
     using BenchmarkPC::BenchmarkPC;
 
 protected:
-    void Initialize(CppBenchmark::Context&) override
+    void Initialize(CppBenchmark::Context& context) override
     {
         _queue = std::make_shared<mpmc_bounded_queue_t<int>>(queue_bound_size);
         _count = 1;
     }
 
-    void Cleanup(CppBenchmark::Context&) override
+    void Cleanup(CppBenchmark::Context& context) override
     {
         _queue.reset();
     }

@@ -6,7 +6,7 @@
 #define _WIN32_WINNT 0x0601
 #endif
 
-#include "macros.h"
+#include "cppbenchmark.h"
 
 #include <chrono>
 #include <ctime>

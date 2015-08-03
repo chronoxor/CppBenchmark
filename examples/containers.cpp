@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 18.07.2015.
 //
 
-#include "macros.h"
+#include "cppbenchmark.h"
 
 #include <deque>
 #include <list>
@@ -16,8 +16,8 @@ class ContainerFixture : public virtual CppBenchmark::Fixture
 protected:
     T container;
 
-    void Initialize(CppBenchmark::Context&) override { container = T(); }
-    void Cleanup(CppBenchmark::Context&) override { container.clear(); }
+    void Initialize(CppBenchmark::Context& context) override { container = T(); }
+    void Cleanup(CppBenchmark::Context& context) override { container.clear(); }
 };
 
 BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back", iterations)

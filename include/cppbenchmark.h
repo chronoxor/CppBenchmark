@@ -1,13 +1,13 @@
 /*!
-    \file macros.h
-    \brief Macros definitions
+    \file cppbenchmark.h
+    \brief CppBenchmark definitions
     \author Ivan Shynkarenka
     \date 16.07.2015
     \copyright MIT License
 */
 
-#ifndef CPPBENCHMARK_MACROS_H
-#define CPPBENCHMARK_MACROS_H
+#ifndef CPPBENCHMARK_H
+#define CPPBENCHMARK_H
 
 #include "launcher_console.h"
 
@@ -203,4 +203,4 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(Cont
 #define BENCHMARK_CLASS(type, name, ...)\
 namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(name, type::TSettings(__VA_ARGS__))); }
 
-#endif // CPPBENCHMARK_MACROS_H
+#endif // CPPBENCHMARK_H

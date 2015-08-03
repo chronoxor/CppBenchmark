@@ -86,6 +86,7 @@ private:
 /*! \example containers.cpp Containers push back benchmark */
 /*! \example fpu.cpp FPU benchmark */
 /*! \example fwrite.cpp File write benchmark */
+/*! \example iterators.cpp Iterators benchmark */
 /*! \example random.cpp Random distribution benchmark */
 /*! \example sort.cpp Sort algorithms benchmark */
 

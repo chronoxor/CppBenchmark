@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 18.07.2015.
 //
 
-#include "macros.h"
+#include "cppbenchmark.h"
 
 #include <algorithm>
 #include <queue>
@@ -19,7 +19,12 @@ protected:
     void Initialize(CppBenchmark::Context& context) override
     {
         items.resize(context.x());
-        std::generate(items.begin(), items.end(), std::rand);
+        std::generate(items.begin(), items.end(), rand);
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override 
+    { 
+        items.clear(); 
     }
 };
 
@@ -460,6 +465,19 @@ protected:
     }
 };
 
+class StdSort : public CppBenchmark::Benchmark, public SortFixture
+{
+public:
+    using Benchmark::Benchmark;
+
+protected:
+    void Run(CppBenchmark::Context& context) override
+    {
+        std::sort(items.begin(), items.end());
+        context.metrics().AddItems(items.size());
+    }
+};
+
 BENCHMARK_CLASS(SelectionSort, "SelectionSort", Settings().Param(slow_size))
 BENCHMARK_CLASS(BubbleSort, "BubbleSort", Settings().Param(slow_size))
 BENCHMARK_CLASS(ShakerSort, "ShakerSort", Settings().Param(slow_size))
@@ -470,5 +488,6 @@ BENCHMARK_CLASS(MergeSort, "MergeSort", Settings().Param(fast_size))
 BENCHMARK_CLASS(QuickSort, "QuickSort", Settings().Param(fast_size))
 BENCHMARK_CLASS(QuickSort3, "QuickSort3", Settings().Param(fast_size))
 BENCHMARK_CLASS(RadixSort, "RadixSort", Settings().Param(fast_size))
+BENCHMARK_CLASS(StdSort, "std::sort", Settings().Param(fast_size))
 
 BENCHMARK_MAIN()
