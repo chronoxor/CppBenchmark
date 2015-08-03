@@ -9,17 +9,17 @@ C++ Benchmark Library
     * [Linux](#linux)
   * [How to create a benchmark?](#how-to-create-a-benchmark)
     * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
-    * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation) 
+    * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation)
     * [Example 3: Benchmark with static fixture](#example-3-benchmark-with-static-fixture)
     * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
     * [Example 6: Benchmark class](#example-6-benchmark-class)
     * [Example 7: Benchmark I/O operations](#example-7-benchmark-io-operations)
-    * [Example 8: Benchmark threads](#example-8-benchmark-threads)     
-    * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)         
-    * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)         
-    * [Example 11: Benchmark multiple producers, multiple consumers pattern](#example-11-benchmark-multiple-producers-multiple-consumers-pattern)          
-  * [Command line options](#command-line-options)     
+    * [Example 8: Benchmark threads](#example-8-benchmark-threads)
+    * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)
+    * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)
+    * [Example 11: Benchmark multiple producers, multiple consumers pattern](#example-11-benchmark-multiple-producers-multiple-consumers-pattern)
+  * [Command line options](#command-line-options)
   * [Todo](#todo)
 
 # Requirements
@@ -111,7 +111,7 @@ Iterations throughput: 411732889 / second
 ```C++
 #include "cppbenchmark.h"
 
-// Benchmark rand() call until it returns 0. 
+// Benchmark rand() call until it returns 0.
 // Benchmark will print iterations count required to get 'rand() == 0' case.
 // Make 10 attemtps and choose one with the best time result.
 BENCHMARK("rand-till-zero", Settings().Infinite().Attempts(10))
@@ -140,7 +140,7 @@ Iterations throughput: 39433750 / second
 ```
 
 ##Example 3: Benchmark with static fixture
-Static fixture will be constructed once per each benchmark, will be the same for 
+Static fixture will be constructed once per each benchmark, will be the same for
 each attempt / iteration and will be destructed at the end of the benchmark.
 ```C++
 #include "macros.h"
@@ -244,7 +244,7 @@ Iterations throughput: 1498 / second
 ```
 
 ##Example 4: Benchmark with dynamic fixture
-Dynamic fixture can be used to prepare benchmark before each attempt with 
+Dynamic fixture can be used to prepare benchmark before each attempt with
 Initialize() / Cleanup() methods. You can access to the current benchmark
 context in dynamic fixture methods.
 ```C++
@@ -326,9 +326,9 @@ Iterations throughput: 45698221 / second
 ```
 
 ##Example 5: Benchmark with parameters
-Additional parameters can be provided to benchmark with settings using fluent 
-syntax. Parameters can be single, pair or tripple, provided as a value, as a 
-range, or with a range and selector function. Benchmark will be launched for 
+Additional parameters can be provided to benchmark with settings using fluent
+syntax. Parameters can be single, pair or tripple, provided as a value, as a
+range, or with a range and selector function. Benchmark will be launched for
 each parameters combination.
 ```C++
 #include "cppbenchmark.h"
@@ -347,9 +347,9 @@ protected:
         std::generate(items.begin(), items.end(), rand);
     }
 
-    void Cleanup(CppBenchmark::Context& context) override 
-    { 
-        items.clear(); 
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        items.clear();
     }
 };
 
@@ -383,7 +383,7 @@ Items throughput: 15524528 / second
 
 ##Example 6: Benchmark class
 You can also create a benchmark by inheriting from CppBenchmark::Benchmark class
-and implementing Run() method. You can use AddItems() method of a benchmark context 
+and implementing Run() method. You can use AddItems() method of a benchmark context
 metrics to register processed items.
 ```C++
 #include "cppbenchmark.h"
@@ -394,10 +394,10 @@ metrics to register processed items.
 class StdSort : public CppBenchmark::Benchmark
 {
 public:
-    using Benchmark::Benchmark;	
+    using Benchmark::Benchmark;
 
 protected:
-    std::vector<int> items;	
+    std::vector<int> items;
 
     void Initialize(CppBenchmark::Context& context) override
     {
@@ -405,9 +405,9 @@ protected:
         std::generate(items.begin(), items.end(), rand);
     }
 
-    void Cleanup(CppBenchmark::Context& context) override 
-    { 
-        items.clear(); 
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        items.clear();
     }
 
     void Run(CppBenchmark::Context& context) override
@@ -447,16 +447,16 @@ const int iterations = 100000;
 const int chunk_size_from = 32;
 const int chunk_size_to = 4096;
 
-// Create settings for the benchmark which will make 100000 iterations for each chunk size 
+// Create settings for the benchmark which will make 100000 iterations for each chunk size
 // scaled from 32 bytes to 4096 bytes (32, 64, 128, 256, 512, 1024, 2048, 4096).
 const auto settings = CppBenchmark::Settings()
     .Iterations(iterations)
     .ParamRange(
-        chunk_size_from, chunk_size_to, [](int from, int to, int& result) 
-        { 
-            int r = result; 
-            result *= 2; 
-            return r; 
+        chunk_size_from, chunk_size_to, [](int from, int to, int& result)
+        {
+            int r = result;
+            result *= 2;
+            return r;
         }
     );
 
@@ -750,7 +750,7 @@ Iterations throughput: 9322229 / second
 
 const int items_to_produce = 10000000;
 
-// Create settings for the benchmark which will create 1 producer and 1 consumer 
+// Create settings for the benchmark which will create 1 producer and 1 consumer
 // and launch producer in inifinite loop.
 const auto settings = CppBenchmark::Settings().Infinite().PC(1, 1);
 
@@ -1063,3 +1063,4 @@ When you create and build a benchmark you can run it with the following command 
 
 # Todo
 * Doxygen summary
+..
