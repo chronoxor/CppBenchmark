@@ -80,7 +80,7 @@ BENCHMARK_MAIN()
 // Benchmark rand() call until it returns 0. 
 // Benchmark will print iterations count required to get 'rand() == 0' case.
 // Make 10 attemtps and choose one with the best time result.
-BENCHMARK("rand-till-zero", Settings().Infinite())
+BENCHMARK("rand-till-zero", Settings().Infinite().Attempts(10))
 {
     if (rand() == 0)
         context.Cancel();
