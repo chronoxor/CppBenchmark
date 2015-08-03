@@ -1,6 +1,6 @@
 # CppBenchmark
 C++ Benchmark Library allows to create performance benchmarks of some code to investigate 
-average/minimal/maximal execution time, items processing throughput, I/O processing speed.
+average/minimal/maximal execution time, items processing processing speed, I/O throughput.
 CppBenchmark library has lots of [features](#features) and allows to make benchmarks for
 [different kind of scenarios](#benchmark-examples) such as micro-benchmarks, benchmarks 
 with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
@@ -33,6 +33,10 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 * Benchmarks with [static fixtures](#example-3-benchmark-with-static-fixture) and [dynamic fixtures](#example-4-benchmark-with-dynamic-fixture)
 * Benchmarks with [parameters](#example-5-benchmark-with-parameters) (single, pair, triple parameters, ranges, ranges with selectors) 
 * [Benchmark infinite run with cancelation](#example-2-benchmark-with-cancelation)
+* [Benchmark items processing speed](#example-6-benchmark-class)
+* [Benchmark I/O throughput](#example-7-benchmark-io-operations)
+* [Benchmark threads](#example-8-benchmark-threads)
+* [Benchmark producers/consumers pattern](#example-10-benchmark-single-producer-single-consumer-pattern)
 
 # Requirements
 * Windows 7 / Windows 10
