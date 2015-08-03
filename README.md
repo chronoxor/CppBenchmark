@@ -12,6 +12,7 @@ C++ Benchmark Library
     * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation) 
     * [Example 3: Benchmark with static fixture](#example-3-benchmark-with-static-fixture)
     * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
+    * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -315,6 +316,72 @@ Maximal time: 22 ns / iteration
 Total time: 218.826 ms
 Total iterations: 10000000
 Iterations throughput: 45698221 / second
+===============================================================================
+```
+
+##Example 5: Benchmark with parameters
+Additional parameters can be provided to benchmark with settings using fluent 
+syntax. Parameters can be single, pair or tripple, provided as a value, as a 
+range, or with a range and selector function. Benchmark will be launched for 
+each parameters combination.
+```C++
+#include "cppbenchmark.h"
+
+#include <algorithm>
+#include <vector>
+
+class SortFixture : public virtual CppBenchmark::Fixture
+{
+protected:
+    std::vector<int> items;
+
+    void Initialize(CppBenchmark::Context& context) override
+    {
+        items.resize(context.x());
+        std::generate(items.begin(), items.end(), rand);
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override 
+    { 
+        items.clear(); 
+    }
+};
+
+BENCHMARK_FIXTURE(SortFixture, "std::sort", Settings().Iterations(100).Param(100000).Param(1000000))
+{
+    std::sort(items.begin(), items.end());
+    context.metrics().AddItems(items.size());
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: std::sort
+Attempts: 5
+Iterations: 100
+-------------------------------------------------------------------------------
+Phase: std::sort(100000)
+Average time: 1.214 ms / iteration
+Minimal time: 1.214 ms / iteration
+Maximal time: 1.297 ms / iteration
+Total time: 121.455 ms
+Total iterations: 100
+Total items: 10000000
+Iterations throughput: 823 / second
+Items throughput: 82334684 / second
+-------------------------------------------------------------------------------
+Phase: std::sort(1000000)
+Average time: 11.130 ms / iteration
+Minimal time: 11.130 ms / iteration
+Maximal time: 11.589 ms / iteration
+Total time: 1.113 s
+Total iterations: 100
+Total items: 100000000
+Iterations throughput: 89 / second
+Items throughput: 89843624 / second
 ===============================================================================
 ```
 
