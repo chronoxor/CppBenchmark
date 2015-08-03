@@ -348,7 +348,7 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(SortFixture, "std::sort", Settings().Iterations(100).Param(100000).Param(1000000))
+BENCHMARK_FIXTURE(SortFixture, "std::sort", Settings().Param(1000000).Param(10000000))
 {
     std::sort(items.begin(), items.end());
     context.metrics().AddItems(items.size());
@@ -362,27 +362,17 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: std::sort
 Attempts: 5
-Iterations: 100
--------------------------------------------------------------------------------
-Phase: std::sort(100000)
-Average time: 1.214 ms / iteration
-Minimal time: 1.214 ms / iteration
-Maximal time: 1.297 ms / iteration
-Total time: 121.455 ms
-Total iterations: 100
-Total items: 10000000
-Iterations throughput: 823 / second
-Items throughput: 82334684 / second
+Iterations: 1
 -------------------------------------------------------------------------------
 Phase: std::sort(1000000)
-Average time: 11.130 ms / iteration
-Minimal time: 11.130 ms / iteration
-Maximal time: 11.589 ms / iteration
-Total time: 1.113 s
-Total iterations: 100
-Total items: 100000000
-Iterations throughput: 89 / second
-Items throughput: 89843624 / second
+Total time: 66.976 ms
+Total items: 1000000
+Items throughput: 14930626 / second
+-------------------------------------------------------------------------------
+Phase: std::sort(10000000)
+Total time: 644.141 ms
+Total items: 10000000
+Items throughput: 15524528 / second
 ===============================================================================
 ```
 
