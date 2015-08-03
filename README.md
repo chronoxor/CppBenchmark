@@ -794,7 +794,6 @@ protected:
 
         // Produce item
         _queue.push(++_count);
-        context.metrics().AddItems(1);
     }
 
     void RunConsumer(CppBenchmark::ContextPC& context) override
@@ -802,15 +801,14 @@ protected:
     	std::lock_guard<std::mutex> lock(_mutex);
 
     	if (_queue.size() > 0) {
+            // Consume item
             int value = _queue.front();
+            _queue.pop();
             // Check if we need to stop consumption...
             if (value == 0) {
                 context.StopConsume();
                 return;
             }
-            // Consume item
-            _queue.pop();
-            context.metrics().AddItems(1);
         }
     }
 
@@ -832,27 +830,23 @@ Benchmark: std::mutex+std::queue<int>
 Attempts: 5
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:1)
-Total time: 656.487 ms
+Total time: 652.176 ms
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:1).producer
-Average time: 46 ns / iteration
-Minimal time: 46 ns / iteration
-Maximal time: 55 ns / iteration
-Total time: 460.023 ms
+Average time: 50 ns / iteration
+Minimal time: 50 ns / iteration
+Maximal time: 53 ns / iteration
+Total time: 509.201 ms
 Total iterations: 10000001
-Total items: 10000000
-Iterations throughput: 21737999 / second
-Items throughput: 21737997 / second
+Iterations throughput: 19638574 / second
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:1).consumer
-Average time: 65 ns / iteration
-Minimal time: 65 ns / iteration
-Maximal time: 69 ns / iteration
-Total time: 655.412 ms
-Total iterations: 10000001
-Total items: 10000000
-Iterations throughput: 15257556 / second
-Items throughput: 15257555 / second
+Average time: 64 ns / iteration
+Minimal time: 64 ns / iteration
+Maximal time: 67 ns / iteration
+Total time: 650.805 ms
+Total iterations: 10124742
+Iterations throughput: 15557246 / second
 ===============================================================================
 ```
 
