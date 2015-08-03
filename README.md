@@ -92,11 +92,11 @@ BENCHMARK_MAIN()
 
 #Command line options
 When you create and build a benchmark you can run it with the following command line options:
-* -h / --help - Show help
-* -f / --filter - Filter benchmarks by the given regexp pattern
-* -l / --list - List all avaliable benchmarks
-* -o / --output - Output format (console, csv, json). Default: console
-* -s / --silent - Launch in silent mode. No progress will be shown!
+* **-h, --help** - Show help
+* **-f, --filter** - Filter benchmarks by the given regexp pattern
+* **-l, --list** - List all avaliable benchmarks
+* **-o, --output** - Output format (console, csv, json). Default: console
+* **-s, --silent** - Launch in silent mode. No progress will be shown!
 
 # Todo
 * Doxygen summary
