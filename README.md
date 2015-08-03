@@ -13,7 +13,7 @@ C++ Benchmark Library
     * [Example 3: Benchmark with static fixture](#example-3-benchmark-with-static-fixture)
     * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
-    * [Example 6: Benchmark class](#example-6-benchmark-class) 
+    * [Example 6: Benchmark class](#example-6-benchmark-class)
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -386,7 +386,7 @@ Items throughput: 89843624 / second
 ===============================================================================
 ```
 
-##Example 5: Benchmark class
+##Example 6: Benchmark class
 You can also create a benchmark by inheriting from CppBenchmark::Benchmark class
 and implementing Run() method.
 ```C++
