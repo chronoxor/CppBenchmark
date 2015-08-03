@@ -1,10 +1,9 @@
 # CppBenchmark
-C++ Benchmark Library allows to create performance benchmarks of some  code  to
-investigate   average/minimal/maximal   execution   time,   items    processing
-throughput,  I/O  processing  speed.   CppBenchmark   library   has   lots   of
-[features](#features) and allows to make  benchmarks  for  [different  kind  of
-scenarios](#how-to-create-a-benchmark)  such  as  micro-benchmarks,  benchmarks
-with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
+C++ Benchmark Library allows to create performance benchmarks of some code to investigate 
+average/minimal/maximal execution time, items processing throughput, I/O processing speed.
+CppBenchmark library has lots of [features](#features) and allows to make benchmarks for
+[different kind of scenarios](#how-to-create-a-benchmark) such as micro-benchmarks, 
+benchmarks with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
 #Contents
   * [Requirements](#requirements)
