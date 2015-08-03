@@ -73,6 +73,38 @@ BENCHMARK("sin", 1000000000)
 
 BENCHMARK_MAIN()
 ```
+Report is the following:
+```
+===============================================================================
+CppBenchmark report. Version 1.0.0.0
+===============================================================================
+CPU architecutre: Intel(R) Core(TM) i5-2500 CPU @ 3.30GHz
+CPU logical cores: 4
+CPU physical cores: 4
+CPU clock speed: 3.292 GHz
+CPU Hyper-Threading: disabled
+RAM total: 15.936 GiB
+RAM free: 2.1018 GiB
+===============================================================================
+OS version: 64-bit
+Process version: 64-bit
+Process configuaraion: release
+Local timestamp: Mon Aug  3 17:27:00 2015
+UTC timestamp: Mon Aug  3 14:27:00 2015
+===============================================================================
+Benchmark: sin
+Attempts: 5
+Iterations: 1000000000
+-------------------------------------------------------------------------------
+Phase: sin()
+Average time: 2 ns / iteration
+Minimal time: 2 ns / iteration
+Maximal time: 2 ns / iteration
+Total time: 2.428 s
+Total iterations: 1000000000
+Iterations throughput: 411732889 / second
+===============================================================================
+```
 
 ##Example 2: Benchmark with cancelation
 ```C++
