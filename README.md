@@ -662,7 +662,7 @@ protected:
 
     void CleanupThread(CppBenchmark::ContextThread& context) override
     {
-        // Thread cleanup code might be placed here...
+        // Thread cleanup code can be placed here...
     }
 };
 
