@@ -2,8 +2,8 @@
 C++ Benchmark Library allows to create performance benchmarks of some code to investigate 
 average/minimal/maximal execution time, items processing throughput, I/O processing speed.
 CppBenchmark library has lots of [features](#features) and allows to make benchmarks for
-[different kind of scenarios](#how-to-create-a-benchmark) such as micro-benchmarks, 
-benchmarks with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
+[different kind of scenarios](#benchmark-examples) such as micro-benchmarks, benchmarks 
+with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
 #Contents
   * [Requirements](#requirements)
@@ -12,6 +12,7 @@ benchmarks with fixtures and parameters, threads benchmarks, produsers/consummer
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
     * [Linux](#linux)
   * [How to create a benchmark?](#how-to-create-a-benchmark)
+  * [Benchmark examples](#benchmark-examples)
     * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
     * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation)
     * [Example 3: Benchmark with static fixture](#example-3-benchmark-with-static-fixture)
@@ -77,6 +78,8 @@ cd CppBenchmark\scripts
 5. Insert BENCHMARK_MAIN() at the end
 6. Compile the *.cpp file and link it over CppBenchmark library
 7. Run it (see also possible [command line options](#command-line-options))
+
+#Benchmark examples
 
 ##Example 1: Benchmark of a function call
 ```C++
