@@ -14,6 +14,7 @@ C++ Benchmark Library
     * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
     * [Example 6: Benchmark class](#example-6-benchmark-class)
+    * [Example 7: Benchmark I/O operations](#example-7-benchmark-i-i-operations)
   * [Command line options](#command-line-options)     
   * [Todo](#todo)
 
@@ -378,7 +379,8 @@ Items throughput: 15524528 / second
 
 ##Example 6: Benchmark class
 You can also create a benchmark by inheriting from CppBenchmark::Benchmark class
-and implementing Run() method.
+and implementing Run() method. You can use AddItems() method of a benchmark context 
+metrics to register processed items.
 ```C++
 #include "cppbenchmark.h"
 
@@ -427,6 +429,111 @@ Phase: std::sort(10000000)
 Total time: 648.461 ms
 Total items: 10000000
 Items throughput: 15421124 / second
+===============================================================================
+```
+
+##Example 7: Benchmark I/O operations
+You can use AddBytes() method of a benchmark context metrics to register processed data.
+```C++
+#include "cppbenchmark.h"
+
+#include <array>
+
+const int iterations = 100000;
+const int chunk_size_from = 32;
+const int chunk_size_to = 4096;
+
+// Create settings for the benchmark which will make 100000 iterations for each chunk size 
+// scaled from 32 bytes to 4096 bytes (32, 64, 128, 256, 512, 1024, 2048, 4096).
+const auto settings = CppBenchmark::Settings()
+    .Iterations(iterations)
+    .ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int& result) 
+    { 
+        int r = result; 
+        result *= 2; 
+        return r; 
+    });
+
+class FileFixture
+{
+public:
+    FileFixture()
+    {
+        // Open file for binary write
+        file = fopen("fwrite.out", "wb");
+    }
+
+    ~FileFixture()
+    {
+        // Close file
+        fclose(file);
+
+        // Delete file
+        remove("fwrite.out");
+    }
+
+protected:
+    FILE* file;
+    std::array<char, chunk_size_to> buffer;
+};
+
+BENCHMARK_FIXTURE(FileFixture, "fwrite", settings)
+{
+    fwrite(buffer.data(), sizeof(char), context.x(), file);
+    context.metrics().AddBytes(context.x());
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: fwrite
+Attempts: 5
+Iterations: 100000
+-------------------------------------------------------------------------------
+Phase: fwrite(32)
+Average time: 66 ns / iteration
+Minimal time: 66 ns / iteration
+Maximal time: 78 ns / iteration
+Total time: 6.608 ms
+Total iterations: 100000
+Total bytes: 3.053 MiB
+Iterations throughput: 15131818 / second
+Bytes throughput: 461.805 MiB / second
+-------------------------------------------------------------------------------
+Phase: fwrite(64)
+Average time: 93 ns / iteration
+Minimal time: 93 ns / iteration
+Maximal time: 134 ns / iteration
+Total time: 9.380 ms
+Total iterations: 100000
+Total bytes: 6.106 MiB
+Iterations throughput: 10660950 / second
+Bytes throughput: 650.709 MiB / second
+-------------------------------------------------------------------------------
+...
+-------------------------------------------------------------------------------
+Phase: fwrite(2048)
+Average time: 1.846 mcs / iteration
+Minimal time: 1.846 mcs / iteration
+Maximal time: 2.299 mcs / iteration
+Total time: 184.605 ms
+Total iterations: 100000
+Total bytes: 195.320 MiB
+Iterations throughput: 541696 / second
+Bytes throughput: 1.034 GiB / second
+-------------------------------------------------------------------------------
+Phase: fwrite(4096)
+Average time: 3.687 mcs / iteration
+Minimal time: 3.687 mcs / iteration
+Maximal time: 4.617 mcs / iteration
+Total time: 368.788 ms
+Total iterations: 100000
+Total bytes: 390.640 MiB
+Iterations throughput: 271157 / second
+Bytes throughput: 1.035 GiB / second
 ===============================================================================
 ```
 
