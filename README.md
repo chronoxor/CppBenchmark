@@ -5,6 +5,8 @@ CppBenchmark library has lots of [features](#features) and allows to make benchm
 [different kind of scenarios](#benchmark-examples) such as micro-benchmarks, benchmarks
 with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
+CppBenchmark API reference: http://chronoxor.github.io/CppBenchmark/index.html
+
 # Contents
   * [Features](#features)
   * [Requirements](#requirements)
