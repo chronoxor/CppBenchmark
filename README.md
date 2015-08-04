@@ -39,7 +39,8 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 * [Benchmark producers/consumers pattern](#example-10-benchmark-single-producer-single-consumer-pattern)
 * Different reporting formats: console, csv, json
 * Colored console progress and report
-![alt Console colored report][console]
+
+![Console colored report][console]
 [console]: https://github.com/chronoxor/CppBenchmark/raw/master/images/console.png "Console colored report"
 
 # Requirements
