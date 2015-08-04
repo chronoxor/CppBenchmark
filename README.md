@@ -28,7 +28,6 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
     * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)
     * [Example 11: Benchmark multiple producers, multiple consumers pattern](#example-11-benchmark-multiple-producers-multiple-consumers-pattern)
   * [Command line options](#command-line-options)
-  * [Todo](#todo)
 
 # Features
 * [Micro-benchmarks](#example-1-benchmark-of-a-function-call)
