@@ -1,8 +1,8 @@
 # CppBenchmark
-C++ Benchmark Library allows to create performance benchmarks of some code to investigate 
+C++ Benchmark Library allows to create performance benchmarks of some code to investigate
 average/minimal/maximal execution time, items processing processing speed, I/O throughput.
 CppBenchmark library has lots of [features](#features) and allows to make benchmarks for
-[different kind of scenarios](#benchmark-examples) such as micro-benchmarks, benchmarks 
+[different kind of scenarios](#benchmark-examples) such as micro-benchmarks, benchmarks
 with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
 # Contents
@@ -31,7 +31,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 # Features
 * [Micro-benchmarks](#example-1-benchmark-of-a-function-call)
 * Benchmarks with [static fixtures](#example-3-benchmark-with-static-fixture) and [dynamic fixtures](#example-4-benchmark-with-dynamic-fixture)
-* Benchmarks with [parameters](#example-5-benchmark-with-parameters) (single, pair, triple parameters, ranges, ranges with selectors) 
+* Benchmarks with [parameters](#example-5-benchmark-with-parameters) (single, pair, triple parameters, ranges, ranges with selectors)
 * [Benchmark infinite run with cancelation](#example-2-benchmark-with-cancelation)
 * [Benchmark items processing speed](#example-6-benchmark-class)
 * [Benchmark I/O throughput](#example-7-benchmark-io-operations)
@@ -1083,6 +1083,3 @@ When you create and build a benchmark you can run it with the following command 
 * **-l, --list** - List all avaliable benchmarks
 * **-o, --output** - Output format (console, csv, json). Default: console
 * **-s, --silent** - Launch in silent mode. No progress will be shown!
-
-# Todo
-* Doxygen summary
