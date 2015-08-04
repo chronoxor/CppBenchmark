@@ -1,3 +1,0 @@
-cd ..
-cd build
-ctest

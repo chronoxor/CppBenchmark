@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['pair',['Pair',['../class_cpp_benchmark_1_1_settings.html#ac1a948a6ddbf0f89de3e2d694744e134',1,'CppBenchmark::Settings']]],
+  ['pairrange',['PairRange',['../class_cpp_benchmark_1_1_settings.html#a74e97a83e083ff2fe792a57033918a43',1,'CppBenchmark::Settings::PairRange(int from1, int to1, int from2, int to2)'],['../class_cpp_benchmark_1_1_settings.html#a6a0dba8ea8c20d7fd87c7a8b0f348be6',1,'CppBenchmark::Settings::PairRange(int from1, int to1, std::function&lt; int(int, int, int &amp;)&gt; selector1, int from2, int to2, std::function&lt; int(int, int, int &amp;)&gt; selector2)']]],
+  ['param',['Param',['../class_cpp_benchmark_1_1_settings.html#aec454951045f38086c6f85834a56bd76',1,'CppBenchmark::Settings']]],
+  ['paramrange',['ParamRange',['../class_cpp_benchmark_1_1_settings.html#a05240233a5032cac11f2aa0215ed6a32',1,'CppBenchmark::Settings::ParamRange(int from, int to)'],['../class_cpp_benchmark_1_1_settings.html#adc2f7b58fa7324ca27abe3e7e5b6f475',1,'CppBenchmark::Settings::ParamRange(int from, int to, std::function&lt; int(int, int, int &amp;)&gt; selector)']]],
+  ['params',['params',['../class_cpp_benchmark_1_1_settings.html#a53b60a271c248305240e0436eaefd203',1,'CppBenchmark::Settings']]],
+  ['pc',['pc',['../class_cpp_benchmark_1_1_settings.html#a867a8f0a685852653edb142e5d7035ca',1,'CppBenchmark::Settings::pc() const '],['../class_cpp_benchmark_1_1_settings.html#a249301abea8166ade7a02e716f95d136',1,'CppBenchmark::Settings::PC(int producers, int consumers)']]],
+  ['pcrange',['PCRange',['../class_cpp_benchmark_1_1_settings.html#a9e32d02676f819e672010208b1efaaf2',1,'CppBenchmark::Settings::PCRange(int producers_from, int producers_to, int consumers_from, int consumers_to)'],['../class_cpp_benchmark_1_1_settings.html#a2ba339f9863df3a05fdd84c5f481ccdd',1,'CppBenchmark::Settings::PCRange(int producers_from, int producers_to, std::function&lt; int(int, int, int &amp;)&gt; producers_selector, int consumers_from, int consumers_to, std::function&lt; int(int, int, int &amp;)&gt; consumers_selector)']]],
+  ['phase',['Phase',['../class_cpp_benchmark_1_1_phase.html',1,'CppBenchmark']]],
+  ['phase_2eh',['phase.h',['../phase_8h.html',1,'']]],
+  ['phase_5fcore_2ecpp',['phase_core.cpp',['../phase__core_8cpp.html',1,'']]],
+  ['phase_5fcore_2eh',['phase_core.h',['../phase__core_8h.html',1,'']]],
+  ['phase_5fmetrics_2ecpp',['phase_metrics.cpp',['../phase__metrics_8cpp.html',1,'']]],
+  ['phase_5fmetrics_2eh',['phase_metrics.h',['../phase__metrics_8h.html',1,'']]],
+  ['phase_5fscope_2ecpp',['phase_scope.cpp',['../phase__scope_8cpp.html',1,'']]],
+  ['phase_5fscope_2eh',['phase_scope.h',['../phase__scope_8h.html',1,'']]],
+  ['phasecore',['PhaseCore',['../class_cpp_benchmark_1_1_phase_metrics.html#ac951c6d438c23e6aa19cc0fdc29e7559',1,'CppBenchmark::PhaseMetrics::PhaseCore()'],['../class_cpp_benchmark_1_1_phase_core.html#a1a8e7bd77e1e33916d3efcae4a78613e',1,'CppBenchmark::PhaseCore::PhaseCore(const std::string &amp;name)'],['../class_cpp_benchmark_1_1_phase_core.html#a039d782ef2ca00b827ed43f8f22e9db3',1,'CppBenchmark::PhaseCore::PhaseCore(const PhaseCore &amp;)=delete'],['../class_cpp_benchmark_1_1_phase_core.html#af85a4e41ae9d7a06b54d598c841045e8',1,'CppBenchmark::PhaseCore::PhaseCore(PhaseCore &amp;&amp;)=delete']]],
+  ['phasecore',['PhaseCore',['../class_cpp_benchmark_1_1_phase_core.html',1,'CppBenchmark']]],
+  ['phasemetrics',['PhaseMetrics',['../class_cpp_benchmark_1_1_phase_metrics.html',1,'CppBenchmark']]],
+  ['phasemetrics',['PhaseMetrics',['../class_cpp_benchmark_1_1_phase_metrics.html#ae3e4e39a436f3f60093b5dd3683e2cc1',1,'CppBenchmark::PhaseMetrics::PhaseMetrics()'],['../class_cpp_benchmark_1_1_phase_metrics.html#a15921f7a1ca9e5cbc9b79b9f6cd2ac4b',1,'CppBenchmark::PhaseMetrics::PhaseMetrics(const PhaseMetrics &amp;)=default'],['../class_cpp_benchmark_1_1_phase_metrics.html#a68f144afef1a069434c4828d8b8694a7',1,'CppBenchmark::PhaseMetrics::PhaseMetrics(PhaseMetrics &amp;&amp;instance)=default']]],
+  ['phasescope',['PhaseScope',['../class_cpp_benchmark_1_1_phase_scope.html',1,'CppBenchmark']]],
+  ['phasescope',['PhaseScope',['../class_cpp_benchmark_1_1_phase_scope.html#a1d8e6c859bff385c6f11e1399e35b33c',1,'CppBenchmark::PhaseScope::PhaseScope(const std::shared_ptr&lt; Phase &gt; &amp;phase) noexcept'],['../class_cpp_benchmark_1_1_phase_scope.html#a2c85bdfb81ad50c15c37566b98524c7f',1,'CppBenchmark::PhaseScope::PhaseScope(const PhaseScope &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_phase_scope.html#acef947a5297176ebb4f94a505b85229b',1,'CppBenchmark::PhaseScope::PhaseScope(PhaseScope &amp;&amp;instance) noexcept=default']]],
+  ['produce_5fstopped',['produce_stopped',['../class_cpp_benchmark_1_1_context_p_c.html#a364a05dbf532ed80f699f44c127c2d02',1,'CppBenchmark::ContextPC']]],
+  ['producers',['producers',['../class_cpp_benchmark_1_1_context_p_c.html#a06ed609321f523d39e4309547e21bdbf',1,'CppBenchmark::ContextPC']]]
+];

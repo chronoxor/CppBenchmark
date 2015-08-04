@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['cancel',['Cancel',['../class_cpp_benchmark_1_1_context.html#a42227d97cc30b7d065ac7dacd5a84e49',1,'CppBenchmark::Context']]],
+  ['canceled',['canceled',['../class_cpp_benchmark_1_1_context.html#a0e68498c0044c83de6abdb56d164f938',1,'CppBenchmark::Context']]],
+  ['cleanup',['Cleanup',['../class_cpp_benchmark_1_1_fixture.html#a5436824d6a8d00158f634f015b648648',1,'CppBenchmark::Fixture']]],
+  ['cleanupconsumer',['CleanupConsumer',['../class_cpp_benchmark_1_1_fixture_p_c.html#af0a1698e09dcb545858144ad289ec526',1,'CppBenchmark::FixturePC']]],
+  ['cleanupproducer',['CleanupProducer',['../class_cpp_benchmark_1_1_fixture_p_c.html#a7350b499a4726ea0719e63ec7c31bc29',1,'CppBenchmark::FixturePC']]],
+  ['cleanupthread',['CleanupThread',['../class_cpp_benchmark_1_1_fixture_threads.html#ae9c4c94c6a643cc64da51a0473dcfa4d',1,'CppBenchmark::FixtureThreads']]],
+  ['clearallbenchmarks',['ClearAllBenchmarks',['../class_cpp_benchmark_1_1_launcher.html#a0a1309c66dfaeb0a26b68c1b7b564a90',1,'CppBenchmark::Launcher']]],
+  ['console',['Console',['../class_cpp_benchmark_1_1_console.html#a7ea9e2321ea194ea119f524c0dc3f021',1,'CppBenchmark::Console::Console()=delete'],['../class_cpp_benchmark_1_1_console.html#a30c7357b50f63c9332e8d1c4eed665e0',1,'CppBenchmark::Console::Console(const Console &amp;)=delete'],['../class_cpp_benchmark_1_1_console.html#a51e9ee63ecd62f031fdf509244471ffa',1,'CppBenchmark::Console::Console(Console &amp;&amp;)=delete']]],
+  ['consume_5fstopped',['consume_stopped',['../class_cpp_benchmark_1_1_context_p_c.html#afa28932697f09949e5c6c54f8c86d2b2',1,'CppBenchmark::ContextPC']]],
+  ['consumers',['consumers',['../class_cpp_benchmark_1_1_context_p_c.html#ae60806759aabb08702ca2ed1f92f0d0f',1,'CppBenchmark::ContextPC']]],
+  ['context',['Context',['../class_cpp_benchmark_1_1_context.html#a39c7d1d41532c6af7c26be480def2b0e',1,'CppBenchmark::Context::Context()=delete'],['../class_cpp_benchmark_1_1_context.html#a5ae27edcf99d8576aa63fced94c71753',1,'CppBenchmark::Context::Context(const Context &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context.html#a69beafc8f914c76f1ffe755599e65783',1,'CppBenchmark::Context::Context(Context &amp;&amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context.html#a0696aa51287b21aa3e47f0cda045cdac',1,'CppBenchmark::Context::Context(int x, int y, int z) noexcept']]],
+  ['contextpc',['ContextPC',['../class_cpp_benchmark_1_1_context_p_c.html#ac08acb7a38b8bb4d7c0b89b8b1ca37c1',1,'CppBenchmark::ContextPC::ContextPC()=delete'],['../class_cpp_benchmark_1_1_context_p_c.html#a41f8d99cdb8197b5e3009a476cf399ee',1,'CppBenchmark::ContextPC::ContextPC(const ContextPC &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context_p_c.html#a0947d2304c4111441e7ca667d8713286',1,'CppBenchmark::ContextPC::ContextPC(ContextPC &amp;&amp;) noexcept=default']]],
+  ['contextthread',['ContextThread',['../class_cpp_benchmark_1_1_context_thread.html#a3115639f35e3decc3c9489166e44e91f',1,'CppBenchmark::ContextThread::ContextThread()=delete'],['../class_cpp_benchmark_1_1_context_thread.html#a06b6e1e201ced34cc19d1667c5a15b0d',1,'CppBenchmark::ContextThread::ContextThread(const ContextThread &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context_thread.html#a539dae10700aa3d99e5b9142a44ca3f3',1,'CppBenchmark::ContextThread::ContextThread(ContextThread &amp;&amp;) noexcept=default']]],
+  ['cpuarchitecture',['CpuArchitecture',['../class_cpp_benchmark_1_1_system.html#a69e6dae8f177b586f704d37c936782a5',1,'CppBenchmark::System']]],
+  ['cpuclockspeed',['CpuClockSpeed',['../class_cpp_benchmark_1_1_system.html#ac32f0e061ce95898ae5542aea731230e',1,'CppBenchmark::System']]],
+  ['cpuhyperthreading',['CpuHyperThreading',['../class_cpp_benchmark_1_1_system.html#ac8b04fd4dffcc7eeb8ecc637cd67a914',1,'CppBenchmark::System']]],
+  ['cpulogicalcores',['CpuLogicalCores',['../class_cpp_benchmark_1_1_system.html#aefb037354b59d68d63bfa83f0a1e3b27',1,'CppBenchmark::System']]],
+  ['cpuphysicalcores',['CpuPhysicalCores',['../class_cpp_benchmark_1_1_system.html#a61add01c06607efea3508bd977742555',1,'CppBenchmark::System']]],
+  ['cputotalcores',['CpuTotalCores',['../class_cpp_benchmark_1_1_system.html#a31c7890d9bb87c545d3f143865224ead',1,'CppBenchmark::System']]],
+  ['current',['current',['../class_cpp_benchmark_1_1_phase_core.html#aca6383511f2c044d9e5d6c8f29d1e859',1,'CppBenchmark::PhaseCore']]],
+  ['currentthreadid',['CurrentThreadId',['../class_cpp_benchmark_1_1_system.html#a18edbab54a02fecf0ca946d3d9756774',1,'CppBenchmark::System']]],
+  ['custom_5fint',['custom_int',['../class_cpp_benchmark_1_1_phase_metrics.html#ad8726716261cf5d27c3c790b04b8e01e',1,'CppBenchmark::PhaseMetrics']]],
+  ['custom_5fstr',['custom_str',['../class_cpp_benchmark_1_1_phase_metrics.html#a64477ae314a27682a299dacc184bb703',1,'CppBenchmark::PhaseMetrics']]]
+];
