@@ -107,12 +107,12 @@
       <file leaf-file-name="environment.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/environment.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0703125">
-              <caret line="263" column="59" selection-start-line="263" selection-start-column="31" selection-end-line="263" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.65848213">
+              <caret line="265" column="0" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
               <folding>
                 <element signature="e#173#197#0" expanded="true" />
-                <element signature="e#610#718#0" expanded="true" />
-                <element signature="e#1096#1109#0" expanded="true" />
+                <element signature="e#627#735#0" expanded="true" />
+                <element signature="e#1113#1126#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,9 +122,10 @@
         <entry file="file://$PROJECT_DIR$/source/system.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
+              <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
               <folding>
-                <element signature="e#1579#1876#0" expanded="true" />
+                <element signature="e#163#182#0" expanded="true" />
+                <element signature="e#341#406#0" expanded="true" />
                 <element signature="e#3651#3774#0" expanded="true" />
                 <element signature="e#4349#4679#0" expanded="true" />
                 <element signature="e#5083#5152#0" expanded="true" />
@@ -833,14 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/reporter_console.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="45" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/reporter_json.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -852,9 +845,10 @@
     <entry file="file://$PROJECT_DIR$/source/system.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
+          <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
           <folding>
-            <element signature="e#1579#1876#0" expanded="true" />
+            <element signature="e#163#182#0" expanded="true" />
+            <element signature="e#341#406#0" expanded="true" />
             <element signature="e#3651#3774#0" expanded="true" />
             <element signature="e#4349#4679#0" expanded="true" />
             <element signature="e#5083#5152#0" expanded="true" />
@@ -862,14 +856,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/source/reporter_console.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="45" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/source/environment.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0703125">
-          <caret line="263" column="59" selection-start-line="263" selection-start-column="31" selection-end-line="263" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.65848213">
+          <caret line="265" column="0" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
           <folding>
             <element signature="e#173#197#0" expanded="true" />
-            <element signature="e#610#718#0" expanded="true" />
-            <element signature="e#1096#1109#0" expanded="true" />
+            <element signature="e#627#735#0" expanded="true" />
+            <element signature="e#1113#1126#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -9,6 +9,7 @@
 #include "environment.h"
 
 #include <chrono>
+#include <regex>
 #include <sstream>
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -268,7 +269,7 @@ std::string Environment::OSVersion()
     while (getline(stream, line)) {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
-            return matches[1].str();
+            return matches[1];
     }
 
     return "<linux>";
