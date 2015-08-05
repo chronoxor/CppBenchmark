@@ -38,8 +38,9 @@ void ReporterConsole::ReportSystem()
 void ReporterConsole::ReportEnvironment()
 {
     _stream << DARKGREY << GenerateSeparator('=') << std::endl;
-    _stream << WHITE << "OS version: " << DARKGREY << (Environment::Is64BitOS() ? "64-bit" : (Environment::Is32BitOS() ? "32-bit" : "<unknown>")) << std::endl;
-    _stream << WHITE << "Process version: " << DARKGREY << (Environment::Is64BitProcess() ? "64-bit" : (Environment::Is32BitProcess() ? "32-bit" : "<unknown>")) << std::endl;
+    _stream << WHITE << "OS version: " << DARKGREY << Environment::OSVersion() << std::endl;
+    _stream << WHITE << "OS bits: " << DARKGREY << (Environment::Is64BitOS() ? "64-bit" : (Environment::Is32BitOS() ? "32-bit" : "<unknown>")) << std::endl;
+    _stream << WHITE << "Process bits: " << DARKGREY << (Environment::Is64BitProcess() ? "64-bit" : (Environment::Is32BitProcess() ? "32-bit" : "<unknown>")) << std::endl;
     _stream << WHITE << "Process configuaraion: " << DARKGREY << (Environment::IsDebug() ? "debug" : (Environment::IsRelease() ? "release" : "<unknown>")) << std::endl;
     time_t timestamp = Environment::Timestamp();
     _stream << WHITE << "Local timestamp: " << DARKGREY << std::asctime(std::localtime(&timestamp));

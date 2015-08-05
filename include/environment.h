@@ -10,6 +10,7 @@
 #define CPPBENCHMARK_ENVIRONMENT_H
 
 #include <ctime>
+#include <string>
 
 namespace CppBenchmark {
 
@@ -41,6 +42,9 @@ public:
     static bool IsDebug();
     //! Is compiled in release mode?
     static bool IsRelease();
+
+    //! Get OS version string
+    static std::string OSVersion();
 
     //! Get the current timestamp
     static time_t Timestamp();

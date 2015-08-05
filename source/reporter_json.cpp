@@ -58,6 +58,7 @@ void ReporterJSON::ReportEnvironment()
     _stream << Internals::indent2 << "\"is_32_bit_process\": " << (Environment::Is32BitProcess() ? "true" : "false") << ",\n";
     _stream << Internals::indent2 << "\"is_debug\": " << (Environment::IsDebug() ? "true" : "false") << ",\n";
     _stream << Internals::indent2 << "\"is_release\": " << (Environment::IsRelease() ? "true" : "false") << ",\n";
+    _stream << Internals::indent2 << "\"os_version\": " << Environment::OSVersion() << "\n";
     _stream << Internals::indent2 << "\"timestamp\": " << Environment::Timestamp() << "\n";
     _stream << Internals::indent1 << "},\n";
 }
