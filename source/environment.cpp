@@ -261,6 +261,16 @@ std::string Environment::OSVersion()
     }
     return os.str();
 #elif defined(linux) || defined(__linux) || defined(__linux__)
+    static std::regex pattern("DISTRIB_DESCRIPTION=\"(.*)\"");
+
+    std::string line;
+    std::ifstream stream("/etc/lsb-release");
+    while (getline(stream, line)) {
+        std::smatch matches;
+        if (std::regex_match(line, matches, pattern))
+            return matches[1].str();
+    }
+
     return "<linux>";
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     return "<unix>";
