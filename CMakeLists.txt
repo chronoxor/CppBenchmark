@@ -10,7 +10,7 @@ include(cmake/SetCrtSecureWarningsOff.cmake)
 find_package(Threads REQUIRED)
 
 # Library
-include_directories(include)
+include_directories("include")
 file(GLOB_RECURSE HEADER_FILES "${PROJECT_SOURCE_DIR}/source/*.h")
 file(GLOB_RECURSE SOURCE_FILES "${PROJECT_SOURCE_DIR}/source/*.cpp")
 add_library(cppbenchmark ${HEADER_FILES} ${SOURCE_FILES})
@@ -27,9 +27,11 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
 endforeach()
 
 # Tests
+include_directories("modules/catch/single_include")
+file(GLOB_RECURSE CATCH_HEADER_FILES "${PROJECT_SOURCE_DIR}/modules/catch/single_include/catch.hpp")
 file(GLOB_RECURSE TESTS_HEADER_FILES "${PROJECT_SOURCE_DIR}/tests/*.h")
 file(GLOB_RECURSE TESTS_SOURCE_FILES "${PROJECT_SOURCE_DIR}/tests/*.cpp")
-add_executable(cppbenchmark-tests ${TESTS_HEADER_FILES} ${TESTS_SOURCE_FILES})
+add_executable(cppbenchmark-tests ${CATCH_HEADER_FILES} ${TESTS_HEADER_FILES} ${TESTS_SOURCE_FILES})
 target_link_libraries(cppbenchmark-tests cppbenchmark Threads::Threads)
 list(APPEND INSTALL_TARGETS cppbenchmark-tests)
 
