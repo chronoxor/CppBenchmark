@@ -11,7 +11,6 @@
 
 #include <limits>
 #include <mutex>
-#include <unordered_map>
 #include <vector>
 
 #include "phase_metrics.h"

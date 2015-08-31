@@ -4,7 +4,6 @@
     <generated>
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-itertor" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-test-system" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-mpmc" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-spsc" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-iterators" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-random" />
@@ -13,15 +12,16 @@
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-sort" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-tests" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-atomic" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-fwrite" />
+      <config projectName="cppbenchmark" targetName="cppbenchmark-example-mpsc" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-containers" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-stl-containers-insert" />
       <config projectName="cppbenchmark" targetName="doxygen" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-main" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-timers" />
       <config projectName="cppbenchmark" targetName="cppbenchmark-example-spsc2" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-mpsc" />
+      <config projectName="cppbenchmark" targetName="cppbenchmark-example-mpmc" />
       <config projectName="cppbenchmark" targetName="cppbenchmark" />
+      <config projectName="cppbenchmark" targetName="cppbenchmark-example-fwrite" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
@@ -31,8 +31,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3701edfd-3577-46a3-8ad8-44a5d9a3019b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/environment.cpp" afterPath="$PROJECT_DIR$/source/environment.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/cppbenchmark.iml" afterPath="$PROJECT_DIR$/.idea/cppbenchmark.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/phase_core.h" afterPath="$PROJECT_DIR$/include/phase_core.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/phase_metrics.h" afterPath="$PROJECT_DIR$/include/phase_metrics.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cppbenchmark.iws" />
@@ -107,13 +110,9 @@
       <file leaf-file-name="environment.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/environment.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.65848213">
-              <caret line="265" column="0" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
-              <folding>
-                <element signature="e#173#197#0" expanded="true" />
-                <element signature="e#627#735#0" expanded="true" />
-                <element signature="e#1113#1126#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-0.55022323">
+              <caret line="76" column="1" selection-start-line="76" selection-start-column="1" selection-end-line="76" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -256,7 +255,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -284,13 +283,13 @@
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="cppbenchmark" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$1$1" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="cppbenchmark" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$1$1" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="CppBenchmark" />
@@ -300,7 +299,7 @@
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="cppbenchmark" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$1$1" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="CppBenchmark" />
@@ -316,7 +315,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -329,7 +328,7 @@
       <recent name="C:\Workspace\Projects\CppBenchmark\source" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.cppbenchmark-tests">
+  <component name="RunManager" selected="Application.Build All">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark" CONFIG_NAME="Debug">
       <envs />
       <method />
@@ -343,7 +342,7 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+    <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
       <envs />
       <method />
     </configuration>
@@ -395,27 +394,15 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="doxygen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="doxygen" CONFIG_NAME="Debug">
+    <configuration default="false" name="cppbenchmark-example-random" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-random" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-random">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-itertor" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-itertor" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-itertor">
+    <configuration default="false" name="cppbenchmark-example-iterators" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-iterators" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-iterators">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-random" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-random" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-random">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="cppbenchmark-example-iterators" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-iterators" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-iterators">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="cppbenchmark-example-spsc2" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-spsc2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-spsc2">
-      <envs />
-      <method />
-    </configuration>
-    <list size="18">
+    <list size="15">
       <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
       <item index="1" class="java.lang.String" itemvalue="Application.cppbenchmark" />
       <item index="2" class="java.lang.String" itemvalue="Application.cppbenchmark-tests" />
@@ -429,11 +416,8 @@
       <item index="10" class="java.lang.String" itemvalue="Application.cppbenchmark-example-mpsc" />
       <item index="11" class="java.lang.String" itemvalue="Application.cppbenchmark-example-timers" />
       <item index="12" class="java.lang.String" itemvalue="Application.cppbenchmark-example-fpu" />
-      <item index="13" class="java.lang.String" itemvalue="Application.doxygen" />
-      <item index="14" class="java.lang.String" itemvalue="Application.cppbenchmark-example-itertor" />
-      <item index="15" class="java.lang.String" itemvalue="Application.cppbenchmark-example-random" />
-      <item index="16" class="java.lang.String" itemvalue="Application.cppbenchmark-example-iterators" />
-      <item index="17" class="java.lang.String" itemvalue="Application.cppbenchmark-example-spsc2" />
+      <item index="13" class="java.lang.String" itemvalue="Application.cppbenchmark-example-random" />
+      <item index="14" class="java.lang.String" itemvalue="Application.cppbenchmark-example-iterators" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -451,9 +435,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1554" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1140625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1140625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36099586" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3118949" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -782,7 +766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -866,13 +849,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/environment.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65848213">
-          <caret line="265" column="0" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
-          <folding>
-            <element signature="e#173#197#0" expanded="true" />
-            <element signature="e#627#735#0" expanded="true" />
-            <element signature="e#1113#1126#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-0.55022323">
+          <caret line="76" column="1" selection-start-line="76" selection-start-column="1" selection-end-line="76" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>

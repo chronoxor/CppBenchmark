@@ -11,7 +11,7 @@
 
 #include <cstdint>
 #include <limits>
-#include <unordered_map>
+#include <map>
 
 namespace CppBenchmark {
 
@@ -76,10 +76,10 @@ public:
     //! Get data throughput (bytes / second)
     int64_t bytes_per_second() const noexcept;
 
-    //! Get custom integers hash table
-    const std::unordered_map<std::string, int>& custom_int() const noexcept { return _custom_int; }
-    //! Get custom strings hash table
-    const std::unordered_map<std::string, std::string>& custom_str() const noexcept { return _custom_str; }
+    //! Get custom integers map
+    const std::map<std::string, int>& custom_int() const noexcept { return _custom_int; }
+    //! Get custom strings map
+    const std::map<std::string, std::string>& custom_str() const noexcept { return _custom_str; }
 
     //! Increase iterations count of the current phase
     /*!
@@ -122,8 +122,8 @@ private:
     int64_t _total_iterations;
     int64_t _total_items;
     int64_t _total_bytes;
-    std::unordered_map<std::string, int> _custom_int;
-    std::unordered_map<std::string, std::string> _custom_str;
+    std::map<std::string, int> _custom_int;
+    std::map<std::string, std::string> _custom_str;
 
     int64_t _timestamp;
 
