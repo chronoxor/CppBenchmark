@@ -1,3 +1,6 @@
 [submodule "modules/catch"]
 	path = modules/catch
 	url = https://github.com/philsquared/Catch.git
+[submodule "modules/cpp-optparse"]
+	path = modules/cpp-optparse
+	url = https://github.com/weisslj/cpp-optparse.git

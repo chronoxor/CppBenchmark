@@ -11,8 +11,9 @@
 #include <iomanip>
 #include <regex>
 
+#include <OptionParser.h>
+
 #include "console.h"
-#include "option_parser.h"
 #include "reporter_console.h"
 #include "reporter_csv.h"
 #include "reporter_json.h"
