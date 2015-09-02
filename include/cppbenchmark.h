@@ -25,7 +25,13 @@ GitHub: https://github.com/chronoxor/CppBenchmark
 #ifndef CPPBENCHMARK_H
 #define CPPBENCHMARK_H
 
+#include <sstream>
+
+#include "executor.h"
 #include "launcher_console.h"
+#include "reporter_console.h"
+#include "reporter_csv.h"
+#include "reporter_json.h"
 
 /*!
     \namespace CppBenchmark
@@ -218,5 +224,34 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(Cont
 */
 #define BENCHMARK_CLASS(type, name, ...)\
 namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(name, type::TSettings(__VA_ARGS__))); }
+
+#define BENCHCODE_START(name) CppBenchmark::Executor::GetInstance().StartBenchmark(name);
+#define BENCHCODE_STOP(name) CppBenchmark::Executor::GetInstance().StopBenchmark(name);
+#define BENCHCODE_REPORT()\
+{\
+    CppBenchmark::ReporterConsole BENCHMARK_INTERNAL_UNIQUE_NAME(reporter);\
+    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
+}
+#define BENCHCODE_REPORT_STR(value)\
+{\
+    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);
+    CppBenchmark::ReporterConsole BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
+    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
+    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();
+}
+#define BENCHCODE_REPORT_CSV(value)\
+{\
+    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);
+    CppBenchmark::ReporterCSV BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
+    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
+    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();
+}
+#define BENCHCODE_REPORT_JSON(value)\
+{\
+    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);
+    CppBenchmark::ReporterJSON BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
+    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
+    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();
+}
 
 #endif // CPPBENCHMARK_H

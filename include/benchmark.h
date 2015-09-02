@@ -26,7 +26,7 @@ class Benchmark : public virtual Fixture
 {
     friend class BenchmarkPC;
     friend class BenchmarkThreads;
-    friend class ExecutorThreads;
+    friend class Executor;
     friend class Launcher;
 
 public:

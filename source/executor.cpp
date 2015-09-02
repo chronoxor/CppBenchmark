@@ -1,6 +1,6 @@
 /*!
     \file executor.cpp
-    \brief Dynamic benchmarks executor (not thread-safe) class implementation
+    \brief Dynamic benchmarks executor class implementation
     \author Ivan Shynkarenka
     \date 02.09.2015
     \copyright MIT License
@@ -52,17 +52,23 @@ std::shared_ptr<Phase> Executor::StartBenchmark(const std::string& benchmark)
 {
     std::shared_ptr<PhaseCore> result;
 
-    // Find or create a dynamic benchmark with the given name
-    auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(),
-                           [&benchmark](std::shared_ptr<PhaseCore>& item) { return item->name() == benchmark; });
-    if (it == _benchmarks.end()) {
-        result = std::make_shared<PhaseCore>(benchmark);
-        _benchmarks.emplace_back(result);
-    }
-    else
-        result = *it;
+    // Update dynamic benchmarks collection under lock guard...
+    {
+        std::lock_guard<std::mutex> lock(_mutex);
 
-    // Start new iteration for the dynamic benchmark
+        // Find or create a dynamic benchmark with the given name
+        auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item) {
+            return ((item->name() == benchmark) && (item->_thread == System::CurrentThreadId()));
+        });
+        if (it == _benchmarks.end()) {
+            result = std::make_shared<PhaseCore>(benchmark);
+            _benchmarks.emplace_back(result);
+        }
+        else
+            result = *it;
+    }
+
+    // Start new iteration for the child dynamic benchmark
     result->StartCollectingMetrics();
 
     // Add new metrics iteration
@@ -71,8 +77,27 @@ std::shared_ptr<Phase> Executor::StartBenchmark(const std::string& benchmark)
     return result;
 }
 
+void Executor::StopBenchmark(const std::string& benchmark)
+{
+    // Update dynamic benchmarks collection under lock guard...
+    {
+        std::lock_guard<std::mutex> lock(_mutex);
+
+        // Find dynamic benchmark with the given name
+        auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item) {
+            return ((item->name() == benchmark) && (item->_thread == System::CurrentThreadId()));
+        });
+        if (it != _benchmarks.end())
+            (*it)->StopCollectingMetrics();
+    }
+}
+
 void Executor::Report(Reporter& reporter)
 {
+    std::lock_guard<std::mutex> lock(_mutex);
+
+    UpdateBenchmarkThreads();
+
     // Report header, system & environment
     reporter.ReportHeader();
     reporter.ReportSystem();
@@ -107,6 +132,12 @@ void Executor::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
         std::string child_name = name + "." + child->name();
         ReportPhase(reporter, *child, child_name);
     }
+}
+
+void Executor::UpdateBenchmarkThreads()
+{
+    for (auto it = _benchmarks.begin(); it != _benchmarks.end(); ++it)
+        Benchmark::UpdateBenchmarkThreads(**it);
 }
 
 } // namespace CppBenchmark

@@ -6,19 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$/cmake/SetCompilerFeatures.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake/SetCompilerWarningAll.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake/SetCrtSecureWarningsOff.cmake" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/atomic.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/containers.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/fpu.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/fwrite.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/iterators.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/mpmc.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/mpsc.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/random.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/sort.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/spsc.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/threads.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/examples/timers.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/modules/catch/single_include/catch.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/catch.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/cpp-optparse.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/cpp-optparse/OptionParser.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/cpp-optparse/OptionParser.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/benchmark.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/benchmark_pc.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/benchmark_threads.cpp" isTestSource="false" />
@@ -27,9 +19,10 @@
       <sourceFolder url="file://$MODULE_DIR$/source/context_pc.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/context_thread.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/environment.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/executor.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/executor_threads.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/launcher.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/launcher_console.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/option_parser.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/phase_core.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/phase_metrics.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/phase_scope.cpp" isTestSource="false" />
@@ -51,6 +44,7 @@
         <CLASSES>
           <root url="file://$MODULE_DIR$/include" />
           <root url="file://$MODULE_DIR$/modules/catch/single_include" />
+          <root url="file://$MODULE_DIR$/modules/cpp-optparse" />
           <root url="file://Z:/Soft/Development/MinGW-W64/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" />
           <root url="file://Z:/Soft/Development/MinGW-W64/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/include-fixed" />
           <root url="file://Z:/Soft/Development/MinGW-W64/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/objc" />
@@ -60,6 +54,7 @@
         <SOURCES>
           <root url="file://$MODULE_DIR$/include" />
           <root url="file://$MODULE_DIR$/modules/catch/single_include" />
+          <root url="file://$MODULE_DIR$/modules/cpp-optparse" />
           <root url="file://Z:/Soft/Development/MinGW-W64/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" />
           <root url="file://Z:/Soft/Development/MinGW-W64/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/include-fixed" />
           <root url="file://Z:/Soft/Development/MinGW-W64/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/objc" />
@@ -67,7 +62,8 @@
           <root url="file://Z:/Soft/Development/MinGW-W64/mingw64/x86_64-w64-mingw32/include" />
         </SOURCES>
         <excluded>
-          <root url="file://$MODULE_DIR$/modules/catch/single_include/catch.hpp" />
+          <root url="file://$MODULE_DIR$/modules/cpp-optparse/OptionParser.cpp" />
+          <root url="file://$MODULE_DIR$/modules/cpp-optparse/OptionParser.h" />
         </excluded>
       </library>
     </orderEntry>
