@@ -60,6 +60,7 @@ void PhaseMetrics::StopCollecting() noexcept
     // Get iteration duration
     int64_t duration = System::Timestamp() - _timestamp;
 
+    // Limitation of the Unix environment
     if (duration > 143838832099148626)
         duration = 143838832099148626;
 
@@ -81,6 +82,7 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
     if (metrics._max_time > _max_time)
         _max_time = metrics._max_time;
 
+    // Limitation of the Unix environment
     if (metrics._max_time > 143838832099148626)
         _max_time = 143838832099148626;
 
