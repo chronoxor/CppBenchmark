@@ -28,6 +28,7 @@ class PhaseCore : public Phase
     friend class Benchmark;
     friend class BenchmarkPC;
     friend class BenchmarkThreads;
+    friend class Executor;
     friend class Launcher;
 
 public:

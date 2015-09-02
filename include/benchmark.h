@@ -26,6 +26,7 @@ class Benchmark : public virtual Fixture
 {
     friend class BenchmarkPC;
     friend class BenchmarkThreads;
+    friend class ExecutorThreads;
     friend class Launcher;
 
 public:
@@ -51,6 +52,8 @@ public:
 
     //! Get benchmark name
     const std::string& name() const { return _name; }
+    //! Get benchmark settings
+    const Settings& settings() const { return _settings; }
 
 protected:
     //! Benchmark run method
@@ -73,13 +76,13 @@ private:
     void InitBenchmarkContext(Context& context);
 
     void UpdateBenchmarkMetrics();
-    void UpdateBenchmarkMetrics(PhaseCore& phase);
+    static void UpdateBenchmarkMetrics(PhaseCore& phase);
 
     void UpdateBenchmarkThreads();
-    void UpdateBenchmarkThreads(PhaseCore& phase);
+    static void UpdateBenchmarkThreads(PhaseCore& phase);
 
     void UpdateBenchmarkNames();
-    void UpdateBenchmarkNames(PhaseCore& phase, const std::string& name);
+    static void UpdateBenchmarkNames(PhaseCore& phase, const std::string& name);
 };
 
 /*! \example atomic.cpp Atomic operations benchmark */

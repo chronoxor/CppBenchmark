@@ -47,7 +47,7 @@ void Launcher::Report(Reporter& reporter)
         if (benchmark->_launched) {
             // Report benchmark results
             reporter.ReportBenchmarkHeader();
-            reporter.ReportBenchmark(*benchmark, benchmark->_settings);
+            reporter.ReportBenchmark(*benchmark, benchmark->settings());
             reporter.ReportPhasesHeader();
             for (auto root_phase : benchmark->_phases) {
                 ReportPhase(reporter, *root_phase, root_phase->name());

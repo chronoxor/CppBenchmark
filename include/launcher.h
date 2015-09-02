@@ -25,8 +25,8 @@ class Launcher : public LauncherHandler
 {
 public:
     Launcher() = default;
-    Launcher(const Benchmark&) = delete;
-    Launcher(Benchmark&&) = delete;
+    Launcher(const Launcher&) = delete;
+    Launcher(Launcher&&) = delete;
     virtual ~Launcher() = default;
 
     Launcher& operator=(const Launcher&) = delete;

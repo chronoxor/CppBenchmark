@@ -21,8 +21,8 @@ namespace CppBenchmark {
 class LauncherConsole : public Launcher
 {
 public:
-    LauncherConsole(const Benchmark&) = delete;
-    LauncherConsole(Benchmark&&) = delete;
+    LauncherConsole(const LauncherConsole&) = delete;
+    LauncherConsole(LauncherConsole&&) = delete;
     virtual ~LauncherConsole() = default;
 
     LauncherConsole& operator=(const LauncherConsole&) = delete;

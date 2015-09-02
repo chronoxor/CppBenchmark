@@ -40,6 +40,7 @@ public:
         \param phase - Sub-phase name
     */
     virtual std::shared_ptr<Phase> StartPhase(const std::string& phase) = 0;
+
     //! Start a new sub-phase with a given name in a multi-thread environment
     /*!
         This method will create or get existent sub-phase with a given name, start benchmark measurement and return it
@@ -48,6 +49,7 @@ public:
         \param phase - Sub-phase name
     */
     virtual std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) = 0;
+
     //! Stop measurement of the current phase
     virtual void StopPhase() = 0;
 
@@ -58,6 +60,7 @@ public:
         \param phase - Sub-phase name
     */
     virtual std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) = 0;
+
     //! Start a new sub-phase with a given name in a multi-thread environment and wrap it in a PhaseScope
     /*!
         Please note the method is thread-safe and might be called in multi-thread environment!
