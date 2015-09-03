@@ -225,6 +225,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(Cont
 #define BENCHMARK_CLASS(type, name, ...)\
 namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(name, type::TSettings(__VA_ARGS__))); }
 
+#define BENCHCODE_SCOPE(name) CppBenchmark::Executor::GetInstance().ScopeBenchmark(name);
 #define BENCHCODE_START(name) CppBenchmark::Executor::GetInstance().StartBenchmark(name);
 #define BENCHCODE_STOP(name) CppBenchmark::Executor::GetInstance().StopBenchmark(name);
 #define BENCHCODE_REPORT()\
@@ -234,24 +235,24 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
 }
 #define BENCHCODE_REPORT_STR(value)\
 {\
-    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);
+    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
     CppBenchmark::ReporterConsole BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
     CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
-    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();
+    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\
 }
 #define BENCHCODE_REPORT_CSV(value)\
 {\
-    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);
+    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
     CppBenchmark::ReporterCSV BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
     CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
-    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();
+    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\
 }
 #define BENCHCODE_REPORT_JSON(value)\
 {\
-    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);
+    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
     CppBenchmark::ReporterJSON BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
     CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
-    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();
+    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\
 }
 
 #endif // CPPBENCHMARK_H

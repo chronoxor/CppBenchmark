@@ -96,7 +96,8 @@ void Executor::Report(Reporter& reporter)
 {
     std::lock_guard<std::mutex> lock(_mutex);
 
-    UpdateBenchmarkThreads();
+    Benchmark::UpdateBenchmarkMetrics(_benchmarks);
+    Benchmark::UpdateBenchmarkThreads(_benchmarks);
 
     // Report header, system & environment
     reporter.ReportHeader();
@@ -132,12 +133,6 @@ void Executor::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
         std::string child_name = name + "." + child->name();
         ReportPhase(reporter, *child, child_name);
     }
-}
-
-void Executor::UpdateBenchmarkThreads()
-{
-    for (auto it = _benchmarks.begin(); it != _benchmarks.end(); ++it)
-        Benchmark::UpdateBenchmarkThreads(**it);
 }
 
 } // namespace CppBenchmark

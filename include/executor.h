@@ -77,7 +77,6 @@ protected:
 
 private:
     void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name);
-    void UpdateBenchmarkThreads();
 };
 
 } // namespace CppBenchmark

@@ -22,7 +22,7 @@ target_link_libraries(cppbenchmark cpp-optparse)
 list(APPEND INSTALL_TARGETS cppbenchmark)
 
 # Examples
-file(GLOB EXAMPLE_FILES RELATIVE "examples" "examples/*.cpp")
+file(GLOB EXAMPLE_FILES RELATIVE "${PROJECT_SOURCE_DIR}/examples" "examples/*.cpp")
 foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
   string(REGEX REPLACE "(.*)\\.cpp" "\\1" EXAMPLE_NAME ${EXAMPLE_FILE})
   set(EXAMPLE_TARGET "cppbenchmark-example-${EXAMPLE_NAME}")
@@ -45,14 +45,14 @@ add_test(cppbenchmark-tests cppbenchmark-tests)
 
 # Install
 install(TARGETS ${INSTALL_TARGETS}
-  RUNTIME DESTINATION "bin"
-  LIBRARY DESTINATION "bin"
-  ARCHIVE DESTINATION "bin")
+  RUNTIME DESTINATION "${PROJECT_SOURCE_DIR}/bin"
+  LIBRARY DESTINATION "${PROJECT_SOURCE_DIR}/bin"
+  ARCHIVE DESTINATION "${PROJECT_SOURCE_DIR}/bin")
 
 # Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(DOXYGEN "doxygen")
   add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "documents/Doxyfile" WORKING_DIRECTORY "documents")
-  add_custom_target(${DOXYGEN} DEPENDS "Doxyfile")
+  add_custom_target(${DOXYGEN} DEPENDS "documents/Doxyfile")
 endif()

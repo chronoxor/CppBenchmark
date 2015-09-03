@@ -68,14 +68,14 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
         }
 
         // Update benchmark root metrics for the current attempt
-        UpdateBenchmarkMetrics();
+        UpdateBenchmarkMetrics(_phases);
     }
 
     // Update benchmark threads
-    UpdateBenchmarkThreads();
+    UpdateBenchmarkThreads(_phases);
 
     // Update benchmark names
-    UpdateBenchmarkNames();
+    UpdateBenchmarkNames(_phases);
 
     // Update benchmark launched flag
     _launched = true;
@@ -100,9 +100,9 @@ void Benchmark::InitBenchmarkContext(Context& context)
     context._metrics = &result->current();
 }
 
-void Benchmark::UpdateBenchmarkMetrics()
+void Benchmark::UpdateBenchmarkMetrics(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto it = _phases.begin(); it != _phases.end(); ++it)
+    for (auto it = phases.begin(); it != phases.end(); ++it)
         UpdateBenchmarkMetrics(**it);
 }
 
@@ -114,17 +114,11 @@ void Benchmark::UpdateBenchmarkMetrics(PhaseCore& phase)
     phase.ResetMetrics();
 }
 
-void Benchmark::UpdateBenchmarkThreads()
+void Benchmark::UpdateBenchmarkThreads(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto it = _phases.begin(); it != _phases.end(); ++it)
-        UpdateBenchmarkThreads(**it);
-}
-
-void Benchmark::UpdateBenchmarkThreads(PhaseCore& phase)
-{
-    // Merge child benchmark phases with a same name for different threads
-    for (auto it = phase._child.begin(); it != phase._child.end(); ++it) {
-        for (auto next = it + 1; next != phase._child.end(); ++next) {
+    // Merge benchmark phases with a same name for different threads
+    for (auto it = phases.begin(); it != phases.end(); ++it) {
+        for (auto next = it + 1; next != phases.end(); ++next) {
             if ((*it)->name() == (*next)->name()) {
 
                 // Merge metrics results
@@ -139,20 +133,17 @@ void Benchmark::UpdateBenchmarkThreads(PhaseCore& phase)
         }
     }
 
-    // Remove child phases maked to delete
-    phase._child.erase(std::remove_if(phase._child.begin(), phase._child.end(), [](const std::shared_ptr<PhaseCore>& p) { return p->_thread == 0; }), phase._child.end());
+    // Remove phases marked to delete
+    phases.erase(std::remove_if(phases.begin(), phases.end(), [](const std::shared_ptr<PhaseCore>& p) { return p->_thread == 0; }), phases.end());
 
     // Perform the same operation for child phases
-    for (auto it = phase._child.begin(); it != phase._child.end(); ++it)
-        UpdateBenchmarkThreads(**it);
-
-    // Reset thread Id for the current phase
-    phase._thread = 0;
+    for (auto it = phases.begin(); it != phases.end(); ++it)
+        UpdateBenchmarkThreads((*it)->_child);
 }
 
-void Benchmark::UpdateBenchmarkNames()
+void Benchmark::UpdateBenchmarkNames(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto it = _phases.begin(); it != _phases.end(); ++it)
+    for (auto it = phases.begin(); it != phases.end(); ++it)
         UpdateBenchmarkNames(**it, (*it)->name());
 }
 

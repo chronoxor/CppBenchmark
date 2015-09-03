@@ -75,13 +75,10 @@ private:
 
     void InitBenchmarkContext(Context& context);
 
-    void UpdateBenchmarkMetrics();
+    static void UpdateBenchmarkMetrics(std::vector<std::shared_ptr<PhaseCore>>& phases);
     static void UpdateBenchmarkMetrics(PhaseCore& phase);
-
-    void UpdateBenchmarkThreads();
-    static void UpdateBenchmarkThreads(PhaseCore& phase);
-
-    void UpdateBenchmarkNames();
+    static void UpdateBenchmarkThreads(std::vector<std::shared_ptr<PhaseCore>>& phases);
+    static void UpdateBenchmarkNames(std::vector<std::shared_ptr<PhaseCore>>& phases);
     static void UpdateBenchmarkNames(PhaseCore& phase, const std::string& name);
 };
 

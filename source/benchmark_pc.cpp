@@ -165,10 +165,10 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
     }
 
     // Update benchmark threads
-    UpdateBenchmarkThreads();
+    UpdateBenchmarkThreads(_phases);
 
     // Update benchmark names
-    UpdateBenchmarkNames();
+    UpdateBenchmarkNames(_phases);
 
     // Update benchmark launched flag
     _launched = true;
