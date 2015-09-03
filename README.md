@@ -27,6 +27,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
     * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)
     * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)
     * [Example 11: Benchmark multiple producers, multiple consumers pattern](#example-11-benchmark-multiple-producers-multiple-consumers-pattern)
+    * [Example 12: Dynamic benchmarks](#example-12-dynamic-benchmarks)
   * [Command line options](#command-line-options)
 
 # Features
@@ -1077,6 +1078,150 @@ Maximal time: 648 ns / iteration
 Total time: 676.364 ms
 Total iterations: 1382941
 Iterations throughput: 2044668 / second
+===============================================================================
+```
+
+## Example 12: Dynamic benchmarks
+Dynamic benchmarks are usefull when you have some working program and want to benchmark some
+critical parts and code fragments. In this case just include cppbenchmark.h header and use
+BENCHCODE_SCOPE(), BENCHCODE_START(), BENCHCODE_STOP(), BENCHCODE_REPORT() macro. All of the
+macro are easy access to methods of the static Executor class which you may use directly as a
+singleton. All functionality provided for dynamic benchmarks is thread-safe synchronizied with
+mutex (each call will lost some ns).
+```C++
+#include "cppbenchmark.h"
+
+#include <chrono>
+#include <thread>
+#include <vector>
+
+const int THREADS = 8;
+
+void init()
+{
+    auto benchmark = BENCHCODE_SCOPE("Initialization");
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+}
+
+void calculate()
+{
+    auto benchmark = BENCHCODE_SCOPE("Calculate");
+
+    for (int i = 0; i < 5; ++i) {
+        auto phase1 = benchmark->StartPhase("Calculate.1");
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        phase1->StopPhase();
+    }
+
+    auto phase2 = benchmark->StartPhase("Calculate.2");
+    {
+        auto phase21 = benchmark->StartPhase("Calculate.2.1");
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+        phase21->StopPhase();
+
+        auto phase22 = benchmark->StartPhase("Calculate.2.2");
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+
+        phase22->StopPhase();
+    }
+    phase2->StopPhase();
+
+    for (int i = 0; i < 3; ++i) {
+        auto phase3 = benchmark->StartPhase("Calculate.3");
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(400));
+
+        phase3->StopPhase();
+    }
+}
+
+void cleanup()
+{
+    BENCHCODE_START("Cleanup");
+
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    BENCHCODE_STOP("Cleanup");
+}
+
+int main(int argc, char** argv)
+{
+    // Initialization
+    init();
+
+    // Start parallel calculations
+    std::vector<std::thread> threads;
+    for (int i = 0; i < THREADS; ++i)
+        threads.push_back(std::thread(calculate));
+
+    // Wait for all threads
+    for (auto& thread : threads)
+        thread.join();
+
+    // Cleanup
+    cleanup();
+
+    // Report benchmark results
+    BENCHCODE_REPORT();
+
+    return 0;
+}
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: Initialization
+Attempts: 1
+Iterations: 1
+-------------------------------------------------------------------------------
+Phase: Initialization
+Total time: 2.002 s
+===============================================================================
+Benchmark: Calculate
+Attempts: 1
+Iterations: 1
+-------------------------------------------------------------------------------
+Phase: Calculate
+Total time: 2.200 s
+-------------------------------------------------------------------------------
+Phase: Calculate.1
+Average time: 100.113 ms / iteration
+Minimal time: 93.337 ms / iteration
+Maximal time: 107.303 ms / iteration
+Total time: 500.565 ms
+Total iterations: 5
+Iterations throughput: 9 / second
+-------------------------------------------------------------------------------
+Phase: Calculate.2
+Total time: 499.420 ms
+-------------------------------------------------------------------------------
+Phase: Calculate.2.1
+Total time: 199.514 ms
+-------------------------------------------------------------------------------
+Phase: Calculate.2.2
+Total time: 299.755 ms
+-------------------------------------------------------------------------------
+Phase: Calculate.3
+Average time: 399.920 ms / iteration
+Minimal time: 399.726 ms / iteration
+Maximal time: 400.365 ms / iteration
+Total time: 1.199 s
+Total iterations: 3
+Iterations throughput: 2 / second
+===============================================================================
+Benchmark: Cleanup
+Attempts: 1
+Iterations: 1
+-------------------------------------------------------------------------------
+Phase: Cleanup
+Total time: 1.007 s
 ===============================================================================
 ```
 
