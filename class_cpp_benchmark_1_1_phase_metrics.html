@@ -149,12 +149,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7b3e5a7ba016462e42ed820eab57f693"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a7b3e5a7ba016462e42ed820eab57f693">bytes_per_second</a> () const  noexcept</td></tr>
 <tr class="memdesc:a7b3e5a7ba016462e42ed820eab57f693"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get data throughput (bytes / second)  <a href="#a7b3e5a7ba016462e42ed820eab57f693">More...</a><br /></td></tr>
 <tr class="separator:a7b3e5a7ba016462e42ed820eab57f693"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8726716261cf5d27c3c790b04b8e01e"><td class="memItemLeft" align="right" valign="top">const std::unordered_map&lt; std::string, int &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#ad8726716261cf5d27c3c790b04b8e01e">custom_int</a> () const  noexcept</td></tr>
-<tr class="memdesc:ad8726716261cf5d27c3c790b04b8e01e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get custom integers hash table.  <a href="#ad8726716261cf5d27c3c790b04b8e01e">More...</a><br /></td></tr>
-<tr class="separator:ad8726716261cf5d27c3c790b04b8e01e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64477ae314a27682a299dacc184bb703"><td class="memItemLeft" align="right" valign="top">const std::unordered_map&lt; std::string, std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a64477ae314a27682a299dacc184bb703">custom_str</a> () const  noexcept</td></tr>
-<tr class="memdesc:a64477ae314a27682a299dacc184bb703"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get custom strings hash table.  <a href="#a64477ae314a27682a299dacc184bb703">More...</a><br /></td></tr>
-<tr class="separator:a64477ae314a27682a299dacc184bb703"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaac27af5a5fc8d1d20817a8a1fa6b0be"><td class="memItemLeft" align="right" valign="top">const std::map&lt; std::string, int &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#aaac27af5a5fc8d1d20817a8a1fa6b0be">custom_int</a> () const  noexcept</td></tr>
+<tr class="memdesc:aaac27af5a5fc8d1d20817a8a1fa6b0be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get custom integers map.  <a href="#aaac27af5a5fc8d1d20817a8a1fa6b0be">More...</a><br /></td></tr>
+<tr class="separator:aaac27af5a5fc8d1d20817a8a1fa6b0be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7af61e4167a6c1a68aee54b239e3f330"><td class="memItemLeft" align="right" valign="top">const std::map&lt; std::string, std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a7af61e4167a6c1a68aee54b239e3f330">custom_str</a> () const  noexcept</td></tr>
+<tr class="memdesc:a7af61e4167a6c1a68aee54b239e3f330"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get custom strings map.  <a href="#a7af61e4167a6c1a68aee54b239e3f330">More...</a><br /></td></tr>
+<tr class="separator:a7af61e4167a6c1a68aee54b239e3f330"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a40af3a716824e3a77229531939f546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a4a40af3a716824e3a77229531939f546">AddIterations</a> (int64_t iterations) noexcept</td></tr>
 <tr class="memdesc:a4a40af3a716824e3a77229531939f546"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase iterations count of the current phase.  <a href="#a4a40af3a716824e3a77229531939f546">More...</a><br /></td></tr>
 <tr class="separator:a4a40af3a716824e3a77229531939f546"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -452,7 +452,7 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad8726716261cf5d27c3c790b04b8e01e"></a>
+<a class="anchor" id="aaac27af5a5fc8d1d20817a8a1fa6b0be"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -460,7 +460,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::unordered_map&lt;std::string, int&gt;&amp; CppBenchmark::PhaseMetrics::custom_int </td>
+          <td class="memname">const std::map&lt;std::string, int&gt;&amp; CppBenchmark::PhaseMetrics::custom_int </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -473,13 +473,13 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get custom integers hash table. </p>
+<p>Get custom integers map. </p>
 
 <p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00080">80</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a64477ae314a27682a299dacc184bb703"></a>
+<a class="anchor" id="a7af61e4167a6c1a68aee54b239e3f330"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -487,7 +487,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::unordered_map&lt;std::string, std::string&gt;&amp; CppBenchmark::PhaseMetrics::custom_str </td>
+          <td class="memname">const std::map&lt;std::string, std::string&gt;&amp; CppBenchmark::PhaseMetrics::custom_str </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -500,7 +500,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get custom strings hash table. </p>
+<p>Get custom strings map. </p>
 
 <p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00082">82</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 

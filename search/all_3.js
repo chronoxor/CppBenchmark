@@ -36,7 +36,7 @@ var searchData=
   ['cputotalcores',['CpuTotalCores',['../class_cpp_benchmark_1_1_system.html#a31c7890d9bb87c545d3f143865224ead',1,'CppBenchmark::System']]],
   ['current',['current',['../class_cpp_benchmark_1_1_phase_core.html#aca6383511f2c044d9e5d6c8f29d1e859',1,'CppBenchmark::PhaseCore']]],
   ['currentthreadid',['CurrentThreadId',['../class_cpp_benchmark_1_1_system.html#a18edbab54a02fecf0ca946d3d9756774',1,'CppBenchmark::System']]],
-  ['custom_5fint',['custom_int',['../class_cpp_benchmark_1_1_phase_metrics.html#ad8726716261cf5d27c3c790b04b8e01e',1,'CppBenchmark::PhaseMetrics']]],
-  ['custom_5fstr',['custom_str',['../class_cpp_benchmark_1_1_phase_metrics.html#a64477ae314a27682a299dacc184bb703',1,'CppBenchmark::PhaseMetrics']]],
+  ['custom_5fint',['custom_int',['../class_cpp_benchmark_1_1_phase_metrics.html#aaac27af5a5fc8d1d20817a8a1fa6b0be',1,'CppBenchmark::PhaseMetrics']]],
+  ['custom_5fstr',['custom_str',['../class_cpp_benchmark_1_1_phase_metrics.html#a7af61e4167a6c1a68aee54b239e3f330',1,'CppBenchmark::PhaseMetrics']]],
   ['cyan',['CYAN',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69ad29ef53642762a875034cfafb4c47ae7',1,'CppBenchmark']]]
 ];

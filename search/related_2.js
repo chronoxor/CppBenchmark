@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['phasecore',['PhaseCore',['../class_cpp_benchmark_1_1_phase_metrics.html#ac951c6d438c23e6aa19cc0fdc29e7559',1,'CppBenchmark::PhaseMetrics']]]
+  ['launcher',['Launcher',['../class_cpp_benchmark_1_1_benchmark.html#a3bd5a0d7c79df7b1c02dfa851383dad4',1,'CppBenchmark::Benchmark::Launcher()'],['../class_cpp_benchmark_1_1_phase_core.html#a3bd5a0d7c79df7b1c02dfa851383dad4',1,'CppBenchmark::PhaseCore::Launcher()']]]
 ];

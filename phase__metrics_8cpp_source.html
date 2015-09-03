@@ -105,12 +105,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_cpp_benchmark_1_1_phase_metrics.html#a7f6616ddf445f5f0ecda2fdeec2b249c">   19</a></span>&#160;int64_t <a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#a7f6616ddf445f5f0ecda2fdeec2b249c">PhaseMetrics::min_time</a>() const noexcept</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">return</span> (_total_iterations &gt; 0) ? (_min_time / _total_iterations) : 0;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">return</span> _min_time;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_cpp_benchmark_1_1_phase_metrics.html#ac18082158ba5f3f582c3b50856e3fc4a">   24</a></span>&#160;int64_t <a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#ac18082158ba5f3f582c3b50856e3fc4a">PhaseMetrics::max_time</a>() const noexcept</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">return</span> (_total_iterations &gt; 0) ? (_max_time / _total_iterations) : 0;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">return</span> _max_time;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_cpp_benchmark_1_1_phase_metrics.html#afa317ebac70179b9d289885779368688">   29</a></span>&#160;int64_t <a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#afa317ebac70179b9d289885779368688">PhaseMetrics::iterations_per_second</a>() const noexcept</div>
@@ -139,23 +139,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> PhaseMetrics::StartCollecting() noexcept</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    _timestamp = <a class="code" href="class_cpp_benchmark_1_1_system.html#a8d6fb7cee809b1cb65cc1590c671b08f">System::Timestamp</a>();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> PhaseMetrics::StopCollecting() noexcept</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// Get iteration duration</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    int64_t duration = <a class="code" href="class_cpp_benchmark_1_1_system.html#a8d6fb7cee809b1cb65cc1590c671b08f">System::Timestamp</a>() - _timestamp;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (duration &gt; 143838832099148626)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        duration = 143838832099148626;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    _iterstamp = _total_iterations;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    _timestamp = <a class="code" href="class_cpp_benchmark_1_1_system.html#a8d6fb7cee809b1cb65cc1590c671b08f">System::Timestamp</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> PhaseMetrics::StopCollecting() noexcept</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// Get iterations count &amp; duration</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    int64_t iterations = _total_iterations - _iterstamp;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    int64_t total_duration = <a class="code" href="class_cpp_benchmark_1_1_system.html#a8d6fb7cee809b1cb65cc1590c671b08f">System::Timestamp</a>() - _timestamp;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    int64_t average_duration = total_duration / ((iterations &gt; 0) ? iterations : 1);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// Update time counters</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (duration &lt; _min_time)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        _min_time = duration;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (duration &gt; _max_time)</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        _max_time = duration;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    _total_time += duration;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (average_duration &lt; _min_time)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        _min_time = average_duration;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (average_duration &gt; _max_time)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        _max_time = average_duration;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    _total_time += total_duration;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">void</span> PhaseMetrics::MergeMetrics(<span class="keyword">const</span> PhaseMetrics&amp; metrics)</div>
@@ -168,28 +168,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> (metrics._max_time &gt; _max_time)</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        _max_time = metrics._max_time;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> (metrics._max_time &gt; 143838832099148626)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        _max_time = 143838832099148626;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="comment">// Merge custom hash tables</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    _custom_int.insert(metrics._custom_int.begin(), metrics._custom_int.end());</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    _custom_str.insert(metrics._custom_str.begin(), metrics._custom_str.end());</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">// Choose best total time with iterations, items and bytes</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span> (metrics._total_time &lt; _total_time) {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        _total_time = metrics._total_time;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        _total_iterations = metrics._total_iterations;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        _total_items = metrics._total_items;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        _total_bytes = metrics._total_bytes;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="comment">// Overwrite metrics custom hash tables</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; it : metrics._custom_int)</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            _custom_int[it.first] = it.second;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; it : metrics._custom_str)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            _custom_str[it.first] = it.second;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">// Merge custom hash tables</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    _custom_int.insert(metrics._custom_int.begin(), metrics._custom_int.end());</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    _custom_str.insert(metrics._custom_str.begin(), metrics._custom_str.end());</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">// Choose best total time with iterations, items and bytes</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> (metrics._total_time &lt; _total_time) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        _total_time = metrics._total_time;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        _total_iterations = metrics._total_iterations;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        _total_items = metrics._total_items;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        _total_bytes = metrics._total_bytes;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="comment">// Overwrite metrics custom hash tables</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; it : metrics._custom_int)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            _custom_int[it.first] = it.second;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; it : metrics._custom_str)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            _custom_str[it.first] = it.second;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_metrics_html_a2a078ab76921722947cb0602eaba1c9d"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase_metrics.html#a2a078ab76921722947cb0602eaba1c9d">CppBenchmark::PhaseMetrics::items_per_second</a></div><div class="ttdeci">int64_t items_per_second() const  noexcept</div><div class="ttdoc">Get items throughput (items / second) </div><div class="ttdef"><b>Definition:</b> <a href="phase__metrics_8cpp_source.html#l00037">phase_metrics.cpp:37</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_metrics_html_ac18082158ba5f3f582c3b50856e3fc4a"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase_metrics.html#ac18082158ba5f3f582c3b50856e3fc4a">CppBenchmark::PhaseMetrics::max_time</a></div><div class="ttdeci">int64_t max_time() const  noexcept</div><div class="ttdoc">Get maximal time of the phase execution. </div><div class="ttdef"><b>Definition:</b> <a href="phase__metrics_8cpp_source.html#l00024">phase_metrics.cpp:24</a></div></div>
 <div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">CppBenchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00017">benchmark.h:17</a></div></div>

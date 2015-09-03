@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['launcher',['Launcher',['../class_cpp_benchmark_1_1_benchmark.html#a3bd5a0d7c79df7b1c02dfa851383dad4',1,'CppBenchmark::Benchmark::Launcher()'],['../class_cpp_benchmark_1_1_phase_core.html#a3bd5a0d7c79df7b1c02dfa851383dad4',1,'CppBenchmark::PhaseCore::Launcher()']]]
+  ['executor',['Executor',['../class_cpp_benchmark_1_1_benchmark.html#a763b2f90bc53f92d680a635fe28e858e',1,'CppBenchmark::Benchmark::Executor()'],['../class_cpp_benchmark_1_1_phase_core.html#a763b2f90bc53f92d680a635fe28e858e',1,'CppBenchmark::PhaseCore::Executor()']]]
 ];

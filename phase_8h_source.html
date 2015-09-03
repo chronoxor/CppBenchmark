@@ -114,19 +114,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;Phase&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a448dabf771ac41e3087872801f97f233">StartPhase</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;Phase&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a16202b16ff7d961aa0642eada38f95c1">StartPhaseThreadSafe</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_phase.html#aaa1efb55fed38a19b620167be438e1f6">StopPhase</a>() = 0;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;Phase&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a16202b16ff7d961aa0642eada38f95c1">StartPhaseThreadSafe</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_phase.html#aaa1efb55fed38a19b620167be438e1f6">StopPhase</a>() = 0;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;PhaseScope&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a81d2c7dea121f9c117c7fb1d72bd1284">ScopePhase</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;PhaseScope&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a138c98e45e4054121f38147222f6d1a9">ScopePhaseThreadSafe</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif // CPPBENCHMARK_PHASE_H</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;PhaseScope&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a81d2c7dea121f9c117c7fb1d72bd1284">ScopePhase</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;PhaseScope&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a138c98e45e4054121f38147222f6d1a9">ScopePhaseThreadSafe</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif // CPPBENCHMARK_PHASE_H</span></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_metrics_html"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase_metrics.html">CppBenchmark::PhaseMetrics</a></div><div class="ttdoc">Benchmark phase metrics. </div><div class="ttdef"><b>Definition:</b> <a href="phase__metrics_8h_source.html#l00035">phase_metrics.h:35</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a81d2c7dea121f9c117c7fb1d72bd1284"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a81d2c7dea121f9c117c7fb1d72bd1284">CppBenchmark::Phase::ScopePhase</a></div><div class="ttdeci">virtual std::shared_ptr&lt; PhaseScope &gt; ScopePhase(const std::string &amp;phase)=0</div><div class="ttdoc">Start a new sub-phase with a given name in a single-thread environment and wrap it in a PhaseScope...</div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a16202b16ff7d961aa0642eada38f95c1"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a16202b16ff7d961aa0642eada38f95c1">CppBenchmark::Phase::StartPhaseThreadSafe</a></div><div class="ttdeci">virtual std::shared_ptr&lt; Phase &gt; StartPhaseThreadSafe(const std::string &amp;phase)=0</div><div class="ttdoc">Start a new sub-phase with a given name in a multi-thread environment. </div></div>

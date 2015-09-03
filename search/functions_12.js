@@ -8,6 +8,7 @@ var searchData=
   ['_7econtextpc',['~ContextPC',['../class_cpp_benchmark_1_1_context_p_c.html#a8e71c4ffee636526d954d47dbe67da81',1,'CppBenchmark::ContextPC']]],
   ['_7econtextthread',['~ContextThread',['../class_cpp_benchmark_1_1_context_thread.html#a67a42e4f509cf700896abe9f688fa7e5',1,'CppBenchmark::ContextThread']]],
   ['_7eenvironment',['~Environment',['../class_cpp_benchmark_1_1_environment.html#a7178f31c43ecf08fcbecb89598a7e98f',1,'CppBenchmark::Environment']]],
+  ['_7eexecutor',['~Executor',['../class_cpp_benchmark_1_1_executor.html#ab99f16af7829eb4f2ec5d044aa54b000',1,'CppBenchmark::Executor']]],
   ['_7efixture',['~Fixture',['../class_cpp_benchmark_1_1_fixture.html#a17f49fedb19b1595ee8f6cdf948ecede',1,'CppBenchmark::Fixture']]],
   ['_7efixturepc',['~FixturePC',['../class_cpp_benchmark_1_1_fixture_p_c.html#ab2909947a0167ba6f27126caa5444e04',1,'CppBenchmark::FixturePC']]],
   ['_7efixturethreads',['~FixtureThreads',['../class_cpp_benchmark_1_1_fixture_threads.html#ac2803310ce4c980780f2d37496e0c09c',1,'CppBenchmark::FixtureThreads']]],

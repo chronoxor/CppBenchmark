@@ -98,7 +98,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a class="el" href="namespace_cpp_benchmark.html" title="CppBenchmark project definitions. ">CppBenchmark</a> definitions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="launcher__console_8h_source.html">launcher_console.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;sstream&gt;</code><br />
+<code>#include &quot;<a class="el" href="executor_8h_source.html">executor.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="launcher__console_8h_source.html">launcher_console.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="reporter__console_8h_source.html">reporter_console.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="reporter__csv_8h_source.html">reporter_csv.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="reporter__json_8h_source.html">reporter_json.h</a>&quot;</code><br />
 </div>
 <p><a href="cppbenchmark_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -128,6 +133,27 @@ Macros</h2></td></tr>
 <tr class="memitem:a9145e21b0b31ad313568362bf7aa50bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(type,  name, ...)&#160;&#160;&#160;namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;type&gt;(name, type::TSettings(__VA_ARGS__))); }</td></tr>
 <tr class="memdesc:a9145e21b0b31ad313568362bf7aa50bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Benchmark class register macro.  <a href="#a9145e21b0b31ad313568362bf7aa50bf">More...</a><br /></td></tr>
 <tr class="separator:a9145e21b0b31ad313568362bf7aa50bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61f6db918d2041a5ced1d51f09fe4d88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a61f6db918d2041a5ced1d51f09fe4d88">BENCHCODE_SCOPE</a>(name)&#160;&#160;&#160;<a class="el" href="class_cpp_benchmark_1_1_executor.html#a1fbde2533cdfd84cf9b019c7eb6a85c4">CppBenchmark::Executor::GetInstance</a>().ScopeBenchmark(name);</td></tr>
+<tr class="memdesc:a61f6db918d2041a5ced1d51f09fe4d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic benchmark scope register macro.  <a href="#a61f6db918d2041a5ced1d51f09fe4d88">More...</a><br /></td></tr>
+<tr class="separator:a61f6db918d2041a5ced1d51f09fe4d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed129505564f5c84f1fde979f0a88660"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#aed129505564f5c84f1fde979f0a88660">BENCHCODE_START</a>(name)&#160;&#160;&#160;<a class="el" href="class_cpp_benchmark_1_1_executor.html#a1fbde2533cdfd84cf9b019c7eb6a85c4">CppBenchmark::Executor::GetInstance</a>().StartBenchmark(name);</td></tr>
+<tr class="memdesc:aed129505564f5c84f1fde979f0a88660"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic benchmark start macro.  <a href="#aed129505564f5c84f1fde979f0a88660">More...</a><br /></td></tr>
+<tr class="separator:aed129505564f5c84f1fde979f0a88660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a369b49cac39b2a1a33423239118e41b9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a369b49cac39b2a1a33423239118e41b9">BENCHCODE_STOP</a>(name)&#160;&#160;&#160;<a class="el" href="class_cpp_benchmark_1_1_executor.html#a1fbde2533cdfd84cf9b019c7eb6a85c4">CppBenchmark::Executor::GetInstance</a>().StopBenchmark(name);</td></tr>
+<tr class="memdesc:a369b49cac39b2a1a33423239118e41b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic benchmark stop macro.  <a href="#a369b49cac39b2a1a33423239118e41b9">More...</a><br /></td></tr>
+<tr class="separator:a369b49cac39b2a1a33423239118e41b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b25f56abde76836480849a3eef4d547"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a8b25f56abde76836480849a3eef4d547">BENCHCODE_REPORT</a>()</td></tr>
+<tr class="memdesc:a8b25f56abde76836480849a3eef4d547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic benchmarks report to console macro.  <a href="#a8b25f56abde76836480849a3eef4d547">More...</a><br /></td></tr>
+<tr class="separator:a8b25f56abde76836480849a3eef4d547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a978a709c3849e81a657eb5269c013af1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a978a709c3849e81a657eb5269c013af1">BENCHCODE_REPORT_STR</a>(value)</td></tr>
+<tr class="memdesc:a978a709c3849e81a657eb5269c013af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic benchmarks report as a string macro.  <a href="#a978a709c3849e81a657eb5269c013af1">More...</a><br /></td></tr>
+<tr class="separator:a978a709c3849e81a657eb5269c013af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65290d7dd56c5efb20548fb63b0ceb9d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a65290d7dd56c5efb20548fb63b0ceb9d">BENCHCODE_REPORT_CSV</a>(value)</td></tr>
+<tr class="memdesc:a65290d7dd56c5efb20548fb63b0ceb9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic benchmarks report as a CSV format string macro.  <a href="#a65290d7dd56c5efb20548fb63b0ceb9d">More...</a><br /></td></tr>
+<tr class="separator:a65290d7dd56c5efb20548fb63b0ceb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4595e553a09078111de49f33c6c574d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#aa4595e553a09078111de49f33c6c574d">BENCHCODE_REPORT_JSON</a>(value)</td></tr>
+<tr class="memdesc:aa4595e553a09078111de49f33c6c574d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic benchmarks report as a JSON format string macro.  <a href="#aa4595e553a09078111de49f33c6c574d">More...</a><br /></td></tr>
+<tr class="separator:aa4595e553a09078111de49f33c6c574d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="namespace_cpp_benchmark.html" title="CppBenchmark project definitions. ">CppBenchmark</a> definitions. </p>
@@ -137,6 +163,212 @@ Macros</h2></td></tr>
 
 <p>Definition in file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a8b25f56abde76836480849a3eef4d547"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BENCHCODE_REPORT</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">{\</div>
+<div class="line">    CppBenchmark::ReporterConsole BENCHMARK_INTERNAL_UNIQUE_NAME(reporter);\</div>
+<div class="line">    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Dynamic benchmarks report to console macro. </p>
+<p>Prepare results of all dynamic benchmarks registered in static Executor class and show them using ReporterConsole.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// Do some calculations or program run and measure code fragments with dynamic benchmarks...</span></div>
+<div class="line">    ...</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Report benchmark results</span></div>
+<div class="line">    <a class="code" href="cppbenchmark_8h.html#a8b25f56abde76836480849a3eef4d547">BENCHCODE_REPORT</a>();</div>
+<div class="line"></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00296">296</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a65290d7dd56c5efb20548fb63b0ceb9d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BENCHCODE_REPORT_CSV</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">value</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">{\</div>
+<div class="line">    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\</div>
+<div class="line">    CppBenchmark::ReporterCSV BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\</div>
+<div class="line">    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\</div>
+<div class="line">    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Dynamic benchmarks report as a CSV format string macro. </p>
+<p>Prepare results of all dynamic benchmarks registered in static Executor class using ReporterCSV and store them in a string variable <em>value</em>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="comment">// Report benchmark results in CSV format</span></div>
+<div class="line">std::string report;</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a65290d7dd56c5efb20548fb63b0ceb9d">BENCHCODE_REPORT_CSV</a>(report);</div>
+</div><!-- fragment --> 
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00334">334</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa4595e553a09078111de49f33c6c574d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BENCHCODE_REPORT_JSON</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">value</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">{\</div>
+<div class="line">    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\</div>
+<div class="line">    CppBenchmark::ReporterJSON BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\</div>
+<div class="line">    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\</div>
+<div class="line">    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Dynamic benchmarks report as a JSON format string macro. </p>
+<p>Prepare results of all dynamic benchmarks registered in static Executor class using ReporterJSON and store them in a string variable <em>value</em>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="comment">// Report benchmark results in JSON format</span></div>
+<div class="line">std::string report;</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#aa4595e553a09078111de49f33c6c574d">BENCHCODE_REPORT_JSON</a>(report);</div>
+</div><!-- fragment --> 
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00354">354</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a978a709c3849e81a657eb5269c013af1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BENCHCODE_REPORT_STR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">value</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">{\</div>
+<div class="line">    std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\</div>
+<div class="line">    CppBenchmark::ReporterConsole BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\</div>
+<div class="line">    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\</div>
+<div class="line">    value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Dynamic benchmarks report as a string macro. </p>
+<p>Prepare results of all dynamic benchmarks registered in static Executor class using ReporterConsole and store them in a string variable <em>value</em>.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="comment">// Report benchmark results</span></div>
+<div class="line">std::string report;</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a978a709c3849e81a657eb5269c013af1">BENCHCODE_REPORT_STR</a>(report);</div>
+</div><!-- fragment --> 
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00314">314</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a61f6db918d2041a5ced1d51f09fe4d88"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BENCHCODE_SCOPE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_cpp_benchmark_1_1_executor.html#a1fbde2533cdfd84cf9b019c7eb6a85c4">CppBenchmark::Executor::GetInstance</a>().ScopeBenchmark(name);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dynamic benchmark scope register macro. </p>
+<p>Create a scope guard for dynamic benchmark with the given <em>name</em>. It will be automatically registered in static Executor class.</p>
+<p>Example: </p><div class="fragment"><div class="line"><span class="comment">// Some scope...</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> benchmark = <a class="code" href="cppbenchmark_8h.html#a61f6db918d2041a5ced1d51f09fe4d88">BENCHCODE_SCOPE</a>(<span class="stringliteral">&quot;My dynamic benchmark&quot;</span>);</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Here goes some code fragment you want to benchmark dynamically...</span></div>
+<div class="line">    ...</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00242">242</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aed129505564f5c84f1fde979f0a88660"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BENCHCODE_START</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_cpp_benchmark_1_1_executor.html#a1fbde2533cdfd84cf9b019c7eb6a85c4">CppBenchmark::Executor::GetInstance</a>().StartBenchmark(name);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dynamic benchmark start macro. </p>
+<p>Start dynamic benchmark with the given <em>name</em>. It will be automatically registered in static Executor class. Should be used in pair with BENCHCODE_STOP macro!</p>
+<p>Example: </p><div class="fragment"><div class="line"><a class="code" href="cppbenchmark_8h.html#aed129505564f5c84f1fde979f0a88660">BENCHCODE_START</a>(<span class="stringliteral">&quot;My dynamic benchmark&quot;</span>);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// Here goes some code fragment you want to benchmark dynamically...</span></div>
+<div class="line">...</div>
+<div class="line"></div>
+<div class="line">BENCHCODE_STOP(<span class="stringliteral">&quot;My dynamic benchmark&quot;</span>);</div>
+</div><!-- fragment --> 
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00259">259</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a369b49cac39b2a1a33423239118e41b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BENCHCODE_STOP</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_cpp_benchmark_1_1_executor.html#a1fbde2533cdfd84cf9b019c7eb6a85c4">CppBenchmark::Executor::GetInstance</a>().StopBenchmark(name);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dynamic benchmark stop macro. </p>
+<p>Stop dynamic benchmark with the given <em>name</em>. It will be automatically registered in static Executor class. Should be used in pair with BENCHCODE_START macro!</p>
+<p>Example: </p><div class="fragment"><div class="line"><a class="code" href="cppbenchmark_8h.html#aed129505564f5c84f1fde979f0a88660">BENCHCODE_START</a>(<span class="stringliteral">&quot;My dynamic benchmark&quot;</span>);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// Here goes some code fragment you want to benchmark dynamically...</span></div>
+<div class="line">...</div>
+<div class="line"></div>
+<div class="line">BENCHCODE_STOP(<span class="stringliteral">&quot;My dynamic benchmark&quot;</span>);</div>
+</div><!-- fragment --> 
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00276">276</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a580c48d324f038b23fea44795c57a926"></a>
 <div class="memitem">
 <div class="memproto">
@@ -171,9 +403,9 @@ Macros</h2></td></tr>
 <div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(name, <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">Benchmark::TSettings</a>(__VA_ARGS__)));\</div>
 <div class="line">}\</div>
 <div class="line">void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(<a class="code" href="namespace_cpp_benchmark.html">CppBenchmark</a>::Context&amp; context)</div>
-<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_a97d8f5a8d53060b00bc76653a3fb2cef"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">CppBenchmark::Benchmark::Benchmark</a></div><div class="ttdeci">Benchmark(const std::string &amp;name, const TSettings &amp;settings=TSettings())</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00040">benchmark.h:40</a></div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_a97d8f5a8d53060b00bc76653a3fb2cef"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">CppBenchmark::Benchmark::Benchmark</a></div><div class="ttdeci">Benchmark(const std::string &amp;name, const TSettings &amp;settings=TSettings())</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00041">benchmark.h:41</a></div></div>
 <div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">CppBenchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00017">benchmark.h:17</a></div></div>
-<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_a22d1cb41d894cd9ba1c00dbd629da136"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">CppBenchmark::Benchmark::TSettings</a></div><div class="ttdeci">Settings TSettings</div><div class="ttdoc">Benchmark settings type. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00033">benchmark.h:33</a></div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_a22d1cb41d894cd9ba1c00dbd629da136"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">CppBenchmark::Benchmark::TSettings</a></div><div class="ttdeci">Settings TSettings</div><div class="ttdoc">Benchmark settings type. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00034">benchmark.h:34</a></div></div>
 </div><!-- fragment -->
 <p>Benchmark register macro. </p>
 <p>Register a new benchmark with a given <em>name</em> and settings. Next to the definition you should provide a benchmark code.</p>
@@ -184,7 +416,7 @@ Macros</h2></td></tr>
 <div class="line">}</div>
 </div><!-- fragment --> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="fpu_8cpp-example.html#a0">fpu.cpp</a>, and <a class="el" href="random_8cpp-example.html#a0">random.cpp</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00085">85</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00091">91</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 
 </div>
 </div>
@@ -234,7 +466,7 @@ Macros</h2></td></tr>
 <div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(VectorBenchmark, <span class="stringliteral">&quot;VectorPushBackBenchmark&quot;</span>, 1000000)</div>
 </div><!-- fragment --> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="mpmc_8cpp-example.html#a13">mpmc.cpp</a>, <a class="el" href="mpsc_8cpp-example.html#a13">mpsc.cpp</a>, <a class="el" href="sort_8cpp-example.html#a10">sort.cpp</a>, and <a class="el" href="spsc_8cpp-example.html#a13">spsc.cpp</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00219">219</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00223">223</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 
 </div>
 </div>
@@ -278,9 +510,9 @@ Macros</h2></td></tr>
 <div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(name, <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">Benchmark::TSettings</a>(__VA_ARGS__)));\</div>
 <div class="line">}\</div>
 <div class="line">void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context&amp; context)</div>
-<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_a97d8f5a8d53060b00bc76653a3fb2cef"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">CppBenchmark::Benchmark::Benchmark</a></div><div class="ttdeci">Benchmark(const std::string &amp;name, const TSettings &amp;settings=TSettings())</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00040">benchmark.h:40</a></div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_a97d8f5a8d53060b00bc76653a3fb2cef"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">CppBenchmark::Benchmark::Benchmark</a></div><div class="ttdeci">Benchmark(const std::string &amp;name, const TSettings &amp;settings=TSettings())</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00041">benchmark.h:41</a></div></div>
 <div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">CppBenchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00017">benchmark.h:17</a></div></div>
-<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_a22d1cb41d894cd9ba1c00dbd629da136"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">CppBenchmark::Benchmark::TSettings</a></div><div class="ttdeci">Settings TSettings</div><div class="ttdoc">Benchmark settings type. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00033">benchmark.h:33</a></div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_a22d1cb41d894cd9ba1c00dbd629da136"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">CppBenchmark::Benchmark::TSettings</a></div><div class="ttdeci">Settings TSettings</div><div class="ttdoc">Benchmark settings type. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00034">benchmark.h:34</a></div></div>
 </div><!-- fragment -->
 <p>Benchmark with fixture register macro. </p>
 <p>Register a new benchmark with a given <em>fixture</em>, <em>name</em> and settings. Next to the definition you should provide a benchmark code. Benchmark fixture is a user class that will be constructed before benchmarking and destructed after. In benchmark code you can access to public and protected fields &amp; methods of the fixture.</p>
@@ -297,7 +529,7 @@ Macros</h2></td></tr>
 <div class="line">}</div>
 </div><!-- fragment --> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="atomic_8cpp-example.html#a0">atomic.cpp</a>, <a class="el" href="containers_8cpp-example.html#a4">containers.cpp</a>, <a class="el" href="fwrite_8cpp-example.html#a3">fwrite.cpp</a>, and <a class="el" href="iterators_8cpp-example.html#a0">iterators.cpp</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00120">120</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00125">125</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 
 </div>
 </div>
@@ -325,7 +557,7 @@ Macros</h2></td></tr>
 <p>Main entry point definition for all benchmarks. Place this macro in some .cpp file to provide a main() function with registered LauncherConsole with <em>argc</em> &amp; <em>argv</em> arguments parsing. </p>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="atomic_8cpp-example.html#a1">atomic.cpp</a>, <a class="el" href="containers_8cpp-example.html#a5">containers.cpp</a>, <a class="el" href="fpu_8cpp-example.html#a1">fpu.cpp</a>, <a class="el" href="fwrite_8cpp-example.html#a4">fwrite.cpp</a>, <a class="el" href="iterators_8cpp-example.html#a1">iterators.cpp</a>, <a class="el" href="mpmc_8cpp-example.html#a14">mpmc.cpp</a>, <a class="el" href="mpsc_8cpp-example.html#a14">mpsc.cpp</a>, <a class="el" href="random_8cpp-example.html#a1">random.cpp</a>, <a class="el" href="sort_8cpp-example.html#a11">sort.cpp</a>, <a class="el" href="spsc_8cpp-example.html#a14">spsc.cpp</a>, and <a class="el" href="threads_8cpp-example.html#a4">threads.cpp</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00062">62</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00068">68</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 
 </div>
 </div>
@@ -375,7 +607,7 @@ Macros</h2></td></tr>
 <div class="line">    std::count &lt;&lt; rand();</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
-<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00148">148</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00153">153</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 
 </div>
 </div>
@@ -438,7 +670,7 @@ Macros</h2></td></tr>
 <div class="line">}</div>
 </div><!-- fragment --> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="threads_8cpp-example.html#a3">threads.cpp</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00184">184</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
+<p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00189">189</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 
 </div>
 </div>
