@@ -125,6 +125,7 @@ private:
     std::map<std::string, int> _custom_int;
     std::map<std::string, std::string> _custom_str;
 
+    int64_t _iterstamp;
     int64_t _timestamp;
 
     void StartCollecting() noexcept;

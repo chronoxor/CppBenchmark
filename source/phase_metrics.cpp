@@ -52,24 +52,23 @@ int64_t PhaseMetrics::bytes_per_second() const noexcept
 
 void PhaseMetrics::StartCollecting() noexcept
 {
+    _iterstamp = _total_iterations;
     _timestamp = System::Timestamp();
 }
 
 void PhaseMetrics::StopCollecting() noexcept
 {
-    // Get iteration duration
-    int64_t duration = System::Timestamp() - _timestamp;
-
-    // Limitation of the Unix environment
-    if (duration > 143838832099148626)
-        duration = 143838832099148626;
+    // Get iterations count & duration
+    int64_t iterations = _total_iterations - _iterstamp;
+    int64_t total_duration = System::Timestamp() - _timestamp;
+    int64_t average_duration = total_duration / ((iterations > 0) ? iterations : 1);
 
     // Update time counters
-    if (duration < _min_time)
-        _min_time = duration;
-    if (duration > _max_time)
-        _max_time = duration;
-    _total_time += duration;
+    if (average_duration < _min_time)
+        _min_time = average_duration;
+    if (average_duration > _max_time)
+        _max_time = average_duration;
+    _total_time += total_duration;
 }
 
 void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
@@ -81,10 +80,6 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
     // Choose best max time
     if (metrics._max_time > _max_time)
         _max_time = metrics._max_time;
-
-    // Limitation of the Unix environment
-    if (metrics._max_time > 143838832099148626)
-        _max_time = 143838832099148626;
 
     // Merge custom hash tables
     _custom_int.insert(metrics._custom_int.begin(), metrics._custom_int.end());
