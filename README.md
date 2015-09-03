@@ -1085,9 +1085,9 @@ Iterations throughput: 2044668 / second
 Dynamic benchmarks are usefull when you have some working program and want to benchmark some
 critical parts and code fragments. In this case just include cppbenchmark.h header and use
 BENCHCODE_SCOPE(), BENCHCODE_START(), BENCHCODE_STOP(), BENCHCODE_REPORT() macro. All of the
-macro are easy access to methods of the static Executor class which you may use directly as a
-singleton. All functionality provided for dynamic benchmarks is thread-safe synchronizied with
-mutex (each call will lose some ns).
+macro are easy access to methods of the static [Executor](http://chronoxor.github.io/CppBenchmark/class_cpp_benchmark_1_1_executor.html) class 
+which you may use directly as a singleton. All functionality provided for dynamic benchmarks is 
+thread-safe synchronizied with mutex (each call will lose some ns).
 ```C++
 #include "cppbenchmark.h"
 
