@@ -6,6 +6,19 @@
       <sourceFolder url="file://$MODULE_DIR$/cmake/SetCompilerFeatures.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake/SetCompilerWarningAll.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake/SetCrtSecureWarningsOff.cmake" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/atomic.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/containers.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/executor.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/fpu.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/fwrite.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/iterators.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/mpmc.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/mpsc.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/random.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/sort.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/spsc.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/threads.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/timers.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/modules/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/modules/catch.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/modules/cpp-optparse.cmake" isTestSource="false" />
@@ -20,7 +33,6 @@
       <sourceFolder url="file://$MODULE_DIR$/source/context_thread.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/environment.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/executor.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/executor_threads.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/launcher.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/launcher_console.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/phase_core.cpp" isTestSource="false" />

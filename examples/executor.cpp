@@ -12,7 +12,7 @@ const int THREADS = 8;
 
 void init()
 {
-    auto benchmark = BENCHCODE_SCOPE("Initialization")
+    auto benchmark = BENCHCODE_SCOPE("Initialization");
 
     std::this_thread::sleep_for(std::chrono::seconds(2));
 }
@@ -56,11 +56,11 @@ void calculate()
 
 void cleanup()
 {
-    BENCHCODE_START("Cleanup")
+    BENCHCODE_START("Cleanup");
 
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
-    BENCHCODE_STOP("Cleanup")
+    BENCHCODE_STOP("Cleanup");
 }
 
 int main(int argc, char** argv)

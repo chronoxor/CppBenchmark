@@ -101,7 +101,6 @@ namespace CppBenchmark {\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(CppBenchmark::Context& context)
 
-
 //! Benchmark with fixture register macro
 /*!
     Register a new benchmark with a given \a fixture, \a name and settings. Next to the definition you should provide
@@ -200,7 +199,6 @@ namespace CppBenchmark {\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(ContextThread& context)
 
-
 //! Benchmark class register macro
 /*!
     Register a new benchmark based on a child class of a \a type with a given \a name and \a settings. You should
@@ -225,14 +223,94 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(Cont
 #define BENCHMARK_CLASS(type, name, ...)\
 namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(name, type::TSettings(__VA_ARGS__))); }
 
+//! Dynamic benchmark scope register macro
+/*!
+    Create a scope guard for dynamic benchmark with the given \a name. It will be automatically registered in static
+    Executor class.
+
+    Example:
+    \code{.cpp}
+    // Some scope...
+    {
+        auto benchmark = BENCHCODE_SCOPE("My dynamic benchmark");
+
+        // Here goes some code fragment you want to benchmark dynamically...
+        ...
+    }
+    \endcode
+*/
 #define BENCHCODE_SCOPE(name) CppBenchmark::Executor::GetInstance().ScopeBenchmark(name);
+
+//! Dynamic benchmark start macro
+/*!
+    Start dynamic benchmark with the given \a name. It will be automatically registered in static Executor class.
+    Should be used in pair with BENCHCODE_STOP macro!
+
+    Example:
+    \code{.cpp}
+    BENCHCODE_START("My dynamic benchmark");
+
+    // Here goes some code fragment you want to benchmark dynamically...
+    ...
+
+    BENCHCODE_STOP("My dynamic benchmark");
+    \endcode
+*/
 #define BENCHCODE_START(name) CppBenchmark::Executor::GetInstance().StartBenchmark(name);
+
+//! Dynamic benchmark stop macro
+/*!
+    Stop dynamic benchmark with the given \a name. It will be automatically registered in static Executor class.
+    Should be used in pair with BENCHCODE_START macro!
+
+    Example:
+    \code{.cpp}
+    BENCHCODE_START("My dynamic benchmark");
+
+    // Here goes some code fragment you want to benchmark dynamically...
+    ...
+
+    BENCHCODE_STOP("My dynamic benchmark");
+    \endcode
+*/
 #define BENCHCODE_STOP(name) CppBenchmark::Executor::GetInstance().StopBenchmark(name);
+
+//! Dynamic benchmarks report to console macro
+/*!
+    Prepare results of all dynamic benchmarks registered in static Executor class and show them using ReporterConsole.
+
+    Example:
+    \code{.cpp}
+    int main(int argc, char** argv)
+    {
+        // Do some calculations or program run and measure code fragments with dynamic benchmarks...
+        ...
+
+        // Report benchmark results
+        BENCHCODE_REPORT();
+
+        return 0;
+    }
+    \endcode
+*/
 #define BENCHCODE_REPORT()\
 {\
     CppBenchmark::ReporterConsole BENCHMARK_INTERNAL_UNIQUE_NAME(reporter);\
     CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
 }
+
+//! Dynamic benchmarks report as a string macro
+/*!
+    Prepare results of all dynamic benchmarks registered in static Executor class using ReporterConsole and store them
+    in a string variable \a value.
+
+    Example:
+    \code{.cpp}
+    // Report benchmark results
+    std::string report;
+    BENCHCODE_REPORT_STR(report);
+    \endcode
+*/
 #define BENCHCODE_REPORT_STR(value)\
 {\
     std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
@@ -240,6 +318,19 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
     CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
     value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\
 }
+
+//! Dynamic benchmarks report as a CSV format string macro
+/*!
+    Prepare results of all dynamic benchmarks registered in static Executor class using ReporterCSV and store them
+    in a string variable \a value.
+
+    Example:
+    \code{.cpp}
+    // Report benchmark results in CSV format
+    std::string report;
+    BENCHCODE_REPORT_CSV(report);
+    \endcode
+*/
 #define BENCHCODE_REPORT_CSV(value)\
 {\
     std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
@@ -247,6 +338,19 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
     CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
     value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\
 }
+
+//! Dynamic benchmarks report as a JSON format string macro
+/*!
+    Prepare results of all dynamic benchmarks registered in static Executor class using ReporterJSON and store them
+    in a string variable \a value.
+
+    Example:
+    \code{.cpp}
+    // Report benchmark results in JSON format
+    std::string report;
+    BENCHCODE_REPORT_JSON(report);
+    \endcode
+*/
 #define BENCHCODE_REPORT_JSON(value)\
 {\
     std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
