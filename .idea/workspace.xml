@@ -33,7 +33,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3701edfd-3577-46a3-8ad8-44a5d9a3019b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/cppbenchmark.h" afterPath="$PROJECT_DIR$/include/cppbenchmark.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/cppbenchmark.iml" afterPath="$PROJECT_DIR$/.idea/cppbenchmark.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -455,7 +454,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1554" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1554" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1140625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />

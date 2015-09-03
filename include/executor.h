@@ -14,7 +14,7 @@
 
 namespace CppBenchmark {
 
-//! Dynamic executor class
+//! Dynamic benchmarks executor class
 /*!
     Provides interface to register dynamic benchmarks and report results with external reporters.
 */
