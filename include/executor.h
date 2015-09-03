@@ -79,6 +79,8 @@ private:
     void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name);
 };
 
+/*! \example executor.cpp Dynamic benchmarks */
+
 } // namespace CppBenchmark
 
 #endif // CPPBENCHMARK_EXECUTOR_H
