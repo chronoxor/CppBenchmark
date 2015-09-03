@@ -1087,7 +1087,7 @@ critical parts and code fragments. In this case just include cppbenchmark.h head
 BENCHCODE_SCOPE(), BENCHCODE_START(), BENCHCODE_STOP(), BENCHCODE_REPORT() macro. All of the
 macro are easy access to methods of the static Executor class which you may use directly as a
 singleton. All functionality provided for dynamic benchmarks is thread-safe synchronizied with
-mutex (each call will lost some ns).
+mutex (each call will lose some ns).
 ```C++
 #include "cppbenchmark.h"
 
