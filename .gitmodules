@@ -4,3 +4,6 @@
 [submodule "modules/cpp-optparse"]
 	path = modules/cpp-optparse
 	url = https://github.com/weisslj/cpp-optparse.git
+[submodule "scripts"]
+	path = scripts
+	url = https://github.com/chronoxor/CppBuildScripts.git
