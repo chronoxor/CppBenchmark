@@ -9,9 +9,13 @@
 #ifndef CPPBENCHMARK_VERSION_H
 #define CPPBENCHMARK_VERSION_H
 
+/*!
+    \namespace CppBenchmark
+    \brief C++ benchmark project definitions
+*/
 namespace CppBenchmark {
 
-//! CppBenchmark version
+//! Project version
 const char version[] = "1.1.0.0";
 
 } // namespace CppBenchmark
