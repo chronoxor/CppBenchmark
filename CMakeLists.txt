@@ -6,10 +6,18 @@ include("cmake/SetCompilerFeatures.cmake")
 include("cmake/SetCompilerWarningAll.cmake")
 include("cmake/SetCrtSecureWarningsOff.cmake")
 
-# Modules path
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/packages" ${CMAKE_MODULE_PATH})
+# Doxygen
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+  set(DOXYGEN "doxygen")
+  if(NOT TARGET ${DOXYGEN})
+    add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "Doxyfile" WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/documents")
+    add_custom_target(${DOXYGEN} DEPENDS "Doxyfile")
+  endif()
+endif()
 
-# External packages
+# Modules path
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/packages" ${CMAKE_MODULE_PATH})# External packages
 find_package(Threads REQUIRED)
 
 # Modules
@@ -51,11 +59,3 @@ install(TARGETS ${INSTALL_TARGETS}
   RUNTIME DESTINATION "${PROJECT_SOURCE_DIR}/bin"
   LIBRARY DESTINATION "${PROJECT_SOURCE_DIR}/bin"
   ARCHIVE DESTINATION "${PROJECT_SOURCE_DIR}/bin")
-
-# Doxygen
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-  set(DOXYGEN "${PROJECT_NAME}-doxygen")
-  add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "Doxyfile" WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/documents")
-  add_custom_target(${DOXYGEN} DEPENDS "Doxyfile")
-endif()
