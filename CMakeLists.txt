@@ -16,11 +16,11 @@ include("cmake/SetCompilerFeatures.cmake")
 include("cmake/SetCompilerWarningAll.cmake")
 include("cmake/SetCrtSecureWarningsOff.cmake")
 
+# External packages path
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/packages" ${CMAKE_MODULE_PATH})
+
 # External packages
 find_package(Threads REQUIRED)
-
-# Modules path
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/packages" ${CMAKE_MODULE_PATH})
 
 # Modules
 add_subdirectory("modules")
