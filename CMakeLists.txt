@@ -22,9 +22,12 @@ find_package(Threads REQUIRED)
 # Modules
 add_subdirectory("modules")
 
-# Library
+# Includes
 include_directories("include")
+include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
+
+# Library
 file(GLOB_RECURSE HEADER_FILES "source/*.h")
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 add_library(cppbenchmark ${HEADER_FILES} ${SOURCE_FILES})
@@ -42,7 +45,6 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
 endforeach()
 
 # Tests
-include_directories("modules/catch/single_include")
 file(GLOB_RECURSE TESTS_HEADER_FILES "tests/*.h")
 file(GLOB_RECURSE TESTS_SOURCE_FILES "tests/*.cpp")
 add_executable(cppbenchmark-tests ${CATCH_HEADER} ${TESTS_HEADER_FILES} ${TESTS_SOURCE_FILES})
