@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(cppbenchmark)
 
-# Compiler features
-include("cmake/SetCompilerFeatures.cmake")
-include("cmake/SetCompilerWarningAll.cmake")
-include("cmake/SetCrtSecureWarningsOff.cmake")
-
 # Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
@@ -16,9 +11,16 @@ if(DOXYGEN_FOUND)
   endif()
 endif()
 
-# Modules path
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/packages" ${CMAKE_MODULE_PATH})# External packages
+# Compiler features
+include("cmake/SetCompilerFeatures.cmake")
+include("cmake/SetCompilerWarningAll.cmake")
+include("cmake/SetCrtSecureWarningsOff.cmake")
+
+# External packages
 find_package(Threads REQUIRED)
+
+# Modules path
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/packages" ${CMAKE_MODULE_PATH})
 
 # Modules
 add_subdirectory("modules")
