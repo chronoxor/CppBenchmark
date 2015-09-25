@@ -6,6 +6,9 @@ include("cmake/SetCompilerFeatures.cmake")
 include("cmake/SetCompilerWarningAll.cmake")
 include("cmake/SetCrtSecureWarningsOff.cmake")
 
+# Modules path
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/packages" ${CMAKE_MODULE_PATH})
+
 # External packages
 find_package(Threads REQUIRED)
 
@@ -52,7 +55,7 @@ install(TARGETS ${INSTALL_TARGETS}
 # Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-  set(DOXYGEN "doxygen")
+  set(DOXYGEN "${PROJECT_NAME}-doxygen")
   add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "Doxyfile" WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/documents")
   add_custom_target(${DOXYGEN} DEPENDS "Doxyfile")
 endif()
