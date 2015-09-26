@@ -38,8 +38,10 @@ Settings& Settings::Threads(int threads)
 
 Settings& Settings::ThreadsRange(int from, int to)
 {
-    if ((from > 0) && (to > 0)) {
-        if (from > to) {
+    if ((from > 0) && (to > 0))
+    {
+        if (from > to)
+        {
             from = to;
             to = from;
         }
@@ -51,15 +53,18 @@ Settings& Settings::ThreadsRange(int from, int to)
 
 Settings& Settings::ThreadsRange(int from, int to, std::function<int (int, int, int&)> selector)
 {
-    if ((from > 0) && (to > 0)) {
-        if (from > to) {
+    if ((from > 0) && (to > 0))
+    {
+        if (from > to)
+        {
             from = to;
             to = from;
         }
         // Select the first value
         int current = from;
         int result = selector(from, to, current);
-        while ((result >= from) && (result <= to)) {
+        while ((result >= from) && (result <= to))
+        {
             _threads.emplace_back(result);
             // Select the next value
             result = selector(from, to, current);
@@ -77,12 +82,15 @@ Settings& Settings::PC(int producers, int consumers)
 
 Settings& Settings::PCRange(int producers_from, int producers_to, int consumers_from, int consumers_to)
 {
-    if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0)) {
-        if (producers_from > producers_to) {
+    if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0))
+    {
+        if (producers_from > producers_to)
+        {
             producers_from = producers_to;
             producers_to = producers_from;
         }
-        if (consumers_from > consumers_to) {
+        if (consumers_from > consumers_to)
+        {
             consumers_from = consumers_to;
             consumers_to = consumers_from;
         }
@@ -94,25 +102,30 @@ Settings& Settings::PCRange(int producers_from, int producers_to, int consumers_
 }
 
 Settings& Settings::PCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
-                              int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector)
+                            int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector)
 {
-    if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0)) {
-        if (producers_from > producers_to) {
+    if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0))
+    {
+        if (producers_from > producers_to)
+        {
             producers_from = producers_to;
             producers_to = producers_from;
         }
-        if (consumers_from > consumers_to) {
+        if (consumers_from > consumers_to)
+        {
             consumers_from = consumers_to;
             consumers_to = consumers_from;
         }
         // Select the first value
         int current1 = producers_from;
         int result1 = producers_selector(producers_from, producers_to, current1);
-        while ((result1 >= producers_from) && (result1 <= producers_to)) {
+        while ((result1 >= producers_from) && (result1 <= producers_to))
+        {
             // Select the second value
             int current2 = consumers_from;
             int result2 = consumers_selector(consumers_from, consumers_to, current2);
-            while ((result2 >= consumers_from) && (result2 <= consumers_to)) {
+            while ((result2 >= consumers_from) && (result2 <= consumers_to))
+            {
                 _pc.emplace_back(result1, result2);
                 // Select the next value
                 result2 = consumers_selector(consumers_from, consumers_to, current2);
@@ -133,8 +146,10 @@ Settings& Settings::Param(int value)
 
 Settings& Settings::ParamRange(int from, int to)
 {
-    if ((from >= 0) && (to >= 0)) {
-        if (from > to) {
+    if ((from >= 0) && (to >= 0))
+    {
+        if (from > to)
+        {
             from = to;
             to = from;
         }
@@ -146,15 +161,18 @@ Settings& Settings::ParamRange(int from, int to)
 
 Settings& Settings::ParamRange(int from, int to, std::function<int (int, int, int&)> selector)
 {
-    if ((from >= 0) && (to >= 0)) {
-        if (from > to) {
+    if ((from >= 0) && (to >= 0))
+    {
+        if (from > to)
+        {
             from = to;
             to = from;
         }
         // Select the first value
         int current = from;
         int result = selector(from, to, current);
-        while ((result >= from) && (result <= to)) {
+        while ((result >= from) && (result <= to))
+        {
             _params.emplace_back(result, -1, -1);
             // Select the next value
             result = selector(from, to, current);
@@ -172,12 +190,15 @@ Settings& Settings::Pair(int value1, int value2)
 
 Settings& Settings::PairRange(int from1, int to1, int from2, int to2)
 {
-    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0)) {
-        if (from1 > to1) {
+    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0))
+    {
+        if (from1 > to1)
+        {
             from1 = to1;
             to1 = from1;
         }
-        if (from2 > to2) {
+        if (from2 > to2)
+        {
             from2 = to2;
             to2 = from2;
         }
@@ -191,23 +212,28 @@ Settings& Settings::PairRange(int from1, int to1, int from2, int to2)
 Settings& Settings::PairRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
                               int from2, int to2, std::function<int (int, int, int&)> selector2)
 {
-    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0)) {
-        if (from1 > to1) {
+    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0))
+    {
+        if (from1 > to1)
+        {
             from1 = to1;
             to1 = from1;
         }
-        if (from2 > to2) {
+        if (from2 > to2)
+        {
             from2 = to2;
             to2 = from2;
         }
         // Select the first value
         int current1 = from1;
         int result1 = selector1(from1, to1, current1);
-        while ((result1 >= from1) && (result1 <= to1)) {
+        while ((result1 >= from1) && (result1 <= to1))
+        {
             // Select the second value
             int current2 = from2;
             int result2 = selector2(from2, to2, current2);
-            while ((result2 >= from2) && (result2 <= to2)) {
+            while ((result2 >= from2) && (result2 <= to2))
+            {
                 _params.emplace_back(result1, result2, -1);
                 // Select the next value
                 result2 = selector2(from2, to2, current2);
@@ -228,16 +254,20 @@ Settings& Settings::Triple(int value1, int value2, int value3)
 
 Settings& Settings::TripleRange(int from1, int to1, int from2, int to2, int from3, int to3)
 {
-    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0)) {
-        if (from1 > to1) {
+    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0))
+    {
+        if (from1 > to1)
+        {
             from1 = to1;
             to1 = from1;
         }
-        if (from2 > to2) {
+        if (from2 > to2)
+        {
             from2 = to2;
             to2 = from2;
         }
-        if (from3 > to3) {
+        if (from3 > to3)
+        {
             from3 = to3;
             to3 = from3;
         }
@@ -253,31 +283,38 @@ Settings& Settings::TripleRange(int from1, int to1, std::function<int (int, int,
                                 int from2, int to2, std::function<int (int, int, int&)> selector2,
                                 int from3, int to3, std::function<int (int, int, int&)> selector3)
 {
-    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0)) {
-        if (from1 > to1) {
+    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0))
+    {
+        if (from1 > to1)
+        {
             from1 = to1;
             to1 = from1;
         }
-        if (from2 > to2) {
+        if (from2 > to2)
+        {
             from2 = to2;
             to2 = from2;
         }
-        if (from3 > to3) {
+        if (from3 > to3)
+        {
             from3 = to3;
             to3 = from3;
         }
         // Select the first value
         int current1 = from1;
         int result1 = selector1(from1, to1, current1);
-        while ((result1 >= from1) && (result1 <= to1)) {
+        while ((result1 >= from1) && (result1 <= to1))
+        {
             // Select the second value
             int current2 = from2;
             int result2 = selector2(from2, to2, current2);
-            while ((result2 >= from2) && (result2 <= to2)) {
+            while ((result2 >= from2) && (result2 <= to2))
+            {
                 // Select the third value
                 int current3 = from3;
                 int result3 = selector3(from3, to3, current3);
-                while ((result3 >= from3) && (result3 <= to3)) {
+                while ((result3 >= from3) && (result3 <= to3))
+                {
                     _params.emplace_back(result1, result2, result3);
                     // Select the next value
                     result3 = selector3(from3, to3, current3);

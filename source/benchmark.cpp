@@ -22,15 +22,15 @@ int Benchmark::CountLaunches() const
 void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
 {
     // Make several attempts of execution...
-    for (int attempt = 1; attempt <= _settings.attempts(); ++attempt) {
-
+    for (int attempt = 1; attempt <= _settings.attempts(); ++attempt)
+    {
         // Run benchmark at least once
         if (_settings._params.empty())
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every input parameter (single, pair, triple)
-        for (auto param : _settings.params()) {
-
+        for (auto param : _settings.params())
+        {
             // Prepare benchmark context
             Context context(std::get<0>(param), std::get<1>(param), std::get<2>(param));
 
@@ -88,7 +88,8 @@ void Benchmark::InitBenchmarkContext(Context& context)
 
     // Find or create root phase for the given context
     auto it = std::find_if(_phases.begin(), _phases.end(), [&name] (std::shared_ptr<PhaseCore>& item) { return item->name() == name; });
-    if (it == _phases.end()) {
+    if (it == _phases.end())
+    {
         result = std::make_shared<PhaseCore>(name);
         _phases.emplace_back(result);
     }
@@ -117,10 +118,12 @@ void Benchmark::UpdateBenchmarkMetrics(PhaseCore& phase)
 void Benchmark::UpdateBenchmarkThreads(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
     // Merge benchmark phases with a same name for different threads
-    for (auto it = phases.begin(); it != phases.end(); ++it) {
-        for (auto next = it + 1; next != phases.end(); ++next) {
-            if ((*it)->name() == (*next)->name()) {
-
+    for (auto it = phases.begin(); it != phases.end(); ++it)
+    {
+        for (auto next = it + 1; next != phases.end(); ++next)
+        {
+            if ((*it)->name() == (*next)->name())
+            {
                 // Merge metrics results
                 (*it)->MergeMetrics(**next);
 

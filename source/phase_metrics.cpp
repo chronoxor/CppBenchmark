@@ -86,7 +86,8 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
     _custom_str.insert(metrics._custom_str.begin(), metrics._custom_str.end());
 
     // Choose best total time with iterations, items and bytes
-    if (metrics._total_time < _total_time) {
+    if (metrics._total_time < _total_time)
+    {
         _total_time = metrics._total_time;
         _total_iterations = metrics._total_iterations;
         _total_items = metrics._total_items;

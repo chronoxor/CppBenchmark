@@ -21,8 +21,8 @@ int BenchmarkPC::CountLaunches() const
 void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 {
     // Make several attempts of execution...
-    for (int attempt = 1; attempt <= _settings.attempts(); ++attempt) {
-
+    for (int attempt = 1; attempt <= _settings.attempts(); ++attempt)
+    {
         // Run benchmark at least for 1 producer and 1 consumer
         if (_settings._pc.empty())
             _settings._pc.emplace_back(1, 1);
@@ -32,14 +32,14 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every producers/consumers pair
-        for (auto pc : _settings.pc()) {
-
+        for (auto pc : _settings.pc())
+        {
             int producers = std::get<0>(pc);
             int consumers = std::get<1>(pc);
 
             // Run benchmark for every input parameter (single, pair, triple)
-            for (auto param : _settings.params()) {
-
+            for (auto param : _settings.params())
+            {
                 // Prepare benchmark context
                 ContextPC context(producers, consumers, std::get<0>(param), std::get<1>(param), std::get<2>(param));
 
@@ -60,7 +60,8 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 context._metrics->AddIterations(1);
 
                 // Start benchmark producers as futures
-                for (int i = 0; i < producers; ++i) {
+                for (int i = 0; i < producers; ++i)
+                {
                     _threads.push_back(std::thread([this, &context, infinite, iterations, i]()
                     {
                         // Clone producer context
@@ -104,7 +105,8 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 }
 
                 // Start benchmark consumers as futures
-                for (int i = 0; i < consumers; ++i) {
+                for (int i = 0; i < consumers; ++i)
+                {
                     _threads.push_back(std::thread([this, &context, i]()
                     {
                         // Clone consumer context

@@ -36,12 +36,14 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
     optparse::Values options = parser.parse_args(argc, argv);
 
     // Check for double initialization
-    if (_init) {
+    if (_init)
+    {
         parser.error("Console launcher double initialization!");
     }
 
     // Print help
-    if (options.get("help")) {
+    if (options.get("help"))
+    {
         parser.print_help();
         parser.exit();
     }
@@ -60,17 +62,19 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
 
 void LauncherConsole::Launch()
 {
-    if (_list) {
+    if (_list)
+    {
         // List all suitable benchmarks
         std::regex matcher(_filter);
-        for (auto benchmark : _benchmarks) {
+        for (auto benchmark : _benchmarks)
+        {
             // Match benchmark name with the given pattern
-            if (_filter.empty() || std::regex_match(benchmark->name(), matcher)) {
+            if (_filter.empty() || std::regex_match(benchmark->name(), matcher))
                 std::cout << benchmark->name() << std::endl;
-            }
         }
     }
-    else {
+    else
+    {
         // Launch all suitable benchmarks
         Launcher::Launch(_filter);
     }
@@ -78,15 +82,18 @@ void LauncherConsole::Launch()
 
 void LauncherConsole::Report()
 {
-    if (_output == "console") {
+    if (_output == "console")
+    {
         ReporterConsole reporter(std::cout);
         Launcher::Report(reporter);
     }
-    else if (_output == "csv") {
+    else if (_output == "csv")
+    {
         ReporterCSV reporter(std::cout);
         Launcher::Report(reporter);
     }
-    else if (_output == "json") {
+    else if (_output == "json")
+    {
         ReporterJSON reporter(std::cout);
         Launcher::Report(reporter);
     }

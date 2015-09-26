@@ -99,7 +99,8 @@ std::string Environment::OSVersion()
     else
         GetSystemInfo(&si);
 
-    if ((osvi.dwPlatformId != VER_PLATFORM_WIN32_NT) || (osvi.dwMajorVersion <= 4)) {
+    if ((osvi.dwPlatformId != VER_PLATFORM_WIN32_NT) || (osvi.dwMajorVersion <= 4))
+    {
         return "<windows>";
     }
 
@@ -254,7 +255,8 @@ std::string Environment::OSVersion()
     os << " " << osvi.szCSDVersion;
 
     os << " (build " << osvi.dwBuildNumber << ")";
-    if ( osvi.dwMajorVersion >= 6 ) {
+    if ( osvi.dwMajorVersion >= 6 )
+    {
         if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64)
             os <<  ", 64-bit";
         else if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_INTEL)
@@ -266,7 +268,8 @@ std::string Environment::OSVersion()
 
     std::string line;
     std::ifstream stream("/etc/lsb-release");
-    while (getline(stream, line)) {
+    while (getline(stream, line))
+    {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
             return matches[1];

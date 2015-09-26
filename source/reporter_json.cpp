@@ -79,9 +79,8 @@ void ReporterJSON::ReportBenchmarksFooter()
 
 void ReporterJSON::ReportBenchmarkHeader()
 {
-    if (_benchmark_comma) {
+    if (_benchmark_comma)
         _stream << ",\n";
-    }
     _stream << Internals::indent2 << "{\n";
     _stream << Internals::indent3 << "\"benchmark\": {\n";
     _benchmark_comma = true;
@@ -117,9 +116,8 @@ void ReporterJSON::ReportPhasesFooter()
 
 void ReporterJSON::ReportPhaseHeader()
 {
-    if (_phase_comma) {
+    if (_phase_comma)
         _stream << ",\n";
-    }
     _stream << Internals::indent5 << "{\n";
     _stream << Internals::indent6 << "\"phase\": {\n";
     _phase_comma = true;
@@ -132,9 +130,10 @@ void ReporterJSON::ReportPhaseFooter()
 }
 
 void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
-    {
+{
     _stream << Internals::indent7 << "\"name\": \"" << phase.name() << "\",\n";
-    if (metrics.total_iterations() > 1) {
+    if (metrics.total_iterations() > 1)
+    {
         _stream << Internals::indent7 << "\"avg_time\": " << metrics.avg_time() << ",\n";
         _stream << Internals::indent7 << "\"min_time\": " << metrics.min_time() << ",\n";
         _stream << Internals::indent7 << "\"max_time\": " << metrics.max_time() << ",\n";
@@ -153,23 +152,27 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
     if (metrics.total_bytes() > 0)
         _stream << Internals::indent7 << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
     _stream << Internals::indent7 << "\"custom\": [";
-    if ((metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0)) {
+    if ((metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0))
+    {
         std::set<std::string> names;
         for (auto it : metrics.custom_int())
             names.insert(it.first);
         for (auto it : metrics.custom_str())
             names.insert(it.first);
         bool comma = false;
-        for (auto name : names) {
+        for (auto name : names)
+        {
             auto it_int = metrics.custom_int().find(name);
-            if (it_int != metrics.custom_int().end()) {
+            if (it_int != metrics.custom_int().end())
+            {
                 if (comma)
                     _stream << ',';
                 _stream << '\n' << Internals::indent8 << "{ " << '"' << it_int->first << "\": " << it_int->second << " }";
                 comma = true;
             }
             auto it_str = metrics.custom_str().find(name);
-            if (it_str != metrics.custom_str().end()) {
+            if (it_str != metrics.custom_str().end())
+            {
                 if (comma)
                     _stream << ',';
                 _stream << '\n' << Internals::indent8 << "{ " << '"' << it_str->first << "\": \"" << it_str->second << "\" }";

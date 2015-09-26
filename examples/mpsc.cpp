@@ -37,7 +37,8 @@ protected:
 
     void RunProducer(CppBenchmark::ContextPC& context) override
     {
-        if (_count >= items_to_produce) {
+        if (_count >= items_to_produce)
+        {
             if (_queue->try_enqueue(0))
                 context.StopProduce();
             return;
@@ -78,7 +79,8 @@ protected:
 
     void RunProducer(CppBenchmark::ContextPC& context) override
     {
-        if (_count >= items_to_produce) {
+        if (_count >= items_to_produce)
+        {
             int value = 0;
             if (_queue->enqueue(value))
                 context.StopProduce();
@@ -121,7 +123,8 @@ protected:
 
     void RunProducer(CppBenchmark::ContextPC& context) override
     {
-        if (_count >= items_to_produce) {
+        if (_count >= items_to_produce)
+        {
             _queue->enqueue(0);
             context.StopProduce();
             return;

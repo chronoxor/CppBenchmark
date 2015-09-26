@@ -60,7 +60,8 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
 {
     _stream << DARKGREY << GenerateSeparator('-') << std::endl;
     _stream << WHITE << "Phase: " << LIGHTCYAN << phase.name() << std::endl;
-    if (metrics.total_iterations() > 1) {
+    if (metrics.total_iterations() > 1)
+    {
         _stream << WHITE << "Average time: " << YELLOW << GenerateTimePeriod(metrics.avg_time()) << " / iteration" << std::endl;
         _stream << WHITE << "Minimal time: " << YELLOW << GenerateTimePeriod(metrics.min_time()) << " / iteration" << std::endl;
         _stream << WHITE << "Maximal time: " << YELLOW << GenerateTimePeriod(metrics.max_time()) << " / iteration" << std::endl;
@@ -78,14 +79,16 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
         _stream << WHITE << "Items throughput: " << LIGHTMAGENTA << metrics.items_per_second() << " / second" << std::endl;
     if (metrics.total_bytes() > 0)
         _stream << WHITE << "Bytes throughput: " << MAGENTA << GenerateDataSize(metrics.bytes_per_second()) << " / second" << std::endl;
-    if ((metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0)) {
+    if ((metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0))
+    {
         _stream << WHITE << "Custom values: " << std::endl;
         std::set<std::string> names;
         for (auto it : metrics.custom_int())
             names.insert(it.first);
         for (auto it : metrics.custom_str())
             names.insert(it.first);
-        for (auto name : names) {
+        for (auto name : names)
+        {
             auto it_int = metrics.custom_int().find(name);
             if (it_int != metrics.custom_int().end())
                 _stream << DARKGREY << '\t' << it_int->first << ": " << GREY << it_int->second << std::endl;
@@ -110,17 +113,20 @@ std::string ReporterConsole::GenerateClockSpeed(int64_t hertz)
 {
     std::ostringstream stream;
 
-    if (hertz >= 1000000000ll) {
+    if (hertz >= 1000000000ll)
+    {
         int64_t gigahertz = hertz / 1000000000ll;
         int64_t megahertz = (hertz % 1000000000ll) / 1000000ll;
         stream << gigahertz << '.' << ((megahertz < 100) ? "0" : "") << ((megahertz < 10) ? "0" : "") << megahertz << " GHz";
     }
-    else if (hertz >= 1000000) {
+    else if (hertz >= 1000000)
+    {
         int64_t megahertz = hertz / 1000000;
         int64_t kilohertz = (hertz % 1000000) / 1000;
         stream << megahertz << '.' << ((kilohertz < 100) ? "0" : "") << ((kilohertz < 10) ? "0" : "") << kilohertz << " MHz";
     }
-    else if (hertz >= 1000) {
+    else if (hertz >= 1000)
+    {
         int64_t kilohertz = hertz / 1000;
         hertz = hertz % 1000;
         stream << kilohertz << '.' << ((hertz < 100) ? "0" : "") << ((hertz < 10) ? "0" : "") << hertz << " kHz";
@@ -135,22 +141,26 @@ std::string ReporterConsole::GenerateDataSize(int64_t bytes)
 {
     std::ostringstream stream;
 
-    if (bytes >= (1024ll * 1024ll * 1024ll * 1024ll)) {
+    if (bytes >= (1024ll * 1024ll * 1024ll * 1024ll))
+    {
         int64_t tb = bytes / (1024ll * 1024ll * 1024ll * 1024ll);
         int64_t gb = (bytes % (1024ll * 1024ll * 1024ll * 1024ll)) / (1024 * 1024 * 1024);
         stream << tb << '.' << ((gb < 100) ? "0" : "") << ((gb < 10) ? "0" : "") << gb << " TiB";
     }
-    else if (bytes >= (1024 * 1024 * 1024)) {
+    else if (bytes >= (1024 * 1024 * 1024))
+    {
         int64_t gb = bytes / (1024 * 1024 * 1024);
         int64_t mb = (bytes % (1024 * 1024 * 1024)) / (1024 * 1024);
         stream << gb << '.' << ((mb < 100) ? "0" : "") << ((mb < 10) ? "0" : "") << mb << " GiB";
     }
-    else if (bytes >= (1024 * 1024)) {
+    else if (bytes >= (1024 * 1024))
+    {
         int64_t mb = bytes / (1024 * 1024);
         int64_t kb = (bytes % (1024 * 1024)) / 1024;
         stream << mb << '.' << ((kb < 100) ? "0" : "") << ((kb < 10) ? "0" : "") << kb << " MiB";
     }
-    else if (bytes >= 1024) {
+    else if (bytes >= 1024)
+    {
         int64_t kb = bytes / 1024;
         bytes = bytes % 1024;
         stream << kb << '.' << ((bytes < 100) ? "0" : "") << ((bytes < 10) ? "0" : "") << bytes << " KiB";
@@ -165,30 +175,35 @@ std::string ReporterConsole::GenerateTimePeriod(int64_t nanoseconds)
 {
     std::ostringstream stream;
 
-    if (nanoseconds >= (60 * 60 * 1000000000ll)) {
+    if (nanoseconds >= (60 * 60 * 1000000000ll))
+    {
         int64_t hours = nanoseconds / (60 * 60 * 1000000000ll);
         int64_t minutes = ((nanoseconds % (60 * 60 * 1000000000ll)) / 1000000000ll) / 60;
         int64_t seconds = ((nanoseconds % (60 * 60 * 1000000000ll)) / 1000000000ll) % 60;
         int64_t milliseconds = ((nanoseconds % (60 * 60 * 1000000000ll)) % 1000000000ll) / 1000000ll;
         stream << hours << ':' << ((minutes < 10) ? "0" : "") << minutes << ':' << ((seconds < 10) ? "0" : "") << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " h";
     }
-    else if (nanoseconds >= (60 * 1000000000ll)) {
+    else if (nanoseconds >= (60 * 1000000000ll))
+    {
         int64_t minutes = nanoseconds / (60 * 1000000000ll);
         int64_t seconds = (nanoseconds % (60 * 1000000000ll)) / 1000000000ll;
         int64_t milliseconds = ((nanoseconds % (60 * 1000000000ll)) % 1000000000ll) / 1000000ll;
         stream << minutes << ':' << ((seconds < 10) ? "0" : "") << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " m";
     }
-    else if (nanoseconds >= 1000000000ll) {
+    else if (nanoseconds >= 1000000000ll)
+    {
         int64_t seconds = nanoseconds / 1000000000ll;
         int64_t milliseconds = (nanoseconds % 1000000000ll) / 1000000ll;
         stream << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " s";
     }
-    else if (nanoseconds >= 1000000) {
+    else if (nanoseconds >= 1000000)
+    {
         int64_t milliseconds = nanoseconds / 1000000;
         int64_t microseconds = (nanoseconds % 1000000) / 1000;
         stream << milliseconds << '.' << ((microseconds < 100) ? "0" : "") << ((microseconds < 10) ? "0" : "") << microseconds << " ms";
     }
-    else if (nanoseconds >= 1000) {
+    else if (nanoseconds >= 1000)
+    {
         int64_t microseconds = nanoseconds / 1000;
         nanoseconds = nanoseconds % 1000;
         stream << microseconds << '.' << ((nanoseconds < 100) ? "0" : "") << ((nanoseconds < 10) ? "0" : "") << nanoseconds << " mcs";

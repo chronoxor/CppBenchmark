@@ -28,7 +28,8 @@ void Console::SetColor(Color color)
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, (WORD)color);
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    const char* colors[] = {
+    const char* colors[] =
+    {
         "\033[22;30m",  // Black color
         "\033[22;34m",  // Blue color
         "\033[22;32m",  // Green color

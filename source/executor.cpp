@@ -57,10 +57,12 @@ std::shared_ptr<Phase> Executor::StartBenchmark(const std::string& benchmark)
         std::lock_guard<std::mutex> lock(_mutex);
 
         // Find or create a dynamic benchmark with the given name
-        auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item) {
+        auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item)
+        {
             return ((item->name() == benchmark) && (item->_thread == System::CurrentThreadId()));
         });
-        if (it == _benchmarks.end()) {
+        if (it == _benchmarks.end())
+        {
             result = std::make_shared<PhaseCore>(benchmark);
             _benchmarks.emplace_back(result);
         }
@@ -84,7 +86,8 @@ void Executor::StopBenchmark(const std::string& benchmark)
         std::lock_guard<std::mutex> lock(_mutex);
 
         // Find dynamic benchmark with the given name
-        auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item) {
+        auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item)
+        {
             return ((item->name() == benchmark) && (item->_thread == System::CurrentThreadId()));
         });
         if (it != _benchmarks.end())
@@ -106,7 +109,8 @@ void Executor::Report(Reporter& reporter)
     reporter.ReportBenchmarksHeader();
 
     // For all registered benchmarks...
-    for (auto benchmark : _benchmarks) {
+    for (auto benchmark : _benchmarks)
+    {
         // Create dynamic benchmark wrapper
         Internals::DynamicBenchmark result(benchmark->name(), Settings().Attempts(1));
 
@@ -129,7 +133,8 @@ void Executor::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
     reporter.ReportPhaseHeader();
     reporter.ReportPhase(phase, phase.metrics());
     reporter.ReportPhaseFooter();
-    for (auto child : phase._child) {
+    for (auto child : phase._child)
+    {
         std::string child_name = name + "." + child->name();
         ReportPhase(reporter, *child, child_name);
     }

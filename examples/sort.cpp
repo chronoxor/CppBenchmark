@@ -36,12 +36,14 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
-        for (size_t i = 0; i < items.size(); ++i) {
+        for (size_t i = 0; i < items.size(); ++i)
+        {
             // Set the current item as minimal
             size_t min = i;
 
             // Found in rest items another minimal
-            for (size_t j = i + 1; j < items.size(); ++j) {
+            for (size_t j = i + 1; j < items.size(); ++j)
+            {
                 if (items[j] < items[min])
                     min = j;
             }
@@ -62,12 +64,14 @@ protected:
     void Run(CppBenchmark::Context& context) override
     {
         // Iterate through all items to get the current bound
-        for (size_t i = 0; i < items.size(); ++i) {
+        for (size_t i = 0; i < items.size(); ++i)
+        {
             // Calculate the current bound
             size_t bound = items.size() - i;
 
             // Starting from the current items and for all next items before the bound...
-            for (size_t j = 1; j < bound; ++j) {
+            for (size_t j = 1; j < bound; ++j)
+            {
                 // Swap items to bubble up minimal one to the end
                 if (items[j] < items[j - 1])
                     std::swap(items[j], items[j - 1]);
@@ -90,9 +94,11 @@ protected:
         size_t right = items.size();
 
         // While left and right bound not met...
-        while (left < right) {
+        while (left < right)
+        {
             // Bubble down minimal item to the left bound
-            for (size_t i = right; i > left; --i) {
+            for (size_t i = right; i > left; --i)
+            {
                 if (items[i - 1] < items[i - 1 - 1])
                     std::swap(items[i - 1], items[i - 1 - 1]);
             }
@@ -101,7 +107,8 @@ protected:
             ++left;
 
             // Bubble up maximal item to the right bound
-            for (size_t i = left; i < right; ++i) {
+            for (size_t i = left; i < right; ++i)
+            {
                 if (items[i + 1 - 1] < items[i - 1])
                     std::swap(items[i + 1 - 1], items[i - 1]);
             }
@@ -127,20 +134,24 @@ protected:
         size_t j = 2;
 
         // For each item...
-        while (i < items.size()) {
+        while (i < items.size())
+        {
             // If the current item is less then previous...
-            if (items[i] < items[i - 1]) {
+            if (items[i] < items[i - 1])
+            {
                 // Swap items
                 std::swap(items[i], items[i - 1]);
                 // Decrease the current item
                 --i;
                 // If we get the left bound then jump the next unsorted item
-                if (i == 0) {
+                if (i == 0)
+                {
                     i = j;
                     ++j;
                 }
             }
-            else {
+            else
+            {
                 // In other case jump to the next unsorted item
                 i = j;
                 ++j;
@@ -158,9 +169,11 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
-        for (size_t i = 1; i < items.size(); ++i) {
+        for (size_t i = 1; i < items.size(); ++i)
+        {
             // Take the next item
-            for (size_t j = i + 1; j > 1; --j) {
+            for (size_t j = i + 1; j > 1; --j)
+            {
                 // Check the current item with the previous one
                 if (items[j - 1] < items[j - 1 - 1])
                     std::swap(items[j - 1], items[j - 1 - 1]);
@@ -184,7 +197,8 @@ protected:
             d = 3 * d + 1;
 
         // While distance is valid
-        while (d > 0) {
+        while (d > 0)
+        {
             // Perform insert sort with the given distance
             ShellSortInternal(items, d);
 
@@ -197,9 +211,11 @@ protected:
 private:
     void ShellSortInternal(std::vector<int>& subitems, size_t d)
     {
-        for (size_t i = d; i < subitems.size(); ++i) {
+        for (size_t i = d; i < subitems.size(); ++i)
+        {
             // Take the next item
-            for (size_t j = i + 1; j >= d + 1; j -= d) {
+            for (size_t j = i + 1; j >= d + 1; j -= d)
+            {
                 // Check the current item with the previous one
                 if (subitems[j - 1] < subitems[j - d - 1])
                     std::swap(subitems[j - 1], subitems[j - d - 1]);
@@ -222,7 +238,8 @@ protected:
         // Start from the chunk size 1
         size_t chunk = 1;
         // While chunk size less than count of items
-        while (chunk < items.size()) {
+        while (chunk < items.size())
+        {
             // Perform merge operation for the current chunks
             for (size_t i = 0; i < items.size(); i += 2 * chunk)
                 MergeSortInternal(temp.data() + i, items.data() + i, i, items.size(), chunk);
@@ -240,7 +257,8 @@ private:
         size_t index1 = 0;
         size_t index2 = 0;
 
-        while ((index1 < chunk) || (index2 < chunk)) {
+        while ((index1 < chunk) || (index2 < chunk))
+        {
             // Check bounds of left chunk
             if ((index + index1 >= size))
                 index1 = chunk;
@@ -249,12 +267,14 @@ private:
                 index2 = chunk;
 
             // Check if we use right or left chunk for merge
-            if ((index2 < chunk) && ((index1 == chunk) || (src[chunk + index2] < src[index1]))) {
+            if ((index2 < chunk) && ((index1 == chunk) || (src[chunk + index2] < src[index1])))
+            {
                 // Use right chunk
                 *dst++ = src[chunk + index2];
                 ++index2;
             }
-            else if (index1 < chunk) {
+            else if (index1 < chunk)
+            {
                 // Use left chunk
                 *dst++ = src[index1];
                 ++index1;
@@ -285,7 +305,8 @@ private:
         size_t l = left;
         size_t r = right;
 
-        while (l <= r) {
+        while (l <= r)
+        {
             // Move left if item is less than pivot
             while ((l < right) && (subitems[l - 1] < pivot))
                 l++;
@@ -293,7 +314,8 @@ private:
             while ((r > left) && (subitems[r - 1] > pivot))
                 r--;
 
-            if (l <= r) {
+            if (l <= r)
+            {
                 // Swap left and right items
                 std::swap(subitems[l - 1], subitems[r - 1]);
 
@@ -337,7 +359,8 @@ private:
         size_t l = left;
         size_t r = right;
 
-        while (l <= r) {
+        while (l <= r)
+        {
             // Move left if item is less than pivot
             while ((l < right) && (subitems[l - 1] < pivot))
                 l++;
@@ -345,18 +368,21 @@ private:
             while ((r > left) && (subitems[r - 1] > pivot))
                 r--;
 
-            if (l <= r) {
+            if (l <= r)
+            {
                 // Swap left and right items
                 std::swap(subitems[l - 1], subitems[r - 1]);
 
                 // Move equals to the left
-                if (subitems[l - 1] == pivot) {
+                if (subitems[l - 1] == pivot)
+                {
                     std::swap(subitems[bl - 1], subitems[l - 1]);
                     bl++;
                 }
 
                 // Move equals to the right
-                if (subitems[r - 1] == pivot) {
+                if (subitems[r - 1] == pivot)
+                {
                     std::swap(subitems[br - 1], subitems[r - 1]);
                     br++;
                 }
@@ -398,12 +424,14 @@ protected:
         size_t n = 1;
 
         bool found;
-        do {
+        do
+        {
             // Reset found flag
             found = false;
 
             // Try to put all items into the radix queue
-            for (size_t i = 0; i < items.size(); ++i) {
+            for (size_t i = 0; i < items.size(); ++i)
+            {
                 // Get the base item value
                 size_t base = items[i] / n;
 
@@ -418,11 +446,14 @@ protected:
             }
 
             // Back items from the radix list
-            if (found) {
+            if (found)
+            {
                 size_t index = 0;
-                for (size_t i = 0; i < sizeof(radix_queue) / sizeof(radix_queue[0]); ++i) {
+                for (size_t i = 0; i < sizeof(radix_queue) / sizeof(radix_queue[0]); ++i)
+                {
                     // Get all items from the corresponding radix queue
-                    while (!radix_queue[i].empty()) {
+                    while (!radix_queue[i].empty())
+                    {
                         items[index++] = radix_queue[i].front();
                         radix_queue[i].pop();
                     }

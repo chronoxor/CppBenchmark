@@ -21,8 +21,8 @@ int BenchmarkThreads::CountLaunches() const
 void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
 {
     // Make several attempts of execution...
-    for (int attempt = 1; attempt <= _settings.attempts(); ++attempt) {
-
+    for (int attempt = 1; attempt <= _settings.attempts(); ++attempt)
+    {
         // Run benchmark at least for N threads where N is hardware core count
         if (_settings._threads.empty())
             _settings._threads.emplace_back(System::CpuPhysicalCores());
@@ -32,11 +32,11 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every threads count
-        for (auto threads : _settings.threads()) {
-
+        for (auto threads : _settings.threads())
+        {
             // Run benchmark for every input parameter (single, pair, triple)
-            for (auto param : _settings.params()) {
-
+            for (auto param : _settings.params())
+            {
                 // Prepare benchmark context
                 ContextThread context(threads, std::get<0>(param), std::get<1>(param), std::get<2>(param));
 
@@ -57,7 +57,8 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 context._metrics->AddIterations(1);
 
                 // Start benchmark threads
-                for (int i = 0; i < threads; ++i) {
+                for (int i = 0; i < threads; ++i)
+                {
                     _threads.push_back(std::thread([this, &context, threads, infinite, iterations]()
                     {
                         // Clone thread context

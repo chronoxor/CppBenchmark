@@ -30,7 +30,8 @@ BENCHMARK("std::chrono::high_resolution_clock::now", iterations)
 
     auto current = std::chrono::high_resolution_clock::now();
     int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(current - timestamp).count();
-    if ((duration > 0) && (duration < resolution)) {
+    if ((duration > 0) && (duration < resolution))
+    {
         timestamp = current;
         resolution = duration;
         context.metrics().SetCustom("Resolution", (int)resolution);
@@ -44,7 +45,8 @@ BENCHMARK("clock", iterations)
 
     auto current = clock();
     int64_t duration = current - timestamp;
-    if ((duration > 0) && (duration < resolution)) {
+    if ((duration > 0) && (duration < resolution))
+    {
         timestamp = current;
         resolution = duration;
         context.metrics().SetCustom("Resolution", (int)(resolution * 1000 * 1000 * 1000 / CLOCKS_PER_SEC));
@@ -59,7 +61,8 @@ BENCHMARK("GetTickCount", iterations)
 
     DWORD current = GetTickCount();
     int64_t duration = current - timestamp;
-    if ((duration > 0) && (duration < resolution)) {
+    if ((duration > 0) && (duration < resolution))
+    {
         timestamp = current;
         resolution = duration;
         context.metrics().SetCustom("Resolution", (int)(resolution * 1000 * 1000));
@@ -75,7 +78,8 @@ BENCHMARK("GetTickCount64", iterations)
 
     ULONGLONG current = GetTickCount64();
     int64_t duration = current - timestamp;
-    if ((duration > 0) && (duration < resolution)) {
+    if ((duration > 0) && (duration < resolution))
+    {
         timestamp = current;
         resolution = duration;
         context.metrics().SetCustom("Resolution", (int)(resolution * 1000 * 1000));
@@ -92,7 +96,8 @@ BENCHMARK("QueryPerformanceCounter", iterations)
     LARGE_INTEGER current;
     QueryPerformanceCounter(&current);
     int64_t duration = current.QuadPart - timestamp.QuadPart;
-    if ((duration > 0) && (duration < resolution)) {
+    if ((duration > 0) && (duration < resolution))
+    {
         timestamp = current;
         resolution = duration;
 
@@ -113,7 +118,8 @@ BENCHMARK("clock_gettime", iterations)
     struct timespec current;
     clock_gettime(CLOCK_REALTIME, &current);
     int64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
-    if ((duration > 0) && (duration < resolution)) {
+    if ((duration > 0) && (duration < resolution))
+    {
         timestamp = current;
         resolution = duration;
         context.metrics().SetCustom("Resolution", (int)resolution);
@@ -130,7 +136,8 @@ BENCHMARK("gettimeofday", iterations)
     struct timeval current;
     gettimeofday(&current, NULL);
     int64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - timestamp.tv_usec) * 1000;
-    if ((duration > 0) && (duration < resolution)) {
+    if ((duration > 0) && (duration < resolution))
+    {
         timestamp = current;
         resolution = duration;
         context.metrics().SetCustom("Resolution", (int)resolution);

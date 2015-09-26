@@ -30,7 +30,8 @@ std::shared_ptr<Phase> PhaseScope::StartPhaseThreadSafe(const std::string& phase
 
 void PhaseScope::StopPhase()
 {
-    if (_phase) {
+    if (_phase)
+    {
         _phase->StopPhase();
         _phase.reset();
     }

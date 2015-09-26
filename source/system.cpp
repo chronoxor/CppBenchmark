@@ -65,7 +65,8 @@ std::string System::CpuArchitecture()
 
     std::string line;
     std::ifstream stream("/proc/cpuinfo");
-    while (getline(stream, line)) {
+    while (getline(stream, line))
+    {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
             return matches[2];
@@ -92,10 +93,13 @@ std::pair<int, int> System::CpuTotalCores()
     PSYSTEM_LOGICAL_PROCESSOR_INFORMATION pBuffer = NULL;
     DWORD dwLength = 0;
 
-    while (!allocated) {
+    while (!allocated)
+    {
         DWORD dwResult = GetLogicalProcessorInformation(pBuffer, &dwLength);
-        if (dwResult == FALSE) {
-            if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
+        if (dwResult == FALSE)
+        {
+            if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
+            {
                 if (pBuffer != NULL)
                     free(pBuffer);
                 pBuffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION)malloc(dwLength);
@@ -162,7 +166,8 @@ int64_t System::CpuClockSpeed()
 
     std::string line;
     std::ifstream stream("/proc/cpuinfo");
-    while (getline(stream, line)) {
+    while (getline(stream, line))
+    {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
             return (int64_t)(atof(matches[2].str().c_str()) * 1000 * 1000);
@@ -218,7 +223,8 @@ int64_t System::Timestamp()
 #if defined(_WIN32) || defined(_WIN64)
     static LARGE_INTEGER frequency{0};
     static BOOL initialized = QueryPerformanceFrequency(&frequency);
-    if (initialized) {
+    if (initialized)
+    {
         LARGE_INTEGER timestamp{0};
         QueryPerformanceCounter(&timestamp);
         return (timestamp.QuadPart * 1000 * 1000 * 1000) / frequency.QuadPart;

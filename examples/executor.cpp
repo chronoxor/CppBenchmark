@@ -21,7 +21,8 @@ void calculate()
 {
     auto benchmark = BENCHCODE_SCOPE("Calculate");
 
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i)
+    {
         auto phase1 = benchmark->StartPhase("Calculate.1");
 
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -45,7 +46,8 @@ void calculate()
     }
     phase2->StopPhase();
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i)
+    {
         auto phase3 = benchmark->StartPhase("Calculate.3");
 
         std::this_thread::sleep_for(std::chrono::milliseconds(400));
