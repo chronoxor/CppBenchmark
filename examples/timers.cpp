@@ -35,9 +35,9 @@ BENCHMARK("std::chrono::high_resolution_clock::now", iterations)
         if (duration < resolution)
         {
             resolution = duration;
-            context.metrics().SetCustom("Resolution", resolution);	
+            context.metrics().SetCustom("Resolution", resolution);
         }
-        timestamp = current;	
+        timestamp = current;
     }
 }
 
@@ -47,15 +47,15 @@ BENCHMARK("clock", iterations)
     static int64_t resolution = std::numeric_limits<int64_t>::max();
 
     auto current = clock();
-    int64_t duration = current - timestamp;
+    int64_t duration = (current - timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
     if (duration > 0)
     {
         if (duration < resolution)
         {
             resolution = duration;
-            context.metrics().SetCustom("Resolution", resolution * 1000 * 1000 * 1000 / CLOCKS_PER_SEC);
+            context.metrics().SetCustom("Resolution", resolution);
         }
-        timestamp = current;	
+        timestamp = current;
     }
 }
 
@@ -66,15 +66,15 @@ BENCHMARK("GetTickCount", iterations)
     static int64_t resolution = std::numeric_limits<int64_t>::max();
 
     DWORD current = GetTickCount();
-    int64_t duration = current - timestamp;
+    int64_t duration = (current - timestamp) * 1000 * 1000;
     if (duration > 0)
     {
         if (duration < resolution)
         {
             resolution = duration;
-            context.metrics().SetCustom("Resolution", resolution * 1000 * 1000);
+            context.metrics().SetCustom("Resolution", resolution);
         }
-        timestamp = current;	
+        timestamp = current;
     }
 }
 #endif
@@ -86,52 +86,68 @@ BENCHMARK("GetTickCount64", iterations)
     static int64_t resolution = std::numeric_limits<int64_t>::max();
 
     ULONGLONG current = GetTickCount64();
-    int64_t duration = current - timestamp;
+    int64_t duration = (current - timestamp) * 1000 * 1000;
     if (duration > 0)
     {
         if (duration < resolution)
         {
             resolution = duration;
-            context.metrics().SetCustom("Resolution", resolution * 1000 * 1000);
+            context.metrics().SetCustom("Resolution", resolution);
         }
-        timestamp = current;	
+        timestamp = current;
     }
 }
 #endif
 
 #ifdef _WIN32
-BENCHMARK("QueryPerformanceCounter", iterations)
+LARGE_INTEGER QueryPerformanceCounter()
 {
-    static LARGE_INTEGER timestamp{0};
-    static int64_t resolution = std::numeric_limits<int64_t>::max();
-
     LARGE_INTEGER current;
     QueryPerformanceCounter(&current);
-    int64_t duration = current.QuadPart - timestamp.QuadPart;
+    return current;
+}
+
+LARGE_INTEGER QueryPerformanceFrequency()
+{
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
+    return frequency;
+}
+
+BENCHMARK("QueryPerformanceCounter", iterations)
+{
+	static LARGE_INTEGER frequency = QueryPerformanceFrequency();
+    static LARGE_INTEGER timestamp = QueryPerformanceCounter();
+    static int64_t resolution = std::numeric_limits<int64_t>::max();
+
+    LARGE_INTEGER current = QueryPerformanceCounter();
+    int64_t duration = (current.QuadPart - timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
     if (duration > 0)
     {
         if (duration < resolution)
         {
             resolution = duration;
-  
-            LARGE_INTEGER frequency;
-            QueryPerformanceFrequency(&frequency);
-
-            context.metrics().SetCustom("Resolution", resolution * 1000 * 1000 * 1000 / frequency.QuadPart);
+            context.metrics().SetCustom("Resolution", resolution);
         }
-        timestamp = current;	
+        timestamp = current;
     }
 }
 #endif
 
 #ifdef __unix__
-BENCHMARK("clock_gettime", iterations)
+struct timespec clock_gettime()
 {
-    static struct timespec timestamp{0};
-    static int64_t resolution = std::numeric_limits<int64_t>::max();
-
     struct timespec current;
     clock_gettime(CLOCK_REALTIME, &current);
+    return current;
+}
+
+BENCHMARK("clock_gettime", iterations)
+{
+    static struct timespec timestamp = clock_gettime();
+    static int64_t resolution = std::numeric_limits<int64_t>::max();
+
+    struct timespec current = clock_gettime();
     int64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
     if (duration > 0)
     {
@@ -140,19 +156,25 @@ BENCHMARK("clock_gettime", iterations)
             resolution = duration;
             context.metrics().SetCustom("Resolution", resolution);
         }
-        timestamp = current;	
+        timestamp = current;
     }
 }
 #endif
 
 #ifdef __unix__
-BENCHMARK("gettimeofday", iterations)
+struct timeval gettimeofday()
 {
-    static struct timeval timestamp{0};
-    static int64_t resolution = std::numeric_limits<int64_t>::max();
-
     struct timeval current;
     gettimeofday(&current, NULL);
+    return current;
+}
+
+BENCHMARK("gettimeofday", iterations)
+{
+    static struct timeval timestamp = gettimeofday();
+    static int64_t resolution = std::numeric_limits<int64_t>::max();
+
+    struct timeval current = gettimeofday();
     int64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - timestamp.tv_usec) * 1000;
     if (duration > 0)
     {
@@ -161,7 +183,7 @@ BENCHMARK("gettimeofday", iterations)
             resolution = duration;
             context.metrics().SetCustom("Resolution", resolution);
         }
-        timestamp = current;	
+        timestamp = current;
     }
 }
 #endif
