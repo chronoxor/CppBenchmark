@@ -152,9 +152,11 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
     if (metrics.total_bytes() > 0)
         _stream << Internals::indent7 << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
     _stream << Internals::indent7 << "\"custom\": [";
-    if ((metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0))
+    if ((metrics.custom_dbl().size() > 0) || (metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0))
     {
         std::set<std::string> names;
+        for (auto it : metrics.custom_dbl())
+            names.insert(it.first);
         for (auto it : metrics.custom_int())
             names.insert(it.first);
         for (auto it : metrics.custom_str())
@@ -162,6 +164,14 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
         bool comma = false;
         for (auto name : names)
         {
+            auto it_dbl = metrics.custom_dbl().find(name);
+            if (it_dbl != metrics.custom_dbl().end())
+            {
+                if (comma)
+                    _stream << ',';
+                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_dbl->first << "\": " << it_dbl->second << " }";
+                comma = true;
+            }
             auto it_int = metrics.custom_int().find(name);
             if (it_int != metrics.custom_int().end())
             {

@@ -51,9 +51,12 @@ protected:
         std::this_thread::sleep_for(std::chrono::milliseconds(context.z()));
         phase3->StopPhase();
 
-        context.metrics().SetCustom("AAA", 123);
-        context.metrics().SetCustom("BBB", 456);
-        context.metrics().SetCustom("CCC", 789);
+        context.metrics().SetCustom("AAA", 123ll);
+        context.metrics().SetCustom("BBB", 456ll);
+        context.metrics().SetCustom("CCC", 789ll);
+        context.metrics().SetCustom("AAA", 1.23);
+        context.metrics().SetCustom("BBB", 4.56);
+        context.metrics().SetCustom("CCC", 7.89);
         context.metrics().SetCustom("AAA", "aaa");
         context.metrics().SetCustom("BBB", "bbb");
         context.metrics().SetCustom("CCC", "ccc");

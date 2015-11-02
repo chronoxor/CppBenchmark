@@ -76,6 +76,8 @@ public:
     //! Get data throughput (bytes / second)
     int64_t bytes_per_second() const noexcept;
 
+    //! Get custom doubles map
+    const std::map<std::string, double>& custom_dbl() const noexcept { return _custom_dbl; }
     //! Get custom integers map
     const std::map<std::string, int64_t>& custom_int() const noexcept { return _custom_int; }
     //! Get custom strings map
@@ -100,6 +102,13 @@ public:
     void AddBytes(int64_t bytes) noexcept
     { _total_bytes += bytes; }
 
+    //! Set custom double value
+    /*!
+        \param name - Name
+        \param value - Value
+    */
+    void SetCustom(const std::string& name, double value)
+    { _custom_dbl[name] = value; }
     //! Set custom integer value
     /*!
         \param name - Name
@@ -122,6 +131,7 @@ private:
     int64_t _total_iterations;
     int64_t _total_items;
     int64_t _total_bytes;
+    std::map<std::string, double> _custom_dbl;
     std::map<std::string, int64_t> _custom_int;
     std::map<std::string, std::string> _custom_str;
 

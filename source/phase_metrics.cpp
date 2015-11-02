@@ -82,6 +82,7 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
         _max_time = metrics._max_time;
 
     // Merge custom hash tables
+    _custom_dbl.insert(metrics._custom_dbl.begin(), metrics._custom_dbl.end());
     _custom_int.insert(metrics._custom_int.begin(), metrics._custom_int.end());
     _custom_str.insert(metrics._custom_str.begin(), metrics._custom_str.end());
 
@@ -92,7 +93,9 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
         _total_iterations = metrics._total_iterations;
         _total_items = metrics._total_items;
         _total_bytes = metrics._total_bytes;
-        // Overwrite metrics custom hash tables
+        // Overwrite metrics custom tables
+        for (auto& it : metrics._custom_dbl)
+            _custom_dbl[it.first] = it.second;
         for (auto& it : metrics._custom_int)
             _custom_int[it.first] = it.second;
         for (auto& it : metrics._custom_str)

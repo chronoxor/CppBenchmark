@@ -79,16 +79,21 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
         _stream << WHITE << "Items throughput: " << LIGHTMAGENTA << metrics.items_per_second() << " / second" << std::endl;
     if (metrics.total_bytes() > 0)
         _stream << WHITE << "Bytes throughput: " << MAGENTA << GenerateDataSize(metrics.bytes_per_second()) << " / second" << std::endl;
-    if ((metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0))
+    if ((metrics.custom_dbl().size() > 0) || (metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0))
     {
         _stream << WHITE << "Custom values: " << std::endl;
         std::set<std::string> names;
+        for (auto it : metrics.custom_dbl())
+            names.insert(it.first);
         for (auto it : metrics.custom_int())
             names.insert(it.first);
         for (auto it : metrics.custom_str())
             names.insert(it.first);
         for (auto name : names)
         {
+            auto it_dbl = metrics.custom_dbl().find(name);
+            if (it_dbl != metrics.custom_dbl().end())
+                _stream << DARKGREY << '\t' << it_dbl->first << ": " << GREY << it_dbl->second << std::endl;
             auto it_int = metrics.custom_int().find(name);
             if (it_int != metrics.custom_int().end())
                 _stream << DARKGREY << '\t' << it_int->first << ": " << GREY << it_int->second << std::endl;
