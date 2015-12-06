@@ -79,7 +79,7 @@ public:
     //! Get custom doubles map
     const std::map<std::string, double>& custom_dbl() const noexcept { return _custom_dbl; }
     //! Get custom integers map
-    const std::map<std::string, int64_t>& custom_int() const noexcept { return _custom_int; }
+    const std::map<std::string, long long>& custom_int() const noexcept { return _custom_int; }
     //! Get custom strings map
     const std::map<std::string, std::string>& custom_str() const noexcept { return _custom_str; }
 
@@ -114,7 +114,7 @@ public:
         \param name - Name
         \param value - Value
     */
-    void SetCustom(const std::string& name, int64_t value)
+    void SetCustom(const std::string& name, long long value)
     { _custom_int[name] = value; }
     //! Set custom string value
     /*!
@@ -132,7 +132,7 @@ private:
     int64_t _total_items;
     int64_t _total_bytes;
     std::map<std::string, double> _custom_dbl;
-    std::map<std::string, int64_t> _custom_int;
+    std::map<std::string, long long> _custom_int;
     std::map<std::string, std::string> _custom_str;
 
     int64_t _iterstamp;

@@ -10,6 +10,7 @@
 
 #include <chrono>
 #include <regex>
+#include <fstream>
 #include <sstream>
 
 #if defined(_WIN32) || defined(_WIN64)
