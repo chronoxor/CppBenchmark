@@ -239,6 +239,47 @@ BENCHMARK("QueryPerformanceCounter", iterations)
 }
 #endif
 
+#ifdef _WIN32
+BENCHMARK("__rdtsc", iterations)
+{
+    static int64_t timestamp = __rdtsc();
+    static double maxlatency = std::numeric_limits<double>::min();
+    static double minlatency = std::numeric_limits<double>::max();
+    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static int64_t minresolution = std::numeric_limits<int64_t>::max();
+    static int64_t count = 0;
+
+    int64_t current = __rdtsc();
+    int64_t duration = current - timestamp;
+    double latency = (double)duration / ++count;
+    if (duration > 0)
+    {
+        if (latency < minlatency)
+        {
+            minlatency = latency;
+            context.metrics().SetCustom("latency-min-clock-cycles", minlatency);
+        }
+        if (latency > maxlatency)
+        {
+            maxlatency = latency;
+            context.metrics().SetCustom("latency-max-clock-cycles", maxlatency);
+        }
+        if (duration < minresolution)
+        {
+            minresolution = duration;
+            context.metrics().SetCustom("resolution-min-clock-cycles", minresolution);
+        }
+        if (duration > maxresolution)
+        {
+            maxresolution = duration;
+            context.metrics().SetCustom("resolution-max-clock-cycles", maxresolution);
+        }
+        timestamp = current;
+        count = 0;
+    }
+}
+#endif
+
 #ifdef __unix__
 struct timespec clock_gettime()
 {
