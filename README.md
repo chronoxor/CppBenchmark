@@ -57,9 +57,14 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
 #How to build?
 
-## Windows (Visaul Studio 2015)
+## Clone repository with submodules
 ```
 git clone https://github.com/chronoxor/CppBenchmark.git
+git submodule update --init --recursive
+```
+
+## Windows (Visaul Studio 2015)
+```
 cd CppBenchmark\scripts
 01-generate-vs2015-x64.bat
 02-build-vs2015.bat
@@ -71,7 +76,6 @@ If you want 32-bit version use '01-generate-vs2015-x32.bat' to generate project 
 
 ## Windows (MinGW with MSYS)
 ```
-git clone https://github.com/chronoxor/CppBenchmark.git
 cd CppBenchmark\scripts
 01-generate-MSYS.bat
 02-build-MSYS.bat
@@ -82,7 +86,6 @@ cd CppBenchmark\scripts
 
 ## Linux
 ```
-git clone https://github.com/chronoxor/CppBenchmark.git
 cd CppBenchmark\scripts
 01-generate-unix.sh
 02-build-unix.sh
@@ -1085,8 +1088,8 @@ Iterations throughput: 2044668 / second
 Dynamic benchmarks are usefull when you have some working program and want to benchmark some
 critical parts and code fragments. In this case just include cppbenchmark.h header and use
 BENCHCODE_SCOPE(), BENCHCODE_START(), BENCHCODE_STOP(), BENCHCODE_REPORT() macro. All of the
-macro are easy access to methods of the static [Executor](http://chronoxor.github.io/CppBenchmark/class_cpp_benchmark_1_1_executor.html) class 
-which you may use directly as a singleton. All functionality provided for dynamic benchmarks is 
+macro are easy access to methods of the static [Executor](http://chronoxor.github.io/CppBenchmark/class_cpp_benchmark_1_1_executor.html) class
+which you may use directly as a singleton. All functionality provided for dynamic benchmarks is
 thread-safe synchronizied with mutex (each call will lose some ns).
 ```C++
 #include "cppbenchmark.h"
