@@ -11,6 +11,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
   * [Features](#features)
   * [Requirements](#requirements)
   * [How to build?](#how-to-build)
+    * [Clone repository with submodules](#clone-repository-with-submodules)
     * [Windows (Visaul Studio 2015)](#windows-visaul-studio-2015)
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
     * [Linux](#linux)
