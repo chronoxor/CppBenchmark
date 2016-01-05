@@ -1,12 +1,12 @@
+[submodule "cmake"]
+	path = cmake
+	url = https://github.com/chronoxor/CppCMakeScripts.git
+[submodule "scripts"]
+	path = scripts
+	url = https://github.com/chronoxor/CppBuildScripts.git
 [submodule "modules/catch"]
 	path = modules/catch
 	url = https://github.com/philsquared/Catch.git
 [submodule "modules/cpp-optparse"]
 	path = modules/cpp-optparse
 	url = https://github.com/weisslj/cpp-optparse.git
-[submodule "scripts"]
-	path = scripts
-	url = https://github.com/chronoxor/CppBuildScripts.git
-[submodule "cmake"]
-	path = cmake
-	url = https://github.com/chronoxor/CppCMakeScripts.git
