@@ -239,7 +239,7 @@ BENCHMARK("QueryPerformanceCounter", iterations)
 }
 #endif
 
-#ifdef _WIN32
+#ifdef _MSC_VER
 BENCHMARK("__rdtsc", iterations)
 {
     static int64_t timestamp = __rdtsc();
