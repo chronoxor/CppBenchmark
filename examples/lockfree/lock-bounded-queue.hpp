@@ -58,7 +58,6 @@ public:
 private:
 
     typedef typename std::aligned_storage<sizeof(T), std::alignment_of<T>::value>::type aligned_t;
-    typedef char cache_line_pad_t[64];
 
     const size_t        _size;
     const size_t        _mask;
@@ -67,9 +66,9 @@ private:
     size_t _head;
     size_t _tail;
 
-	std::condition_variable	_cond_empty;
-	std::condition_variable	_cond_overflow;
-	std::mutex _mtx;
+    std::condition_variable _cond_empty;
+    std::condition_variable _cond_overflow;
+    std::mutex _mtx;
 
     lock_bounded_queue_t(const lock_bounded_queue_t&) {}
     void operator=(const lock_bounded_queue_t&) {}
