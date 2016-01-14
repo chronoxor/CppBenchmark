@@ -2,28 +2,28 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" assignedExecutableTargets="true" buildAllGenerated="true">
     <generated>
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-itertor" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-test-system" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-mpmc" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-spsc" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-iterators" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-random" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-fpu" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-threads" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-sort" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-executor" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-tests" />
-      <config projectName="cppbenchmark" targetName="cpp-optparse" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-atomic" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-fwrite" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-containers" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-stl-containers-insert" />
-      <config projectName="cppbenchmark" targetName="doxygen" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-main" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-timers" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-spsc2" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark-example-mpsc" />
-      <config projectName="cppbenchmark" targetName="cppbenchmark" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-itertor" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-test-system" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-mpmc" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-spsc" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-iterators" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-random" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-fpu" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-threads" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-sort" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-executor" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-tests" />
+      <config projectName="CppBenchmark" targetName="cpp-optparse" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-atomic" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-fwrite" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-containers" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-stl-containers-insert" />
+      <config projectName="CppBenchmark" targetName="doxygen" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-main" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-timers" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-spsc2" />
+      <config projectName="CppBenchmark" targetName="cppbenchmark-example-mpsc" />
+      <config projectName="CppBenchmark" targetName="CppBenchmark" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
@@ -33,7 +33,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3701edfd-3577-46a3-8ad8-44a5d9a3019b" name="Default" comment="" />
-    <ignored path="cppbenchmark.iws" />
+    <ignored path="CppBenchmark.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,7 +48,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
-    <favorites_list name="cppbenchmark" />
+    <favorites_list name="CppBenchmark" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -273,7 +273,7 @@
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cppbenchmark" />
+              <option name="myItemId" value="CppBenchmark" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -296,7 +296,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Build All">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark" CONFIG_NAME="Debug">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="CppBenchmark" CONFIG_NAME="Debug">
       <envs />
       <method />
     </configuration>
@@ -313,67 +313,67 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark">
+    <configuration default="false" name="CppBenchmark" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="CppBenchmark" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CppBenchmark" RUN_TARGET_NAME="CppBenchmark">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-tests" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-tests">
+    <configuration default="false" name="cppbenchmark-tests" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-tests">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-fwrite" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-fwrite" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-fwrite">
+    <configuration default="false" name="cppbenchmark-example-fwrite" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-fwrite" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-fwrite">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-sort" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-sort" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-sort">
+    <configuration default="false" name="cppbenchmark-example-sort" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-sort" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-sort">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-containers" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-containers" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-containers">
+    <configuration default="false" name="cppbenchmark-example-containers" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-containers" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-containers">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-threads" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-threads" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-threads">
+    <configuration default="false" name="cppbenchmark-example-threads" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-threads" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-threads">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-mpmc" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-mpmc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-mpmc">
+    <configuration default="false" name="cppbenchmark-example-mpmc" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-mpmc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-mpmc">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-spsc" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-spsc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-spsc">
+    <configuration default="false" name="cppbenchmark-example-spsc" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-spsc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-spsc">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-atomic" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-atomic" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-atomic">
+    <configuration default="false" name="cppbenchmark-example-atomic" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-atomic" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-atomic">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-mpsc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-mpsc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-mpsc">
+    <configuration default="false" name="cppbenchmark-example-mpsc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-mpsc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-mpsc">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-timers" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-timers" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-timers">
+    <configuration default="false" name="cppbenchmark-example-timers" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-timers" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-timers">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-fpu" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-fpu" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-fpu">
+    <configuration default="false" name="cppbenchmark-example-fpu" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-fpu" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-fpu">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-random" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-random" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-random">
+    <configuration default="false" name="cppbenchmark-example-random" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-random" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-random">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-iterators" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-iterators" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-iterators">
+    <configuration default="false" name="cppbenchmark-example-iterators" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-iterators" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-iterators">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cpp-optparse" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cpp-optparse" CONFIG_NAME="Debug">
+    <configuration default="false" name="cpp-optparse" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cpp-optparse" CONFIG_NAME="Debug">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="cppbenchmark-example-executor" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="cppbenchmark" TARGET_NAME="cppbenchmark-example-executor" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-executor">
+    <configuration default="false" name="cppbenchmark-example-executor" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="CppBenchmark" TARGET_NAME="cppbenchmark-example-executor" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cppbenchmark" RUN_TARGET_NAME="cppbenchmark-example-executor">
       <envs />
       <method />
     </configuration>
