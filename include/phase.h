@@ -38,6 +38,7 @@ public:
         environment!
 
         \param phase - Sub-phase name
+        \return Shared pointer to the required benchmark sub-phase
     */
     virtual std::shared_ptr<Phase> StartPhase(const std::string& phase) = 0;
 
@@ -47,6 +48,7 @@ public:
         as a shared pointer. Please note the method is thread-safe and might be called in multi-thread environment!
 
         \param phase - Sub-phase name
+        \return Shared pointer to the thread safe benchmark sub-phase
     */
     virtual std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) = 0;
 
@@ -58,6 +60,7 @@ public:
         Please note the method is not thread-safe and should not be called in multi-thread environment!
 
         \param phase - Sub-phase name
+        \return Shared pointer to the required benchmark sub-phase scope wrapper
     */
     virtual std::shared_ptr<PhaseScope> ScopePhase(const std::string& phase) = 0;
 
@@ -66,6 +69,7 @@ public:
         Please note the method is thread-safe and might be called in multi-thread environment!
 
         \param phase - Sub-phase name
+        \return Shared pointer to the required thread-safe benchmark sub-phase scope wrapper
     */
     virtual std::shared_ptr<PhaseScope> ScopePhaseThreadSafe(const std::string& phase) = 0;
 };

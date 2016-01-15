@@ -50,6 +50,7 @@ public:
         Will return a string of 79 given characters.
 
         \param ch - Separator character
+        \return String separator
     */
     static std::string GenerateSeparator(char ch);
     //! Generate clock speed string
@@ -57,6 +58,7 @@ public:
         Will return a pretty string of Hz, kHz, MHz, GHz based on the given clock speed in hertz.
 
         \param hertz - Clock speed value in hertz
+        \return String with clock speed representation
     */
     static std::string GenerateClockSpeed(int64_t hertz);
     //! Generate data size string
@@ -64,6 +66,7 @@ public:
         Will return a pretty string of bytes, KiB, MiB, GiB, TiB based on the given bytes.
 
         \param bytes - Data size in bytes
+        \return String with data size representation
     */
     static std::string GenerateDataSize(int64_t bytes);
     //! Generate time period string
@@ -71,6 +74,7 @@ public:
         Will return a pretty string of ns, mcs, ms, s, m, h based on the given nanoseconds.
 
         \param nanoseconds - Time period in nanoseconds
+        \return String with time period representation
     */
     static std::string GenerateTimePeriod(int64_t nanoseconds);
 

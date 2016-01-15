@@ -72,12 +72,14 @@ public:
     //! Set count of iterations
     /*!
         \param iterations - Count of iterations (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& Iterations(int64_t iterations);
 
     //! Add new threads count to the benchmark running plan
     /*!
         \param threads - Count of running threads (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& Threads(int threads);
     //! Add new threads range to the benchmark running plan
@@ -86,6 +88,7 @@ public:
 
         \param from - From range of running threads (must be positive)
         \param to - To range of running threads (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& ThreadsRange(int from, int to);
     //! Add new threads range to the benchmark running plan using given selector function
@@ -97,6 +100,7 @@ public:
         \param from - From range of running threads (must be positive)
         \param to - To range of running threads (must be positive)
         \param selector - Selector function
+        \return Reference to the current settings instance
     */
     Settings& ThreadsRange(int from, int to, std::function<int (int, int, int&)> selector);
 
@@ -104,6 +108,7 @@ public:
     /*!
         \param producers - Count of producers (must be positive)
         \param consumers - Count of consumers (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& PC(int producers, int consumers);
     //! Add new producers/consumers range to the benchmark running plan
@@ -115,6 +120,7 @@ public:
         \param producers_to - To range of producers (must be positive)
         \param consumers_from - From range of consumers (must be positive)
         \param consumers_to - To range of consumers (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& PCRange(int producers_from, int producers_to, int consumers_from, int consumers_to);
     //! Add new producers/consumers range to the benchmark running plan using given selector functions
@@ -130,6 +136,7 @@ public:
         \param consumers_from - From range of consumers (must be positive)
         \param consumers_to - To range of consumers (must be positive)
         \param consumers_selector - Consumers selector function
+        \return Reference to the current settings instance
     */
     Settings& PCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
                       int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector);
@@ -137,6 +144,7 @@ public:
     //! Add new single parameter to the benchmark running plan
     /*!
         \param value - Single parameter (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& Param(int value);
     //! Add new single parameter range to the benchmark running plan
@@ -145,6 +153,7 @@ public:
 
         \param from - From range of the single parameter (must be positive)
         \param to - To range of the single parameter (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& ParamRange(int from, int to);
     //! Add new single parameter range to the benchmark running plan using given selector function
@@ -156,6 +165,7 @@ public:
         \param from - From range of the single parameter (must be positive)
         \param to - To range of the single parameter (must be positive)
         \param selector - Selector function
+        \return Reference to the current settings instance
     */
     Settings& ParamRange(int from, int to, std::function<int (int, int, int&)> selector);
 
@@ -163,6 +173,7 @@ public:
     /*!
         \param value1 - First parameter (must be positive)
         \param value2 - Second parameter (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& Pair(int value1, int value2);
     //! Add new parameters pairs range to the benchmark running plan
@@ -174,6 +185,7 @@ public:
         \param to1 - To range of the first parameter (must be positive)
         \param from2 - From range of the second parameter (must be positive)
         \param to2 - To range of the second parameter (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& PairRange(int from1, int to1, int from2, int to2);
     //! Add new parameters pairs range to the benchmark running plan using given selector functions
@@ -188,6 +200,7 @@ public:
         \param from2 - From range of the second parameter (must be positive)
         \param to2 - To range of the second parameter (must be positive)
         \param selector2 - Selector function for the second parameter
+        \return Reference to the current settings instance
     */
     Settings& PairRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
                         int from2, int to2, std::function<int (int, int, int&)> selector2);
@@ -197,6 +210,7 @@ public:
         \param value1 - First parameter (must be positive)
         \param value2 - Second parameter (must be positive)
         \param value3 - Third parameter (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& Triple(int value1, int value2, int value3);
     //! Add new parameters triple range to the benchmark running plan
@@ -210,6 +224,7 @@ public:
         \param to2 - To range of the second parameter (must be positive)
         \param from3 - From range of the third parameter (must be positive)
         \param to3 - To range of the third parameter (must be positive)
+        \return Reference to the current settings instance
     */
     Settings& TripleRange(int from1, int to1, int from2, int to2, int from3, int to3);
     //! Add new parameters triple range to the benchmark running plan using given selector functions
@@ -228,6 +243,7 @@ public:
         \param from3 - From range of the third parameter (must be positive)
         \param to3 - To range of the third parameter (must be positive)
         \param selector3 - Selector function for the third parameter
+        \return Reference to the current settings instance
     */
     Settings& TripleRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
                           int from2, int to2, std::function<int (int, int, int&)> selector2,

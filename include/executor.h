@@ -40,6 +40,7 @@ public:
         environment!
 
         \param benchmark - Dynamic benchmark name
+        \return Shared pointer to the required dynamic benchmark
     */
     std::shared_ptr<Phase> StartBenchmark(const std::string& benchmark);
 
@@ -57,6 +58,7 @@ public:
         Please note the method is thread-safe and might be called in multi-thread environment!
 
         \param benchmark - Dynamic benchmark name
+        \return Shared pointer to the required dynamic benchmark scope wrapper
     */
     std::shared_ptr<PhaseScope> ScopeBenchmark(const std::string& benchmark)
     { return std::make_shared<PhaseScope>(StartBenchmark(benchmark)); }
