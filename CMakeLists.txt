@@ -28,9 +28,8 @@ include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
 
 # Library
-file(GLOB_RECURSE HEADER_FILES "source/*.h")
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
-add_library(cppbenchmark ${HEADER_FILES} ${SOURCE_FILES})
+add_library(cppbenchmark ${SOURCE_FILES})
 target_link_libraries(cppbenchmark cpp-optparse)
 list(APPEND INSTALL_TARGETS cppbenchmark)
 
@@ -45,9 +44,8 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
 endforeach()
 
 # Tests
-file(GLOB_RECURSE TESTS_HEADER_FILES "tests/*.h")
-file(GLOB_RECURSE TESTS_SOURCE_FILES "tests/*.cpp")
-add_executable(cppbenchmark-tests ${CATCH_HEADER} ${TESTS_HEADER_FILES} ${TESTS_SOURCE_FILES})
+file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
+add_executable(cppbenchmark-tests ${CATCH_HEADER} ${TESTS_SOURCE_FILES})
 target_link_libraries(cppbenchmark-tests cppbenchmark Threads::Threads)
 list(APPEND INSTALL_TARGETS cppbenchmark-tests)
 
