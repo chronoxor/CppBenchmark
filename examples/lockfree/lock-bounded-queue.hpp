@@ -10,14 +10,7 @@ template<typename T>
 class lock_bounded_queue_t
 {
 public:
-
-    lock_bounded_queue_t(
-        size_t size) :
-        _size(size),
-        _mask(size - 1),
-        _buffer(reinterpret_cast<T*>(new aligned_t[_size])),
-        _head(0),
-        _tail(0)
+    lock_bounded_queue_t(size_t size) : _size(size), _mask(size - 1), _buffer(new T[_size]), _head(0), _tail(0)
     {
         // make sure it's a power of 2
         assert((_size != 0) && ((_size & (~_size + 1)) == _size));
@@ -28,40 +21,28 @@ public:
         delete[] _buffer;
     }
 
-    void
-    enqueue(
-        T& input)
+    void enqueue(T& input)
     {
 		std::unique_lock<std::mutex> lock(_mtx);
 
 		_cond_overflow.wait(lock, [this]() { return _tail + _size > _head; });
-
 		_buffer[_head++ & _mask] = input;
-
 		_cond_empty.notify_one();
     }
 
-    void
-    dequeue(
-        T& output)
+    void dequeue(T& output)
     {
 		std::unique_lock<std::mutex> lock(_mtx);
 
 		_cond_empty.wait(lock, [this]() { return _tail < _head;	});
-
 		output = _buffer[_tail++ & _mask];
-
 		_cond_overflow.notify_one();
     }
 
-
 private:
-
-    typedef typename std::aligned_storage<sizeof(T), std::alignment_of<T>::value>::type aligned_t;
-
-    const size_t        _size;
-    const size_t        _mask;
-    T* const            _buffer;
+    const size_t _size;
+    const size_t _mask;
+    T* const _buffer;
 
     size_t _head;
     size_t _tail;

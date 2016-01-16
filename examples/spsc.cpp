@@ -232,9 +232,9 @@ private:
     std::atomic<int> _count;
 };
 
-BENCHMARK_CLASS(ReaderWriterQueueBenchmark<moodycamel::BlockingReaderWriterQueue<int>>, "moodycamel::BlockingReaderWriterQueue<int>", settings)
-BENCHMARK_CLASS(ReaderWriterQueueBenchmark<moodycamel::ReaderWriterQueue<int>>, "moodycamel::ReaderWriterQueue<int>", settings)
-BENCHMARK_CLASS(ProducerConsumerQueueBenchmark, "folly::ProducerConsumerQueue<int>", settings)
+//BENCHMARK_CLASS(ReaderWriterQueueBenchmark<moodycamel::BlockingReaderWriterQueue<int>>, "moodycamel::BlockingReaderWriterQueue<int>", settings)
+//BENCHMARK_CLASS(ReaderWriterQueueBenchmark<moodycamel::ReaderWriterQueue<int>>, "moodycamel::ReaderWriterQueue<int>", settings)
+//BENCHMARK_CLASS(ProducerConsumerQueueBenchmark, "folly::ProducerConsumerQueue<int>", settings)
 BENCHMARK_CLASS(SPSCQueueBenchmark, "lockfree::spsc_queue_t<int>", settings)
 BENCHMARK_CLASS(SPSCBoundedQueueBenchmark, "lockfree::spsc_bounded_queue_t<int>", settings)
 BENCHMARK_CLASS(LockBoundedQueueBenchmark, "lockfree::lock_bounded_queue_t<int>", settings)

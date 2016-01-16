@@ -41,14 +41,7 @@ template<typename T>
 class spsc_bounded_queue_t
 {
 public:
-
-    spsc_bounded_queue_t(
-        size_t size) :
-        _size(size),
-        _mask(size - 1),
-        _buffer(reinterpret_cast<T*>(new aligned_t[_size + 1])), // need one extra element for a guard
-        _head(0),
-        _tail(0)
+    spsc_bounded_queue_t(size_t size) : _size(size), _mask(size - 1), _buffer(new T[_size]), _head(0), _tail(0)
     {
         // make sure it's a power of 2
         assert((_size != 0) && ((_size & (~_size + 1)) == _size));
@@ -59,9 +52,7 @@ public:
         delete[] _buffer;
     }
 
-    bool
-    enqueue(
-        T& input)
+    bool enqueue(T& input)
     {
         const size_t head = _head.load(std::memory_order_relaxed);
 
@@ -73,9 +64,7 @@ public:
         return false;
     }
 
-    bool
-    dequeue(
-        T& output)
+    bool dequeue(T& output)
     {
         const size_t tail = _tail.load(std::memory_order_relaxed);
 
@@ -87,10 +76,7 @@ public:
         return false;
     }
 
-
 private:
-
-    typedef typename std::aligned_storage<sizeof(T), std::alignment_of<T>::value>::type aligned_t;
     typedef char cache_line_pad_t[64];
 
     cache_line_pad_t    _pad0;

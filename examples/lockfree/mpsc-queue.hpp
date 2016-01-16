@@ -36,10 +36,7 @@ template<typename T>
 class mpsc_queue_t
 {
 public:
-
-    mpsc_queue_t() :
-        _head(reinterpret_cast<buffer_node_t*>(new buffer_node_aligned_t)),
-        _tail(_head.load(std::memory_order_relaxed))
+    mpsc_queue_t() : _head(new buffer_node_t), _tail(_head.load(std::memory_order_relaxed))
     {
         buffer_node_t* front = _head.load(std::memory_order_relaxed);
         front->next.store(NULL, std::memory_order_relaxed);
@@ -53,11 +50,9 @@ public:
         delete front;
     }
 
-    void
-    enqueue(
-        const T& input)
+    void enqueue(const T& input)
     {
-        buffer_node_t* node = reinterpret_cast<buffer_node_t*>(new buffer_node_aligned_t);
+        buffer_node_t* node = new buffer_node_t;
         node->data = input;
         node->next.store(NULL, std::memory_order_relaxed);
 
@@ -65,9 +60,7 @@ public:
         prev_head->next.store(node, std::memory_order_release);
     }
 
-    bool
-    dequeue(
-        T& output)
+    bool dequeue(T& output)
     {
         buffer_node_t* tail = _tail.load(std::memory_order_relaxed);
         buffer_node_t* next = tail->next.load(std::memory_order_acquire);
@@ -82,18 +75,19 @@ public:
         return true;
     }
 
-
 private:
-
     struct buffer_node_t
     {
         T                           data;
         std::atomic<buffer_node_t*> next;
     };
 
-    typedef typename std::aligned_storage<sizeof(buffer_node_t), std::alignment_of<buffer_node_t>::value>::type buffer_node_aligned_t;
+    typedef char cache_line_pad_t[64];
 
+    cache_line_pad_t            _pad0;
     std::atomic<buffer_node_t*> _head;
+
+    cache_line_pad_t            _pad1;
     std::atomic<buffer_node_t*> _tail;
 
     mpsc_queue_t(const mpsc_queue_t&) {}

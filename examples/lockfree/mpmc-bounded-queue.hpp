@@ -37,14 +37,7 @@ template<typename T>
 class mpmc_bounded_queue_t
 {
 public:
-
-    mpmc_bounded_queue_t(
-        size_t size) :
-        _size(size),
-        _mask(size - 1),
-        _buffer(reinterpret_cast<node_t*>(new aligned_node_t[_size])),
-        _head_seq(0),
-        _tail_seq(0)
+    mpmc_bounded_queue_t(size_t size) : _size(size), _mask(size - 1), _buffer(new node_t[_size]), _head_seq(0), _tail_seq(0)
     {
         // make sure it's a power of 2
         assert((_size != 0) && ((_size & (~_size + 1)) == _size));
@@ -60,9 +53,7 @@ public:
         delete[] _buffer;
     }
 
-    bool
-    enqueue(
-        const T& data)
+    bool enqueue(const T& data)
     {
         // _head_seq only wraps at MAX(_head_seq) instead we use a mask to convert the sequence to an array index
         // this is why the ring buffer must be a size which is a power of 2. this also allows the sequence to double as a ticket/lock.
@@ -101,9 +92,7 @@ public:
         return false;
     }
 
-    bool
-    dequeue(
-        T& data)
+    bool dequeue(T& data)
     {
         size_t       tail_seq = _tail_seq.load(std::memory_order_relaxed);
 
@@ -141,25 +130,24 @@ public:
     }
 
 private:
-
     struct node_t
     {
         T                     data;
         std::atomic<size_t>   seq;
     };
 
-    typedef typename std::aligned_storage<sizeof(node_t), std::alignment_of<node_t>::value>::type aligned_node_t;
-    typedef char cache_line_pad_t[64]; // it's either 32 or 64 so 64 is good enough
+    typedef char cache_line_pad_t[64];
 
     cache_line_pad_t    _pad0;
     const size_t        _size;
     const size_t        _mask;
     node_t* const       _buffer;
+
     cache_line_pad_t    _pad1;
     std::atomic<size_t> _head_seq;
+
     cache_line_pad_t    _pad2;
     std::atomic<size_t> _tail_seq;
-    cache_line_pad_t    _pad3;
 
     mpmc_bounded_queue_t(const mpmc_bounded_queue_t&) {}
     void operator=(const mpmc_bounded_queue_t&) {}

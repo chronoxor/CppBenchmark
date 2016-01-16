@@ -37,10 +37,7 @@ template<typename T>
 class spsc_queue_t
 {
 public:
-
-    spsc_queue_t() :
-        _head(reinterpret_cast<node_t*>(new node_aligned_t)),
-        _tail(_head)
+    spsc_queue_t() : _head(new node_t), _tail(_head)
     {
         _head->next = NULL;
     }
@@ -52,11 +49,9 @@ public:
         delete _head;
     }
 
-    void
-    enqueue(
-        const T& input)
+    void enqueue(const T& input)
     {
-        node_t* node = reinterpret_cast<node_t*>(new node_aligned_t);
+        node_t* node = new node_t;
         node->data = input;
         node->next = NULL;
 
@@ -65,9 +60,7 @@ public:
         _head = node;
     }
 
-    bool
-    dequeue(
-        T& output)
+    bool dequeue(T& output)
     {
         std::atomic_thread_fence(std::memory_order_consume);
         if (!_tail->next) {
@@ -83,21 +76,21 @@ public:
         return true;
     }
 
-
 private:
-
     struct node_t
     {
         node_t* next;
         T       data;
     };
 
-    typedef typename std::aligned_storage<sizeof(node_t), std::alignment_of<node_t>::value>::type node_aligned_t;
+    typedef char cache_line_pad_t[64];
 
-    node_t* _head;
-    char    _cache_line[64];
-    node_t* _tail;
-    node_t* _back;
+    cache_line_pad_t _pad0;
+    node_t*          _head;
+
+    cache_line_pad_t _pad1;
+    node_t*          _tail;
+    node_t*          _back;
 
     spsc_queue_t(const spsc_queue_t&) {}
     void operator=(const spsc_queue_t&) {}
