@@ -102,7 +102,7 @@ public:
         \param selector - Selector function
         \return Reference to the current settings instance
     */
-    Settings& ThreadsRange(int from, int to, std::function<int (int, int, int&)> selector);
+    Settings& ThreadsRange(int from, int to, const std::function<int (int, int, int&)>& selector);
 
     //! Add new producers/consumers count to the benchmark running plan
     /*!
@@ -138,8 +138,8 @@ public:
         \param consumers_selector - Consumers selector function
         \return Reference to the current settings instance
     */
-    Settings& PCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
-                      int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector);
+    Settings& PCRange(int producers_from, int producers_to, const std::function<int (int, int, int&)>& producers_selector,
+                      int consumers_from, int consumers_to, const std::function<int (int, int, int&)>& consumers_selector);
 
     //! Add new single parameter to the benchmark running plan
     /*!
@@ -167,7 +167,7 @@ public:
         \param selector - Selector function
         \return Reference to the current settings instance
     */
-    Settings& ParamRange(int from, int to, std::function<int (int, int, int&)> selector);
+    Settings& ParamRange(int from, int to, const std::function<int (int, int, int&)>& selector);
 
     //! Add new parameters pair to the benchmark running plan
     /*!
@@ -202,8 +202,8 @@ public:
         \param selector2 - Selector function for the second parameter
         \return Reference to the current settings instance
     */
-    Settings& PairRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
-                        int from2, int to2, std::function<int (int, int, int&)> selector2);
+    Settings& PairRange(int from1, int to1, const std::function<int (int, int, int&)>& selector1,
+                        int from2, int to2, const std::function<int (int, int, int&)>& selector2);
 
     //! Add new parameters triple to the benchmark running plan
     /*!
@@ -245,9 +245,9 @@ public:
         \param selector3 - Selector function for the third parameter
         \return Reference to the current settings instance
     */
-    Settings& TripleRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
-                          int from2, int to2, std::function<int (int, int, int&)> selector2,
-                          int from3, int to3, std::function<int (int, int, int&)> selector3);
+    Settings& TripleRange(int from1, int to1, const std::function<int (int, int, int&)>& selector1,
+                          int from2, int to2, const std::function<int (int, int, int&)>& selector2,
+                          int from3, int to3, const std::function<int (int, int, int&)>& selector3);
 
 private:
     int _attempts;

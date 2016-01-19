@@ -51,7 +51,7 @@ Settings& Settings::ThreadsRange(int from, int to)
     return *this;
 }
 
-Settings& Settings::ThreadsRange(int from, int to, std::function<int (int, int, int&)> selector)
+Settings& Settings::ThreadsRange(int from, int to, const std::function<int (int, int, int&)>& selector)
 {
     if ((from > 0) && (to > 0))
     {
@@ -101,8 +101,8 @@ Settings& Settings::PCRange(int producers_from, int producers_to, int consumers_
     return *this;
 }
 
-Settings& Settings::PCRange(int producers_from, int producers_to, std::function<int (int, int, int&)> producers_selector,
-                            int consumers_from, int consumers_to, std::function<int (int, int, int&)> consumers_selector)
+Settings& Settings::PCRange(int producers_from, int producers_to, const std::function<int (int, int, int&)>& producers_selector,
+                            int consumers_from, int consumers_to, const std::function<int (int, int, int&)>& consumers_selector)
 {
     if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0))
     {
@@ -159,7 +159,7 @@ Settings& Settings::ParamRange(int from, int to)
     return *this;
 }
 
-Settings& Settings::ParamRange(int from, int to, std::function<int (int, int, int&)> selector)
+Settings& Settings::ParamRange(int from, int to, const std::function<int (int, int, int&)>& selector)
 {
     if ((from >= 0) && (to >= 0))
     {
@@ -209,8 +209,8 @@ Settings& Settings::PairRange(int from1, int to1, int from2, int to2)
     return *this;
 }
 
-Settings& Settings::PairRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
-                              int from2, int to2, std::function<int (int, int, int&)> selector2)
+Settings& Settings::PairRange(int from1, int to1, const std::function<int (int, int, int&)>& selector1,
+                              int from2, int to2, const std::function<int (int, int, int&)>& selector2)
 {
     if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0))
     {
@@ -279,9 +279,9 @@ Settings& Settings::TripleRange(int from1, int to1, int from2, int to2, int from
     return *this;
 }
 
-Settings& Settings::TripleRange(int from1, int to1, std::function<int (int, int, int&)> selector1,
-                                int from2, int to2, std::function<int (int, int, int&)> selector2,
-                                int from3, int to3, std::function<int (int, int, int&)> selector3)
+Settings& Settings::TripleRange(int from1, int to1, const std::function<int (int, int, int&)>& selector1,
+                                int from2, int to2, const std::function<int (int, int, int&)>& selector2,
+                                int from3, int to3, const std::function<int (int, int, int&)>& selector3)
 {
     if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0))
     {
