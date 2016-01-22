@@ -1,6 +1,6 @@
 /*!
     \file benchmark_threads.cpp
-    \brief Threads benchmark base class implementation
+    \brief Threads benchmark base implementation
     \author Ivan Shynkarenka
     \date 21.07.2015
     \copyright MIT License

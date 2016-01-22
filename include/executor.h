@@ -1,6 +1,6 @@
 /*!
     \file executor.h
-    \brief Dynamic benchmarks executor class definition
+    \brief Dynamic benchmarks executor definition
     \author Ivan Shynkarenka
     \date 02.09.2015
     \copyright MIT License

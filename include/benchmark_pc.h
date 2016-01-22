@@ -1,6 +1,6 @@
 /*!
     \file benchmark_pc.h
-    \brief Producers/Consumers benchmark base class definition
+    \brief Producers/Consumers benchmark base definition
     \author Ivan Shynkarenka
     \date 24.07.2015
     \copyright MIT License

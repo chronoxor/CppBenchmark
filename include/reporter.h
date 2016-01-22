@@ -1,6 +1,6 @@
 /*!
     \file reporter.h
-    \brief Reporter base class definition
+    \brief Reporter base definition
     \author Ivan Shynkarenka
     \date 08.07.2015
     \copyright MIT License

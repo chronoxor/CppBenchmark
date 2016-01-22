@@ -1,6 +1,6 @@
 /*!
     \file environment.h
-    \brief Environment management static class definition
+    \brief Environment management definition
     \author Ivan Shynkarenka
     \date 09.07.2015
     \copyright MIT License

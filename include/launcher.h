@@ -1,6 +1,6 @@
 /*!
     \file launcher.h
-    \brief Launcher base class definition
+    \brief Launcher base definition
     \author Ivan Shynkarenka
     \date 07.07.2015
     \copyright MIT License

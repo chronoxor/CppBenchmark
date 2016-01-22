@@ -1,6 +1,6 @@
 /*!
     \file system.cpp
-    \brief System management static class implementation
+    \brief System management implementation
     \author Ivan Shynkarenka
     \date 06.07.2015
     \copyright MIT License

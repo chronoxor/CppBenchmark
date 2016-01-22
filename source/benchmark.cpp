@@ -1,6 +1,6 @@
 /*!
     \file benchmark.cpp
-    \brief Benchmark base class implementation
+    \brief Benchmark base implementation
     \author Ivan Shynkarenka
     \date 06.07.2015
     \copyright MIT License

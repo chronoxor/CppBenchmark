@@ -1,6 +1,6 @@
 /*!
     \file benchmark_threads.h
-    \brief Threads benchmark base class definition
+    \brief Threads benchmark base definition
     \author Ivan Shynkarenka
     \date 21.07.2015
     \copyright MIT License

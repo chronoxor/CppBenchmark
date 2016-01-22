@@ -1,6 +1,6 @@
 /*!
     \file system.h
-    \brief System management static class definition
+    \brief System management definition
     \author Ivan Shynkarenka
     \date 06.07.2015
     \copyright MIT License

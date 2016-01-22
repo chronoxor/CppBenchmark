@@ -1,6 +1,6 @@
 /*!
     \file console.cpp
-    \brief Console management static class implementation
+    \brief Console management implementation
     \author Ivan Shynkarenka
     \date 29.07.2015
     \copyright MIT License

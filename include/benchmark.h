@@ -1,6 +1,6 @@
 /*!
     \file benchmark.h
-    \brief Benchmark base class definition
+    \brief Benchmark base definition
     \author Ivan Shynkarenka
     \date 06.07.2015
     \copyright MIT License

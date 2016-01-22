@@ -1,6 +1,6 @@
 /*!
     \file launcher.cpp
-    \brief Launcher base class implementation
+    \brief Launcher base implementation
     \author Ivan Shynkarenka
     \date 07.07.2015
     \copyright MIT License

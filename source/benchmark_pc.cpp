@@ -1,6 +1,6 @@
 /*!
     \file benchmark_pc.cpp
-    \brief Producers/Consumers benchmark base class implementation
+    \brief Producers/Consumers benchmark base implementation
     \author Ivan Shynkarenka
     \date 24.07.2015
     \copyright MIT License

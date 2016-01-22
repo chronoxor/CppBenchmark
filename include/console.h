@@ -1,6 +1,6 @@
 /*!
     \file console.h
-    \brief Console management static class definition
+    \brief Console management definition
     \author Ivan Shynkarenka
     \date 29.07.2015
     \copyright MIT License

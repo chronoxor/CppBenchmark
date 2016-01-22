@@ -1,6 +1,6 @@
 /*!
     \file phase.h
-    \brief Benchmark phase base class definition
+    \brief Benchmark phase base definition
     \author Ivan Shynkarenka
     \date 02.07.2015
     \copyright MIT License

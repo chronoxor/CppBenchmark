@@ -1,6 +1,6 @@
 /*!
     \file executor.cpp
-    \brief Dynamic benchmarks executor class implementation
+    \brief Dynamic benchmarks executor implementation
     \author Ivan Shynkarenka
     \date 02.09.2015
     \copyright MIT License
