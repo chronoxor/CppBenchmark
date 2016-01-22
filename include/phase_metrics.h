@@ -47,7 +47,7 @@ public:
               _total_bytes(0)
     {};
     PhaseMetrics(const PhaseMetrics&) = default;
-    PhaseMetrics(PhaseMetrics&& instance) = default;
+    PhaseMetrics(PhaseMetrics&&) = default;
     ~PhaseMetrics() = default;
 
     PhaseMetrics& operator=(const PhaseMetrics&) = default;

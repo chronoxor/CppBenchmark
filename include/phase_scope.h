@@ -31,7 +31,7 @@ public:
     */
     explicit PhaseScope(const std::shared_ptr<Phase>& phase) noexcept : _phase(phase) {}
     PhaseScope(const PhaseScope&) noexcept = default;
-    PhaseScope(PhaseScope&& instance) noexcept = default;
+    PhaseScope(PhaseScope&&) noexcept = default;
     //! Benchmark phase will be stopped on destructing
     virtual ~PhaseScope();
 
