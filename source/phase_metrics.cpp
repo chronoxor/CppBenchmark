@@ -82,8 +82,12 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
         _max_time = metrics._max_time;
 
     // Merge custom hash tables
-    _custom_dbl.insert(metrics._custom_dbl.begin(), metrics._custom_dbl.end());
     _custom_int.insert(metrics._custom_int.begin(), metrics._custom_int.end());
+    _custom_uint.insert(metrics._custom_uint.begin(), metrics._custom_uint.end());
+    _custom_int64.insert(metrics._custom_int64.begin(), metrics._custom_int64.end());
+    _custom_uint64.insert(metrics._custom_uint64.begin(), metrics._custom_uint64.end());
+    _custom_flt.insert(metrics._custom_flt.begin(), metrics._custom_flt.end());
+    _custom_dbl.insert(metrics._custom_dbl.begin(), metrics._custom_dbl.end());
     _custom_str.insert(metrics._custom_str.begin(), metrics._custom_str.end());
 
     // Choose best total time with iterations, items and bytes
@@ -94,10 +98,18 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
         _total_items = metrics._total_items;
         _total_bytes = metrics._total_bytes;
         // Overwrite metrics custom tables
-        for (auto& it : metrics._custom_dbl)
-            _custom_dbl[it.first] = it.second;
         for (auto& it : metrics._custom_int)
             _custom_int[it.first] = it.second;
+        for (auto& it : metrics._custom_uint)
+            _custom_uint[it.first] = it.second;
+        for (auto& it : metrics._custom_int64)
+            _custom_int64[it.first] = it.second;
+        for (auto& it : metrics._custom_uint64)
+            _custom_uint64[it.first] = it.second;
+        for (auto& it : metrics._custom_flt)
+            _custom_flt[it.first] = it.second;
+        for (auto& it : metrics._custom_dbl)
+            _custom_dbl[it.first] = it.second;
         for (auto& it : metrics._custom_str)
             _custom_str[it.first] = it.second;
     }

@@ -152,32 +152,75 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
     if (metrics.total_bytes() > 0)
         _stream << Internals::indent7 << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
     _stream << Internals::indent7 << "\"custom\": [";
-    if ((metrics.custom_dbl().size() > 0) || (metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0))
+    if ((metrics.custom_int().size() > 0) || (metrics.custom_uint().size() > 0) ||
+        (metrics.custom_int64().size() > 0) || (metrics.custom_uint64().size() > 0) ||
+        (metrics.custom_flt().size() > 0) || (metrics.custom_dbl().size() > 0) ||
+        (metrics.custom_str().size() > 0))
     {
         std::set<std::string> names;
-        for (auto it : metrics.custom_dbl())
-            names.insert(it.first);
         for (auto it : metrics.custom_int())
+            names.insert(it.first);
+        for (auto it : metrics.custom_uint())
+            names.insert(it.first);
+        for (auto it : metrics.custom_int64())
+            names.insert(it.first);
+        for (auto it : metrics.custom_uint64())
+            names.insert(it.first);
+        for (auto it : metrics.custom_flt())
+            names.insert(it.first);
+        for (auto it : metrics.custom_dbl())
             names.insert(it.first);
         for (auto it : metrics.custom_str())
             names.insert(it.first);
         bool comma = false;
         for (auto name : names)
         {
-            auto it_dbl = metrics.custom_dbl().find(name);
-            if (it_dbl != metrics.custom_dbl().end())
-            {
-                if (comma)
-                    _stream << ',';
-                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_dbl->first << "\": " << it_dbl->second << " }";
-                comma = true;
-            }
             auto it_int = metrics.custom_int().find(name);
             if (it_int != metrics.custom_int().end())
             {
                 if (comma)
                     _stream << ',';
                 _stream << '\n' << Internals::indent8 << "{ " << '"' << it_int->first << "\": " << it_int->second << " }";
+                comma = true;
+            }
+            auto it_uint = metrics.custom_uint().find(name);
+            if (it_uint != metrics.custom_uint().end())
+            {
+                if (comma)
+                    _stream << ',';
+                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_uint->first << "\": " << it_uint->second << " }";
+                comma = true;
+            }
+            auto it_int64 = metrics.custom_int64().find(name);
+            if (it_int64 != metrics.custom_int64().end())
+            {
+                if (comma)
+                    _stream << ',';
+                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_int64->first << "\": " << it_int64->second << " }";
+                comma = true;
+            }
+            auto it_uint64 = metrics.custom_uint64().find(name);
+            if (it_uint64 != metrics.custom_uint64().end())
+            {
+                if (comma)
+                    _stream << ',';
+                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_uint64->first << "\": " << it_uint64->second << " }";
+                comma = true;
+            }
+            auto it_flt = metrics.custom_flt().find(name);
+            if (it_flt != metrics.custom_flt().end())
+            {
+                if (comma)
+                    _stream << ',';
+                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_flt->first << "\": " << it_flt->second << " }";
+                comma = true;
+            }
+            auto it_dbl = metrics.custom_dbl().find(name);
+            if (it_dbl != metrics.custom_dbl().end())
+            {
+                if (comma)
+                    _stream << ',';
+                _stream << '\n' << Internals::indent8 << "{ " << '"' << it_dbl->first << "\": " << it_dbl->second << " }";
                 comma = true;
             }
             auto it_str = metrics.custom_str().find(name);

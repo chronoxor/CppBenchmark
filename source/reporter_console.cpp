@@ -79,24 +79,47 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
         _stream << WHITE << "Items throughput: " << LIGHTMAGENTA << metrics.items_per_second() << " / second" << std::endl;
     if (metrics.total_bytes() > 0)
         _stream << WHITE << "Bytes throughput: " << MAGENTA << GenerateDataSize(metrics.bytes_per_second()) << " / second" << std::endl;
-    if ((metrics.custom_dbl().size() > 0) || (metrics.custom_int().size() > 0) || (metrics.custom_str().size() > 0))
+    if ((metrics.custom_int().size() > 0) || (metrics.custom_uint().size() > 0) ||
+        (metrics.custom_int64().size() > 0) || (metrics.custom_uint64().size() > 0) ||
+        (metrics.custom_flt().size() > 0) || (metrics.custom_dbl().size() > 0) ||
+        (metrics.custom_str().size() > 0))
     {
         _stream << WHITE << "Custom values: " << std::endl;
         std::set<std::string> names;
-        for (auto it : metrics.custom_dbl())
-            names.insert(it.first);
         for (auto it : metrics.custom_int())
+            names.insert(it.first);
+        for (auto it : metrics.custom_uint())
+            names.insert(it.first);
+        for (auto it : metrics.custom_int64())
+            names.insert(it.first);
+        for (auto it : metrics.custom_uint64())
+            names.insert(it.first);
+        for (auto it : metrics.custom_flt())
+            names.insert(it.first);
+        for (auto it : metrics.custom_dbl())
             names.insert(it.first);
         for (auto it : metrics.custom_str())
             names.insert(it.first);
         for (auto name : names)
         {
-            auto it_dbl = metrics.custom_dbl().find(name);
-            if (it_dbl != metrics.custom_dbl().end())
-                _stream << DARKGREY << '\t' << it_dbl->first << ": " << GREY << it_dbl->second << std::endl;
             auto it_int = metrics.custom_int().find(name);
             if (it_int != metrics.custom_int().end())
                 _stream << DARKGREY << '\t' << it_int->first << ": " << GREY << it_int->second << std::endl;
+            auto it_uint = metrics.custom_uint().find(name);
+            if (it_uint != metrics.custom_uint().end())
+                _stream << DARKGREY << '\t' << it_uint->first << ": " << GREY << it_uint->second << std::endl;
+            auto it_int64 = metrics.custom_int64().find(name);
+            if (it_int64 != metrics.custom_int64().end())
+                _stream << DARKGREY << '\t' << it_int64->first << ": " << GREY << it_int64->second << std::endl;
+            auto it_uint64 = metrics.custom_uint64().find(name);
+            if (it_uint64 != metrics.custom_uint64().end())
+                _stream << DARKGREY << '\t' << it_uint64->first << ": " << GREY << it_uint64->second << std::endl;
+            auto it_flt = metrics.custom_flt().find(name);
+            if (it_flt != metrics.custom_flt().end())
+                _stream << DARKGREY << '\t' << it_flt->first << ": " << GREY << it_flt->second << std::endl;
+            auto it_dbl = metrics.custom_dbl().find(name);
+            if (it_dbl != metrics.custom_dbl().end())
+                _stream << DARKGREY << '\t' << it_dbl->first << ": " << GREY << it_dbl->second << std::endl;
             auto it_str = metrics.custom_str().find(name);
             if (it_str != metrics.custom_str().end())
                 _stream << DARKGREY << '\t' << it_str->first << ": " << GREY << it_str->second << std::endl;
