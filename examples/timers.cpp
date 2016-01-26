@@ -200,7 +200,7 @@ LARGE_INTEGER QueryPerformanceFrequency()
 
 BENCHMARK("QueryPerformanceCounter", iterations)
 {
-	static LARGE_INTEGER frequency = QueryPerformanceFrequency();
+    static LARGE_INTEGER frequency = QueryPerformanceFrequency();
     static LARGE_INTEGER timestamp = QueryPerformanceCounter();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
