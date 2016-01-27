@@ -209,7 +209,7 @@ int64_t System::RamFree()
 #endif
 }
 
-int System::CurrentThreadId()
+uint64_t System::CurrentThreadId()
 {
 #if defined(_WIN32) || defined(_WIN64)
     return GetCurrentThreadId();
@@ -218,7 +218,7 @@ int System::CurrentThreadId()
 #endif
 }
 
-int64_t System::Timestamp()
+uint64_t System::Timestamp()
 {
 #if defined(_WIN32) || defined(_WIN64)
     static LARGE_INTEGER frequency{0};

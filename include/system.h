@@ -47,10 +47,10 @@ public:
     static int64_t RamFree();
 
     //! Current thread Id
-    static int CurrentThreadId();
+    static uint64_t CurrentThreadId();
 
     //! Get timestamp in nanoseconds
-    static int64_t Timestamp();
+    static uint64_t Timestamp();
 };
 
 } // namespace CppBenchmark

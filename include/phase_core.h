@@ -65,7 +65,7 @@ protected:
     //! Phase name
     std::string _name;
     //! Thread Id
-    int _thread;
+    uint64_t _thread;
     //! Child phases container
     std::vector<std::shared_ptr<PhaseCore>> _child;
     //! Current phase metrics
