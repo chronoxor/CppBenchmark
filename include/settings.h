@@ -33,7 +33,10 @@ class Settings
     friend class BenchmarkThreads;
 
 public:
-    //! Initialize settings with count of iterations
+    //! Initialize settings with the given count of iterations
+    /*!
+        \param iterations - Count of iterations (default is 1)
+    */
     Settings(int iterations = 1) : _attempts(5), _infinite(false), _iterations(iterations) {}
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;

@@ -332,7 +332,7 @@ BENCHMARK("clock_gettime", iterations)
 struct timeval gettimeofday()
 {
     struct timeval current;
-    gettimeofday(&current, NULL);
+    gettimeofday(&current, nullptr);
     return current;
 }
 

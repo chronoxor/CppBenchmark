@@ -4,14 +4,14 @@
 
 #include "cppbenchmark.h"
 
-#include <atomic>
-#include <memory>
-
 #include "cameron/readerwriterqueue.h"
 #include "folly/ProducerConsumerQueue.h"
 #include "lockfree/lock-bounded-queue.hpp"
 #include "lockfree/spsc-queue.hpp"
 #include "lockfree/spsc-bounded-queue.hpp"
+
+#include <atomic>
+#include <memory>
 
 const int queue_bound_size = 65536;
 const int items_to_produce = 10000000;

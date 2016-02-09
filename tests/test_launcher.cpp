@@ -4,13 +4,13 @@
 
 #include "catch.hpp"
 
-#include <chrono>
-#include <thread>
-
 #include "launcher.h"
 #include "reporter_console.h"
 #include "reporter_csv.h"
 #include "reporter_json.h"
+
+#include <chrono>
+#include <thread>
 
 using namespace CppBenchmark;
 

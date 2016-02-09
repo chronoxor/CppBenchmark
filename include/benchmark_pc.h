@@ -9,12 +9,12 @@
 #ifndef CPPBENCHMARK_BENCHMARK_PC_H
 #define CPPBENCHMARK_BENCHMARK_PC_H
 
-#include <thread>
-
 #include "benchmark_threads.h"
 #include "context_pc.h"
 #include "fixture_pc.h"
 #include "settings_pc.h"
+
+#include <thread>
 
 namespace CppBenchmark {
 

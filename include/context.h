@@ -9,10 +9,10 @@
 #ifndef CPPBENCHMARK_CONTEXT_H
 #define CPPBENCHMARK_CONTEXT_H
 
+#include "phase_core.h"
+
 #include <atomic>
 #include <string>
-
-#include "phase_core.h"
 
 namespace CppBenchmark {
 

@@ -8,16 +8,16 @@
 
 #include "launcher_console.h"
 
-#include <iomanip>
-#include <regex>
-
-#include <OptionParser.h>
-
 #include "console.h"
 #include "reporter_console.h"
 #include "reporter_csv.h"
 #include "reporter_json.h"
 #include "version.h"
+
+#include <iomanip>
+#include <regex>
+
+#include <OptionParser.h>
 
 namespace CppBenchmark {
 

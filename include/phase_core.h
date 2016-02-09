@@ -9,13 +9,13 @@
 #ifndef CPPBENCHMARK_PHASE_CORE_H
 #define CPPBENCHMARK_PHASE_CORE_H
 
-#include <limits>
-#include <mutex>
-#include <vector>
-
 #include "phase_metrics.h"
 #include "phase_scope.h"
 #include "system.h"
+
+#include <limits>
+#include <mutex>
+#include <vector>
 
 namespace CppBenchmark {
 

@@ -9,9 +9,9 @@
 #ifndef CPPBENCHMARK_REPORTER_JSON_H
 #define CPPBENCHMARK_REPORTER_JSON_H
 
-#include <iostream>
-
 #include "reporter.h"
+
+#include <iostream>
 
 namespace CppBenchmark {
 

@@ -95,7 +95,7 @@ std::string Environment::OSVersion()
     ZeroMemory(&si, sizeof(SYSTEM_INFO));
 
     PGNSI pGNSI = (PGNSI)GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNativeSystemInfo");
-    if (pGNSI != NULL)
+    if (pGNSI != nullptr)
         pGNSI(&si);
     else
         GetSystemInfo(&si);

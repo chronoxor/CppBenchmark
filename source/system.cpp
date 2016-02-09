@@ -55,7 +55,7 @@ std::string System::CpuArchitecture()
 
     CHAR pBuffer[_MAX_PATH] = { 0 };
     DWORD dwBufferSize = _MAX_PATH;
-    lError = RegQueryValueEx(hKey, "ProcessorNameString", NULL, NULL, (LPBYTE)pBuffer, &dwBufferSize);
+    lError = RegQueryValueEx(hKey, "ProcessorNameString", nullptr, nullptr, (LPBYTE)pBuffer, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
@@ -90,7 +90,7 @@ std::pair<int, int> System::CpuTotalCores()
 {
 #if defined(_WIN32) || defined(_WIN64)
     BOOL allocated = FALSE;
-    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION pBuffer = NULL;
+    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION pBuffer = nullptr;
     DWORD dwLength = 0;
 
     while (!allocated)
@@ -100,10 +100,10 @@ std::pair<int, int> System::CpuTotalCores()
         {
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
             {
-                if (pBuffer != NULL)
+                if (pBuffer != nullptr)
                     free(pBuffer);
                 pBuffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION)malloc(dwLength);
-                if (pBuffer == NULL)
+                if (pBuffer == nullptr)
                     return std::make_pair(-1, -1);
             }
             else
@@ -156,7 +156,7 @@ int64_t System::CpuClockSpeed()
 
     DWORD dwMHz = 0;
     DWORD dwBufferSize = sizeof(DWORD);
-    lError = RegQueryValueEx(hKey, "~MHz", NULL, NULL, (LPBYTE)&dwMHz, &dwBufferSize);
+    lError = RegQueryValueEx(hKey, "~MHz", nullptr, nullptr, (LPBYTE)&dwMHz, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return -1;
 

@@ -20,9 +20,17 @@ namespace CppBenchmark {
 class SettingsPC : public SettingsThreads
 {
 public:
-    //! Initialize settings with count of iterations
+    //! Initialize settings with the given count of iterations
+    /*!
+        \param iterations - Count of iterations (default is 1)
+    */
     SettingsPC(int iterations = 1) : SettingsThreads(iterations) {}
-    //! Initialize settings with count of iterations and count of producers/consumers
+    //! Initialize settings with the given count of iterations and count of producers/consumers
+    /*!
+        \param iterations - Count of iterations
+        \param producers - Count of producers
+        \param consumers - Count of consumers
+    */
     SettingsPC(int iterations, int producers, int consumers) : SettingsPC(iterations) { PC(producers, consumers); }
     SettingsPC(const Settings& settings) : SettingsThreads(settings) {}
     SettingsPC(const SettingsPC&) = default;

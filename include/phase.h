@@ -9,10 +9,10 @@
 #ifndef CPPBENCHMARK_PHASE_H
 #define CPPBENCHMARK_PHASE_H
 
+#include "phase_metrics.h"
+
 #include <memory>
 #include <string>
-
-#include "phase_metrics.h"
 
 namespace CppBenchmark {
 

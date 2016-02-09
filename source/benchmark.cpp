@@ -8,9 +8,9 @@
 
 #include "benchmark.h"
 
-#include <algorithm>
-
 #include "launcher_handler.h"
+
+#include <algorithm>
 
 namespace CppBenchmark {
 

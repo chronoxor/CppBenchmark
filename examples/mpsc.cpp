@@ -4,14 +4,14 @@
 
 #include "cppbenchmark.h"
 
-#include <atomic>
-#include <memory>
-
 #include "cameron/blockingconcurrentqueue.h"
 #include "cameron/concurrentqueue.h"
 #include "lockfree/lock-bounded-queue.hpp"
 #include "lockfree/mpmc-bounded-queue.hpp"
 #include "lockfree/mpsc-queue.hpp"
+
+#include <atomic>
+#include <memory>
 
 const int queue_bound_size = 65536;
 const int items_to_produce = 10000000;

@@ -8,12 +8,12 @@
 
 #include "reporter_console.h"
 
-#include <set>
-#include <sstream>
-
 #include "console.h"
 #include "environment.h"
 #include "version.h"
+
+#include <set>
+#include <sstream>
 
 namespace CppBenchmark {
 

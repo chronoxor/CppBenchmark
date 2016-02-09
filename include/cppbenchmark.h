@@ -25,13 +25,13 @@ GitHub: https://github.com/chronoxor/CppBenchmark
 #ifndef CPPBENCHMARK_H
 #define CPPBENCHMARK_H
 
-#include <sstream>
-
 #include "executor.h"
 #include "launcher_console.h"
 #include "reporter_console.h"
 #include "reporter_csv.h"
 #include "reporter_json.h"
+
+#include <sstream>
 
 namespace CppBenchmark {
 

@@ -9,12 +9,12 @@
 #ifndef CPPBENCHMARK_BENCHMARK_THREADS_H
 #define CPPBENCHMARK_BENCHMARK_THREADS_H
 
-#include <thread>
-
 #include "benchmark.h"
 #include "context_thread.h"
 #include "fixture_threads.h"
 #include "settings_threads.h"
+
+#include <thread>
 
 namespace CppBenchmark {
 

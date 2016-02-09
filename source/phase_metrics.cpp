@@ -7,6 +7,7 @@
 */
 
 #include "phase_metrics.h"
+
 #include "system.h"
 
 namespace CppBenchmark {

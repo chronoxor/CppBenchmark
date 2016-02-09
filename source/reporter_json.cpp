@@ -8,10 +8,10 @@
 
 #include "reporter_json.h"
 
-#include <set>
-
 #include "environment.h"
 #include "version.h"
+
+#include <set>
 
 namespace CppBenchmark {
 
