@@ -39,9 +39,7 @@ public:
         \param settings - Benchmark settings
     */
     explicit Benchmark(const std::string& name, const TSettings& settings = TSettings())
-            : _launched(false),
-              _name(name),
-              _settings(settings)
+        : _launched(false), _name(name), _settings(settings)
     {}
     Benchmark(const Benchmark&) = delete;
     Benchmark(Benchmark&&) = delete;

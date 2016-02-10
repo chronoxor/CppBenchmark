@@ -71,11 +71,11 @@ private:
         \param z - Benchmark third parameter
     */
     ContextPC(int producers, int consumers, int x, int y, int z) noexcept
-            : Context(x, y, z),
-              _producers(producers),
-              _consumers(consumers),
-              _produce_stopped(std::make_shared<std::atomic<bool>>(false)),
-              _consume_stopped(std::make_shared<std::atomic<bool>>(false))
+        : Context(x, y, z),
+          _producers(producers),
+          _consumers(consumers),
+          _produce_stopped(std::make_shared<std::atomic<bool>>(false)),
+          _consume_stopped(std::make_shared<std::atomic<bool>>(false))
     {}
 };
 

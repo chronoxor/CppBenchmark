@@ -51,10 +51,7 @@ private:
         \param y - Benchmark second parameter
         \param z - Benchmark third parameter
     */
-    ContextThread(int threads, int x, int y, int z) noexcept
-            : Context(x, y, z),
-              _threads(threads)
-    {}
+    ContextThread(int threads, int x, int y, int z) noexcept : Context(x, y, z), _threads(threads) {}
 };
 
 } // namespace CppBenchmark

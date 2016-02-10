@@ -39,13 +39,13 @@ class PhaseMetrics
 public:
     //! Default constructor
     PhaseMetrics()
-            : _min_time(std::numeric_limits<int64_t>::max()),
-              _max_time(std::numeric_limits<int64_t>::min()),
-              _total_time(0),
-              _total_iterations(0),
-              _total_items(0),
-              _total_bytes(0)
-    {};
+        : _min_time(std::numeric_limits<int64_t>::max()),
+          _max_time(std::numeric_limits<int64_t>::min()),
+          _total_time(0),
+          _total_iterations(0),
+          _total_items(0),
+          _total_bytes(0)
+    {}
     PhaseMetrics(const PhaseMetrics&) = default;
     PhaseMetrics(PhaseMetrics&&) = default;
     ~PhaseMetrics() = default;

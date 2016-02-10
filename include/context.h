@@ -90,10 +90,7 @@ protected:
         \param z - Benchmark third parameter
     */
     Context(int x, int y, int z) noexcept
-            : _x(x),
-              _y(y),
-              _z(z),
-              _canceled(std::make_shared<std::atomic<bool>>(false))
+        : _x(x), _y(y), _z(z), _canceled(std::make_shared<std::atomic<bool>>(false))
     {}
 };
 
