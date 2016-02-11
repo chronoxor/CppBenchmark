@@ -22,6 +22,9 @@ include(SetCrtSecureWarningsOff)
 # External packages
 find_package(Threads REQUIRED)
 
+# System link libraries
+list(APPEND SYSTEM Threads::Threads)
+
 # Modules
 add_subdirectory("modules")
 
@@ -42,14 +45,14 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
   string(REGEX REPLACE "(.*)\\.cpp" "\\1" EXAMPLE_NAME ${EXAMPLE_FILE})
   set(EXAMPLE_TARGET "cppbenchmark-example-${EXAMPLE_NAME}")
   add_executable(${EXAMPLE_TARGET} examples/${EXAMPLE_FILE})
-  target_link_libraries(${EXAMPLE_TARGET} cppbenchmark Threads::Threads)
+  target_link_libraries(${EXAMPLE_TARGET} cppbenchmark ${SYSTEM})
   list(APPEND INSTALL_TARGETS ${EXAMPLE_TARGET})
 endforeach()
 
 # Tests
 file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
 add_executable(cppbenchmark-tests ${CATCH_HEADER} ${TESTS_SOURCE_FILES})
-target_link_libraries(cppbenchmark-tests cppbenchmark Threads::Threads)
+target_link_libraries(cppbenchmark-tests cppbenchmark ${SYSTEM})
 list(APPEND INSTALL_TARGETS cppbenchmark-tests)
 
 # CTest
