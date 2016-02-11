@@ -47,6 +47,7 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
   add_executable(${EXAMPLE_TARGET} examples/${EXAMPLE_FILE})
   target_link_libraries(${EXAMPLE_TARGET} cppbenchmark ${SYSTEM})
   list(APPEND INSTALL_TARGETS ${EXAMPLE_TARGET})
+  list(APPEND INSTALL_TARGETS_PDB ${EXAMPLE_TARGET})
 endforeach()
 
 # Tests
@@ -54,6 +55,7 @@ file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
 add_executable(cppbenchmark-tests ${CATCH_HEADER} ${TESTS_SOURCE_FILES})
 target_link_libraries(cppbenchmark-tests cppbenchmark ${SYSTEM})
 list(APPEND INSTALL_TARGETS cppbenchmark-tests)
+list(APPEND INSTALL_TARGETS_PDB cppbenchmark-tests)
 
 # CTest
 enable_testing()
@@ -64,3 +66,10 @@ install(TARGETS ${INSTALL_TARGETS}
   RUNTIME DESTINATION "${PROJECT_SOURCE_DIR}/bin"
   LIBRARY DESTINATION "${PROJECT_SOURCE_DIR}/bin"
   ARCHIVE DESTINATION "${PROJECT_SOURCE_DIR}/bin")
+
+# Install *.pdb files
+if(MSVC)
+  foreach(INSTALL_TARGET_PDB ${INSTALL_TARGETS_PDB})
+    install(FILES $<TARGET_PDB_FILE:${INSTALL_TARGET_PDB}> DESTINATION "${PROJECT_SOURCE_DIR}/bin")
+  endforeach()
+endif()
