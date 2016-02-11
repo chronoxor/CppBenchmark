@@ -11,10 +11,13 @@ if(DOXYGEN_FOUND)
   endif()
 endif()
 
+# CMake module path
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+
 # Compiler features
-include("cmake/SetCompilerFeatures.cmake")
-include("cmake/SetCompilerWarningAll.cmake")
-include("cmake/SetCrtSecureWarningsOff.cmake")
+include(SetCompilerFeatures)
+include(SetCompilerWarningAll)
+include(SetCrtSecureWarningsOff)
 
 # External packages
 find_package(Threads REQUIRED)
