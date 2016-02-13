@@ -35,7 +35,14 @@ public:
         \param name - Benchmark name
         \param settings - Benchmark settings
     */
-    explicit BenchmarkThreads(const std::string& name, const TSettings& settings = TSettings()) : Benchmark(name, settings) {}
+    template<typename... Types>
+    explicit BenchmarkThreads(const std::string& name, Types... settings) : BenchmarkThreads(name, TSettings(settings...)) {}
+    //! Alternative class constructor
+    /*!
+        \param name - Benchmark name
+        \param settings - Benchmark settings
+    */
+    explicit BenchmarkThreads(const std::string& name, const TSettings& settings) : Benchmark(name, settings) {}
     BenchmarkThreads(const BenchmarkThreads&) = delete;
     BenchmarkThreads(BenchmarkThreads&&) = delete;
     virtual ~BenchmarkThreads() = default;

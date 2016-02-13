@@ -33,7 +33,14 @@ public:
         \param name - Benchmark name
         \param settings - Benchmark settings
     */
-    explicit BenchmarkPC(const std::string& name, const TSettings& settings = TSettings()) : BenchmarkThreads(name, settings) {}
+    template<typename... Types>
+    explicit BenchmarkPC(const std::string& name, Types... settings) : BenchmarkPC(name, TSettings(settings...)) {}
+    //! Alternative class constructor
+    /*!
+        \param name - Benchmark name
+        \param settings - Benchmark settings
+    */
+    explicit BenchmarkPC(const std::string& name, const TSettings& settings) : BenchmarkThreads(name, settings) {}
     BenchmarkPC(const BenchmarkPC&) = delete;
     BenchmarkPC(BenchmarkPC&&) = delete;
     virtual ~BenchmarkPC() = default;

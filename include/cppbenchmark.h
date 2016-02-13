@@ -72,8 +72,7 @@ int main(int argc, char** argv)\
 
 //! Benchmark register macro
 /*!
-    Register a new benchmark with a given \a name and settings. Next to the definition you should provide a benchmark
-    code.
+    Register a new benchmark with a given name and settings. Next to the definition you should provide a benchmark code.
 
     Example:
     \code{.cpp}
@@ -84,7 +83,7 @@ int main(int argc, char** argv)\
     }
     \endcode
 */
-#define BENCHMARK(name, ...)\
+#define BENCHMARK(...)\
 namespace CppBenchmark {\
     class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public Benchmark\
     {\
@@ -93,13 +92,13 @@ namespace CppBenchmark {\
     protected:\
         void Run(Context& context) override;\
     };\
-    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(name, Benchmark::TSettings(__VA_ARGS__)));\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(CppBenchmark::Context& context)
 
 //! Benchmark with fixture register macro
 /*!
-    Register a new benchmark with a given \a fixture, \a name and settings. Next to the definition you should provide
+    Register a new benchmark with a given \a fixture, name and settings. Next to the definition you should provide
     a benchmark code. Benchmark fixture is a user class that will be constructed before benchmarking and destructed
     after. In benchmark code you can access to public and protected fields & methods of the fixture.
 
@@ -118,7 +117,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(CppBenchma
     }
     \endcode
 */
-#define BENCHMARK_FIXTURE(fixture, name, ...)\
+#define BENCHMARK_FIXTURE(fixture, ...)\
 namespace CppBenchmark {\
     class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public Benchmark, public fixture\
     {\
@@ -127,13 +126,13 @@ namespace CppBenchmark {\
     protected:\
         void Run(Context& context) override;\
     };\
-    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(name, Benchmark::TSettings(__VA_ARGS__)));\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& context)
 
 //! Benchmark threads register macro
 /*!
-    Register a new threads benchmark with a given \a name and settings. Next to the definition you should provide
+    Register a new threads benchmark with a given name and settings. Next to the definition you should provide
     a benchmark code that will be executed in multi-thread environment. You can use \a settings parameter to give
     threads count to want to measure with.
 
@@ -146,7 +145,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& c
     }
     \endcode
 */
-#define BENCHMARK_THREADS(name, ...)\
+#define BENCHMARK_THREADS(...)\
 namespace CppBenchmark {\
     class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public BenchmarkThreads\
     {\
@@ -155,13 +154,13 @@ namespace CppBenchmark {\
     protected:\
         void RunThread(ContextThread& context) override;\
     };\
-    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(name, BenchmarkThreads::TSettings(__VA_ARGS__)));\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(CppBenchmark::ContextThread& context)
 
 //! Benchmark threads with fixture register macro
 /*!
-    Register a new threads benchmark with a given \a fixture, \a name and settings. Next to the definition you should
+    Register a new threads benchmark with a given \a fixture, name and settings. Next to the definition you should
     provide a benchmark code that will be executed in multi-thread environment. Benchmark fixture is a user class
     that will be constructed before benchmarking and destructed after. In benchmark code you can access to public
     and protected fields & methods of the fixture. You can use \a settings parameter to give threads count to want
@@ -182,7 +181,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(CppB
     }
     \endcode
 */
-#define BENCHMARK_THREADS_FIXTURE(fixture, name, ...)\
+#define BENCHMARK_THREADS_FIXTURE(fixture, ...)\
 namespace CppBenchmark {\
     class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public BenchmarkThreads, public fixture\
     {\
@@ -191,13 +190,13 @@ namespace CppBenchmark {\
     protected:\
         void RunThread(ContextThread& context) override;\
     };\
-    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(name, BenchmarkThreads::TSettings(__VA_ARGS__)));\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__));\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(ContextThread& context)
 
 //! Benchmark class register macro
 /*!
-    Register a new benchmark based on a child class of a \a type with a given \a name and \a settings. You should
+    Register a new benchmark based on a child class of a \a type with a given name and \a settings. You should
     inherit \a type from Benchmark, BenchmarkThreads or BenchmarkPC and implement all necessary benchmark methods.
 
     Example:
@@ -216,8 +215,8 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(Cont
     BENCHMARK_CLASS(VectorBenchmark, "VectorPushBackBenchmark", 1000000)
     \endcode
 */
-#define BENCHMARK_CLASS(type, name, ...)\
-namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(name, type::TSettings(__VA_ARGS__))); }
+#define BENCHMARK_CLASS(type, ...)\
+namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared<type>(__VA_ARGS__)); }
 
 //! Dynamic benchmark scope register macro
 /*!

@@ -38,7 +38,16 @@ public:
         \param name - Benchmark name
         \param settings - Benchmark settings
     */
-    explicit Benchmark(const std::string& name, const TSettings& settings = TSettings())
+    template<typename... Types>
+    explicit Benchmark(const std::string& name, Types... settings)
+        : Benchmark(name, TSettings(settings...))
+    {}
+    //! Alternative class constructor
+    /*!
+        \param name - Benchmark name
+        \param settings - Benchmark settings
+    */
+    explicit Benchmark(const std::string& name, const TSettings& settings)
         : _launched(false), _name(name), _settings(settings)
     {}
     Benchmark(const Benchmark&) = delete;
