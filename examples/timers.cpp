@@ -101,7 +101,7 @@ BENCHMARK("clock", iterations)
     }
 }
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 BENCHMARK("GetTickCount", iterations)
 {
     static DWORD timestamp = GetTickCount();
@@ -142,7 +142,7 @@ BENCHMARK("GetTickCount", iterations)
 }
 #endif
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 BENCHMARK("GetTickCount64", iterations)
 {
     static ULONGLONG timestamp = GetTickCount64();
@@ -183,7 +183,7 @@ BENCHMARK("GetTickCount64", iterations)
 }
 #endif
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 LARGE_INTEGER QueryPerformanceCounter()
 {
     LARGE_INTEGER current;
@@ -239,7 +239,7 @@ BENCHMARK("QueryPerformanceCounter", iterations)
 }
 #endif
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER)
 BENCHMARK("__rdtsc", iterations)
 {
     static int64_t timestamp = __rdtsc();
@@ -280,7 +280,7 @@ BENCHMARK("__rdtsc", iterations)
 }
 #endif
 
-#ifdef __unix__
+#if defined(unix) || defined(__unix) || defined(__unix__)
 struct timespec clock_gettime()
 {
     struct timespec current;
@@ -328,7 +328,7 @@ BENCHMARK("clock_gettime", iterations)
 }
 #endif
 
-#ifdef __unix__
+#if defined(unix) || defined(__unix) || defined(__unix__)
 struct timeval gettimeofday()
 {
     struct timeval current;
