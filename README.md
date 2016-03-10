@@ -662,8 +662,8 @@ Iterations throughput: 6396501 / second
 ```C++
 #include "cppbenchmark.h"
 
-#include <mutex>
-#include <unordered_map>
+#include <array>
+#include <atomic>
 
 const int iterations = 10000000;
 
@@ -680,23 +680,20 @@ const auto settings = CppBenchmark::Settings()
         }
     );
 
-class MutexFixture1
+class Fixture1
 {
 protected:
-    std::mutex mutex;
-    int counter;
+    std::atomic<int> counter;
 };
 
-class MutexFixture2 : public virtual CppBenchmark::FixtureThreads
+class Fixture2 : public virtual CppBenchmark::FixtureThreads
 {
 protected:
-    std::mutex mutex;
-    std::unordered_map<std::thread::id, int> counter;
+    std::array<int, 8> counter;
 
     void InitializeThread(CppBenchmark::ContextThread& context) override
     {
-        std::lock_guard<std::mutex> lock(mutex);
-        counter[std::this_thread::get_id()] = 0;
+        counter[CppBenchmark::System::CurrentThreadId() % counter.size()] = 0;
     }
 
     void CleanupThread(CppBenchmark::ContextThread& context) override
@@ -705,16 +702,14 @@ protected:
     }
 };
 
-BENCHMARK_THREADS_FIXTURE(MutexFixture1, "std::mutex+global", settings)
+BENCHMARK_THREADS_FIXTURE(Fixture1, "Global counter", settings)
 {
-    std::lock_guard<std::mutex> lock(mutex);
     counter++;
 }
 
-BENCHMARK_THREADS_FIXTURE(MutexFixture2, "std::mutex+local", settings)
+BENCHMARK_THREADS_FIXTURE(Fixture2, "Thread local counter", settings)
 {
-    std::lock_guard<std::mutex> lock(mutex);
-    counter[std::this_thread::get_id()]++;
+    counter[CppBenchmark::System::CurrentThreadId() % counter.size()]++;
 }
 
 BENCHMARK_MAIN()
@@ -723,53 +718,93 @@ BENCHMARK_MAIN()
 Report fragment is the following:
 ```
 ===============================================================================
-Benchmark: std::mutex+local
-Attempts: 5
-Iterations: 10000000
+Phase: Global counter(threads:1)
+Total time: 63.303 ms
 -------------------------------------------------------------------------------
-Phase: std::mutex+local(threads:1)
-Total time: 317.020 ms
--------------------------------------------------------------------------------
-Phase: std::mutex+local(threads:1).thread
-Average time: 31 ns / iteration
-Minimal time: 31 ns / iteration
-Maximal time: 34 ns / iteration
-Total time: 316.620 ms
+Phase: Global counter(threads:1).thread
+Average time: 6 ns / iteration
+Minimal time: 6 ns / iteration
+Maximal time: 6 ns / iteration
+Total time: 63.165 ms
 Total iterations: 10000000
-Iterations throughput: 31583526 / second
+Iterations throughput: 158313134 / second
 -------------------------------------------------------------------------------
-Phase: std::mutex+local(threads:2)
-Total time: 625.352 ms
+Phase: Global counter(threads:2)
+Total time: 237.676 ms
 -------------------------------------------------------------------------------
-Phase: std::mutex+local(threads:2).thread
-Average time: 40 ns / iteration
-Minimal time: 40 ns / iteration
-Maximal time: 64 ns / iteration
-Total time: 401.583 ms
+Phase: Global counter(threads:2).thread
+Average time: 23 ns / iteration
+Minimal time: 23 ns / iteration
+Maximal time: 27 ns / iteration
+Total time: 236.504 ms
 Total iterations: 10000000
-Iterations throughput: 24901424 / second
+Iterations throughput: 42282550 / second
 -------------------------------------------------------------------------------
-Phase: std::mutex+local(threads:4)
-Total time: 1.414 s
+Phase: Global counter(threads:4)
+Total time: 669.396 ms
 -------------------------------------------------------------------------------
-Phase: std::mutex+local(threads:4).thread
-Average time: 81 ns / iteration
-Minimal time: 81 ns / iteration
-Maximal time: 143 ns / iteration
-Total time: 811.919 ms
+Phase: Global counter(threads:4).thread
+Average time: 65 ns / iteration
+Minimal time: 65 ns / iteration
+Maximal time: 68 ns / iteration
+Total time: 652.646 ms
 Total iterations: 10000000
-Iterations throughput: 12316484 / second
+Iterations throughput: 15322241 / second
 -------------------------------------------------------------------------------
-Phase: std::mutex+local(threads:8)
-Total time: 3.327 s
+Phase: Global counter(threads:8)
+Total time: 1.362 s
 -------------------------------------------------------------------------------
-Phase: std::mutex+local(threads:8).thread
-Average time: 107 ns / iteration
-Minimal time: 107 ns / iteration
-Maximal time: 339 ns / iteration
-Total time: 1.072 s
+Phase: Global counter(threads:8).thread
+Average time: 129 ns / iteration
+Minimal time: 129 ns / iteration
+Maximal time: 138 ns / iteration
+Total time: 1.297 s
 Total iterations: 10000000
-Iterations throughput: 9322229 / second
+Iterations throughput: 7706848 / second
+===============================================================================
+Phase: Thread local counter(threads:1)
+Total time: 41.325 ms
+-------------------------------------------------------------------------------
+Phase: Thread local counter(threads:1).thread
+Average time: 4 ns / iteration
+Minimal time: 4 ns / iteration
+Maximal time: 4 ns / iteration
+Total time: 41.175 ms
+Total iterations: 10000000
+Iterations throughput: 242865244 / second
+-------------------------------------------------------------------------------
+Phase: Thread local counter(threads:2)
+Total time: 83.360 ms
+-------------------------------------------------------------------------------
+Phase: Thread local counter(threads:2).thread
+Average time: 8 ns / iteration
+Minimal time: 8 ns / iteration
+Maximal time: 12 ns / iteration
+Total time: 80.003 ms
+Total iterations: 10000000
+Iterations throughput: 124994748 / second
+-------------------------------------------------------------------------------
+Phase: Thread local counter(threads:4)
+Total time: 231.836 ms
+-------------------------------------------------------------------------------
+Phase: Thread local counter(threads:4).thread
+Average time: 21 ns / iteration
+Minimal time: 21 ns / iteration
+Maximal time: 23 ns / iteration
+Total time: 218.354 ms
+Total iterations: 10000000
+Iterations throughput: 45797028 / second
+-------------------------------------------------------------------------------
+Phase: Thread local counter(threads:8)
+Total time: 412.714 ms
+-------------------------------------------------------------------------------
+Phase: Thread local counter(threads:8).thread
+Average time: 30 ns / iteration
+Minimal time: 30 ns / iteration
+Maximal time: 42 ns / iteration
+Total time: 306.252 ms
+Total iterations: 10000000
+Iterations throughput: 32652780 / second
 ===============================================================================
 ```
 
