@@ -8,6 +8,7 @@
 
 #include "benchmark_pc.h"
 
+#include "barrier.h"
 #include "launcher_handler.h"
 #include "system.h"
 
@@ -55,14 +56,17 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 bool infinite = _settings.infinite();
                 int64_t iterations = _settings.iterations();
 
+                // Prepare barrier for producers & consumers threads
+                Barrier barrier(producers + consumers);
+
                 // Start benchmark root phase iteration
                 context._current->StartCollectingMetrics();
                 context._metrics->AddIterations(1);
 
-                // Start benchmark producers as futures
+                // Start benchmark producers
                 for (int i = 0; i < producers; ++i)
                 {
-                    _threads.push_back(std::thread([this, &context, infinite, iterations, i]()
+                    _threads.push_back(std::thread([this, &barrier, &context, infinite, iterations, i]()
                     {
                         // Clone producer context
                         ContextPC producer_context(context);
@@ -81,6 +85,9 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 
                         bool producer_infinite = infinite;
                         int64_t producer_iterations = iterations;
+
+                        // Wait for other threads at the barrier
+                        barrier.Wait();
 
                         producer_context._current->StartCollectingMetrics();
                         while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_iterations > 0)))
@@ -104,10 +111,10 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                     }));
                 }
 
-                // Start benchmark consumers as futures
+                // Start benchmark consumers
                 for (int i = 0; i < consumers; ++i)
                 {
-                    _threads.push_back(std::thread([this, &context, i]()
+                    _threads.push_back(std::thread([this, &barrier, &context, i]()
                     {
                         // Clone consumer context
                         ContextPC consumer_context(context);
@@ -123,6 +130,9 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 
                         // Call initialize consumer method...
                         InitializeConsumer(consumer_context);
+
+                        // Wait for other threads at the barrier
+                        barrier.Wait();
 
                         consumer_context._current->StartCollectingMetrics();
                         while (!consumer_context.consume_stopped() && !consumer_context.canceled())

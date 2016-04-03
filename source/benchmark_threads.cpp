@@ -8,6 +8,7 @@
 
 #include "benchmark_threads.h"
 
+#include "barrier.h"
 #include "launcher_handler.h"
 #include "system.h"
 
@@ -52,6 +53,9 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 bool infinite = _settings.infinite();
                 int64_t iterations = _settings.iterations();
 
+                // Prepare barrier for benchmark threads
+                Barrier barrier(threads);
+
                 // Start benchmark root phase iteration
                 context._current->StartCollectingMetrics();
                 context._metrics->AddIterations(1);
@@ -59,7 +63,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark threads
                 for (int i = 0; i < threads; ++i)
                 {
-                    _threads.push_back(std::thread([this, &context, threads, infinite, iterations]()
+                    _threads.push_back(std::thread([this, &barrier, &context, threads, infinite, iterations]()
                     {
                         // Clone thread context
                         ContextThread thread_context(context);
@@ -78,6 +82,9 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
 
                         bool thread_infinite = infinite;
                         int64_t thread_iterations = iterations;
+
+                        // Wait for other threads at the barrier
+                        barrier.Wait();
 
                         thread_context._current->StartCollectingMetrics();
                         while (!thread_context.canceled() && (thread_infinite || (thread_iterations > 0)))
