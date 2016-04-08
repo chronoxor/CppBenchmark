@@ -50,9 +50,10 @@ public:
     //! Stop benchmark consumption
     void StopConsume() noexcept { *_consume_stopped = true; }
 
+    //! Get name of the current benchmark running context
     std::string to_string() const override;
 
-private:
+protected:
     //! Benchmark producers count
     int _producers;
     //! Benchmark consumers count
