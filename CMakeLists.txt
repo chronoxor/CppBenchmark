@@ -39,7 +39,7 @@ add_library(cppbenchmark ${SOURCE_FILES})
 target_link_libraries(cppbenchmark cpp-optparse)
 list(APPEND INSTALL_TARGETS cppbenchmark)
 
-# External module include check
+# Full module components: examples, tests and install
 if(NOT CPPBENCHMARK_MODULE)
 
   # Examples
