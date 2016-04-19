@@ -49,13 +49,13 @@ std::string System::CpuArchitecture()
 {
 #if defined(_WIN32) || defined(_WIN64)
     HKEY hKey;
-    LONG lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
+    LONG lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
     CHAR pBuffer[_MAX_PATH] = { 0 };
     DWORD dwBufferSize = _MAX_PATH;
-    lError = RegQueryValueEx(hKey, "ProcessorNameString", nullptr, nullptr, (LPBYTE)pBuffer, &dwBufferSize);
+    lError = RegQueryValueExA(hKey, "ProcessorNameString", nullptr, nullptr, (LPBYTE)pBuffer, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
@@ -150,13 +150,13 @@ int64_t System::CpuClockSpeed()
 {
 #if defined(_WIN32) || defined(_WIN64)
     HKEY hKey;
-    long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
+    long lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     if (lError != ERROR_SUCCESS)
         return -1;
 
     DWORD dwMHz = 0;
     DWORD dwBufferSize = sizeof(DWORD);
-    lError = RegQueryValueEx(hKey, "~MHz", nullptr, nullptr, (LPBYTE)&dwMHz, &dwBufferSize);
+    lError = RegQueryValueExA(hKey, "~MHz", nullptr, nullptr, (LPBYTE)&dwMHz, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return -1;
 
