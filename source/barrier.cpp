@@ -41,7 +41,7 @@ bool Barrier::Wait() noexcept
     }
 
     // Wait for the next barrier generation
-    _cond.wait(lock, [=, this]() { return generation != _generation; });
+    _cond.wait(lock, [this, generation]() { return generation != _generation; });
 
     // Notify each of remaining threads
     return false;
