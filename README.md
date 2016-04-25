@@ -73,7 +73,7 @@ cd CppBenchmark\scripts
 04-install-VisualStudio.bat
 05-doxygen-VisualStudio.bat
 ```
-If you want 32-bit version use '01-generate-vs2015-x32.bat' to generate project files.
+If you want 32-bit version use '01-generate-VisualStudio-x32.bat' to generate project files.
 
 ## Windows (MinGW with MSYS)
 ```
