@@ -60,7 +60,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
 ## Clone repository with submodules
 ```
-git clone https://github.com/chronoxor/CppBenchmark.git
+git clone git@github.com:chronoxor/CppBenchmark.git
 git submodule update --init --recursive
 ```
 
