@@ -2,10 +2,6 @@
 // Created by Ivan Shynkarenka on 31.07.2015.
 //
 
-#if defined(_WIN32) || defined(_WIN64)
-#define _WIN32_WINNT 0x0601
-#endif
-
 #include "cppbenchmark.h"
 
 #include <chrono>
@@ -100,6 +96,57 @@ BENCHMARK("clock", iterations)
         count = 0;
     }
 }
+
+#if defined(_WIN32) || defined(_WIN64)
+BENCHMARK("GetSystemTimePreciseAsFileTime", iterations)
+{
+    static int64_t timestamp = 0;
+    static double maxlatency = std::numeric_limits<double>::min();
+    static double minlatency = std::numeric_limits<double>::max();
+    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static int64_t minresolution = std::numeric_limits<int64_t>::max();
+    static int64_t count = 0;
+
+    FILETIME filetime;
+    GetSystemTimePreciseAsFileTime(&filetime);
+
+    ULARGE_INTEGER ularge;
+    ularge.LowPart = filetime.dwLowDateTime;
+    ularge.HighPart = filetime.dwHighDateTime;
+    int64_t current = ularge.QuadPart * 100;
+
+    if (timestamp == 0)
+        timestamp = current;
+
+    int64_t duration = (current - timestamp);
+    double latency = (double)duration / ++count;
+    if (duration > 0)
+    {
+        if (latency < minlatency)
+        {
+            minlatency = latency;
+            context.metrics().SetCustom("latency-min", minlatency);
+        }
+        if (latency > maxlatency)
+        {
+            maxlatency = latency;
+            context.metrics().SetCustom("latency-max", maxlatency);
+        }
+        if (duration < minresolution)
+        {
+            minresolution = duration;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (duration > maxresolution)
+        {
+            maxresolution = duration;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        timestamp = current;
+        count = 0;
+    }
+}
+#endif
 
 #if defined(_WIN32) || defined(_WIN64)
 BENCHMARK("GetTickCount", iterations)

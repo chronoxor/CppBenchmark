@@ -221,16 +221,41 @@ uint64_t System::CurrentThreadId()
 uint64_t System::Timestamp()
 {
 #if defined(_WIN32) || defined(_WIN64)
+    static uint64_t offset = 0;
+    static LARGE_INTEGER first{0};
     static LARGE_INTEGER frequency{0};
-    static BOOL initialized = QueryPerformanceFrequency(&frequency);
-    if (initialized)
+    static bool initialized = false;
+    static bool qpc = true;
+
+    if (!initialized)
+    {
+        // Calculate timestamp offset
+        FILETIME timestamp;
+        GetSystemTimePreciseAsFileTime(&timestamp);
+
+        ULARGE_INTEGER result;
+        result.LowPart = timestamp.dwLowDateTime;
+        result.HighPart = timestamp.dwHighDateTime;
+
+        // Convert 01.01.1601 to 01.01.1970
+        result.QuadPart -= 116444736000000000ll;
+        offset = result.QuadPart * 100;
+
+        // Setup performance counter
+        qpc = QueryPerformanceFrequency(&frequency) && QueryPerformanceCounter(&first);
+
+        initialized = true;
+    }
+
+    if (qpc)
     {
         LARGE_INTEGER timestamp{0};
         QueryPerformanceCounter(&timestamp);
-        return (timestamp.QuadPart * 1000 * 1000 * 1000) / frequency.QuadPart;
+        timestamp.QuadPart -= first.QuadPart;
+        return offset + ((timestamp.QuadPart * 1000 * 1000 * 1000) / frequency.QuadPart);
     }
     else
-        return GetTickCount() * 1000 * 1000;
+        return offset;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     struct timespec timestamp;
     clock_gettime(CLOCK_REALTIME, &timestamp);
