@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 24.07.2015.
 //
 
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <atomic>
 

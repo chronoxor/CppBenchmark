@@ -4,7 +4,7 @@
 
 #include "catch.hpp"
 
-#include "system.h"
+#include "benchmark/system.h"
 
 using namespace CppBenchmark;
 

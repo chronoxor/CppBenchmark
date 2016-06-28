@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 03.09.2015.
 //
 
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <chrono>
 #include <thread>
@@ -87,4 +87,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-

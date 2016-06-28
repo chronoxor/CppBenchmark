@@ -4,7 +4,7 @@
 
 #include "catch.hpp"
 
-#include "environment.h"
+#include "benchmark/environment.h"
 
 using namespace CppBenchmark;
 

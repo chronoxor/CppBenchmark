@@ -4,10 +4,10 @@
 
 #include "catch.hpp"
 
-#include "launcher.h"
-#include "reporter_console.h"
-#include "reporter_csv.h"
-#include "reporter_json.h"
+#include "benchmark/launcher.h"
+#include "benchmark/reporter_console.h"
+#include "benchmark/reporter_csv.h"
+#include "benchmark/reporter_json.h"
 
 #include <chrono>
 #include <thread>
