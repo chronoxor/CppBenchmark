@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 24.07.2015.
 //
 
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include "cameron/readerwriterqueue.h"
 #include "folly/ProducerConsumerQueue.h"
@@ -37,8 +37,8 @@ protected:
 
     void RunProducer(CppBenchmark::ContextPC& context) override
     {
-    	if (_count >= items_to_produce)
-    	{
+        if (_count >= items_to_produce)
+        {
             if (_queue->try_enqueue(0))
                 context.StopProduce();
             return;

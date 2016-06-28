@@ -4,7 +4,7 @@
 
 #include "catch.hpp"
 
-#include "reporter_console.h"
+#include "benchmark/reporter_console.h"
 
 using namespace CppBenchmark;
 
