@@ -27,9 +27,9 @@ class Phase
 {
 public:
     //! Get phase name
-    virtual const std::string& name() const = 0;
+    virtual const std::string& name() const noexcept = 0;
     //! Get phase metrics
-    virtual const PhaseMetrics& metrics() const = 0;
+    virtual const PhaseMetrics& metrics() const noexcept = 0;
 
     //! Start a new sub-phase with a given name in a single-thread environment
     /*!

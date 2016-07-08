@@ -61,8 +61,8 @@ public:
     virtual std::string to_string() const;
 
     // Implementation of Phase
-    const std::string& name() const override { return _current->name(); }
-    const PhaseMetrics& metrics() const override { return _current->metrics(); }
+    const std::string& name() const noexcept override { return _current->name(); }
+    const PhaseMetrics& metrics() const noexcept override { return _current->metrics(); }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override { return _current->StartPhase(phase); }
     std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) override { return _current->StartPhaseThreadSafe(phase); }
     void StopPhase() override { _current->StopPhase(); }

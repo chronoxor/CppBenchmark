@@ -46,17 +46,17 @@ public:
     Settings& operator=(Settings&&) = default;
 
     //! Get count of independent benchmark attempts
-    int attempts() const { return _attempts; }
+    int attempts() const noexcept { return _attempts; }
     //! Is benchmark running with infinite count of iterations (until cancel)?
-    bool infinite() const { return _infinite; }
+    bool infinite() const noexcept { return _infinite; }
     //! Get count of iterations
-    int64_t iterations() const { return _iterations; }
+    int64_t iterations() const noexcept { return _iterations; }
     //! Get collection of independent threads counts in a benchmark plan
-    const std::vector<int>& threads() const { return _threads; }
+    const std::vector<int>& threads() const noexcept { return _threads; }
     //! Get collection of independent producers/consumers counts in a benchmark plan
-    const std::vector<std::tuple<int, int>>& pc() const { return _pc; }
+    const std::vector<std::tuple<int, int>>& pc() const noexcept { return _pc; }
     //! Get collection of independent parameters in a benchmark plan
-    const std::vector<std::tuple<int, int, int>>& params() const { return _params; }
+    const std::vector<std::tuple<int, int, int>>& params() const noexcept { return _params; }
 
     //! Set independent benchmark attempts
     /*!

@@ -43,9 +43,9 @@ public:
     { return _phase ? true : false; }
 
     // Implementation of Phase
-    const std::string& name() const override
+    const std::string& name() const noexcept override
     { return _phase ? _phase->name() : EMPTY_NAME; }
-    const PhaseMetrics& metrics() const override
+    const PhaseMetrics& metrics() const noexcept override
     { return _phase ? _phase->metrics() : EMPTY_METRICS; }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override;
     std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) override;

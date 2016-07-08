@@ -49,8 +49,8 @@ public:
     PhaseMetrics& current() { return _metrics_current; }
 
     // Implementation of Phase
-    const std::string& name() const override { return _name; }
-    const PhaseMetrics& metrics() const override { return _metrics_result; }
+    const std::string& name() const noexcept override { return _name; }
+    const PhaseMetrics& metrics() const noexcept override { return _metrics_result; }
     std::shared_ptr<Phase> StartPhase(const std::string& phase) override;
     std::shared_ptr<Phase> StartPhaseThreadSafe(const std::string& phase) override;
     void StopPhase() override { StopCollectingMetrics(); }
