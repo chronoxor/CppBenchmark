@@ -24,12 +24,12 @@ BENCHMARK("std::chrono::high_resolution_clock::now", iterations)
     static auto timestamp = std::chrono::high_resolution_clock::now();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
     auto current = std::chrono::high_resolution_clock::now();
-    int64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(current - timestamp).count();
+    uint64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(current - timestamp).count();
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
@@ -63,12 +63,12 @@ BENCHMARK("clock", iterations)
     static auto timestamp = clock();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
     auto current = clock();
-    int64_t duration = (current - timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
+    uint64_t duration = (current - timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
@@ -100,12 +100,12 @@ BENCHMARK("clock", iterations)
 #if defined(_WIN32) || defined(_WIN64)
 BENCHMARK("GetSystemTimePreciseAsFileTime", iterations)
 {
-    static int64_t timestamp = 0;
+    static uint64_t timestamp = 0;
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
     FILETIME filetime;
     GetSystemTimePreciseAsFileTime(&filetime);
@@ -113,12 +113,12 @@ BENCHMARK("GetSystemTimePreciseAsFileTime", iterations)
     ULARGE_INTEGER ularge;
     ularge.LowPart = filetime.dwLowDateTime;
     ularge.HighPart = filetime.dwHighDateTime;
-    int64_t current = ularge.QuadPart * 100;
+    uint64_t current = ularge.QuadPart * 100;
 
     if (timestamp == 0)
         timestamp = current;
 
-    int64_t duration = (current - timestamp);
+    uint64_t duration = (current - timestamp);
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
@@ -154,12 +154,12 @@ BENCHMARK("GetTickCount", iterations)
     static DWORD timestamp = GetTickCount();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
     DWORD current = GetTickCount();
-    int64_t duration = (current - timestamp) * 1000 * 1000;
+    uint64_t duration = (current - timestamp) * 1000 * 1000;
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
@@ -195,12 +195,12 @@ BENCHMARK("GetTickCount64", iterations)
     static ULONGLONG timestamp = GetTickCount64();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
     ULONGLONG current = GetTickCount64();
-    int64_t duration = (current - timestamp) * 1000 * 1000;
+    uint64_t duration = (current - timestamp) * 1000 * 1000;
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
@@ -251,12 +251,12 @@ BENCHMARK("QueryPerformanceCounter", iterations)
     static LARGE_INTEGER timestamp = QueryPerformanceCounter();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
     LARGE_INTEGER current = QueryPerformanceCounter();
-    int64_t duration = (current.QuadPart - timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
+    uint64_t duration = (current.QuadPart - timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
@@ -289,15 +289,15 @@ BENCHMARK("QueryPerformanceCounter", iterations)
 #if defined(_MSC_VER)
 BENCHMARK("__rdtsc", iterations)
 {
-    static int64_t timestamp = __rdtsc();
+    static uint64_t timestamp = __rdtsc();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
-    int64_t current = __rdtsc();
-    int64_t duration = current - timestamp;
+    uint64_t current = __rdtsc();
+    uint64_t duration = current - timestamp;
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
@@ -340,12 +340,12 @@ BENCHMARK("clock_gettime", iterations)
     static struct timespec timestamp = clock_gettime();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
     struct timespec current = clock_gettime();
-    int64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
+    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
@@ -388,12 +388,12 @@ BENCHMARK("gettimeofday", iterations)
     static struct timeval timestamp = gettimeofday();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static int64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static int64_t minresolution = std::numeric_limits<int64_t>::max();
-    static int64_t count = 0;
+    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t count = 0;
 
     struct timeval current = gettimeofday();
-    int64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - timestamp.tv_usec) * 1000;
+    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - timestamp.tv_usec) * 1000;
     double latency = (double)duration / ++count;
     if (duration > 0)
     {
