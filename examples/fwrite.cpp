@@ -13,7 +13,10 @@ const auto settings = CppBenchmark::Settings().Iterations(iterations).ParamRange
 
 class FileFixture
 {
-public:
+protected:
+    FILE* file;
+    std::array<char, chunk_size_to> buffer;
+
     FileFixture()
     {
         // Open file for binary write
@@ -28,10 +31,6 @@ public:
         // Delete file
         remove("fwrite.out");
     }
-
-protected:
-    FILE* file;
-    std::array<char, chunk_size_to> buffer;
 };
 
 BENCHMARK_FIXTURE(FileFixture, "fwrite", settings)
