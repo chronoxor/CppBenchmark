@@ -141,19 +141,21 @@ std::string ReporterConsole::GenerateClockSpeed(int64_t hertz)
 {
     std::ostringstream stream;
 
-    if (hertz >= 1000000000ll)
+    int64_t abs_hertz = std::abs(hertz);
+
+    if (abs_hertz >= 1000000000ll)
     {
         int64_t gigahertz = hertz / 1000000000ll;
         int64_t megahertz = (hertz % 1000000000ll) / 1000000ll;
         stream << gigahertz << '.' << ((megahertz < 100) ? "0" : "") << ((megahertz < 10) ? "0" : "") << megahertz << " GHz";
     }
-    else if (hertz >= 1000000)
+    else if (abs_hertz >= 1000000)
     {
         int64_t megahertz = hertz / 1000000;
         int64_t kilohertz = (hertz % 1000000) / 1000;
         stream << megahertz << '.' << ((kilohertz < 100) ? "0" : "") << ((kilohertz < 10) ? "0" : "") << kilohertz << " MHz";
     }
-    else if (hertz >= 1000)
+    else if (abs_hertz >= 1000)
     {
         int64_t kilohertz = hertz / 1000;
         hertz = hertz % 1000;
@@ -169,25 +171,27 @@ std::string ReporterConsole::GenerateDataSize(int64_t bytes)
 {
     std::ostringstream stream;
 
-    if (bytes >= (1024ll * 1024ll * 1024ll * 1024ll))
+    int64_t abs_bytes = std::abs(bytes);
+
+    if (abs_bytes >= (1024ll * 1024ll * 1024ll * 1024ll))
     {
         int64_t tb = bytes / (1024ll * 1024ll * 1024ll * 1024ll);
         int64_t gb = (bytes % (1024ll * 1024ll * 1024ll * 1024ll)) / (1024 * 1024 * 1024);
         stream << tb << '.' << ((gb < 100) ? "0" : "") << ((gb < 10) ? "0" : "") << gb << " TiB";
     }
-    else if (bytes >= (1024 * 1024 * 1024))
+    else if (abs_bytes >= (1024 * 1024 * 1024))
     {
         int64_t gb = bytes / (1024 * 1024 * 1024);
         int64_t mb = (bytes % (1024 * 1024 * 1024)) / (1024 * 1024);
         stream << gb << '.' << ((mb < 100) ? "0" : "") << ((mb < 10) ? "0" : "") << mb << " GiB";
     }
-    else if (bytes >= (1024 * 1024))
+    else if (abs_bytes >= (1024 * 1024))
     {
         int64_t mb = bytes / (1024 * 1024);
         int64_t kb = (bytes % (1024 * 1024)) / 1024;
         stream << mb << '.' << ((kb < 100) ? "0" : "") << ((kb < 10) ? "0" : "") << kb << " MiB";
     }
-    else if (bytes >= 1024)
+    else if (abs_bytes >= 1024)
     {
         int64_t kb = bytes / 1024;
         bytes = bytes % 1024;
@@ -203,7 +207,9 @@ std::string ReporterConsole::GenerateTimePeriod(int64_t nanoseconds)
 {
     std::ostringstream stream;
 
-    if (nanoseconds >= (60 * 60 * 1000000000ll))
+    int64_t abs_nanoseconds = std::abs(nanoseconds);
+
+    if (abs_nanoseconds >= (60 * 60 * 1000000000ll))
     {
         int64_t hours = nanoseconds / (60 * 60 * 1000000000ll);
         int64_t minutes = ((nanoseconds % (60 * 60 * 1000000000ll)) / 1000000000ll) / 60;
@@ -211,26 +217,26 @@ std::string ReporterConsole::GenerateTimePeriod(int64_t nanoseconds)
         int64_t milliseconds = ((nanoseconds % (60 * 60 * 1000000000ll)) % 1000000000ll) / 1000000ll;
         stream << hours << ':' << ((minutes < 10) ? "0" : "") << minutes << ':' << ((seconds < 10) ? "0" : "") << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " h";
     }
-    else if (nanoseconds >= (60 * 1000000000ll))
+    else if (abs_nanoseconds >= (60 * 1000000000ll))
     {
         int64_t minutes = nanoseconds / (60 * 1000000000ll);
         int64_t seconds = (nanoseconds % (60 * 1000000000ll)) / 1000000000ll;
         int64_t milliseconds = ((nanoseconds % (60 * 1000000000ll)) % 1000000000ll) / 1000000ll;
         stream << minutes << ':' << ((seconds < 10) ? "0" : "") << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " m";
     }
-    else if (nanoseconds >= 1000000000ll)
+    else if (abs_nanoseconds >= 1000000000ll)
     {
         int64_t seconds = nanoseconds / 1000000000ll;
         int64_t milliseconds = (nanoseconds % 1000000000ll) / 1000000ll;
         stream << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " s";
     }
-    else if (nanoseconds >= 1000000)
+    else if (abs_nanoseconds >= 1000000)
     {
         int64_t milliseconds = nanoseconds / 1000000;
         int64_t microseconds = (nanoseconds % 1000000) / 1000;
         stream << milliseconds << '.' << ((microseconds < 100) ? "0" : "") << ((microseconds < 10) ? "0" : "") << microseconds << " ms";
     }
-    else if (nanoseconds >= 1000)
+    else if (abs_nanoseconds >= 1000)
     {
         int64_t microseconds = nanoseconds / 1000;
         nanoseconds = nanoseconds % 1000;
