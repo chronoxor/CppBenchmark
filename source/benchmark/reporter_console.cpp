@@ -214,20 +214,20 @@ std::string ReporterConsole::GenerateTimePeriod(int64_t nanoseconds)
         int64_t hours = nanoseconds / (60 * 60 * 1000000000ll);
         int64_t minutes = ((nanoseconds % (60 * 60 * 1000000000ll)) / 1000000000ll) / 60;
         int64_t seconds = ((nanoseconds % (60 * 60 * 1000000000ll)) / 1000000000ll) % 60;
-        int64_t milliseconds = ((nanoseconds % (60 * 60 * 1000000000ll)) % 1000000000ll) / 1000000ll;
+        int64_t milliseconds = ((nanoseconds % (60 * 60 * 1000000000ll)) % 1000000000ll) / 1000000;
         stream << hours << ':' << ((minutes < 10) ? "0" : "") << minutes << ':' << ((seconds < 10) ? "0" : "") << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " h";
     }
     else if (abs_nanoseconds >= (60 * 1000000000ll))
     {
         int64_t minutes = nanoseconds / (60 * 1000000000ll);
         int64_t seconds = (nanoseconds % (60 * 1000000000ll)) / 1000000000ll;
-        int64_t milliseconds = ((nanoseconds % (60 * 1000000000ll)) % 1000000000ll) / 1000000ll;
+        int64_t milliseconds = ((nanoseconds % (60 * 1000000000ll)) % 1000000000ll) / 1000000;
         stream << minutes << ':' << ((seconds < 10) ? "0" : "") << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " m";
     }
     else if (abs_nanoseconds >= 1000000000ll)
     {
         int64_t seconds = nanoseconds / 1000000000ll;
-        int64_t milliseconds = (nanoseconds % 1000000000ll) / 1000000ll;
+        int64_t milliseconds = (nanoseconds % 1000000000ll) / 1000000;
         stream << seconds << '.' << ((milliseconds < 100) ? "0" : "") << ((milliseconds < 10) ? "0" : "") << milliseconds << " s";
     }
     else if (abs_nanoseconds >= 1000000)
