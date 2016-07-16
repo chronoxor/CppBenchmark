@@ -258,7 +258,7 @@ uint64_t System::Timestamp()
         return offset;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     struct timespec timestamp;
-    clock_gettime(CLOCK_REALTIME, &timestamp);
+    clock_gettime(CLOCK_MONOTONIC, &timestamp);
     return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
 #endif
 }
