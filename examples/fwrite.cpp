@@ -33,13 +33,13 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(FileFixture, "fwrite", settings)
+BENCHMARK_FIXTURE(FileFixture, "fwrite()", settings)
 {
     fwrite(buffer.data(), sizeof(char), context.x(), file);
     context.metrics().AddBytes(context.x());
 }
 
-BENCHMARK_FIXTURE(FileFixture, "fwrite+fflush", settings)
+BENCHMARK_FIXTURE(FileFixture, "fwrite()+fflush()", settings)
 {
     fwrite(buffer.data(), sizeof(char), context.x(), file);
     fflush(file);

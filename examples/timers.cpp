@@ -19,7 +19,7 @@
 
 const int iterations = 10000000;
 
-BENCHMARK("std::chrono::high_resolution_clock::now", iterations)
+BENCHMARK("std::chrono::high_resolution_clock::now()", iterations)
 {
     static auto timestamp = std::chrono::high_resolution_clock::now();
     static double maxlatency = std::numeric_limits<double>::min();
@@ -58,7 +58,7 @@ BENCHMARK("std::chrono::high_resolution_clock::now", iterations)
     }
 }
 
-BENCHMARK("clock", iterations)
+BENCHMARK("clock()", iterations)
 {
     static auto timestamp = clock();
     static double maxlatency = std::numeric_limits<double>::min();
@@ -98,7 +98,7 @@ BENCHMARK("clock", iterations)
 }
 
 #if defined(_WIN32) || defined(_WIN64)
-BENCHMARK("GetSystemTimePreciseAsFileTime", iterations)
+BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
 {
     static uint64_t timestamp = 0;
     static double maxlatency = std::numeric_limits<double>::min();
@@ -149,7 +149,7 @@ BENCHMARK("GetSystemTimePreciseAsFileTime", iterations)
 #endif
 
 #if defined(_WIN32) || defined(_WIN64)
-BENCHMARK("GetTickCount", iterations)
+BENCHMARK("GetTickCount()", iterations)
 {
     static DWORD timestamp = GetTickCount();
     static double maxlatency = std::numeric_limits<double>::min();
@@ -190,7 +190,7 @@ BENCHMARK("GetTickCount", iterations)
 #endif
 
 #if defined(_WIN32) || defined(_WIN64)
-BENCHMARK("GetTickCount64", iterations)
+BENCHMARK("GetTickCount64()", iterations)
 {
     static ULONGLONG timestamp = GetTickCount64();
     static double maxlatency = std::numeric_limits<double>::min();
@@ -245,7 +245,7 @@ LARGE_INTEGER QueryPerformanceFrequency()
     return frequency;
 }
 
-BENCHMARK("QueryPerformanceCounter", iterations)
+BENCHMARK("QueryPerformanceCounter()", iterations)
 {
     static LARGE_INTEGER frequency = QueryPerformanceFrequency();
     static LARGE_INTEGER timestamp = QueryPerformanceCounter();
@@ -287,7 +287,7 @@ BENCHMARK("QueryPerformanceCounter", iterations)
 #endif
 
 #if defined(_MSC_VER)
-BENCHMARK("__rdtsc", iterations)
+BENCHMARK("__rdtsc()", iterations)
 {
     static uint64_t timestamp = __rdtsc();
     static double maxlatency = std::numeric_limits<double>::min();
@@ -408,7 +408,7 @@ struct timeval gettimeofday()
     return current;
 }
 
-BENCHMARK("gettimeofday", iterations)
+BENCHMARK("gettimeofday()", iterations)
 {
     static struct timeval timestamp = gettimeofday();
     static double maxlatency = std::numeric_limits<double>::min();

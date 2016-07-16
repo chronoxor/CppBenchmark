@@ -22,25 +22,25 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.forward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>-forward", iterations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.backward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>-backward", iterations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.forward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>-forward", iterations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.backward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>-backward", iterations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);

@@ -8,17 +8,17 @@
 
 const int iterations = 1000000000;
 
-BENCHMARK("sin", iterations)
+BENCHMARK("sin()", iterations)
 {
     sin(123.456);
 }
 
-BENCHMARK("cos", iterations)
+BENCHMARK("cos()", iterations)
 {
     cos(123.456);
 }
 
-BENCHMARK("tan", iterations)
+BENCHMARK("tan()", iterations)
 {
     tan(123.456);
 }
