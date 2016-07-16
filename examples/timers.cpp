@@ -24,8 +24,8 @@ BENCHMARK("std::chrono::high_resolution_clock::now()", iterations)
     static auto timestamp = std::chrono::high_resolution_clock::now();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     auto current = std::chrono::high_resolution_clock::now();
@@ -63,8 +63,8 @@ BENCHMARK("clock()", iterations)
     static auto timestamp = clock();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     auto current = clock();
@@ -103,8 +103,8 @@ BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
     static uint64_t timestamp = 0;
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     FILETIME filetime;
@@ -154,8 +154,8 @@ BENCHMARK("GetTickCount()", iterations)
     static DWORD timestamp = GetTickCount();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     DWORD current = GetTickCount();
@@ -195,8 +195,8 @@ BENCHMARK("GetTickCount64()", iterations)
     static ULONGLONG timestamp = GetTickCount64();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     ULONGLONG current = GetTickCount64();
@@ -251,8 +251,8 @@ BENCHMARK("QueryPerformanceCounter()", iterations)
     static LARGE_INTEGER timestamp = QueryPerformanceCounter();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     LARGE_INTEGER current = QueryPerformanceCounter();
@@ -292,8 +292,8 @@ BENCHMARK("__rdtsc()", iterations)
     static uint64_t timestamp = __rdtsc();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     uint64_t current = __rdtsc();
@@ -340,8 +340,8 @@ BENCHMARK("clock_gettime(CLOCK_REALTIME)", iterations)
     static struct timespec timestamp = clock_gettime(CLOCK_REALTIME);
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     struct timespec current = clock_gettime(CLOCK_REALTIME);
@@ -379,8 +379,8 @@ BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", iterations)
     static struct timespec timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     struct timespec current = clock_gettime(CLOCK_REALTIME_COARSE);
@@ -418,8 +418,8 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", iterations)
     static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC);
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     struct timespec current = clock_gettime(CLOCK_MONOTONIC);
@@ -457,8 +457,8 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC_COARSE)", iterations)
     static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC_COARSE);
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     struct timespec current = clock_gettime(CLOCK_MONOTONIC_COARSE);
@@ -496,8 +496,8 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", iterations)
     static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC_RAW);
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     struct timespec current = clock_gettime(CLOCK_MONOTONIC_RAW);
@@ -544,8 +544,8 @@ BENCHMARK("gettimeofday()", iterations)
     static struct timeval timestamp = gettimeofday();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<int64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
     struct timeval current = gettimeofday();
