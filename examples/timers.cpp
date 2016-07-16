@@ -328,23 +328,23 @@ BENCHMARK("__rdtsc", iterations)
 #endif
 
 #if defined(unix) || defined(__unix) || defined(__unix__)
-struct timespec clock_gettime()
+struct timespec clock_gettime(clockid_t clockid)
 {
     struct timespec current;
-    clock_gettime(CLOCK_REALTIME, &current);
+    clock_gettime(clockid, &current);
     return current;
 }
 
-BENCHMARK("clock_gettime", iterations)
+void clock_gettime_iteration(CppBenchmark::Context& context, clockid_t clockid)
 {
-    static struct timespec timestamp = clock_gettime();
+    static struct timespec timestamp = clock_gettime(clockid);
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
     static uint64_t maxresolution = std::numeric_limits<int64_t>::min();
     static uint64_t minresolution = std::numeric_limits<int64_t>::max();
     static uint64_t count = 0;
 
-    struct timespec current = clock_gettime();
+    struct timespec current = clock_gettime(clockid);
     uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
     double latency = (double)duration / ++count;
     if (duration > 0)
@@ -372,6 +372,31 @@ BENCHMARK("clock_gettime", iterations)
         timestamp = current;
         count = 0;
     }
+}
+
+BENCHMARK("clock_gettime(CLOCK_REALTIME)", iterations)
+{
+    clock_gettime_iteration(context, CLOCK_REALTIME);
+}
+
+BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", iterations)
+{
+    clock_gettime_iteration(context, CLOCK_REALTIME_COARSE);
+}
+
+BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", iterations)
+{
+    clock_gettime_iteration(context, CLOCK_MONOTONIC);
+}
+
+BENCHMARK("clock_gettime(CLOCK_MONOTONIC_COARSE)", iterations)
+{
+    clock_gettime_iteration(context, CLOCK_MONOTONIC_COARSE);
+}
+
+BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", iterations)
+{
+    clock_gettime_iteration(context, CLOCK_MONOTONIC_RAW);
 }
 #endif
 
