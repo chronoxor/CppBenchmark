@@ -103,14 +103,14 @@ void Benchmark::InitBenchmarkContext(Context& context)
 
 void Benchmark::UpdateBenchmarkMetrics(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto it = phases.begin(); it != phases.end(); ++it)
-        UpdateBenchmarkMetrics(**it);
+    for (auto phase : phases)
+        UpdateBenchmarkMetrics(*phase);
 }
 
 void Benchmark::UpdateBenchmarkMetrics(PhaseCore& phase)
 {
-    for (auto it = phase._child.begin(); it != phase._child.end(); ++it)
-        UpdateBenchmarkMetrics(**it);
+    for (auto child : phase._child)
+        UpdateBenchmarkMetrics(*child);
     phase.MergeMetrics();
     phase.ResetMetrics();
 }
@@ -140,20 +140,20 @@ void Benchmark::UpdateBenchmarkThreads(std::vector<std::shared_ptr<PhaseCore>>& 
     phases.erase(std::remove_if(phases.begin(), phases.end(), [](const std::shared_ptr<PhaseCore>& p) { return p->_thread == 0; }), phases.end());
 
     // Perform the same operation for child phases
-    for (auto it = phases.begin(); it != phases.end(); ++it)
-        UpdateBenchmarkThreads((*it)->_child);
+    for (auto phase : phases)
+        UpdateBenchmarkThreads(phase->_child);
 }
 
 void Benchmark::UpdateBenchmarkNames(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto it = phases.begin(); it != phases.end(); ++it)
-        UpdateBenchmarkNames(**it, (*it)->name());
+    for (auto phase : phases)
+        UpdateBenchmarkNames(*phase, phase->name());
 }
 
 void Benchmark::UpdateBenchmarkNames(PhaseCore& phase, const std::string& name)
 {
-    for (auto it = phase._child.begin(); it != phase._child.end(); ++it)
-        UpdateBenchmarkNames(**it, name + "." + (*it)->name());
+    for (auto child : phase._child)
+        UpdateBenchmarkNames(*child, name + "." + child->name());
     phase._name = name;
 }
 
