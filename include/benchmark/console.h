@@ -14,7 +14,7 @@
 namespace CppBenchmark {
 
 //! Supported console colors
-enum Color
+enum class Color
 {
     BLACK,          //!< Black color
     BLUE,           //!< Blue color
