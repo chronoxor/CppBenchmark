@@ -109,7 +109,7 @@ void Executor::Report(Reporter& reporter)
     reporter.ReportBenchmarksHeader();
 
     // For all registered benchmarks...
-    for (auto benchmark : _benchmarks)
+    for (auto& benchmark : _benchmarks)
     {
         // Create dynamic benchmark wrapper
         Internals::DynamicBenchmark result(benchmark->name(), Settings().Attempts(1));
@@ -133,7 +133,7 @@ void Executor::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
     reporter.ReportPhaseHeader();
     reporter.ReportPhase(phase, phase.metrics());
     reporter.ReportPhaseFooter();
-    for (auto child : phase._child)
+    for (auto& child : phase._child)
     {
         std::string child_name = name + "." + child->name();
         ReportPhase(reporter, *child, child_name);

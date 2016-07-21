@@ -33,10 +33,10 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every threads count
-        for (auto threads : _settings.threads())
+        for (auto& threads : _settings.threads())
         {
             // Run benchmark for every input parameter (single, pair, triple)
-            for (auto param : _settings.params())
+            for (auto& param : _settings.params())
             {
                 // Prepare benchmark context
                 ContextThread context(threads, std::get<0>(param), std::get<1>(param), std::get<2>(param));

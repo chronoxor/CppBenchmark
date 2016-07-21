@@ -20,7 +20,7 @@ void Launcher::Launch(const std::string& pattern)
 
     // Filter benchmarks
     std::regex matcher(pattern);
-    for (auto benchmark : _benchmarks)
+    for (auto& benchmark : _benchmarks)
     {
         // Match benchmark name with the given pattern
         if (pattern.empty() || std::regex_match(benchmark->name(), matcher))
@@ -31,7 +31,7 @@ void Launcher::Launch(const std::string& pattern)
     }
 
     // Launch filtered benchmarks
-    for (auto benchmark : benchmarks)
+    for (auto& benchmark : benchmarks)
         benchmark->Launch(current, total, *this);
 }
 
@@ -44,7 +44,7 @@ void Launcher::Report(Reporter& reporter)
     reporter.ReportBenchmarksHeader();
 
     // For all registered benchmarks...
-    for (auto benchmark : _benchmarks)
+    for (auto& benchmark : _benchmarks)
     {
         // Filter performed benchmarks
         if (benchmark->_launched)
@@ -53,7 +53,7 @@ void Launcher::Report(Reporter& reporter)
             reporter.ReportBenchmarkHeader();
             reporter.ReportBenchmark(*benchmark, benchmark->settings());
             reporter.ReportPhasesHeader();
-            for (auto root_phase : benchmark->_phases)
+            for (auto& root_phase : benchmark->_phases)
                 ReportPhase(reporter, *root_phase, root_phase->name());
             reporter.ReportPhasesFooter();
             reporter.ReportBenchmarkFooter();
@@ -70,7 +70,7 @@ void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
     reporter.ReportPhaseHeader();
     reporter.ReportPhase(phase, phase.metrics());
     reporter.ReportPhaseFooter();
-    for (auto child : phase._child)
+    for (auto& child : phase._child)
     {
         std::string child_name = name + "." + child->name();
         ReportPhase(reporter, *child, child_name);

@@ -33,13 +33,13 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every producers/consumers pair
-        for (auto pc : _settings.pc())
+        for (auto& pc : _settings.pc())
         {
             int producers = std::get<0>(pc);
             int consumers = std::get<1>(pc);
 
             // Run benchmark for every input parameter (single, pair, triple)
-            for (auto param : _settings.params())
+            for (auto& param : _settings.params())
             {
                 // Prepare benchmark context
                 ContextPC context(producers, consumers, std::get<0>(param), std::get<1>(param), std::get<2>(param));

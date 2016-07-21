@@ -29,7 +29,7 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every input parameter (single, pair, triple)
-        for (auto param : _settings.params())
+        for (auto& param : _settings.params())
         {
             // Prepare benchmark context
             Context context(std::get<0>(param), std::get<1>(param), std::get<2>(param));
@@ -103,13 +103,13 @@ void Benchmark::InitBenchmarkContext(Context& context)
 
 void Benchmark::UpdateBenchmarkMetrics(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto phase : phases)
+    for (auto& phase : phases)
         UpdateBenchmarkMetrics(*phase);
 }
 
 void Benchmark::UpdateBenchmarkMetrics(PhaseCore& phase)
 {
-    for (auto child : phase._child)
+    for (auto& child : phase._child)
         UpdateBenchmarkMetrics(*child);
     phase.MergeMetrics();
     phase.ResetMetrics();
@@ -140,19 +140,19 @@ void Benchmark::UpdateBenchmarkThreads(std::vector<std::shared_ptr<PhaseCore>>& 
     phases.erase(std::remove_if(phases.begin(), phases.end(), [](const std::shared_ptr<PhaseCore>& p) { return p->_thread == 0; }), phases.end());
 
     // Perform the same operation for child phases
-    for (auto phase : phases)
+    for (auto& phase : phases)
         UpdateBenchmarkThreads(phase->_child);
 }
 
 void Benchmark::UpdateBenchmarkNames(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto phase : phases)
+    for (auto& phase : phases)
         UpdateBenchmarkNames(*phase, phase->name());
 }
 
 void Benchmark::UpdateBenchmarkNames(PhaseCore& phase, const std::string& name)
 {
-    for (auto child : phase._child)
+    for (auto& child : phase._child)
         UpdateBenchmarkNames(*child, name + "." + child->name());
     phase._name = name;
 }
