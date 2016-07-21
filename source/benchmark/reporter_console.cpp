@@ -19,72 +19,72 @@ namespace CppBenchmark {
 
 void ReporterConsole::ReportHeader()
 {
-    _stream << DARKGREY << GenerateSeparator('=') << std::endl;
-    _stream << WHITE << "CppBenchmark report. Version " << version << std::endl;
+    _stream << Color::DARKGREY << GenerateSeparator('=') << std::endl;
+    _stream << Color::WHITE << "CppBenchmark report. Version " << version << std::endl;
 }
 
 void ReporterConsole::ReportSystem()
 {
-    _stream << DARKGREY << GenerateSeparator('=') << std::endl;
-    _stream << WHITE << "CPU architecutre: " << LIGHTCYAN << System::CpuArchitecture() << std::endl;
-    _stream << WHITE << "CPU logical cores: " << LIGHTGREEN << System::CpuLogicalCores() << std::endl;
-    _stream << WHITE << "CPU physical cores: " << LIGHTGREEN << System::CpuPhysicalCores() << std::endl;
-    _stream << WHITE << "CPU clock speed: " << LIGHTGREEN << GenerateClockSpeed(System::CpuClockSpeed()) << std::endl;
-    _stream << WHITE << "CPU Hyper-Threading: " << LIGHTGREEN << (System::CpuHyperThreading() ? "enabled" : "disabled") << std::endl;
-    _stream << WHITE << "RAM total: " << YELLOW << GenerateDataSize(System::RamTotal()) << std::endl;
-    _stream << WHITE << "RAM free: " << YELLOW << GenerateDataSize(System::RamFree()) << std::endl;
+    _stream << Color::DARKGREY << GenerateSeparator('=') << std::endl;
+    _stream << Color::WHITE << "CPU architecutre: " << Color::LIGHTCYAN << System::CpuArchitecture() << std::endl;
+    _stream << Color::WHITE << "CPU logical cores: " << Color::LIGHTGREEN << System::CpuLogicalCores() << std::endl;
+    _stream << Color::WHITE << "CPU physical cores: " << Color::LIGHTGREEN << System::CpuPhysicalCores() << std::endl;
+    _stream << Color::WHITE << "CPU clock speed: " << Color::LIGHTGREEN << GenerateClockSpeed(System::CpuClockSpeed()) << std::endl;
+    _stream << Color::WHITE << "CPU Hyper-Threading: " << Color::LIGHTGREEN << (System::CpuHyperThreading() ? "enabled" : "disabled") << std::endl;
+    _stream << Color::WHITE << "RAM total: " << Color::YELLOW << GenerateDataSize(System::RamTotal()) << std::endl;
+    _stream << Color::WHITE << "RAM free: " << Color::YELLOW << GenerateDataSize(System::RamFree()) << std::endl;
 }
 
 void ReporterConsole::ReportEnvironment()
 {
-    _stream << DARKGREY << GenerateSeparator('=') << std::endl;
-    _stream << WHITE << "OS version: " << DARKGREY << Environment::OSVersion() << std::endl;
-    _stream << WHITE << "OS bits: " << DARKGREY << (Environment::Is64BitOS() ? "64-bit" : (Environment::Is32BitOS() ? "32-bit" : "<unknown>")) << std::endl;
-    _stream << WHITE << "Process bits: " << DARKGREY << (Environment::Is64BitProcess() ? "64-bit" : (Environment::Is32BitProcess() ? "32-bit" : "<unknown>")) << std::endl;
-    _stream << WHITE << "Process configuaraion: " << DARKGREY << (Environment::IsDebug() ? "debug" : (Environment::IsRelease() ? "release" : "<unknown>")) << std::endl;
+    _stream << Color::DARKGREY << GenerateSeparator('=') << std::endl;
+    _stream << Color::WHITE << "OS version: " << Color::DARKGREY << Environment::OSVersion() << std::endl;
+    _stream << Color::WHITE << "OS bits: " << Color::DARKGREY << (Environment::Is64BitOS() ? "64-bit" : (Environment::Is32BitOS() ? "32-bit" : "<unknown>")) << std::endl;
+    _stream << Color::WHITE << "Process bits: " << Color::DARKGREY << (Environment::Is64BitProcess() ? "64-bit" : (Environment::Is32BitProcess() ? "32-bit" : "<unknown>")) << std::endl;
+    _stream << Color::WHITE << "Process configuaraion: " << Color::DARKGREY << (Environment::IsDebug() ? "debug" : (Environment::IsRelease() ? "release" : "<unknown>")) << std::endl;
     time_t timestamp = Environment::Timestamp();
-    _stream << WHITE << "Local timestamp: " << DARKGREY << std::asctime(std::localtime(&timestamp));
-    _stream << WHITE << "UTC timestamp: " << DARKGREY << std::asctime(std::gmtime(&timestamp));
+    _stream << Color::WHITE << "Local timestamp: " << Color::DARKGREY << std::asctime(std::localtime(&timestamp));
+    _stream << Color::WHITE << "UTC timestamp: " << Color::DARKGREY << std::asctime(std::gmtime(&timestamp));
 }
 
 void ReporterConsole::ReportBenchmark(const Benchmark& benchmark, const Settings& settings)
 {
-    _stream << DARKGREY << GenerateSeparator('=') << std::endl;
-    _stream << WHITE << "Benchmark: " << LIGHTCYAN << benchmark.name() << std::endl;
-    _stream << WHITE << "Attempts: " << DARKGREY << settings.attempts() << std::endl;
+    _stream << Color::DARKGREY << GenerateSeparator('=') << std::endl;
+    _stream << Color::WHITE << "Benchmark: " << Color::LIGHTCYAN << benchmark.name() << std::endl;
+    _stream << Color::WHITE << "Attempts: " << Color::DARKGREY << settings.attempts() << std::endl;
     if (!settings.infinite())
-        _stream << WHITE << "Iterations: " << DARKGREY << settings.iterations() << std::endl;
+        _stream << Color::WHITE << "Iterations: " << Color::DARKGREY << settings.iterations() << std::endl;
 }
 
 void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
 {
-    _stream << DARKGREY << GenerateSeparator('-') << std::endl;
-    _stream << WHITE << "Phase: " << LIGHTCYAN << phase.name() << std::endl;
+    _stream << Color::DARKGREY << GenerateSeparator('-') << std::endl;
+    _stream << Color::WHITE << "Phase: " << Color::LIGHTCYAN << phase.name() << std::endl;
     if (metrics.total_iterations() > 1)
     {
-        _stream << WHITE << "Average time: " << YELLOW << GenerateTimePeriod(metrics.avg_time()) << " / iteration" << std::endl;
-        _stream << WHITE << "Minimal time: " << YELLOW << GenerateTimePeriod(metrics.min_time()) << " / iteration" << std::endl;
-        _stream << WHITE << "Maximal time: " << YELLOW << GenerateTimePeriod(metrics.max_time()) << " / iteration" << std::endl;
+        _stream << Color::WHITE << "Average time: " << Color::YELLOW << GenerateTimePeriod(metrics.avg_time()) << " / iteration" << std::endl;
+        _stream << Color::WHITE << "Minimal time: " << Color::YELLOW << GenerateTimePeriod(metrics.min_time()) << " / iteration" << std::endl;
+        _stream << Color::WHITE << "Maximal time: " << Color::YELLOW << GenerateTimePeriod(metrics.max_time()) << " / iteration" << std::endl;
     }
-    _stream << WHITE << "Total time: " << LIGHTRED << GenerateTimePeriod(metrics.total_time()) << std::endl;
+    _stream << Color::WHITE << "Total time: " << Color::LIGHTRED << GenerateTimePeriod(metrics.total_time()) << std::endl;
     if (metrics.total_iterations() > 1)
-        _stream << WHITE << "Total iterations: " << LIGHTGREEN << metrics.total_iterations() << std::endl;
+        _stream << Color::WHITE << "Total iterations: " << Color::LIGHTGREEN << metrics.total_iterations() << std::endl;
     if (metrics.total_items() > 0)
-        _stream << WHITE << "Total items: " << LIGHTMAGENTA << metrics.total_items() << std::endl;
+        _stream << Color::WHITE << "Total items: " << Color::LIGHTMAGENTA << metrics.total_items() << std::endl;
     if (metrics.total_bytes() > 0)
-        _stream << WHITE << "Total bytes: " << MAGENTA << GenerateDataSize(metrics.total_bytes()) << std::endl;
+        _stream << Color::WHITE << "Total bytes: " << Color::MAGENTA << GenerateDataSize(metrics.total_bytes()) << std::endl;
     if (metrics.total_iterations() > 1)
-        _stream << WHITE << "Iterations throughput: " << LIGHTGREEN << metrics.iterations_per_second() << " / second" << std::endl;
+        _stream << Color::WHITE << "Iterations throughput: " << Color::LIGHTGREEN << metrics.iterations_per_second() << " / second" << std::endl;
     if (metrics.total_items() > 0)
-        _stream << WHITE << "Items throughput: " << LIGHTMAGENTA << metrics.items_per_second() << " / second" << std::endl;
+        _stream << Color::WHITE << "Items throughput: " << Color::LIGHTMAGENTA << metrics.items_per_second() << " / second" << std::endl;
     if (metrics.total_bytes() > 0)
-        _stream << WHITE << "Bytes throughput: " << MAGENTA << GenerateDataSize(metrics.bytes_per_second()) << " / second" << std::endl;
+        _stream << Color::WHITE << "Bytes throughput: " << Color::MAGENTA << GenerateDataSize(metrics.bytes_per_second()) << " / second" << std::endl;
     if ((metrics.custom_int().size() > 0) || (metrics.custom_uint().size() > 0) ||
         (metrics.custom_int64().size() > 0) || (metrics.custom_uint64().size() > 0) ||
         (metrics.custom_flt().size() > 0) || (metrics.custom_dbl().size() > 0) ||
         (metrics.custom_str().size() > 0))
     {
-        _stream << WHITE << "Custom values: " << std::endl;
+        _stream << Color::WHITE << "Custom values: " << std::endl;
         std::set<std::string> names;
         for (auto it : metrics.custom_int())
             names.insert(it.first);
@@ -104,32 +104,32 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
         {
             auto it_int = metrics.custom_int().find(name);
             if (it_int != metrics.custom_int().end())
-                _stream << DARKGREY << '\t' << it_int->first << ": " << GREY << it_int->second << std::endl;
+                _stream << Color::DARKGREY << '\t' << it_int->first << ": " << Color::GREY << it_int->second << std::endl;
             auto it_uint = metrics.custom_uint().find(name);
             if (it_uint != metrics.custom_uint().end())
-                _stream << DARKGREY << '\t' << it_uint->first << ": " << GREY << it_uint->second << std::endl;
+                _stream << Color::DARKGREY << '\t' << it_uint->first << ": " << Color::GREY << it_uint->second << std::endl;
             auto it_int64 = metrics.custom_int64().find(name);
             if (it_int64 != metrics.custom_int64().end())
-                _stream << DARKGREY << '\t' << it_int64->first << ": " << GREY << it_int64->second << std::endl;
+                _stream << Color::DARKGREY << '\t' << it_int64->first << ": " << Color::GREY << it_int64->second << std::endl;
             auto it_uint64 = metrics.custom_uint64().find(name);
             if (it_uint64 != metrics.custom_uint64().end())
-                _stream << DARKGREY << '\t' << it_uint64->first << ": " << GREY << it_uint64->second << std::endl;
+                _stream << Color::DARKGREY << '\t' << it_uint64->first << ": " << Color::GREY << it_uint64->second << std::endl;
             auto it_flt = metrics.custom_flt().find(name);
             if (it_flt != metrics.custom_flt().end())
-                _stream << DARKGREY << '\t' << it_flt->first << ": " << GREY << it_flt->second << std::endl;
+                _stream << Color::DARKGREY << '\t' << it_flt->first << ": " << Color::GREY << it_flt->second << std::endl;
             auto it_dbl = metrics.custom_dbl().find(name);
             if (it_dbl != metrics.custom_dbl().end())
-                _stream << DARKGREY << '\t' << it_dbl->first << ": " << GREY << it_dbl->second << std::endl;
+                _stream << Color::DARKGREY << '\t' << it_dbl->first << ": " << Color::GREY << it_dbl->second << std::endl;
             auto it_str = metrics.custom_str().find(name);
             if (it_str != metrics.custom_str().end())
-                _stream << DARKGREY << '\t' << it_str->first << ": " << GREY << it_str->second << std::endl;
+                _stream << Color::DARKGREY << '\t' << it_str->first << ": " << Color::GREY << it_str->second << std::endl;
         }
     }
 }
 
 void ReporterConsole::ReportFooter()
 {
-    _stream << DARKGREY << GenerateSeparator('=') << std::endl;
+    _stream << Color::DARKGREY << GenerateSeparator('=') << std::endl;
 }
 
 std::string ReporterConsole::GenerateSeparator(char ch)

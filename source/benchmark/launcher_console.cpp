@@ -104,7 +104,7 @@ void LauncherConsole::onLaunching(int current, int total, const Benchmark& bench
     if (_silent)
         return;
 
-    std::cerr << DARKGREY << "[" << std::setw(3) << (100 * current / total) << "%] " << GREY << "Launching " << LIGHTCYAN << benchmark.name() << context.to_string() << GREY << ". Attempt " << WHITE << attempt << GREY << "...";
+    std::cerr << Color::DARKGREY << "[" << std::setw(3) << (100 * current / total) << "%] " << Color::GREY << "Launching " << Color::LIGHTCYAN << benchmark.name() << context.to_string() << Color::GREY << ". Attempt " << Color::WHITE << attempt << Color::GREY << "...";
 }
 
 void LauncherConsole::onLaunched(int current, int total, const Benchmark& benchmark, const Context& context, int attempt)
@@ -112,7 +112,7 @@ void LauncherConsole::onLaunched(int current, int total, const Benchmark& benchm
     if (_silent)
         return;
 
-    std::cerr << LIGHTGREEN << "Done!" << std::endl;
+    std::cerr << Color::LIGHTGREEN << "Done!" << std::endl;
 }
 
 } // namespace CppBenchmark

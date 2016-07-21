@@ -47,7 +47,7 @@ void Console::SetColor(Color color)
         "\033[01;33m",  // Yellow color
         "\033[01;37m"   // White color
     };
-    std::cout << colors[color - BLACK];
+    std::cout << colors[color - Color::BLACK];
 #endif
 }
 
