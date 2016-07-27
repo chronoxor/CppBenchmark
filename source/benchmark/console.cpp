@@ -8,7 +8,7 @@
 
 #include "benchmark/console.h"
 
-#include <iostream>
+#include <cstdio>
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
@@ -72,7 +72,8 @@ void Console::SetColor(Color color, Color background)
         "\033[01;43m",  // Yellow color
         "\033[01;47m"   // White color
     };
-    std::cout << colors[color - Color::BLACK] << backgrounds[background - Color::BLACK];
+    std::fwrite(colors[color - Color::BLACK], 1, 8, stdout);
+    std::fwrite(backgrounds[background - Color::BLACK], 1, 8, stdout);
 #endif
 }
 
