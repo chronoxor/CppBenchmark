@@ -38,7 +38,7 @@ public:
     static std::pair<int, int> CpuTotalCores();
     //! CPU clock speed in Hz
     static int64_t CpuClockSpeed();
-    //! Is CPU Hyper-threading enabled?
+    //! Is CPU Hyper-Threading enabled?
     static bool CpuHyperThreading();
 
     //! Total RAM in bytes
