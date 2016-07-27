@@ -88,7 +88,7 @@ std::string Environment::OSVersion()
     osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
 
     BOOL bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*)&osvi);
-    if(bOsVersionInfoEx == 0)
+    if (bOsVersionInfoEx == 0)
         return "<windows>";
 
     SYSTEM_INFO si;
@@ -107,21 +107,50 @@ std::string Environment::OSVersion()
 
     std::stringstream os;
 
+    // Windows version
     os << "Microsoft ";
+    if (osvi.dwMajorVersion >= 6)
     {
-        if (osvi.dwMinorVersion == 0)
+        if (osvi.dwMajorVersion == 10)
         {
-            if (osvi.wProductType == VER_NT_WORKSTATION)
-                os << "Windows Vista ";
-            else
-                os << "Windows Server 2008 ";
+            if (osvi.dwMinorVersion == 0)
+            {
+                if (osvi.wProductType == VER_NT_WORKSTATION)
+                    os << "Windows 10 ";
+                else
+                    os << "Windows Server 2016 ";
+            }
         }
-        else if (osvi.dwMinorVersion == 1)
+        else if (osvi.dwMajorVersion == 6)
         {
-            if (osvi.wProductType == VER_NT_WORKSTATION)
-                os << "Windows 7 ";
-            else
-                os << "Windows Server 2008 R2 ";
+            if (osvi.dwMinorVersion == 3)
+            {
+                if (osvi.wProductType == VER_NT_WORKSTATION)
+                    os << "Windows 8.1 ";
+                else
+                    os << "Windows Server 2012 R2 ";
+            }
+            else if (osvi.dwMinorVersion == 2)
+            {
+                if (osvi.wProductType == VER_NT_WORKSTATION)
+                    os << "Windows 8 ";
+                else
+                    os << "Windows Server 2012 ";
+            }
+            else if (osvi.dwMinorVersion == 1)
+            {
+                if (osvi.wProductType == VER_NT_WORKSTATION)
+                    os << "Windows 7 ";
+                else
+                    os << "Windows Server 2008 R2 ";
+            }
+            else if (osvi.dwMinorVersion == 0)
+            {
+                if (osvi.wProductType == VER_NT_WORKSTATION)
+                    os << "Windows Vista ";
+                else
+                    os << "Windows Server 2008 ";
+            }
         }
 
         DWORD dwType;
@@ -185,7 +214,7 @@ std::string Environment::OSVersion()
                 break;
         }
     }
-    if ((osvi.dwMajorVersion == 5) && (osvi.dwMinorVersion == 2))
+    else if ((osvi.dwMajorVersion == 5) && (osvi.dwMinorVersion == 2))
     {
         if (GetSystemMetrics(SM_SERVERR2))
             os << "Windows Server 2003 R2, ";
@@ -253,9 +282,15 @@ std::string Environment::OSVersion()
                 os << "Server";
         }
     }
-    os << " " << osvi.szCSDVersion;
 
+    // Windows Service Pack version
+    if (std::strlen(osvi.szCSDVersion) > 0)
+        os << " " << osvi.szCSDVersion;
+
+    // Windows build
     os << " (build " << osvi.dwBuildNumber << ")";
+
+    // Windows architecture
     if ( osvi.dwMajorVersion >= 6 )
     {
         if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64)
@@ -263,6 +298,7 @@ std::string Environment::OSVersion()
         else if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_INTEL)
             os << ", 32-bit";
     }
+
     return os.str();
 #elif defined(linux) || defined(__linux) || defined(__linux__)
     static std::regex pattern("DISTRIB_DESCRIPTION=\"(.*)\"");
