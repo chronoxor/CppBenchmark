@@ -63,14 +63,14 @@ void Console::SetColor(Color color, Color background)
         "\033[02;45m",  // Magenta color
         "\033[02;43m",  // Brown color
         "\033[02;47m",  // Grey color
-        "\033[01;40m",  // Dark grey color
-        "\033[01;44m",  // Light blue color
-        "\033[01;42m",  // Light green color
-        "\033[01;46m",  // Light cyan color
-        "\033[01;41m",  // Light red color
-        "\033[01;45m",  // Light magenta color
-        "\033[01;43m",  // Yellow color
-        "\033[01;47m"   // White color
+        "\033[00;40m",  // Dark grey color
+        "\033[00;44m",  // Light blue color
+        "\033[00;42m",  // Light green color
+        "\033[00;46m",  // Light cyan color
+        "\033[00;41m",  // Light red color
+        "\033[00;45m",  // Light magenta color
+        "\033[00;43m",  // Yellow color
+        "\033[00;47m"   // White color
     };
     std::fwrite(backgrounds[(int)background - (int)Color::BLACK], 1, 8, stdout);
     std::fwrite(colors[(int)color - (int)Color::BLACK], 1, 8, stdout);
