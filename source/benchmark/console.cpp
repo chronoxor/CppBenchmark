@@ -22,11 +22,17 @@ std::ostream& operator<<(std::ostream& stream, Color color)
     return stream;
 }
 
-void Console::SetColor(Color color)
+std::ostream& operator<<(std::ostream& stream, std::pair<Color, Color> colors)
+{
+    Console::SetColor(colors.first, colors.second);
+    return stream;
+}
+
+void Console::SetColor(Color color, Color background)
 {
 #if defined(_WIN32) || defined(_WIN64)
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, (WORD)color);
+    SetConsoleTextAttribute(hConsole, (((WORD)color) & 0x0F) + ((((WORD)background) & 0x0F) << 4));
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     const char* colors[] =
     {
@@ -47,7 +53,26 @@ void Console::SetColor(Color color)
         "\033[01;33m",  // Yellow color
         "\033[01;37m"   // White color
     };
-    std::cout << colors[color - Color::BLACK];
+    const char* backgrounds[] =
+    {
+        "\033[22;40m",  // Black color
+        "\033[22;44m",  // Blue color
+        "\033[22;42m",  // Green color
+        "\033[22;46m",  // Cyan color
+        "\033[22;41m",  // Red color
+        "\033[22;45m",  // Magenta color
+        "\033[22;43m",  // Brown color
+        "\033[22;47m",  // Grey color
+        "\033[01;40m",  // Dark grey color
+        "\033[01;44m",  // Light blue color
+        "\033[01;42m",  // Light green color
+        "\033[01;46m",  // Light cyan color
+        "\033[01;41m",  // Light red color
+        "\033[01;45m",  // Light magenta color
+        "\033[01;43m",  // Yellow color
+        "\033[01;47m"   // White color
+    };
+    std::cout << colors[color - Color::BLACK] << backgrounds[background - Color::BLACK];
 #endif
 }
 

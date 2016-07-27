@@ -42,9 +42,18 @@ enum class Color
 */
 std::ostream& operator<<(std::ostream& stream, Color color);
 
+//! Stream manipulator: change console text and background colors
+/*!
+    \param stream - Output stream
+    \param colors - Console text and background colors
+    \return Output stream
+*/
+std::ostream& operator<<(std::ostream& stream, std::pair<Color, Color> colors);
+
 //! Console management static class
 /*!
-    Provides console management functionality such as setting text color.
+    Provides console management functionality such as setting
+    text and background colors.
 */
 class Console
 {
@@ -60,8 +69,9 @@ public:
     //! Set console text color
     /*!
         \param color - Console text color
+        \param background - Console background color (default is Color::BLACK)
     */
-    static void SetColor(Color color);
+    static void SetColor(Color color, Color background = Color::BLACK);
 };
 
 } // namespace CppBenchmark
