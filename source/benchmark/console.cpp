@@ -72,8 +72,8 @@ void Console::SetColor(Color color, Color background)
         "\033[01;43m",  // Yellow color
         "\033[01;47m"   // White color
     };
-    std::fwrite(colors[color - Color::BLACK], 1, 8, stdout);
-    std::fwrite(backgrounds[background - Color::BLACK], 1, 8, stdout);
+    std::fwrite(colors[(int)color - (int)Color::BLACK], 1, 8, stdout);
+    std::fwrite(backgrounds[(int)background - (int)Color::BLACK], 1, 8, stdout);
 #endif
 }
 
