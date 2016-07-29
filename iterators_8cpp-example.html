@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="comment">// Created by Ivan Shynkarenka on 03.08.2015.</span></div>
 <div class="line"><span class="comment">//</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">cppbenchmark.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">benchmark/cppbenchmark.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;list&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
@@ -107,25 +107,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><a name="a0"></a><a class="code" href="cppbenchmark_8h.html#af839fe7ad06f5f97ef164ce940dc372e">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::list&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::list&lt;int&gt;.forward&quot;</span>, iterations)</div>
+<div class="line"><a name="a0"></a><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::list&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::list&lt;int&gt;-forward&quot;</span>, iterations)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = container.begin(); it != container.end(); ++it)</div>
 <div class="line">        ++(*it);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#af839fe7ad06f5f97ef164ce940dc372e">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::list&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::list&lt;int&gt;.backward&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::list&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::list&lt;int&gt;-backward&quot;</span>, iterations)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = container.rbegin(); it != container.rend(); ++it)</div>
 <div class="line">        ++(*it);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#af839fe7ad06f5f97ef164ce940dc372e">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::vector&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::vector&lt;int&gt;.forward&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::vector&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::vector&lt;int&gt;-forward&quot;</span>, iterations)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = container.begin(); it != container.end(); ++it)</div>
 <div class="line">        ++(*it);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#af839fe7ad06f5f97ef164ce940dc372e">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::vector&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::vector&lt;int&gt;.backward&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::vector&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::vector&lt;int&gt;-backward&quot;</span>, iterations)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = container.rbegin(); it != container.rend(); ++it)</div>
 <div class="line">        ++(*it);</div>

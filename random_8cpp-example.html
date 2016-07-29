@@ -87,14 +87,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="comment">// Created by Ivan Shynkarenka on 03.08.2015.</span></div>
 <div class="line"><span class="comment">//</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">cppbenchmark.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">benchmark/cppbenchmark.h</a>&quot;</span></div>
 <div class="line"></div>
-<div class="line"><a name="a0"></a><a class="code" href="cppbenchmark_8h.html#a580c48d324f038b23fea44795c57a926">BENCHMARK</a>(<span class="stringliteral">&quot;rand&quot;</span>, 100000000)</div>
+<div class="line"><a name="a0"></a><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;rand()&quot;</span>, 100000000)</div>
 <div class="line">{</div>
 <div class="line">    rand();</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a580c48d324f038b23fea44795c57a926">BENCHMARK</a>(<span class="stringliteral">&quot;rand-till-zero&quot;</span>, Settings().Infinite())</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;rand()-till-zero&quot;</span>, Settings().Infinite())</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">if</span> (rand() == 0)</div>
 <div class="line">        context.Cancel();</div>

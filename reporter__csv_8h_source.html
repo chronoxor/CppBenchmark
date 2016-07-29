@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>CppBenchmark: include/reporter_csv.h Source File</title>
+<title>CppBenchmark: include/benchmark/reporter_csv.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_b0fbd03d1d68fbed92a2b8794268c173.html">benchmark</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -96,9 +96,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef CPPBENCHMARK_REPORTER_CSV_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define CPPBENCHMARK_REPORTER_CSV_H</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="reporter_8h.html">benchmark/reporter.h</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="reporter_8h.html">reporter.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_cpp_benchmark.html">CppBenchmark</a> {</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
@@ -129,8 +129,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_core_html"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase_core.html">CppBenchmark::PhaseCore</a></div><div class="ttdoc">Benchmark phase core. </div><div class="ttdef"><b>Definition:</b> <a href="phase__core_8h_source.html#l00026">phase_core.h:26</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_metrics_html"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase_metrics.html">CppBenchmark::PhaseMetrics</a></div><div class="ttdoc">Benchmark phase metrics. </div><div class="ttdef"><b>Definition:</b> <a href="phase__metrics_8h_source.html#l00035">phase_metrics.h:35</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_reporter_html"><div class="ttname"><a href="class_cpp_benchmark_1_1_reporter.html">CppBenchmark::Reporter</a></div><div class="ttdoc">Reporter base class. </div><div class="ttdef"><b>Definition:</b> <a href="reporter_8h_source.html#l00020">reporter.h:20</a></div></div>
-<div class="ttc" id="reporter_8h_html"><div class="ttname"><a href="reporter_8h.html">reporter.h</a></div><div class="ttdoc">Reporter base class definition. </div></div>
-<div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">CppBenchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00017">benchmark.h:17</a></div></div>
+<div class="ttc" id="reporter_8h_html"><div class="ttname"><a href="reporter_8h.html">reporter.h</a></div><div class="ttdoc">Reporter base definition. </div></div>
+<div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">C++ benchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="barrier_8h_source.html#l00015">barrier.h:15</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_reporter_c_s_v_html"><div class="ttname"><a href="class_cpp_benchmark_1_1_reporter_c_s_v.html">CppBenchmark::ReporterCSV</a></div><div class="ttdoc">Comma-separated values (CSV) reporter. </div><div class="ttdef"><b>Definition:</b> <a href="reporter__csv_8h_source.html#l00024">reporter_csv.h:24</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_reporter_c_s_v_html_a887de8ab4e6f5ab295e5c5b587b4c6f1"><div class="ttname"><a href="class_cpp_benchmark_1_1_reporter_c_s_v.html#a887de8ab4e6f5ab295e5c5b587b4c6f1">CppBenchmark::ReporterCSV::ReportPhase</a></div><div class="ttdeci">void ReportPhase(const PhaseCore &amp;phase, const PhaseMetrics &amp;metrics) override</div><div class="ttdoc">Report current phase information. </div><div class="ttdef"><b>Definition:</b> <a href="reporter__csv_8cpp_source.html#l00018">reporter_csv.cpp:18</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_reporter_c_s_v_html_af71970375ab78a5376576236b17b93be"><div class="ttname"><a href="class_cpp_benchmark_1_1_reporter_c_s_v.html#af71970375ab78a5376576236b17b93be">CppBenchmark::ReporterCSV::ReportHeader</a></div><div class="ttdeci">void ReportHeader() override</div><div class="ttdoc">Report header. </div><div class="ttdef"><b>Definition:</b> <a href="reporter__csv_8cpp_source.html#l00013">reporter_csv.cpp:13</a></div></div>

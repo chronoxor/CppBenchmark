@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cyan',['CYAN',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69ad29ef53642762a875034cfafb4c47ae7',1,'CppBenchmark']]]
+  ['cyan',['CYAN',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69a344dd8cd533280795b9db82ef0c92749',1,'CppBenchmark']]]
 ];

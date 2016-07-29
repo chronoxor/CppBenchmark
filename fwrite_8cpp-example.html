@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="comment">// Created by Ivan Shynkarenka on 18.07.2015.</span></div>
 <div class="line"><span class="comment">//</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">cppbenchmark.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">benchmark/cppbenchmark.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"></div>
@@ -98,7 +98,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"></div>
 <div class="line"><span class="keyword">class </span>FileFixture</div>
 <div class="line">{</div>
-<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="keyword">protected</span>:</div>
+<div class="line">    FILE* file;</div>
+<div class="line">    std::array&lt;char, chunk_size_to&gt; buffer;</div>
+<div class="line"></div>
 <div class="line">    FileFixture()</div>
 <div class="line">    {</div>
 <div class="line">        <span class="comment">// Open file for binary write</span></div>
@@ -113,19 +116,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">        <span class="comment">// Delete file</span></div>
 <div class="line">        <span class="keyword">remove</span>(<span class="stringliteral">&quot;fwrite.out&quot;</span>);</div>
 <div class="line">    }</div>
-<div class="line"></div>
-<div class="line"><span class="keyword">protected</span>:</div>
-<div class="line">    FILE* file;</div>
-<div class="line">    std::array&lt;char, chunk_size_to&gt; buffer;</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><a name="a3"></a><a class="code" href="cppbenchmark_8h.html#af839fe7ad06f5f97ef164ce940dc372e">BENCHMARK_FIXTURE</a>(FileFixture, <span class="stringliteral">&quot;fwrite&quot;</span>, settings)</div>
+<div class="line"><a name="a3"></a><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(FileFixture, <span class="stringliteral">&quot;fwrite()&quot;</span>, settings)</div>
 <div class="line">{</div>
 <div class="line">    fwrite(buffer.data(), <span class="keyword">sizeof</span>(char), context.x(), file);</div>
 <div class="line">    context.metrics().AddBytes(context.x());</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#af839fe7ad06f5f97ef164ce940dc372e">BENCHMARK_FIXTURE</a>(FileFixture, <span class="stringliteral">&quot;fwrite+fflush&quot;</span>, settings)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(FileFixture, <span class="stringliteral">&quot;fwrite()+fflush()&quot;</span>, settings)</div>
 <div class="line">{</div>
 <div class="line">    fwrite(buffer.data(), <span class="keyword">sizeof</span>(char), context.x(), file);</div>
 <div class="line">    fflush(file);</div>

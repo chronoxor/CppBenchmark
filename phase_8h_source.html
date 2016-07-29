@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>CppBenchmark: include/phase.h Source File</title>
+<title>CppBenchmark: include/benchmark/phase.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_b0fbd03d1d68fbed92a2b8794268c173.html">benchmark</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -96,10 +96,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef CPPBENCHMARK_PHASE_H</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define CPPBENCHMARK_PHASE_H</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="phase__metrics_8h.html">phase_metrics.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="phase__metrics_8h.html">benchmark/phase_metrics.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_cpp_benchmark.html">CppBenchmark</a> {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
@@ -109,36 +109,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_cpp_benchmark_1_1_phase.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_cpp_benchmark_1_1_phase.html">Phase</a></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> std::string&amp; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a54e52b177f1ec3c4a71afd5d3c3593cf">name</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html">PhaseMetrics</a>&amp; <a class="code" href="class_cpp_benchmark_1_1_phase.html#aca47c0ebe44306f863b4c47f667cc02e">metrics</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> std::string&amp; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a7e206a4faadb3a1474b53e194cd7d469">name</a>() <span class="keyword">const</span> noexcept = 0;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html">PhaseMetrics</a>&amp; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a30cd69a290ad87fa4a99931dd47af588">metrics</a>() <span class="keyword">const</span> noexcept = 0;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;Phase&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a448dabf771ac41e3087872801f97f233">StartPhase</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;Phase&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a16202b16ff7d961aa0642eada38f95c1">StartPhaseThreadSafe</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_phase.html#aaa1efb55fed38a19b620167be438e1f6">StopPhase</a>() = 0;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;Phase&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a448dabf771ac41e3087872801f97f233">StartPhase</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;Phase&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a16202b16ff7d961aa0642eada38f95c1">StartPhaseThreadSafe</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_phase.html#aaa1efb55fed38a19b620167be438e1f6">StopPhase</a>() = 0;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;PhaseScope&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a81d2c7dea121f9c117c7fb1d72bd1284">ScopePhase</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;PhaseScope&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a138c98e45e4054121f38147222f6d1a9">ScopePhaseThreadSafe</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif // CPPBENCHMARK_PHASE_H</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;PhaseScope&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a81d2c7dea121f9c117c7fb1d72bd1284">ScopePhase</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">virtual</span> std::shared_ptr&lt;PhaseScope&gt; <a class="code" href="class_cpp_benchmark_1_1_phase.html#a138c98e45e4054121f38147222f6d1a9">ScopePhaseThreadSafe</a>(<span class="keyword">const</span> std::string&amp; phase) = 0;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif // CPPBENCHMARK_PHASE_H</span></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a7e206a4faadb3a1474b53e194cd7d469"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a7e206a4faadb3a1474b53e194cd7d469">CppBenchmark::Phase::name</a></div><div class="ttdeci">virtual const std::string &amp; name() const  noexcept=0</div><div class="ttdoc">Get phase name. </div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_metrics_html"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase_metrics.html">CppBenchmark::PhaseMetrics</a></div><div class="ttdoc">Benchmark phase metrics. </div><div class="ttdef"><b>Definition:</b> <a href="phase__metrics_8h_source.html#l00035">phase_metrics.h:35</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a81d2c7dea121f9c117c7fb1d72bd1284"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a81d2c7dea121f9c117c7fb1d72bd1284">CppBenchmark::Phase::ScopePhase</a></div><div class="ttdeci">virtual std::shared_ptr&lt; PhaseScope &gt; ScopePhase(const std::string &amp;phase)=0</div><div class="ttdoc">Start a new sub-phase with a given name in a single-thread environment and wrap it in a PhaseScope...</div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a16202b16ff7d961aa0642eada38f95c1"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a16202b16ff7d961aa0642eada38f95c1">CppBenchmark::Phase::StartPhaseThreadSafe</a></div><div class="ttdeci">virtual std::shared_ptr&lt; Phase &gt; StartPhaseThreadSafe(const std::string &amp;phase)=0</div><div class="ttdoc">Start a new sub-phase with a given name in a multi-thread environment. </div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_html_aaa1efb55fed38a19b620167be438e1f6"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#aaa1efb55fed38a19b620167be438e1f6">CppBenchmark::Phase::StopPhase</a></div><div class="ttdeci">virtual void StopPhase()=0</div><div class="ttdoc">Stop measurement of the current phase. </div></div>
-<div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">CppBenchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00017">benchmark.h:17</a></div></div>
+<div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">C++ benchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="barrier_8h_source.html#l00015">barrier.h:15</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a138c98e45e4054121f38147222f6d1a9"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a138c98e45e4054121f38147222f6d1a9">CppBenchmark::Phase::ScopePhaseThreadSafe</a></div><div class="ttdeci">virtual std::shared_ptr&lt; PhaseScope &gt; ScopePhaseThreadSafe(const std::string &amp;phase)=0</div><div class="ttdoc">Start a new sub-phase with a given name in a multi-thread environment and wrap it in a PhaseScope...</div></div>
-<div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a54e52b177f1ec3c4a71afd5d3c3593cf"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a54e52b177f1ec3c4a71afd5d3c3593cf">CppBenchmark::Phase::name</a></div><div class="ttdeci">virtual const std::string &amp; name() const  =0</div><div class="ttdoc">Get phase name. </div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a30cd69a290ad87fa4a99931dd47af588"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a30cd69a290ad87fa4a99931dd47af588">CppBenchmark::Phase::metrics</a></div><div class="ttdeci">virtual const PhaseMetrics &amp; metrics() const  noexcept=0</div><div class="ttdoc">Get phase metrics. </div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_html"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html">CppBenchmark::Phase</a></div><div class="ttdoc">Benchmark phase base class. </div><div class="ttdef"><b>Definition:</b> <a href="phase_8h_source.html#l00026">phase.h:26</a></div></div>
-<div class="ttc" id="class_cpp_benchmark_1_1_phase_html_aca47c0ebe44306f863b4c47f667cc02e"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#aca47c0ebe44306f863b4c47f667cc02e">CppBenchmark::Phase::metrics</a></div><div class="ttdeci">virtual const PhaseMetrics &amp; metrics() const  =0</div><div class="ttdoc">Get phase metrics. </div></div>
 <div class="ttc" id="phase__metrics_8h_html"><div class="ttname"><a href="phase__metrics_8h.html">phase_metrics.h</a></div><div class="ttdoc">Benchmark phase metrics definition. </div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_phase_html_a448dabf771ac41e3087872801f97f233"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase.html#a448dabf771ac41e3087872801f97f233">CppBenchmark::Phase::StartPhase</a></div><div class="ttdeci">virtual std::shared_ptr&lt; Phase &gt; StartPhase(const std::string &amp;phase)=0</div><div class="ttdoc">Start a new sub-phase with a given name in a single-thread environment. </div></div>
 </div><!-- fragment --></div><!-- contents -->

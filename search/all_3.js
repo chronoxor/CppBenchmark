@@ -22,10 +22,10 @@ var searchData=
   ['context_5fpc_2eh',['context_pc.h',['../context__pc_8h.html',1,'']]],
   ['context_5fthread_2ecpp',['context_thread.cpp',['../context__thread_8cpp.html',1,'']]],
   ['context_5fthread_2eh',['context_thread.h',['../context__thread_8h.html',1,'']]],
-  ['contextpc',['ContextPC',['../class_cpp_benchmark_1_1_context_p_c.html#ac08acb7a38b8bb4d7c0b89b8b1ca37c1',1,'CppBenchmark::ContextPC::ContextPC()=delete'],['../class_cpp_benchmark_1_1_context_p_c.html#a41f8d99cdb8197b5e3009a476cf399ee',1,'CppBenchmark::ContextPC::ContextPC(const ContextPC &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context_p_c.html#a0947d2304c4111441e7ca667d8713286',1,'CppBenchmark::ContextPC::ContextPC(ContextPC &amp;&amp;) noexcept=default']]],
   ['contextpc',['ContextPC',['../class_cpp_benchmark_1_1_context_p_c.html',1,'CppBenchmark']]],
+  ['contextpc',['ContextPC',['../class_cpp_benchmark_1_1_context_p_c.html#ac08acb7a38b8bb4d7c0b89b8b1ca37c1',1,'CppBenchmark::ContextPC::ContextPC()=delete'],['../class_cpp_benchmark_1_1_context_p_c.html#a41f8d99cdb8197b5e3009a476cf399ee',1,'CppBenchmark::ContextPC::ContextPC(const ContextPC &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context_p_c.html#a0947d2304c4111441e7ca667d8713286',1,'CppBenchmark::ContextPC::ContextPC(ContextPC &amp;&amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context_p_c.html#a07d7f0856499a0bfaf6f737e2fa2d3ba',1,'CppBenchmark::ContextPC::ContextPC(int producers, int consumers, int x, int y, int z) noexcept']]],
   ['contextthread',['ContextThread',['../class_cpp_benchmark_1_1_context_thread.html',1,'CppBenchmark']]],
-  ['contextthread',['ContextThread',['../class_cpp_benchmark_1_1_context_thread.html#a3115639f35e3decc3c9489166e44e91f',1,'CppBenchmark::ContextThread::ContextThread()=delete'],['../class_cpp_benchmark_1_1_context_thread.html#a06b6e1e201ced34cc19d1667c5a15b0d',1,'CppBenchmark::ContextThread::ContextThread(const ContextThread &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context_thread.html#a539dae10700aa3d99e5b9142a44ca3f3',1,'CppBenchmark::ContextThread::ContextThread(ContextThread &amp;&amp;) noexcept=default']]],
+  ['contextthread',['ContextThread',['../class_cpp_benchmark_1_1_context_thread.html#a3115639f35e3decc3c9489166e44e91f',1,'CppBenchmark::ContextThread::ContextThread()=delete'],['../class_cpp_benchmark_1_1_context_thread.html#a06b6e1e201ced34cc19d1667c5a15b0d',1,'CppBenchmark::ContextThread::ContextThread(const ContextThread &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context_thread.html#a539dae10700aa3d99e5b9142a44ca3f3',1,'CppBenchmark::ContextThread::ContextThread(ContextThread &amp;&amp;) noexcept=default'],['../class_cpp_benchmark_1_1_context_thread.html#abf7f195ec15c294348a2b16725a9a7c5',1,'CppBenchmark::ContextThread::ContextThread(int threads, int x, int y, int z) noexcept']]],
   ['cppbenchmark',['CppBenchmark',['../namespace_cpp_benchmark.html',1,'']]],
   ['cppbenchmark_2eh',['cppbenchmark.h',['../cppbenchmark_8h.html',1,'']]],
   ['cpuarchitecture',['CpuArchitecture',['../class_cpp_benchmark_1_1_system.html#a69e6dae8f177b586f704d37c936782a5',1,'CppBenchmark::System']]],
@@ -35,8 +35,13 @@ var searchData=
   ['cpuphysicalcores',['CpuPhysicalCores',['../class_cpp_benchmark_1_1_system.html#a61add01c06607efea3508bd977742555',1,'CppBenchmark::System']]],
   ['cputotalcores',['CpuTotalCores',['../class_cpp_benchmark_1_1_system.html#a31c7890d9bb87c545d3f143865224ead',1,'CppBenchmark::System']]],
   ['current',['current',['../class_cpp_benchmark_1_1_phase_core.html#aca6383511f2c044d9e5d6c8f29d1e859',1,'CppBenchmark::PhaseCore']]],
-  ['currentthreadid',['CurrentThreadId',['../class_cpp_benchmark_1_1_system.html#a18edbab54a02fecf0ca946d3d9756774',1,'CppBenchmark::System']]],
+  ['currentthreadid',['CurrentThreadId',['../class_cpp_benchmark_1_1_system.html#aa08ea00e46b0b1b2af6205297209b71b',1,'CppBenchmark::System']]],
+  ['custom_5fdbl',['custom_dbl',['../class_cpp_benchmark_1_1_phase_metrics.html#a4cb9aeabbbc94cd593e9279166360663',1,'CppBenchmark::PhaseMetrics']]],
+  ['custom_5fflt',['custom_flt',['../class_cpp_benchmark_1_1_phase_metrics.html#a7ffdcfaa31739df519d244f6415a50e1',1,'CppBenchmark::PhaseMetrics']]],
   ['custom_5fint',['custom_int',['../class_cpp_benchmark_1_1_phase_metrics.html#aaac27af5a5fc8d1d20817a8a1fa6b0be',1,'CppBenchmark::PhaseMetrics']]],
+  ['custom_5fint64',['custom_int64',['../class_cpp_benchmark_1_1_phase_metrics.html#a80fe81a9fefe73e18b0c97b5487020c7',1,'CppBenchmark::PhaseMetrics']]],
   ['custom_5fstr',['custom_str',['../class_cpp_benchmark_1_1_phase_metrics.html#a7af61e4167a6c1a68aee54b239e3f330',1,'CppBenchmark::PhaseMetrics']]],
-  ['cyan',['CYAN',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69ad29ef53642762a875034cfafb4c47ae7',1,'CppBenchmark']]]
+  ['custom_5fuint',['custom_uint',['../class_cpp_benchmark_1_1_phase_metrics.html#af3ac872c3a50e97759c08be826122d5e',1,'CppBenchmark::PhaseMetrics']]],
+  ['custom_5fuint64',['custom_uint64',['../class_cpp_benchmark_1_1_phase_metrics.html#a47090499802baa7515686f10d968c756',1,'CppBenchmark::PhaseMetrics']]],
+  ['cyan',['CYAN',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69a344dd8cd533280795b9db82ef0c92749',1,'CppBenchmark']]]
 ];

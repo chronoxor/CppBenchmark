@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="comment">// Created by Ivan Shynkarenka on 18.07.2015.</span></div>
 <div class="line"><span class="comment">//</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">cppbenchmark.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">benchmark/cppbenchmark.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;queue&gt;</span></div>
@@ -107,16 +107,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">        std::generate(items.begin(), items.end(), rand);</div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    <span class="keywordtype">void</span> <a name="a4"></a><a class="code" href="class_cpp_benchmark_1_1_fixture.html#a5436824d6a8d00158f634f015b648648">Cleanup</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override </span></div>
-<div class="line"><span class="keyword">    </span>{ </div>
-<div class="line">        items.clear(); </div>
+<div class="line">    <span class="keywordtype">void</span> <a name="a4"></a><a class="code" href="class_cpp_benchmark_1_1_fixture.html#a5436824d6a8d00158f634f015b648648">Cleanup</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        items.clear();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">class </span>SelectionSort : <span class="keyword">public</span> <a name="_a5"></a><a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a name="a6"></a><a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a name="a6"></a><a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a name="a7"></a><a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -143,18 +143,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>BubbleSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
 <div class="line">        <span class="comment">// Iterate through all items to get the current bound</span></div>
-<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; items.size(); ++i) {</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; items.size(); ++i)</div>
+<div class="line">        {</div>
 <div class="line">            <span class="comment">// Calculate the current bound</span></div>
 <div class="line">            <span class="keywordtype">size_t</span> bound = items.size() - i;</div>
 <div class="line"></div>
 <div class="line">            <span class="comment">// Starting from the current items and for all next items before the bound...</span></div>
-<div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 1; j &lt; bound; ++j) {</div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 1; j &lt; bound; ++j)</div>
+<div class="line">            {</div>
 <div class="line">                <span class="comment">// Swap items to bubble up minimal one to the end</span></div>
 <div class="line">                <span class="keywordflow">if</span> (items[j] &lt; items[j - 1])</div>
 <div class="line">                    std::swap(items[j], items[j - 1]);</div>
@@ -167,7 +169,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>ShakerSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -206,7 +208,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>GnomeSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -247,7 +249,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>InsertSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -269,7 +271,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>ShellSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -310,7 +312,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>MergeSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -369,7 +371,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>QuickSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -420,7 +422,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>QuickSort3 : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -495,7 +497,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>RadixSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -553,7 +555,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="keyword">class </span>StdSort : <span class="keyword">public</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a>, <span class="keyword">public</span> SortFixture</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#a97d8f5a8d53060b00bc76653a3fb2cef">Benchmark::Benchmark</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark::Benchmark</a>;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -563,17 +565,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><a name="a10"></a><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(SelectionSort, <span class="stringliteral">&quot;SelectionSort&quot;</span>, Settings().Param(slow_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(BubbleSort, &quot;BubbleSort&quot;, Settings().Param(slow_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(ShakerSort, &quot;ShakerSort&quot;, Settings().Param(slow_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(GnomeSort, &quot;GnomeSort&quot;, Settings().Param(slow_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(InsertSort, &quot;InsertSort&quot;, Settings().Param(slow_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(ShellSort, &quot;ShellSort&quot;, Settings().Param(slow_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(MergeSort, &quot;MergeSort&quot;, Settings().Param(fast_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(QuickSort, &quot;QuickSort&quot;, Settings().Param(fast_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(QuickSort3, &quot;QuickSort3&quot;, Settings().Param(fast_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(RadixSort, &quot;RadixSort&quot;, Settings().Param(fast_size))</div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a9145e21b0b31ad313568362bf7aa50bf">BENCHMARK_CLASS</a>(StdSort, &quot;std::sort&quot;, Settings().Param(fast_size))</div>
+<div class="line"><a name="a10"></a><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(SelectionSort, <span class="stringliteral">&quot;SelectionSort&quot;</span>, Settings().Param(slow_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(BubbleSort, &quot;BubbleSort&quot;, Settings().Param(slow_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(ShakerSort, &quot;ShakerSort&quot;, Settings().Param(slow_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(GnomeSort, &quot;GnomeSort&quot;, Settings().Param(slow_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(InsertSort, &quot;InsertSort&quot;, Settings().Param(slow_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(ShellSort, &quot;ShellSort&quot;, Settings().Param(slow_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(MergeSort, &quot;MergeSort&quot;, Settings().Param(fast_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(QuickSort, &quot;QuickSort&quot;, Settings().Param(fast_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(QuickSort3, &quot;QuickSort3&quot;, Settings().Param(fast_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(RadixSort, &quot;RadixSort&quot;, Settings().Param(fast_size))</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(StdSort, &quot;std::sort&quot;, Settings().Param(fast_size))</div>
 <div class="line"></div>
 <div class="line"><a name="a11"></a><a class="code" href="cppbenchmark_8h.html#a76a768260eed180721a82b78d1bcfe95">BENCHMARK_MAIN</a>()</div>
 </div><!-- fragment --> </div><!-- contents -->

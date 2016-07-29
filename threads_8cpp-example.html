@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="comment">// Created by Ivan Shynkarenka on 23.07.2015.</span></div>
 <div class="line"><span class="comment">//</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">cppbenchmark.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">benchmark/cppbenchmark.h</a>&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;atomic&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;mutex&gt;</span></div>
@@ -114,17 +114,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    <span class="keywordtype">int</span> counter;</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><a name="a3"></a><a class="code" href="cppbenchmark_8h.html#ad9299575b0189f85730b16dc1f3b711d">BENCHMARK_THREADS_FIXTURE</a>(UnsynchronizedFixture, <span class="stringliteral">&quot;unsynchronized++&quot;</span>, settings)</div>
+<div class="line"><a name="a3"></a><a class="code" href="cppbenchmark_8h.html#ab2cb673560b625affdb02d43f2be0050">BENCHMARK_THREADS_FIXTURE</a>(UnsynchronizedFixture, <span class="stringliteral">&quot;unsynchronized++&quot;</span>, settings)</div>
 <div class="line">{</div>
 <div class="line">    counter++;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#ad9299575b0189f85730b16dc1f3b711d">BENCHMARK_THREADS_FIXTURE</a>(AtomicFixture, <span class="stringliteral">&quot;std::atomic++&quot;</span>, settings)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#ab2cb673560b625affdb02d43f2be0050">BENCHMARK_THREADS_FIXTURE</a>(AtomicFixture, <span class="stringliteral">&quot;std::atomic++&quot;</span>, settings)</div>
 <div class="line">{</div>
 <div class="line">    counter++;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#ad9299575b0189f85730b16dc1f3b711d">BENCHMARK_THREADS_FIXTURE</a>(MutexFixture, <span class="stringliteral">&quot;std::mutex++&quot;</span>, settings)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#ab2cb673560b625affdb02d43f2be0050">BENCHMARK_THREADS_FIXTURE</a>(MutexFixture, <span class="stringliteral">&quot;std::mutex++&quot;</span>, settings)</div>
 <div class="line">{</div>
 <div class="line">    std::lock_guard&lt;std::mutex&gt; lock(mutex);</div>
 <div class="line">    counter++;</div>

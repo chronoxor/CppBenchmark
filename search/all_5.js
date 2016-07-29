@@ -5,7 +5,7 @@ var searchData=
   ['environment_2ecpp',['environment.cpp',['../environment_8cpp.html',1,'']]],
   ['environment_2eh',['environment.h',['../environment_8h.html',1,'']]],
   ['executor',['Executor',['../class_cpp_benchmark_1_1_executor.html',1,'CppBenchmark']]],
-  ['executor',['Executor',['../class_cpp_benchmark_1_1_benchmark.html#a763b2f90bc53f92d680a635fe28e858e',1,'CppBenchmark::Benchmark::Executor()'],['../class_cpp_benchmark_1_1_phase_core.html#a763b2f90bc53f92d680a635fe28e858e',1,'CppBenchmark::PhaseCore::Executor()'],['../class_cpp_benchmark_1_1_executor.html#ae5f4185bbbd322aeb8a8dd0de20c245c',1,'CppBenchmark::Executor::Executor()=default'],['../class_cpp_benchmark_1_1_executor.html#a6522997c345499a20e3289fdf6be6f4c',1,'CppBenchmark::Executor::Executor(const Executor &amp;)=delete'],['../class_cpp_benchmark_1_1_executor.html#ad9cc6c5987f51efe1a1f91455a54b252',1,'CppBenchmark::Executor::Executor(Executor &amp;&amp;)=delete']]],
+  ['executor',['Executor',['../class_cpp_benchmark_1_1_benchmark.html#a763b2f90bc53f92d680a635fe28e858e',1,'CppBenchmark::Benchmark::Executor()'],['../class_cpp_benchmark_1_1_phase_core.html#a763b2f90bc53f92d680a635fe28e858e',1,'CppBenchmark::PhaseCore::Executor()'],['../class_cpp_benchmark_1_1_executor.html#a6522997c345499a20e3289fdf6be6f4c',1,'CppBenchmark::Executor::Executor(const Executor &amp;)=delete'],['../class_cpp_benchmark_1_1_executor.html#ad9cc6c5987f51efe1a1f91455a54b252',1,'CppBenchmark::Executor::Executor(Executor &amp;&amp;)=delete']]],
   ['executor_2ecpp',['executor.cpp',['../executor_8cpp.html',1,'']]],
   ['executor_2eh',['executor.h',['../executor_8h.html',1,'']]]
 ];

@@ -152,12 +152,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af0c9884b3f8519963fc8a3d37af29ce4"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_context.html#af0c9884b3f8519963fc8a3d37af29ce4">to_string</a> () const </td></tr>
 <tr class="memdesc:af0c9884b3f8519963fc8a3d37af29ce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of the current benchmark running context.  <a href="#af0c9884b3f8519963fc8a3d37af29ce4">More...</a><br /></td></tr>
 <tr class="separator:af0c9884b3f8519963fc8a3d37af29ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada53039a67c3467cd496dca369c3dc5d"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_context.html#ada53039a67c3467cd496dca369c3dc5d">name</a> () const  override</td></tr>
-<tr class="memdesc:ada53039a67c3467cd496dca369c3dc5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get phase name.  <a href="#ada53039a67c3467cd496dca369c3dc5d">More...</a><br /></td></tr>
-<tr class="separator:ada53039a67c3467cd496dca369c3dc5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d7f5f9593b2e05b0df6c953ce161f30"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html">PhaseMetrics</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_context.html#a8d7f5f9593b2e05b0df6c953ce161f30">metrics</a> () const  override</td></tr>
-<tr class="memdesc:a8d7f5f9593b2e05b0df6c953ce161f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get phase metrics.  <a href="#a8d7f5f9593b2e05b0df6c953ce161f30">More...</a><br /></td></tr>
-<tr class="separator:a8d7f5f9593b2e05b0df6c953ce161f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ea984b5a7ae7c6f06a6bd216ee0c5ac"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_context.html#a9ea984b5a7ae7c6f06a6bd216ee0c5ac">name</a> () const  noexcept override</td></tr>
+<tr class="memdesc:a9ea984b5a7ae7c6f06a6bd216ee0c5ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get phase name.  <a href="#a9ea984b5a7ae7c6f06a6bd216ee0c5ac">More...</a><br /></td></tr>
+<tr class="separator:a9ea984b5a7ae7c6f06a6bd216ee0c5ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa86c209ce8c1ef97ffa6072aab52e47c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html">PhaseMetrics</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_context.html#aa86c209ce8c1ef97ffa6072aab52e47c">metrics</a> () const  noexcept override</td></tr>
+<tr class="memdesc:aa86c209ce8c1ef97ffa6072aab52e47c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get phase metrics.  <a href="#aa86c209ce8c1ef97ffa6072aab52e47c">More...</a><br /></td></tr>
+<tr class="separator:aa86c209ce8c1ef97ffa6072aab52e47c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57c8f8cd283cdf72de42329ea6d7bc01"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase.html">Phase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_context.html#a57c8f8cd283cdf72de42329ea6d7bc01">StartPhase</a> (const std::string &amp;phase) override</td></tr>
 <tr class="memdesc:a57c8f8cd283cdf72de42329ea6d7bc01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a new sub-phase with a given name in a single-thread environment.  <a href="#a57c8f8cd283cdf72de42329ea6d7bc01">More...</a><br /></td></tr>
 <tr class="separator:a57c8f8cd283cdf72de42329ea6d7bc01"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -448,7 +448,7 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8d7f5f9593b2e05b0df6c953ce161f30"></a>
+<a class="anchor" id="aa86c209ce8c1ef97ffa6072aab52e47c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -464,20 +464,20 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get phase metrics. </p>
 
-<p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#aca47c0ebe44306f863b4c47f667cc02e">CppBenchmark::Phase</a>.</p>
+<p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a30cd69a290ad87fa4a99931dd47af588">CppBenchmark::Phase</a>.</p>
 
 <p>Definition at line <a class="el" href="context_8h_source.html#l00065">65</a> of file <a class="el" href="context_8h_source.html">context.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ada53039a67c3467cd496dca369c3dc5d"></a>
+<a class="anchor" id="a9ea984b5a7ae7c6f06a6bd216ee0c5ac"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -493,14 +493,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get phase name. </p>
 
-<p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a54e52b177f1ec3c4a71afd5d3c3593cf">CppBenchmark::Phase</a>.</p>
+<p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a7e206a4faadb3a1474b53e194cd7d469">CppBenchmark::Phase</a>.</p>
 
 <p>Definition at line <a class="el" href="context_8h_source.html#l00064">64</a> of file <a class="el" href="context_8h_source.html">context.h</a>.</p>
 
@@ -584,6 +584,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the required benchmark sub-phase scope wrapper </dd></dl>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a81d2c7dea121f9c117c7fb1d72bd1284">CppBenchmark::Phase</a>.</p>
 
@@ -621,6 +622,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the required thread-safe benchmark sub-phase scope wrapper </dd></dl>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a138c98e45e4054121f38147222f6d1a9">CppBenchmark::Phase</a>.</p>
 
@@ -658,6 +660,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the required benchmark sub-phase </dd></dl>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a448dabf771ac41e3087872801f97f233">CppBenchmark::Phase</a>.</p>
 
@@ -695,6 +698,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the thread safe benchmark sub-phase </dd></dl>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a16202b16ff7d961aa0642eada38f95c1">CppBenchmark::Phase</a>.</p>
 
@@ -1011,8 +1015,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/<a class="el" href="context_8h_source.html">context.h</a></li>
-<li>source/<a class="el" href="context_8cpp_source.html">context.cpp</a></li>
+<li>include/benchmark/<a class="el" href="context_8h_source.html">context.h</a></li>
+<li>source/benchmark/<a class="el" href="context_8cpp_source.html">context.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
