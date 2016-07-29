@@ -28,6 +28,10 @@ public:
     LauncherConsole& operator=(const LauncherConsole&) = delete;
     LauncherConsole& operator=(LauncherConsole&&) = delete;
 
+    //! Get singleton instance
+    static LauncherConsole& GetInstance()
+    { static LauncherConsole instance; return instance; }
+
     //! Initialized console launcher
     /*!
         This method should be called once from main() function to initialize console launcher with command line
@@ -43,10 +47,6 @@ public:
     void Launch();
     //! Report benchmarks results in console
     void Report();
-
-    //! Get console launcher singleton instance
-    static LauncherConsole& GetInstance()
-    { static LauncherConsole instance; return instance; }
 
 protected:
     // Implementation of LauncherHanlder

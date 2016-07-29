@@ -234,7 +234,7 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
     }
     \endcode
 */
-#define BENCHCODE_SCOPE(name) CppBenchmark::Executor::GetInstance().ScopeBenchmark(name);
+#define BENCHCODE_SCOPE(name) CppBenchmark::Executor::ScopeBenchmark(name);
 
 //! Dynamic benchmark start macro
 /*!
@@ -251,7 +251,7 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
     BENCHCODE_STOP("My dynamic benchmark");
     \endcode
 */
-#define BENCHCODE_START(name) CppBenchmark::Executor::GetInstance().StartBenchmark(name);
+#define BENCHCODE_START(name) CppBenchmark::Executor::StartBenchmark(name);
 
 //! Dynamic benchmark stop macro
 /*!
@@ -268,7 +268,7 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
     BENCHCODE_STOP("My dynamic benchmark");
     \endcode
 */
-#define BENCHCODE_STOP(name) CppBenchmark::Executor::GetInstance().StopBenchmark(name);
+#define BENCHCODE_STOP(name) CppBenchmark::Executor::StopBenchmark(name);
 
 //! Dynamic benchmarks report to console macro
 /*!
@@ -291,7 +291,7 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
 #define BENCHCODE_REPORT()\
 {\
     CppBenchmark::ReporterConsole BENCHMARK_INTERNAL_UNIQUE_NAME(reporter);\
-    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
+    CppBenchmark::Executor::Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
 }
 
 //! Dynamic benchmarks report as a string macro
@@ -310,7 +310,7 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
 {\
     std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
     CppBenchmark::ReporterConsole BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
-    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
+    CppBenchmark::Executor::Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
     value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\
 }
 
@@ -330,7 +330,7 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
 {\
     std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
     CppBenchmark::ReporterCSV BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
-    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
+    CppBenchmark::Executor::Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
     value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\
 }
 
@@ -350,7 +350,7 @@ namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQ
 {\
     std::ostringstream BENCHMARK_INTERNAL_UNIQUE_NAME(output);\
     CppBenchmark::ReporterJSON BENCHMARK_INTERNAL_UNIQUE_NAME(reporter)(BENCHMARK_INTERNAL_UNIQUE_NAME(output));\
-    CppBenchmark::Executor::GetInstance().Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
+    CppBenchmark::Executor::Report(BENCHMARK_INTERNAL_UNIQUE_NAME(reporter));\
     value = BENCHMARK_INTERNAL_UNIQUE_NAME(output).str();\
 }
 

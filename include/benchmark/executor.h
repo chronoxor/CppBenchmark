@@ -21,17 +21,12 @@ namespace CppBenchmark {
 class Executor
 {
 public:
-    Executor() = default;
     Executor(const Executor&) = delete;
     Executor(Executor&&) = delete;
     virtual ~Executor() = default;
 
     Executor& operator=(const Executor&) = delete;
     Executor& operator=(Executor&&) = delete;
-
-    //! Get executor singleton instance
-    static Executor& GetInstance()
-    { static Executor instance; return instance; }
 
     //! Start a new dynamic benchmark with a given name
     /*!
@@ -42,7 +37,7 @@ public:
         \param benchmark - Dynamic benchmark name
         \return Shared pointer to the required dynamic benchmark
     */
-    std::shared_ptr<Phase> StartBenchmark(const std::string& benchmark);
+    static std::shared_ptr<Phase> StartBenchmark(const std::string& benchmark);
 
     //! Stop dynamic benchmark with a given name
     /*!
@@ -51,7 +46,7 @@ public:
 
         \param benchmark - Dynamic benchmark name
     */
-    void StopBenchmark(const std::string& benchmark);
+    static void StopBenchmark(const std::string& benchmark);
 
     //! Start a new dynamic benchmark with a given name and wrap it in a PhaseScope
     /*!
@@ -60,7 +55,7 @@ public:
         \param benchmark - Dynamic benchmark name
         \return Shared pointer to the required dynamic benchmark scope wrapper
     */
-    std::shared_ptr<PhaseScope> ScopeBenchmark(const std::string& benchmark)
+    static std::shared_ptr<PhaseScope> ScopeBenchmark(const std::string& benchmark)
     { return std::make_shared<PhaseScope>(StartBenchmark(benchmark)); }
 
     //! Report benchmarks results using the given reporter
@@ -69,7 +64,7 @@ public:
 
         \param reporter - Reporter interface
     */
-    void Report(Reporter& reporter);
+    static void Report(Reporter& reporter);
 
 protected:
     //! Synchronization mutex
@@ -78,7 +73,13 @@ protected:
     std::vector<std::shared_ptr<PhaseCore>> _benchmarks;
 
 private:
+    Executor() = default;
+
     void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name);
+
+    //! Get singleton instance
+    static Executor& GetInstance()
+    { static Executor instance; return instance; }
 };
 
 /*! \example executor.cpp Dynamic benchmarks */

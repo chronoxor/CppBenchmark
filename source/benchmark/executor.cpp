@@ -50,21 +50,23 @@ protected:
 
 std::shared_ptr<Phase> Executor::StartBenchmark(const std::string& benchmark)
 {
+    Executor& instance = GetInstance();
+
     std::shared_ptr<PhaseCore> result;
 
     // Update dynamic benchmarks collection under lock guard...
     {
-        std::lock_guard<std::mutex> lock(_mutex);
+        std::lock_guard<std::mutex> lock(instance._mutex);
 
         // Find or create a dynamic benchmark with the given name
-        auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item)
+        auto it = std::find_if(instance._benchmarks.begin(), instance._benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item)
         {
             return ((item->name() == benchmark) && (item->_thread == System::CurrentThreadId()));
         });
-        if (it == _benchmarks.end())
+        if (it == instance._benchmarks.end())
         {
             result = std::make_shared<PhaseCore>(benchmark);
-            _benchmarks.emplace_back(result);
+            instance._benchmarks.emplace_back(result);
         }
         else
             result = *it;
@@ -81,26 +83,30 @@ std::shared_ptr<Phase> Executor::StartBenchmark(const std::string& benchmark)
 
 void Executor::StopBenchmark(const std::string& benchmark)
 {
+    Executor& instance = GetInstance();
+
     // Update dynamic benchmarks collection under lock guard...
     {
-        std::lock_guard<std::mutex> lock(_mutex);
+        std::lock_guard<std::mutex> lock(instance._mutex);
 
         // Find dynamic benchmark with the given name
-        auto it = std::find_if(_benchmarks.begin(), _benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item)
+        auto it = std::find_if(instance._benchmarks.begin(), instance._benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item)
         {
             return ((item->name() == benchmark) && (item->_thread == System::CurrentThreadId()));
         });
-        if (it != _benchmarks.end())
+        if (it != instance._benchmarks.end())
             (*it)->StopCollectingMetrics();
     }
 }
 
 void Executor::Report(Reporter& reporter)
 {
-    std::lock_guard<std::mutex> lock(_mutex);
+    Executor& instance = GetInstance();
 
-    Benchmark::UpdateBenchmarkMetrics(_benchmarks);
-    Benchmark::UpdateBenchmarkThreads(_benchmarks);
+    std::lock_guard<std::mutex> lock(instance._mutex);
+
+    Benchmark::UpdateBenchmarkMetrics(instance._benchmarks);
+    Benchmark::UpdateBenchmarkThreads(instance._benchmarks);
 
     // Report header, system & environment
     reporter.ReportHeader();
@@ -109,7 +115,7 @@ void Executor::Report(Reporter& reporter)
     reporter.ReportBenchmarksHeader();
 
     // For all registered benchmarks...
-    for (auto& benchmark : _benchmarks)
+    for (auto& benchmark : instance._benchmarks)
     {
         // Create dynamic benchmark wrapper
         Internals::DynamicBenchmark result(benchmark->name(), Settings().Attempts(1));
@@ -118,7 +124,7 @@ void Executor::Report(Reporter& reporter)
         reporter.ReportBenchmarkHeader();
         reporter.ReportBenchmark(result, result.settings());
         reporter.ReportPhasesHeader();
-        ReportPhase(reporter, *benchmark, benchmark->name());
+        instance.ReportPhase(reporter, *benchmark, benchmark->name());
         reporter.ReportPhasesFooter();
         reporter.ReportBenchmarkFooter();
     }
