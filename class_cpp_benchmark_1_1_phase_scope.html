@@ -152,6 +152,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4eee2a557e9004bd00d73f188a843eaf"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_scope.html">PhaseScope</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_scope.html#a4eee2a557e9004bd00d73f188a843eaf">ScopePhaseThreadSafe</a> (const std::string &amp;phase) override</td></tr>
 <tr class="memdesc:a4eee2a557e9004bd00d73f188a843eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a new sub-phase with a given name in a multi-thread environment and wrap it in a <a class="el" href="class_cpp_benchmark_1_1_phase_scope.html" title="Benchmark phase scope. ">PhaseScope</a>.  <a href="#a4eee2a557e9004bd00d73f188a843eaf">More...</a><br /></td></tr>
 <tr class="separator:a4eee2a557e9004bd00d73f188a843eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_cpp_benchmark_1_1_phase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_cpp_benchmark_1_1_phase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_phase.html">CppBenchmark::Phase</a></td></tr>
+<tr class="memitem:acfece567eb819f4235f9ae090006e997 inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase.html#acfece567eb819f4235f9ae090006e997">Phase</a> () noexcept=default</td></tr>
+<tr class="separator:acfece567eb819f4235f9ae090006e997 inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfaf6656053fc455951272958d058e3c inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase.html#acfaf6656053fc455951272958d058e3c">Phase</a> (const <a class="el" href="class_cpp_benchmark_1_1_phase.html">Phase</a> &amp;)=default</td></tr>
+<tr class="separator:acfaf6656053fc455951272958d058e3c inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa45319f40bd5ca8abc42392bd8effaa inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase.html#afa45319f40bd5ca8abc42392bd8effaa">Phase</a> (<a class="el" href="class_cpp_benchmark_1_1_phase.html">Phase</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:afa45319f40bd5ca8abc42392bd8effaa inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb7babf96e0e2475a954ccac317aead2 inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase.html#acb7babf96e0e2475a954ccac317aead2">~Phase</a> ()=default</td></tr>
+<tr class="separator:acb7babf96e0e2475a954ccac317aead2 inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afce25fbdf28d9155fb18877d09984434 inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_phase.html">Phase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase.html#afce25fbdf28d9155fb18877d09984434">operator=</a> (const <a class="el" href="class_cpp_benchmark_1_1_phase.html">Phase</a> &amp;)=default</td></tr>
+<tr class="separator:afce25fbdf28d9155fb18877d09984434 inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae74a492004a6c5cdf442486a9ceb9b3 inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_phase.html">Phase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase.html#aae74a492004a6c5cdf442486a9ceb9b3">operator=</a> (<a class="el" href="class_cpp_benchmark_1_1_phase.html">Phase</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:aae74a492004a6c5cdf442486a9ceb9b3 inherit pub_methods_class_cpp_benchmark_1_1_phase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark base class. ">Benchmark</a> phase scope. </p>
@@ -189,7 +202,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__scope_8h_source.html#l00032">32</a> of file <a class="el" href="phase__scope_8h_source.html">phase_scope.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8h_source.html#l00028">28</a> of file <a class="el" href="phase__scope_8h_source.html">phase_scope.h</a>.</p>
 
 </div>
 </div>
@@ -294,7 +307,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a30cd69a290ad87fa4a99931dd47af588">CppBenchmark::Phase</a>.</p>
 
-<p>Definition at line <a class="el" href="phase__scope_8h_source.html#l00048">48</a> of file <a class="el" href="phase__scope_8h_source.html">phase_scope.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8h_source.html#l00044">44</a> of file <a class="el" href="phase__scope_8h_source.html">phase_scope.h</a>.</p>
 
 </div>
 </div>
@@ -323,7 +336,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a7e206a4faadb3a1474b53e194cd7d469">CppBenchmark::Phase</a>.</p>
 
-<p>Definition at line <a class="el" href="phase__scope_8h_source.html#l00046">46</a> of file <a class="el" href="phase__scope_8h_source.html">phase_scope.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8h_source.html#l00042">42</a> of file <a class="el" href="phase__scope_8h_source.html">phase_scope.h</a>.</p>
 
 </div>
 </div>
@@ -350,7 +363,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Is phase scope is valid? </p>
 
-<p>Definition at line <a class="el" href="phase__scope_8h_source.html#l00042">42</a> of file <a class="el" href="phase__scope_8h_source.html">phase_scope.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8h_source.html#l00038">38</a> of file <a class="el" href="phase__scope_8h_source.html">phase_scope.h</a>.</p>
 
 </div>
 </div>
@@ -436,7 +449,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a81d2c7dea121f9c117c7fb1d72bd1284">CppBenchmark::Phase</a>.</p>
 
-<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00040">40</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00044">44</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
 
 </div>
 </div>
@@ -474,7 +487,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a138c98e45e4054121f38147222f6d1a9">CppBenchmark::Phase</a>.</p>
 
-<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00045">45</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00049">49</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
 
 </div>
 </div>
@@ -512,7 +525,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a448dabf771ac41e3087872801f97f233">CppBenchmark::Phase</a>.</p>
 
-<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00021">21</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00025">25</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
 
 </div>
 </div>
@@ -550,7 +563,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#a16202b16ff7d961aa0642eada38f95c1">CppBenchmark::Phase</a>.</p>
 
-<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00026">26</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00030">30</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
 
 </div>
 </div>
@@ -579,7 +592,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="class_cpp_benchmark_1_1_phase.html#aaa1efb55fed38a19b620167be438e1f6">CppBenchmark::Phase</a>.</p>
 
-<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00031">31</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__scope_8cpp_source.html#l00035">35</a> of file <a class="el" href="phase__scope_8cpp_source.html">phase_scope.cpp</a>.</p>
 
 </div>
 </div>

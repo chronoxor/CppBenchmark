@@ -294,8 +294,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">private</span>:</div>
-<div class="line">    <span class="keywordtype">void</span> ShellSortInternal(std::vector&lt;int&gt;&amp; subitems, <span class="keywordtype">size_t</span> d)</div>
-<div class="line">    {</div>
+<div class="line">    <span class="keywordtype">void</span> ShellSortInternal(std::vector&lt;int&gt;&amp; subitems, <span class="keywordtype">size_t</span> d)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = d; i &lt; subitems.size(); ++i)</div>
 <div class="line">        {</div>
 <div class="line">            <span class="comment">// Take the next item</span></div>
@@ -337,7 +337,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">private</span>:</div>
-<div class="line">    <span class="keywordtype">void</span> MergeSortInternal(<span class="keywordtype">int</span>* dst, <span class="keywordtype">int</span>* src, <span class="keywordtype">size_t</span> index, <span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> chunk)</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> MergeSortInternal(<span class="keywordtype">int</span>* dst, <span class="keywordtype">int</span>* src, <span class="keywordtype">size_t</span> index, <span class="keywordtype">size_t</span> size, <span class="keywordtype">size_t</span> chunk)</div>
 <div class="line">    {</div>
 <div class="line">        <span class="keywordtype">size_t</span> index1 = 0;</div>
 <div class="line">        <span class="keywordtype">size_t</span> index2 = 0;</div>
@@ -382,7 +382,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">private</span>:</div>
-<div class="line">    <span class="keywordtype">void</span> QuickSortInternal(std::vector&lt;int&gt;&amp; subitems, <span class="keywordtype">size_t</span> left, <span class="keywordtype">size_t</span> right)</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> QuickSortInternal(std::vector&lt;int&gt;&amp; subitems, <span class="keywordtype">size_t</span> left, <span class="keywordtype">size_t</span> right)</div>
 <div class="line">    {</div>
 <div class="line">        <span class="comment">// Choose the pivot item</span></div>
 <div class="line">        <span class="keywordtype">int</span> pivot = subitems[left + ((right - left) / 2) - 1];</div>
@@ -433,7 +433,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">private</span>:</div>
-<div class="line">    <span class="keywordtype">void</span> QuickSort3Internal(std::vector&lt;int&gt;&amp; subitems, <span class="keywordtype">size_t</span> left, <span class="keywordtype">size_t</span> right)</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> QuickSort3Internal(std::vector&lt;int&gt;&amp; subitems, <span class="keywordtype">size_t</span> left, <span class="keywordtype">size_t</span> right)</div>
 <div class="line">    {</div>
 <div class="line">        <span class="comment">// Choose the pivot item</span></div>
 <div class="line">        <span class="keywordtype">int</span> pivot = subitems[left + ((right - left) / 2) - 1];</div>
