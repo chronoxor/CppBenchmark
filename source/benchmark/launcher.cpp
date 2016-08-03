@@ -35,7 +35,7 @@ void Launcher::Launch(const std::string& pattern)
         benchmark->Launch(current, total, *this);
 }
 
-void Launcher::Report(Reporter& reporter)
+void Launcher::Report(Reporter& reporter) const
 {
     // Report header, system & environment
     reporter.ReportHeader();

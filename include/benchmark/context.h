@@ -54,7 +54,7 @@ public:
     //! Is benchmark execution canceled?
     bool canceled() const noexcept { return *_canceled; }
     //! Cancel benchmark execution
-    void Cancel() const noexcept { *_canceled = true; }
+    void Cancel() noexcept { *_canceled = true; }
 
     //! Get name of the current benchmark running context
     virtual std::string to_string() const;
@@ -89,7 +89,10 @@ protected:
         \param z - Benchmark third parameter
     */
     Context(int x, int y, int z) noexcept
-        : _x(x), _y(y), _z(z), _current(nullptr), _metrics(nullptr), _canceled(std::make_shared<std::atomic<bool>>(false))
+        : _x(x), _y(y), _z(z),
+          _current(nullptr),
+          _metrics(nullptr),
+          _canceled(std::make_shared<std::atomic<bool>>(false))
     {}
 };
 

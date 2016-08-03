@@ -33,7 +33,7 @@ public:
     ReporterCSV(std::ostream& stream = std::cout) : _stream(stream) {}
     ReporterCSV(const ReporterCSV&) = delete;
     ReporterCSV(ReporterCSV&&) = delete;
-    ~ReporterCSV() = default;
+    virtual ~ReporterCSV() = default;
 
     ReporterCSV& operator=(const ReporterCSV&) = delete;
     ReporterCSV& operator=(ReporterCSV&&) = delete;

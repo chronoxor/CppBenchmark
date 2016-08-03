@@ -29,7 +29,7 @@ BENCHMARK("std::chrono::high_resolution_clock::now()", iterations)
 
     auto current = std::chrono::high_resolution_clock::now();
     uint64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(current - timestamp).count();
-    double latency = static_cast<double>(duration) / ++count;
+    double latency = (double)duration / ++count;
     if (duration > 0)
     {
         if (latency < minlatency)
@@ -68,7 +68,7 @@ BENCHMARK("clock()", iterations)
 
     auto current = clock();
     uint64_t duration = (current - timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
-    double latency = static_cast<double>(duration) / ++count;
+    double latency = (double)duration / ++count;
     if (duration > 0)
     {
         if (latency < minlatency)
@@ -118,7 +118,7 @@ BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
         timestamp = current;
 
     uint64_t duration = (current - timestamp);
-    double latency = static_cast<double>(duration) / ++count;
+    double latency = (double)duration / ++count;
     if (duration > 0)
     {
         if (latency < minlatency)
@@ -159,7 +159,7 @@ BENCHMARK("GetTickCount()", iterations)
 
     DWORD current = GetTickCount();
     uint64_t duration = (current - timestamp) * 1000 * 1000;
-    double latency = static_cast<double>(duration) / ++count;
+    double latency = (double)duration / ++count;
     if (duration > 0)
     {
         if (latency < minlatency)
@@ -200,7 +200,7 @@ BENCHMARK("GetTickCount64()", iterations)
 
     ULONGLONG current = GetTickCount64();
     uint64_t duration = (current - timestamp) * 1000 * 1000;
-    double latency = static_cast<double>(duration) / ++count;
+    double latency = (double)duration / ++count;
     if (duration > 0)
     {
         if (latency < minlatency)
@@ -256,7 +256,7 @@ BENCHMARK("QueryPerformanceCounter()", iterations)
 
     LARGE_INTEGER current = QueryPerformanceCounter();
     uint64_t duration = (current.QuadPart - timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
-    double latency = static_cast<double>(duration) / ++count;
+    double latency = (double)duration / ++count;
     if (duration > 0)
     {
         if (latency < minlatency)
@@ -297,7 +297,7 @@ BENCHMARK("__rdtsc()", iterations)
 
     uint64_t current = __rdtsc();
     uint64_t duration = current - timestamp;
-    double latency = static_cast<double>(duration) / ++count;
+    double latency = (double)duration / ++count;
     if (duration > 0)
     {
         if (latency < minlatency)

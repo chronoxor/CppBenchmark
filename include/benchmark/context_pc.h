@@ -31,7 +31,7 @@ public:
     ContextPC() = delete;
     ContextPC(const ContextPC&) noexcept = default;
     ContextPC(ContextPC&&) noexcept = default;
-    ~ContextPC() noexcept = default;
+    virtual ~ContextPC() noexcept = default;
 
     ContextPC& operator=(const ContextPC&) noexcept = default;
     ContextPC& operator=(ContextPC&&) noexcept = default;
@@ -46,9 +46,9 @@ public:
     //! Is benchmark consume stopped?
     bool consume_stopped() const noexcept { return *_consume_stopped; }
     //! Stop benchmark production
-    void StopProduce() const noexcept { *_produce_stopped = true; }
+    void StopProduce() noexcept { *_produce_stopped = true; }
     //! Stop benchmark consumption
-    void StopConsume() const noexcept { *_consume_stopped = true; }
+    void StopConsume() noexcept { *_consume_stopped = true; }
 
     //! Get name of the current benchmark running context
     std::string to_string() const override;

@@ -33,7 +33,7 @@ public:
     ReporterJSON(std::ostream& stream = std::cout) : _stream(stream), _benchmark_comma(false), _phase_comma(false) {}
     ReporterJSON(const ReporterJSON&) = delete;
     ReporterJSON(ReporterJSON&&) = delete;
-    ~ReporterJSON() = default;
+    virtual ~ReporterJSON() = default;
 
     ReporterJSON& operator=(const ReporterJSON&) = delete;
     ReporterJSON& operator=(ReporterJSON&&) = delete;

@@ -52,8 +52,8 @@ public:
 private:
     std::shared_ptr<Phase> _phase;
 
-	static const std::string EMPTY_NAME;
-	static PhaseMetrics EMPTY_METRICS;
+    static const std::string EMPTY_NAME;
+    static const PhaseMetrics EMPTY_METRICS;
 };
 
 } // namespace CppBenchmark

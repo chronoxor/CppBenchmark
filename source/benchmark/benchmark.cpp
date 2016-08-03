@@ -16,7 +16,7 @@ namespace CppBenchmark {
 
 int Benchmark::CountLaunches() const
 {
-    return _settings.attempts() * (_settings.params().empty() ? 1 : static_cast<int>(_settings.params().size()));
+    return _settings.attempts() * (_settings.params().empty() ? 1 : (int)_settings.params().size());
 }
 
 void Benchmark::Launch(int& current, int total, LauncherHandler& handler)

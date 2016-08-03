@@ -30,7 +30,7 @@ public:
     ContextThread() = delete;
     ContextThread(const ContextThread&) noexcept = default;
     ContextThread(ContextThread&&) noexcept = default;
-    ~ContextThread() noexcept = default;
+    virtual ~ContextThread() noexcept = default;
 
     ContextThread& operator=(const ContextThread&) noexcept = default;
     ContextThread& operator=(ContextThread&&) noexcept = default;
@@ -52,7 +52,10 @@ protected:
         \param y - Benchmark second parameter
         \param z - Benchmark third parameter
     */
-    ContextThread(int threads, int x, int y, int z) noexcept : Context(x, y, z), _threads(threads) {}
+    ContextThread(int threads, int x, int y, int z) noexcept
+        : Context(x, y, z),
+          _threads(threads)
+    {}
 };
 
 } // namespace CppBenchmark

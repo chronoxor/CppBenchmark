@@ -11,15 +11,15 @@
 namespace CppBenchmark {
 
 const std::string PhaseScope::EMPTY_NAME("<none>");
-PhaseMetrics PhaseScope::EMPTY_METRICS;
+const PhaseMetrics PhaseScope::EMPTY_METRICS;
 
 PhaseScope::~PhaseScope()
 {
-	if (_phase)
-	{
-		_phase->StopPhase();
-		_phase.reset();
-	}
+    if (_phase)
+    {
+        _phase->StopPhase();
+        _phase.reset();
+    }
 }
 
 std::shared_ptr<Phase> PhaseScope::StartPhase(const std::string& phase)
@@ -34,11 +34,11 @@ std::shared_ptr<Phase> PhaseScope::StartPhaseThreadSafe(const std::string& phase
 
 void PhaseScope::StopPhase()
 {
-	if (_phase)
-	{
-		_phase->StopPhase();
-		_phase.reset();
-	}
+    if (_phase)
+    {
+        _phase->StopPhase();
+        _phase.reset();
+    }
 }
 
 std::shared_ptr<PhaseScope> PhaseScope::ScopePhase(const std::string& phase)

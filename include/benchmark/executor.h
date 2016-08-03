@@ -23,7 +23,7 @@ class Executor
 public:
     Executor(const Executor&) = delete;
     Executor(Executor&&) = delete;
-    virtual ~Executor() = default;
+    ~Executor() = default;
 
     Executor& operator=(const Executor&) = delete;
     Executor& operator=(Executor&&) = delete;

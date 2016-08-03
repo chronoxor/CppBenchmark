@@ -32,7 +32,7 @@ public:
     ReporterConsole(std::ostream& stream = std::cout) : _stream(stream) {}
     ReporterConsole(const ReporterConsole&) = delete;
     ReporterConsole(ReporterConsole&&) = delete;
-    ~ReporterConsole() = default;
+    virtual ~ReporterConsole() = default;
 
     ReporterConsole& operator=(const ReporterConsole&) = delete;
     ReporterConsole& operator=(ReporterConsole&&) = delete;

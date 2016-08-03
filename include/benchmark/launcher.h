@@ -53,7 +53,7 @@ public:
     /*!
         \param reporter - Reporter interface
     */
-    void Report(Reporter& reporter);
+    void Report(Reporter& reporter) const;
 
 protected:
     //! Registered benchmarks collection
