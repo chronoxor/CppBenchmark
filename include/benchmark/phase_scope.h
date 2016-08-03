@@ -36,7 +36,7 @@ public:
 
     //! Is phase scope is valid?
     explicit operator bool() const noexcept
-    { return _phase ? true : false; }
+    { return _phase; }
 
     // Implementation of Phase
     const std::string& name() const noexcept override
