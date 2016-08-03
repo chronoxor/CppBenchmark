@@ -80,7 +80,7 @@ void LauncherConsole::Launch()
     }
 }
 
-void LauncherConsole::Report()
+void LauncherConsole::Report() const
 {
     if (_output == "console")
     {

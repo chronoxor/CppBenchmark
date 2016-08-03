@@ -76,8 +76,8 @@ class TestLauncher : public Launcher
 public:
     TestLauncher() : _launching(0), _launched(0) {}
 
-    int launching() { return _launching; }
-    int launched() { return _launched; }
+    int launching() const { return _launching; }
+    int launched() const { return _launched; }
 
     void Launch() { Launcher::Launch(".es."); }
 

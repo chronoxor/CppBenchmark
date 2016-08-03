@@ -46,7 +46,7 @@ public:
     //! Launch benchmarks executions and show progress in console
     void Launch();
     //! Report benchmarks results in console
-    void Report();
+    void Report() const;
 
 protected:
     // Implementation of LauncherHanlder

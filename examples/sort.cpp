@@ -209,7 +209,7 @@ protected:
     }
 
 private:
-    void ShellSortInternal(std::vector<int>& subitems, size_t d)
+    void ShellSortInternal(std::vector<int>& subitems, size_t d) const
     {
         for (size_t i = d; i < subitems.size(); ++i)
         {
@@ -252,7 +252,7 @@ protected:
     }
 
 private:
-    void MergeSortInternal(int* dst, int* src, size_t index, size_t size, size_t chunk)
+    static void MergeSortInternal(int* dst, int* src, size_t index, size_t size, size_t chunk)
     {
         size_t index1 = 0;
         size_t index2 = 0;
@@ -297,7 +297,7 @@ protected:
     }
 
 private:
-    void QuickSortInternal(std::vector<int>& subitems, size_t left, size_t right)
+    static void QuickSortInternal(std::vector<int>& subitems, size_t left, size_t right)
     {
         // Choose the pivot item
         int pivot = subitems[left + ((right - left) / 2) - 1];
@@ -348,7 +348,7 @@ protected:
     }
 
 private:
-    void QuickSort3Internal(std::vector<int>& subitems, size_t left, size_t right)
+    static void QuickSort3Internal(std::vector<int>& subitems, size_t left, size_t right)
     {
         // Choose the pivot item
         int pivot = subitems[left + ((right - left) / 2) - 1];
