@@ -44,7 +44,9 @@ public:
           _total_time(0),
           _total_iterations(0),
           _total_items(0),
-          _total_bytes(0)
+          _total_bytes(0),
+          _iterstamp(0),
+          _timestamp(0)
     {}
     PhaseMetrics(const PhaseMetrics&) = default;
     PhaseMetrics(PhaseMetrics&&) = default;

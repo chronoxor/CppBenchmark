@@ -12,7 +12,6 @@
 #include "benchmark/phase_metrics.h"
 
 #include <memory>
-#include <string>
 
 namespace CppBenchmark {
 
@@ -26,6 +25,14 @@ class PhaseScope;
 class Phase
 {
 public:
+    Phase() noexcept = default;
+    Phase(const Phase&) = default;
+    Phase(Phase&&) = default;
+    virtual ~Phase() = default;
+
+    Phase& operator=(const Phase&) = default;
+    Phase& operator=(Phase&&) = default;
+
     //! Get phase name
     virtual const std::string& name() const noexcept = 0;
     //! Get phase metrics

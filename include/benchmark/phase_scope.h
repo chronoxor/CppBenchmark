@@ -20,10 +20,6 @@ namespace CppBenchmark {
 */
 class PhaseScope : public Phase
 {
-private:
-    static const std::string EMPTY_NAME;
-    static PhaseMetrics EMPTY_METRICS;
-
 public:
     //! Create benchmark phase scope and attach existing benchmark phase to it
     /*!
@@ -55,6 +51,9 @@ public:
 
 private:
     std::shared_ptr<Phase> _phase;
+
+	static const std::string EMPTY_NAME;
+	static PhaseMetrics EMPTY_METRICS;
 };
 
 } // namespace CppBenchmark

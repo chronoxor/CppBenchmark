@@ -65,7 +65,7 @@ void Launcher::Report(Reporter& reporter)
     reporter.ReportFooter();
 }
 
-void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name)
+void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name) const
 {
     reporter.ReportPhaseHeader();
     reporter.ReportPhase(phase, phase.metrics());

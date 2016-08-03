@@ -10,13 +10,12 @@
 
 #include "benchmark/barrier.h"
 #include "benchmark/launcher_handler.h"
-#include "benchmark/system.h"
 
 namespace CppBenchmark {
 
 int BenchmarkPC::CountLaunches() const
 {
-    return _settings.attempts() * (_settings.pc().empty() ? 1 : (int)_settings.pc().size()) * (_settings.params().empty() ? 1 : (int)_settings.params().size());
+    return _settings.attempts() * (_settings.pc().empty() ? 1 : static_cast<int>(_settings.pc().size())) * (_settings.params().empty() ? 1 : static_cast<int>(_settings.params().size()));
 }
 
 void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)

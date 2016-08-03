@@ -30,7 +30,7 @@ public:
 
         \param stream - Output stream
     */
-    ReporterJSON(std::ostream& stream = std::cout) : _stream(stream) {}
+    ReporterJSON(std::ostream& stream = std::cout) : _stream(stream), _benchmark_comma(false), _phase_comma(false) {}
     ReporterJSON(const ReporterJSON&) = delete;
     ReporterJSON(ReporterJSON&&) = delete;
     ~ReporterJSON() = default;

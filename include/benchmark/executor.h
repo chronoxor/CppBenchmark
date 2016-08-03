@@ -75,7 +75,7 @@ protected:
 private:
     Executor() = default;
 
-    void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name);
+    void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name) const;
 
     //! Get singleton instance
     static Executor& GetInstance()

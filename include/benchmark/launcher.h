@@ -60,7 +60,7 @@ protected:
     std::vector<std::shared_ptr<Benchmark>> _benchmarks;
 
 private:
-    void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name);
+    void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name) const;
 };
 
 } // namespace CppBenchmark

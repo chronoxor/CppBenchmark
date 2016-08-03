@@ -15,7 +15,11 @@ PhaseMetrics PhaseScope::EMPTY_METRICS;
 
 PhaseScope::~PhaseScope()
 {
-    StopPhase();
+	if (_phase)
+	{
+		_phase->StopPhase();
+		_phase.reset();
+	}
 }
 
 std::shared_ptr<Phase> PhaseScope::StartPhase(const std::string& phase)
@@ -30,11 +34,11 @@ std::shared_ptr<Phase> PhaseScope::StartPhaseThreadSafe(const std::string& phase
 
 void PhaseScope::StopPhase()
 {
-    if (_phase)
-    {
-        _phase->StopPhase();
-        _phase.reset();
-    }
+	if (_phase)
+	{
+		_phase->StopPhase();
+		_phase.reset();
+	}
 }
 
 std::shared_ptr<PhaseScope> PhaseScope::ScopePhase(const std::string& phase)

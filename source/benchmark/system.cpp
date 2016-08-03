@@ -8,9 +8,6 @@
 
 #include "benchmark/system.h"
 
-#include <fstream>
-#include <regex>
-
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #elif defined(unix) || defined(__unix) || defined(__unix__)
@@ -30,7 +27,7 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
 {
     DWORD dwLeftShift = sizeof(ULONG_PTR) * 8 - 1;
     DWORD dwBitSetCount = 0;
-    ULONG_PTR pBitTest = (ULONG_PTR)1 << dwLeftShift;
+    ULONG_PTR pBitTest = static_cast<ULONG_PTR>(1) << dwLeftShift;
 
     for (DWORD i = 0; i <= dwLeftShift; ++i)
     {
@@ -55,7 +52,7 @@ std::string System::CpuArchitecture()
 
     CHAR pBuffer[_MAX_PATH] = { 0 };
     DWORD dwBufferSize = _MAX_PATH;
-    lError = RegQueryValueExA(hKey, "ProcessorNameString", nullptr, nullptr, (LPBYTE)pBuffer, &dwBufferSize);
+    lError = RegQueryValueExA(hKey, "ProcessorNameString", nullptr, nullptr, reinterpret_cast<LPBYTE>(pBuffer), &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
@@ -102,7 +99,7 @@ std::pair<int, int> System::CpuTotalCores()
             {
                 if (pBuffer != nullptr)
                     free(pBuffer);
-                pBuffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION)malloc(dwLength);
+                pBuffer = static_cast<PSYSTEM_LOGICAL_PROCESSOR_INFORMATION>(malloc(dwLength));
                 if (pBuffer == nullptr)
                     return std::make_pair(-1, -1);
             }
@@ -156,7 +153,7 @@ int64_t System::CpuClockSpeed()
 
     DWORD dwMHz = 0;
     DWORD dwBufferSize = sizeof(DWORD);
-    lError = RegQueryValueExA(hKey, "~MHz", nullptr, nullptr, (LPBYTE)&dwMHz, &dwBufferSize);
+    lError = RegQueryValueExA(hKey, "~MHz", nullptr, nullptr, reinterpret_cast<LPBYTE>(&dwMHz), &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return -1;
 

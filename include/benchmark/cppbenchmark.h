@@ -31,8 +31,6 @@ GitHub: https://github.com/chronoxor/CppBenchmark
 #include "benchmark/reporter_csv.h"
 #include "benchmark/reporter_json.h"
 
-#include <sstream>
-
 namespace CppBenchmark {
 
 //! @cond

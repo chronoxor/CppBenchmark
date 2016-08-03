@@ -134,7 +134,7 @@ void Executor::Report(Reporter& reporter)
     reporter.ReportFooter();
 }
 
-void Executor::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name)
+void Executor::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name) const
 {
     reporter.ReportPhaseHeader();
     reporter.ReportPhase(phase, phase.metrics());

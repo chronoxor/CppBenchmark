@@ -8,8 +8,6 @@
 
 #include "benchmark/console.h"
 
-#include <cstdio>
-
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #endif
@@ -32,7 +30,7 @@ void Console::SetColor(Color color, Color background)
 {
 #if defined(_WIN32) || defined(_WIN64)
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, (((WORD)color) & 0x0F) + ((((WORD)background) & 0x0F) << 4));
+    SetConsoleTextAttribute(hConsole, (static_cast<WORD>(color) & 0x0F) + ((static_cast<WORD>(background) & 0x0F) << 4));
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     const char* colors[] =
     {

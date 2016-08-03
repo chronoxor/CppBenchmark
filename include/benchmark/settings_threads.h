@@ -10,7 +10,6 @@
 #define CPPBENCHMARK_SETTINGS_THREADS_H
 
 #include "benchmark/settings.h"
-#include "benchmark/system.h"
 
 namespace CppBenchmark {
 

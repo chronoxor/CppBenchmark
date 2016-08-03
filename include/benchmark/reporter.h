@@ -23,7 +23,7 @@ public:
     Reporter() = default;
     Reporter(const Reporter&) = delete;
     Reporter(Reporter&&) = delete;
-    ~Reporter() = default;
+    virtual ~Reporter() = default;
 
     Reporter& operator=(const Reporter&) = delete;
     Reporter& operator=(Reporter&&) = delete;

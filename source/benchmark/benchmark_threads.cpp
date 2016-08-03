@@ -16,7 +16,7 @@ namespace CppBenchmark {
 
 int BenchmarkThreads::CountLaunches() const
 {
-    return _settings.attempts() * (_settings.threads().empty() ? 1 : (int)_settings.threads().size()) * (_settings.params().empty() ? 1 : (int)_settings.params().size());
+    return _settings.attempts() * (_settings.threads().empty() ? 1 : static_cast<int>(_settings.threads().size())) * (_settings.params().empty() ? 1 : static_cast<int>(_settings.params().size()));
 }
 
 void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)

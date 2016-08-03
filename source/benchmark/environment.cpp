@@ -9,8 +9,6 @@
 #include "benchmark/environment.h"
 
 #include <chrono>
-#include <regex>
-#include <fstream>
 #include <sstream>
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -87,14 +85,14 @@ std::string Environment::OSVersion()
     ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
     osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
 
-    BOOL bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*)&osvi);
+    BOOL bOsVersionInfoEx = GetVersionEx(reinterpret_cast<OSVERSIONINFO*>(&osvi));
     if (bOsVersionInfoEx == 0)
         return "<windows>";
 
     SYSTEM_INFO si;
     ZeroMemory(&si, sizeof(SYSTEM_INFO));
 
-    PGNSI pGNSI = (PGNSI)GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNativeSystemInfo");
+    PGNSI pGNSI = reinterpret_cast<PGNSI>(GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNativeSystemInfo"));
     if (pGNSI != nullptr)
         pGNSI(&si);
     else
@@ -154,7 +152,7 @@ std::string Environment::OSVersion()
         }
 
         DWORD dwType;
-        PGPI pGPI = (PGPI)GetProcAddress(GetModuleHandle("kernel32.dll"), "GetProductInfo");
+        PGPI pGPI = reinterpret_cast<PGPI>(GetProcAddress(GetModuleHandle("kernel32.dll"), "GetProductInfo"));
         pGPI(osvi.dwMajorVersion, osvi.dwMinorVersion, 0, 0, &dwType);
         switch (dwType)
         {
