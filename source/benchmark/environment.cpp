@@ -9,13 +9,14 @@
 #include "benchmark/environment.h"
 
 #include <chrono>
-#include <regex>
 #include <sstream>
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #elif defined(linux) || defined(__linux) || defined(__linux__)
 #include <sys/stat.h>
+#include <fstream>
+#include <regex>
 #endif
 
 namespace CppBenchmark {
