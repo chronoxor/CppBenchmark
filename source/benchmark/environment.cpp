@@ -9,6 +9,7 @@
 #include "benchmark/environment.h"
 
 #include <chrono>
+#include <regex>
 #include <sstream>
 
 #if defined(_WIN32) || defined(_WIN64)
