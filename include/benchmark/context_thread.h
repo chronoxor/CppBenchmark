@@ -15,7 +15,7 @@ namespace CppBenchmark {
 
 //! Benchmark thread running context
 /*!
-    Provides access to the current thread benchmark context information:
+    Provides access to the current threads benchmark context information:
     - Benchmark parameters (x, y, z)
     - Benchmark threads count
     - Benchmark metrics

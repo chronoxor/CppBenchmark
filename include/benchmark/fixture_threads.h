@@ -14,20 +14,21 @@
 
 namespace CppBenchmark {
 
-//! Threads benchmark fixture
+//! Threads benchmark context fixture
 /*!
     Provides interface to initialize and cleanup threads benchmarks.
 */
-class FixtureThreads : public virtual Fixture
+template <class TContext>
+class ContextFixtureThreads : public virtual ContextFixture<TContext>
 {
 public:
-    FixtureThreads() noexcept = default;
-    FixtureThreads(const FixtureThreads&) noexcept = default;
-    FixtureThreads(FixtureThreads&&) noexcept = default;
-    virtual ~FixtureThreads() noexcept = default;
+    ContextFixtureThreads() noexcept = default;
+    ContextFixtureThreads(const ContextFixtureThreads&) noexcept = default;
+    ContextFixtureThreads(ContextFixtureThreads&&) noexcept = default;
+    virtual ~ContextFixtureThreads() noexcept = default;
 
-    FixtureThreads& operator=(const FixtureThreads&) noexcept = default;
-    FixtureThreads& operator=(FixtureThreads&&) noexcept = default;
+    ContextFixtureThreads& operator=(const ContextFixtureThreads&) noexcept = default;
+    ContextFixtureThreads& operator=(ContextFixtureThreads&&) noexcept = default;
 
 protected:
     //! Initialize thread
@@ -36,15 +37,18 @@ protected:
 
         \param context - Thread running context
     */
-    virtual void InitializeThread(ContextThread& context) {}
+    virtual void InitializeThread(TContext& context) {}
     //! Cleanup thread
     /*!
         This method is called to cleanup benchmark thread.
 
         \param context - Thread running context
     */
-    virtual void CleanupThread(ContextThread& context) {}
+    virtual void CleanupThread(TContext& context) {}
 };
+
+//! Producers/Consumers benchmark fixture
+typedef ContextFixtureThreads<ContextThread> FixtureThreads;
 
 } // namespace CppBenchmark
 

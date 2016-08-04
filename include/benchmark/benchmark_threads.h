@@ -24,8 +24,6 @@ namespace CppBenchmark {
 */
 class BenchmarkThreads : public Benchmark, public virtual FixtureThreads
 {
-    friend class BenchmarkPC;
-
 public:
     //! BenchmarkThreads settings type
     typedef SettingsThreads TSettings;
@@ -55,7 +53,7 @@ protected:
     /*!
         Should be implemented to provide code which will be executed in separate thread!
 
-        \param context - Thread running context
+        \param context - Threads running context
     */
     virtual void RunThread(ContextThread& context) = 0;
 

@@ -14,20 +14,21 @@
 
 namespace CppBenchmark {
 
-//! Producers/Consumers benchmark fixture
+//! Producers/Consumers benchmark context fixture
 /*!
     Provides interface to initialize and cleanup producers/consumers benchmarks.
 */
-class FixturePC : public virtual Fixture
+template <class TContext>
+class ContextFixturePC : public virtual ContextFixture<TContext>
 {
 public:
-    FixturePC() noexcept = default;
-    FixturePC(const FixturePC&) noexcept = default;
-    FixturePC(FixturePC&&) noexcept = default;
-    virtual ~FixturePC() noexcept = default;
+    ContextFixturePC() noexcept = default;
+    ContextFixturePC(const ContextFixturePC&) noexcept = default;
+    ContextFixturePC(ContextFixturePC&&) noexcept = default;
+    virtual ~ContextFixturePC() noexcept = default;
 
-    FixturePC& operator=(const FixturePC&) noexcept = default;
-    FixturePC& operator=(FixturePC&&) noexcept = default;
+    ContextFixturePC& operator=(const ContextFixturePC&) noexcept = default;
+    ContextFixturePC& operator=(ContextFixturePC&&) noexcept = default;
 
 protected:
     //! Initialize producer
@@ -36,29 +37,32 @@ protected:
 
         \param context - Producer running context
     */
-    virtual void InitializeProducer(ContextPC& context) {}
+    virtual void InitializeProducer(TContext& context) {}
     //! Initialize consumer
     /*!
         This method is called to initialize consumer in separate thread.
 
         \param context - Consumer running context
     */
-    virtual void InitializeConsumer(ContextPC& context) {}
+    virtual void InitializeConsumer(TContext& context) {}
     //! Cleanup producer
     /*!
         This method is called to cleanup producer in separate thread.
 
         \param context - Producer running context
     */
-    virtual void CleanupProducer(ContextPC& context) {}
+    virtual void CleanupProducer(TContext& context) {}
     //! Cleanup consumer
     /*!
         This method is called to cleanup consumer in separate thread.
 
         \param context - Consumer running context
     */
-    virtual void CleanupConsumer(ContextPC& context) {}
+    virtual void CleanupConsumer(TContext& context) {}
 };
+
+//! Producers/Consumers benchmark fixture
+typedef ContextFixturePC<ContextPC> FixturePC;
 
 } // namespace CppBenchmark
 

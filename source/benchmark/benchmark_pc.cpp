@@ -49,8 +49,9 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Call launching notification...
                 handler.onLaunching(++current, total, *this, context, attempt);
 
-                // Call initialize benchmark method...
-                Initialize(context);
+                // Call initialize benchmark methods...
+                Fixture::Initialize(context);
+                FixturePC::Initialize(context);
 
                 bool infinite = _settings.infinite();
                 int64_t iterations = _settings.iterations();
@@ -162,8 +163,9 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Stop benchmark root phase iteration
                 context._current->StopCollectingMetrics();
 
-                // Call cleanup benchmark method...
-                Cleanup(context);
+                // Call cleanup benchmark methods...
+                Fixture::Cleanup(context);
+                FixturePC::Cleanup(context);
 
                 // Call launched notification...
                 handler.onLaunched(current, total, *this, context, attempt);

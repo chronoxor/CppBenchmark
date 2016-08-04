@@ -13,20 +13,21 @@
 
 namespace CppBenchmark {
 
-//! Benchmark fixture
+//! Benchmark context fixture
 /*!
     Provides interface to initialize and cleanup benchmarks.
 */
-class Fixture
+template <class TContext>
+class ContextFixture
 {
 public:
-    Fixture() noexcept = default;
-    Fixture(const Fixture&) noexcept = default;
-    Fixture(Fixture&&) noexcept = default;
-    virtual ~Fixture() noexcept = default;
+    ContextFixture() noexcept = default;
+    ContextFixture(const ContextFixture&) noexcept = default;
+    ContextFixture(ContextFixture&&) noexcept = default;
+    virtual ~ContextFixture() noexcept = default;
 
-    Fixture& operator=(const Fixture&) noexcept = default;
-    Fixture& operator=(Fixture&&) noexcept = default;
+    ContextFixture& operator=(const ContextFixture&) noexcept = default;
+    ContextFixture& operator=(ContextFixture&&) noexcept = default;
 
 protected:
     //! Initialize benchmark
@@ -35,15 +36,18 @@ protected:
 
         \param context - Benchmark running context
     */
-    virtual void Initialize(Context& context) {}
+    virtual void Initialize(TContext& context) {}
     //! Cleanup benchmark
     /*!
         This method is called after benchmark run method.
 
         \param context - Benchmark running context
     */
-    virtual void Cleanup(Context& context) {}
+    virtual void Cleanup(TContext& context) {}
 };
+
+//! Benchmark fixture
+typedef ContextFixture<Context> Fixture;
 
 } // namespace CppBenchmark
 
