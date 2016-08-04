@@ -14,16 +14,12 @@ class UnsynchronizedFixture
 {
 protected:
     int counter;
-
-    UnsynchronizedFixture() : counter(0) {}
 };
 
 class AtomicFixture
 {
 protected:
     std::atomic<int> counter;
-
-    AtomicFixture() : counter(0) {}
 };
 
 class MutexFixture
@@ -31,8 +27,6 @@ class MutexFixture
 protected:
     std::mutex mutex;
     int counter;
-
-    MutexFixture() : mutex(), counter(0) {}
 };
 
 BENCHMARK_THREADS_FIXTURE(UnsynchronizedFixture, "unsynchronized++", settings)
