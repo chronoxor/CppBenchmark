@@ -19,12 +19,12 @@ int64_t PhaseMetrics::avg_time() const noexcept
 
 int64_t PhaseMetrics::min_time() const noexcept
 {
-    return _min_time;
+    return (_total_iterations > 0) ? (_min_time / _total_iterations) : _min_time;
 }
 
 int64_t PhaseMetrics::max_time() const noexcept
 {
-    return _max_time;
+    return (_total_iterations > 0) ? (_max_time / _total_iterations) : _max_time;
 }
 
 int64_t PhaseMetrics::iterations_per_second() const noexcept
@@ -69,15 +69,13 @@ void PhaseMetrics::StartCollecting() noexcept
 void PhaseMetrics::StopCollecting() noexcept
 {
     // Get iterations count & duration
-    int64_t iterations = _total_iterations - _iterstamp;
     int64_t total_duration = System::Timestamp() - _timestamp;
-    int64_t average_duration = total_duration / ((iterations > 0) ? iterations : 1);
 
     // Update time counters
-    if (average_duration < _min_time)
-        _min_time = average_duration;
-    if (average_duration > _max_time)
-        _max_time = average_duration;
+    if (total_duration < _min_time)
+        _min_time = total_duration;
+    if (total_duration > _max_time)
+        _max_time = total_duration;
     _total_time += total_duration;
 }
 
