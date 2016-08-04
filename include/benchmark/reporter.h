@@ -9,7 +9,7 @@
 #ifndef CPPBENCHMARK_REPORTER_H
 #define CPPBENCHMARK_REPORTER_H
 
-#include "benchmark/benchmark.h"
+#include "benchmark/benchmark_base.h"
 
 namespace CppBenchmark {
 
@@ -47,7 +47,7 @@ public:
         \param benchmark - Current benchmark
         \param settings - Current benchmark settings
     */
-    virtual void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) {}
+    virtual void ReportBenchmark(const BenchmarkBase& benchmark, const Settings& settings) {}
     //! Report all phases header
     virtual void ReportPhasesHeader() {}
     //! Report all phases footer

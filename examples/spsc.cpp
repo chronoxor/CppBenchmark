@@ -24,13 +24,13 @@ public:
     using BenchmarkPC::BenchmarkPC;
 
 protected:
-    void Initialize(CppBenchmark::Context& context) override
+    void Initialize(CppBenchmark::ContextPC& context) override
     {
         _queue = std::make_shared<TReaderWriterQueue>();
         _count = 1;
     }
 
-    void Cleanup(CppBenchmark::Context& context) override
+    void Cleanup(CppBenchmark::ContextPC& context) override
     {
         _queue.reset();
     }
@@ -66,13 +66,13 @@ public:
     using BenchmarkPC::BenchmarkPC;
 
 protected:
-    void Initialize(CppBenchmark::Context& context) override
+    void Initialize(CppBenchmark::ContextPC& context) override
     {
         _queue = std::make_shared<folly::ProducerConsumerQueue<int>>(queue_bound_size);
         _count = 1;
     }
 
-    void Cleanup(CppBenchmark::Context& context) override
+    void Cleanup(CppBenchmark::ContextPC& context) override
     {
         _queue.reset();
     }
@@ -108,13 +108,13 @@ public:
     using BenchmarkPC::BenchmarkPC;
 
 protected:
-    void Initialize(CppBenchmark::Context& context) override
+    void Initialize(CppBenchmark::ContextPC& context) override
     {
         _queue = std::make_shared<spsc_queue_t<int>>();
         _count = 1;
     }
 
-    void Cleanup(CppBenchmark::Context& context) override
+    void Cleanup(CppBenchmark::ContextPC& context) override
     {
         _queue.reset();
     }
@@ -149,13 +149,13 @@ public:
     using BenchmarkPC::BenchmarkPC;
 
 protected:
-    void Initialize(CppBenchmark::Context& context) override
+    void Initialize(CppBenchmark::ContextPC& context) override
     {
         _queue = std::make_shared<spsc_bounded_queue_t<int>>(queue_bound_size);
         _count = 1;
     }
 
-    void Cleanup(CppBenchmark::Context& context) override
+    void Cleanup(CppBenchmark::ContextPC& context) override
     {
         _queue.reset();
     }
@@ -193,13 +193,13 @@ public:
     using BenchmarkPC::BenchmarkPC;
 
 protected:
-    void Initialize(CppBenchmark::Context& context) override
+    void Initialize(CppBenchmark::ContextPC& context) override
     {
         _queue = std::make_shared<lock_bounded_queue_t<int>>(queue_bound_size);
         _count = 1;
     }
 
-    void Cleanup(CppBenchmark::Context& context) override
+    void Cleanup(CppBenchmark::ContextPC& context) override
     {
         _queue.reset();
     }

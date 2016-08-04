@@ -25,6 +25,7 @@ namespace CppBenchmark {
 */
 class PhaseCore : public Phase
 {
+    friend class BenchmarkBase;
     friend class Benchmark;
     friend class BenchmarkPC;
     friend class BenchmarkThreads;

@@ -50,8 +50,8 @@ public:
 
 protected:
     // Implementation of LauncherHanlder
-    void onLaunching(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) override;
-    void onLaunched(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) override;
+    void onLaunching(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt) override;
+    void onLaunched(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt) override;
 
 private:
     bool _init;

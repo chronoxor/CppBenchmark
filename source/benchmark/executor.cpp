@@ -19,7 +19,7 @@ namespace Internals {
 /*!
     Provides interface to wrap dynamic benchmark.
 */
-class DynamicBenchmark : public Benchmark
+class DynamicBenchmark : public BenchmarkBase
 {
 public:
     //! Dynamic benchmark settings type
@@ -31,7 +31,7 @@ public:
         \param settings - Benchmark settings
     */
     explicit DynamicBenchmark(const std::string& name, const TSettings& settings = TSettings())
-            : Benchmark(name, settings)
+            : BenchmarkBase(name, settings)
     {}
     DynamicBenchmark(const DynamicBenchmark&) = delete;
     DynamicBenchmark(DynamicBenchmark&&) = delete;
@@ -39,10 +39,6 @@ public:
 
     DynamicBenchmark& operator=(const DynamicBenchmark&) = delete;
     DynamicBenchmark& operator=(DynamicBenchmark&&) = delete;
-
-protected:
-    // Implementation of Benchmark
-    void Run(Context& context) override {}
 };
 
 } // namespace Internals
@@ -105,8 +101,8 @@ void Executor::Report(Reporter& reporter)
 
     std::lock_guard<std::mutex> lock(instance._mutex);
 
-    Benchmark::UpdateBenchmarkMetrics(instance._benchmarks);
-    Benchmark::UpdateBenchmarkThreads(instance._benchmarks);
+    BenchmarkBase::UpdateBenchmarkMetrics(instance._benchmarks);
+    BenchmarkBase::UpdateBenchmarkThreads(instance._benchmarks);
 
     // Report header, system & environment
     reporter.ReportHeader();

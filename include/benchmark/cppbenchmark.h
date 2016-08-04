@@ -39,7 +39,7 @@ namespace Internals {
 class BenchmarkRegistrator
 {
 public:
-    explicit BenchmarkRegistrator(std::shared_ptr<Benchmark> benchmark)
+    explicit BenchmarkRegistrator(std::shared_ptr<BenchmarkBase> benchmark)
     { LauncherConsole::GetInstance().AddBenchmark(benchmark); }
 };
 

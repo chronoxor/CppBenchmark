@@ -36,7 +36,7 @@ public:
     /*!
         \param benchmark - Benchmark to register
     */
-    void AddBenchmark(std::shared_ptr<Benchmark> benchmark) { _benchmarks.emplace_back(benchmark); }
+    void AddBenchmark(std::shared_ptr<BenchmarkBase> benchmark) { _benchmarks.emplace_back(benchmark); }
     //! Clear benchmarks collection
     void ClearAllBenchmarks() { _benchmarks.clear(); }
 
@@ -57,7 +57,7 @@ public:
 
 protected:
     //! Registered benchmarks collection
-    std::vector<std::shared_ptr<Benchmark>> _benchmarks;
+    std::vector<std::shared_ptr<BenchmarkBase>> _benchmarks;
 
 private:
     void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name) const;

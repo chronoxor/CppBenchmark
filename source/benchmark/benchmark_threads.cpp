@@ -48,8 +48,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 handler.onLaunching(++current, total, *this, context, attempt);
 
                 // Call initialize benchmark methods...
-                Fixture::Initialize(context);
-                FixtureThreads::Initialize(context);
+                Initialize(context);
 
                 bool infinite = _settings.infinite();
                 int64_t iterations = _settings.iterations();
@@ -120,8 +119,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 context._current->StopCollectingMetrics();
 
                 // Call cleanup benchmark method...
-                Fixture::Cleanup(context);
-                FixtureThreads::Cleanup(context);
+                Cleanup(context);
 
                 // Call launched notification...
                 handler.onLaunched(current, total, *this, context, attempt);

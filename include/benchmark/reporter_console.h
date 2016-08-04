@@ -41,7 +41,7 @@ public:
     void ReportHeader() override;
     void ReportSystem() override;
     void ReportEnvironment() override;
-    void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) override;
+    void ReportBenchmark(const BenchmarkBase& benchmark, const Settings& settings) override;
     void ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics) override;
     void ReportFooter() override;
 

@@ -9,7 +9,7 @@
 #ifndef CPPBENCHMARK_BENCHMARK_PC_H
 #define CPPBENCHMARK_BENCHMARK_PC_H
 
-#include "benchmark/benchmark.h"
+#include "benchmark/benchmark_base.h"
 #include "benchmark/context_pc.h"
 #include "benchmark/fixture_pc.h"
 #include "benchmark/settings_pc.h"
@@ -20,7 +20,7 @@ namespace CppBenchmark {
 /*!
     Provides interface to perform benchmark of the producers/consumers pattern in multi-thread environment.
 */
-class BenchmarkPC : public Benchmark, public virtual FixturePC
+class BenchmarkPC : public BenchmarkBase, public virtual FixturePC
 {
 public:
     //! BenchmarkPC settings type
@@ -38,7 +38,7 @@ public:
         \param name - Benchmark name
         \param settings - Benchmark settings
     */
-    explicit BenchmarkPC(const std::string& name, const TSettings& settings) : Benchmark(name, settings) {}
+    explicit BenchmarkPC(const std::string& name, const TSettings& settings) : BenchmarkBase(name, settings) {}
     BenchmarkPC(const BenchmarkPC&) = delete;
     BenchmarkPC(BenchmarkPC&&) = delete;
     virtual ~BenchmarkPC() = default;
@@ -69,9 +69,6 @@ private:
 
     int CountLaunches() const override;
     void Launch(int& current, int total, LauncherHandler& handler) override;
-
-    // Hide base benchmark run method
-    void Run(Context& context) override {}
 };
 
 /*! \example spsc.cpp Single producer, single consumer benchmark */

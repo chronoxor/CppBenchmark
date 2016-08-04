@@ -92,7 +92,7 @@ void ReporterJSON::ReportBenchmarkFooter()
     _stream << Internals::indent2 <<  "}";
 }
 
-void ReporterJSON::ReportBenchmark(const Benchmark& benchmark, const Settings& settings)
+void ReporterJSON::ReportBenchmark(const BenchmarkBase& benchmark, const Settings& settings)
 {
     _stream << Internals::indent4 << "\"name\": \"" << benchmark.name() << "\",\n";
     _stream << Internals::indent4 << "\"attempts\": " << settings.attempts() << ",\n";

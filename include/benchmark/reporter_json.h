@@ -46,7 +46,7 @@ public:
     void ReportBenchmarksFooter() override;
     void ReportBenchmarkHeader() override;
     void ReportBenchmarkFooter() override;
-    void ReportBenchmark(const Benchmark& benchmark, const Settings& settings) override;
+    void ReportBenchmark(const BenchmarkBase& benchmark, const Settings& settings) override;
     void ReportPhasesHeader() override;
     void ReportPhasesFooter() override;
     void ReportPhaseHeader() override;

@@ -9,7 +9,7 @@
 #ifndef CPPBENCHMARK_BENCHMARK_THREADS_H
 #define CPPBENCHMARK_BENCHMARK_THREADS_H
 
-#include "benchmark/benchmark.h"
+#include "benchmark/benchmark_base.h"
 #include "benchmark/context_threads.h"
 #include "benchmark/fixture_threads.h"
 #include "benchmark/settings_threads.h"
@@ -22,7 +22,7 @@ namespace CppBenchmark {
 /*!
     Provides interface to perform benchmark in multi-thread environment.
 */
-class BenchmarkThreads : public Benchmark, public virtual FixtureThreads
+class BenchmarkThreads : public BenchmarkBase, public virtual FixtureThreads
 {
 public:
     //! BenchmarkThreads settings type
@@ -40,7 +40,7 @@ public:
         \param name - Benchmark name
         \param settings - Benchmark settings
     */
-    explicit BenchmarkThreads(const std::string& name, const TSettings& settings) : Benchmark(name, settings) {}
+    explicit BenchmarkThreads(const std::string& name, const TSettings& settings) : BenchmarkBase(name, settings) {}
     BenchmarkThreads(const BenchmarkThreads&) = delete;
     BenchmarkThreads(BenchmarkThreads&&) = delete;
     virtual ~BenchmarkThreads() = default;
@@ -62,9 +62,6 @@ private:
 
     int CountLaunches() const override;
     void Launch(int& current, int total, LauncherHandler& handler) override;
-
-    // Hide base benchmark run method
-    void Run(Context& context) override {}
 };
 
 /*! \example threads.cpp Threads integer increment benchmark */

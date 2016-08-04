@@ -25,6 +25,7 @@ namespace CppBenchmark {
 */
 class Context : public Phase
 {
+    friend class BenchmarkBase;
     friend class Benchmark;
 
 public:

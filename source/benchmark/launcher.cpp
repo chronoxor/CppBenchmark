@@ -16,7 +16,7 @@ void Launcher::Launch(const std::string& pattern)
 {
     int current = 0;
     int total = 0;
-    std::vector<std::shared_ptr<Benchmark>> benchmarks;
+    std::vector<std::shared_ptr<BenchmarkBase>> benchmarks;
 
     // Filter benchmarks
     std::regex matcher(pattern);

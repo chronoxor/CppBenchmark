@@ -47,7 +47,7 @@ void ReporterConsole::ReportEnvironment()
     _stream << Color::WHITE << "UTC timestamp: " << Color::DARKGREY << std::asctime(std::gmtime(&timestamp));
 }
 
-void ReporterConsole::ReportBenchmark(const Benchmark& benchmark, const Settings& settings)
+void ReporterConsole::ReportBenchmark(const BenchmarkBase& benchmark, const Settings& settings)
 {
     _stream << Color::DARKGREY << GenerateSeparator('=') << std::endl;
     _stream << Color::WHITE << "Benchmark: " << Color::LIGHTCYAN << benchmark.name() << std::endl;

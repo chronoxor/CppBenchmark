@@ -9,7 +9,7 @@
 #ifndef CPPBENCHMARK_LAUNCHER_HANDLER_H
 #define CPPBENCHMARK_LAUNCHER_HANDLER_H
 
-#include "benchmark/benchmark.h"
+#include "benchmark/benchmark_base.h"
 #include "benchmark/benchmark_threads.h"
 
 namespace CppBenchmark {
@@ -44,7 +44,7 @@ protected:
         \param context - Benchmark running context
         \param attempt - Benchmark attempt
     */
-    virtual void onLaunching(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) {}
+    virtual void onLaunching(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt) {}
     //! Handle benchmark launched notification
     /*!
         This method is called after launched the given benchmark.
@@ -55,7 +55,7 @@ protected:
         \param context - Benchmark running context
         \param attempt - Benchmark attempt
     */
-    virtual void onLaunched(int current, int total, const Benchmark& benchmark, const Context& context, int attempt) {}
+    virtual void onLaunched(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt) {}
 };
 
 } // namespace CppBenchmark
