@@ -1,16 +1,16 @@
 /*!
-    \file context_thread.cpp
+    \file context_threads.cpp
     \brief Benchmark thread running context implementation
     \author Ivan Shynkarenka
     \date 21.07.2015
     \copyright MIT License
 */
 
-#include "benchmark/context_thread.h"
+#include "benchmark/context_threads.h"
 
 namespace CppBenchmark {
 
-std::string ContextThread::to_string() const
+std::string ContextThreads::to_string() const
 {
     if ((_x < 0) && (_y < 0) && (_z < 0))
         return "(threads:" + std::to_string(_threads) + ")";

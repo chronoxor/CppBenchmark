@@ -9,7 +9,7 @@
 #ifndef CPPBENCHMARK_FIXTURE_THREADS_H
 #define CPPBENCHMARK_FIXTURE_THREADS_H
 
-#include "benchmark/context_thread.h"
+#include "benchmark/context_threads.h"
 #include "benchmark/fixture.h"
 
 namespace CppBenchmark {
@@ -48,7 +48,7 @@ protected:
 };
 
 //! Producers/Consumers benchmark fixture
-typedef ContextFixtureThreads<ContextThread> FixtureThreads;
+typedef ContextFixtureThreads<ContextThreads> FixtureThreads;
 
 } // namespace CppBenchmark
 

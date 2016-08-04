@@ -39,7 +39,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
             for (auto& param : _settings.params())
             {
                 // Prepare benchmark context
-                ContextThread context(threads, std::get<0>(param), std::get<1>(param), std::get<2>(param));
+                ContextThreads context(threads, std::get<0>(param), std::get<1>(param), std::get<2>(param));
 
                 // Initialize the current benchmark
                 InitBenchmarkContext(context);
@@ -67,7 +67,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                     _threads.push_back(std::thread([this, &barrier, &context, threads, infinite, iterations]()
                     {
                         // Clone thread context
-                        ContextThread thread_context(context);
+                        ContextThreads thread_context(context);
 
                         // Create and start thread safe phase
                         std::shared_ptr<Phase> thread_phase = context.StartPhaseThreadSafe("thread");

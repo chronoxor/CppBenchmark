@@ -10,7 +10,7 @@
 #define CPPBENCHMARK_BENCHMARK_THREADS_H
 
 #include "benchmark/benchmark.h"
-#include "benchmark/context_thread.h"
+#include "benchmark/context_threads.h"
 #include "benchmark/fixture_threads.h"
 #include "benchmark/settings_threads.h"
 
@@ -55,7 +55,7 @@ protected:
 
         \param context - Threads running context
     */
-    virtual void RunThread(ContextThread& context) = 0;
+    virtual void RunThread(ContextThreads& context) = 0;
 
 private:
     std::vector<std::thread> _threads;
