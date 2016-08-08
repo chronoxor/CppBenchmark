@@ -14,6 +14,8 @@
 #include "benchmark/fixture_pc.h"
 #include "benchmark/settings_pc.h"
 
+#include <thread>
+
 namespace CppBenchmark {
 
 //! Producers/Consumers benchmark base class
