@@ -80,8 +80,8 @@ bool Environment::IsRelease()
 std::string Environment::OSVersion()
 {
 #if defined(_WIN32) || defined(_WIN64)
-    typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
-    typedef BOOL (WINAPI *PGPI)(DWORD, DWORD, DWORD, DWORD, PDWORD);
+    static void(__stdcall *GetNativeSystemInfo)(OUT LPSYSTEM_INFO lpSystemInfo) = (void(__stdcall*)(LPSYSTEM_INFO))GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNativeSystemInfo");
+    static BOOL(__stdcall *GetProductInfo)(IN DWORD dwOSMajorVersion, IN DWORD dwOSMinorVersion, IN DWORD dwSpMajorVersion, IN DWORD dwSpMinorVersion, OUT PDWORD pdwReturnedProductType) = (BOOL(__stdcall*)(DWORD, DWORD, DWORD, DWORD, PDWORD))GetProcAddress(GetModuleHandle("kernel32.dll"), "GetProductInfo");
 
     OSVERSIONINFOEX osvi;
     ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
@@ -94,9 +94,8 @@ std::string Environment::OSVersion()
     SYSTEM_INFO si;
     ZeroMemory(&si, sizeof(SYSTEM_INFO));
 
-    PGNSI pGNSI = (PGNSI)GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNativeSystemInfo");
-    if (pGNSI != nullptr)
-        pGNSI(&si);
+    if (GetNativeSystemInfo != nullptr)
+        GetNativeSystemInfo(&si);
     else
         GetSystemInfo(&si);
 
@@ -154,64 +153,65 @@ std::string Environment::OSVersion()
         }
 
         DWORD dwType;
-        PGPI pGPI = (PGPI)GetProcAddress(GetModuleHandle("kernel32.dll"), "GetProductInfo");
-        pGPI(osvi.dwMajorVersion, osvi.dwMinorVersion, 0, 0, &dwType);
-        switch (dwType)
+        if ((GetProductInfo != nullptr) && GetProductInfo(osvi.dwMajorVersion, osvi.dwMinorVersion, 0, 0, &dwType))
         {
-            case PRODUCT_ULTIMATE:
-                os << "Ultimate Edition";
-                break;
-            case PRODUCT_PROFESSIONAL:
-                os << "Professional";
-                break;
-            case PRODUCT_HOME_PREMIUM:
-                os << "Home Premium Edition";
-                break;
-            case PRODUCT_HOME_BASIC:
-                os << "Home Basic Edition";
-                break;
-            case PRODUCT_ENTERPRISE:
-                os << "Enterprise Edition";
-                break;
-            case PRODUCT_BUSINESS:
-                os << "Business Edition";
-                break;
-            case PRODUCT_STARTER:
-                os << "Starter Edition";
-                break;
-            case PRODUCT_CLUSTER_SERVER:
-                os << "Cluster Server Edition";
-                break;
-            case PRODUCT_DATACENTER_SERVER:
-                os << "Datacenter Edition";
-                break;
-            case PRODUCT_DATACENTER_SERVER_CORE:
-                os << "Datacenter Edition (core installation)";
-                break;
-            case PRODUCT_ENTERPRISE_SERVER:
-                os << "Enterprise Edition";
-                break;
-            case PRODUCT_ENTERPRISE_SERVER_CORE:
-                os << "Enterprise Edition (core installation)";
-                break;
-            case PRODUCT_ENTERPRISE_SERVER_IA64:
-                os << "Enterprise Edition for Itanium-based Systems";
-                break;
-            case PRODUCT_SMALLBUSINESS_SERVER:
-                os << "Small Business Server";
-                break;
-            case PRODUCT_SMALLBUSINESS_SERVER_PREMIUM:
-                os << "Small Business Server Premium Edition";
-                break;
-            case PRODUCT_STANDARD_SERVER:
-                os << "Standard Edition";
-                break;
-            case PRODUCT_STANDARD_SERVER_CORE:
-                os << "Standard Edition (core installation)";
-                break;
-            case PRODUCT_WEB_SERVER:
-                os << "Web Server Edition";
-                break;
+            switch (dwType)
+            {
+                case PRODUCT_ULTIMATE:
+                    os << "Ultimate Edition";
+                    break;
+                case PRODUCT_PROFESSIONAL:
+                    os << "Professional";
+                    break;
+                case PRODUCT_HOME_PREMIUM:
+                    os << "Home Premium Edition";
+                    break;
+                case PRODUCT_HOME_BASIC:
+                    os << "Home Basic Edition";
+                    break;
+                case PRODUCT_ENTERPRISE:
+                    os << "Enterprise Edition";
+                    break;
+                case PRODUCT_BUSINESS:
+                    os << "Business Edition";
+                    break;
+                case PRODUCT_STARTER:
+                    os << "Starter Edition";
+                    break;
+                case PRODUCT_CLUSTER_SERVER:
+                    os << "Cluster Server Edition";
+                    break;
+                case PRODUCT_DATACENTER_SERVER:
+                    os << "Datacenter Edition";
+                    break;
+                case PRODUCT_DATACENTER_SERVER_CORE:
+                    os << "Datacenter Edition (core installation)";
+                    break;
+                case PRODUCT_ENTERPRISE_SERVER:
+                    os << "Enterprise Edition";
+                    break;
+                case PRODUCT_ENTERPRISE_SERVER_CORE:
+                    os << "Enterprise Edition (core installation)";
+                    break;
+                case PRODUCT_ENTERPRISE_SERVER_IA64:
+                    os << "Enterprise Edition for Itanium-based Systems";
+                    break;
+                case PRODUCT_SMALLBUSINESS_SERVER:
+                    os << "Small Business Server";
+                    break;
+                case PRODUCT_SMALLBUSINESS_SERVER_PREMIUM:
+                    os << "Small Business Server Premium Edition";
+                    break;
+                case PRODUCT_STANDARD_SERVER:
+                    os << "Standard Edition";
+                    break;
+                case PRODUCT_STANDARD_SERVER_CORE:
+                    os << "Standard Edition (core installation)";
+                    break;
+                case PRODUCT_WEB_SERVER:
+                    os << "Web Server Edition";
+                    break;
+            }
         }
     }
     else if ((osvi.dwMajorVersion == 5) && (osvi.dwMinorVersion == 2))
