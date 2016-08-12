@@ -77,6 +77,18 @@ bool Environment::IsRelease()
 #endif
 }
 
+bool Environment::IsBigEndian()
+{
+    char16_t test = 0x0102;
+    return ((char*)&test)[0] == 0x01;
+}
+
+bool Environment::IsLittleEndian()
+{
+    char16_t test = 0x0102;
+    return ((char*)&test)[0] == 0x02;
+}
+
 std::string Environment::OSVersion()
 {
 #if defined(_WIN32) || defined(_WIN64)

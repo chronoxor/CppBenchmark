@@ -34,14 +34,21 @@ public:
     static bool Is32BitOS();
     //! Is 64-bit OS?
     static bool Is64BitOS();
+
     //! Is 32-bit running process?
     static bool Is32BitProcess();
     //! Is 64-bit running process?
     static bool Is64BitProcess();
+
     //! Is compiled in debug mode?
     static bool IsDebug();
     //! Is compiled in release mode?
     static bool IsRelease();
+
+    //! Is big-endian system?
+    static bool IsBigEndian();
+    //! Is little-endian system?
+    static bool IsLittleEndian();
 
     //! Get OS version string
     static std::string OSVersion();
