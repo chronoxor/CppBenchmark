@@ -296,7 +296,7 @@ std::string Environment::OSVersion()
     }
 
     // Windows Service Pack version
-    if (std::strlen(osvi.szCSDVersion) > 0)
+    if (strlen(osvi.szCSDVersion) > 0)
         os << " " << osvi.szCSDVersion;
 
     // Windows build
