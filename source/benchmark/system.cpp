@@ -52,9 +52,13 @@ std::string System::CpuArchitecture()
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
+    // Smart resource deleter pattern
+    auto clear = [](HKEY hKey) { RegCloseKey(hKey); };
+    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKey, clear);
+
     CHAR pBuffer[_MAX_PATH] = { 0 };
     DWORD dwBufferSize = _MAX_PATH;
-    lError = RegQueryValueExA(hKey, "ProcessorNameString", nullptr, nullptr, (LPBYTE)pBuffer, &dwBufferSize);
+    lError = RegQueryValueExA(key.get(), "ProcessorNameString", nullptr, nullptr, (LPBYTE)pBuffer, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
@@ -153,9 +157,13 @@ int64_t System::CpuClockSpeed()
     if (lError != ERROR_SUCCESS)
         return -1;
 
+    // Smart resource deleter pattern
+    auto clear = [](HKEY hKey) { RegCloseKey(hKey); };
+    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKey, clear);
+
     DWORD dwMHz = 0;
     DWORD dwBufferSize = sizeof(DWORD);
-    lError = RegQueryValueExA(hKey, "~MHz", nullptr, nullptr, (LPBYTE)&dwMHz, &dwBufferSize);
+    lError = RegQueryValueExA(key.get(), "~MHz", nullptr, nullptr, (LPBYTE)&dwMHz, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return -1;
 
