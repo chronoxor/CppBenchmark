@@ -53,7 +53,7 @@ public:
     //! Get OS version string
     static std::string OSVersion();
 
-    //! Get the current timestamp
+    //! Get the current time in seconds
     static time_t Timestamp();
 };
 

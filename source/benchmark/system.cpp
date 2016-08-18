@@ -8,6 +8,8 @@
 
 #include "benchmark/system.h"
 
+#include "benchmark/encoding.h"
+
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #include <memory>
@@ -49,7 +51,7 @@ std::string System::CpuArchitecture()
 {
 #if defined(_WIN32) || defined(_WIN64)
     HKEY hKey;
-    LONG lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
+    LONG lError = RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
@@ -57,13 +59,13 @@ std::string System::CpuArchitecture()
     auto clear = [](HKEY hKey) { RegCloseKey(hKey); };
     auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKey, clear);
 
-    CHAR pBuffer[_MAX_PATH] = { 0 };
-    DWORD dwBufferSize = _MAX_PATH;
-    lError = RegQueryValueExA(key.get(), "ProcessorNameString", nullptr, nullptr, (LPBYTE)pBuffer, &dwBufferSize);
+    WCHAR pBuffer[_MAX_PATH] = { 0 };
+    DWORD dwBufferSize = sizeof(pBuffer);
+    lError = RegQueryValueExW(key.get(), L"ProcessorNameString", nullptr, nullptr, (LPBYTE)pBuffer, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
-    return std::string(pBuffer);
+    return Encoding::ToUTF8(pBuffer);
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     static std::regex pattern("model name(.*): (.*)");
 
@@ -154,7 +156,7 @@ int64_t System::CpuClockSpeed()
 {
 #if defined(_WIN32) || defined(_WIN64)
     HKEY hKey;
-    long lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
+    long lError = RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     if (lError != ERROR_SUCCESS)
         return -1;
 
@@ -164,7 +166,7 @@ int64_t System::CpuClockSpeed()
 
     DWORD dwMHz = 0;
     DWORD dwBufferSize = sizeof(DWORD);
-    lError = RegQueryValueExA(key.get(), "~MHz", nullptr, nullptr, (LPBYTE)&dwMHz, &dwBufferSize);
+    lError = RegQueryValueExW(key.get(), L"~MHz", nullptr, nullptr, (LPBYTE)&dwMHz, &dwBufferSize);
     if (lError != ERROR_SUCCESS)
         return -1;
 

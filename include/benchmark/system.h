@@ -49,7 +49,7 @@ public:
     //! Current thread Id
     static uint64_t CurrentThreadId();
 
-    //! Get timestamp in nanoseconds
+    //! Get the current timestamp in nanoseconds
     static uint64_t Timestamp();
 };
 
