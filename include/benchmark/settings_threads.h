@@ -24,13 +24,13 @@ public:
     /*!
         \param iterations - Count of iterations (default is 1)
     */
-    SettingsThreads(int iterations = 1) : Settings(iterations) {}
+    SettingsThreads(int64_t iterations = 1) : Settings(iterations) {}
     //! Initialize settings with the given count of iterations and count of running threads
     /*!
         \param iterations - Count of iterations
         \param threads - Count of running threads
     */
-    SettingsThreads(int iterations, int threads) : SettingsThreads(iterations) { Threads(threads); }
+    SettingsThreads(int64_t iterations, int threads) : SettingsThreads(iterations) { Threads(threads); }
     SettingsThreads(const Settings& settings) : Settings(settings) {}
     SettingsThreads(const SettingsThreads&) = default;
     SettingsThreads(Settings&& settings) : Settings(settings) {}

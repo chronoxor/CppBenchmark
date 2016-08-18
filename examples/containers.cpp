@@ -8,7 +8,7 @@
 #include <list>
 #include <vector>
 
-const int iterations = 10000000;
+const uint64_t iterations = 10000000;
 
 template <typename T>
 class ContainerFixture : public virtual CppBenchmark::Fixture

@@ -16,7 +16,7 @@
 #include <time.h>
 #endif
 
-const int iterations = 10000000;
+const uint64_t iterations = 10000000;
 
 BENCHMARK("std::chrono::high_resolution_clock::now()", iterations)
 {

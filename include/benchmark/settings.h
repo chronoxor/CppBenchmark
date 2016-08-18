@@ -37,7 +37,7 @@ public:
     /*!
         \param iterations - Count of iterations (default is 1)
     */
-    Settings(int iterations = 1) : _attempts(5), _infinite(false), _iterations(iterations) {}
+    Settings(int64_t iterations = 1) : _attempts(5), _infinite(false), _iterations(iterations) {}
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;
     ~Settings() = default;

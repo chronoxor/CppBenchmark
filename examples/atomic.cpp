@@ -6,7 +6,7 @@
 
 #include <atomic>
 
-const int iterations = 100000000;
+const uint64_t iterations = 100000000;
 
 template <typename T>
 class AtomicFixture

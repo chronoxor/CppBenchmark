@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-const int iterations = 1000000000;
+const uint64_t iterations = 1000000000;
 
 BENCHMARK("sin()", iterations)
 {

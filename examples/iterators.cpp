@@ -7,7 +7,7 @@
 #include <list>
 #include <vector>
 
-const int iterations = 1000;
+const uint64_t iterations = 1000;
 
 template <typename T>
 class ContainerFixture

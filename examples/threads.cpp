@@ -7,7 +7,7 @@
 #include <atomic>
 #include <mutex>
 
-const int iterations = 10000000;
+const uint64_t iterations = 10000000;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
 class UnsynchronizedFixture

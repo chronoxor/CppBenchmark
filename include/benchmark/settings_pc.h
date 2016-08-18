@@ -24,14 +24,14 @@ public:
     /*!
         \param iterations - Count of iterations (default is 1)
     */
-    SettingsPC(int iterations = 1) : Settings(iterations) {}
+    SettingsPC(int64_t iterations = 1) : Settings(iterations) {}
     //! Initialize settings with the given count of iterations and count of producers/consumers
     /*!
         \param iterations - Count of iterations
         \param producers - Count of producers
         \param consumers - Count of consumers
     */
-    SettingsPC(int iterations, int producers, int consumers) : SettingsPC(iterations) { PC(producers, consumers); }
+    SettingsPC(int64_t iterations, int producers, int consumers) : SettingsPC(iterations) { PC(producers, consumers); }
     SettingsPC(const Settings& settings) : Settings(settings) {}
     SettingsPC(const SettingsPC&) = default;
     SettingsPC(Settings&& settings) : Settings(settings) {}
