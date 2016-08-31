@@ -186,7 +186,7 @@ private:
     void MergeMetrics(const PhaseMetrics& metrics);
 
     // Calculate (operant * multiplier / divider) with 64 bit unsigned integer values
-    static int64_t MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t divider);
+    static uint64_t MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t divider);
 };
 
 } // namespace CppBenchmark

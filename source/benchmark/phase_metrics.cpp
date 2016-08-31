@@ -114,7 +114,7 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
     }
 }
 
-int64_t PhaseMetrics::MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t divider)
+uint64_t PhaseMetrics::MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t divider)
 {
 #if defined(_MSC_VER) && (_MSC_VER == 1900)
 #pragma warning(push)
