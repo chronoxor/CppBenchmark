@@ -187,9 +187,9 @@ uint64_t PhaseMetrics::MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t 
     return ((uint64_t)q1 << 32) | q0;
 #pragma warning(pop)
 #elif defined(__GNUC__)
-    __uint128 a = operant;
-    __uint128 b = multiplier;
-    __uint128 c = divider;
+    __uint128_t a = operant;
+    __uint128_t b = multiplier;
+    __uint128_t c = divider;
 
     return (uint64_t)(a * b / c);
 #else
