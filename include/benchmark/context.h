@@ -57,8 +57,8 @@ public:
     //! Cancel benchmark execution
     void Cancel() noexcept { *_canceled = true; }
 
-    //! Get name of the current benchmark running context
-    virtual std::string to_string() const;
+    //! Get description of the current benchmark running context
+    virtual std::string description() const;
 
     // Implementation of Phase
     const std::string& name() const noexcept override { return _current->name(); }

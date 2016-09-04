@@ -38,8 +38,8 @@ public:
     //! Benchmark threads count
     int threads() const noexcept { return _threads; }
 
-    //! Get name of the current benchmark running context
-    std::string to_string() const override;
+    //! Get description of the current benchmark running context
+    std::string description() const override;
 
 protected:
     //! Benchmark threads count

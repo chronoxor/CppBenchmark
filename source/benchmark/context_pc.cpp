@@ -10,7 +10,7 @@
 
 namespace CppBenchmark {
 
-std::string ContextPC::to_string() const
+std::string ContextPC::description() const
 {
     if ((_x < 0) && (_y < 0) && (_z < 0))
         return "(producers:" + std::to_string(_producers) + ",consumers:" + std::to_string(_consumers) + ")";

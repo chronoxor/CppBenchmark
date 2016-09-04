@@ -104,7 +104,7 @@ void LauncherConsole::onLaunching(int current, int total, const BenchmarkBase& b
     if (_silent)
         return;
 
-    std::cerr << Color::DARKGREY << "[" << std::setw(3) << (100 * current / total) << "%] " << Color::GREY << "Launching " << Color::LIGHTCYAN << benchmark.name() << context.to_string() << Color::GREY << ". Attempt " << Color::WHITE << attempt << Color::GREY << "...";
+    std::cerr << Color::DARKGREY << "[" << std::setw(3) << (100 * current / total) << "%] " << Color::GREY << "Launching " << Color::LIGHTCYAN << benchmark.name() << context.description() << Color::GREY << ". Attempt " << Color::WHITE << attempt << Color::GREY << "...";
 }
 
 void LauncherConsole::onLaunched(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt)

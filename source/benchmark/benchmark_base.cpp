@@ -14,7 +14,7 @@ namespace CppBenchmark {
 
 void BenchmarkBase::InitBenchmarkContext(Context& context)
 {
-    std::string name = _name + context.to_string();
+    std::string name = _name + context.description();
     std::shared_ptr<PhaseCore> result;
 
     // Find or create root phase for the given context

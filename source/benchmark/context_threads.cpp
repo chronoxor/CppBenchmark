@@ -10,7 +10,7 @@
 
 namespace CppBenchmark {
 
-std::string ContextThreads::to_string() const
+std::string ContextThreads::description() const
 {
     if ((_x < 0) && (_y < 0) && (_z < 0))
         return "(threads:" + std::to_string(_threads) + ")";

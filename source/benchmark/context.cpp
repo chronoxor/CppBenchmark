@@ -10,7 +10,7 @@
 
 namespace CppBenchmark {
 
-std::string Context::to_string() const
+std::string Context::description() const
 {
     if ((_x < 0) && (_y < 0) && (_z < 0))
         return "";
