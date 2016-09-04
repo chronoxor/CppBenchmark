@@ -330,6 +330,15 @@ std::string Environment::OSVersion()
 #endif
 }
 
+std::string Environment::EndLine()
+{
+#if defined(_WIN32) || defined(_WIN64)
+    return "\r\n";
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    return "\n";
+#endif
+}
+
 time_t Environment::Timestamp()
 {
     return std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());

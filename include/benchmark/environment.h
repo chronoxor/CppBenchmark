@@ -53,6 +53,9 @@ public:
     //! Get OS version string
     static std::string OSVersion();
 
+    //! Get text end line separator
+    static std::string EndLine();
+
     //! Get the current time in seconds
     static time_t Timestamp();
 };
