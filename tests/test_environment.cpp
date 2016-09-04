@@ -15,5 +15,6 @@ TEST_CASE("Environment information", "[CppBenchmark][Environment]")
     REQUIRE((Environment::IsDebug() || Environment::IsRelease()));
     REQUIRE((Environment::IsBigEndian() || Environment::IsLittleEndian()));
     REQUIRE(Environment::OSVersion().length() > 0);
+    REQUIRE(Environment::EndLine().length() > 0);
     REQUIRE(Environment::Timestamp() > 0);
 }
