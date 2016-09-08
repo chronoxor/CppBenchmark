@@ -40,6 +40,14 @@ public:
     //! Clear benchmarks collection
     void ClearAllBenchmarks() { _benchmarks.clear(); }
 
+    //! Add the given benchmark builder function to the benchmark builders collection
+    /*!
+        \param builder - Benchmark builder function
+    */
+    void AddBenchmarkBuilder(std::function<std::shared_ptr<BenchmarkBase>()> builder) { _builders.emplace_back(builder); }
+    //! Clear benchmark builders collection
+    void ClearAllBenchmarksBuilders() { _builders.clear(); }
+
     //! Launch registered benchmarks
     /*!
         Launch benchmarks from the benchmarks collection which names are matched to the given string pattern. String
@@ -58,6 +66,8 @@ public:
 protected:
     //! Registered benchmarks collection
     std::vector<std::shared_ptr<BenchmarkBase>> _benchmarks;
+    //! Benchmark builders collection
+    std::vector<std::function<std::shared_ptr<BenchmarkBase>()>> _builders;
 
 private:
     void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name) const;

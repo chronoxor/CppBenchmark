@@ -18,6 +18,10 @@ void Launcher::Launch(const std::string& pattern)
     int total = 0;
     std::vector<std::shared_ptr<BenchmarkBase>> benchmarks;
 
+    // Build pending benchmark
+    for (auto& builder : _builders)
+        AddBenchmark(builder());
+
     // Filter benchmarks
     std::regex matcher(pattern);
     for (auto& benchmark : _benchmarks)
