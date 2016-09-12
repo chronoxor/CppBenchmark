@@ -62,12 +62,13 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 ## Clone repository with submodules
 ```
 git clone git@github.com:chronoxor/CppBenchmark.git
+cd CppBenchmark
 git submodule update --init --recursive
 ```
 
 ## Windows (Visaul Studio 2015)
 ```
-cd CppBenchmark\scripts
+cd scripts
 01-generate-VisualStudio-x64.bat
 02-build-VisualStudio.bat
 03-tests.bat
@@ -78,7 +79,7 @@ If you want 32-bit version use '01-generate-VisualStudio-x32.bat' to generate pr
 
 ## Windows (MinGW with MSYS)
 ```
-cd CppBenchmark\scripts
+cd scripts
 01-generate-MSYS.bat
 02-build-MSYS.bat
 03-tests.bat
@@ -88,7 +89,7 @@ cd CppBenchmark\scripts
 
 ## Linux
 ```
-cd CppBenchmark\scripts
+cd scripts
 01-generate-Unix.sh
 02-build-Unix.sh
 03-tests.sh
@@ -102,7 +103,7 @@ cd CppBenchmark\scripts
 3. Insert #include "cppbenchmark.h"
 4. Add benchmark code (examples for different scenarios you can find below)
 5. Insert BENCHMARK_MAIN() at the end
-6. Compile the *.cpp file and link it over CppBenchmark library
+6. Compile the *.cpp file and link it with CppBenchmark library
 7. Run it (see also possible [command line options](#command-line-options))
 
 # Benchmark examples
