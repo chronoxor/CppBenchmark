@@ -10,8 +10,6 @@
 
 #include "benchmark/launcher_handler.h"
 
-#include <algorithm>
-
 namespace CppBenchmark {
 
 int Benchmark::CountLaunches() const

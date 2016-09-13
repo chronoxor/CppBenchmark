@@ -48,14 +48,14 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
 std::string System::CpuArchitecture()
 {
 #if defined(_WIN32) || defined(_WIN64)
-    HKEY hKey;
-    LONG lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
+    HKEY hKeyProcessor;
+    LONG lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKeyProcessor);
     if (lError != ERROR_SUCCESS)
         return "<unknown>";
 
     // Smart resource deleter pattern
     auto clear = [](HKEY hKey) { RegCloseKey(hKey); };
-    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKey, clear);
+    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKeyProcessor, clear);
 
     CHAR pBuffer[_MAX_PATH] = { 0 };
     DWORD dwBufferSize = sizeof(pBuffer);
@@ -153,14 +153,14 @@ std::pair<int, int> System::CpuTotalCores()
 int64_t System::CpuClockSpeed()
 {
 #if defined(_WIN32) || defined(_WIN64)
-    HKEY hKey;
-    long lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
+    HKEY hKeyProcessor;
+    long lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKeyProcessor);
     if (lError != ERROR_SUCCESS)
         return -1;
 
     // Smart resource deleter pattern
     auto clear = [](HKEY hKey) { RegCloseKey(hKey); };
-    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKey, clear);
+    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKeyProcessor, clear);
 
     DWORD dwMHz = 0;
     DWORD dwBufferSize = sizeof(DWORD);
