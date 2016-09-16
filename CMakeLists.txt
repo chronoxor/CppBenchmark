@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(cppbenchmark)
 
-# Modules
-add_subdirectory("modules")
-
 # Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
@@ -32,6 +29,9 @@ list(APPEND SYSTEM Threads::Threads)
 include_directories("include")
 include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
+
+# Modules
+add_subdirectory("modules")
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
