@@ -25,13 +25,13 @@ find_package(Threads REQUIRED)
 # System link libraries
 list(APPEND SYSTEM Threads::Threads)
 
+# Modules
+add_subdirectory("modules")
+
 # Includes
 include_directories("include")
 include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
-
-# Modules
-add_subdirectory("modules")
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
