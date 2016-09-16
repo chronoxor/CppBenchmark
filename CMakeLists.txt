@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 project(cppbenchmark)
 
+# Modules
+add_subdirectory("modules")
+
 # Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
@@ -24,9 +27,6 @@ find_package(Threads REQUIRED)
 
 # System link libraries
 list(APPEND SYSTEM Threads::Threads)
-
-# Modules
-add_subdirectory("modules")
 
 # Includes
 include_directories("include")
