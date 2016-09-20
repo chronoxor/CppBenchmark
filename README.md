@@ -1,4 +1,4 @@
-# CppBenchmark
+# CppBenchmark [![Build Status (Master)](https://travis-ci.org/chronoxor/CppBenchmark.svg?branch=master)](https://travis-ci.org/chronoxor/CppBenchmark)
 C++ Benchmark Library allows to create performance benchmarks of some code to investigate
 average/minimal/maximal execution time, items processing processing speed, I/O throughput.
 CppBenchmark library has lots of [features](#features) and allows to make benchmarks for
