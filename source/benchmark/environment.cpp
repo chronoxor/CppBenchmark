@@ -18,7 +18,6 @@
 #include <fstream>
 #include <regex>
 #elif defined(__APPLE__) || defined(__MACH__)
-#include <libkern/version.h>
 #include <sys/sysctl.h>
 #endif
 
@@ -42,7 +41,7 @@ bool Environment::Is64BitOS()
     struct stat buffer;
     return (stat("/lib64/ld-linux-x86-64.so.2", &buffer) == 0);
 #elif defined(__APPLE__) || defined(__MACH__)
-    return ((version_major == 10) && (version_minor > 6));
+    return true;
 #else
     #error Unsupported platform
 #endif

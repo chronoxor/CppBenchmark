@@ -1,0 +1,46 @@
+# Specify version format
+version: "1.1.0.{build}"
+
+# Build platform, i.e. Win32 (instead of x86), x64, Any CPU. This setting is optional.
+platform: 
+  - x86
+  - x64
+
+# Specify custom environment variables
+environment:
+  MSVC_DEFAULT_OPTIONS: ON
+
+# Build configuration, i.e. Debug, Release, etc.
+configuration:
+  - Debug
+  - Release
+
+# Branches to build
+branches:
+  only: 
+    - master
+
+# Scripts that are called at very beginning, before repo cloning
+init:
+  - cmd: cmake --version
+  - cmd: msbuild /version
+
+# Scripts that run after cloning repository
+install:
+
+# Scripts to run before build
+before_build:
+  - cmd: cd ./scripts
+  - cmd: if "%platform%"=="x86" ./01-generate-VisualStudio-x32.bat
+  - cmd: if "%platform%"=="x64" ./01-generate-VisualStudio-x64.bat
+
+# Build scripts
+build:
+  - cmd: ./02-build-VisualStudio.bat
+  - cmd: ./03-tests.bat
+  - cmd: ./04-install-VisualStudio.bat
+  - cmd: ./05-doxygen-VisualStudio.bat
+  - cmd: ./06-clean.bat
+
+# Test scripts
+test: off
