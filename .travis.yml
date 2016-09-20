@@ -4,11 +4,11 @@ os:
 - linux
 - osx
 
-sudo: required
-dist: trusty
-
 compiler:
 - gcc
+
+sudo: required
+dist: trusty
 
 addons:
   apt:
@@ -16,6 +16,8 @@ addons:
     - cmake
     - doxygen
     - graphviz
+
+osx_image: xcode8
 
 before_install:
   - echo $TRAVIS_OS_NAME
