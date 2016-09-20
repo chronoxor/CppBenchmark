@@ -11,7 +11,7 @@
 #include <windows.h>
 #undef max
 #undef min
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
 #include <sys/time.h>
 #include <time.h>
 #endif
@@ -326,7 +326,7 @@ BENCHMARK("__rdtsc()", iterations)
 }
 #endif
 
-#if defined(unix) || defined(__unix) || defined(__unix__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
 struct timespec clock_gettime(clockid_t clockid)
 {
     struct timespec current;
@@ -530,7 +530,7 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", iterations)
 }
 #endif
 
-#if defined(unix) || defined(__unix) || defined(__unix__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
 struct timeval gettimeofday()
 {
     struct timeval current;

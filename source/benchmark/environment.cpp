@@ -17,6 +17,8 @@
 #include <sys/stat.h>
 #include <fstream>
 #include <regex>
+#elif defined(__APPLE__) || defined(__MACH__)
+#include <sys/sysctl.h>
 #endif
 
 namespace CppBenchmark {
@@ -54,8 +56,8 @@ bool Environment::Is64BitProcess()
 #elif defined(_WIN32)
     return false;
 #endif
-#elif defined(unix) || defined(__unix) || defined(__unix__)
-#if defined(__x86_64__) || defined(__ppc64__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#if defined(__x86_64__) || defined(__amd64__) || defined(__aarch64__) || defined(__ia64__) || defined(__ppc64__)
     return true;
 #else
     return false;
@@ -325,6 +327,18 @@ std::string Environment::OSVersion()
     }
 
     return "<linux>";
+#elif defined(__APPLE__) || defined(__MACH__)
+    int name[] = { CTL_KERN, KERN_OSRELEASE };
+
+    size_t size;
+    if (sysctl(name, countof(name), nullptr, &size, nullptr, 0) == 0)
+    {
+        std::string result(size, '\0');
+        if (sysctl(name, countof(name), result.data(), &size, nullptr, 0) == 0)
+            return result;
+    }
+
+    return "<apple>";
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     return "<unix>";
 #endif
@@ -334,7 +348,7 @@ std::string Environment::EndLine()
 {
 #if defined(_WIN32) || defined(_WIN64)
     return "\r\n";
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     return "\n";
 #endif
 }

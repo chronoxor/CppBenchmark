@@ -11,7 +11,7 @@
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #include <memory>
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
 #include <sys/sysinfo.h>
 #include <pthread.h>
 #include <unistd.h>
@@ -64,7 +64,7 @@ std::string System::CpuArchitecture()
         return "<unknown>";
 
     return std::string(pBuffer);
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     static std::regex pattern("model name(.*): (.*)");
 
     std::string line;
@@ -143,7 +143,7 @@ std::pair<int, int> System::CpuTotalCores()
     free(pBuffer);
 
     return result;
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     long processors = sysconf(_SC_NPROCESSORS_ONLN);
     std::pair<int, int> result(processors, processors);
     return result;
@@ -169,7 +169,7 @@ int64_t System::CpuClockSpeed()
         return -1;
 
     return dwMHz * 1000 * 1000;
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     static std::regex pattern("cpu MHz(.*): (.*)");
 
     std::string line;
@@ -198,7 +198,7 @@ int64_t System::RamTotal()
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
     return status.ullTotalPhys;
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     struct sysinfo si;
     return (sysinfo(&si) == 0) ? si.totalram : -1;
 #endif
@@ -211,7 +211,7 @@ int64_t System::RamFree()
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
     return status.ullAvailPhys;
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     struct sysinfo si;
     return (sysinfo(&si) == 0) ? si.freeram : -1;
 #endif
@@ -221,7 +221,7 @@ uint64_t System::CurrentThreadId()
 {
 #if defined(_WIN32) || defined(_WIN64)
     return GetCurrentThreadId();
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     return pthread_self();
 #endif
 }
@@ -264,7 +264,7 @@ uint64_t System::Timestamp()
     }
     else
         return offset;
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     struct timespec timestamp;
     clock_gettime(CLOCK_MONOTONIC, &timestamp);
     return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
