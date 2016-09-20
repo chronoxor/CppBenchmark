@@ -20,5 +20,5 @@ TEST_CASE("System information", "[CppBenchmark][System]")
     REQUIRE(System::CpuClockSpeed() >= 0);
 
     REQUIRE(System::RamTotal() >= 0);
-    REQUIRE(System::RamFree() == 0);
+    REQUIRE(System::RamFree() >= 0);
 }
