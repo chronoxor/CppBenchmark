@@ -29,10 +29,10 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
 
 script: 
-  - cd ./scripts
-  - ./01-generate-Unix.sh
-  - ./02-build-Unix.sh
-  - ./03-tests.sh
-  - ./04-install-Unix.sh
-  - ./05-doxygen-Unix.sh
-  - ./06-clean.sh
+  - cd scripts
+  - 01-generate-Unix.sh
+  - 02-build-Unix.sh
+  - 03-tests.sh
+  - 04-install-Unix.sh
+  - 05-doxygen-Unix.sh
+  - 06-clean.sh
