@@ -11,12 +11,15 @@
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #include <memory>
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
 #include <sys/sysinfo.h>
 #include <pthread.h>
 #include <unistd.h>
 #include <fstream>
 #include <regex>
+#elif defined(__APPLE__) || defined(__MACH__)
+#include <mach/vm_statistics.h>
+#include <sys/sysctl.h>
 #endif
 
 namespace CppBenchmark {
@@ -64,7 +67,7 @@ std::string System::CpuArchitecture()
         return "<unknown>";
 
     return std::string(pBuffer);
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     static std::regex pattern("model name(.*): (.*)");
 
     std::string line;
@@ -77,6 +80,15 @@ std::string System::CpuArchitecture()
     }
 
     return "<unknown>";
+#elif defined(__APPLE__) || defined(__MACH__)
+    char result[1024];
+    size_t size = sizeof(result);
+    if (sysctlbyname("machdep.cpu.brand_string", result, &size, nullptr, 0) == 0)
+        return result;
+
+    return "<unknown>";
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -143,10 +155,23 @@ std::pair<int, int> System::CpuTotalCores()
     free(pBuffer);
 
     return result;
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     long processors = sysconf(_SC_NPROCESSORS_ONLN);
-    std::pair<int, int> result(processors, processors);
-    return result;
+    return std::make_pair(processors, processors);
+#elif defined(__APPLE__) || defined(__MACH__)
+    int logical = 0;
+    size_t size = sizeof(logical);
+    if (sysctlbyname("hw.logicalcpu", &logical, &size, nullptr, 0) != 0)
+        logical = -1;
+
+    int physical = 0;
+    size_t size = sizeof(physical);
+    if (sysctlbyname("hw.physicalcpu", &physical, &size, nullptr, 0) != 0)
+        physical = -1;
+
+    return std::make_pair(logical, physical);
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -169,7 +194,7 @@ int64_t System::CpuClockSpeed()
         return -1;
 
     return dwMHz * 1000 * 1000;
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     static std::regex pattern("cpu MHz(.*): (.*)");
 
     std::string line;
@@ -182,6 +207,15 @@ int64_t System::CpuClockSpeed()
     }
 
     return -1;
+#elif defined(__APPLE__) || defined(__MACH__)
+    uint64_t frequency = 0;
+    size_t size = sizeof(frequency);
+    if (sysctlbyname("hw.cpufrequency", &frequency, &size, nullptr, 0) == 0)
+        return frequency;
+
+    return -1;
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -198,9 +232,18 @@ int64_t System::RamTotal()
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
     return status.ullTotalPhys;
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     struct sysinfo si;
     return (sysinfo(&si) == 0) ? si.totalram : -1;
+#elif defined(__APPLE__) || defined(__MACH__)
+    int64_t memsize = 0;
+    size_t size = sizeof(memsize);
+    if (sysctlbyname("hw.memsize", &memsize, &size, nullptr, 0) == 0)
+        return memsize;
+
+    return -1;
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -211,9 +254,22 @@ int64_t System::RamFree()
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
     return status.ullAvailPhys;
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     struct sysinfo si;
     return (sysinfo(&si) == 0) ? si.freeram : -1;
+#elif defined(__APPLE__) || defined(__MACH__)
+    mach_msg_type_number_t count = HOST_VM_INFO_COUNT;
+    vm_statistics_data_t vmstat;
+    if (host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t)&vmstat, &count) == KERN_SUCCESS)
+    {
+        int64_t total_mem = vmstat.wire_count + vmstat.active_count + vmstat.inactive_count + vmstat.free_count;
+        int64_t free_mem = vmstat.free_count / free_mem;
+        return free_mem;
+    }
+
+    return -1;
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -223,6 +279,8 @@ uint64_t System::CurrentThreadId()
     return GetCurrentThreadId();
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     return pthread_self();
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -268,6 +326,8 @@ uint64_t System::Timestamp()
     struct timespec timestamp;
     clock_gettime(CLOCK_MONOTONIC, &timestamp);
     return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
+#else
+    #error Unsupported platform
 #endif
 }
 

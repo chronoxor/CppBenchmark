@@ -18,6 +18,7 @@
 #include <fstream>
 #include <regex>
 #elif defined(__APPLE__) || defined(__MACH__)
+#include <libkern/version.h>
 #include <sys/sysctl.h>
 #endif
 
@@ -40,6 +41,10 @@ bool Environment::Is64BitOS()
 #elif defined(linux) || defined(__linux) || defined(__linux__)
     struct stat buffer;
     return (stat("/lib64/ld-linux-x86-64.so.2", &buffer) == 0);
+#elif defined(__APPLE__) || defined(__MACH__)
+    return ((version_major == 10) && (version_minor > 6));
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -62,6 +67,8 @@ bool Environment::Is64BitProcess()
 #else
     return false;
 #endif
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -328,19 +335,16 @@ std::string Environment::OSVersion()
 
     return "<linux>";
 #elif defined(__APPLE__) || defined(__MACH__)
-    int name[] = { CTL_KERN, KERN_OSRELEASE };
-
-    size_t size;
-    if (sysctl(name, countof(name), nullptr, &size, nullptr, 0) == 0)
-    {
-        std::string result(size, '\0');
-        if (sysctl(name, countof(name), result.data(), &size, nullptr, 0) == 0)
-            return result;
-    }
+    char result[1024];
+    size_t size = sizeof(result);
+    if (sysctlbyname("kern.osrelease", result, &size, nullptr, 0) == 0)
+        return result;
 
     return "<apple>";
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     return "<unix>";
+#else
+    #error Unsupported platform
 #endif
 }
 
@@ -350,6 +354,8 @@ std::string Environment::EndLine()
     return "\r\n";
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     return "\n";
+#else
+    #error Unsupported platform
 #endif
 }
 
