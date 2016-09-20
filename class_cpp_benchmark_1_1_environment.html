@@ -139,11 +139,20 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a1b3feb2d04c5ec77679f72b87bc2ce9e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_environment.html#a1b3feb2d04c5ec77679f72b87bc2ce9e">IsRelease</a> ()</td></tr>
 <tr class="memdesc:a1b3feb2d04c5ec77679f72b87bc2ce9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is compiled in release mode?  <a href="#a1b3feb2d04c5ec77679f72b87bc2ce9e">More...</a><br /></td></tr>
 <tr class="separator:a1b3feb2d04c5ec77679f72b87bc2ce9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe74ee4f616f4ad1f57be5560d592119"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_environment.html#afe74ee4f616f4ad1f57be5560d592119">IsBigEndian</a> ()</td></tr>
+<tr class="memdesc:afe74ee4f616f4ad1f57be5560d592119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is big-endian system?  <a href="#afe74ee4f616f4ad1f57be5560d592119">More...</a><br /></td></tr>
+<tr class="separator:afe74ee4f616f4ad1f57be5560d592119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73c8ff125ef096c34aa9d5a4e43f12de"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_environment.html#a73c8ff125ef096c34aa9d5a4e43f12de">IsLittleEndian</a> ()</td></tr>
+<tr class="memdesc:a73c8ff125ef096c34aa9d5a4e43f12de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is little-endian system?  <a href="#a73c8ff125ef096c34aa9d5a4e43f12de">More...</a><br /></td></tr>
+<tr class="separator:a73c8ff125ef096c34aa9d5a4e43f12de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10e751791b82d90729ec537fe4032a4c"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_environment.html#a10e751791b82d90729ec537fe4032a4c">OSVersion</a> ()</td></tr>
 <tr class="memdesc:a10e751791b82d90729ec537fe4032a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get OS version string.  <a href="#a10e751791b82d90729ec537fe4032a4c">More...</a><br /></td></tr>
 <tr class="separator:a10e751791b82d90729ec537fe4032a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a65b1b0700a4d4b6c8960fbe1ff24c3"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_environment.html#a9a65b1b0700a4d4b6c8960fbe1ff24c3">EndLine</a> ()</td></tr>
+<tr class="memdesc:a9a65b1b0700a4d4b6c8960fbe1ff24c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get text end line separator.  <a href="#a9a65b1b0700a4d4b6c8960fbe1ff24c3">More...</a><br /></td></tr>
+<tr class="separator:a9a65b1b0700a4d4b6c8960fbe1ff24c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f211909e69650a6ae2022e13d05baaf"><td class="memItemLeft" align="right" valign="top">static time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_environment.html#a1f211909e69650a6ae2022e13d05baaf">Timestamp</a> ()</td></tr>
-<tr class="memdesc:a1f211909e69650a6ae2022e13d05baaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current timestamp.  <a href="#a1f211909e69650a6ae2022e13d05baaf">More...</a><br /></td></tr>
+<tr class="memdesc:a1f211909e69650a6ae2022e13d05baaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current time in seconds.  <a href="#a1f211909e69650a6ae2022e13d05baaf">More...</a><br /></td></tr>
 <tr class="separator:a1f211909e69650a6ae2022e13d05baaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -247,6 +256,33 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9a65b1b0700a4d4b6c8960fbe1ff24c3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string CppBenchmark::Environment::EndLine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get text end line separator. </p>
+
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00350">350</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ad228e10d29225a0627b237b57c22159b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -270,7 +306,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Is 32-bit OS? </p>
 
-<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00024">24</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00026">26</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
 
 </div>
 </div>
@@ -297,7 +333,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Is 32-bit running process? </p>
 
-<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00044">44</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00050">50</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
 
 </div>
 </div>
@@ -324,7 +360,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Is 64-bit OS? </p>
 
-<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00029">29</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00031">31</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +387,34 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Is 64-bit running process? </p>
 
-<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00049">49</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00055">55</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afe74ee4f616f4ad1f57be5560d592119"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CppBenchmark::Environment::IsBigEndian </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is big-endian system? </p>
+
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00088">88</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
 
 </div>
 </div>
@@ -378,7 +441,34 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Is compiled in debug mode? </p>
 
-<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00066">66</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00074">74</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a73c8ff125ef096c34aa9d5a4e43f12de"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CppBenchmark::Environment::IsLittleEndian </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is little-endian system? </p>
+
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00094">94</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
 
 </div>
 </div>
@@ -405,7 +495,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Is compiled in release mode? </p>
 
-<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00071">71</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00079">79</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
 
 </div>
 </div>
@@ -480,7 +570,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Get OS version string. </p>
 
-<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00080">80</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00100">100</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
 
 </div>
 </div>
@@ -505,9 +595,9 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the current timestamp. </p>
+<p>Get the current time in seconds. </p>
 
-<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00321">321</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
+<p>Definition at line <a class="el" href="environment_8cpp_source.html#l00361">361</a> of file <a class="el" href="environment_8cpp_source.html">environment.cpp</a>.</p>
 
 </div>
 </div>

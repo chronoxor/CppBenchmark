@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['generateclockspeed',['GenerateClockSpeed',['../class_cpp_benchmark_1_1_reporter_console.html#a0e88ff50b877fdc56051f15a49538573',1,'CppBenchmark::ReporterConsole']]],
-  ['generatedatasize',['GenerateDataSize',['../class_cpp_benchmark_1_1_reporter_console.html#ac72cc33e02222faeca4023966e0e9411',1,'CppBenchmark::ReporterConsole']]],
-  ['generateseparator',['GenerateSeparator',['../class_cpp_benchmark_1_1_reporter_console.html#a55b4dd76be48ee550c145424956e3830',1,'CppBenchmark::ReporterConsole']]],
-  ['generatetimeperiod',['GenerateTimePeriod',['../class_cpp_benchmark_1_1_reporter_console.html#a94e7c2e4b158e39e3b439a0f8849fd4a',1,'CppBenchmark::ReporterConsole']]],
-  ['getinstance',['GetInstance',['../class_cpp_benchmark_1_1_launcher_console.html#a5ec2f62efeb9009548f1c7da6645f2d2',1,'CppBenchmark::LauncherConsole']]]
+  ['fixture',['Fixture',['../class_cpp_benchmark_1_1_fixture.html#ad96112069a26c7414d44cbb2c8d87fbf',1,'CppBenchmark::Fixture::Fixture() noexcept=default'],['../class_cpp_benchmark_1_1_fixture.html#a5f8c8768720042fd0e5a721d6d7f3aac',1,'CppBenchmark::Fixture::Fixture(const Fixture &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_fixture.html#acf21276fe564155d456c5538f457eb5e',1,'CppBenchmark::Fixture::Fixture(Fixture &amp;&amp;) noexcept=default']]],
+  ['fixturepc',['FixturePC',['../class_cpp_benchmark_1_1_fixture_p_c.html#ace13ba02daa851c35f8e9caf6ca06043',1,'CppBenchmark::FixturePC::FixturePC() noexcept=default'],['../class_cpp_benchmark_1_1_fixture_p_c.html#aa70a009f61782f2d84175470dbd4135c',1,'CppBenchmark::FixturePC::FixturePC(const FixturePC &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_fixture_p_c.html#a853957f095b84d1aecdb9458fe947d47',1,'CppBenchmark::FixturePC::FixturePC(FixturePC &amp;&amp;) noexcept=default']]],
+  ['fixturethreads',['FixtureThreads',['../class_cpp_benchmark_1_1_fixture_threads.html#afe5f7dcff8195a640c06d69860245037',1,'CppBenchmark::FixtureThreads::FixtureThreads() noexcept=default'],['../class_cpp_benchmark_1_1_fixture_threads.html#ad452a14d3ef39944b4801d4b4f3eb685',1,'CppBenchmark::FixtureThreads::FixtureThreads(const FixtureThreads &amp;) noexcept=default'],['../class_cpp_benchmark_1_1_fixture_threads.html#a32bbbc58a56dcb296b895fcba85c8cc4',1,'CppBenchmark::FixtureThreads::FixtureThreads(FixtureThreads &amp;&amp;) noexcept=default']]]
 ];

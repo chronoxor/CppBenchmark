@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['addbenchmark',['AddBenchmark',['../class_cpp_benchmark_1_1_launcher.html#a9731fd2256220d5e93b86517377b00af',1,'CppBenchmark::Launcher']]],
+  ['addbenchmark',['AddBenchmark',['../class_cpp_benchmark_1_1_launcher.html#ac7889490797885a2ec4119a8dcda8814',1,'CppBenchmark::Launcher']]],
+  ['addbenchmarkbuilder',['AddBenchmarkBuilder',['../class_cpp_benchmark_1_1_launcher.html#a82819c5f3b1d412db5c60c98744b8cdf',1,'CppBenchmark::Launcher']]],
   ['addbytes',['AddBytes',['../class_cpp_benchmark_1_1_phase_metrics.html#ab18695107bd30df57c21e6f289982085',1,'CppBenchmark::PhaseMetrics']]],
   ['additems',['AddItems',['../class_cpp_benchmark_1_1_phase_metrics.html#a91dd543cfcffb02cacbbd966d38ac402',1,'CppBenchmark::PhaseMetrics']]],
   ['additerations',['AddIterations',['../class_cpp_benchmark_1_1_phase_metrics.html#a4a40af3a716824e3a77229531939f546',1,'CppBenchmark::PhaseMetrics']]],

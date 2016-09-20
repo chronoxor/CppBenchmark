@@ -128,12 +128,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a31953ee9f7a8edb15930e42888155007"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ebb7af35b51d29821097f0067ad9002"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_launcher.html">Launcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#a6ebb7af35b51d29821097f0067ad9002">operator=</a> (<a class="el" href="class_cpp_benchmark_1_1_launcher.html">Launcher</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a6ebb7af35b51d29821097f0067ad9002"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9731fd2256220d5e93b86517377b00af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#a9731fd2256220d5e93b86517377b00af">AddBenchmark</a> (std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &gt; benchmark)</td></tr>
-<tr class="memdesc:a9731fd2256220d5e93b86517377b00af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the given benchmark to the benchmarks collection.  <a href="#a9731fd2256220d5e93b86517377b00af">More...</a><br /></td></tr>
-<tr class="separator:a9731fd2256220d5e93b86517377b00af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7889490797885a2ec4119a8dcda8814"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#ac7889490797885a2ec4119a8dcda8814">AddBenchmark</a> (std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &gt; benchmark)</td></tr>
+<tr class="memdesc:ac7889490797885a2ec4119a8dcda8814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the given benchmark to the benchmarks collection.  <a href="#ac7889490797885a2ec4119a8dcda8814">More...</a><br /></td></tr>
+<tr class="separator:ac7889490797885a2ec4119a8dcda8814"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a1309c66dfaeb0a26b68c1b7b564a90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#a0a1309c66dfaeb0a26b68c1b7b564a90">ClearAllBenchmarks</a> ()</td></tr>
 <tr class="memdesc:a0a1309c66dfaeb0a26b68c1b7b564a90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear benchmarks collection.  <a href="#a0a1309c66dfaeb0a26b68c1b7b564a90">More...</a><br /></td></tr>
 <tr class="separator:a0a1309c66dfaeb0a26b68c1b7b564a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82819c5f3b1d412db5c60c98744b8cdf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#a82819c5f3b1d412db5c60c98744b8cdf">AddBenchmarkBuilder</a> (std::function&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &gt;()&gt; builder)</td></tr>
+<tr class="memdesc:a82819c5f3b1d412db5c60c98744b8cdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the given benchmark builder function to the benchmark builders collection.  <a href="#a82819c5f3b1d412db5c60c98744b8cdf">More...</a><br /></td></tr>
+<tr class="separator:a82819c5f3b1d412db5c60c98744b8cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf2569794ffc93919fa30e32f886b7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#afaf2569794ffc93919fa30e32f886b7b">ClearAllBenchmarksBuilders</a> ()</td></tr>
+<tr class="memdesc:afaf2569794ffc93919fa30e32f886b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear benchmark builders collection.  <a href="#afaf2569794ffc93919fa30e32f886b7b">More...</a><br /></td></tr>
+<tr class="separator:afaf2569794ffc93919fa30e32f886b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0adafeae5cb9c440479d1d938d90f4c3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#a0adafeae5cb9c440479d1d938d90f4c3">Launch</a> (const std::string &amp;pattern=&quot;&quot;)</td></tr>
 <tr class="memdesc:a0adafeae5cb9c440479d1d938d90f4c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launch registered benchmarks.  <a href="#a0adafeae5cb9c440479d1d938d90f4c3">More...</a><br /></td></tr>
 <tr class="separator:a0adafeae5cb9c440479d1d938d90f4c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,19 +162,22 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a68c52f212e638fdecfc6106641f21fe3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#a68c52f212e638fdecfc6106641f21fe3">_benchmarks</a></td></tr>
-<tr class="memdesc:a68c52f212e638fdecfc6106641f21fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registered benchmarks collection.  <a href="#a68c52f212e638fdecfc6106641f21fe3">More...</a><br /></td></tr>
-<tr class="separator:a68c52f212e638fdecfc6106641f21fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3ee9f865ef888e46aa537887765b5da"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#ad3ee9f865ef888e46aa537887765b5da">_benchmarks</a></td></tr>
+<tr class="memdesc:ad3ee9f865ef888e46aa537887765b5da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registered benchmarks collection.  <a href="#ad3ee9f865ef888e46aa537887765b5da">More...</a><br /></td></tr>
+<tr class="separator:ad3ee9f865ef888e46aa537887765b5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45011dc3122b28ecf2bfe17443ad9bcc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::function&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &gt;)&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher.html#a45011dc3122b28ecf2bfe17443ad9bcc">_builders</a></td></tr>
+<tr class="memdesc:a45011dc3122b28ecf2bfe17443ad9bcc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> builders collection.  <a href="#a45011dc3122b28ecf2bfe17443ad9bcc">More...</a><br /></td></tr>
+<tr class="separator:a45011dc3122b28ecf2bfe17443ad9bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_cpp_benchmark_1_1_launcher_handler')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_launcher_handler.html">CppBenchmark::LauncherHandler</a></td></tr>
-<tr class="memitem:a17856b1371384cee44969932b58b116e inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher_handler.html#a17856b1371384cee44969932b58b116e">onLaunching</a> (int current, int total, const <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &amp;benchmark, const <a class="el" href="class_cpp_benchmark_1_1_context.html">Context</a> &amp;context, int attempt)</td></tr>
-<tr class="memdesc:a17856b1371384cee44969932b58b116e inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle benchmark launching notification.  <a href="#a17856b1371384cee44969932b58b116e">More...</a><br /></td></tr>
-<tr class="separator:a17856b1371384cee44969932b58b116e inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8483db835e7ea13ec06ce99054cd5c8a inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher_handler.html#a8483db835e7ea13ec06ce99054cd5c8a">onLaunched</a> (int current, int total, const <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &amp;benchmark, const <a class="el" href="class_cpp_benchmark_1_1_context.html">Context</a> &amp;context, int attempt)</td></tr>
-<tr class="memdesc:a8483db835e7ea13ec06ce99054cd5c8a inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle benchmark launched notification.  <a href="#a8483db835e7ea13ec06ce99054cd5c8a">More...</a><br /></td></tr>
-<tr class="separator:a8483db835e7ea13ec06ce99054cd5c8a inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c156ed997081093ae08e00e00849f53 inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher_handler.html#a0c156ed997081093ae08e00e00849f53">onLaunching</a> (int current, int total, const <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &amp;benchmark, const <a class="el" href="class_cpp_benchmark_1_1_context.html">Context</a> &amp;context, int attempt)</td></tr>
+<tr class="memdesc:a0c156ed997081093ae08e00e00849f53 inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle benchmark launching notification.  <a href="#a0c156ed997081093ae08e00e00849f53">More...</a><br /></td></tr>
+<tr class="separator:a0c156ed997081093ae08e00e00849f53 inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf33bb20e8da7316b82ddfe1152112bc inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_launcher_handler.html#acf33bb20e8da7316b82ddfe1152112bc">onLaunched</a> (int current, int total, const <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &amp;benchmark, const <a class="el" href="class_cpp_benchmark_1_1_context.html">Context</a> &amp;context, int attempt)</td></tr>
+<tr class="memdesc:acf33bb20e8da7316b82ddfe1152112bc inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle benchmark launched notification.  <a href="#acf33bb20e8da7316b82ddfe1152112bc">More...</a><br /></td></tr>
+<tr class="separator:acf33bb20e8da7316b82ddfe1152112bc inherit pro_methods_class_cpp_benchmark_1_1_launcher_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_cpp_benchmark_1_1_launcher.html" title="Launcher base class. ">Launcher</a> base class. </p>
@@ -271,7 +280,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a9731fd2256220d5e93b86517377b00af"></a>
+<a class="anchor" id="ac7889490797885a2ec4119a8dcda8814"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -281,7 +290,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void CppBenchmark::Launcher::AddBenchmark </td>
           <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &gt;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &gt;&#160;</td>
           <td class="paramname"><em>benchmark</em></td><td>)</td>
           <td></td>
         </tr>
@@ -296,12 +305,46 @@ Additional Inherited Members</h2></td></tr>
 <p>Add the given benchmark to the benchmarks collection. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">benchmark</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark base class. ">Benchmark</a> to register </td></tr>
+    <tr><td class="paramname">benchmark</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> to register </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Definition at line <a class="el" href="launcher_8h_source.html#l00039">39</a> of file <a class="el" href="launcher_8h_source.html">launcher.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a82819c5f3b1d412db5c60c98744b8cdf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppBenchmark::Launcher::AddBenchmarkBuilder </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &gt;()&gt;&#160;</td>
+          <td class="paramname"><em>builder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add the given benchmark builder function to the benchmark builders collection. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">builder</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> builder function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="launcher_8h_source.html#l00047">47</a> of file <a class="el" href="launcher_8h_source.html">launcher.h</a>.</p>
 
 </div>
 </div>
@@ -329,6 +372,33 @@ Additional Inherited Members</h2></td></tr>
 <p>Clear benchmarks collection. </p>
 
 <p>Definition at line <a class="el" href="launcher_8h_source.html#l00041">41</a> of file <a class="el" href="launcher_8h_source.html">launcher.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afaf2569794ffc93919fa30e32f886b7b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppBenchmark::Launcher::ClearAllBenchmarksBuilders </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clear benchmark builders collection. </p>
+
+<p>Definition at line <a class="el" href="launcher_8h_source.html#l00049">49</a> of file <a class="el" href="launcher_8h_source.html">launcher.h</a>.</p>
 
 </div>
 </div>
@@ -437,12 +507,12 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="launcher_8cpp_source.html#l00038">38</a> of file <a class="el" href="launcher_8cpp_source.html">launcher.cpp</a>.</p>
+<p>Definition at line <a class="el" href="launcher_8cpp_source.html#l00042">42</a> of file <a class="el" href="launcher_8cpp_source.html">launcher.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a68c52f212e638fdecfc6106641f21fe3"></a>
+<a class="anchor" id="ad3ee9f865ef888e46aa537887765b5da"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -450,7 +520,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a>&gt; &gt; CppBenchmark::Launcher::_benchmarks</td>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a>&gt; &gt; CppBenchmark::Launcher::_benchmarks</td>
         </tr>
       </table>
   </td>
@@ -462,7 +532,31 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Registered benchmarks collection. </p>
 
-<p>Definition at line <a class="el" href="launcher_8h_source.html#l00060">60</a> of file <a class="el" href="launcher_8h_source.html">launcher.h</a>.</p>
+<p>Definition at line <a class="el" href="launcher_8h_source.html#l00068">68</a> of file <a class="el" href="launcher_8h_source.html">launcher.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a45011dc3122b28ecf2bfe17443ad9bcc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::function&lt;std::shared_ptr&lt;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a>&gt;)&gt; &gt; CppBenchmark::Launcher::_builders</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> builders collection. </p>
+
+<p>Definition at line <a class="el" href="launcher_8h_source.html#l00070">70</a> of file <a class="el" href="launcher_8h_source.html">launcher.h</a>.</p>
 
 </div>
 </div>

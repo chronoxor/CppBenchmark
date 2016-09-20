@@ -94,7 +94,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="class_cpp_benchmark_1_1_benchmark_threads-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CppBenchmark::BenchmarkThreads Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -111,11 +110,8 @@ Inheritance diagram for CppBenchmark::BenchmarkThreads:</div>
  <div class="center">
   <img src="class_cpp_benchmark_1_1_benchmark_threads.png" usemap="#CppBenchmark::BenchmarkThreads_map" alt=""/>
   <map id="CppBenchmark::BenchmarkThreads_map" name="CppBenchmark::BenchmarkThreads_map">
-<area href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark base class. " alt="CppBenchmark::Benchmark" shape="rect" coords="0,56,213,80"/>
-<area href="class_cpp_benchmark_1_1_fixture_threads.html" title="Threads benchmark fixture. " alt="CppBenchmark::FixtureThreads" shape="rect" coords="223,56,436,80"/>
-<area href="class_cpp_benchmark_1_1_fixture.html" title="Benchmark fixture. " alt="CppBenchmark::Fixture" shape="rect" coords="0,0,213,24"/>
-<area href="class_cpp_benchmark_1_1_fixture.html" title="Benchmark fixture. " alt="CppBenchmark::Fixture" shape="rect" coords="223,0,436,24"/>
-<area href="class_cpp_benchmark_1_1_benchmark_p_c.html" title="Producers/Consumers benchmark base class. " alt="CppBenchmark::BenchmarkPC" shape="rect" coords="111,168,324,192"/>
+<area href="class_cpp_benchmark_1_1_benchmark_base.html" title="Benchmark base class. " alt="CppBenchmark::BenchmarkBase" shape="rect" coords="0,0,213,24"/>
+<area href="class_cpp_benchmark_1_1_fixture_threads.html" title="Threads benchmark fixture. " alt="CppBenchmark::FixtureThreads" shape="rect" coords="223,0,436,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -124,18 +120,14 @@ Public Types</h2></td></tr>
 <tr class="memitem:a79d0253edfaff9fa2c5a3966b1f9ede9"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_cpp_benchmark_1_1_settings_threads.html">SettingsThreads</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#a79d0253edfaff9fa2c5a3966b1f9ede9">TSettings</a></td></tr>
 <tr class="memdesc:a79d0253edfaff9fa2c5a3966b1f9ede9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html" title="Threads benchmark base class. ">BenchmarkThreads</a> settings type.  <a href="#a79d0253edfaff9fa2c5a3966b1f9ede9">More...</a><br /></td></tr>
 <tr class="separator:a79d0253edfaff9fa2c5a3966b1f9ede9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_class_cpp_benchmark_1_1_benchmark"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_cpp_benchmark_1_1_benchmark')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a></td></tr>
-<tr class="memitem:a22d1cb41d894cd9ba1c00dbd629da136 inherit pub_types_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_cpp_benchmark_1_1_settings.html">Settings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">TSettings</a></td></tr>
-<tr class="memdesc:a22d1cb41d894cd9ba1c00dbd629da136 inherit pub_types_class_cpp_benchmark_1_1_benchmark"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark base class. ">Benchmark</a> settings type.  <a href="#a22d1cb41d894cd9ba1c00dbd629da136">More...</a><br /></td></tr>
-<tr class="separator:a22d1cb41d894cd9ba1c00dbd629da136 inherit pub_types_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab609cf20237c19d029f9304665d9da20"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
-<tr class="memitem:ab609cf20237c19d029f9304665d9da20"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#ab609cf20237c19d029f9304665d9da20">BenchmarkThreads</a> (const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark.html#aff4fff0bfb81b4cf82473e46388e935a">name</a>, Types...settings)</td></tr>
+<tr class="memitem:ab609cf20237c19d029f9304665d9da20"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#ab609cf20237c19d029f9304665d9da20">BenchmarkThreads</a> (const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a6ccdaeb2e0d8dc8869375db401142670">name</a>, Types...settings)</td></tr>
 <tr class="memdesc:ab609cf20237c19d029f9304665d9da20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default class constructor.  <a href="#ab609cf20237c19d029f9304665d9da20">More...</a><br /></td></tr>
 <tr class="separator:ab609cf20237c19d029f9304665d9da20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b6ee4c102b065d307aed5864d34cc96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#a8b6ee4c102b065d307aed5864d34cc96">BenchmarkThreads</a> (const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark.html#aff4fff0bfb81b4cf82473e46388e935a">name</a>, const <a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">TSettings</a> &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a52098ef3996919da630688134e38ace6">settings</a>)</td></tr>
+<tr class="memitem:a8b6ee4c102b065d307aed5864d34cc96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#a8b6ee4c102b065d307aed5864d34cc96">BenchmarkThreads</a> (const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a6ccdaeb2e0d8dc8869375db401142670">name</a>, const <a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#a79d0253edfaff9fa2c5a3966b1f9ede9">TSettings</a> &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ada0af4ec4b02fca26ebd4cb29d026cf8">settings</a>)</td></tr>
 <tr class="memdesc:a8b6ee4c102b065d307aed5864d34cc96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative class constructor.  <a href="#a8b6ee4c102b065d307aed5864d34cc96">More...</a><br /></td></tr>
 <tr class="separator:a8b6ee4c102b065d307aed5864d34cc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3ca8d22fa79c3c7812fc9991e2f0dba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#ae3ca8d22fa79c3c7812fc9991e2f0dba">BenchmarkThreads</a> (const <a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html">BenchmarkThreads</a> &amp;)=delete</td></tr>
@@ -148,43 +140,30 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a343033c734174dadad6a7ec32decb0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a53dd6eb2e56c4377a216716569516e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html">BenchmarkThreads</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#a9a53dd6eb2e56c4377a216716569516e">operator=</a> (<a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html">BenchmarkThreads</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a9a53dd6eb2e56c4377a216716569516e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_cpp_benchmark_1_1_benchmark"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_cpp_benchmark_1_1_benchmark')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">CppBenchmark::Benchmark</a></td></tr>
-<tr class="memitem:ae389f49df70e63b0ea4065852e422784 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
-<tr class="memitem:ae389f49df70e63b0ea4065852e422784 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">Benchmark</a> (const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark.html#aff4fff0bfb81b4cf82473e46388e935a">name</a>, Types...settings)</td></tr>
-<tr class="memdesc:ae389f49df70e63b0ea4065852e422784 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default class constructor.  <a href="#ae389f49df70e63b0ea4065852e422784">More...</a><br /></td></tr>
-<tr class="separator:ae389f49df70e63b0ea4065852e422784 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a606f8a66bc1b00a7457265068849a072 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a606f8a66bc1b00a7457265068849a072">Benchmark</a> (const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark.html#aff4fff0bfb81b4cf82473e46388e935a">name</a>, const <a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">TSettings</a> &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a52098ef3996919da630688134e38ace6">settings</a>)</td></tr>
-<tr class="memdesc:a606f8a66bc1b00a7457265068849a072 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative class constructor.  <a href="#a606f8a66bc1b00a7457265068849a072">More...</a><br /></td></tr>
-<tr class="separator:a606f8a66bc1b00a7457265068849a072 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcc0bbfe5694cc1acd154225959eb6dc inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#adcc0bbfe5694cc1acd154225959eb6dc">Benchmark</a> (const <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &amp;)=delete</td></tr>
-<tr class="separator:adcc0bbfe5694cc1acd154225959eb6dc inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd449e6c45f175cb1854e3d955535b2d inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#afd449e6c45f175cb1854e3d955535b2d">Benchmark</a> (<a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &amp;&amp;)=delete</td></tr>
-<tr class="separator:afd449e6c45f175cb1854e3d955535b2d inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b775ccc5edee2821dc80fd3e606c87f inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a9b775ccc5edee2821dc80fd3e606c87f">~Benchmark</a> ()=default</td></tr>
-<tr class="separator:a9b775ccc5edee2821dc80fd3e606c87f inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b6880f8d2a821f134f631f74e12f08a inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a1b6880f8d2a821f134f631f74e12f08a">operator=</a> (const <a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &amp;)=delete</td></tr>
-<tr class="separator:a1b6880f8d2a821f134f631f74e12f08a inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a161e749ab70d37e3871418673e3763d1 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a161e749ab70d37e3871418673e3763d1">operator=</a> (<a class="el" href="class_cpp_benchmark_1_1_benchmark.html">Benchmark</a> &amp;&amp;)=delete</td></tr>
-<tr class="separator:a161e749ab70d37e3871418673e3763d1 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff4fff0bfb81b4cf82473e46388e935a inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#aff4fff0bfb81b4cf82473e46388e935a">name</a> () const </td></tr>
-<tr class="memdesc:aff4fff0bfb81b4cf82473e46388e935a inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get benchmark name.  <a href="#aff4fff0bfb81b4cf82473e46388e935a">More...</a><br /></td></tr>
-<tr class="separator:aff4fff0bfb81b4cf82473e46388e935a inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52098ef3996919da630688134e38ace6 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_cpp_benchmark_1_1_settings.html">Settings</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a52098ef3996919da630688134e38ace6">settings</a> () const </td></tr>
-<tr class="memdesc:a52098ef3996919da630688134e38ace6 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get benchmark settings.  <a href="#a52098ef3996919da630688134e38ace6">More...</a><br /></td></tr>
-<tr class="separator:a52098ef3996919da630688134e38ace6 inherit pub_methods_class_cpp_benchmark_1_1_benchmark"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_cpp_benchmark_1_1_fixture"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_cpp_benchmark_1_1_fixture')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_fixture.html">CppBenchmark::Fixture</a></td></tr>
-<tr class="memitem:ad96112069a26c7414d44cbb2c8d87fbf inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture.html#ad96112069a26c7414d44cbb2c8d87fbf">Fixture</a> () noexcept=default</td></tr>
-<tr class="separator:ad96112069a26c7414d44cbb2c8d87fbf inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f8c8768720042fd0e5a721d6d7f3aac inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture.html#a5f8c8768720042fd0e5a721d6d7f3aac">Fixture</a> (const <a class="el" href="class_cpp_benchmark_1_1_fixture.html">Fixture</a> &amp;) noexcept=default</td></tr>
-<tr class="separator:a5f8c8768720042fd0e5a721d6d7f3aac inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf21276fe564155d456c5538f457eb5e inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture.html#acf21276fe564155d456c5538f457eb5e">Fixture</a> (<a class="el" href="class_cpp_benchmark_1_1_fixture.html">Fixture</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="separator:acf21276fe564155d456c5538f457eb5e inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17f49fedb19b1595ee8f6cdf948ecede inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture.html#a17f49fedb19b1595ee8f6cdf948ecede">~Fixture</a> () noexcept=default</td></tr>
-<tr class="separator:a17f49fedb19b1595ee8f6cdf948ecede inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab423f3fae4c8091f45b5035b67f706dd inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_fixture.html">Fixture</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture.html#ab423f3fae4c8091f45b5035b67f706dd">operator=</a> (const <a class="el" href="class_cpp_benchmark_1_1_fixture.html">Fixture</a> &amp;) noexcept=default</td></tr>
-<tr class="separator:ab423f3fae4c8091f45b5035b67f706dd inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2c8892af52ba1809d05b06139d6bbaa inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_fixture.html">Fixture</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture.html#ab2c8892af52ba1809d05b06139d6bbaa">operator=</a> (<a class="el" href="class_cpp_benchmark_1_1_fixture.html">Fixture</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="separator:ab2c8892af52ba1809d05b06139d6bbaa inherit pub_methods_class_cpp_benchmark_1_1_fixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_cpp_benchmark_1_1_benchmark_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">CppBenchmark::BenchmarkBase</a></td></tr>
+<tr class="memitem:ad826e1e5e9433735c409ee55a0b2e31f inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:ad826e1e5e9433735c409ee55a0b2e31f inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ad826e1e5e9433735c409ee55a0b2e31f">BenchmarkBase</a> (const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a6ccdaeb2e0d8dc8869375db401142670">name</a>, Types...settings)</td></tr>
+<tr class="memdesc:ad826e1e5e9433735c409ee55a0b2e31f inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default class constructor.  <a href="#ad826e1e5e9433735c409ee55a0b2e31f">More...</a><br /></td></tr>
+<tr class="separator:ad826e1e5e9433735c409ee55a0b2e31f inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af59ee01ecb94586152c0456577e118b4 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#af59ee01ecb94586152c0456577e118b4">BenchmarkBase</a> (const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a6ccdaeb2e0d8dc8869375db401142670">name</a>, const <a class="el" href="class_cpp_benchmark_1_1_settings.html">Settings</a> &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ada0af4ec4b02fca26ebd4cb29d026cf8">settings</a>)</td></tr>
+<tr class="memdesc:af59ee01ecb94586152c0456577e118b4 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative class constructor.  <a href="#af59ee01ecb94586152c0456577e118b4">More...</a><br /></td></tr>
+<tr class="separator:af59ee01ecb94586152c0456577e118b4 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdf700e14e2f184175f5d1eb50e10879 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#abdf700e14e2f184175f5d1eb50e10879">BenchmarkBase</a> (const <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &amp;)=delete</td></tr>
+<tr class="separator:abdf700e14e2f184175f5d1eb50e10879 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dc1a7e76dffd724ba50d421ae3b6a86 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a9dc1a7e76dffd724ba50d421ae3b6a86">BenchmarkBase</a> (<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a9dc1a7e76dffd724ba50d421ae3b6a86 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada8fde350986d1fe13845048c38e6a35 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ada8fde350986d1fe13845048c38e6a35">~BenchmarkBase</a> ()=default</td></tr>
+<tr class="separator:ada8fde350986d1fe13845048c38e6a35 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f13b15441eef6bb6e5e4f7d1049a1f2 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a1f13b15441eef6bb6e5e4f7d1049a1f2">operator=</a> (const <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &amp;)=delete</td></tr>
+<tr class="separator:a1f13b15441eef6bb6e5e4f7d1049a1f2 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac60f421cbadb20e876ec13f5487cf1b3 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ac60f421cbadb20e876ec13f5487cf1b3">operator=</a> (<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">BenchmarkBase</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ac60f421cbadb20e876ec13f5487cf1b3 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ccdaeb2e0d8dc8869375db401142670 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a6ccdaeb2e0d8dc8869375db401142670">name</a> () const </td></tr>
+<tr class="memdesc:a6ccdaeb2e0d8dc8869375db401142670 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get benchmark name.  <a href="#a6ccdaeb2e0d8dc8869375db401142670">More...</a><br /></td></tr>
+<tr class="separator:a6ccdaeb2e0d8dc8869375db401142670 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0af4ec4b02fca26ebd4cb29d026cf8 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_cpp_benchmark_1_1_settings.html">Settings</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ada0af4ec4b02fca26ebd4cb29d026cf8">settings</a> () const </td></tr>
+<tr class="memdesc:ada0af4ec4b02fca26ebd4cb29d026cf8 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get benchmark settings.  <a href="#ada0af4ec4b02fca26ebd4cb29d026cf8">More...</a><br /></td></tr>
+<tr class="separator:ada0af4ec4b02fca26ebd4cb29d026cf8 inherit pub_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_cpp_benchmark_1_1_fixture_threads"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_cpp_benchmark_1_1_fixture_threads')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html">CppBenchmark::FixtureThreads</a></td></tr>
 <tr class="memitem:afe5f7dcff8195a640c06d69860245037 inherit pub_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html#afe5f7dcff8195a640c06d69860245037">FixtureThreads</a> () noexcept=default</td></tr>
 <tr class="separator:afe5f7dcff8195a640c06d69860245037 inherit pub_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,28 +180,48 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac9b2e3d62f5bedbe2c339c3d18451ff0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#ac9b2e3d62f5bedbe2c339c3d18451ff0">RunThread</a> (<a class="el" href="class_cpp_benchmark_1_1_context_thread.html">ContextThread</a> &amp;context)=0</td></tr>
-<tr class="memdesc:ac9b2e3d62f5bedbe2c339c3d18451ff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread run method.  <a href="#ac9b2e3d62f5bedbe2c339c3d18451ff0">More...</a><br /></td></tr>
-<tr class="separator:ac9b2e3d62f5bedbe2c339c3d18451ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_class_cpp_benchmark_1_1_fixture"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_cpp_benchmark_1_1_fixture')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_fixture.html">CppBenchmark::Fixture</a></td></tr>
-<tr class="memitem:a53dc414574cb40710ad95c2266bb607d inherit pro_methods_class_cpp_benchmark_1_1_fixture"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture.html#a53dc414574cb40710ad95c2266bb607d">Initialize</a> (<a class="el" href="class_cpp_benchmark_1_1_context.html">Context</a> &amp;context)</td></tr>
-<tr class="memdesc:a53dc414574cb40710ad95c2266bb607d inherit pro_methods_class_cpp_benchmark_1_1_fixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize benchmark.  <a href="#a53dc414574cb40710ad95c2266bb607d">More...</a><br /></td></tr>
-<tr class="separator:a53dc414574cb40710ad95c2266bb607d inherit pro_methods_class_cpp_benchmark_1_1_fixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5436824d6a8d00158f634f015b648648 inherit pro_methods_class_cpp_benchmark_1_1_fixture"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture.html#a5436824d6a8d00158f634f015b648648">Cleanup</a> (<a class="el" href="class_cpp_benchmark_1_1_context.html">Context</a> &amp;context)</td></tr>
-<tr class="memdesc:a5436824d6a8d00158f634f015b648648 inherit pro_methods_class_cpp_benchmark_1_1_fixture"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup benchmark.  <a href="#a5436824d6a8d00158f634f015b648648">More...</a><br /></td></tr>
-<tr class="separator:a5436824d6a8d00158f634f015b648648 inherit pro_methods_class_cpp_benchmark_1_1_fixture"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac66b92c7fcc77ecf788f2fc2a65ecac1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#ac66b92c7fcc77ecf788f2fc2a65ecac1">RunThread</a> (<a class="el" href="class_cpp_benchmark_1_1_context_threads.html">ContextThreads</a> &amp;context)=0</td></tr>
+<tr class="memdesc:ac66b92c7fcc77ecf788f2fc2a65ecac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread run method.  <a href="#ac66b92c7fcc77ecf788f2fc2a65ecac1">More...</a><br /></td></tr>
+<tr class="separator:ac66b92c7fcc77ecf788f2fc2a65ecac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_cpp_benchmark_1_1_benchmark_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_cpp_benchmark_1_1_benchmark_base')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">CppBenchmark::BenchmarkBase</a></td></tr>
+<tr class="memitem:a9279e2f3ae93ace0d22ba81e01f896b5 inherit pro_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a9279e2f3ae93ace0d22ba81e01f896b5">InitBenchmarkContext</a> (<a class="el" href="class_cpp_benchmark_1_1_context.html">Context</a> &amp;context)</td></tr>
+<tr class="separator:a9279e2f3ae93ace0d22ba81e01f896b5 inherit pro_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_cpp_benchmark_1_1_fixture_threads')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html">CppBenchmark::FixtureThreads</a></td></tr>
-<tr class="memitem:a51ea46b4767e39d2956fa69142ee282c inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html#a51ea46b4767e39d2956fa69142ee282c">InitializeThread</a> (<a class="el" href="class_cpp_benchmark_1_1_context_thread.html">ContextThread</a> &amp;context)</td></tr>
-<tr class="memdesc:a51ea46b4767e39d2956fa69142ee282c inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize thread.  <a href="#a51ea46b4767e39d2956fa69142ee282c">More...</a><br /></td></tr>
-<tr class="separator:a51ea46b4767e39d2956fa69142ee282c inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9c4c94c6a643cc64da51a0473dcfa4d inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html#ae9c4c94c6a643cc64da51a0473dcfa4d">CleanupThread</a> (<a class="el" href="class_cpp_benchmark_1_1_context_thread.html">ContextThread</a> &amp;context)</td></tr>
-<tr class="memdesc:ae9c4c94c6a643cc64da51a0473dcfa4d inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup thread.  <a href="#ae9c4c94c6a643cc64da51a0473dcfa4d">More...</a><br /></td></tr>
-<tr class="separator:ae9c4c94c6a643cc64da51a0473dcfa4d inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3becfcd255076e3319f5dc51fbcae72c inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html#a3becfcd255076e3319f5dc51fbcae72c">Initialize</a> (<a class="el" href="class_cpp_benchmark_1_1_context_threads.html">ContextThreads</a> &amp;context)</td></tr>
+<tr class="memdesc:a3becfcd255076e3319f5dc51fbcae72c inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize benchmark.  <a href="#a3becfcd255076e3319f5dc51fbcae72c">More...</a><br /></td></tr>
+<tr class="separator:a3becfcd255076e3319f5dc51fbcae72c inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a039928998f461db7735f894606ed1ceb inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html#a039928998f461db7735f894606ed1ceb">Cleanup</a> (<a class="el" href="class_cpp_benchmark_1_1_context_threads.html">ContextThreads</a> &amp;context)</td></tr>
+<tr class="memdesc:a039928998f461db7735f894606ed1ceb inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup benchmark.  <a href="#a039928998f461db7735f894606ed1ceb">More...</a><br /></td></tr>
+<tr class="separator:a039928998f461db7735f894606ed1ceb inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a596201e3796f2e8908ed0ebeba7e61b8 inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html#a596201e3796f2e8908ed0ebeba7e61b8">InitializeThread</a> (<a class="el" href="class_cpp_benchmark_1_1_context_threads.html">ContextThreads</a> &amp;context)</td></tr>
+<tr class="memdesc:a596201e3796f2e8908ed0ebeba7e61b8 inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize thread.  <a href="#a596201e3796f2e8908ed0ebeba7e61b8">More...</a><br /></td></tr>
+<tr class="separator:a596201e3796f2e8908ed0ebeba7e61b8 inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba0ae29e0c37693e8d3851830c20ca77 inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_fixture_threads.html#aba0ae29e0c37693e8d3851830c20ca77">CleanupThread</a> (<a class="el" href="class_cpp_benchmark_1_1_context_threads.html">ContextThreads</a> &amp;context)</td></tr>
+<tr class="memdesc:aba0ae29e0c37693e8d3851830c20ca77 inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup thread.  <a href="#aba0ae29e0c37693e8d3851830c20ca77">More...</a><br /></td></tr>
+<tr class="separator:aba0ae29e0c37693e8d3851830c20ca77 inherit pro_methods_class_cpp_benchmark_1_1_fixture_threads"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ad169c32d9203bfd6abd25a5260a77a7b"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#ad169c32d9203bfd6abd25a5260a77a7b">BenchmarkPC</a></td></tr>
-<tr class="separator:ad169c32d9203bfd6abd25a5260a77a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_class_cpp_benchmark_1_1_benchmark_base')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">CppBenchmark::BenchmarkBase</a></td></tr>
+<tr class="memitem:af879b2d68f3ee199f1d63fd853c703b4 inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#af879b2d68f3ee199f1d63fd853c703b4">UpdateBenchmarkMetrics</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &gt;&gt; &amp;phases)</td></tr>
+<tr class="separator:af879b2d68f3ee199f1d63fd853c703b4 inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8af0ec0cf6102deb1e5f6bdc960d26f4 inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a8af0ec0cf6102deb1e5f6bdc960d26f4">UpdateBenchmarkMetrics</a> (<a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;phase)</td></tr>
+<tr class="separator:a8af0ec0cf6102deb1e5f6bdc960d26f4 inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92c0dc956655875a27f3b9e97fd3bb7a inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a92c0dc956655875a27f3b9e97fd3bb7a">UpdateBenchmarkThreads</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &gt;&gt; &amp;phases)</td></tr>
+<tr class="separator:a92c0dc956655875a27f3b9e97fd3bb7a inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ddcc2b2860c4fd74715dbc59977eb0e inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a4ddcc2b2860c4fd74715dbc59977eb0e">UpdateBenchmarkNames</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &gt;&gt; &amp;phases)</td></tr>
+<tr class="separator:a4ddcc2b2860c4fd74715dbc59977eb0e inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8910619ff2e0fe47a019b1b6b669c9a inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ab8910619ff2e0fe47a019b1b6b669c9a">UpdateBenchmarkNames</a> (<a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;phase, const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a6ccdaeb2e0d8dc8869375db401142670">name</a>)</td></tr>
+<tr class="separator:ab8910619ff2e0fe47a019b1b6b669c9a inherit pro_static_methods_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_cpp_benchmark_1_1_benchmark_base')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html">CppBenchmark::BenchmarkBase</a></td></tr>
+<tr class="memitem:a121785709c73cf3e26f380dfce2dd43f inherit pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a121785709c73cf3e26f380dfce2dd43f">_launched</a></td></tr>
+<tr class="separator:a121785709c73cf3e26f380dfce2dd43f inherit pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad33046b8724ad32749123b6259545523 inherit pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ad33046b8724ad32749123b6259545523">_name</a></td></tr>
+<tr class="separator:ad33046b8724ad32749123b6259545523 inherit pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a315cc5c5c5526f4a9c65564417cfb14f inherit pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_settings.html">Settings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a315cc5c5c5526f4a9c65564417cfb14f">_settings</a></td></tr>
+<tr class="separator:a315cc5c5c5526f4a9c65564417cfb14f inherit pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe756a93c2776cb4e7fb6bb402c4b49e inherit pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#afe756a93c2776cb4e7fb6bb402c4b49e">_phases</a></td></tr>
+<tr class="separator:afe756a93c2776cb4e7fb6bb402c4b49e inherit pro_attribs_class_cpp_benchmark_1_1_benchmark_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Threads benchmark base class. </p>
@@ -242,7 +241,7 @@ Friends</h2></td></tr>
 
 <p><a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html" title="Threads benchmark base class. ">BenchmarkThreads</a> settings type. </p>
 
-<p>Definition at line <a class="el" href="benchmark__threads_8h_source.html#l00031">31</a> of file <a class="el" href="benchmark__threads_8h_source.html">benchmark_threads.h</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__threads_8h_source.html#l00029">29</a> of file <a class="el" href="benchmark__threads_8h_source.html">benchmark_threads.h</a>.</p>
 
 </div>
 </div>
@@ -284,13 +283,13 @@ template&lt;typename... Types&gt; </div>
 <p>Default class constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark base class. ">Benchmark</a> name </td></tr>
-    <tr><td class="paramname">settings</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark base class. ">Benchmark</a> settings </td></tr>
+    <tr><td class="paramname">name</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> name </td></tr>
+    <tr><td class="paramname">settings</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> settings </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="benchmark__threads_8h_source.html#l00039">39</a> of file <a class="el" href="benchmark__threads_8h_source.html">benchmark_threads.h</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__threads_8h_source.html#l00037">37</a> of file <a class="el" href="benchmark__threads_8h_source.html">benchmark_threads.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +309,7 @@ template&lt;typename... Types&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_cpp_benchmark_1_1_benchmark.html#a22d1cb41d894cd9ba1c00dbd629da136">TSettings</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_cpp_benchmark_1_1_benchmark_threads.html#a79d0253edfaff9fa2c5a3966b1f9ede9">TSettings</a> &amp;&#160;</td>
           <td class="paramname"><em>settings</em>&#160;</td>
         </tr>
         <tr>
@@ -329,13 +328,13 @@ template&lt;typename... Types&gt; </div>
 <p>Alternative class constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark base class. ">Benchmark</a> name </td></tr>
-    <tr><td class="paramname">settings</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark base class. ">Benchmark</a> settings </td></tr>
+    <tr><td class="paramname">name</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> name </td></tr>
+    <tr><td class="paramname">settings</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> settings </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="benchmark__threads_8h_source.html#l00045">45</a> of file <a class="el" href="benchmark__threads_8h_source.html">benchmark_threads.h</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__threads_8h_source.html#l00043">43</a> of file <a class="el" href="benchmark__threads_8h_source.html">benchmark_threads.h</a>.</p>
 
 </div>
 </div>
@@ -459,7 +458,7 @@ template&lt;typename... Types&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac9b2e3d62f5bedbe2c339c3d18451ff0"></a>
+<a class="anchor" id="ac66b92c7fcc77ecf788f2fc2a65ecac1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -469,7 +468,7 @@ template&lt;typename... Types&gt; </div>
         <tr>
           <td class="memname">virtual void CppBenchmark::BenchmarkThreads::RunThread </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_cpp_benchmark_1_1_context_thread.html">ContextThread</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_cpp_benchmark_1_1_context_threads.html">ContextThreads</a> &amp;&#160;</td>
           <td class="paramname"><em>context</em></td><td>)</td>
           <td></td>
         </tr>
@@ -485,33 +484,10 @@ template&lt;typename... Types&gt; </div>
 <p>Should be implemented to provide code which will be executed in separate thread!</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">context</td><td>- Thread running context </td></tr>
+    <tr><td class="paramname">context</td><td>- Threads running context </td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a class="anchor" id="ad169c32d9203bfd6abd25a5260a77a7b"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">friend class <a class="el" href="class_cpp_benchmark_1_1_benchmark_p_c.html">BenchmarkPC</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="benchmark__threads_8h_source.html#l00027">27</a> of file <a class="el" href="benchmark__threads_8h_source.html">benchmark_threads.h</a>.</p>
 
 </div>
 </div>

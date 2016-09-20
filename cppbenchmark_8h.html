@@ -129,7 +129,7 @@ Macros</h2></td></tr>
 <tr class="memitem:ab2cb673560b625affdb02d43f2be0050"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#ab2cb673560b625affdb02d43f2be0050">BENCHMARK_THREADS_FIXTURE</a>(fixture, ...)</td></tr>
 <tr class="memdesc:ab2cb673560b625affdb02d43f2be0050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Benchmark threads with fixture register macro.  <a href="#ab2cb673560b625affdb02d43f2be0050">More...</a><br /></td></tr>
 <tr class="separator:ab2cb673560b625affdb02d43f2be0050"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0367deec9b5fa69ebfae9a1cacd25014"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(type, ...)&#160;&#160;&#160;namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;type&gt;(__VA_ARGS__)); }</td></tr>
+<tr class="memitem:a0367deec9b5fa69ebfae9a1cacd25014"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(type, ...)&#160;&#160;&#160;namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)([]() { return std::make_shared&lt;type&gt;(__VA_ARGS__); }); }</td></tr>
 <tr class="memdesc:a0367deec9b5fa69ebfae9a1cacd25014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Benchmark class register macro.  <a href="#a0367deec9b5fa69ebfae9a1cacd25014">More...</a><br /></td></tr>
 <tr class="separator:a0367deec9b5fa69ebfae9a1cacd25014"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61f6db918d2041a5ced1d51f09fe4d88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cppbenchmark_8h.html#a61f6db918d2041a5ced1d51f09fe4d88">BENCHCODE_SCOPE</a>(name)&#160;&#160;&#160;<a class="el" href="class_cpp_benchmark_1_1_executor.html#afffda3b1c27feb5c984f9ca860278bfb">CppBenchmark::Executor::ScopeBenchmark</a>(name);</td></tr>
@@ -393,10 +393,10 @@ Macros</h2></td></tr>
 <div class="line">    protected:\</div>
 <div class="line">        void Run(Context&amp; context) <span class="keyword">override</span>;\</div>
 <div class="line">    };\</div>
-<div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(__VA_ARGS__));\</div>
+<div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)([]() { <span class="keywordflow">return</span> std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(__VA_ARGS__); });\</div>
 <div class="line">}\</div>
 <div class="line">void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(<a class="code" href="namespace_cpp_benchmark.html">CppBenchmark</a>::Context&amp; context)</div>
-<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_ae389f49df70e63b0ea4065852e422784"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">CppBenchmark::Benchmark::Benchmark</a></div><div class="ttdeci">Benchmark(const std::string &amp;name, Types...settings)</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00042">benchmark.h:42</a></div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_ae389f49df70e63b0ea4065852e422784"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">CppBenchmark::Benchmark::Benchmark</a></div><div class="ttdeci">Benchmark(const std::string &amp;name, Types...settings)</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00033">benchmark.h:33</a></div></div>
 <div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">C++ benchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="barrier_8h_source.html#l00015">barrier.h:15</a></div></div>
 </div><!-- fragment -->
 <p>Benchmark register macro. </p>
@@ -431,7 +431,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;type&gt;(__VA_ARGS__)); }</td>
+          <td></td><td>&#160;&#160;&#160;namespace CppBenchmark { Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)([]() { return std::make_shared&lt;type&gt;(__VA_ARGS__); }); }</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -450,7 +450,7 @@ Macros</h2></td></tr>
 <div class="line"></div>
 <div class="line"><span class="comment">// This benchmark will measure VectorBenchmark with 1000000 iterations</span></div>
 <div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(VectorBenchmark, <span class="stringliteral">&quot;VectorPushBackBenchmark&quot;</span>, 1000000)</div>
-</div><!-- fragment --> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="mpmc_8cpp-example.html#a13">mpmc.cpp</a>, <a class="el" href="mpsc_8cpp-example.html#a13">mpsc.cpp</a>, <a class="el" href="sort_8cpp-example.html#a10">sort.cpp</a>, and <a class="el" href="spsc_8cpp-example.html#a13">spsc.cpp</a>.</dd>
+</div><!-- fragment --> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="mpmc_8cpp-example.html#a12">mpmc.cpp</a>, <a class="el" href="mpsc_8cpp-example.html#a12">mpsc.cpp</a>, <a class="el" href="sort_8cpp-example.html#a10">sort.cpp</a>, and <a class="el" href="spsc_8cpp-example.html#a12">spsc.cpp</a>.</dd>
 </dl>
 <p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00216">216</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 
@@ -487,10 +487,10 @@ Macros</h2></td></tr>
 <div class="line">    protected:\</div>
 <div class="line">        void Run(Context&amp; context) <span class="keyword">override</span>;\</div>
 <div class="line">    };\</div>
-<div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(__VA_ARGS__));\</div>
+<div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)([]() { <span class="keywordflow">return</span> std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(__VA_ARGS__); });\</div>
 <div class="line">}\</div>
 <div class="line">void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context&amp; context)</div>
-<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_ae389f49df70e63b0ea4065852e422784"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">CppBenchmark::Benchmark::Benchmark</a></div><div class="ttdeci">Benchmark(const std::string &amp;name, Types...settings)</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00042">benchmark.h:42</a></div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_html_ae389f49df70e63b0ea4065852e422784"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#ae389f49df70e63b0ea4065852e422784">CppBenchmark::Benchmark::Benchmark</a></div><div class="ttdeci">Benchmark(const std::string &amp;name, Types...settings)</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark_8h_source.html#l00033">benchmark.h:33</a></div></div>
 <div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">C++ benchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="barrier_8h_source.html#l00015">barrier.h:15</a></div></div>
 </div><!-- fragment -->
 <p>Benchmark with fixture register macro. </p>
@@ -534,7 +534,7 @@ Macros</h2></td></tr>
 </div><!-- fragment -->
 <p>Benchmark main entry point macro. </p>
 <p>Main entry point definition for all benchmarks. Place this macro in some .cpp file to provide a main() function with registered LauncherConsole with <em>argc</em> &amp; <em>argv</em> arguments parsing. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="atomic_8cpp-example.html#a1">atomic.cpp</a>, <a class="el" href="containers_8cpp-example.html#a5">containers.cpp</a>, <a class="el" href="fpu_8cpp-example.html#a1">fpu.cpp</a>, <a class="el" href="fwrite_8cpp-example.html#a4">fwrite.cpp</a>, <a class="el" href="iterators_8cpp-example.html#a1">iterators.cpp</a>, <a class="el" href="mpmc_8cpp-example.html#a14">mpmc.cpp</a>, <a class="el" href="mpsc_8cpp-example.html#a14">mpsc.cpp</a>, <a class="el" href="random_8cpp-example.html#a1">random.cpp</a>, <a class="el" href="sort_8cpp-example.html#a11">sort.cpp</a>, <a class="el" href="spsc_8cpp-example.html#a14">spsc.cpp</a>, and <a class="el" href="threads_8cpp-example.html#a4">threads.cpp</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="atomic_8cpp-example.html#a1">atomic.cpp</a>, <a class="el" href="containers_8cpp-example.html#a5">containers.cpp</a>, <a class="el" href="fpu_8cpp-example.html#a1">fpu.cpp</a>, <a class="el" href="fwrite_8cpp-example.html#a4">fwrite.cpp</a>, <a class="el" href="iterators_8cpp-example.html#a1">iterators.cpp</a>, <a class="el" href="mpmc_8cpp-example.html#a13">mpmc.cpp</a>, <a class="el" href="mpsc_8cpp-example.html#a13">mpsc.cpp</a>, <a class="el" href="random_8cpp-example.html#a1">random.cpp</a>, <a class="el" href="sort_8cpp-example.html#a11">sort.cpp</a>, <a class="el" href="spsc_8cpp-example.html#a13">spsc.cpp</a>, and <a class="el" href="threads_8cpp-example.html#a4">threads.cpp</a>.</dd>
 </dl>
 <p>Definition at line <a class="el" href="cppbenchmark_8h_source.html#l00062">62</a> of file <a class="el" href="cppbenchmark_8h_source.html">cppbenchmark.h</a>.</p>
 
@@ -559,12 +559,12 @@ Macros</h2></td></tr>
 <div class="line">    public:\</div>
 <div class="line">        using <a class="code" href="class_cpp_benchmark_1_1_benchmark_threads.html#ab609cf20237c19d029f9304665d9da20">BenchmarkThreads::BenchmarkThreads</a>;\</div>
 <div class="line">    protected:\</div>
-<div class="line">        void RunThread(ContextThread&amp; context) <span class="keyword">override</span>;\</div>
+<div class="line">        void RunThread(ContextThreads&amp; context) <span class="keyword">override</span>;\</div>
 <div class="line">    };\</div>
-<div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(__VA_ARGS__));\</div>
+<div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)([]() { <span class="keywordflow">return</span> std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(__VA_ARGS__); });\</div>
 <div class="line">}\</div>
-<div class="line">void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(<a class="code" href="namespace_cpp_benchmark.html">CppBenchmark</a>::ContextThread&amp; context)</div>
-<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_threads_html_ab609cf20237c19d029f9304665d9da20"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark_threads.html#ab609cf20237c19d029f9304665d9da20">CppBenchmark::BenchmarkThreads::BenchmarkThreads</a></div><div class="ttdeci">BenchmarkThreads(const std::string &amp;name, Types...settings)</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__threads_8h_source.html#l00039">benchmark_threads.h:39</a></div></div>
+<div class="line">void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(<a class="code" href="namespace_cpp_benchmark.html">CppBenchmark</a>::ContextThreads&amp; context)</div>
+<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_threads_html_ab609cf20237c19d029f9304665d9da20"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark_threads.html#ab609cf20237c19d029f9304665d9da20">CppBenchmark::BenchmarkThreads::BenchmarkThreads</a></div><div class="ttdeci">BenchmarkThreads(const std::string &amp;name, Types...settings)</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__threads_8h_source.html#l00037">benchmark_threads.h:37</a></div></div>
 <div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">C++ benchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="barrier_8h_source.html#l00015">barrier.h:15</a></div></div>
 </div><!-- fragment -->
 <p>Benchmark threads register macro. </p>
@@ -608,12 +608,12 @@ Macros</h2></td></tr>
 <div class="line">    public:\</div>
 <div class="line">        using <a class="code" href="class_cpp_benchmark_1_1_benchmark_threads.html#ab609cf20237c19d029f9304665d9da20">BenchmarkThreads::BenchmarkThreads</a>;\</div>
 <div class="line">    protected:\</div>
-<div class="line">        void RunThread(ContextThread&amp; context) <span class="keyword">override</span>;\</div>
+<div class="line">        void RunThread(ContextThreads&amp; context) <span class="keyword">override</span>;\</div>
 <div class="line">    };\</div>
-<div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)(std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(__VA_ARGS__));\</div>
+<div class="line">    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)([]() { <span class="keywordflow">return</span> std::make_shared&lt;BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)&gt;(__VA_ARGS__); });\</div>
 <div class="line">}\</div>
-<div class="line">void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(ContextThread&amp; context)</div>
-<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_threads_html_ab609cf20237c19d029f9304665d9da20"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark_threads.html#ab609cf20237c19d029f9304665d9da20">CppBenchmark::BenchmarkThreads::BenchmarkThreads</a></div><div class="ttdeci">BenchmarkThreads(const std::string &amp;name, Types...settings)</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__threads_8h_source.html#l00039">benchmark_threads.h:39</a></div></div>
+<div class="line">void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(ContextThreads&amp; context)</div>
+<div class="ttc" id="class_cpp_benchmark_1_1_benchmark_threads_html_ab609cf20237c19d029f9304665d9da20"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark_threads.html#ab609cf20237c19d029f9304665d9da20">CppBenchmark::BenchmarkThreads::BenchmarkThreads</a></div><div class="ttdeci">BenchmarkThreads(const std::string &amp;name, Types...settings)</div><div class="ttdoc">Default class constructor. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__threads_8h_source.html#l00037">benchmark_threads.h:37</a></div></div>
 <div class="ttc" id="namespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">C++ benchmark project definitions. </div><div class="ttdef"><b>Definition:</b> <a href="barrier_8h_source.html#l00015">barrier.h:15</a></div></div>
 </div><!-- fragment -->
 <p>Benchmark threads with fixture register macro. </p>
