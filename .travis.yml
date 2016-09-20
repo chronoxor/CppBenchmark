@@ -4,7 +4,6 @@ language: cpp
 # Operation systems
 os:
   - linux
-  - osx
 
 # Branches to build
 branches:
@@ -14,6 +13,7 @@ branches:
 # Compilers
 compiler:
   - gcc
+  - clang
 
 # Using Trusty environment
 sudo: required
