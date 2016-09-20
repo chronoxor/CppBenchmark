@@ -160,7 +160,7 @@ public:
         \param value - Value
     */
     void SetCustom(const std::string& name, const std::string& value)
-    { _custom_str[name] = value; }
+    { _custom_str[name].assign(value); }
 
 private:
     int64_t _min_time;

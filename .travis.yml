@@ -20,7 +20,6 @@ addons:
 osx_image: xcode8
 
 before_install:
-  - echo $TRAVIS_OS_NAME
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
