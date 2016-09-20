@@ -1,0 +1,30 @@
+language: cpp
+
+os:
+- linux
+
+sudo: required
+dist: trusty
+
+compiler:
+- gcc
+
+addons:
+  apt:
+    packages:
+    - cmake
+    - doxygen
+    - graphviz
+
+script: 
+- cd scripts
+- ./01-generate-Unix.sh
+- ./02-build-Unix.sh
+- ./03-tests.sh
+- ./04-install-Unix.sh
+- ./05-doxygen-Unix.sh
+- ./06-clean.sh
+
+branches:
+  only:
+  - master
