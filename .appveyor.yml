@@ -27,7 +27,13 @@ init:
 
 # Scripts that run after cloning repository
 install:
+  - choco install doxygen.portable
+  - choco install graphviz.portable
   - cmd: git submodule update --init --recursive --remote
+
+# Scripts to run before build
+before_build:
+  - del "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets"
 
 # Build scripts
 build_script:
