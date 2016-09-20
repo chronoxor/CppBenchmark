@@ -63,7 +63,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 ```
 git clone git@github.com:chronoxor/CppBenchmark.git
 cd CppBenchmark
-git submodule update --init --recursive
+git submodule update --init --recursive --remote
 ```
 
 ## Windows (Visaul Studio 2015)
