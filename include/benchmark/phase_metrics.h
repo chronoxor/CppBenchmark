@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <limits>
 #include <map>
+#include <string>
 
 namespace CppBenchmark {
 
