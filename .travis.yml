@@ -1,15 +1,25 @@
+# Programming language definition
 language: cpp
 
+# Operation systems
 os:
   - linux
   - osx
 
+# Branches to build
+branches:
+  only:
+    - master
+
+# Compilers
 compiler:
   - gcc
 
+# Using Trusty environment
 sudo: required
 dist: trusty
 
+# Add-ons and packages
 addons:
   apt:
     packages:
@@ -17,17 +27,16 @@ addons:
       - doxygen
       - graphviz
 
+# OS X Version
 osx_image: xcode8
 
-branches:
-  only:
-    - master
-
+# Scripts that run before install
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
 
+# Build scripts
 script: 
   - cd scripts
   - ./01-generate-Unix.sh
@@ -36,3 +45,8 @@ script:
   - ./04-install-Unix.sh
   - ./05-doxygen-Unix.sh
   - ./06-clean.sh
+
+# Don't send notifications on success
+notifications:
+  email:
+    on_success: never

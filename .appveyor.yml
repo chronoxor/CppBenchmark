@@ -1,24 +1,24 @@
 # Specify version format
 version: "1.1.0.{build}"
 
+# Branches to build
+branches:
+  only: 
+    - master
+
 # Build platform, i.e. Win32 (instead of x86), x64, Any CPU. This setting is optional.
 platform: 
   - x86
   - x64
-
-# Specify custom environment variables
-environment:
-  MSVC_DEFAULT_OPTIONS: ON
 
 # Build configuration, i.e. Debug, Release, etc.
 configuration:
   - Debug
   - Release
 
-# Branches to build
-branches:
-  only: 
-    - master
+# Specify custom environment variables
+environment:
+  MSVC_DEFAULT_OPTIONS: ON
 
 # Scripts that are called at very beginning, before repo cloning
 init:
@@ -48,3 +48,8 @@ build_script:
 
 # Test scripts
 test: off
+
+# Don't send notifications on success
+notifications:
+  - provider: Email
+    on_build_success: false
