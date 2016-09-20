@@ -25,9 +25,6 @@ init:
   - cmd: cmake --version
   - cmd: msbuild /version
 
-# Scripts that run after cloning repository
-install:
-
 # Scripts to run before build
 before_build:
   - cmd: cd ./scripts
@@ -35,7 +32,7 @@ before_build:
   - cmd: if "%platform%"=="x64" ./01-generate-VisualStudio-x64.bat
 
 # Build scripts
-build:
+build_script:
   - cmd: ./02-build-VisualStudio.bat
   - cmd: ./03-tests.bat
   - cmd: ./04-install-VisualStudio.bat
