@@ -16,10 +16,6 @@ configuration:
   - Debug
   - Release
 
-# Specify custom environment variables
-environment:
-  MSVC_DEFAULT_OPTIONS: ON
-
 # Scripts that are called at very beginning, before repo cloning
 init:
   - cmd: cmake --version
@@ -44,8 +40,3 @@ build_script:
 
 # Test scripts
 test: off
-
-# Don't send notifications on success
-notifications:
-  - provider: Email
-    on_build_success: false
