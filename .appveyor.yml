@@ -27,8 +27,8 @@ init:
 
 # Scripts that run after cloning repository
 install:
-  - choco install doxygen.portable
-  - choco install graphviz.portable
+  - appveyor-retry choco install doxygen.portable
+  - appveyor-retry choco install graphviz.portable
   - cmd: git submodule update --init --recursive --remote
 
 # Build scripts
