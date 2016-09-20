@@ -28,9 +28,9 @@ addons:
 
 # Scripts that run before install
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
+  - git config --global user.name "Travis CI"
+  - git config --global user.email "travis@travis-ci.org"
+  - git config --global push.default simple
 
 # Build scripts
 script: 

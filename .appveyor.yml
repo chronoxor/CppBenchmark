@@ -25,6 +25,9 @@ init:
 install:
   - choco install doxygen.portable
   - choco install graphviz.portable
+  - cmd: git config --global user.name "AppVeyor"
+  - cmd: git config --global user.email "team@appveyor.com"
+  - cmd: git config --global push.default simple
   - cmd: git submodule update --init --recursive --remote
 
 # Build scripts
