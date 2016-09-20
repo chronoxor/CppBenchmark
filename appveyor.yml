@@ -25,6 +25,10 @@ init:
   - cmd: cmake --version
   - cmd: msbuild /version
 
+# Scripts that run after cloning repository
+install:
+  - cmd: git submodule update --init --recursive --remote
+
 # Build scripts
 build_script:
   - cmd: cd scripts
