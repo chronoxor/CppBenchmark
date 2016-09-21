@@ -7,14 +7,18 @@
 #include <chrono>
 #include <limits>
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__CYGWIN__)
+#include <sys/time.h>
+#include <time.h>
 #include <windows.h>
-#undef max
-#undef min
 #elif defined(linux) || defined(__linux) || defined(__linux__)
 #include <time.h>
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
 #include <sys/time.h>
+#elif defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#undef max
+#undef min
 #endif
 
 const uint64_t iterations = 10000000;
@@ -97,237 +101,7 @@ BENCHMARK("clock()", iterations)
     }
 }
 
-#if defined(_WIN32) || defined(_WIN64)
-BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
-{
-    static uint64_t timestamp = 0;
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t count = 0;
-
-    FILETIME filetime;
-    GetSystemTimePreciseAsFileTime(&filetime);
-
-    ULARGE_INTEGER ularge;
-    ularge.LowPart = filetime.dwLowDateTime;
-    ularge.HighPart = filetime.dwHighDateTime;
-    uint64_t current = ularge.QuadPart * 100;
-
-    if (timestamp == 0)
-        timestamp = current;
-
-    uint64_t duration = (current - timestamp);
-    double latency = (double)duration / ++count;
-    if (duration > 0)
-    {
-        if (latency < minlatency)
-        {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (duration > maxresolution)
-        {
-            maxresolution = duration;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        timestamp = current;
-        count = 0;
-    }
-}
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-BENCHMARK("GetTickCount()", iterations)
-{
-    static DWORD timestamp = GetTickCount();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t count = 0;
-
-    DWORD current = GetTickCount();
-    uint64_t duration = (current - timestamp) * 1000 * 1000;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
-    {
-        if (latency < minlatency)
-        {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (duration > maxresolution)
-        {
-            maxresolution = duration;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        timestamp = current;
-        count = 0;
-    }
-}
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-BENCHMARK("GetTickCount64()", iterations)
-{
-    static ULONGLONG timestamp = GetTickCount64();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t count = 0;
-
-    ULONGLONG current = GetTickCount64();
-    uint64_t duration = (current - timestamp) * 1000 * 1000;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
-    {
-        if (latency < minlatency)
-        {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (duration > maxresolution)
-        {
-            maxresolution = duration;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        timestamp = current;
-        count = 0;
-    }
-}
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-LARGE_INTEGER QueryPerformanceCounter()
-{
-    LARGE_INTEGER current;
-    QueryPerformanceCounter(&current);
-    return current;
-}
-
-LARGE_INTEGER QueryPerformanceFrequency()
-{
-    LARGE_INTEGER frequency;
-    QueryPerformanceFrequency(&frequency);
-    return frequency;
-}
-
-BENCHMARK("QueryPerformanceCounter()", iterations)
-{
-    static LARGE_INTEGER frequency = QueryPerformanceFrequency();
-    static LARGE_INTEGER timestamp = QueryPerformanceCounter();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t count = 0;
-
-    LARGE_INTEGER current = QueryPerformanceCounter();
-    uint64_t duration = (current.QuadPart - timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
-    {
-        if (latency < minlatency)
-        {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (duration > maxresolution)
-        {
-            maxresolution = duration;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        timestamp = current;
-        count = 0;
-    }
-}
-#endif
-
-#if defined(_MSC_VER)
-BENCHMARK("__rdtsc()", iterations)
-{
-    static uint64_t timestamp = __rdtsc();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t count = 0;
-
-    uint64_t current = __rdtsc();
-    uint64_t duration = current - timestamp;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
-    {
-        if (latency < minlatency)
-        {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min-clock-cycles", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max-clock-cycles", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
-            context.metrics().SetCustom("resolution-min-clock-cycles", minresolution);
-        }
-        if (duration > maxresolution)
-        {
-            maxresolution = duration;
-            context.metrics().SetCustom("resolution-max-clock-cycles", maxresolution);
-        }
-        timestamp = current;
-        count = 0;
-    }
-}
-#endif
-
-#if defined(linux) || defined(__linux) || defined(__linux__)
+#if defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
 struct timespec clock_gettime(clockid_t clockid)
 {
     struct timespec current;
@@ -531,7 +305,7 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", iterations)
 }
 #endif
 
-#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__) || defined(__CYGWIN__)
 struct timeval gettimeofday()
 {
     struct timeval current;
@@ -572,6 +346,236 @@ BENCHMARK("gettimeofday()", iterations)
         {
             maxresolution = duration;
             context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        timestamp = current;
+        count = 0;
+    }
+}
+#endif
+
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
+{
+    static uint64_t timestamp = 0;
+    static double maxlatency = std::numeric_limits<double>::min();
+    static double minlatency = std::numeric_limits<double>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t count = 0;
+
+    FILETIME filetime;
+    GetSystemTimePreciseAsFileTime(&filetime);
+
+    ULARGE_INTEGER ularge;
+    ularge.LowPart = filetime.dwLowDateTime;
+    ularge.HighPart = filetime.dwHighDateTime;
+    uint64_t current = ularge.QuadPart * 100;
+
+    if (timestamp == 0)
+        timestamp = current;
+
+    uint64_t duration = (current - timestamp);
+    double latency = (double)duration / ++count;
+    if (duration > 0)
+    {
+        if (latency < minlatency)
+        {
+            minlatency = latency;
+            context.metrics().SetCustom("latency-min", minlatency);
+        }
+        if (latency > maxlatency)
+        {
+            maxlatency = latency;
+            context.metrics().SetCustom("latency-max", maxlatency);
+        }
+        if (duration < minresolution)
+        {
+            minresolution = duration;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (duration > maxresolution)
+        {
+            maxresolution = duration;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        timestamp = current;
+        count = 0;
+    }
+}
+#endif
+
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+BENCHMARK("GetTickCount()", iterations)
+{
+    static DWORD timestamp = GetTickCount();
+    static double maxlatency = std::numeric_limits<double>::min();
+    static double minlatency = std::numeric_limits<double>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t count = 0;
+
+    DWORD current = GetTickCount();
+    uint64_t duration = (current - timestamp) * 1000 * 1000;
+    double latency = (double)duration / ++count;
+    if (duration > 0)
+    {
+        if (latency < minlatency)
+        {
+            minlatency = latency;
+            context.metrics().SetCustom("latency-min", minlatency);
+        }
+        if (latency > maxlatency)
+        {
+            maxlatency = latency;
+            context.metrics().SetCustom("latency-max", maxlatency);
+        }
+        if (duration < minresolution)
+        {
+            minresolution = duration;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (duration > maxresolution)
+        {
+            maxresolution = duration;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        timestamp = current;
+        count = 0;
+    }
+}
+#endif
+
+#if defined(_WIN32) || defined(_WIN64)
+BENCHMARK("GetTickCount64()", iterations)
+{
+    static ULONGLONG timestamp = GetTickCount64();
+    static double maxlatency = std::numeric_limits<double>::min();
+    static double minlatency = std::numeric_limits<double>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t count = 0;
+
+    ULONGLONG current = GetTickCount64();
+    uint64_t duration = (current - timestamp) * 1000 * 1000;
+    double latency = (double)duration / ++count;
+    if (duration > 0)
+    {
+        if (latency < minlatency)
+        {
+            minlatency = latency;
+            context.metrics().SetCustom("latency-min", minlatency);
+        }
+        if (latency > maxlatency)
+        {
+            maxlatency = latency;
+            context.metrics().SetCustom("latency-max", maxlatency);
+        }
+        if (duration < minresolution)
+        {
+            minresolution = duration;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (duration > maxresolution)
+        {
+            maxresolution = duration;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        timestamp = current;
+        count = 0;
+    }
+}
+#endif
+
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+LARGE_INTEGER QueryPerformanceCounter()
+{
+    LARGE_INTEGER current;
+    QueryPerformanceCounter(&current);
+    return current;
+}
+
+LARGE_INTEGER QueryPerformanceFrequency()
+{
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
+    return frequency;
+}
+
+BENCHMARK("QueryPerformanceCounter()", iterations)
+{
+    static LARGE_INTEGER frequency = QueryPerformanceFrequency();
+    static LARGE_INTEGER timestamp = QueryPerformanceCounter();
+    static double maxlatency = std::numeric_limits<double>::min();
+    static double minlatency = std::numeric_limits<double>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t count = 0;
+
+    LARGE_INTEGER current = QueryPerformanceCounter();
+    uint64_t duration = (current.QuadPart - timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
+    double latency = (double)duration / ++count;
+    if (duration > 0)
+    {
+        if (latency < minlatency)
+        {
+            minlatency = latency;
+            context.metrics().SetCustom("latency-min", minlatency);
+        }
+        if (latency > maxlatency)
+        {
+            maxlatency = latency;
+            context.metrics().SetCustom("latency-max", maxlatency);
+        }
+        if (duration < minresolution)
+        {
+            minresolution = duration;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (duration > maxresolution)
+        {
+            maxresolution = duration;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        timestamp = current;
+        count = 0;
+    }
+}
+#endif
+
+#if defined(_MSC_VER)
+BENCHMARK("__rdtsc()", iterations)
+{
+    static uint64_t timestamp = __rdtsc();
+    static double maxlatency = std::numeric_limits<double>::min();
+    static double minlatency = std::numeric_limits<double>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t count = 0;
+
+    uint64_t current = __rdtsc();
+    uint64_t duration = current - timestamp;
+    double latency = (double)duration / ++count;
+    if (duration > 0)
+    {
+        if (latency < minlatency)
+        {
+            minlatency = latency;
+            context.metrics().SetCustom("latency-min-clock-cycles", minlatency);
+        }
+        if (latency > maxlatency)
+        {
+            maxlatency = latency;
+            context.metrics().SetCustom("latency-max-clock-cycles", maxlatency);
+        }
+        if (duration < minresolution)
+        {
+            minresolution = duration;
+            context.metrics().SetCustom("resolution-min-clock-cycles", minresolution);
+        }
+        if (duration > maxresolution)
+        {
+            maxresolution = duration;
+            context.metrics().SetCustom("resolution-max-clock-cycles", maxresolution);
         }
         timestamp = current;
         count = 0;
