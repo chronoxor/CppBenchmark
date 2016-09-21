@@ -18,8 +18,11 @@
 #include <fstream>
 #include <regex>
 #elif defined(__APPLE__) || defined(__MACH__)
-#include <mach/vm_statistics.h>
+#include <mach/host_info.h>
+#include <mach/mach_time.h>
 #include <sys/sysctl.h>
+#include <pthread.h>
+#include <cassert>
 #endif
 
 namespace CppBenchmark {
@@ -42,6 +45,54 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
     }
 
     return dwBitSetCount;
+}
+#endif
+
+#if defined(__APPLE__) || defined(__MACH__)
+// This function returns the rational number inside the given interval with
+// the smallest denominator (and smallest numerator breaks ties; correctness
+// proof neglects floating-point errors).
+mach_timebase_info_data_t bestFrac(double a, double b)
+{
+    if (floor(a) < floor(b))
+    {
+        mach_timebase_info_data_t rv = { (int)ceil(a), 1 };
+        return rv;
+    }
+
+    double m = floor(a);
+    mach_timebase_info_data_t next = bestFrac(1 / (b - m), 1 / (a - m));
+    mach_timebase_info_data_t rv = { (int)m * next.numer + next.denum, next.numer };
+    return rv;
+}
+
+// The clock may run up to 0.1% faster or slower than the "exact" tick count.
+// However, although the bound on the error is the same as for the pragmatic
+// answer, the error is actually minimized over the given accuracy bound.
+uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
+{
+    tb.number = 0;
+    tb.denom = 1;
+
+    kern_return_t mtiStatus = mach_timebase_info(&tb);
+    if (mtiStatus != KERN_SUCCESS)
+        return 0;
+
+    double frac = (double)tb.numer / tb.denom;
+    uint64_t spanTarget = 315360000000000000llu;
+    if (getExpressibleSpan(tb.numer, tb.denom) >= spanTarget)
+        return;
+
+    for (double errorTarget = 1 / 1024.0; errorTarget > 0.000001;)
+    {
+        mach_timebase_info_data_t newFrac = bestFrac((1 - errorTarget) * frac, (1 + errorTarget) * frac);
+        if (getExpressibleSpan(newFrac.numer, newFrac.denom) < spanTarget)
+            break;
+        tb = newFrac;
+        errorTarget = fabs((double)tb.numer / tb.denom - frac) / frac / 8;
+    }
+
+    return mach_absolute_time();
 }
 #endif
 
@@ -160,13 +211,13 @@ std::pair<int, int> System::CpuTotalCores()
     return std::make_pair(processors, processors);
 #elif defined(__APPLE__) || defined(__MACH__)
     int logical = 0;
-    size_t size = sizeof(logical);
-    if (sysctlbyname("hw.logicalcpu", &logical, &size, nullptr, 0) != 0)
+    size_t logical_size = sizeof(logical);
+    if (sysctlbyname("hw.logicalcpu", &logical, &logical_size, nullptr, 0) != 0)
         logical = -1;
 
     int physical = 0;
-    size_t size = sizeof(physical);
-    if (sysctlbyname("hw.physicalcpu", &physical, &size, nullptr, 0) != 0)
+    size_t physical_size = sizeof(physical);
+    if (sysctlbyname("hw.physicalcpu", &physical, &physical_size, nullptr, 0) != 0)
         physical = -1;
 
     return std::make_pair(logical, physical);
@@ -322,10 +373,14 @@ uint64_t System::Timestamp()
     }
     else
         return offset;
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     struct timespec timestamp;
     clock_gettime(CLOCK_MONOTONIC, &timestamp);
     return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
+#elif defined(__APPLE__) || defined(__MACH__)
+    static mach_timebase_info_data_t info;
+    static uint64_t bias = PrepareTimebaseInfo(info);
+    return (mach_absolute_time() - bias) * info.number / info.denom;
 #else
     #error Unsupported platform
 #endif
