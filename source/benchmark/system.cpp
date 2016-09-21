@@ -333,14 +333,13 @@ int64_t System::RamFree()
 #elif defined(__APPLE__) || defined(__MACH__)
     mach_msg_type_number_t count = HOST_VM_INFO_COUNT;
     vm_statistics_data_t vmstat;
-    if (host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t)&vmstat, &count) == KERN_SUCCESS)
-    {
-        int64_t total_mem = vmstat.wire_count + vmstat.active_count + vmstat.inactive_count + vmstat.free_count;
-        int64_t free_mem = vmstat.free_count / free_mem;
-        return free_mem;
-    }
+    kern_return_t kernReturn = host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t)&vmstat, &count);
+    if (kernReturn != KERN_SUCCESS)
+        return -1;
 
-    return -1;
+    int64_t total_mem = vmstat.wire_count + vmstat.active_count + vmstat.inactive_count + vmstat.free_count;
+    int64_t free_mem = vmstat.free_count / free_mem;
+    return free_mem;
 #else
     #error Unsupported platform
 #endif
