@@ -305,7 +305,7 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", iterations)
 }
 #endif
 
-#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__) || defined(__CYGWIN__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
 struct timeval gettimeofday()
 {
     struct timeval current;

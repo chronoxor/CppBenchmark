@@ -63,7 +63,7 @@ bool Environment::Is64BitProcess()
 #else
     return false;
 #endif
-#elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+#elif defined(_WIN32) || defined(_WIN64)
 #if defined(_WIN64)
     return true;
 #elif defined(_WIN32)
@@ -135,8 +135,6 @@ std::string Environment::OSVersion()
     }
 
     return "<linux>";
-#elif defined(unix) || defined(__unix) || defined(__unix__)
-    return "<unix>";
 #elif defined(_WIN32) || defined(_WIN64)
     static void(__stdcall *GetNativeSystemInfo)(OUT LPSYSTEM_INFO lpSystemInfo) = (void(__stdcall*)(LPSYSTEM_INFO))GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNativeSystemInfo");
     static BOOL(__stdcall *GetProductInfo)(IN DWORD dwOSMajorVersion, IN DWORD dwOSMinorVersion, IN DWORD dwSpMajorVersion, IN DWORD dwSpMinorVersion, OUT PDWORD pdwReturnedProductType) = (BOOL(__stdcall*)(DWORD, DWORD, DWORD, DWORD, PDWORD))GetProcAddress(GetModuleHandle("kernel32.dll"), "GetProductInfo");

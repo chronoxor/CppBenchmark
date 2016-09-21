@@ -14,7 +14,7 @@
 #include <sys/sysctl.h>
 #include <math.h>
 #include <pthread.h>
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
 #include <sys/sysinfo.h>
 #include <pthread.h>
 #include <unistd.h>
@@ -130,7 +130,7 @@ std::string System::CpuArchitecture()
         return result;
 
     return "<unknown>";
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
     static std::regex pattern("model name(.*): (.*)");
 
     std::string line;
@@ -189,7 +189,7 @@ std::pair<int, int> System::CpuTotalCores()
         physical = -1;
 
     return std::make_pair(logical, physical);
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
     long processors = sysconf(_SC_NPROCESSORS_ONLN);
     return std::make_pair(processors, processors);
 #elif defined(_WIN32) || defined(_WIN64)
@@ -257,7 +257,7 @@ int64_t System::CpuClockSpeed()
         return frequency;
 
     return -1;
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
     static std::regex pattern("cpu MHz(.*): (.*)");
 
     std::string line;
@@ -307,7 +307,7 @@ int64_t System::RamTotal()
         return memsize;
 
     return -1;
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
     struct sysinfo si;
     return (sysinfo(&si) == 0) ? si.totalram : -1;
 #elif defined(_WIN32) || defined(_WIN64)
@@ -339,7 +339,7 @@ int64_t System::RamFree()
     int64_t used_mem = (vmstat.active_count + vmstat.inactive_count + vmstat.wire_count) * page_size;
     int64_t free_mem = vmstat.free_count * page_size;
     return free_mem;
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
     struct sysinfo si;
     return (sysinfo(&si) == 0) ? si.freeram : -1;
 #elif defined(_WIN32) || defined(_WIN64)
@@ -354,12 +354,7 @@ int64_t System::RamFree()
 
 uint64_t System::CurrentThreadId()
 {
-#if defined(__APPLE__) || defined(__MACH__)
-    uint64_t result = 0;
-    pthread_t thread = pthread_self();
-    memcpy(&result, &thread, std::min(sizeof(result), sizeof(thread)));
-    return result;
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     return (uint64_t)pthread_self();
 #elif defined(_WIN32) || defined(_WIN64)
     return GetCurrentThreadId();
@@ -374,7 +369,7 @@ uint64_t System::Timestamp()
     static mach_timebase_info_data_t info;
     static uint64_t bias = Internals::PrepareTimebaseInfo(info);
     return (mach_absolute_time() - bias) * info.numer / info.denom;
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
     struct timespec timestamp;
     clock_gettime(CLOCK_MONOTONIC, &timestamp);
     return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
