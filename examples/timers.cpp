@@ -11,9 +11,10 @@
 #include <windows.h>
 #undef max
 #undef min
+#elif defined(linux) || defined(__linux) || defined(__linux__)
+#include <time.h>
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
 #include <sys/time.h>
-#include <time.h>
 #endif
 
 const uint64_t iterations = 10000000;
@@ -326,7 +327,7 @@ BENCHMARK("__rdtsc()", iterations)
 }
 #endif
 
-#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
 struct timespec clock_gettime(clockid_t clockid)
 {
     struct timespec current;
