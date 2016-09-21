@@ -35,6 +35,8 @@ before_install:
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
   - git config --global push.default simple
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
 
 # Build scripts
 script: 
