@@ -49,6 +49,20 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
 #endif
 
 #if defined(__APPLE__) || defined(__MACH__)
+uint32_t ceilLog2(uint32_t x)
+{
+    uint32_t result = 0;
+
+    --x;
+    while (x > 0)
+    {
+        ++result;
+        x >>= 1;
+    }
+
+    return result;
+}
+
 // This function returns the rational number inside the given interval with
 // the smallest denominator (and smallest numerator breaks ties; correctness
 // proof neglects floating-point errors).
@@ -56,7 +70,7 @@ mach_timebase_info_data_t bestFrac(double a, double b)
 {
     if (floor(a) < floor(b))
     {
-        mach_timebase_info_data_t rv = { (int)ceil(a), 1 };
+        mach_timebase_info_data_t rv = { (uint32_t)ceil(a), 1 };
         return rv;
     }
 
@@ -89,7 +103,7 @@ uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
     double frac = (double)tb.numer / tb.denom;
     uint64_t spanTarget = 315360000000000000llu;
     if (getExpressibleSpan(tb.numer, tb.denom) >= spanTarget)
-        return;
+        return 0;
 
     for (double errorTarget = 1 / 1024.0; errorTarget > 0.000001;)
     {
@@ -336,8 +350,13 @@ uint64_t System::CurrentThreadId()
 {
 #if defined(_WIN32) || defined(_WIN64)
     return GetCurrentThreadId();
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     return pthread_self();
+#elif defined(__APPLE__) || defined(__MACH__)
+    uint64_t result = 0;
+    pthread_t thread = pthread_self();
+    memcpy(&result, &thread, std::min(sizeof(result), sizeof(thread)));
+    return result;
 #else
     #error Unsupported platform
 #endif
