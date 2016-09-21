@@ -8,9 +8,10 @@
 #include <limits>
 
 #if defined(__CYGWIN__)
+#define _WIN32_WINNT 0x601
 #include <sys/time.h>
 #include <time.h>
-#include <winbase.h>
+#include <windows.h>
 #elif defined(linux) || defined(__linux) || defined(__linux__)
 #include <time.h>
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
