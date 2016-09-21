@@ -20,6 +20,9 @@
 #include <unistd.h>
 #include <fstream>
 #include <regex>
+#if defined(__CYGWIN__)
+#include <windows.h>
+#endif
 #elif defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #include <memory>
@@ -307,10 +310,10 @@ int64_t System::RamTotal()
         return memsize;
 
     return -1;
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     struct sysinfo si;
     return (sysinfo(&si) == 0) ? si.totalram : -1;
-#elif defined(_WIN32) || defined(_WIN64)
+#elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
@@ -339,10 +342,10 @@ int64_t System::RamFree()
     int64_t used_mem = (vmstat.active_count + vmstat.inactive_count + vmstat.wire_count) * page_size;
     int64_t free_mem = vmstat.free_count * page_size;
     return free_mem;
-#elif defined(unix) || defined(__unix) || defined(__unix__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
     struct sysinfo si;
     return (sysinfo(&si) == 0) ? si.freeram : -1;
-#elif defined(_WIN32) || defined(_WIN64)
+#elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
