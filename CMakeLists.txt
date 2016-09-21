@@ -18,6 +18,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(SetCompilerFeatures)
 include(SetCompilerWarningAll)
 include(SetCrtSecureWarningsOff)
+include(SetSystemFeatures)
 
 # External packages
 find_package(Threads REQUIRED)
