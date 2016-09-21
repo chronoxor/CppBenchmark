@@ -11,17 +11,17 @@
 #include <chrono>
 #include <sstream>
 
-#if defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
+#if defined(__APPLE__) || defined(__MACH__)
+#include <sys/sysctl.h>
 #elif defined(__CYGWIN__)
 #include <sys/utsname.h>
 #include <windows.h>
-#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#elif defined(linux) || defined(__linux) || defined(__linux__)
 #include <sys/stat.h>
 #include <fstream>
 #include <regex>
-#elif defined(__APPLE__) || defined(__MACH__)
-#include <sys/sysctl.h>
+#elif defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
 #endif
 
 namespace CppBenchmark {
@@ -33,18 +33,18 @@ bool Environment::Is32BitOS()
 
 bool Environment::Is64BitOS()
 {
-#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+#if defined(__APPLE__) || defined(__MACH__)
+    return true;
+#elif defined(linux) || defined(__linux) || defined(__linux__)
+    struct stat buffer;
+    return (stat("/lib64/ld-linux-x86-64.so.2", &buffer) == 0);
+#elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 #if defined(_WIN64)
     return true;
 #elif defined(_WIN32)
     BOOL bWow64Process = FALSE;
     return IsWow64Process(GetCurrentProcess(), &bWow64Process) && bWow64Process;
 #endif
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    struct stat buffer;
-    return (stat("/lib64/ld-linux-x86-64.so.2", &buffer) == 0);
-#elif defined(__APPLE__) || defined(__MACH__)
-    return true;
 #else
     #error Unsupported platform
 #endif
@@ -57,16 +57,16 @@ bool Environment::Is32BitProcess()
 
 bool Environment::Is64BitProcess()
 {
-#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
-#if defined(_WIN64)
-    return true;
-#elif defined(_WIN32)
-    return false;
-#endif
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
 #if defined(__x86_64__) || defined(__amd64__) || defined(__aarch64__) || defined(__ia64__) || defined(__ppc64__)
     return true;
 #else
+    return false;
+#endif
+#elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+#if defined(_WIN64)
+    return true;
+#elif defined(_WIN32)
     return false;
 #endif
 #else
@@ -102,7 +102,42 @@ bool Environment::IsLittleEndian()
 
 std::string Environment::OSVersion()
 {
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__APPLE__) || defined(__MACH__)
+    char result[1024];
+    size_t size = sizeof(result);
+    if (sysctlbyname("kern.osrelease", result, &size, nullptr, 0) == 0)
+        return result;
+
+    return "<apple>";
+#elif defined(__CYGWIN__)
+    struct utsname name;
+    if (uname(struct utsname *buf) == 0)
+    {
+        std::string result(name.sysname);
+        result.append(' ');
+        result.append(name.release);
+        result.append(' ');
+        result.append(name.version);
+        return result;
+    }
+
+    return "<cygwin>";
+#elif defined(linux) || defined(__linux) || defined(__linux__)
+    static std::regex pattern("DISTRIB_DESCRIPTION=\"(.*)\"");
+
+    std::string line;
+    std::ifstream stream("/etc/lsb-release");
+    while (getline(stream, line))
+    {
+        std::smatch matches;
+        if (std::regex_match(line, matches, pattern))
+            return matches[1];
+    }
+
+    return "<linux>";
+#elif defined(unix) || defined(__unix) || defined(__unix__)
+    return "<unix>";
+#elif defined(_WIN32) || defined(_WIN64)
     static void(__stdcall *GetNativeSystemInfo)(OUT LPSYSTEM_INFO lpSystemInfo) = (void(__stdcall*)(LPSYSTEM_INFO))GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNativeSystemInfo");
     static BOOL(__stdcall *GetProductInfo)(IN DWORD dwOSMajorVersion, IN DWORD dwOSMinorVersion, IN DWORD dwSpMajorVersion, IN DWORD dwSpMinorVersion, OUT PDWORD pdwReturnedProductType) = (BOOL(__stdcall*)(DWORD, DWORD, DWORD, DWORD, PDWORD))GetProcAddress(GetModuleHandle("kernel32.dll"), "GetProductInfo");
 
@@ -323,41 +358,6 @@ std::string Environment::OSVersion()
     }
 
     return os.str();
-#elif defined(__CYGWIN__)
-    struct utsname name;
-    if (uname(struct utsname *buf) == 0)
-    {
-        std::string result(name.sysname);
-        result.append(' ');
-        result.append(name.release);
-        result.append(' ');
-        result.append(name.version);
-        return result;
-    }
-
-    return "<cygwin>";
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    static std::regex pattern("DISTRIB_DESCRIPTION=\"(.*)\"");
-
-    std::string line;
-    std::ifstream stream("/etc/lsb-release");
-    while (getline(stream, line))
-    {
-        std::smatch matches;
-        if (std::regex_match(line, matches, pattern))
-            return matches[1];
-    }
-
-    return "<linux>";
-#elif defined(__APPLE__) || defined(__MACH__)
-    char result[1024];
-    size_t size = sizeof(result);
-    if (sysctlbyname("kern.osrelease", result, &size, nullptr, 0) == 0)
-        return result;
-
-    return "<apple>";
-#elif defined(unix) || defined(__unix) || defined(__unix__)
-    return "<unix>";
 #else
     #error Unsupported platform
 #endif
@@ -365,10 +365,10 @@ std::string Environment::OSVersion()
 
 std::string Environment::EndLine()
 {
-#if defined(_WIN32) || defined(_WIN64)
-    return "\r\n";
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
     return "\n";
+#elif defined(_WIN32) || defined(_WIN64)
+    return "\r\n";
 #else
     #error Unsupported platform
 #endif

@@ -8,45 +8,27 @@
 
 #include "benchmark/system.h"
 
-#if defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
-#include <memory>
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-#include <sys/sysinfo.h>
-#include <pthread.h>
-#include <unistd.h>
-#include <fstream>
-#include <regex>
-#elif defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__) || defined(__MACH__)
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 #include <sys/sysctl.h>
 #include <math.h>
 #include <pthread.h>
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#include <sys/sysinfo.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <fstream>
+#include <regex>
+#elif defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#include <memory>
 #endif
 
 namespace CppBenchmark {
 
 //! @cond
 namespace Internals {
-
-#if defined(_WIN32) || defined(_WIN64)
-// Helper function to count set bits in the processor mask
-DWORD CountSetBits(ULONG_PTR pBitMask)
-{
-    DWORD dwLeftShift = sizeof(ULONG_PTR) * 8 - 1;
-    DWORD dwBitSetCount = 0;
-    ULONG_PTR pBitTest = (ULONG_PTR)1 << dwLeftShift;
-
-    for (DWORD i = 0; i <= dwLeftShift; ++i)
-    {
-        dwBitSetCount += ((pBitMask & pBitTest) ? 1 : 0);
-        pBitTest /= 2;
-    }
-
-    return dwBitSetCount;
-}
-#endif
 
 #if defined(__APPLE__) || defined(__MACH__)
 uint32_t ceilLog2(uint32_t x)
@@ -118,12 +100,50 @@ uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
 }
 #endif
 
+#if defined(_WIN32) || defined(_WIN64)
+// Helper function to count set bits in the processor mask
+DWORD CountSetBits(ULONG_PTR pBitMask)
+{
+    DWORD dwLeftShift = sizeof(ULONG_PTR) * 8 - 1;
+    DWORD dwBitSetCount = 0;
+    ULONG_PTR pBitTest = (ULONG_PTR)1 << dwLeftShift;
+
+    for (DWORD i = 0; i <= dwLeftShift; ++i)
+    {
+        dwBitSetCount += ((pBitMask & pBitTest) ? 1 : 0);
+        pBitTest /= 2;
+    }
+
+    return dwBitSetCount;
+}
+#endif
+
 } // namespace Internals
 //! @endcond
 
 std::string System::CpuArchitecture()
 {
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__APPLE__) || defined(__MACH__)
+    char result[1024];
+    size_t size = sizeof(result);
+    if (sysctlbyname("machdep.cpu.brand_string", result, &size, nullptr, 0) == 0)
+        return result;
+
+    return "<unknown>";
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+    static std::regex pattern("model name(.*): (.*)");
+
+    std::string line;
+    std::ifstream stream("/proc/cpuinfo");
+    while (getline(stream, line))
+    {
+        std::smatch matches;
+        if (std::regex_match(line, matches, pattern))
+            return matches[2];
+    }
+
+    return "<unknown>";
+#elif defined(_WIN32) || defined(_WIN64)
     HKEY hKeyProcessor;
     LONG lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKeyProcessor);
     if (lError != ERROR_SUCCESS)
@@ -140,26 +160,6 @@ std::string System::CpuArchitecture()
         return "<unknown>";
 
     return std::string(pBuffer);
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    static std::regex pattern("model name(.*): (.*)");
-
-    std::string line;
-    std::ifstream stream("/proc/cpuinfo");
-    while (getline(stream, line))
-    {
-        std::smatch matches;
-        if (std::regex_match(line, matches, pattern))
-            return matches[2];
-    }
-
-    return "<unknown>";
-#elif defined(__APPLE__) || defined(__MACH__)
-    char result[1024];
-    size_t size = sizeof(result);
-    if (sysctlbyname("machdep.cpu.brand_string", result, &size, nullptr, 0) == 0)
-        return result;
-
-    return "<unknown>";
 #else
     #error Unsupported platform
 #endif
@@ -177,7 +177,22 @@ int System::CpuPhysicalCores()
 
 std::pair<int, int> System::CpuTotalCores()
 {
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__APPLE__) || defined(__MACH__)
+    int logical = 0;
+    size_t logical_size = sizeof(logical);
+    if (sysctlbyname("hw.logicalcpu", &logical, &logical_size, nullptr, 0) != 0)
+        logical = -1;
+
+    int physical = 0;
+    size_t physical_size = sizeof(physical);
+    if (sysctlbyname("hw.physicalcpu", &physical, &physical_size, nullptr, 0) != 0)
+        physical = -1;
+
+    return std::make_pair(logical, physical);
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+    long processors = sysconf(_SC_NPROCESSORS_ONLN);
+    return std::make_pair(processors, processors);
+#elif defined(_WIN32) || defined(_WIN64)
     BOOL allocated = FALSE;
     PSYSTEM_LOGICAL_PROCESSOR_INFORMATION pBuffer = nullptr;
     DWORD dwLength = 0;
@@ -228,21 +243,6 @@ std::pair<int, int> System::CpuTotalCores()
     free(pBuffer);
 
     return result;
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    long processors = sysconf(_SC_NPROCESSORS_ONLN);
-    return std::make_pair(processors, processors);
-#elif defined(__APPLE__) || defined(__MACH__)
-    int logical = 0;
-    size_t logical_size = sizeof(logical);
-    if (sysctlbyname("hw.logicalcpu", &logical, &logical_size, nullptr, 0) != 0)
-        logical = -1;
-
-    int physical = 0;
-    size_t physical_size = sizeof(physical);
-    if (sysctlbyname("hw.physicalcpu", &physical, &physical_size, nullptr, 0) != 0)
-        physical = -1;
-
-    return std::make_pair(logical, physical);
 #else
     #error Unsupported platform
 #endif
@@ -250,7 +250,27 @@ std::pair<int, int> System::CpuTotalCores()
 
 int64_t System::CpuClockSpeed()
 {
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__APPLE__) || defined(__MACH__)
+    uint64_t frequency = 0;
+    size_t size = sizeof(frequency);
+    if (sysctlbyname("hw.cpufrequency", &frequency, &size, nullptr, 0) == 0)
+        return frequency;
+
+    return -1;
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+    static std::regex pattern("cpu MHz(.*): (.*)");
+
+    std::string line;
+    std::ifstream stream("/proc/cpuinfo");
+    while (getline(stream, line))
+    {
+        std::smatch matches;
+        if (std::regex_match(line, matches, pattern))
+            return (int64_t)(atof(matches[2].str().c_str()) * 1000 * 1000);
+    }
+
+    return -1;
+#elif defined(_WIN32) || defined(_WIN64)
     HKEY hKeyProcessor;
     long lError = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKeyProcessor);
     if (lError != ERROR_SUCCESS)
@@ -267,26 +287,6 @@ int64_t System::CpuClockSpeed()
         return -1;
 
     return dwMHz * 1000 * 1000;
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    static std::regex pattern("cpu MHz(.*): (.*)");
-
-    std::string line;
-    std::ifstream stream("/proc/cpuinfo");
-    while (getline(stream, line))
-    {
-        std::smatch matches;
-        if (std::regex_match(line, matches, pattern))
-            return (int64_t)(atof(matches[2].str().c_str()) * 1000 * 1000);
-    }
-
-    return -1;
-#elif defined(__APPLE__) || defined(__MACH__)
-    uint64_t frequency = 0;
-    size_t size = sizeof(frequency);
-    if (sysctlbyname("hw.cpufrequency", &frequency, &size, nullptr, 0) == 0)
-        return frequency;
-
-    return -1;
 #else
     #error Unsupported platform
 #endif
@@ -300,21 +300,21 @@ bool System::CpuHyperThreading()
 
 int64_t System::RamTotal()
 {
-#if defined(_WIN32) || defined(_WIN64)
-    MEMORYSTATUSEX status;
-    status.dwLength = sizeof(status);
-    GlobalMemoryStatusEx(&status);
-    return status.ullTotalPhys;
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    struct sysinfo si;
-    return (sysinfo(&si) == 0) ? si.totalram : -1;
-#elif defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__) || defined(__MACH__)
     int64_t memsize = 0;
     size_t size = sizeof(memsize);
     if (sysctlbyname("hw.memsize", &memsize, &size, nullptr, 0) == 0)
         return memsize;
 
     return -1;
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+    struct sysinfo si;
+    return (sysinfo(&si) == 0) ? si.totalram : -1;
+#elif defined(_WIN32) || defined(_WIN64)
+    MEMORYSTATUSEX status;
+    status.dwLength = sizeof(status);
+    GlobalMemoryStatusEx(&status);
+    return status.ullTotalPhys;
 #else
     #error Unsupported platform
 #endif
@@ -322,15 +322,7 @@ int64_t System::RamTotal()
 
 int64_t System::RamFree()
 {
-#if defined(_WIN32) || defined(_WIN64)
-    MEMORYSTATUSEX status;
-    status.dwLength = sizeof(status);
-    GlobalMemoryStatusEx(&status);
-    return status.ullAvailPhys;
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    struct sysinfo si;
-    return (sysinfo(&si) == 0) ? si.freeram : -1;
-#elif defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__) || defined(__MACH__)
     mach_port_t host_port = mach_host_self();
     if (host_port == MACH_PORT_NULL)
         return -1;
@@ -347,6 +339,14 @@ int64_t System::RamFree()
     int64_t used_mem = (vmstat.active_count + vmstat.inactive_count + vmstat.wire_count) * page_size;
     int64_t free_mem = vmstat.free_count * page_size;
     return free_mem;
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+    struct sysinfo si;
+    return (sysinfo(&si) == 0) ? si.freeram : -1;
+#elif defined(_WIN32) || defined(_WIN64)
+    MEMORYSTATUSEX status;
+    status.dwLength = sizeof(status);
+    GlobalMemoryStatusEx(&status);
+    return status.ullAvailPhys;
 #else
     #error Unsupported platform
 #endif
@@ -354,15 +354,15 @@ int64_t System::RamFree()
 
 uint64_t System::CurrentThreadId()
 {
-#if defined(_WIN32) || defined(_WIN64)
-    return GetCurrentThreadId();
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    return pthread_self();
-#elif defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__) || defined(__MACH__)
     uint64_t result = 0;
     pthread_t thread = pthread_self();
     memcpy(&result, &thread, std::min(sizeof(result), sizeof(thread)));
     return result;
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+    return pthread_self();
+#elif defined(_WIN32) || defined(_WIN64)
+    return GetCurrentThreadId();
 #else
     #error Unsupported platform
 #endif
@@ -370,7 +370,15 @@ uint64_t System::CurrentThreadId()
 
 uint64_t System::Timestamp()
 {
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__APPLE__) || defined(__MACH__)
+    static mach_timebase_info_data_t info;
+    static uint64_t bias = Internals::PrepareTimebaseInfo(info);
+    return (mach_absolute_time() - bias) * info.numer / info.denom;
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+    struct timespec timestamp;
+    clock_gettime(CLOCK_MONOTONIC, &timestamp);
+    return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
+#elif defined(_WIN32) || defined(_WIN64)
     static uint64_t offset = 0;
     static LARGE_INTEGER first{0};
     static LARGE_INTEGER frequency{0};
@@ -406,14 +414,6 @@ uint64_t System::Timestamp()
     }
     else
         return offset;
-#elif defined(linux) || defined(__linux) || defined(__linux__)
-    struct timespec timestamp;
-    clock_gettime(CLOCK_MONOTONIC, &timestamp);
-    return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
-#elif defined(__APPLE__) || defined(__MACH__)
-    static mach_timebase_info_data_t info;
-    static uint64_t bias = Internals::PrepareTimebaseInfo(info);
-    return (mach_absolute_time() - bias) * info.numer / info.denom;
 #else
     #error Unsupported platform
 #endif
