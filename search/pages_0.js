@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['my_20personal_20index_20page',['My Personal Index Page',['../index.html',1,'']]]
+  ['c_2b_2b_20benchmark_20library',['C++ Benchmark Library',['../index.html',1,'']]]
 ];
