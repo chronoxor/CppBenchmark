@@ -444,7 +444,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    memcpy(&amp;result, &amp;thread, std::min(<span class="keyword">sizeof</span>(result), <span class="keyword">sizeof</span>(thread)));</div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="preprocessor">#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="preprocessor"></span>    <span class="keywordflow">return</span> pthread_self();</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="preprocessor"></span>    <span class="keywordflow">return</span> (uint64_t)pthread_self();</div>
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="preprocessor">#elif defined(_WIN32) || defined(_WIN64)</span></div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="preprocessor"></span>    <span class="keywordflow">return</span> GetCurrentThreadId();</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="preprocessor">#else</span></div>
