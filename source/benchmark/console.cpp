@@ -10,7 +10,7 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
 #include <cstdio>
 #endif
 
@@ -33,7 +33,7 @@ void Console::SetColor(Color color, Color background)
 #if defined(_WIN32) || defined(_WIN64)
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, (((WORD)color) & 0x0F) + ((((WORD)background) & 0x0F) << 4));
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
     const char* colors[] =
     {
         "\033[22;30m",  // Black color

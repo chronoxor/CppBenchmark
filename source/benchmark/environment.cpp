@@ -11,7 +11,7 @@
 #include <chrono>
 #include <sstream>
 
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
 #include <sys/sysctl.h>
 #elif defined(__CYGWIN__)
 #include <sys/utsname.h>
@@ -33,7 +33,7 @@ bool Environment::Is32BitOS()
 
 bool Environment::Is64BitOS()
 {
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
     return true;
 #elif defined(linux) || defined(__linux) || defined(__linux__)
     struct stat buffer;
@@ -57,7 +57,7 @@ bool Environment::Is32BitProcess()
 
 bool Environment::Is64BitProcess()
 {
-#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
 #if defined(__x86_64__) || defined(__amd64__) || defined(__aarch64__) || defined(__ia64__) || defined(__ppc64__)
     return true;
 #else
@@ -102,7 +102,7 @@ bool Environment::IsLittleEndian()
 
 std::string Environment::OSVersion()
 {
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
     char result[1024];
     size_t size = sizeof(result);
     if (sysctlbyname("kern.osrelease", result, &size, nullptr, 0) == 0)
@@ -363,7 +363,7 @@ std::string Environment::OSVersion()
 
 std::string Environment::EndLine()
 {
-#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
     return "\n";
 #elif defined(_WIN32) || defined(_WIN64)
     return "\r\n";

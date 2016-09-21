@@ -8,7 +8,7 @@
 
 #include "benchmark/system.h"
 
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 #include <sys/sysctl.h>
@@ -33,7 +33,7 @@ namespace CppBenchmark {
 //! @cond
 namespace Internals {
 
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
 uint32_t ceilLog2(uint32_t x)
 {
     uint32_t result = 0;
@@ -126,7 +126,7 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
 
 std::string System::CpuArchitecture()
 {
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
     char result[1024];
     size_t size = sizeof(result);
     if (sysctlbyname("machdep.cpu.brand_string", result, &size, nullptr, 0) == 0)
@@ -180,7 +180,7 @@ int System::CpuPhysicalCores()
 
 std::pair<int, int> System::CpuTotalCores()
 {
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
     int logical = 0;
     size_t logical_size = sizeof(logical);
     if (sysctlbyname("hw.logicalcpu", &logical, &logical_size, nullptr, 0) != 0)
@@ -253,7 +253,7 @@ std::pair<int, int> System::CpuTotalCores()
 
 int64_t System::CpuClockSpeed()
 {
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
     uint64_t frequency = 0;
     size_t size = sizeof(frequency);
     if (sysctlbyname("hw.cpufrequency", &frequency, &size, nullptr, 0) == 0)
@@ -303,7 +303,7 @@ bool System::CpuHyperThreading()
 
 int64_t System::RamTotal()
 {
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
     int64_t memsize = 0;
     size_t size = sizeof(memsize);
     if (sysctlbyname("hw.memsize", &memsize, &size, nullptr, 0) == 0)
@@ -325,7 +325,7 @@ int64_t System::RamTotal()
 
 int64_t System::RamFree()
 {
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
     mach_port_t host_port = mach_host_self();
     if (host_port == MACH_PORT_NULL)
         return -1;
@@ -357,7 +357,7 @@ int64_t System::RamFree()
 
 uint64_t System::CurrentThreadId()
 {
-#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
     return (uint64_t)pthread_self();
 #elif defined(_WIN32) || defined(_WIN64)
     return GetCurrentThreadId();
@@ -368,7 +368,7 @@ uint64_t System::CurrentThreadId()
 
 uint64_t System::Timestamp()
 {
-#if defined(__APPLE__) || defined(__MACH__)
+#if defined(__APPLE__)
     static mach_timebase_info_data_t info;
     static uint64_t bias = Internals::PrepareTimebaseInfo(info);
     return (mach_absolute_time() - bias) * info.numer / info.denom;

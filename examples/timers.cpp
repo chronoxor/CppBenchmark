@@ -14,7 +14,7 @@
 #include <windows.h>
 #elif defined(linux) || defined(__linux) || defined(__linux__)
 #include <time.h>
-#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
 #include <sys/time.h>
 #elif defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
@@ -308,7 +308,7 @@ BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", iterations)
 #endif
 #endif
 
-#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
 struct timeval gettimeofday()
 {
     struct timeval current;
