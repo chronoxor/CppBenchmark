@@ -6,7 +6,7 @@
     \copyright MIT License
 */
 
-/*! \mainpage My Personal Index Page
+/*! \mainpage C++ Benchmark Library
 
 C++ Benchmark Library allows to create performance benchmarks of some  code  to
 investigate average/minimal/maximal execution time, items processing processing
