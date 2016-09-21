@@ -13,7 +13,10 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
-#elif defined(linux) || defined(__linux) || defined(__linux__)
+#elif defined(__CYGWIN__)
+#include <sys/utsname.h>
+#include <windows.h>
+#elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
 #include <sys/stat.h>
 #include <fstream>
 #include <regex>
@@ -30,7 +33,7 @@ bool Environment::Is32BitOS()
 
 bool Environment::Is64BitOS()
 {
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 #if defined(_WIN64)
     return true;
 #elif defined(_WIN32)
@@ -54,7 +57,7 @@ bool Environment::Is32BitProcess()
 
 bool Environment::Is64BitProcess()
 {
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 #if defined(_WIN64)
     return true;
 #elif defined(_WIN32)
@@ -320,6 +323,19 @@ std::string Environment::OSVersion()
     }
 
     return os.str();
+#elif defined(__CYGWIN__)
+    struct utsname name;
+    if (uname(struct utsname *buf) == 0)
+    {
+        std::string result(name.sysname);
+        result.append(' ');
+        result.append(name.release);
+        result.append(' ');
+        result.append(name.version);
+        return result;
+    }
+
+    return "<cygwin>";
 #elif defined(linux) || defined(__linux) || defined(__linux__)
     static std::regex pattern("DISTRIB_DESCRIPTION=\"(.*)\"");
 
