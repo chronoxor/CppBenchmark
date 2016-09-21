@@ -111,12 +111,12 @@ std::string Environment::OSVersion()
     return "<apple>";
 #elif defined(__CYGWIN__)
     struct utsname name;
-    if (uname(struct utsname *buf) == 0)
+    if (uname(&name) == 0)
     {
         std::string result(name.sysname);
-        result.append(' ');
+        result.append(" ");
         result.append(name.release);
-        result.append(' ');
+        result.append(" ");
         result.append(name.version);
         return result;
     }

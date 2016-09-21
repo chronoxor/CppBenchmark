@@ -360,7 +360,7 @@ uint64_t System::CurrentThreadId()
     memcpy(&result, &thread, std::min(sizeof(result), sizeof(thread)));
     return result;
 #elif defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
-    return pthread_self();
+    return (uint64_t)pthread_self();
 #elif defined(_WIN32) || defined(_WIN64)
     return GetCurrentThreadId();
 #else
