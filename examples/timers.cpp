@@ -327,7 +327,7 @@ BENCHMARK("__rdtsc()", iterations)
 }
 #endif
 
-#elif defined(linux) || defined(__linux) || defined(__linux__)
+#if defined(linux) || defined(__linux) || defined(__linux__)
 struct timespec clock_gettime(clockid_t clockid)
 {
     struct timespec current;
