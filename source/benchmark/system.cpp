@@ -18,11 +18,11 @@
 #include <fstream>
 #include <regex>
 #elif defined(__APPLE__) || defined(__MACH__)
-#include <mach/host_info.h>
+#include <mach/mach.h>
 #include <mach/mach_time.h>
 #include <sys/sysctl.h>
+#include <math.h>
 #include <pthread.h>
-#include <cassert>
 #endif
 
 namespace CppBenchmark {
@@ -62,8 +62,16 @@ mach_timebase_info_data_t bestFrac(double a, double b)
 
     double m = floor(a);
     mach_timebase_info_data_t next = bestFrac(1 / (b - m), 1 / (a - m));
-    mach_timebase_info_data_t rv = { (int)m * next.numer + next.denum, next.numer };
+    mach_timebase_info_data_t rv = { (int)m * next.numer + next.denom, next.numer };
     return rv;
+}
+
+// This is just less than the smallest thing we can multiply numer by without
+// overflowing. ceilLog2(numer) = 64 - number of leading zeros of numer
+uint64_t getExpressibleSpan(uint32_t numer, uint32_t denom)
+{
+  uint64_t maxDiffWithoutOverflow = ((uint64_t)1 << (64 - ceilLog2(numer))) - 1;
+  return maxDiffWithoutOverflow * numer / denom;
 }
 
 // The clock may run up to 0.1% faster or slower than the "exact" tick count.
@@ -71,7 +79,7 @@ mach_timebase_info_data_t bestFrac(double a, double b)
 // answer, the error is actually minimized over the given accuracy bound.
 uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
 {
-    tb.number = 0;
+    tb.numer = 0;
     tb.denom = 1;
 
     kern_return_t mtiStatus = mach_timebase_info(&tb);
@@ -379,8 +387,8 @@ uint64_t System::Timestamp()
     return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
 #elif defined(__APPLE__) || defined(__MACH__)
     static mach_timebase_info_data_t info;
-    static uint64_t bias = PrepareTimebaseInfo(info);
-    return (mach_absolute_time() - bias) * info.number / info.denom;
+    static uint64_t bias = Internals::PrepareTimebaseInfo(info);
+    return (mach_absolute_time() - bias) * info.numer / info.denom;
 #else
     #error Unsupported platform
 #endif
