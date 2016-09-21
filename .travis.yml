@@ -1,18 +1,17 @@
 # Programming language definition
 language: cpp
 
-# Operation systems
-os:
-  - linux
-
-# Branches to build
-branches:
-  only:
-    - master
-
 # Compilers
 compiler:
   - gcc
+
+# Operation systems
+os:
+  - linux
+  - osx
+
+# Apple OS X image
+osx_image: xcode8
 
 # Using Trusty environment
 sudo: required
@@ -25,6 +24,11 @@ addons:
       - cmake
       - doxygen
       - graphviz
+
+# Branches to build
+branches:
+  only:
+    - master
 
 # Scripts that run before install
 before_install:

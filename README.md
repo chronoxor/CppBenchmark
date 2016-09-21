@@ -72,7 +72,7 @@ git submodule update --init --recursive --remote
 ## Windows (Visaul Studio 2015)
 ```
 cd scripts
-01-generate-VisualStudio-x64.bat
+01-generate-VisualStudio-x32.bat or 01-generate-VisualStudio-x64.bat
 02-build-VisualStudio.bat
 03-tests.bat
 04-install-VisualStudio.bat
@@ -93,11 +93,11 @@ cd scripts
 ## Linux
 ```
 cd scripts
-01-generate-Unix.sh
-02-build-Unix.sh
-03-tests.sh
-04-install-Unix.sh
-05-doxygen-Unix.sh
+./01-generate-Unix.sh
+./02-build-Unix.sh
+./03-tests.sh
+./04-install-Unix.sh
+./05-doxygen-Unix.sh
 ```
 
 # How to create a benchmark?
