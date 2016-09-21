@@ -10,7 +10,7 @@
 #if defined(__CYGWIN__)
 #include <sys/time.h>
 #include <time.h>
-#include <windows.h>
+#include <winbase.h>
 #elif defined(linux) || defined(__linux) || defined(__linux__)
 #include <time.h>
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
@@ -148,45 +148,6 @@ BENCHMARK("clock_gettime(CLOCK_REALTIME)", iterations)
     }
 }
 
-BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", iterations)
-{
-    static struct timespec timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t count = 0;
-
-    struct timespec current = clock_gettime(CLOCK_REALTIME_COARSE);
-    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
-    double latency = (double)duration / ++count;
-    if (duration > 0)
-    {
-        if (latency < minlatency)
-        {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (duration > maxresolution)
-        {
-            maxresolution = duration;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        timestamp = current;
-        count = 0;
-    }
-}
-
 BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", iterations)
 {
     static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC);
@@ -226,6 +187,7 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", iterations)
     }
 }
 
+#if !defined(__CYGWIN__)
 BENCHMARK("clock_gettime(CLOCK_MONOTONIC_COARSE)", iterations)
 {
     static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC_COARSE);
@@ -303,6 +265,46 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", iterations)
         count = 0;
     }
 }
+
+BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", iterations)
+{
+    static struct timespec timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
+    static double maxlatency = std::numeric_limits<double>::min();
+    static double minlatency = std::numeric_limits<double>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t count = 0;
+
+    struct timespec current = clock_gettime(CLOCK_REALTIME_COARSE);
+    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
+    double latency = (double)duration / ++count;
+    if (duration > 0)
+    {
+        if (latency < minlatency)
+        {
+            minlatency = latency;
+            context.metrics().SetCustom("latency-min", minlatency);
+        }
+        if (latency > maxlatency)
+        {
+            maxlatency = latency;
+            context.metrics().SetCustom("latency-max", maxlatency);
+        }
+        if (duration < minresolution)
+        {
+            minresolution = duration;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (duration > maxresolution)
+        {
+            maxresolution = duration;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        timestamp = current;
+        count = 0;
+    }
+}
+#endif
 #endif
 
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
