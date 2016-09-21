@@ -10,17 +10,20 @@ const uint64_t iterations = 1000000000;
 
 BENCHMARK("sin()", iterations)
 {
-    sin(123.456);
+    static double sum = 0;
+    sum += sin(123.456);
 }
 
 BENCHMARK("cos()", iterations)
 {
-    cos(123.456);
+    static double sum = 0;
+    sum += cos(123.456);
 }
 
 BENCHMARK("tan()", iterations)
 {
-    tan(123.456);
+    static double sum = 0;
+    sum += tan(123.456);
 }
 
 BENCHMARK_MAIN()

@@ -10,6 +10,9 @@ os:
   - linux
   - osx
 
+# Apple OS X image
+osx_image: xcode8
+
 # Using Trusty environment
 sudo: required
 dist: trusty
