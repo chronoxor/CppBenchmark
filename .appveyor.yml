@@ -20,33 +20,33 @@ only_commits:
 environment:
   matrix:
     - build: VisualStudio (x32)
-        command: cmd
-        generate: VisualStudio-x32
-        name: VisualStudio
-        ext: bat
+      command: cmd
+      generate: VisualStudio-x32
+      name: VisualStudio
+      ext: bat
     - build: VisualStudio (x64)
-        command: cmd
-        generate: VisualStudio-x64
-        name: VisualStudio
-        ext: bat
+      command: cmd
+      generate: VisualStudio-x64
+      name: VisualStudio
+      ext: bat
     - build: Cygwin (x32)
-        command: C:\cygwin\bin\bash
-        generate: Cygwin
-        name: Cygwin
-        ext: sh
-        cyg_root: C:\cygwin
-        cyg_setup: setup-x86.exe
-        cyg_mirror: http://mirrors.kernel.org
-        cyg_cache: C:\cygwin\var\cache\setup
+      command: C:\cygwin\bin\bash
+      generate: Cygwin
+      name: Cygwin
+      ext: sh
+      cyg_root: C:\cygwin
+      cyg_setup: setup-x86.exe
+      cyg_mirror: http://mirrors.kernel.org
+      cyg_cache: C:\cygwin\var\cache\setup
     - build: Cygwin (x64)
-        command: C:\cygwin64\bin\bash
-        generate: Cygwin
-        name: Cygwin
-        ext: sh
-        cyg_root: C:\cygwin64
-        cyg_setup: setup-x86_64.exe
-        cyg_mirror: http://mirrors.kernel.org
-        cyg_cache: C:\cygwin64\var\cache\setup
+      command: C:\cygwin64\bin\bash
+      generate: Cygwin
+      name: Cygwin
+      ext: sh
+      cyg_root: C:\cygwin64
+      cyg_setup: setup-x86_64.exe
+      cyg_mirror: http://mirrors.kernel.org
+      cyg_cache: C:\cygwin64\var\cache\setup
 
 # Allow to fail on first error in matrix
 matrix:
