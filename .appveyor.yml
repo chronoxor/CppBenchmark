@@ -27,12 +27,12 @@ environment:
 #      name: VisualStudio
 #      ext: bat
     - build: Cygwin (x32)
-      command: C:\cygwin\bin\bash
+      command: C:\cygwin\bin\bash -lc
       generate: Cygwin
       name: Cygwin
       ext: sh
     - build: Cygwin (x64)
-      command: C:\cygwin64\bin\bash
+      command: C:\cygwin64\bin\bash -lc
       generate: Cygwin
       name: Cygwin
       ext: sh
@@ -43,8 +43,11 @@ matrix:
 
 # Scripts that are called at very beginning, before repo cloning
 init:
-  - cmake --version
-  - msbuild /version
+  - if "%build%"=="VisualStudio (x32)" %command% "msbuild /version"
+  - if "%build%"=="VisualStudio (x64)" %command% "msbuild /version"
+  - if "%build%"=="Cygwin (x32)" %command% "cygcheck -dc cygwin"
+  - if "%build%"=="Cygwin (x64)" %command% "cygcheck -dc cygwin"
+  - %command% "cmake --version"
 
 # Scripts that run after cloning repository
 install:
@@ -52,8 +55,6 @@ install:
   - if "%build%"=="VisualStudio (x32)" choco install graphviz.portable
   - if "%build%"=="VisualStudio (x64)" choco install doxygen.portable
   - if "%build%"=="VisualStudio (x64)" choco install graphviz.portable
-  - if "%build%"=="Cygwin (x32)" %command% -lc "cygcheck -dc cygwin"
-  - if "%build%"=="Cygwin (x64)" %command% -lc "cygcheck -dc cygwin"
   - git config --global user.name "AppVeyor"
   - git config --global user.email "team@appveyor.com"
   - git config --global push.default simple
