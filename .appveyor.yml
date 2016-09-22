@@ -33,7 +33,7 @@ environment:
       ext: sh
       cyg_root: C:\cygwin
       cyg_setup: setup-x86.exe
-      cyg_mirror: http://mirrors.kernel.org
+      cyg_mirror: http://mirrors.kernel.org/sourceware/cygwin/
       cyg_cache: C:\cygwin\var\cache\setup
     - build: Cygwin (x64)
       command: C:\cygwin64\bin\bash
@@ -42,7 +42,7 @@ environment:
       ext: sh
       cyg_root: C:\cygwin64
       cyg_setup: setup-x86_64.exe
-      cyg_mirror: http://mirrors.kernel.org
+      cyg_mirror: http://mirrors.kernel.org/sourceware/cygwin/
       cyg_cache: C:\cygwin64\var\cache\setup
 
 # Allow to fail on first error in matrix
@@ -67,7 +67,7 @@ install:
   - if "%build%"=="VisualStudio (x64)" choco install graphviz.portable
   - ps: if ($env:build -eq "Cygwin (x32)") { 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"' }
   - ps: if ($env:build -eq "Cygwin (x64)") { 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"' }
-  - if "%build%"=="Cygwin (x32)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake > NUL 2>&1'
+  - if "%build%"=="Cygwin (x32)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,doxygen,graphviz,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
   - if "%build%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,doxygen,graphviz,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
   - if "%build%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
   - if "%build%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
