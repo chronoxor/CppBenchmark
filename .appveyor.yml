@@ -16,18 +16,14 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-#    - build: VisualStudio
-#      ext: bat
-#      command: cmd /C
-#      prefix:
-#    - build: Cygwin
-#      ext: sh
-#      command: C:\cygwin64\bin\bash -lc
-#      prefix: cd $APPVEYOR_BUILD_FOLDER/scripts; exec 0</dev/null;
-    - build: MinGW
+    - build: VisualStudio
       ext: bat
       command: cmd /C
       prefix:
+    - build: Cygwin
+      ext: sh
+      command: C:\cygwin64\bin\bash -lc
+      prefix: cd $APPVEYOR_BUILD_FOLDER/scripts; exec 0</dev/null;
 
 # Allow to fail on first error in matrix
 matrix:
@@ -47,7 +43,6 @@ install:
   - choco install doxygen.portable
   - choco install graphviz.portable
   - if "%build%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages doxygen,graphviz
-  - if "%build%"=="MinGW" set PATH=C:\mingw-w64\i686-5.3.0-posix-dwarf-rt_v4-rev0\mingw32\bin;%PATH%
   - '%command% "%prefix% git submodule update --init --recursive --remote"'
 
 # Cache Cygwin files to speed up build
@@ -57,11 +52,7 @@ cache:
 # Build scripts
 build_script:
   - cd scripts
-  # MinGW workaround: sh.exe was found in your PATH
-  - ren "C:\Program Files\Git\usr\bin\sh.exe" _sh.exe
   - '%command% "%prefix% ./01-generate-%build%.%ext%"'
-  # MinGW workaround: sh.exe was found in your PATH
-  - ren "C:\Program Files\Git\usr\bin\_sh.exe" sh.exe
   - '%command% "%prefix% ./02-build-%build%.%ext%"'
   - '%command% "%prefix% ./03-tests.%ext%"'
   - '%command% "%prefix% ./04-install-%build%.%ext%"'
