@@ -44,7 +44,7 @@ install:
   - if "%build%"=="VisualStudio" choco install graphviz.portable
   - cd C:\cygwin64
   - dir
-  - if "%build%"=="Cygwin" 'C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --packages doxygen,graphviz'
+  - if "%build%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --packages doxygen,graphviz
   - git submodule update --init --recursive --remote
 
 # Build scripts
