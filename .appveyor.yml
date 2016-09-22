@@ -60,7 +60,7 @@ install:
   - git config --global push.default simple
   - git submodule update --init --recursive --remote
 
-# Build script
+# Build scripts
 build_script:
   - cd scripts
   - '%command% "%prefix% ./01-generate-%generator%.%ext%"'
