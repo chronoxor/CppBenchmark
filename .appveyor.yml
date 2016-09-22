@@ -20,33 +20,33 @@ only_commits:
 environment:
   matrix:
     - build: VisualStudio (x32)
-      command: cmd
-      generate: VisualStudio-x32
-      name: VisualStudio
-      ext: bat
+        command: cmd
+        generate: VisualStudio-x32
+        name: VisualStudio
+        ext: bat
     - build: VisualStudio (x64)
-      command: cmd
-      generate: VisualStudio-x64
-      name: VisualStudio
-      ext: bat
+        command: cmd
+        generate: VisualStudio-x64
+        name: VisualStudio
+        ext: bat
     - build: Cygwin (x32)
-      command: C:\cygwin\bin\bash
-      generate: Cygwin
-      name: Cygwin
-      ext: sh
-      cyg_root: C:\cygwin
-      cyg_setup: setup-x86.exe
-      cyg_mirror: http://mirrors.kernel.org
-      cyg_cache: C:\cygwin\var\cache\setup
+        command: C:\cygwin\bin\bash
+        generate: Cygwin
+        name: Cygwin
+        ext: sh
+        cyg_root: C:\cygwin
+        cyg_setup: setup-x86.exe
+        cyg_mirror: http://mirrors.kernel.org
+        cyg_cache: C:\cygwin\var\cache\setup
     - build: Cygwin (x64)
-      command: C:\cygwin64\bin\bash
-      generate: Cygwin
-      name: Cygwin
-      ext: sh
-      cyg_root: C:\cygwin64
-      cyg_setup: setup-x86_64.exe
-      cyg_mirror: http://mirrors.kernel.org
-      cyg_cache: C:\cygwin64\var\cache\setup
+        command: C:\cygwin64\bin\bash
+        generate: Cygwin
+        name: Cygwin
+        ext: sh
+        cyg_root: C:\cygwin64
+        cyg_setup: setup-x86_64.exe
+        cyg_mirror: http://mirrors.kernel.org
+        cyg_cache: C:\cygwin64\var\cache\setup
 
 # Allow to fail on first error in matrix
 matrix:
@@ -74,10 +74,10 @@ install:
   - if "%build%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
   - if "%build%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
   - if "%build%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
-  - git config --global user.name "AppVeyor"
-  - git config --global user.email "team@appveyor.com"
-  - git config --global push.default simple
-  - git submodule update --init --recursive --remote
+  - '%command% git config --global user.name "AppVeyor"'
+  - '%command% git config --global user.email "team@appveyor.com"'
+  - '%command% git config --global push.default simple'
+  - '%command% git submodule update --init --recursive --remote'
 
 # Build scripts
 build_script:
