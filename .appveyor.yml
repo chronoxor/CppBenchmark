@@ -27,12 +27,12 @@ environment:
 #      name: VisualStudio
 #      ext: bat
     - build: Cygwin (x32)
-      command: C:\cygwin\bin\bash.exe
+      command: C:\cygwin\bin\bash
       generate: Cygwin
       name: Cygwin
       ext: sh
     - build: Cygwin (x64)
-      command: C:\cygwin64\bin\bash.exe
+      command: C:\cygwin64\bin\bash
       generate: Cygwin
       name: Cygwin
       ext: sh
@@ -52,12 +52,8 @@ install:
   - if "%build%"=="VisualStudio (x32)" choco install graphviz.portable
   - if "%build%"=="VisualStudio (x64)" choco install doxygen.portable
   - if "%build%"=="VisualStudio (x64)" choco install graphviz.portable
-  - cd C:\cygwin\bin
-  - dir
-  - cd C:\cygwin64\bin
-  - dir
-  - if "%build%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
-  - if "%build%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
+  - if "%build%"=="Cygwin (x32)" %command% -lc "cygcheck -dc cygwin"
+  - if "%build%"=="Cygwin (x64)" %command% -lc "cygcheck -dc cygwin"
   - git config --global user.name "AppVeyor"
   - git config --global user.email "team@appveyor.com"
   - git config --global push.default simple
