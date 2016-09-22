@@ -17,7 +17,6 @@
 #elif defined(unix) || defined(__unix) || defined(__unix__)
 #include <sys/sysinfo.h>
 #include <pthread.h>
-#include <unistd.h>
 #include <fstream>
 #include <regex>
 #if defined(__CYGWIN__)
@@ -311,8 +310,12 @@ int64_t System::RamTotal()
 
     return -1;
 #elif defined(linux) || defined(__linux) || defined(__linux__)
-    struct sysinfo si;
-    return (sysinfo(&si) == 0) ? si.totalram : -1;
+    int64_t pages = sysconf(_SC_PHYS_PAGES);
+    int64_t page_size = sysconf(_SC_PAGESIZE);
+    if ((pages > 0) && (page_size > 0))
+        return pages * page_size;
+
+    return -1;
 #elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
@@ -343,8 +346,12 @@ int64_t System::RamFree()
     int64_t free_mem = vmstat.free_count * page_size;
     return free_mem;
 #elif defined(linux) || defined(__linux) || defined(__linux__)
-    struct sysinfo si;
-    return (sysinfo(&si) == 0) ? si.freeram : -1;
+    int64_t pages = sysconf(_SC_AVPHYS_PAGES);
+    int64_t page_size = sysconf(_SC_PAGESIZE);
+    if ((pages > 0) && (page_size > 0))
+        return pages * page_size;
+
+    return -1;
 #elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
