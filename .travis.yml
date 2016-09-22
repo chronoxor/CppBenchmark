@@ -30,6 +30,10 @@ branches:
   only:
     - master
 
+# Clone depth
+git:
+  depth: 5
+
 # Scripts that run before install
 before_install:
   - git config --global user.name "Travis CI"
