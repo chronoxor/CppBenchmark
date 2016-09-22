@@ -44,8 +44,8 @@ matrix:
 # Scripts that are called at very beginning, before repo cloning
 init:
   - if "%name%"=="VisualStudio" msbuild /version
-  - if "%name%"=="Cygwin" %command% "cygcheck -dc cygwin"
-  - cmake --version
+  - if "%name%"=="Cygwin" '%command% "cygcheck -dc cygwin"'
+  - '%command% "cmake --version"'
 
 # Scripts that run after cloning repository
 install:
@@ -59,12 +59,12 @@ install:
 # Build scripts
 build_script:
   - cd scripts
-  - %command% "01-generate-%generator%.%ext%"
-  - %command% "02-build-%name%.%ext%"
-  - %command% "03-tests.%ext%"
-  - %command% "04-install-%name%.%ext%"
-  - %command% "05-doxygen-%name%.%ext%"
-  - %command% "06-clean.%ext%"
+  - '%command% "01-generate-%generator%.%ext%"'
+  - '%command% "02-build-%name%.%ext%"'
+  - '%command% "03-tests.%ext%"'
+  - '%command% "04-install-%name%.%ext%"'
+  - '%command% "05-doxygen-%name%.%ext%"'
+  - '%command% "06-clean.%ext%"'
 
 # Test scripts
 test: off
