@@ -9,9 +9,6 @@ branches:
 # Clone depth
 clone_depth: 5
 
-# Clone repository as zip archive
-shallow_clone: true
-
 # Including commits with 'build' comment
 only_commits:
   message: build
