@@ -19,17 +19,18 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-    - build: VisualStudio (x32)
+    fast_finish: true
+    - cfg: VisualStudio (x32)
         command: 
         generate: VisualStudio-x32
         name: VisualStudio
         ext: bat
-    - build: VisualStudio (x64)
+    - cfg: VisualStudio (x64)
         command: 
         generate: VisualStudio-x64
         name: VisualStudio
         ext: bat
-    - build: Cygwin (x32)
+    - cfg: Cygwin (x32)
         command: C:\cygwin\bin\bash
         generate: Cygwin
         name: Cygwin
@@ -38,7 +39,7 @@ environment:
         cyg_setup: setup-x86.exe
         cyg_mirror: http://mirrors.kernel.org
         cyg_cache: C:\cygwin\var\cache\setup
-    - build: Cygwin (x64)
+    - cfg: Cygwin (x64)
         command: C:\cygwin64\bin\bash
         generate: Cygwin
         name: Cygwin
@@ -47,7 +48,6 @@ environment:
         cyg_setup: setup-x86_64.exe
         cyg_mirror: http://mirrors.kernel.org
         cyg_cache: C:\cygwin64\var\cache\setup
-    fast_finish: true
 
 # Cache files to speed up build
 cache:
@@ -61,16 +61,16 @@ init:
 
 # Scripts that run after cloning repository
 install:
-  - if "%build%"=="VisualStudio (x32)" choco install doxygen.portable
-  - if "%build%"=="VisualStudio (x32)" choco install graphviz.portable
-  - if "%build%"=="VisualStudio (x64)" choco install doxygen.portable
-  - if "%build%"=="VisualStudio (x64)" choco install graphviz.portable
-  - if "%build%"=="Cygwin (x32)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
-  - if "%build%"=="Cygwin (x64)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
-  - if "%build%"=="Cygwin (x32)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
-  - if "%build%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
-  - if "%build%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
-  - if "%build%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
+  - if "%cfg%"=="VisualStudio (x32)" choco install doxygen.portable
+  - if "%cfg%"=="VisualStudio (x32)" choco install graphviz.portable
+  - if "%cfg%"=="VisualStudio (x64)" choco install doxygen.portable
+  - if "%cfg%"=="VisualStudio (x64)" choco install graphviz.portable
+  - if "%cfg%"=="Cygwin (x32)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
+  - if "%cfg%"=="Cygwin (x64)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
+  - if "%cfg%"=="Cygwin (x32)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
+  - if "%cfg%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
+  - if "%cfg%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
+  - if "%cfg%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
   - git config --global user.name "AppVeyor"
   - git config --global user.email "team@appveyor.com"
   - git config --global push.default simple
