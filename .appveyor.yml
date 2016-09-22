@@ -74,21 +74,21 @@ install:
   - if "%build%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
   - if "%build%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
   - if "%build%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
-  - '%command% git config --global user.name "AppVeyor"'
-  - '%command% git config --global user.email "team@appveyor.com"'
-  - '%command% git config --global push.default simple'
-  - '%command% git submodule update --init --recursive --remote'
+  - cmd git config --global user.name "AppVeyor"
+  - cmd git config --global user.email "team@appveyor.com"
+  - cmd git config --global push.default simple
+  - cmd git submodule update --init --recursive --remote
 
 # Build scripts
 build_script:
-  - '%command% cd scripts'
-  - '%command% 01-generate-%generate%.%ext%'
-  - '%command% 01-generate-%name%.%ext%'
-  - '%command% 02-build-%name%.%ext%'
-  - '%command% 03-tests.%ext%'
-  - '%command% 04-install-%name%.%ext%'
-  - '%command% 05-doxygen-%name%.%ext%'
-  - '%command% 06-clean.%ext%'
+  - cd scripts
+  - 01-generate-%generate%.%ext%
+  - 01-generate-%name%.%ext%
+  - 02-build-%name%.%ext%
+  - 03-tests.%ext%
+  - 04-install-%name%.%ext%
+  - 05-doxygen-%name%.%ext%
+  - 06-clean.%ext%
 
 # Test scripts
 test: off
