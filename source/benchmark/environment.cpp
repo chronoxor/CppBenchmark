@@ -9,6 +9,7 @@
 #include "benchmark/environment.h"
 
 #include <chrono>
+#include <cstring>
 #include <sstream>
 
 #if defined(__APPLE__)

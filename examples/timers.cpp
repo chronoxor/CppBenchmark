@@ -2,14 +2,15 @@
 // Created by Ivan Shynkarenka on 31.07.2015.
 //
 
+#if defined(__CYGWIN__) || (__MINGW32__)
+#define _WIN32_WINNT 0x601
+#endif
+
 #include "benchmark/cppbenchmark.h"
 
 #include <chrono>
 #include <limits>
 
-#if defined(__CYGWIN__)
-#define _WIN32_WINNT 0x601
-#endif
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__CYGWIN__)
 #include <sys/time.h>
 #include <time.h>

@@ -410,5 +410,5 @@ done:
     #error MulDiv64 is no supported!
 #endif
 }
-{
+
 } // namespace CppBenchmark

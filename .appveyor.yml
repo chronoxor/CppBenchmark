@@ -57,8 +57,10 @@ cache:
 # Build scripts
 build_script:
   - cd scripts
+  # MinGW workaround: sh.exe was found in your PATH
   - ren "C:\Program Files\Git\usr\bin\sh.exe" _sh.exe
   - '%command% "%prefix% ./01-generate-%build%.%ext%"'
+  # MinGW workaround: sh.exe was found in your PATH
   - ren "C:\Program Files\Git\usr\bin\_sh.exe" sh.exe
   - '%command% "%prefix% ./02-build-%build%.%ext%"'
   - '%command% "%prefix% ./03-tests.%ext%"'
