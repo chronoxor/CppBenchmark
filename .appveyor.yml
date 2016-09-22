@@ -21,21 +21,25 @@ environment:
 #      generator: VisualStudio-x32
 #      ext: bat
 #      command: cmd
+#      prefix:
 #    - build: VisualStudio (x64)
 #      name: VisualStudio
 #      generator: VisualStudio-x64
 #      ext: bat
 #      command: cmd
+#      prefix:
     - build: Cygwin (x32)
       name: Cygwin
       generator: Cygwin
       ext: sh
       command: C:\cygwin\bin\bash -lc
+      prefix: cd $APPVEYOR_BUILD_FOLDER; exec 0</dev/null;
     - build: Cygwin (x64)
       name: Cygwin
       generator: Cygwin
       ext: sh
       command: C:\cygwin64\bin\bash -lc
+      prefix: cd $APPVEYOR_BUILD_FOLDER; exec 0</dev/null;
 
 # Allow to fail on first error in matrix
 matrix:
@@ -59,12 +63,12 @@ install:
 # Build scripts
 build_script:
   - cd scripts
-  - '%command% "01-generate-%generator%.%ext%"'
-  - '%command% "02-build-%name%.%ext%"'
-  - '%command% "03-tests.%ext%"'
-  - '%command% "04-install-%name%.%ext%"'
-  - '%command% "05-doxygen-%name%.%ext%"'
-  - '%command% "06-clean.%ext%"'
+  - '%command% "%prefix%01-generate-%generator%.%ext%"'
+  - '%command% "%prefix%02-build-%name%.%ext%"'
+  - '%command% "%prefix%03-tests.%ext%"'
+  - '%command% "%prefix%04-install-%name%.%ext%"'
+  - '%command% "%prefix%05-doxygen-%name%.%ext%"'
+  - '%command% "%prefix%06-clean.%ext%"'
 
 # Test scripts
 test: off
