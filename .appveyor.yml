@@ -47,7 +47,7 @@ init:
   - if "%build%"=="VisualStudio (x64)" %command% "msbuild /version"
   - if "%build%"=="Cygwin (x32)" %command% "cygcheck -dc cygwin"
   - if "%build%"=="Cygwin (x64)" %command% "cygcheck -dc cygwin"
-  - %command% "cmake --version"
+  - %command% "cmake  --version"
 
 # Scripts that run after cloning repository
 install:
