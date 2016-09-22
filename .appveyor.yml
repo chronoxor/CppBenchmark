@@ -17,25 +17,21 @@ only_commits:
 environment:
   matrix:
 #    - build: VisualStudio (x32)
-#      image: Visual Studio 2015
 #      command: cmd
 #      generate: VisualStudio-x32
 #      name: VisualStudio
 #      ext: bat
 #    - build: VisualStudio (x64)
-#      image: Visual Studio 2015
 #      command: cmd
 #      generate: VisualStudio-x64
 #      name: VisualStudio
 #      ext: bat
     - build: Cygwin (x32)
-      image: Visual Studio 2015
       command: C:\cygwin\bin\bash
       generate: Cygwin
       name: Cygwin
       ext: sh
     - build: Cygwin (x64)
-      image: Visual Studio 2015
       command: C:\cygwin64\bin\bash
       generate: Cygwin
       name: Cygwin
@@ -56,7 +52,9 @@ install:
   - if "%build%"=="VisualStudio (x32)" choco install graphviz.portable
   - if "%build%"=="VisualStudio (x64)" choco install doxygen.portable
   - if "%build%"=="VisualStudio (x64)" choco install graphviz.portable
-  - cd C:\
+  - cd C:\cygwin
+  - dir
+  - cd C:\cygwin64
   - dir
   - if "%build%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
   - if "%build%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
