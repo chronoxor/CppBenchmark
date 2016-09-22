@@ -19,10 +19,8 @@
 #include <unistd.h>
 #include <fstream>
 #include <regex>
-#if defined(__CYGWIN__)
-#include <windows.h>
 #endif
-#elif defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 #include <windows.h>
 #include <memory>
 #endif

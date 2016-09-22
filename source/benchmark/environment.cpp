@@ -15,12 +15,12 @@
 #include <sys/sysctl.h>
 #elif defined(__CYGWIN__)
 #include <sys/utsname.h>
-#include <windows.h>
 #elif defined(linux) || defined(__linux) || defined(__linux__)
 #include <sys/stat.h>
 #include <fstream>
 #include <regex>
-#elif defined(_WIN32) || defined(_WIN64)
+#endif
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 #include <windows.h>
 #endif
 
