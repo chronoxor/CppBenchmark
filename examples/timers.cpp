@@ -309,7 +309,7 @@ BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", iterations)
 #endif
 
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
-struct timeval gettimeofday()
+struct timeval mygettimeofday()
 {
     struct timeval current;
     gettimeofday(&current, nullptr);
@@ -318,14 +318,14 @@ struct timeval gettimeofday()
 
 BENCHMARK("gettimeofday()", iterations)
 {
-    static struct timeval timestamp = gettimeofday();
+    static struct timeval timestamp = mygettimeofday();
     static double maxlatency = std::numeric_limits<double>::min();
     static double minlatency = std::numeric_limits<double>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t count = 0;
 
-    struct timeval current = gettimeofday();
+    struct timeval current = mygettimeofday();
     uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - timestamp.tv_usec) * 1000;
     double latency = (double)duration / ++count;
     if (duration > 0)
