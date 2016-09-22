@@ -29,12 +29,12 @@ install:
 # Build scripts
 build_script:
   - cd scripts
-  - ./01-generate-Unix.sh
-  - ./02-build-Unix.sh
-  - ./03-tests.sh
-  - ./04-install-Unix.sh
-  - ./05-doxygen-Unix.sh
-  - ./06-clean.sh
+  - ./01-generate-VisualStudio.bat
+  - ./02-build-VisualStudio.bat
+  - ./03-tests.bat
+  - ./04-install-VisualStudio.bat
+  - ./05-doxygen-VisualStudio.bat
+  - ./06-clean.bat
 
 # Test scripts
 test: off
