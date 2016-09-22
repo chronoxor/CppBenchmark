@@ -11,11 +11,6 @@ platform:
   - x86
   - x64
 
-# Build configuration, i.e. Debug, Release, etc.
-configuration:
-  - Debug
-  - Release
-
 # Scripts that are called at very beginning, before repo cloning
 init:
   - cmd: cmake --version

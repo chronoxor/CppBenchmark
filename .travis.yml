@@ -37,6 +37,7 @@ before_install:
   - git config --global push.default simple
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
+  - cmake --version
 
 # Build scripts
 script: 
