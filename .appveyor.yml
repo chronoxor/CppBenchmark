@@ -33,13 +33,13 @@ environment:
       generator: Cygwin
       ext: sh
       command: C:\cygwin\bin\bash -lc
-      prefix: cd $APPVEYOR_BUILD_FOLDER; exec 0</dev/null;
+      prefix: cd $APPVEYOR_BUILD_FOLDER/scripts; exec 0</dev/null;
     - build: Cygwin (x64)
       name: Cygwin
       generator: Cygwin
       ext: sh
       command: C:\cygwin64\bin\bash -lc
-      prefix: cd $APPVEYOR_BUILD_FOLDER; exec 0</dev/null;
+      prefix: cd $APPVEYOR_BUILD_FOLDER/scripts; exec 0</dev/null;
 
 # Allow to fail on first error in matrix
 matrix:
@@ -63,7 +63,6 @@ install:
 # Build scripts
 build_script:
   - cd scripts
-  - '%command% "%prefix% dir"'
   - '%command% "%prefix% ./01-generate-%generator%.%ext%"'
   - '%command% "%prefix% ./02-build-%name%.%ext%"'
   - '%command% "%prefix% ./03-tests.%ext%"'
