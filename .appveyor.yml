@@ -64,12 +64,12 @@ install:
 build_script:
   - cd scripts
   - echo "%prefix% 01-generate-%generator%.%ext%"
-  - '%command% "%prefix% 01-generate-%generator%.%ext%"'
-  - '%command% "%prefix% 02-build-%name%.%ext%"'
-  - '%command% "%prefix% 03-tests.%ext%"'
-  - '%command% "%prefix% 04-install-%name%.%ext%"'
-  - '%command% "%prefix% 05-doxygen-%name%.%ext%"'
-  - '%command% "%prefix% 06-clean.%ext%"'
+  - '%command% "%prefix% ./01-generate-%generator%.%ext%"'
+  - '%command% "%prefix% ./02-build-%name%.%ext%"'
+  - '%command% "%prefix% ./03-tests.%ext%"'
+  - '%command% "%prefix% ./04-install-%name%.%ext%"'
+  - '%command% "%prefix% ./05-doxygen-%name%.%ext%"'
+  - '%command% "%prefix% ./06-clean.%ext%"'
 
 # Test scripts
 test: off
