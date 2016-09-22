@@ -26,15 +26,15 @@ environment:
 #      generate: VisualStudio-x64
 #      name: VisualStudio
 #      ext: bat
-    - build: "Cygwin (x32)"
-      command: "C:\cygwin\bin\bash -lc"
-      generate: "Cygwin"
-      name: "Cygwin"
+    - build: Cygwin (x32)
+      command: C:\cygwin\bin\bash -lc
+      generate: Cygwin
+      name: Cygwin
       ext: sh
-    - build: "Cygwin (x64)"
-      command: "C:\cygwin64\bin\bash -lc"
-      generate: "Cygwin"
-      name: "Cygwin"
+    - build: Cygwin (x64)
+      command: C:\cygwin64\bin\bash -lc
+      generate: Cygwin
+      name: Cygwin
       ext: sh
 
 # Allow to fail on first error in matrix
