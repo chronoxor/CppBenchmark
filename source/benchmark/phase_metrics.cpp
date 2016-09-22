@@ -401,22 +401,14 @@ done:
 #pragma warning(pop)
 #endif
 #elif defined(__GNUC__)
-#if defined(__x86_64__) || defined(__amd64__) || defined(__aarch64__) || defined(__ia64__) || defined(__ppc64__)
     __uint128_t a = operant;
     __uint128_t b = multiplier;
     __uint128_t c = divider;
 
     return (uint64_t)(a * b / c);
 #else
-    uint64_t a = operant;
-    uint64_t b = multiplier;
-    uint64_t c = divider;
-
-    return (uint64_t)(a * b / c);
-#endif
-#else
     #error MulDiv64 is no supported!
 #endif
 }
-
+{
 } // namespace CppBenchmark
