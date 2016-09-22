@@ -43,11 +43,9 @@ matrix:
 
 # Scripts that are called at very beginning, before repo cloning
 init:
-  - if "%build%"=="VisualStudio (x32)" %command% "msbuild /version"
-  - if "%build%"=="VisualStudio (x64)" %command% "msbuild /version"
-  - if "%build%"=="Cygwin (x32)" %command% "cygcheck -dc cygwin"
-  - if "%build%"=="Cygwin (x64)" %command% "cygcheck -dc cygwin"
-  - "%command%" "cmake  --version"
+  - if "%name%"=="VisualStudio" %command% "msbuild /version"
+  - if "%name%"=="Cygwin" %command% "cygcheck -dc cygwin"
+  - cmd: %command% "cmake --version"
 
 # Scripts that run after cloning repository
 install:
