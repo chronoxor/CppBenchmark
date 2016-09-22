@@ -16,10 +16,10 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-#    - build: VisualStudio
-#      ext: bat
-#      command: cmd 
-#      prefix:
+    - build: VisualStudio
+      ext: bat
+      command: cmd 
+      prefix:
     - build: Cygwin
       ext: sh
       command: C:\cygwin\bin\bash -lc
