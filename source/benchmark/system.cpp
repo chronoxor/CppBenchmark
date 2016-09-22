@@ -15,8 +15,8 @@
 #include <math.h>
 #include <pthread.h>
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-#include <sys/sysinfo.h>
 #include <pthread.h>
+#include <unistd.h>
 #include <fstream>
 #include <regex>
 #if defined(__CYGWIN__)
