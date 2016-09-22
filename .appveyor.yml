@@ -16,13 +16,13 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-    - build: VisualStudio
-      ext: bat
-      command: cmd /C
-      prefix:
+#    - build: VisualStudio
+#      ext: bat
+#      command: cmd /C
+#      prefix:
     - build: Cygwin
       ext: sh
-      command: C:\cygwin\bin\bash -lc
+      command: C:\cygwin64\bin\bash -lc
       prefix: cd $APPVEYOR_BUILD_FOLDER/scripts; exec 0</dev/null;
 
 # Allow to fail on first error in matrix
@@ -42,6 +42,7 @@ init:
 install:
   - if "%build%"=="VisualStudio" choco install doxygen.portable
   - if "%build%"=="VisualStudio" choco install graphviz.portable
+  - if "%build%"=="Cygwin" 'C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --only-site --packages doxygen,graphviz'
   - git submodule update --init --recursive --remote
 
 # Build scripts
