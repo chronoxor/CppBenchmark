@@ -47,7 +47,7 @@ install:
   - if "%build%"=="VisualStudio" choco install doxygen.portable
   - if "%build%"=="VisualStudio" choco install graphviz.portable
   - if "%build%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages doxygen,graphviz
-  - if "%build%"=="MinGW"set PATH=%PATH:C:\Program Files\Git\bin;=%;C:\mingw-w64\i686-5.3.0-posix-dwarf-rt_v4-rev0\mingw32\bin
+  - if "%build%"=="MinGW"set PATH=%PATH:C:\Program Files\Git;=%;C:\mingw-w64\i686-5.3.0-posix-dwarf-rt_v4-rev0\mingw32\bin
   - '%command% "%prefix% git submodule update --init --recursive --remote"'
 
 # Cache Cygwin files to speed up build
