@@ -18,7 +18,7 @@ environment:
   matrix:
 #    - build: VisualStudio
 #      ext: bat
-#      command: cmd
+#      command: cmd 
 #      prefix:
     - build: Cygwin
       ext: sh
