@@ -71,16 +71,15 @@ install:
   - if "%build%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
   - if "%build%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
   - if "%build%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
-  - cmd: git config --global user.name "AppVeyor"
-  - cmd: git config --global user.email "team@appveyor.com"
-  - cmd: git config --global push.default simple
-  - cmd: git submodule update --init --recursive --remote
+  - git config --global user.name "AppVeyor"
+  - git config --global user.email "team@appveyor.com"
+  - git config --global push.default simple
+  - git submodule update --init --recursive --remote
 
 # Build scripts
 build_script:
   - cd scripts
   - 01-generate-%generate%.%ext%
-  - 01-generate-%name%.%ext%
   - 02-build-%name%.%ext%
   - 03-tests.%ext%
   - 04-install-%name%.%ext%
