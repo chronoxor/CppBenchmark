@@ -19,22 +19,22 @@ environment:
 #    - build: VisualStudio (x32)
 #      name: VisualStudio
 #      generator: VisualStudio-x32
-#      extension: bat
+#      ext: bat
 #      command: cmd
 #    - build: VisualStudio (x64)
 #      name: VisualStudio
 #      generator: VisualStudio-x64
-#      extension: bat
+#      ext: bat
 #      command: cmd
     - build: Cygwin (x32)
       name: Cygwin
       generator: Cygwin
-      extension: sh
+      ext: sh
       command: C:\cygwin\bin\bash -lc
     - build: Cygwin (x64)
       name: Cygwin
       generator: Cygwin
-      extension: sh
+      ext: sh
       command: C:\cygwin64\bin\bash -lc
 
 # Allow to fail on first error in matrix
@@ -59,12 +59,12 @@ install:
 # Build scripts
 build_script:
   - cd scripts
-  - 01-generate-%generate%.%ext%
-  - 02-build-%name%.%ext%
-  - 03-tests.%ext%
-  - 04-install-%name%.%ext%
-  - 05-doxygen-%name%.%ext%
-  - 06-clean.%ext%
+  - %command% "01-generate-%generator%.%ext%"
+  - %command% "02-build-%name%.%ext%"
+  - %command% "03-tests.%ext%"
+  - %command% "04-install-%name%.%ext%"
+  - %command% "05-doxygen-%name%.%ext%"
+  - %command% "06-clean.%ext%"
 
 # Test scripts
 test: off
