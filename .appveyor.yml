@@ -19,7 +19,6 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-    fast_finish: true
     - cfg: VisualStudio (x32)
         command: 
         generate: VisualStudio-x32
@@ -48,6 +47,10 @@ environment:
         cyg_setup: setup-x86_64.exe
         cyg_mirror: http://mirrors.kernel.org
         cyg_cache: C:\cygwin64\var\cache\setup
+
+# Allow to fail on first error in matrix
+matrix:
+  fast_finish: true
 
 # Cache files to speed up build
 cache:
