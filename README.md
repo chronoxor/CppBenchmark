@@ -72,13 +72,12 @@ git submodule update --init --recursive --remote
 ## Windows (Visaul Studio 2015)
 ```
 cd scripts
-01-generate-VisualStudio-x32.bat or 01-generate-VisualStudio-x64.bat
+01-generate-VisualStudio.bat
 02-build-VisualStudio.bat
 03-tests.bat
 04-install-VisualStudio.bat
 05-doxygen-VisualStudio.bat
 ```
-If you want 32-bit version use '01-generate-VisualStudio-x32.bat' to generate project files.
 
 ## Windows (MinGW with MSYS)
 ```

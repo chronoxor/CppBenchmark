@@ -16,29 +16,13 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-#    - build: VisualStudio (x32)
-#      name: VisualStudio
-#      generator: VisualStudio-x32
+#    - build: VisualStudio
 #      ext: bat
 #      command: cmd
 #      prefix:
-#    - build: VisualStudio (x64)
-#      name: VisualStudio
-#      generator: VisualStudio-x64
-#      ext: bat
-#      command: cmd
-#      prefix:
-    - build: Cygwin (x32)
-      name: Cygwin
-      generator: Cygwin
+    - build: Cygwin
       ext: sh
       command: C:\cygwin\bin\bash -lc
-      prefix: cd $APPVEYOR_BUILD_FOLDER/scripts; exec 0</dev/null;
-    - build: Cygwin (x64)
-      name: Cygwin
-      generator: Cygwin
-      ext: sh
-      command: C:\cygwin64\bin\bash -lc
       prefix: cd $APPVEYOR_BUILD_FOLDER/scripts; exec 0</dev/null;
 
 # Allow to fail on first error in matrix
@@ -47,14 +31,14 @@ matrix:
 
 # Scripts that are called at very beginning, before repo cloning
 init:
-  - if "%name%"=="VisualStudio" msbuild /version
-  - if "%name%"=="Cygwin" %command% "cygcheck -dc cygwin"
+  - if "%build%"=="VisualStudio" msbuild /version
+  - if "%build%"=="Cygwin" %command% "cygcheck -dc cygwin"
   - '%command% "cmake --version"'
 
 # Scripts that run after cloning repository
 install:
-  - if "%name%"=="VisualStudio (x32)" choco install doxygen.portable
-  - if "%name%"=="VisualStudio (x64)" choco install doxygen.portable
+  - if "%build%"=="VisualStudio" choco install doxygen.portable
+  - if "%build%"=="VisualStudio" choco install graphviz.portable
   - git config --global user.name "AppVeyor"
   - git config --global user.email "team@appveyor.com"
   - git config --global push.default simple
@@ -63,11 +47,11 @@ install:
 # Build scripts
 build_script:
   - cd scripts
-  - '%command% "%prefix% ./01-generate-%generator%.%ext%"'
-  - '%command% "%prefix% ./02-build-%name%.%ext%"'
+  - '%command% "%prefix% ./01-generate-%build%.%ext%"'
+  - '%command% "%prefix% ./02-build-%build%.%ext%"'
   - '%command% "%prefix% ./03-tests.%ext%"'
-  - '%command% "%prefix% ./04-install-%name%.%ext%"'
-  - '%command% "%prefix% ./05-doxygen-%name%.%ext%"'
+  - '%command% "%prefix% ./04-install-%build%.%ext%"'
+  - '%command% "%prefix% ./05-doxygen-%build%.%ext%"'
   - '%command% "%prefix% ./06-clean.%ext%"'
 
 # Test scripts
