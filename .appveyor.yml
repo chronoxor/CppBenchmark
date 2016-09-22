@@ -19,17 +19,17 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-    - cfg: VisualStudio (x32)
+    - channel: VisualStudio (x32)
         command: 
         generate: VisualStudio-x32
         name: VisualStudio
         ext: bat
-    - cfg: VisualStudio (x64)
+    - channel: VisualStudio (x64)
         command: 
         generate: VisualStudio-x64
         name: VisualStudio
         ext: bat
-    - cfg: Cygwin (x32)
+    - channel: Cygwin (x32)
         command: C:\cygwin\bin\bash
         generate: Cygwin
         name: Cygwin
@@ -38,7 +38,7 @@ environment:
         cyg_setup: setup-x86.exe
         cyg_mirror: http://mirrors.kernel.org
         cyg_cache: C:\cygwin\var\cache\setup
-    - cfg: Cygwin (x64)
+    - channel: Cygwin (x64)
         command: C:\cygwin64\bin\bash
         generate: Cygwin
         name: Cygwin
@@ -64,16 +64,16 @@ init:
 
 # Scripts that run after cloning repository
 install:
-  - if "%cfg%"=="VisualStudio (x32)" choco install doxygen.portable
-  - if "%cfg%"=="VisualStudio (x32)" choco install graphviz.portable
-  - if "%cfg%"=="VisualStudio (x64)" choco install doxygen.portable
-  - if "%cfg%"=="VisualStudio (x64)" choco install graphviz.portable
-  - if "%cfg%"=="Cygwin (x32)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
-  - if "%cfg%"=="Cygwin (x64)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
-  - if "%cfg%"=="Cygwin (x32)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
-  - if "%cfg%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
-  - if "%cfg%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
-  - if "%cfg%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
+  - if "%channel%"=="VisualStudio (x32)" choco install doxygen.portable
+  - if "%channel%"=="VisualStudio (x32)" choco install graphviz.portable
+  - if "%channel%"=="VisualStudio (x64)" choco install doxygen.portable
+  - if "%channel%"=="VisualStudio (x64)" choco install graphviz.portable
+  - if "%channel%"=="Cygwin (x32)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
+  - if "%channel%"=="Cygwin (x64)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
+  - if "%channel%"=="Cygwin (x32)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
+  - if "%channel%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
+  - if "%channel%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
+  - if "%channel%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
   - git config --global user.name "AppVeyor"
   - git config --global user.email "team@appveyor.com"
   - git config --global push.default simple
