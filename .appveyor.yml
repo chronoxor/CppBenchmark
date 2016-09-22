@@ -16,35 +16,75 @@ shallow_clone: true
 only_commits:
   message: build
 
-# Build platform, i.e. Win32 (instead of x86), x64, Any CPU. This setting is optional.
-platform: 
-  - x86
-  - x64
+# Build matrix
+matrix:
+  fast_finish: true
+  - build: VisualStudio (x32)
+      command: 
+      generate: VisualStudio-x32
+      name: VisualStudio
+      ext: bat
+  - build: VisualStudio (x64)
+      command: 
+      generate: VisualStudio-x64
+      name: VisualStudio
+      ext: bat
+  - build: Cygwin (x32)
+      command: C:\cygwin\bin\bash
+      generate: Cygwin
+      name: Cygwin
+      ext: sh
+      cyg_root: C:\cygwin
+      cyg_setup: setup-x86.exe
+      cyg_mirror: http://mirrors.kernel.org
+      cyg_cache: C:\cygwin\var\cache\setup
+  - build: Cygwin (x64)
+      command: C:\cygwin64\bin\bash
+      generate: Cygwin
+      name: Cygwin
+      ext: sh
+      cyg_root: C:\cygwin64
+      cyg_setup: setup-x86_64.exe
+      cyg_mirror: http://mirrors.kernel.org
+      cyg_cache: C:\cygwin64\var\cache\setup
+
+# Cache files to speed up build
+cache:
+  - 'C:\cygwin\var\cache\setup'
+  - 'C:\cygwin64\var\cache\setup'
 
 # Scripts that are called at very beginning, before repo cloning
 init:
-  - cmd: cmake --version
-  - cmd: msbuild /version
+  - cmake --version
+  - msbuild /version
 
 # Scripts that run after cloning repository
 install:
-  - choco install doxygen.portable
-  - choco install graphviz.portable
-  - cmd: git config --global user.name "AppVeyor"
-  - cmd: git config --global user.email "team@appveyor.com"
-  - cmd: git config --global push.default simple
-  - cmd: git submodule update --init --recursive --remote
+  - if "%build%"=="VisualStudio (x32)" choco install doxygen.portable
+  - if "%build%"=="VisualStudio (x32)" choco install graphviz.portable
+  - if "%build%"=="VisualStudio (x64)" choco install doxygen.portable
+  - if "%build%"=="VisualStudio (x64)" choco install graphviz.portable
+  - if "%build%"=="Cygwin (x32)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
+  - if "%build%"=="Cygwin (x64)" ps: 'Start-FileDownload "http://cygwin.com/%cyg_setup%" -FileName "%cyg_setup%"'
+  - if "%build%"=="Cygwin (x32)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
+  - if "%build%"=="Cygwin (x64)" '%cyg_setup% --quiet-mode --no-shortcuts --only-site --root "%cyg_root%" --site "%cyg_mirror%" --local-package-dir "%cyg_cache%" --packages autoconf,automake,bison,cmake,gcc-core,gcc-g++,mingw-runtime,mingw-binutils,mingw-gcc-core,mingw-gcc-g++,mingw-pthreads,mingw-w32api,libtool,make,python,gettext-devel,gettext,intltool,libiconv,pkg-config,git,curl,libxslt > NUL 2>&1'
+  - if "%build%"=="Cygwin (x32)" '%command% -lc "cygcheck -dc cygwin"'
+  - if "%build%"=="Cygwin (x64)" '%command% -lc "cygcheck -dc cygwin"'
+  - git config --global user.name "AppVeyor"
+  - git config --global user.email "team@appveyor.com"
+  - git config --global push.default simple
+  - git submodule update --init --recursive --remote
 
 # Build scripts
 build_script:
-  - cmd: cd scripts
-  - cmd: if "%platform%"=="x86" 01-generate-VisualStudio-x32.bat
-  - cmd: if "%platform%"=="x64" 01-generate-VisualStudio-x64.bat
-  - cmd: 02-build-VisualStudio.bat
-  - cmd: 03-tests.bat
-  - cmd: 04-install-VisualStudio.bat
-  - cmd: 05-doxygen-VisualStudio.bat
-  - cmd: 06-clean.bat
+  - '%command% cd scripts'
+  - '%command% 01-generate-%generate%.%ext%'
+  - '%command% 01-generate-%name%.%ext%'
+  - '%command% 02-build-%name%.%ext%'
+  - '%command% 03-tests.%ext%'
+  - '%command% 04-install-%name%.%ext%'
+  - '%command% 05-doxygen-%name%.%ext%'
+  - '%command% 06-clean.%ext%'
 
 # Test scripts
 test: off
