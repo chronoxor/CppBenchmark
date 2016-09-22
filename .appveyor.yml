@@ -34,18 +34,20 @@ init:
   - if "%build%"=="VisualStudio" msbuild /version
   - if "%build%"=="Cygwin" %command% "cygcheck -dc cygwin"
   - '%command% "cmake --version"'
-  - '%command% "git config --global user.name "AppVeyor"'
-  - '%command% "git config --global user.email "team@appveyor.com"'
-  - '%command% "git config --global push.default simple'
+  - '%command% git config --global user.name "AppVeyor"'
+  - '%command% git config --global user.email "team@appveyor.com"'
+  - '%command% git config --global push.default simple'
 
 # Scripts that run after cloning repository
 install:
   - if "%build%"=="VisualStudio" choco install doxygen.portable
   - if "%build%"=="VisualStudio" choco install graphviz.portable
-  - cd C:\cygwin64
-  - dir
-  - if "%build%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --packages doxygen,graphviz
-  - git submodule update --init --recursive --remote
+  - if "%build%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages doxygen,graphviz
+  - '%command% "%prefix% git submodule update --init --recursive --remote"'
+
+# Cache Cygwin files to speed up build
+cache:
+    - 'C:\cygwin64\var\cache\setup'
 
 # Build scripts
 build_script:
