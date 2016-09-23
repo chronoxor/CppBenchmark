@@ -102,6 +102,7 @@ BENCHMARK("clock()", iterations)
 }
 
 #if defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+
 struct timespec clock_gettime(clockid_t clockid)
 {
     struct timespec current;
@@ -188,6 +189,7 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", iterations)
 }
 
 #if !defined(__CYGWIN__)
+
 BENCHMARK("clock_gettime(CLOCK_MONOTONIC_COARSE)", iterations)
 {
     static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC_COARSE);
@@ -304,10 +306,12 @@ BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", iterations)
         count = 0;
     }
 }
+
 #endif
 #endif
 
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
+
 struct timeval mygettimeofday()
 {
     struct timeval current;
@@ -353,9 +357,11 @@ BENCHMARK("gettimeofday()", iterations)
         count = 0;
     }
 }
+
 #endif
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+
 BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
 {
     static uint64_t timestamp = 0;
@@ -404,9 +410,11 @@ BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
         count = 0;
     }
 }
+
 #endif
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+
 BENCHMARK("GetTickCount()", iterations)
 {
     static DWORD timestamp = GetTickCount();
@@ -445,9 +453,11 @@ BENCHMARK("GetTickCount()", iterations)
         count = 0;
     }
 }
+
 #endif
 
 #if defined(_WIN32) || defined(_WIN64)
+
 BENCHMARK("GetTickCount64()", iterations)
 {
     static ULONGLONG timestamp = GetTickCount64();
@@ -486,9 +496,11 @@ BENCHMARK("GetTickCount64()", iterations)
         count = 0;
     }
 }
+
 #endif
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+
 LARGE_INTEGER QueryPerformanceCounter()
 {
     LARGE_INTEGER current;
@@ -542,9 +554,11 @@ BENCHMARK("QueryPerformanceCounter()", iterations)
         count = 0;
     }
 }
+
 #endif
 
 #if defined(_MSC_VER)
+
 BENCHMARK("__rdtsc()", iterations)
 {
     static uint64_t timestamp = __rdtsc();
@@ -583,6 +597,7 @@ BENCHMARK("__rdtsc()", iterations)
         count = 0;
     }
 }
+
 #endif
 
 BENCHMARK_MAIN()

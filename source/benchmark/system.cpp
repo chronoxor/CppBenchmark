@@ -31,6 +31,7 @@ namespace CppBenchmark {
 namespace Internals {
 
 #if defined(__APPLE__)
+
 uint32_t CeilLog2(uint32_t x)
 {
     uint32_t result = 0;
@@ -98,9 +99,11 @@ uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
 
     return mach_absolute_time();
 }
+
 #endif
 
 #if defined(_WIN32) || defined(_WIN64)
+
 // Helper function to count set bits in the processor mask
 DWORD CountSetBits(ULONG_PTR pBitMask)
 {
@@ -116,6 +119,7 @@ DWORD CountSetBits(ULONG_PTR pBitMask)
 
     return dwBitSetCount;
 }
+
 #endif
 
 } // namespace Internals
