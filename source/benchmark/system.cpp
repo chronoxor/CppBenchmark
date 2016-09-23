@@ -31,7 +31,7 @@ namespace CppBenchmark {
 namespace Internals {
 
 #if defined(__APPLE__)
-uint32_t ceilLog2(uint32_t x)
+uint32_t CeilLog2(uint32_t x)
 {
     uint32_t result = 0;
 
@@ -48,7 +48,7 @@ uint32_t ceilLog2(uint32_t x)
 // This function returns the rational number inside the given interval with
 // the smallest denominator (and smallest numerator breaks ties; correctness
 // proof neglects floating-point errors).
-mach_timebase_info_data_t bestFrac(double a, double b)
+mach_timebase_info_data_t BestFrac(double a, double b)
 {
     if (floor(a) < floor(b))
     {
@@ -57,16 +57,16 @@ mach_timebase_info_data_t bestFrac(double a, double b)
     }
 
     double m = floor(a);
-    mach_timebase_info_data_t next = bestFrac(1 / (b - m), 1 / (a - m));
+    mach_timebase_info_data_t next = BestFrac(1 / (b - m), 1 / (a - m));
     mach_timebase_info_data_t rv = { (int)m * next.numer + next.denom, next.numer };
     return rv;
 }
 
 // This is just less than the smallest thing we can multiply numer by without
-// overflowing. ceilLog2(numer) = 64 - number of leading zeros of numer
-uint64_t getExpressibleSpan(uint32_t numer, uint32_t denom)
+// overflowing. CeilLog2(numer) = 64 - number of leading zeros of numer
+uint64_t GetExpressibleSpan(uint32_t numer, uint32_t denom)
 {
-  uint64_t maxDiffWithoutOverflow = ((uint64_t)1 << (64 - ceilLog2(numer))) - 1;
+  uint64_t maxDiffWithoutOverflow = ((uint64_t)1 << (64 - CeilLog2(numer))) - 1;
   return maxDiffWithoutOverflow * numer / denom;
 }
 
@@ -84,13 +84,13 @@ uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
 
     double frac = (double)tb.numer / tb.denom;
     uint64_t spanTarget = 315360000000000000llu;
-    if (getExpressibleSpan(tb.numer, tb.denom) >= spanTarget)
+    if (GetExpressibleSpan(tb.numer, tb.denom) >= spanTarget)
         return 0;
 
     for (double errorTarget = 1 / 1024.0; errorTarget > 0.000001;)
     {
-        mach_timebase_info_data_t newFrac = bestFrac((1 - errorTarget) * frac, (1 + errorTarget) * frac);
-        if (getExpressibleSpan(newFrac.numer, newFrac.denom) < spanTarget)
+        mach_timebase_info_data_t newFrac = BestFrac((1 - errorTarget) * frac, (1 + errorTarget) * frac);
+        if (GetExpressibleSpan(newFrac.numer, newFrac.denom) < spanTarget)
             break;
         tb = newFrac;
         errorTarget = fabs((double)tb.numer / tb.denom - frac) / frac / 8;
