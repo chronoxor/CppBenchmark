@@ -382,13 +382,13 @@ uint64_t System::Timestamp()
     static uint64_t bias = Internals::PrepareTimebaseInfo(info);
     return (mach_absolute_time() - bias) * info.numer / info.denom;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    struct timespec timestamp;
+    struct timespec timestamp = { 0 };
     clock_gettime(CLOCK_MONOTONIC, &timestamp);
     return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
 #elif defined(_WIN32) || defined(_WIN64)
     static uint64_t offset = 0;
-    static LARGE_INTEGER first{0};
-    static LARGE_INTEGER frequency{0};
+    static LARGE_INTEGER first = { 0 };
+    static LARGE_INTEGER frequency = { 0 };
     static bool initialized = false;
     static bool qpc = true;
 
@@ -414,7 +414,7 @@ uint64_t System::Timestamp()
 
     if (qpc)
     {
-        LARGE_INTEGER timestamp{0};
+        LARGE_INTEGER timestamp = { 0 };
         QueryPerformanceCounter(&timestamp);
         timestamp.QuadPart -= first.QuadPart;
         return offset + ((timestamp.QuadPart * 1000 * 1000 * 1000) / frequency.QuadPart);
