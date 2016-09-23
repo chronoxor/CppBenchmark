@@ -466,13 +466,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keyword">static</span> uint64_t bias = Internals::PrepareTimebaseInfo(info);</div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keywordflow">return</span> (mach_absolute_time() - bias) * info.numer / info.denom;</div>
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="preprocessor">#elif defined(unix) || defined(__unix) || defined(__unix__)</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="preprocessor"></span>    <span class="keyword">struct </span>timespec timestamp;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="preprocessor"></span>    <span class="keyword">struct </span>timespec timestamp = { 0 };</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    clock_gettime(CLOCK_MONOTONIC, &amp;timestamp);</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordflow">return</span> (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="preprocessor">#elif defined(_WIN32) || defined(_WIN64)</span></div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="preprocessor"></span>    <span class="keyword">static</span> uint64_t offset = 0;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keyword">static</span> LARGE_INTEGER first{0};</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keyword">static</span> LARGE_INTEGER frequency{0};</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keyword">static</span> LARGE_INTEGER first = { 0 };</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keyword">static</span> LARGE_INTEGER frequency = { 0 };</div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> qpc = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;</div>
@@ -498,7 +498,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="keywordflow">if</span> (qpc)</div>
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    {</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        LARGE_INTEGER timestamp{0};</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        LARGE_INTEGER timestamp = { 0 };</div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        QueryPerformanceCounter(&amp;timestamp);</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        timestamp.QuadPart -= first.QuadPart;</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        <span class="keywordflow">return</span> offset + ((timestamp.QuadPart * 1000 * 1000 * 1000) / frequency.QuadPart);</div>
