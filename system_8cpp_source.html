@@ -116,7 +116,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span>Internals {</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#if defined(__APPLE__)</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"></span>uint32_t ceilLog2(uint32_t x)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor"></span>uint32_t CeilLog2(uint32_t x)</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    uint32_t result = 0;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
@@ -133,7 +133,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// This function returns the rational number inside the given interval with</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// the smallest denominator (and smallest numerator breaks ties; correctness</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// proof neglects floating-point errors).</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;mach_timebase_info_data_t bestFrac(<span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;mach_timebase_info_data_t BestFrac(<span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b)</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> (floor(a) &lt; floor(b))</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
@@ -142,16 +142,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">double</span> m = floor(a);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    mach_timebase_info_data_t next = bestFrac(1 / (b - m), 1 / (a - m));</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    mach_timebase_info_data_t next = BestFrac(1 / (b - m), 1 / (a - m));</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    mach_timebase_info_data_t rv = { (int)m * next.numer + next.denom, next.numer };</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> rv;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// This is just less than the smallest thing we can multiply numer by without</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">// overflowing. ceilLog2(numer) = 64 - number of leading zeros of numer</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;uint64_t getExpressibleSpan(uint32_t numer, uint32_t denom)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">// overflowing. CeilLog2(numer) = 64 - number of leading zeros of numer</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;uint64_t GetExpressibleSpan(uint32_t numer, uint32_t denom)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  uint64_t maxDiffWithoutOverflow = ((uint64_t)1 &lt;&lt; (64 - ceilLog2(numer))) - 1;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  uint64_t maxDiffWithoutOverflow = ((uint64_t)1 &lt;&lt; (64 - CeilLog2(numer))) - 1;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">return</span> maxDiffWithoutOverflow * numer / denom;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
@@ -169,13 +169,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">double</span> frac = (double)tb.numer / tb.denom;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    uint64_t spanTarget = 315360000000000000llu;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    if (getExpressibleSpan(tb.numer, tb.denom) &gt;= spanTarget)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    if (GetExpressibleSpan(tb.numer, tb.denom) &gt;= spanTarget)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">double</span> errorTarget = 1 / 1024.0; errorTarget &gt; 0.000001;)</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        mach_timebase_info_data_t newFrac = bestFrac((1 - errorTarget) * frac, (1 + errorTarget) * frac);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">if</span> (getExpressibleSpan(newFrac.numer, newFrac.denom) &lt; spanTarget)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        mach_timebase_info_data_t newFrac = BestFrac((1 - errorTarget) * frac, (1 + errorTarget) * frac);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">if</span> (GetExpressibleSpan(newFrac.numer, newFrac.denom) &lt; spanTarget)</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        tb = newFrac;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        errorTarget = fabs((<span class="keywordtype">double</span>)tb.numer / tb.denom - frac) / frac / 8;</div>
