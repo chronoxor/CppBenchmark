@@ -20,7 +20,7 @@
 #include <fstream>
 #include <regex>
 #endif
-#if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+#if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #include <memory>
 #endif
@@ -311,14 +311,14 @@ int64_t System::RamTotal()
         return memsize;
 
     return -1;
-#elif defined(linux) || defined(__linux) || defined(__linux__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
     int64_t pages = sysconf(_SC_PHYS_PAGES);
     int64_t page_size = sysconf(_SC_PAGESIZE);
     if ((pages > 0) && (page_size > 0))
         return pages * page_size;
 
     return -1;
-#elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+#elif defined(_WIN32) || defined(_WIN64)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
@@ -347,14 +347,14 @@ int64_t System::RamFree()
     int64_t used_mem = (vmstat.active_count + vmstat.inactive_count + vmstat.wire_count) * page_size;
     int64_t free_mem = vmstat.free_count * page_size;
     return free_mem;
-#elif defined(linux) || defined(__linux) || defined(__linux__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
     int64_t pages = sysconf(_SC_AVPHYS_PAGES);
     int64_t page_size = sysconf(_SC_PAGESIZE);
     if ((pages > 0) && (page_size > 0))
         return pages * page_size;
 
     return -1;
-#elif defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
+#elif defined(_WIN32) || defined(_WIN64)
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     GlobalMemoryStatusEx(&status);
