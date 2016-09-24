@@ -2,10 +2,6 @@
 // Created by Ivan Shynkarenka on 31.07.2015.
 //
 
-#if defined(__CYGWIN__) || (__MINGW32__)
-#define _WIN32_WINNT 0x601
-#endif
-
 #include "benchmark/cppbenchmark.h"
 
 #include <chrono>
