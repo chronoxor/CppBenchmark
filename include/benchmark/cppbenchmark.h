@@ -6,22 +6,6 @@
     \copyright MIT License
 */
 
-/*! \mainpage C++ Benchmark Library
-
-C++ Benchmark Library allows to create performance benchmarks of some  code  to
-investigate average/minimal/maximal execution time, items processing processing
-speed, I/O throughput. CppBenchmark library has lots of features and allows  to
-make benchmarks for different  kind  of  scenarios  such  as  micro-benchmarks,
-benchmarks    with    fixtures    and    parameters,    threads     benchmarks,
-produsers/consummers pattern.
-
-This document contains CppBenchmark API references.
-
-Library description, features, requirements and usage examples can be  find  on
-GitHub: https://github.com/chronoxor/CppBenchmark
-
-*/
-
 #ifndef CPPBENCHMARK_H
 #define CPPBENCHMARK_H
 
