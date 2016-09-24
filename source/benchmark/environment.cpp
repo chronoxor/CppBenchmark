@@ -16,7 +16,7 @@
 #include <sys/sysctl.h>
 #elif defined(__CYGWIN__)
 #include <sys/utsname.h>
-#elif defined(linux) || defined(__linux) || defined(__linux__)
+#elif defined(unix) || defined(__unix) || defined(__unix__)
 #include <sys/stat.h>
 #include <fstream>
 #include <regex>
