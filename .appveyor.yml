@@ -39,3 +39,4 @@ build_script:
 
 # Test scripts
 test: off
+d
