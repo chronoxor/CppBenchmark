@@ -16,10 +16,16 @@ dist: trusty
 # Add-ons and packages
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
+      - gcc-5
+      - g++-5
       - cmake
       - doxygen
       - graphviz
+      - libbfd-dev
+      - uuid-dev
 
 # Branches to build
 branches:
@@ -37,6 +43,8 @@ before_install:
   - git config --global push.default simple
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
+  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
+  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
 
 # Build scripts
 script: 
