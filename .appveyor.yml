@@ -20,7 +20,6 @@ init:
   - git config --global push.default simple
   - choco install doxygen.portable
   - choco install graphviz.portable
-  - cmake --version
 
 # Scripts that run after cloning repository
 install:
