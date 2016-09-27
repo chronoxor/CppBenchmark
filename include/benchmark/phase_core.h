@@ -80,6 +80,7 @@ protected:
     //! Stop collecting metrics in the current phase
     void StopCollectingMetrics() noexcept
     { _metrics_current.StopCollecting(); }
+
     //! Merge phase metrics (current to result)
     void MergeMetrics()
     { _metrics_result.MergeMetrics(_metrics_current); }
@@ -89,6 +90,9 @@ protected:
     //! Reset current phase metrics
     void ResetMetrics()
     { _metrics_current = PhaseMetrics(); }
+
+    //! Aggregate child iterations
+    void AggregateChildIterations();
 };
 
 } // namespace CppBenchmark

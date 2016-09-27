@@ -125,6 +125,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 handler.onLaunched(current, total, *this, context, attempt);
 
                 // Update benchmark root metrics for the current attempt
+                context._current->AggregateChildIterations();
                 context._current->MergeMetrics();
                 context._current->ResetMetrics();
             }

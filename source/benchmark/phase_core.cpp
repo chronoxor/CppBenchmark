@@ -66,4 +66,11 @@ std::shared_ptr<Phase> PhaseCore::StartPhaseThreadSafe(const std::string& phase)
     return result;
 }
 
+void PhaseCore::AggregateChildIterations()
+{
+    _metrics_current.AddIterations(-1);
+    for (auto& child : _child)
+		_metrics_current.AddIterations(child->metrics().total_iterations());
+}
+
 } // namespace CppBenchmark
