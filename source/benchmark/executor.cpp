@@ -12,7 +12,7 @@
 
 namespace CppBenchmark {
 
-//! @cond
+//! @cond INTERNALS
 namespace Internals {
 
 //! Dynamic benchmark wrapper class

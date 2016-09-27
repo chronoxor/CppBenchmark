@@ -15,7 +15,7 @@
 
 namespace CppBenchmark {
 
-//! @cond
+//! @cond INTERNALS
 namespace Internals {
 
 std::string indent1 = std::string(2, ' ');

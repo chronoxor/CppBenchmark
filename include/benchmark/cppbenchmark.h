@@ -17,7 +17,7 @@
 
 namespace CppBenchmark {
 
-//! @cond
+//! @cond INTERNALS
 namespace Internals {
 
 class BenchmarkRegistrator
@@ -32,7 +32,7 @@ public:
 
 } // namespace CppBenchmark
 
-//! @cond
+//! @cond INTERNALS
 #define BENCHMARK_INTERNAL_UNIQUE_NAME_LINE2(name, line) name##line
 #define BENCHMARK_INTERNAL_UNIQUE_NAME_LINE(name, line) BENCHMARK_INTERNAL_UNIQUE_NAME_LINE2(name, line)
 #define BENCHMARK_INTERNAL_UNIQUE_NAME(name) BENCHMARK_INTERNAL_UNIQUE_NAME_LINE(name, __LINE__)
