@@ -47,7 +47,8 @@ public:
           _total_items(0),
           _total_bytes(0),
           _iterstamp(0),
-          _timestamp(0)
+          _timestamp(0),
+          _threads(1)
     {}
     PhaseMetrics(const PhaseMetrics&) = default;
     PhaseMetrics(PhaseMetrics&&) = default;
@@ -93,6 +94,8 @@ public:
     const std::map<std::string, double>& custom_dbl() const noexcept { return _custom_dbl; }
     //! Get custom strings map
     const std::map<std::string, std::string>& custom_str() const noexcept { return _custom_str; }
+
+    int threads() const noexcept { return _threads; }
 
     //! Increase iterations count of the current phase
     /*!
@@ -163,6 +166,13 @@ public:
     void SetCustom(const std::string& name, const std::string& value)
     { _custom_str[name].assign(value); }
 
+    //! Set threads value
+    /*!
+        \param threads - Threads
+    */
+    void SetThreads(int threads)
+    { _threads = threads; }
+
 private:
     int64_t _min_time;
     int64_t _max_time;
@@ -180,6 +190,8 @@ private:
 
     int64_t _iterstamp;
     int64_t _timestamp;
+
+    int _threads;
 
     void StartCollecting() noexcept;
     void StopCollecting() noexcept;

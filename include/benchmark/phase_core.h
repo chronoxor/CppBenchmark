@@ -90,9 +90,6 @@ protected:
     //! Reset current phase metrics
     void ResetMetrics()
     { _metrics_current = PhaseMetrics(); }
-
-    //! Aggregate child iterations
-    void AggregateChildIterations();
 };
 
 } // namespace CppBenchmark

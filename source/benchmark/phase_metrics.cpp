@@ -111,6 +111,8 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
             _custom_dbl[it.first] = it.second;
         for (auto& it : metrics._custom_str)
             _custom_str[it.first] = it.second;
+        // Overwrite metrics threads value
+        _threads = metrics._threads;
     }
 }
 

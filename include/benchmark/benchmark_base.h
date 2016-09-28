@@ -96,11 +96,13 @@ protected:
         \param phase - Benchmark phase
     */
     static void UpdateBenchmarkMetrics(PhaseCore& phase);
+
     //! Update benchmark threads metrics for the given benchmark phases collection
     /*!
         \param phases - Benchmark phases collection
     */
     static void UpdateBenchmarkThreads(std::vector<std::shared_ptr<PhaseCore>>& phases);
+
     //! Update benchmark names for the given benchmark phases collection
     /*!
         \param phases - Benchmark phases collection
@@ -112,6 +114,17 @@ protected:
         \param name - Benchmark name
     */
     static void UpdateBenchmarkNames(PhaseCore& phase, const std::string& name);
+
+    //! Update benchmark iterations for the given benchmark phases collection
+    /*!
+        \param phases - Benchmark phases collection
+    */
+    static void UpdateBenchmarkIterations(std::vector<std::shared_ptr<PhaseCore>>& phases);
+    //! Update benchmark iterations for the given benchmark phase
+    /*!
+        \param phase - Benchmark phase
+    */
+    static void UpdateBenchmarkIterations(PhaseCore& phase);
 };
 
 } // namespace CppBenchmark

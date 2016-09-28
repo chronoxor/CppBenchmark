@@ -65,7 +65,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark producers
                 for (int i = 0; i < producers; ++i)
                 {
-                    _threads.push_back(std::thread([this, &barrier, &context, infinite, iterations, i]()
+                    _threads.push_back(std::thread([this, &barrier, &context, producers, infinite, iterations, i]()
                     {
                         // Clone producer context
                         ContextPC producer_context(context);
@@ -78,6 +78,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         producer_context._current = producer_phase_core;
                         producer_context._metrics = &producer_phase_core->current();
                         producer_context._metrics->AddIterations(-1);
+                        producer_context._metrics->SetThreads(producers);
 
                         // Call initialize producer method...
                         InitializeProducer(producer_context);
@@ -113,7 +114,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark consumers
                 for (int i = 0; i < consumers; ++i)
                 {
-                    _threads.push_back(std::thread([this, &barrier, &context, i]()
+                    _threads.push_back(std::thread([this, &barrier, &context, consumers, i]()
                     {
                         // Clone consumer context
                         ContextPC consumer_context(context);
@@ -126,6 +127,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         consumer_context._current = consumer_phase_core;
                         consumer_context._metrics = &consumer_phase_core->current();
                         consumer_context._metrics->AddIterations(-1);
+                        consumer_context._metrics->SetThreads(consumers);
 
                         // Call initialize consumer method...
                         InitializeConsumer(consumer_context);

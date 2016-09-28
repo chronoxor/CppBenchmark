@@ -76,6 +76,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                         thread_context._current = thread_phase_core;
                         thread_context._metrics = &thread_phase_core->current();
                         thread_context._metrics->AddIterations(-1);
+                        thread_context._metrics->SetThreads(threads);
 
                         // Call initialize thread method...
                         InitializeThread(thread_context);
@@ -125,7 +126,6 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 handler.onLaunched(current, total, *this, context, attempt);
 
                 // Update benchmark root metrics for the current attempt
-                context._current->AggregateChildIterations();
                 context._current->MergeMetrics();
                 context._current->ResetMetrics();
             }
@@ -137,6 +137,9 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
 
     // Update benchmark names
     UpdateBenchmarkNames(_phases);
+
+    // Update benchmark iterations
+    UpdateBenchmarkIterations(_phases);
 
     // Update benchmark launched flag
     _launched = true;
