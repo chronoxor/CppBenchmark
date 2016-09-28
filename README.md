@@ -180,6 +180,7 @@ Iterations throughput: 39433750 / second
 ## Example 3: Benchmark with static fixture
 Static fixture will be constructed once per each benchmark, will be the same for
 each attempt / iteration and will be destructed at the end of the benchmark.
+
 ```C++
 #include "macros.h"
 
@@ -285,6 +286,7 @@ Iterations throughput: 1498 / second
 Dynamic fixture can be used to prepare benchmark before each attempt with
 Initialize() / Cleanup() methods. You can access to the current benchmark
 context in dynamic fixture methods.
+
 ```C++
 #include "macros.h"
 
@@ -368,6 +370,7 @@ Additional parameters can be provided to benchmark with settings using fluent
 syntax. Parameters can be single, pair or tripple, provided as a value, as a
 range, or with a range and selector function. Benchmark will be launched for
 each parameters combination.
+
 ```C++
 #include "cppbenchmark.h"
 
@@ -423,6 +426,7 @@ Items throughput: 15524528 / second
 You can also create a benchmark by inheriting from CppBenchmark::Benchmark class
 and implementing Run() method. You can use AddItems() method of a benchmark context
 metrics to register processed items.
+
 ```C++
 #include "cppbenchmark.h"
 
@@ -476,6 +480,7 @@ Items throughput: 15421124 / second
 
 ## Example 7: Benchmark I/O operations
 You can use AddBytes() method of a benchmark context metrics to register processed data.
+
 ```C++
 #include "cppbenchmark.h"
 
@@ -1133,6 +1138,7 @@ BENCHCODE_SCOPE(), BENCHCODE_START(), BENCHCODE_STOP(), BENCHCODE_REPORT() macro
 macro are easy access to methods of the static [Executor](http://chronoxor.github.io/CppBenchmark/class_cpp_benchmark_1_1_executor.html) class
 which you may use directly as a singleton. All functionality provided for dynamic benchmarks is
 thread-safe synchronizied with mutex (each call will lose some ns).
+
 ```C++
 #include "cppbenchmark.h"
 
