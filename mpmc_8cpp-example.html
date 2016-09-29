@@ -88,11 +88,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cppbenchmark_8h.html">benchmark/cppbenchmark.h</a>&quot;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#include &quot;cameron/blockingconcurrentqueue.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#if defined(_MSC_VER)</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#pragma warning(push)</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#pragma warning(disable: 4127) // C4127: conditional expression is constant</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#pragma warning(disable: 4702) // C4702: unreachable code</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#include &quot;cameron/blockingconcurrentqueue.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;cameron/concurrentqueue.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;cameron/concurrentqueue.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;lockfree/lock-bounded-queue.hpp&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;lockfree/mpmc-bounded-queue.hpp&quot;</span></div>
-<div class="line"></div>
+<div class="line"><span class="preprocessor">#if defined(_MSC_VER)</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#pragma warning(pop)</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;atomic&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"></div>
