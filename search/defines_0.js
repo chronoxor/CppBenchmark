@@ -11,6 +11,8 @@ var searchData=
   ['benchmark_5fclass',['BENCHMARK_CLASS',['../cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014',1,'cppbenchmark.h']]],
   ['benchmark_5ffixture',['BENCHMARK_FIXTURE',['../cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f',1,'cppbenchmark.h']]],
   ['benchmark_5fmain',['BENCHMARK_MAIN',['../cppbenchmark_8h.html#a76a768260eed180721a82b78d1bcfe95',1,'cppbenchmark.h']]],
+  ['benchmark_5fpreset',['BENCHMARK_PRESET',['../cppbenchmark_8h.html#aab719e9e87ebd22e214ab9f85ae70aff',1,'cppbenchmark.h']]],
   ['benchmark_5fthreads',['BENCHMARK_THREADS',['../cppbenchmark_8h.html#a8001af26fa8c3b038812ba349cc3dd74',1,'cppbenchmark.h']]],
-  ['benchmark_5fthreads_5ffixture',['BENCHMARK_THREADS_FIXTURE',['../cppbenchmark_8h.html#ab2cb673560b625affdb02d43f2be0050',1,'cppbenchmark.h']]]
+  ['benchmark_5fthreads_5ffixture',['BENCHMARK_THREADS_FIXTURE',['../cppbenchmark_8h.html#ab2cb673560b625affdb02d43f2be0050',1,'cppbenchmark.h']]],
+  ['benchmark_5fthreads_5fpreset',['BENCHMARK_THREADS_PRESET',['../cppbenchmark_8h.html#a68bec5b56fed7035de6cf3ca9b8d54c0',1,'cppbenchmark.h']]]
 ];
