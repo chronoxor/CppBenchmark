@@ -11,19 +11,19 @@ const int chunk_size_from = 32;
 const int chunk_size_to = 4096;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class FileFixture
+class FilePreset
 {
 protected:
     FILE* file;
     std::array<char, chunk_size_to> buffer;
 
-    FileFixture()
+    FilePreset()
     {
         // Open file for binary write
         file = fopen("fwrite.out", "wb");
     }
 
-    ~FileFixture()
+    ~FilePreset()
     {
         // Close file
         fclose(file);
@@ -33,13 +33,13 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(FileFixture, "fwrite()", settings)
+BENCHMARK_PRESET(FilePreset, "fwrite()", settings)
 {
     fwrite(buffer.data(), sizeof(char), context.x(), file);
     context.metrics().AddBytes(context.x());
 }
 
-BENCHMARK_FIXTURE(FileFixture, "fwrite()+fflush()", settings)
+BENCHMARK_PRESET(FilePreset, "fwrite()+fflush()", settings)
 {
     fwrite(buffer.data(), sizeof(char), context.x(), file);
     fflush(file);

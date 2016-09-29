@@ -10,36 +10,36 @@
 const uint64_t iterations = 10000000;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class UnsynchronizedFixture
+class UnsynchronizedPreset
 {
 protected:
     int counter;
 };
 
-class AtomicFixture
+class AtomicPreset
 {
 protected:
     std::atomic<int> counter;
 };
 
-class MutexFixture
+class MutexPreset
 {
 protected:
     std::mutex mutex;
     int counter;
 };
 
-BENCHMARK_THREADS_FIXTURE(UnsynchronizedFixture, "unsynchronized++", settings)
+BENCHMARK_THREADS_PRESET(UnsynchronizedPreset, "unsynchronized++", settings)
 {
     ++counter;
 }
 
-BENCHMARK_THREADS_FIXTURE(AtomicFixture, "std::atomic++", settings)
+BENCHMARK_THREADS_PRESET(AtomicPreset, "std::atomic++", settings)
 {
     ++counter;
 }
 
-BENCHMARK_THREADS_FIXTURE(MutexFixture, "std::mutex++", settings)
+BENCHMARK_THREADS_PRESET(MutexPreset, "std::mutex++", settings)
 {
     std::lock_guard<std::mutex> lock(mutex);
     ++counter;

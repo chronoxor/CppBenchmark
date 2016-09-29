@@ -22,7 +22,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
   * [Benchmark examples](#benchmark-examples)
     * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
     * [Example 2: Benchmark with cancelation](#example-2-benchmark-with-cancelation)
-    * [Example 3: Benchmark with static fixture](#example-3-benchmark-with-static-fixture)
+    * [Example 3: Benchmark with static preset](#example-3-benchmark-with-static-preset)
     * [Example 4: Benchmark with dynamic fixture](#example-4-benchmark-with-dynamic-fixture)
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
     * [Example 6: Benchmark class](#example-6-benchmark-class)
@@ -177,8 +177,8 @@ Iterations throughput: 39433750 / second
 ===============================================================================
 ```
 
-## Example 3: Benchmark with static fixture
-Static fixture will be constructed once per each benchmark, will be the same for
+## Example 3: Benchmark with static preset
+Static preset will be constructed once per each benchmark, will be the same for
 each attempt / iteration and will be destructed at the end of the benchmark.
 
 ```C++
@@ -190,37 +190,37 @@ each attempt / iteration and will be destructed at the end of the benchmark.
 const int iterations = 1000;
 
 template <typename T>
-class ContainerFixture
+class ContainerPreset
 {
 protected:
     T container;
 
-    ContainerFixture()
+    ContainerPreset()
     {
         for (int i = 0; i < 1000000; ++i)
             container.push_back(rand());
     }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.forward", iterations)
+BENCHMARK_PRESET(ContainerPreset<std::list<int>>, "std::list<int>.forward", iterations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.backward", iterations)
+BENCHMARK_PRESET(ContainerPreset<std::list<int>>, "std::list<int>.backward", iterations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.forward", iterations)
+BENCHMARK_PRESET(ContainerPreset<std::vector<int>>, "std::vector<int>.forward", iterations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.backward", iterations)
+BENCHMARK_PRESET(ContainerPreset<std::vector<int>>, "std::vector<int>.backward", iterations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
@@ -1045,7 +1045,7 @@ BENCHMARK_CLASS(MutexQueueBenchmark, "std::mutex+std::queue<int>", settings)
 BENCHMARK_MAIN()
 ```
 
-Report fragment is the following:
+Report fragment is the following:..
 ```
 ===============================================================================
 Benchmark: std::mutex+std::queue<int>

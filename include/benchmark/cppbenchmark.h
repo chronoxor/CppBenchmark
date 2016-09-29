@@ -78,18 +78,60 @@ namespace CppBenchmark {\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(CppBenchmark::Context& context)
 
-//! Benchmark with fixture register macro
+//! Benchmark with static preset register macro
 /*!
-    Register a new benchmark with a given \a fixture, name and settings. Next to the definition you should provide
-    a benchmark code. Benchmark fixture is a user class that will be constructed before benchmarking and destructed
-    after. In benchmark code you can access to public and protected fields & methods of the fixture.
+    Register a new benchmark with a given \a preset, name and settings. Next to the definition you should provide
+    a benchmark code. Benchmark preset is a user class that will be constructed before benchmarking and will be
+    destructed after. In benchmark code you can access to public and protected fields and methods of the preset.
 
     Example:
     \code{.cpp}
-    class VectorFixture
+    // Vector preset will be created only once and its field will be visible in benchmark body!
+    class VectorPreset
     {
     protected:
         std::vector<int> container;
+    };
+
+    // This benchmark will insert random value into std::vector<int> 1000000 times
+    BENCHMARK_PRESET(VectorPreset, "VectorPushBackBenchmark", 1000000)
+    {
+        container.push_back(rand());
+    }
+    \endcode
+*/
+#define BENCHMARK_PRESET(preset, ...)\
+namespace CppBenchmark {\
+    class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public Benchmark, public preset\
+    {\
+    public:\
+        using Benchmark::Benchmark;\
+    protected:\
+        void Run(Context& context) override;\
+    };\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)([]() { return std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__); });\
+}\
+void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& context)
+
+//! Benchmark with fixture register macro
+/*!
+    Register a new benchmark with a given \a fixture, name and settings. Next to the definition you should provide a benchmark
+    code. Benchmark fixture is a user class inherited from Fixture base class and overrides Initialize()/Cleanup() methods
+    that will be called before/after each benchmark attempt. In benchmark code you can access to public and protected fields
+    and methods of the fixture.
+
+    Example:
+    \code{.cpp}
+    // Vector fixture will be created only once and its filed will be visible in benchmark body!
+    class VectorFixture : public virtual CppBenchmark::Fixture
+    {
+    protected:
+        std::vector<int> container;
+
+        // Initialize method will called just before each benchmark attempt
+        void Initialize(CppBenchmark::Context& context) override { container = std::vector<int>(); }
+        // Cleanup method will called just after each benchmark attempt
+        void Cleanup(CppBenchmark::Context& context) override { container.clear(); }
     };
 
     // This benchmark will insert random value into std::vector<int> 1000000 times
@@ -105,6 +147,8 @@ namespace CppBenchmark {\
     {\
     public:\
         using Benchmark::Benchmark;\
+        using fixture::Initialize;\
+        using fixture::Cleanup;\
     protected:\
         void Run(Context& context) override;\
     };\
@@ -140,20 +184,69 @@ namespace CppBenchmark {\
 }\
 void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(CppBenchmark::ContextThreads& context)
 
-//! Benchmark threads with fixture register macro
+//! Benchmark threads with preset register macro
 /*!
-    Register a new threads benchmark with a given \a fixture, name and settings. Next to the definition you should
-    provide a benchmark code that will be executed in multi-thread environment. Benchmark fixture is a user class
+    Register a new threads benchmark with a given \a preset, name and settings. Next to the definition you should
+    provide a benchmark code that will be executed in multi-thread environment. Benchmark preset is a user class
     that will be constructed before benchmarking and destructed after. In benchmark code you can access to public
     and protected fields & methods of the fixture. You can use \a settings parameter to give threads count to want
     to measure with.
 
     Example:
     \code{.cpp}
-    class AtomicFixture
+    // Atomic preset will be created only once and its field will be visible in benchmark body!
+    class AtomicPreset
     {
     protected:
         std::atomic<int> counter;
+    };
+
+    // This benchmark will increment atomic counter 1000000 times in 4 concurrent threads environment
+    BENCHMARK_THREADS_PRESET(AtomicPreset, "ThreadsAtomicIncrementBenchmark", 1000000, 4)
+    {
+        counter++;
+    }
+    \endcode
+*/
+#define BENCHMARK_THREADS_PRESET(preset, ...)\
+namespace CppBenchmark {\
+    class BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__) : public BenchmarkThreads, public preset\
+    {\
+    public:\
+        using BenchmarkThreads::BenchmarkThreads;\
+    protected:\
+        void RunThread(ContextThreads& context) override;\
+    };\
+    Internals::BenchmarkRegistrator BENCHMARK_INTERNAL_UNIQUE_NAME(benchmark_registrator)([]() { return std::make_shared<BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)>(__VA_ARGS__); });\
+}\
+void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(ContextThreads& context)
+
+//! Benchmark threads with fixture register macro
+/*!
+    Register a new threads benchmark with a given \a fixture, name and settings. Next to the definition you should provide
+    a benchmark code that will be executed in multi-thread environment. Benchmark fixture is a user class inherited from
+    Fixture or FixtureThreads base class and overrides Initialize()/Cleanup()/InitializeThread()/CleanupThread() methods
+    that will be called before/after each benchmark attempt and before/after each thread is started/finished. In benchmark
+    code you can access to public and protected fields & methods of the fixture. You can use \a settings parameter to give
+    threads count to want to measure with.
+
+    Example:
+    \code{.cpp}
+    // Atomic fixture will be created only once and its field will be visible in benchmark body!
+    class AtomicFixture : public virtual CppBenchmark::FixtureThreads
+    {
+    protected:
+        std::atomic<int> counter;
+
+        // Initialize method will called just before each benchmark attempt
+        void Initialize(CppBenchmark::ContextThreads& context) override { counter = 123; }
+        // Cleanup method will called just after each benchmark attempt
+        void Cleanup(CppBenchmark::ContextThreads& context) override { counter = 987; }
+
+        // Initialize thread method will called just before each benchmark thread is started
+        void InitializeThread(CppBenchmark::ContextThreads& context) override { counter = context.threads(); }
+        // Cleanup thread method will called just after each benchmark thread is finished
+        void CleanupThread(CppBenchmark::ContextThreads& context) override { counter = 0; }
     };
 
     // This benchmark will increment atomic counter 1000000 times in 4 concurrent threads environment
@@ -188,9 +281,9 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(Cont
     protected:
         std::vector<int> container;
 
-        void Initialize(Context& context) { container.reserve(1000); }
-        void Run(Context& context) override { container.push_back(rand()); }
-        void Cleanup(Context& context) override { container.clear(); }
+        void Initialize(CppBenchmark::Context& context) { container.reserve(1000); }
+        void Run(CppBenchmark::Context& context) override { container.push_back(rand()); }
+        void Cleanup(CppBenchmark::Context& context) override { container.clear(); }
     };
 
     // This benchmark will measure VectorBenchmark with 1000000 iterations

@@ -10,37 +10,37 @@
 const uint64_t iterations = 1000;
 
 template <typename T>
-class ContainerFixture
+class ContainerPreset
 {
 protected:
     T container;
 
-    ContainerFixture()
+    ContainerPreset()
     {
         for (int i = 0; i < 1000000; ++i)
             container.push_back(rand());
     }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>-forward", iterations)
+BENCHMARK_PRESET(ContainerPreset<std::list<int>>, "std::list<int>-forward", iterations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>-backward", iterations)
+BENCHMARK_PRESET(ContainerPreset<std::list<int>>, "std::list<int>-backward", iterations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>-forward", iterations)
+BENCHMARK_PRESET(ContainerPreset<std::vector<int>>, "std::vector<int>-forward", iterations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>-backward", iterations)
+BENCHMARK_PRESET(ContainerPreset<std::vector<int>>, "std::vector<int>-backward", iterations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
