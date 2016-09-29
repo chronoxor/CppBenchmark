@@ -333,9 +333,9 @@ done:
     // result is returned in edx:eax
 #elif defined (_M_X64 )
 #pragma warning(push)
-#pragma warning(disable: 4018)
-#pragma warning(disable: 4244)
-#pragma warning(disable: 4389)
+#pragma warning(disable: 4018) // C4018: 'expression' : signed/unsigned mismatch
+#pragma warning(disable: 4244) // C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
+#pragma warning(disable: 4389) // C4389: 'operator' : signed/unsigned mismatch
     uint64_t a = operant;
     uint64_t b = multiplier;
     uint64_t c = divider;
