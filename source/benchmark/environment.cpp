@@ -148,11 +148,9 @@ std::string Environment::OSVersion()
 #pragma warning(push)
 #pragma warning(disable: 4996) // C4996: 'function': was declared deprecated
 #endif
-
     BOOL bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*)&osvi);
     if (bOsVersionInfoEx == 0)
         return "<windows>";
-
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
