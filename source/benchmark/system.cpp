@@ -154,7 +154,8 @@ std::string System::CpuArchitecture()
         return "<unknown>";
 
     // Smart resource cleaner pattern
-    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKeyProcessor, [](HKEY hKey) { RegCloseKey(hKey); });
+    auto clearer = [](HKEY hKey) { RegCloseKey(hKey); };
+    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clearer)>(hKeyProcessor, clearer);
 
     CHAR pBuffer[_MAX_PATH] = { 0 };
     DWORD dwBufferSize = sizeof(pBuffer);
@@ -280,7 +281,8 @@ int64_t System::CpuClockSpeed()
         return -1;
 
     // Smart resource cleaner pattern
-    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clear)>(hKeyProcessor, [](HKEY hKey) { RegCloseKey(hKey); });
+    auto clearer = [](HKEY hKey) { RegCloseKey(hKey); };
+    auto key = std::unique_ptr<std::remove_pointer<HKEY>::type, decltype(clearer)>(hKeyProcessor, clearer);
 
     DWORD dwMHz = 0;
     DWORD dwBufferSize = sizeof(DWORD);
