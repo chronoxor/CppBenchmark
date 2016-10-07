@@ -11,7 +11,7 @@ find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(DOXYGEN "doxygen")
   if(NOT TARGET ${DOXYGEN})
-    add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "Doxyfile" WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/documents")
+    add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "Doxyfile" WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/documents")
     add_custom_target(${DOXYGEN} DEPENDS "Doxyfile")
     set_target_properties(${DOXYGEN} PROPERTIES FOLDER doxygen)
   endif()
@@ -39,11 +39,12 @@ add_subdirectory("modules")
 include_directories("include")
 include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
+include_directories("modules/HdrHistogram/src")
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 add_library(cppbenchmark ${SOURCE_FILES})
-target_link_libraries(cppbenchmark cpp-optparse)
+target_link_libraries(cppbenchmark cpp-optparse histogram)
 set_target_properties(cppbenchmark PROPERTIES FOLDER libraries)
 list(APPEND INSTALL_TARGETS cppbenchmark)
 
@@ -51,7 +52,7 @@ list(APPEND INSTALL_TARGETS cppbenchmark)
 if(NOT CPPBENCHMARK_MODULE)
 
   # Examples
-  file(GLOB EXAMPLE_FILES RELATIVE "${PROJECT_SOURCE_DIR}/examples" "examples/*.cpp")
+  file(GLOB EXAMPLE_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/examples" "examples/*.cpp")
   foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
     string(REGEX REPLACE "(.*)\\.cpp" "\\1" EXAMPLE_NAME ${EXAMPLE_FILE})
     set(EXAMPLE_TARGET "cppbenchmark-example-${EXAMPLE_NAME}")
@@ -76,14 +77,14 @@ if(NOT CPPBENCHMARK_MODULE)
 
   # Install
   install(TARGETS ${INSTALL_TARGETS}
-    RUNTIME DESTINATION "${PROJECT_SOURCE_DIR}/bin"
-    LIBRARY DESTINATION "${PROJECT_SOURCE_DIR}/bin"
-    ARCHIVE DESTINATION "${PROJECT_SOURCE_DIR}/bin")
+    RUNTIME DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+    LIBRARY DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+    ARCHIVE DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 
   # Install *.pdb files
   if(MSVC)
     foreach(INSTALL_TARGET_PDB ${INSTALL_TARGETS_PDB})
-      install(FILES $<TARGET_PDB_FILE:${INSTALL_TARGET_PDB}> DESTINATION "${PROJECT_SOURCE_DIR}/bin")
+      install(FILES $<TARGET_PDB_FILE:${INSTALL_TARGET_PDB}> DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/bin")
     endforeach()
   endif()
 

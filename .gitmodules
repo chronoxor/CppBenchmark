@@ -14,3 +14,11 @@
 	path = modules/cpp-optparse
 	url = https://github.com/weisslj/cpp-optparse.git
 	branch = master
+[submodule "modules/HdrHistogram"]
+	path = modules/HdrHistogram
+	url = https://github.com/HdrHistogram/HdrHistogram_c.git
+	branch = master
+[submodule "modules/zlib"]
+	path = modules/zlib
+	url = https://github.com/madler/zlib.git
+	branch = master
