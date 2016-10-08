@@ -16,6 +16,10 @@ if(NOT TARGET histogram)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_INIT} -Wall -Werror" FORCE)
   endif()
 
+  # Includes
+  include_directories("zlib")
+  include_directories("../build/modules/zlib")
+
   # Add module library
   add_library(histogram ${SOURCE_FILES})
   target_link_libraries(histogram zlibstatic)
