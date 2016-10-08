@@ -1,9 +1,5 @@
 if(NOT TARGET histogram)
 
-  # Includes
-  include_directories("zlib")
-  include_directories("../build/modules/zlib")
-
   # Sources
   file(GLOB_RECURSE SOURCE_FILES "HdrHistogram/src/*.c")
 

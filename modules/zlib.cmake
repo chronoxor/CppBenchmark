@@ -18,9 +18,6 @@ if(NOT TARGET zlib)
   # Set install flag
   set(SKIP_INSTALL_ALL Y)
 
-  # Includes
-  include_directories("zlib")
-
   # Add module subdirectory
   add_subdirectory("zlib")
 

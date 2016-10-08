@@ -40,6 +40,8 @@ include_directories("include")
 include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
 include_directories("modules/HdrHistogram/src")
+include_directories("modules/zlib")
+include_directories("build/modules/zlib")
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
