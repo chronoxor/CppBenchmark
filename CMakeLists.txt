@@ -43,6 +43,7 @@ include_directories("modules/HdrHistogram/src")
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
+set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
 add_library(cppbenchmark ${SOURCE_FILES})
 target_link_libraries(cppbenchmark cpp-optparse histogram)
 set_target_properties(cppbenchmark PROPERTIES FOLDER libraries)
@@ -56,6 +57,7 @@ if(NOT CPPBENCHMARK_MODULE)
   foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
     string(REGEX REPLACE "(.*)\\.cpp" "\\1" EXAMPLE_NAME ${EXAMPLE_FILE})
     set(EXAMPLE_TARGET "cppbenchmark-example-${EXAMPLE_NAME}")
+    set_source_files_properties(examples/${EXAMPLE_FILE} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
     add_executable(${EXAMPLE_TARGET} examples/${EXAMPLE_FILE})
     target_link_libraries(${EXAMPLE_TARGET} cppbenchmark ${SYSTEM})
     set_target_properties(${EXAMPLE_TARGET} PROPERTIES FOLDER examples)
@@ -65,6 +67,7 @@ if(NOT CPPBENCHMARK_MODULE)
 
   # Tests
   file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
+  set_source_files_properties(${TESTS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
   add_executable(cppbenchmark-tests ${CATCH_HEADER} ${TESTS_SOURCE_FILES})
   target_link_libraries(cppbenchmark-tests cppbenchmark ${SYSTEM})
   set_target_properties(cppbenchmark-tests PROPERTIES FOLDER tests)
