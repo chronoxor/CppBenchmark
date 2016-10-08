@@ -14,9 +14,10 @@ if(NOT TARGET histogram)
   if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "/wd4146 /wd4200 /wd4244")
   elseif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
-    set(CMAKE_TEMP_C_FLAGS ${CMAKE_C_FLAGS})
-    string(REPLACE "-pedantic" "" CMAKE_TEMP_C_FLAGS ${CMAKE_TEMP_C_FLAGS})
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES CMAKE_C_FLAGS ${CMAKE_TEMP_C_FLAGS})
+    set(CMAKE_OLD_C_FLAGS ${CMAKE_C_FLAGS})
+    set(CMAKE_OLD_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS_INIT} -Wall -Werror")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_INIT} -Wall -Werror")
   endif()
 
   # Add module library
@@ -25,5 +26,11 @@ if(NOT TARGET histogram)
 
   # Set module folder
   set_target_properties(histogram PROPERTIES FOLDER modules/HdrHistogram)
+
+  # Restore default warnings
+  if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
+    set(CMAKE_C_FLAGS ${CMAKE_OLD_C_FLAGS})
+    set(CMAKE_CXX_FLAGS ${CMAKE_OLD_CXX_FLAGS})
+  endif()
 
 endif()
