@@ -13,6 +13,8 @@ if(NOT TARGET histogram)
   # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
   if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "/wd4146 /wd4200 /wd4244")
+  elseif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-Wall -Werror")
   endif()
 
   # Add module library
