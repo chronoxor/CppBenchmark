@@ -18,8 +18,7 @@ if(NOT TARGET histogram)
 
   # Includes
   include_directories("zlib")
-  message(${CMAKE_CURRENT_BINARY_DIR})
-  include_directories("../build/modules/zlib")
+  include_directories("${CMAKE_CURRENT_BINARY_DIR}/zlib")
 
   # Add module library
   add_library(histogram ${SOURCE_FILES})
