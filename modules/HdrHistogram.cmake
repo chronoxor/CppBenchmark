@@ -24,8 +24,8 @@ if(NOT TARGET histogram)
 
   # Restore default warnings
   if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
-    set(CMAKE_C_FLAGS ${CMAKE_OLD_C_FLAGS} FORCE)
-    set(CMAKE_CXX_FLAGS ${CMAKE_OLD_CXX_FLAGS} FORCE)
+    set(CMAKE_C_FLAGS ${CMAKE_OLD_C_FLAGS})
+    set(CMAKE_CXX_FLAGS ${CMAKE_OLD_CXX_FLAGS})
   endif()
 
 endif()
