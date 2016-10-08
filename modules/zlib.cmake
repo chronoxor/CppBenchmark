@@ -21,9 +21,6 @@ if(NOT TARGET zlib)
   # Add module subdirectory
   add_subdirectory("zlib")
 
-  # Put zconf.h to the root project binary directory
-  file(COPY "${CMAKE_CURRENT_BINARY_DIR}/zlib/zconf.h" DESTINATION "${PROJECT_BINARY_DIR}")
-
   # Add missing target sources
   if(MSVC AND AMD64)
     target_sources(zlib PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/zlib/contrib/masmx64/inffas8664.c")
