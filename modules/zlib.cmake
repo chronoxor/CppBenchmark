@@ -1,4 +1,4 @@
-if(NOT TARGET zlib)
+if(NOT TARGET zlibstatic)
 
   # Temporary disable some warnings
   # C4127: conditional expression is constant
@@ -31,10 +31,10 @@ if(NOT TARGET zlib)
   endif()
 
   # Set module folder
-  set_target_properties(zlib zlibstatic example minigzip PROPERTIES FOLDER modules/zlib)
+  set_target_properties(zlibstatic zlib example minigzip PROPERTIES FOLDER modules/zlib)
 
   # Exclude some modules from the build
-  set_target_properties(example minigzip PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
+  set_target_properties(zlib example minigzip PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
 
   # Restore default warnings
   set(CMAKE_C_FLAGS ${CMAKE_OLD_C_FLAGS})
