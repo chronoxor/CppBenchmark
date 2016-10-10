@@ -34,11 +34,6 @@ list(APPEND SYSTEM Threads::Threads)
 # Modules
 add_subdirectory("modules")
 
-# Definitions
-if(MSVC)
-  add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
-endif()
-
 # Includes
 include_directories("include")
 include_directories("modules/catch/single_include")
