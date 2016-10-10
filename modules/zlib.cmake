@@ -8,13 +8,13 @@ if(NOT TARGET zlib)
 
   # Module assembler files
   if(CMAKE_COMPILER_IS_GNUCC)
-    set(ASSEMBLER_FILES "contrib/amd64/amd64-match.S")
     add_definitions(-DASMV)
+    set(ASSEMBLER_FILES "zlib/contrib/amd64/amd64-match.S")
     set_source_files_properties(${ASSEMBLER_FILES} PROPERTIES LANGUAGE C COMPILE_FLAGS -DNO_UNDERLINE)
   elseif(MSVC)
     ENABLE_LANGUAGE(ASM_MASM)
-    set(ASSEMBLER_FILES "zlib/contrib/masmx64/gvmat64.asm" "zlib/contrib/masmx64/inffasx64.asm")
     add_definitions(-DASMV -DASMINF)
+    set(ASSEMBLER_FILES "zlib/contrib/masmx64/gvmat64.asm" "zlib/contrib/masmx64/inffasx64.asm")
   endif()
 
   # Module library
