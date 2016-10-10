@@ -1,6 +1,6 @@
-if(NOT CATCH_HEADER)
+if(NOT CATCH)
 
   # Module header
-  file(GLOB CATCH_HEADER "catch/single_include/catch.hpp")
+  file(GLOB CATCH "catch/single_include/catch.hpp")
 
 endif()

@@ -72,7 +72,7 @@ if(NOT CPPBENCHMARK_MODULE)
   # Tests
   file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
   set_source_files_properties(${TESTS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
-  add_executable(cppbenchmark-tests ${CATCH_HEADER} ${TESTS_SOURCE_FILES})
+  add_executable(cppbenchmark-tests ${CATCH} ${TESTS_SOURCE_FILES})
   target_link_libraries(cppbenchmark-tests cppbenchmark ${SYSTEM})
   set_target_properties(cppbenchmark-tests PROPERTIES FOLDER tests)
   list(APPEND INSTALL_TARGETS cppbenchmark-tests)
