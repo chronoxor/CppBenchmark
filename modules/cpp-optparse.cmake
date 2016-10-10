@@ -1,9 +1,11 @@
 if(NOT TARGET cpp-optparse)
 
-  # Add module library
-  add_library(cpp-optparse cpp-optparse/OptionParser.h cpp-optparse/OptionParser.cpp)
+  # Module library
+  file(SOURCE_FILES "cpp-optparse/OptionParser.cpp")
+  set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
+  add_library(cpp-optparse ${SOURCE_FILES})
 
-  # Set module folder
+  # Module folder
   set_target_properties(cpp-optparse PROPERTIES FOLDER modules/cpp-optparse)
 
 endif()

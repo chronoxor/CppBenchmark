@@ -1,31 +1,23 @@
-if(NOT TARGET histogram)
+if(NOT TARGET HdrHistogram)
 
-  # Sources
-  file(GLOB_RECURSE SOURCE_FILES "HdrHistogram/src/*.c")
-
-  # Temporary disable some warnings
-  # C4146: unary minus operator applied to unsigned type, result still unsigned
-  # C4200: nonstandard extension used : zero-sized array in struct/union
-  # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
-  if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4146 /wd4200 /wd4244")
-  endif()
-
-  # Includes
+  # Module includes
   include_directories("zlib")
   include_directories("${CMAKE_CURRENT_BINARY_DIR}/zlib")
 
-  # Add module library
-  add_library(histogram ${SOURCE_FILES})
-  target_link_libraries(histogram zlibstatic)
-
-  # Set module folder
-  set_target_properties(histogram PROPERTIES FOLDER modules/HdrHistogram)
-
-  # Restore default warnings
-  if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
-    set(CMAKE_C_FLAGS ${CMAKE_OLD_C_FLAGS})
-    set(CMAKE_CXX_FLAGS ${CMAKE_OLD_CXX_FLAGS})
+  # Module library
+  file(SOURCE_FILES "HdrHistogram/src/*.c")
+  if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
+    # C4146: unary minus operator applied to unsigned type, result still unsigned
+    # C4200: nonstandard extension used : zero-sized array in struct/union
+    # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4146 /wd4200 /wd4244")
+  else()
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
   endif()
+  add_library(HdrHistogram ${SOURCE_FILES})
+  target_link_libraries(HdrHistogram zlib)
+
+  # Module folder
+  set_target_properties(HdrHistogram PROPERTIES FOLDER modules/HdrHistogram)
 
 endif()

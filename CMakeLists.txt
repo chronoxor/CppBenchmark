@@ -49,7 +49,7 @@ target_link_libraries(cppbenchmark cpp-optparse histogram)
 set_target_properties(cppbenchmark PROPERTIES FOLDER libraries)
 list(APPEND INSTALL_TARGETS cppbenchmark)
 
-# Full module components: examples, tests and install
+# Additional module components: examples, performance benchmarks, tests, tools and install
 if(NOT CPPBENCHMARK_MODULE)
 
   # Examples

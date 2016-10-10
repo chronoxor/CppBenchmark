@@ -1,43 +1,32 @@
-if(NOT TARGET zlibstatic)
+if(NOT TARGET zlib)
 
-  # Temporary disable some warnings
-  # C4127: conditional expression is constant
-  # C4131: 'function' : uses old-style declarator
-  # C4210: nonstandard extension used : function given file scope
-  # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
-  set(CMAKE_OLD_C_FLAGS ${CMAKE_C_FLAGS})
-  set(CMAKE_OLD_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+  # Assembler files
+  if(CMAKE_COMPILER_IS_GNUCC)
+    set(ASSEMBLER_FILES "contrib/amd64/amd64-match.S")
+    add_definitions(-DASMV)
+    set_source_files_properties(${ASSEMBLER_FILES} PROPERTIES LANGUAGE C COMPILE_FLAGS -DNO_UNDERLINE)
+  elseif(MSVC)
+    ENABLE_LANGUAGE(ASM_MASM)
+    set(ASSEMBLER_FILES "zlib/contrib/masmx64/gvmat64.asm" "zlib/contrib/masmx64/inffasx64.asm")
+    add_definitions(-DASMV -DASMINF)
+    set(ASSEMBLER_FILES "zlib/contrib/masmx64/inffas8664.c" "zlib/contrib/masmx64/inffas8664.c")
+  endif()
+
+  # Module library
+  file(SOURCE_FILES "zlib/*.c")
   if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
-  elseif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pedantic")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
+    # C4127: conditional expression is constant
+    # C4131: 'function' : uses old-style declarator
+    # C4210: nonstandard extension used : function given file scope
+    # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
+  else()
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
   endif()
+  add_library(zlib ${SOURCE_FILES} ${ASSEMBLER_FILES})
+  target_link_libraries(zlib)
 
-  # Set module options
-  option(AMD64 "Enable building amd64 assembly implementation" ON)
-
-  # Set install flag
-  set(SKIP_INSTALL_ALL Y)
-
-  # Add module subdirectory
-  add_subdirectory("zlib")
-
-  # Add missing target sources
-  if(MSVC AND AMD64)
-    target_sources(zlib PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/zlib/contrib/masmx64/inffas8664.c")
-    target_sources(zlibstatic PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/zlib/contrib/masmx64/inffas8664.c")
-  endif()
-
-  # Set module folder
-  set_target_properties(zlibstatic zlib example minigzip PROPERTIES FOLDER modules/zlib)
-
-  # Exclude some modules from the build
-  set_target_properties(zlib example minigzip PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
-
-  # Restore default warnings
-  set(CMAKE_C_FLAGS ${CMAKE_OLD_C_FLAGS})
-  set(CMAKE_CXX_FLAGS ${CMAKE_OLD_CXX_FLAGS})
+  # Module folder
+  set_target_properties(zlib PROPERTIES FOLDER modules/zlib)
 
 endif()
