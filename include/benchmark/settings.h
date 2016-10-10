@@ -35,9 +35,16 @@ class Settings
 public:
     //! Initialize settings with the given count of iterations
     /*!
+        Default benchmark settings: 1 iteration, 5 attempts,
+        latency measurements in range from one nanosecond up
+        to one minute with value quantization 1/1000 (0.1%).
+
         \param iterations - Count of iterations (default is 1)
     */
-    Settings(int64_t iterations = 1) : _attempts(5), _infinite(false), _iterations(iterations) {}
+    Settings(int64_t iterations = 1)
+        : _attempts(5), _infinite(false), _iterations(iterations),
+          _latency(std::make_tuple(0, 60000000000ll, 3))
+    {}
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;
     ~Settings() = default;
@@ -259,6 +266,7 @@ private:
     std::vector<int> _threads;
     std::vector<std::tuple<int, int>> _pc;
     std::vector<std::tuple<int, int, int>> _params;
+    std::tuple<int64_t, int64_t, int> _latency;
 };
 
 } // namespace CppBenchmark

@@ -51,6 +51,23 @@ int64_t PhaseMetrics::bytes_per_second() const noexcept
     return MulDiv64(_total_bytes, 1000000000, _total_time);
 }
 
+void PhaseMetrics::InitLatencyHistogram(int64_t lowest, int64_t highest, int significant)
+{
+    FreeLatencyHistogram();
+    int result = hdr_init(lowest, highest, significant, &_latency);
+    if (result != 0)
+        _latency = nullptr;
+}
+
+void PhaseMetrics::FreeLatencyHistogram()
+{
+    if (_latency != nullptr)
+    {
+        free(_latency);
+        _latency = nullptr;
+    }
+}
+
 void PhaseMetrics::StartCollecting() noexcept
 {
     _iterstamp = _total_iterations;
@@ -92,6 +109,7 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
     // Choose best total time with iterations, items and bytes
     if (metrics._total_time < _total_time)
     {
+        std::swap(_latency, metrics._latency);
         _total_time = metrics._total_time;
         _total_iterations = metrics._total_iterations;
         _total_items = metrics._total_items;

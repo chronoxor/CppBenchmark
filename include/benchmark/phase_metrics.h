@@ -40,7 +40,8 @@ class PhaseMetrics
 public:
     //! Default constructor
     PhaseMetrics()
-        : _min_time(std::numeric_limits<int64_t>::max()),
+        : _latency(nullptr),
+          _min_time(std::numeric_limits<int64_t>::max()),
           _max_time(std::numeric_limits<int64_t>::min()),
           _total_time(0),
           _total_iterations(0),
@@ -52,7 +53,7 @@ public:
     {}
     PhaseMetrics(const PhaseMetrics&) = default;
     PhaseMetrics(PhaseMetrics&&) = default;
-    ~PhaseMetrics() = default;
+    ~PhaseMetrics() { FreeLatencyHistogram(); }
 
     PhaseMetrics& operator=(const PhaseMetrics&) = default;
     PhaseMetrics& operator=(PhaseMetrics&&) = default;
@@ -174,6 +175,7 @@ public:
     { _threads = threads; }
 
 private:
+    hdr_histogram* _latency;
     int64_t _min_time;
     int64_t _max_time;
     int64_t _total_time;
@@ -192,6 +194,9 @@ private:
     int64_t _timestamp;
 
     int _threads;
+
+    void InitLatencyHistogram(int64_t lowest, int64_t highest, int significant);
+    void FreeLatencyHistogram();
 
     void StartCollecting() noexcept;
     void StopCollecting() noexcept;

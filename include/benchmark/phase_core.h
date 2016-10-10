@@ -74,6 +74,15 @@ protected:
     //! Result phase metrics
     PhaseMetrics _metrics_result;
 
+    //! Initialize latency histogram for the current phase
+    /*!
+        \param lowest - The smallest possible value to be put into the histogram
+        \param highest - The largest possible value to be put into the histogram
+        \param significant - Number of significant figures
+    */
+    void InitLatencyHistogram(int64_t lowest, int64_t highest, int significant)
+    { _metrics_current.InitLatencyHistogram(lowest, highest, significant); }
+
     //! Start collecting metrics in the current phase
     void StartCollectingMetrics() noexcept
     { _metrics_current.StartCollecting(); }
