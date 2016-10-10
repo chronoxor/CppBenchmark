@@ -5,7 +5,7 @@ if(NOT TARGET HdrHistogram)
   include_directories("${CMAKE_CURRENT_BINARY_DIR}/zlib")
 
   # Module library
-  file(SOURCE_FILES "HdrHistogram/src/*.c")
+  file(GLOB SOURCE_FILES "HdrHistogram/src/*.c")
   if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
     # C4146: unary minus operator applied to unsigned type, result still unsigned
     # C4200: nonstandard extension used : zero-sized array in struct/union

@@ -23,7 +23,6 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # Compiler features
 include(SetCompilerFeatures)
 include(SetCompilerWarningAll)
-include(SetCrtSecureWarningsOff)
 include(SetPlatformFeatures)
 
 # External packages
@@ -35,6 +34,11 @@ list(APPEND SYSTEM Threads::Threads)
 # Modules
 add_subdirectory("modules")
 
+# Definitions
+if(MSVC)
+  add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+endif()
+
 # Includes
 include_directories("include")
 include_directories("modules/catch/single_include")
@@ -45,7 +49,7 @@ include_directories("modules/HdrHistogram/src")
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
 add_library(cppbenchmark ${SOURCE_FILES})
-target_link_libraries(cppbenchmark cpp-optparse histogram)
+target_link_libraries(cppbenchmark cpp-optparse HdrHistogram)
 set_target_properties(cppbenchmark PROPERTIES FOLDER libraries)
 list(APPEND INSTALL_TARGETS cppbenchmark)
 

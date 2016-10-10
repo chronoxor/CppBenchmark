@@ -1,7 +1,7 @@
 if(NOT TARGET cpp-optparse)
 
   # Module library
-  file(SOURCE_FILES "cpp-optparse/OptionParser.cpp")
+  file(GLOB SOURCE_FILES "cpp-optparse/OptionParser.cpp")
   set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
   add_library(cpp-optparse ${SOURCE_FILES})
 
