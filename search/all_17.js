@@ -19,7 +19,7 @@ var searchData=
   ['_7elauncherhandler',['~LauncherHandler',['../class_cpp_benchmark_1_1_launcher_handler.html#ad49f116b4a196d9daedee0ce81c566bb',1,'CppBenchmark::LauncherHandler']]],
   ['_7ephase',['~Phase',['../class_cpp_benchmark_1_1_phase.html#acb7babf96e0e2475a954ccac317aead2',1,'CppBenchmark::Phase']]],
   ['_7ephasecore',['~PhaseCore',['../class_cpp_benchmark_1_1_phase_core.html#a8a8e4d274ca3968996b39a58b7246463',1,'CppBenchmark::PhaseCore']]],
-  ['_7ephasemetrics',['~PhaseMetrics',['../class_cpp_benchmark_1_1_phase_metrics.html#aaf658a7007de481c2ab7baec8a31718b',1,'CppBenchmark::PhaseMetrics']]],
+  ['_7ephasemetrics',['~PhaseMetrics',['../class_cpp_benchmark_1_1_phase_metrics.html#a70bbe13f81a473ea25635f77f256bbe6',1,'CppBenchmark::PhaseMetrics']]],
   ['_7ephasescope',['~PhaseScope',['../class_cpp_benchmark_1_1_phase_scope.html#a8c560608ba95935ca1ad2604d183a583',1,'CppBenchmark::PhaseScope']]],
   ['_7ereporter',['~Reporter',['../class_cpp_benchmark_1_1_reporter.html#aa4db13207ff08be771264fb5e34b50e1',1,'CppBenchmark::Reporter']]],
   ['_7ereporterconsole',['~ReporterConsole',['../class_cpp_benchmark_1_1_reporter_console.html#a3e9d22cc398c41057d223ce13bd6bc70',1,'CppBenchmark::ReporterConsole']]],
