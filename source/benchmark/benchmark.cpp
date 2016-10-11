@@ -35,6 +35,11 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
             // Initialize the current benchmark
             InitBenchmarkContext(context);
 
+            // Initialize latency histogram of the current phase
+            std::tuple<int64_t, int64_t, int> latency_params(_settings.latency());
+            bool latency_auto = _settings.latency_auto();
+            context._current->InitLatencyHistogram(latency_params);
+
             // Call launching notification...
             handler.onLaunching(++current, total, *this, context, attempt);
 
@@ -50,8 +55,17 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
                 // Add new metrics iteration
                 context._metrics->AddIterations(1);
 
+                // Store timestamp for automatic latency update
+                uint64_t timestamp = 0;
+                if (latency_auto)
+                    timestamp = System::Timestamp();
+
                 // Run benchmark method...
                 Run(context);
+
+                // Automatic latency update
+                if (latency_auto)
+                    context._metrics->AddLatency(System::Timestamp() - timestamp);
 
                 // Decrement iteration counters
                 iterations -= 1;

@@ -10,7 +10,44 @@
 
 #include "benchmark/system.h"
 
+#include <algorithm>
+
 namespace CppBenchmark {
+
+PhaseMetrics::PhaseMetrics() : _latency(nullptr)
+{
+    ResetMetrics();
+}
+
+PhaseMetrics::~PhaseMetrics()
+{
+    FreeLatencyHistogram();
+}
+
+bool PhaseMetrics::latency() const noexcept
+{
+    return (_latency != nullptr);
+}
+
+int64_t PhaseMetrics::min_latency() const noexcept
+{
+    return latency() ? hdr_min(_latency) : 0;
+}
+
+int64_t PhaseMetrics::max_latency() const noexcept
+{
+    return latency() ? hdr_max(_latency) : 0;
+}
+
+double PhaseMetrics::mean_latency() const noexcept
+{
+    return latency() ? hdr_mean(_latency) : 0;
+}
+
+double PhaseMetrics::stdv_latency() const noexcept
+{
+    return latency() ? hdr_stddev(_latency) : 0;
+}
 
 int64_t PhaseMetrics::avg_time() const noexcept
 {
@@ -51,15 +88,19 @@ int64_t PhaseMetrics::bytes_per_second() const noexcept
     return MulDiv64(_total_bytes, 1000000000, _total_time);
 }
 
-void PhaseMetrics::InitLatencyHistogram(int64_t lowest, int64_t highest, int significant)
+void PhaseMetrics::InitLatencyHistogram(const std::tuple<int64_t, int64_t, int>& latency) noexcept
 {
+    int64_t lowest = std::get<0>(latency);
+    int64_t highest = std::get<1>(latency);
+    int significant = std::get<2>(latency);
+
     FreeLatencyHistogram();
     int result = hdr_init(lowest, highest, significant, &_latency);
     if (result != 0)
         _latency = nullptr;
 }
 
-void PhaseMetrics::FreeLatencyHistogram()
+void PhaseMetrics::FreeLatencyHistogram() noexcept
 {
     if (_latency != nullptr)
     {
@@ -87,7 +128,7 @@ void PhaseMetrics::StopCollecting() noexcept
     _total_time += total_duration;
 }
 
-void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
+void PhaseMetrics::MergeMetrics(PhaseMetrics& metrics)
 {
     // Choose best min time
     if (metrics._min_time < _min_time)
@@ -132,6 +173,20 @@ void PhaseMetrics::MergeMetrics(const PhaseMetrics& metrics)
         // Overwrite metrics threads value
         _threads = metrics._threads;
     }
+}
+
+void PhaseMetrics::ResetMetrics() noexcept
+{
+    FreeLatencyHistogram();
+    _min_time = std::numeric_limits<int64_t>::max();
+    _max_time = std::numeric_limits<int64_t>::min();
+    _total_time = 0;
+    _total_iterations = 0;
+    _total_items = 0;
+    _total_bytes = 0;
+    _iterstamp = 0;
+    _timestamp = 0;
+    _threads = 1;
 }
 
 uint64_t PhaseMetrics::MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t divider)

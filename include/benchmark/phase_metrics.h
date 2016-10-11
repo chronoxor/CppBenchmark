@@ -9,6 +9,8 @@
 #ifndef CPPBENCHMARK_PHASE_METRICS_H
 #define CPPBENCHMARK_PHASE_METRICS_H
 
+#include "hdr_histogram.h"
+
 #include <cstdint>
 #include <limits>
 #include <map>
@@ -39,24 +41,24 @@ class PhaseMetrics
 
 public:
     //! Default constructor
-    PhaseMetrics()
-        : _latency(nullptr),
-          _min_time(std::numeric_limits<int64_t>::max()),
-          _max_time(std::numeric_limits<int64_t>::min()),
-          _total_time(0),
-          _total_iterations(0),
-          _total_items(0),
-          _total_bytes(0),
-          _iterstamp(0),
-          _timestamp(0),
-          _threads(1)
-    {}
+    PhaseMetrics();
     PhaseMetrics(const PhaseMetrics&) = default;
     PhaseMetrics(PhaseMetrics&&) = default;
-    ~PhaseMetrics() { FreeLatencyHistogram(); }
+    ~PhaseMetrics();
 
     PhaseMetrics& operator=(const PhaseMetrics&) = default;
     PhaseMetrics& operator=(PhaseMetrics&&) = default;
+
+    //! Is metrics contains latency values?
+    bool latency() const noexcept;
+    //! Get latency minimal value of the phase execution
+    int64_t min_latency() const noexcept;
+    //! Get latency maximal value of the phase execution
+    int64_t max_latency() const noexcept;
+    //! Get latency mean value of the phase execution
+    double mean_latency() const noexcept;
+    //! Get latency standard deviation of the phase execution
+    double stdv_latency() const noexcept;
 
     //! Get average time of the phase execution
     int64_t avg_time() const noexcept;
@@ -174,6 +176,13 @@ public:
     void SetThreads(int threads)
     { _threads = threads; }
 
+    //! Add latency value of the current phase
+    /*!
+        \param latency - Latency value
+    */
+    void AddLatency(int64_t latency) noexcept
+    { if (_latency != nullptr) hdr_record_values(_latency, latency, 1); }
+
 private:
     hdr_histogram* _latency;
     int64_t _min_time;
@@ -195,13 +204,14 @@ private:
 
     int _threads;
 
-    void InitLatencyHistogram(int64_t lowest, int64_t highest, int significant);
-    void FreeLatencyHistogram();
+    void InitLatencyHistogram(const std::tuple<int64_t, int64_t, int>& latency) noexcept;
+    void FreeLatencyHistogram() noexcept;
 
     void StartCollecting() noexcept;
     void StopCollecting() noexcept;
 
-    void MergeMetrics(const PhaseMetrics& metrics);
+    void MergeMetrics(PhaseMetrics& metrics);
+    void ResetMetrics() noexcept;
 
     // Calculate (operant * multiplier / divider) with 64 bit unsigned integer values
     static uint64_t MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t divider);

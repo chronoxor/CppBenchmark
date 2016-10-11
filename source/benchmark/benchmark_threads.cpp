@@ -44,6 +44,10 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 // Initialize the current benchmark
                 InitBenchmarkContext(context);
 
+                // Prepare latency histogram parameters
+                std::tuple<int64_t, int64_t, int> latency_params(_settings.latency());
+                bool latency_auto = _settings.latency_auto();
+
                 // Call launching notification...
                 handler.onLaunching(++current, total, *this, context, attempt);
 
@@ -63,7 +67,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark threads
                 for (int i = 0; i < threads; ++i)
                 {
-                    _threads.push_back(std::thread([this, &barrier, &context, threads, infinite, iterations]()
+                    _threads.push_back(std::thread([this, &barrier, &context, latency_params, latency_auto, threads, infinite, iterations]()
                     {
                         // Clone thread context
                         ContextThreads thread_context(context);
@@ -77,6 +81,9 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                         thread_context._metrics = &thread_phase_core->current();
                         thread_context._metrics->AddIterations(-1);
                         thread_context._metrics->SetThreads(threads);
+
+                        // Initialize latency histogram of the current phase
+                        thread_context._current->InitLatencyHistogram(latency_params);
 
                         // Call initialize thread method...
                         InitializeThread(thread_context);
@@ -93,8 +100,17 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                             // Add new metrics iteration
                             thread_context._metrics->AddIterations(1);
 
+                            // Store timestamp for automatic latency update
+                            uint64_t timestamp = 0;
+                            if (latency_auto)
+                                timestamp = System::Timestamp();
+
                             // Run thread method...
                             RunThread(thread_context);
+
+                            // Automatic latency update
+                            if (latency_auto)
+                                thread_context._metrics->AddLatency(System::Timestamp() - timestamp);
 
                             // Decrement iteration counters
                             thread_iterations -= 1;

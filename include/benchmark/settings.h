@@ -35,15 +35,14 @@ class Settings
 public:
     //! Initialize settings with the given count of iterations
     /*!
-        Default benchmark settings: 1 iteration, 5 attempts,
-        latency measurements in range from one nanosecond up
-        to one minute with value quantization 1/1000 (0.1%).
-
         \param iterations - Count of iterations (default is 1)
     */
     Settings(int64_t iterations = 1)
-        : _attempts(5), _infinite(false), _iterations(iterations),
-          _latency(std::make_tuple(0, 60000000000ll, 3))
+        : _attempts(5),
+          _infinite(false),
+          _iterations(iterations),
+          _latency_params(std::make_tuple(0, 0, 0)),
+          _latency_auto(false)
     {}
     Settings(const Settings&) = default;
     Settings(Settings&&) = default;
@@ -64,6 +63,10 @@ public:
     const std::vector<std::tuple<int, int>>& pc() const noexcept { return _pc; }
     //! Get collection of independent parameters in a benchmark plan
     const std::vector<std::tuple<int, int, int>>& params() const noexcept { return _params; }
+    //! Get latency parameters
+    const std::tuple<int64_t, int64_t, int>& latency() const noexcept { return _latency_params; }
+    //! Get automatic latency update flag
+    bool latency_auto() const noexcept { return _latency_auto; }
 
     //! Set independent benchmark attempts
     /*!
@@ -259,6 +262,16 @@ public:
                           int from2, int to2, const std::function<int (int, int, int&)>& selector2,
                           int from3, int to3, const std::function<int (int, int, int&)>& selector3);
 
+    //! Set latency histogram parameters
+    /*!
+        \param lowest - The smallest possible value to be put into the histogram
+        \param highest - The largest possible value to be put into the histogram
+        \param significant - Number of significant figures
+        \param automatic - Automatic latency update (default is true)
+        \return Reference to the current settings instance
+    */
+    Settings& Latency(int64_t lowest, int64_t highest, int significant, bool automatic = true);
+
 private:
     int _attempts;
     bool _infinite;
@@ -266,7 +279,8 @@ private:
     std::vector<int> _threads;
     std::vector<std::tuple<int, int>> _pc;
     std::vector<std::tuple<int, int, int>> _params;
-    std::tuple<int64_t, int64_t, int> _latency;
+    std::tuple<int64_t, int64_t, int> _latency_params;
+    bool _latency_auto;
 };
 
 } // namespace CppBenchmark

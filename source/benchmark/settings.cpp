@@ -329,4 +329,11 @@ Settings& Settings::TripleRange(int from1, int to1, const std::function<int (int
     return *this;
 }
 
+Settings& Settings::Latency(int64_t lowest, int64_t highest, int significant, bool automatic)
+{
+    _latency_params = std::make_tuple(lowest, highest, significant);
+    _latency_auto = automatic;
+    return *this;
+}
+
 } // namespace CppBenchmark

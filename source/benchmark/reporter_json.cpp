@@ -134,6 +134,13 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
     _stream << Internals::indent7 << "\"name\": \"" << phase.name() << "\",\n";
     if (metrics.total_iterations() > 1)
     {
+        if (metrics.latency())
+        {
+            _stream << Internals::indent7 << "\"min_latency\": " << metrics.min_latency() << ",\n";
+            _stream << Internals::indent7 << "\"max_latency\": " << metrics.max_latency() << ",\n";
+            _stream << Internals::indent7 << "\"mean_latency\": " << metrics.mean_latency() << ",\n";
+            _stream << Internals::indent7 << "\"stdv_latency\": " << metrics.stdv_latency() << ",\n";
+        }
         _stream << Internals::indent7 << "\"avg_time\": " << metrics.avg_time() << ",\n";
         _stream << Internals::indent7 << "\"min_time\": " << metrics.min_time() << ",\n";
         _stream << Internals::indent7 << "\"max_time\": " << metrics.max_time() << ",\n";

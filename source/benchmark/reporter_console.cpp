@@ -62,6 +62,13 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
     _stream << Color::WHITE << "Phase: " << Color::LIGHTCYAN << phase.name() << std::endl;
     if (metrics.total_iterations() > 1)
     {
+        if (metrics.latency())
+        {
+            _stream << Color::WHITE << "Latency (Min): " << Color::BROWN << GenerateTimePeriod(metrics.min_latency()) << " / iteration" << std::endl;
+            _stream << Color::WHITE << "Latency (Max): " << Color::BROWN << GenerateTimePeriod(metrics.max_latency()) << " / iteration" << std::endl;
+            _stream << Color::WHITE << "Latency (Mean): " << Color::BROWN << metrics.mean_latency() << std::endl;
+            _stream << Color::WHITE << "Latency (StDv): " << Color::BROWN << metrics.stdv_latency() << std::endl;
+        }
         _stream << Color::WHITE << "Average time: " << Color::YELLOW << GenerateTimePeriod(metrics.avg_time()) << " / iteration" << std::endl;
         _stream << Color::WHITE << "Minimal time: " << Color::YELLOW << GenerateTimePeriod(metrics.min_time()) << " / iteration" << std::endl;
         _stream << Color::WHITE << "Maximal time: " << Color::YELLOW << GenerateTimePeriod(metrics.max_time()) << " / iteration" << std::endl;

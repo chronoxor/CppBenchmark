@@ -40,6 +40,12 @@ include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
 include_directories("modules/HdrHistogram/src")
 
+# Temporary disable some warnings
+# C4200: nonstandard extension used : zero-sized array in struct/union
+if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
+  set(COMMON_COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4200")
+endif()
+
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")

@@ -17,8 +17,18 @@ void ReporterCSV::ReportHeader()
 
 void ReporterCSV::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
 {
+    _stream << '"' << phase.name() << '"' << ',';
+
+    if (metrics.latency())
+    {
+        _stream
+        << metrics.min_latency() << ','
+        << metrics.max_latency() << ','
+        << metrics.mean_latency() << ','
+        << metrics.stdv_latency() << ',';
+    }
+
     _stream
-    << '"' << phase.name() << '"' << ','
     << metrics.avg_time() << ','
     << metrics.min_time() << ','
     << metrics.max_time() << ','

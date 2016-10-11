@@ -18,82 +18,87 @@
 #endif
 
 const uint64_t iterations = 10000000;
+const auto settings = CppBenchmark::Settings().Iterations(iterations).Latency(1, 1000000000, 5, false);
 
-BENCHMARK("std::chrono::high_resolution_clock::now()", iterations)
+BENCHMARK("std::chrono::high_resolution_clock::now()", settings)
 {
-    static auto timestamp = std::chrono::high_resolution_clock::now();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static auto latency_timestamp = std::chrono::high_resolution_clock::now();
+    static auto resolution_timestamp = std::chrono::high_resolution_clock::now();
     static uint64_t count = 0;
 
+    // Get the current timestamp
     auto current = std::chrono::high_resolution_clock::now();
-    uint64_t duration = std::chrono::duration_cast<std::chrono::nanoseconds>(current - timestamp).count();
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = std::chrono::duration_cast<std::chrono::nanoseconds>(current - latency_timestamp).count();
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = std::chrono::duration_cast<std::chrono::nanoseconds>(current - resolution_timestamp).count();
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
-BENCHMARK("clock()", iterations)
+BENCHMARK("clock()", settings)
 {
-    static auto timestamp = clock();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static clock_t latency_timestamp = clock();
+    static clock_t resolution_timestamp = clock();
     static uint64_t count = 0;
 
-    auto current = clock();
-    uint64_t duration = (current - timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+    // Get the current timestamp
+    clock_t current = clock();
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = (current - latency_timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = (current - resolution_timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
@@ -106,200 +111,210 @@ struct timespec clock_gettime(clockid_t clockid)
     return current;
 }
 
-BENCHMARK("clock_gettime(CLOCK_REALTIME)", iterations)
+BENCHMARK("clock_gettime(CLOCK_REALTIME)", settings)
 {
-    static struct timespec timestamp = clock_gettime(CLOCK_REALTIME);
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static struct timespec latency_timestamp = clock_gettime(CLOCK_REALTIME);
+    static struct timespec resolution_timestamp = clock_gettime(CLOCK_REALTIME);
     static uint64_t count = 0;
 
+    // Get the current timestamp
     struct timespec current = clock_gettime(CLOCK_REALTIME);
-    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
-BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", iterations)
+BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", settings)
 {
-    static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC);
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static struct timespec latency_timestamp = clock_gettime(CLOCK_MONOTONIC);
+    static struct timespec resolution_timestamp = clock_gettime(CLOCK_MONOTONIC);
     static uint64_t count = 0;
 
+    // Get the current timestamp
     struct timespec current = clock_gettime(CLOCK_MONOTONIC);
-    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
 #if !defined(__CYGWIN__)
 
-BENCHMARK("clock_gettime(CLOCK_MONOTONIC_COARSE)", iterations)
+BENCHMARK("clock_gettime(CLOCK_MONOTONIC_COARSE)", settings)
 {
-    static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC_COARSE);
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static struct timespec latency_timestamp = clock_gettime(CLOCK_MONOTONIC_COARSE);
+    static struct timespec resolution_timestamp = clock_gettime(CLOCK_MONOTONIC_COARSE);
     static uint64_t count = 0;
 
+    // Get the current timestamp
     struct timespec current = clock_gettime(CLOCK_MONOTONIC_COARSE);
-    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
-BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", iterations)
+BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", settings)
 {
-    static struct timespec timestamp = clock_gettime(CLOCK_MONOTONIC_RAW);
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static struct timespec latency_timestamp = clock_gettime(CLOCK_MONOTONIC_RAW);
+    static struct timespec resolution_timestamp = clock_gettime(CLOCK_MONOTONIC_RAW);
     static uint64_t count = 0;
 
+    // Get the current timestamp
     struct timespec current = clock_gettime(CLOCK_MONOTONIC_RAW);
-    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
-BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", iterations)
+BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", settings)
 {
-    static struct timespec timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static struct timespec latency_timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
+    static struct timespec resolution_timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
     static uint64_t count = 0;
 
+    // Get the current timestamp
     struct timespec current = clock_gettime(CLOCK_REALTIME_COARSE);
-    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - timestamp.tv_nsec);
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
@@ -315,42 +330,44 @@ struct timeval mygettimeofday()
     return current;
 }
 
-BENCHMARK("gettimeofday()", iterations)
+BENCHMARK("gettimeofday()", settings)
 {
-    static struct timeval timestamp = mygettimeofday();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static struct timeval latency_timestamp = mygettimeofday();
+    static struct timeval resolution_timestamp = mygettimeofday();
     static uint64_t count = 0;
 
+    // Get the current timestamp
     struct timeval current = mygettimeofday();
-    uint64_t duration = ((current.tv_sec - timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - timestamp.tv_usec) * 1000;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - latency_timestamp.tv_usec) * 1000;
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - resolution_timestamp.tv_usec) * 1000;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
@@ -358,13 +375,12 @@ BENCHMARK("gettimeofday()", iterations)
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 
-BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
+BENCHMARK("GetSystemTimePreciseAsFileTime()", settings)
 {
-    static uint64_t timestamp = 0;
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t latency_timestamp = 0;
+    static uint64_t resolution_timestamp = 0;
     static uint64_t count = 0;
 
     FILETIME filetime;
@@ -375,35 +391,38 @@ BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
     ularge.HighPart = filetime.dwHighDateTime;
     uint64_t current = ularge.QuadPart * 100;
 
-    if (timestamp == 0)
-        timestamp = current;
+    if (latency_timestamp == 0)
+        latency_timestamp = current;
+    if (resolution_timestamp == 0)
+        resolution_timestamp = current;
 
-    uint64_t duration = (current - timestamp);
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = current - latency_timestamp;
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = current - resolution_timestamp;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
@@ -411,42 +430,44 @@ BENCHMARK("GetSystemTimePreciseAsFileTime()", iterations)
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 
-BENCHMARK("GetTickCount()", iterations)
+BENCHMARK("GetTickCount()", settings)
 {
-    static DWORD timestamp = GetTickCount();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static DWORD latency_timestamp = GetTickCount();
+    static DWORD resolution_timestamp = GetTickCount();
     static uint64_t count = 0;
 
+    // Get the current timestamp
     DWORD current = GetTickCount();
-    uint64_t duration = (current - timestamp) * 1000 * 1000;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = (current - latency_timestamp) * 1000 * 1000;
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = (current - resolution_timestamp) * 1000 * 1000;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
@@ -454,42 +475,44 @@ BENCHMARK("GetTickCount()", iterations)
 
 #if defined(_WIN32) || defined(_WIN64)
 
-BENCHMARK("GetTickCount64()", iterations)
+BENCHMARK("GetTickCount64()", settings)
 {
-    static ULONGLONG timestamp = GetTickCount64();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static ULONGLONG latency_timestamp = GetTickCount64();
+    static ULONGLONG resolution_timestamp = GetTickCount64();
     static uint64_t count = 0;
 
+    // Get the current timestamp
     ULONGLONG current = GetTickCount64();
-    uint64_t duration = (current - timestamp) * 1000 * 1000;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = (current - latency_timestamp) * 1000 * 1000;
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = (current - resolution_timestamp) * 1000 * 1000;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
@@ -511,43 +534,45 @@ LARGE_INTEGER QueryPerformanceFrequency()
     return frequency;
 }
 
-BENCHMARK("QueryPerformanceCounter()", iterations)
+BENCHMARK("QueryPerformanceCounter()", settings)
 {
-    static LARGE_INTEGER frequency = QueryPerformanceFrequency();
-    static LARGE_INTEGER timestamp = QueryPerformanceCounter();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static LARGE_INTEGER frequency = QueryPerformanceFrequency();
+    static LARGE_INTEGER latency_timestamp = QueryPerformanceCounter();
+    static LARGE_INTEGER resolution_timestamp = QueryPerformanceCounter();
     static uint64_t count = 0;
 
+    // Get the current timestamp
     LARGE_INTEGER current = QueryPerformanceCounter();
-    uint64_t duration = (current.QuadPart - timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = (current.QuadPart - latency_timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = (current.QuadPart - resolution_timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 
@@ -555,42 +580,44 @@ BENCHMARK("QueryPerformanceCounter()", iterations)
 
 #if defined(_MSC_VER)
 
-BENCHMARK("__rdtsc()", iterations)
+BENCHMARK("__rdtsc()", settings)
 {
-    static uint64_t timestamp = __rdtsc();
-    static double maxlatency = std::numeric_limits<double>::min();
-    static double minlatency = std::numeric_limits<double>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t latency_timestamp = __rdtsc();
+    static uint64_t resolution_timestamp = __rdtsc();
     static uint64_t count = 0;
 
+    // Get the current timestamp
     uint64_t current = __rdtsc();
-    uint64_t duration = current - timestamp;
-    double latency = (double)duration / ++count;
-    if (duration > 0)
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = current - latency_timestamp;
+    if (latency > 0)
     {
-        if (latency < minlatency)
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = current - resolution_timestamp;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
         {
-            minlatency = latency;
-            context.metrics().SetCustom("latency-min-clock-cycles", minlatency);
-        }
-        if (latency > maxlatency)
-        {
-            maxlatency = latency;
-            context.metrics().SetCustom("latency-max-clock-cycles", maxlatency);
-        }
-        if (duration < minresolution)
-        {
-            minresolution = duration;
+            minresolution = resolution;
             context.metrics().SetCustom("resolution-min-clock-cycles", minresolution);
         }
-        if (duration > maxresolution)
+        if (resolution > maxresolution)
         {
-            maxresolution = duration;
+            maxresolution = resolution;
             context.metrics().SetCustom("resolution-max-clock-cycles", maxresolution);
         }
-        timestamp = current;
-        count = 0;
+        resolution_timestamp = current;
     }
 }
 

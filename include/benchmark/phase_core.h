@@ -76,12 +76,10 @@ protected:
 
     //! Initialize latency histogram for the current phase
     /*!
-        \param lowest - The smallest possible value to be put into the histogram
-        \param highest - The largest possible value to be put into the histogram
-        \param significant - Number of significant figures
+        \param latency - Latency histogram parameters
     */
-    void InitLatencyHistogram(int64_t lowest, int64_t highest, int significant)
-    { _metrics_current.InitLatencyHistogram(lowest, highest, significant); }
+    void InitLatencyHistogram(const std::tuple<int64_t, int64_t, int>& latency) noexcept
+    { _metrics_current.InitLatencyHistogram(latency); }
 
     //! Start collecting metrics in the current phase
     void StartCollectingMetrics() noexcept
@@ -94,11 +92,11 @@ protected:
     void MergeMetrics()
     { _metrics_result.MergeMetrics(_metrics_current); }
     //! Merge metrics of the two phases
-    void MergeMetrics(const PhaseCore& phase)
+    void MergeMetrics(PhaseCore& phase)
     { _metrics_result.MergeMetrics(phase._metrics_result); }
     //! Reset current phase metrics
-    void ResetMetrics()
-    { _metrics_current = PhaseMetrics(); }
+    void ResetMetrics() noexcept
+    { _metrics_current.ResetMetrics(); }
 };
 
 } // namespace CppBenchmark

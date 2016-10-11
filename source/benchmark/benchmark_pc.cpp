@@ -46,6 +46,10 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Initialize the current benchmark
                 InitBenchmarkContext(context);
 
+                // Prepare latency histogram parameters
+                std::tuple<int64_t, int64_t, int> latency_params(_settings.latency());
+                bool latency_auto = _settings.latency_auto();
+
                 // Call launching notification...
                 handler.onLaunching(++current, total, *this, context, attempt);
 
@@ -65,7 +69,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark producers
                 for (int i = 0; i < producers; ++i)
                 {
-                    _threads.push_back(std::thread([this, &barrier, &context, producers, infinite, iterations, i]()
+                    _threads.push_back(std::thread([this, &barrier, &context, latency_params, latency_auto, producers, infinite, iterations, i]()
                     {
                         // Clone producer context
                         ContextPC producer_context(context);
@@ -79,6 +83,9 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         producer_context._metrics = &producer_phase_core->current();
                         producer_context._metrics->AddIterations(-1);
                         producer_context._metrics->SetThreads(producers);
+
+                        // Initialize latency histogram of the current phase
+                        producer_context._current->InitLatencyHistogram(latency_params);
 
                         // Call initialize producer method...
                         InitializeProducer(producer_context);
@@ -95,8 +102,17 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                             // Add new metrics iteration
                             producer_context._metrics->AddIterations(1);
 
+                            // Store timestamp for automatic latency update
+                            uint64_t timestamp = 0;
+                            if (latency_auto)
+                                timestamp = System::Timestamp();
+
                             // Run producer method...
                             RunProducer(producer_context);
+
+                            // Automatic latency update
+                            if (latency_auto)
+                                producer_context._metrics->AddLatency(System::Timestamp() - timestamp);
 
                             // Decrement iteration counters
                             producer_iterations -= 1;
@@ -114,7 +130,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark consumers
                 for (int i = 0; i < consumers; ++i)
                 {
-                    _threads.push_back(std::thread([this, &barrier, &context, consumers, i]()
+                    _threads.push_back(std::thread([this, &barrier, &context, latency_params, latency_auto, consumers, i]()
                     {
                         // Clone consumer context
                         ContextPC consumer_context(context);
@@ -129,6 +145,9 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         consumer_context._metrics->AddIterations(-1);
                         consumer_context._metrics->SetThreads(consumers);
 
+                        // Initialize latency histogram of the current phase
+                        consumer_context._current->InitLatencyHistogram(latency_params);
+
                         // Call initialize consumer method...
                         InitializeConsumer(consumer_context);
 
@@ -141,8 +160,17 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                             // Add new metrics iteration
                             consumer_context._metrics->AddIterations(1);
 
+                            // Store timestamp for automatic latency update
+                            uint64_t timestamp = 0;
+                            if (latency_auto)
+                                timestamp = System::Timestamp();
+
                             // Run consumer method...
                             RunConsumer(consumer_context);
+
+                            // Automatic latency update
+                            if (latency_auto)
+                                consumer_context._metrics->AddLatency(System::Timestamp() - timestamp);
                         }
                         consumer_context._current->StopCollectingMetrics();
 
