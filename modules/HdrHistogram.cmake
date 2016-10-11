@@ -7,6 +7,8 @@ if(NOT TARGET HdrHistogram)
     # C4200: nonstandard extension used : zero-sized array in struct/union
     # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4146 /wd4200 /wd4244")
+  else()
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-Wno-incompatible-pointer-types")
   endif()
   add_library(HdrHistogram ${SOURCE_FILES})
   target_include_directories(HdrHistogram PRIVATE "zlib" PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/zlib")
