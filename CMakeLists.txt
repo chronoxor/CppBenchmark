@@ -37,8 +37,6 @@ add_subdirectory("modules")
 # Includes
 include_directories("include")
 include_directories("modules/catch/single_include")
-include_directories("modules/cpp-optparse")
-include_directories("modules/HdrHistogram/src")
 
 # Temporary disable some warnings
 # C4200: nonstandard extension used : zero-sized array in struct/union

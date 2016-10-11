@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 08.07.2015.
 //
 
-#include "catch.hpp"
+#include <catch.hpp>
 
 #include "benchmark/system.h"
 

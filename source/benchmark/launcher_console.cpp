@@ -17,7 +17,7 @@
 #include <iomanip>
 #include <regex>
 
-#include <OptionParser.h>
+#include "../../modules/cpp-optparse/OptionParser.h"
 
 namespace CppBenchmark {
 

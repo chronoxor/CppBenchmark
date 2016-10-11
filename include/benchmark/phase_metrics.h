@@ -9,8 +9,6 @@
 #ifndef CPPBENCHMARK_PHASE_METRICS_H
 #define CPPBENCHMARK_PHASE_METRICS_H
 
-#include "hdr_histogram.h"
-
 #include <cstdint>
 #include <limits>
 #include <map>
@@ -180,11 +178,10 @@ public:
     /*!
         \param latency - Latency value
     */
-    void AddLatency(int64_t latency) noexcept
-    { if (_latency != nullptr) hdr_record_values(_latency, latency, 1); }
+    void AddLatency(int64_t latency) noexcept;
 
 private:
-    hdr_histogram* _latency;
+    void* _latency;
     int64_t _min_time;
     int64_t _max_time;
     int64_t _total_time;

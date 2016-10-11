@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 14.07.2015.
 //
 
-#include "catch.hpp"
+#include <catch.hpp>
 
 #include "benchmark/launcher.h"
 #include "benchmark/reporter_console.h"

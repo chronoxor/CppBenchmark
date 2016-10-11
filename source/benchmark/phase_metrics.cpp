@@ -12,6 +12,8 @@
 
 #include <algorithm>
 
+#include "../../modules/HdrHistogram/src/hdr_histogram.h"
+
 namespace CppBenchmark {
 
 PhaseMetrics::PhaseMetrics() : _latency(nullptr)
@@ -31,22 +33,22 @@ bool PhaseMetrics::latency() const noexcept
 
 int64_t PhaseMetrics::min_latency() const noexcept
 {
-    return latency() ? hdr_min(_latency) : 0;
+    return latency() ? hdr_min((const hdr_histogram*)_latency) : 0;
 }
 
 int64_t PhaseMetrics::max_latency() const noexcept
 {
-    return latency() ? hdr_max(_latency) : 0;
+    return latency() ? hdr_max((const hdr_histogram*)_latency) : 0;
 }
 
 double PhaseMetrics::mean_latency() const noexcept
 {
-    return latency() ? hdr_mean(_latency) : 0;
+    return latency() ? hdr_mean((const hdr_histogram*)_latency) : 0;
 }
 
 double PhaseMetrics::stdv_latency() const noexcept
 {
-    return latency() ? hdr_stddev(_latency) : 0;
+    return latency() ? hdr_stddev((const hdr_histogram*)_latency) : 0;
 }
 
 int64_t PhaseMetrics::avg_time() const noexcept
@@ -95,7 +97,7 @@ void PhaseMetrics::InitLatencyHistogram(const std::tuple<int64_t, int64_t, int>&
     int significant = std::get<2>(latency);
 
     FreeLatencyHistogram();
-    int result = hdr_init(lowest, highest, significant, &_latency);
+    int result = hdr_init(lowest, highest, significant, ((hdr_histogram**)&_latency));
     if (result != 0)
         _latency = nullptr;
 }
@@ -107,6 +109,12 @@ void PhaseMetrics::FreeLatencyHistogram() noexcept
         free(_latency);
         _latency = nullptr;
     }
+}
+
+void PhaseMetrics::AddLatency(int64_t latency) noexcept
+{
+    if (_latency != nullptr)
+        hdr_record_values((hdr_histogram*)_latency, latency, 1);
 }
 
 void PhaseMetrics::StartCollecting() noexcept
