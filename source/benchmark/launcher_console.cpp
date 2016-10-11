@@ -32,6 +32,7 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
     parser.add_option("-l", "--list").action("store_true").help("List all avaliable benchmarks");
     parser.add_option("-o", "--output").choices(&output[0], &output[3]).set_default(output[0]).help("Output format (console, csv, json). Default: %default");
     parser.add_option("-s", "--silent").action("store_true").help("Launch in silent mode. No progress will be shown!");
+    parser.add_option("-r", "--histograms").action("store").type("int").set_default(0).help("Create High Dynamic Range (HDR) Histogram files with a given resolution. Default: %default");
 
     optparse::Values options = parser.parse_args(argc, argv);
 
@@ -51,6 +52,7 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
     // Setup console launcher parameters
     _list = options.get("list");
     _silent = options.get("silent");
+    _histograms = (int32_t)options.get("histograms");
     if (options.is_set("filter"))
         _filter = options["filter"];
     if (options.is_set("output"))
@@ -97,6 +99,10 @@ void LauncherConsole::Report() const
         ReporterJSON reporter(std::cout);
         Launcher::Report(reporter);
     }
+
+    // Report histograms
+    if (_histograms > 0)
+        Launcher::ReportHistograms(_histograms);
 }
 
 void LauncherConsole::onLaunching(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt)

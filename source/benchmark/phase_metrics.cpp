@@ -102,6 +102,14 @@ void PhaseMetrics::InitLatencyHistogram(const std::tuple<int64_t, int64_t, int>&
         _latency = nullptr;
 }
 
+void PhaseMetrics::PrintLatencyHistogram(FILE* file, int32_t resolution) const noexcept
+{
+    if ((_latency != nullptr) && (file != nullptr))
+    {
+        hdr_percentiles_print((hdr_histogram*)_latency, file, resolution, 1.0, CLASSIC);
+    }
+}
+
 void PhaseMetrics::FreeLatencyHistogram() noexcept
 {
     if (_latency != nullptr)

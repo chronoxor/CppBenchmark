@@ -8,6 +8,7 @@
 
 #include "benchmark/launcher.h"
 
+#include <algorithm>
 #include <regex>
 
 namespace CppBenchmark {
@@ -78,6 +79,56 @@ void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
     {
         std::string child_name = name + "." + child->name();
         ReportPhase(reporter, *child, child_name);
+    }
+}
+
+void Launcher::ReportHistograms(int32_t resolution) const
+{
+    // For all registered benchmarks...
+    for (auto& benchmark : _benchmarks)
+    {
+        // Filter performed benchmarks
+        if (benchmark->_launched)
+        {
+            // Report benchmark histograms
+            for (auto& root_phase : benchmark->_phases)
+                ReportPhaseHistograms(resolution, *root_phase, root_phase->name());
+        }
+    }
+}
+
+void Launcher::ReportPhaseHistograms(int32_t resolution, const PhaseCore& phase, const std::string& name) const
+{
+    ReportPhaseHistogram(resolution, phase, name);
+    for (auto& child : phase._child)
+    {
+        std::string child_name = name + "." + child->name();
+        ReportPhaseHistograms(resolution, *child, child_name);
+    }
+}
+
+void Launcher::ReportPhaseHistogram(int32_t resolution, const PhaseCore& phase, const std::string& name) const
+{
+    if (phase.metrics().latency())
+    {
+        const char deprecated[] = "\\/?%*:|\"<>";
+
+        // Validate filename
+        std::string filename(name + ".hdr");
+        for (auto& ch : filename)
+            if ((ch != '\\') && (ch != '/') && (std::find(deprecated, deprecated + sizeof(deprecated), ch) != (deprecated + sizeof(deprecated))))
+                ch = '_';
+
+        // Open histogram filename
+        FILE* file = fopen(filename.c_str(), "w");
+        if (file != nullptr)
+        {
+            // Print histogram
+            phase.PrintLatencyHistogram(file, resolution);
+
+            // Close file
+            fclose(file);
+        }
     }
 }
 

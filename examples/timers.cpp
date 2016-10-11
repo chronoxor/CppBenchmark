@@ -20,7 +20,7 @@
 const uint64_t iterations = 10000000;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).Latency(1, 1000000000, 5, false);
 
-BENCHMARK("std::chrono::high_resolution_clock::now()", settings)
+BENCHMARK("high_resolution_clock", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -61,7 +61,7 @@ BENCHMARK("std::chrono::high_resolution_clock::now()", settings)
     }
 }
 
-BENCHMARK("clock()", settings)
+BENCHMARK("clock", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -111,7 +111,7 @@ struct timespec clock_gettime(clockid_t clockid)
     return current;
 }
 
-BENCHMARK("clock_gettime(CLOCK_REALTIME)", settings)
+BENCHMARK("clock_gettime-CLOCK_REALTIME", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -152,7 +152,7 @@ BENCHMARK("clock_gettime(CLOCK_REALTIME)", settings)
     }
 }
 
-BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", settings)
+BENCHMARK("clock_gettime-CLOCK_MONOTONIC", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -195,7 +195,7 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC)", settings)
 
 #if !defined(__CYGWIN__)
 
-BENCHMARK("clock_gettime(CLOCK_MONOTONIC_COARSE)", settings)
+BENCHMARK("clock_gettime-CLOCK_MONOTONIC_COARSE", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -236,7 +236,7 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC_COARSE)", settings)
     }
 }
 
-BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", settings)
+BENCHMARK("clock_gettime-CLOCK_MONOTONIC_RAW", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -277,7 +277,7 @@ BENCHMARK("clock_gettime(CLOCK_MONOTONIC_RAW)", settings)
     }
 }
 
-BENCHMARK("clock_gettime(CLOCK_REALTIME_COARSE)", settings)
+BENCHMARK("clock_gettime-CLOCK_REALTIME_COARSE", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -330,7 +330,7 @@ struct timeval mygettimeofday()
     return current;
 }
 
-BENCHMARK("gettimeofday()", settings)
+BENCHMARK("gettimeofday", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -375,7 +375,7 @@ BENCHMARK("gettimeofday()", settings)
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 
-BENCHMARK("GetSystemTimePreciseAsFileTime()", settings)
+BENCHMARK("GetSystemTimePreciseAsFileTime", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -430,7 +430,7 @@ BENCHMARK("GetSystemTimePreciseAsFileTime()", settings)
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 
-BENCHMARK("GetTickCount()", settings)
+BENCHMARK("GetTickCount", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -475,7 +475,7 @@ BENCHMARK("GetTickCount()", settings)
 
 #if defined(_WIN32) || defined(_WIN64)
 
-BENCHMARK("GetTickCount64()", settings)
+BENCHMARK("GetTickCount64", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -534,7 +534,7 @@ LARGE_INTEGER QueryPerformanceFrequency()
     return frequency;
 }
 
-BENCHMARK("QueryPerformanceCounter()", settings)
+BENCHMARK("QueryPerformanceCounter", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
@@ -580,7 +580,7 @@ BENCHMARK("QueryPerformanceCounter()", settings)
 
 #if defined(_MSC_VER)
 
-BENCHMARK("__rdtsc()", settings)
+BENCHMARK("RDTSC", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();

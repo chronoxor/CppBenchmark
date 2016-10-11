@@ -202,6 +202,7 @@ private:
     int _threads;
 
     void InitLatencyHistogram(const std::tuple<int64_t, int64_t, int>& latency) noexcept;
+    void PrintLatencyHistogram(FILE* file, int32_t resolution) const noexcept;
     void FreeLatencyHistogram() noexcept;
 
     void StartCollecting() noexcept;

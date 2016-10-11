@@ -57,6 +57,7 @@ private:
     bool _init;
     bool _list;
     bool _silent;
+    int32_t _histograms;
     std::string _filter;
     std::string _output;
 

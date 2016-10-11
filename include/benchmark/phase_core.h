@@ -80,6 +80,13 @@ protected:
     */
     void InitLatencyHistogram(const std::tuple<int64_t, int64_t, int>& latency) noexcept
     { _metrics_current.InitLatencyHistogram(latency); }
+    //! Print result latency histogram
+    /*!
+        \param file - File to print into
+        \param resolution - Histogram resolution
+    */
+    void PrintLatencyHistogram(FILE* file, int32_t resolution) const noexcept
+    { _metrics_result.PrintLatencyHistogram(file, resolution); }
 
     //! Start collecting metrics in the current phase
     void StartCollectingMetrics() noexcept

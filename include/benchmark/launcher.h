@@ -62,6 +62,11 @@ public:
         \param reporter - Reporter interface
     */
     void Report(Reporter& reporter) const;
+    //! Report benchmarks High Dynamic Range (HDR) Histograms
+    /*!
+        \param resolution - Histogram resolution
+    */
+    void ReportHistograms(int32_t resolution) const;
 
 protected:
     //! Registered benchmarks collection
@@ -71,6 +76,8 @@ protected:
 
 private:
     void ReportPhase(Reporter& reporter, const PhaseCore& phase, const std::string& name) const;
+    void ReportPhaseHistograms(int32_t resolution, const PhaseCore& phase, const std::string& name) const;
+    void ReportPhaseHistogram(int32_t resolution, const PhaseCore& phase, const std::string& name) const;
 };
 
 } // namespace CppBenchmark
