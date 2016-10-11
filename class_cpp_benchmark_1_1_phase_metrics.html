@@ -118,6 +118,21 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae2cb7f7f4a567e415be3fae399ae3683"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdc41d716858fb0f4434473998a25d17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html">PhaseMetrics</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#afdc41d716858fb0f4434473998a25d17">operator=</a> (<a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html">PhaseMetrics</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:afdc41d716858fb0f4434473998a25d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66c55cd99fbdfa9447f4b58fc288227"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#ae66c55cd99fbdfa9447f4b58fc288227">latency</a> () const noexcept</td></tr>
+<tr class="memdesc:ae66c55cd99fbdfa9447f4b58fc288227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is metrics contains latency values?  <a href="#ae66c55cd99fbdfa9447f4b58fc288227">More...</a><br/></td></tr>
+<tr class="separator:ae66c55cd99fbdfa9447f4b58fc288227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a436368acaaa3de1e8938299917b2d694"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a436368acaaa3de1e8938299917b2d694">min_latency</a> () const noexcept</td></tr>
+<tr class="memdesc:a436368acaaa3de1e8938299917b2d694"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get latency minimal value of the phase execution.  <a href="#a436368acaaa3de1e8938299917b2d694">More...</a><br/></td></tr>
+<tr class="separator:a436368acaaa3de1e8938299917b2d694"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b7e49b9a03b45424fda81153bd7fd61"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a4b7e49b9a03b45424fda81153bd7fd61">max_latency</a> () const noexcept</td></tr>
+<tr class="memdesc:a4b7e49b9a03b45424fda81153bd7fd61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get latency maximal value of the phase execution.  <a href="#a4b7e49b9a03b45424fda81153bd7fd61">More...</a><br/></td></tr>
+<tr class="separator:a4b7e49b9a03b45424fda81153bd7fd61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10e14d2699653d7cfaae8d6893b6bf9e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a10e14d2699653d7cfaae8d6893b6bf9e">mean_latency</a> () const noexcept</td></tr>
+<tr class="memdesc:a10e14d2699653d7cfaae8d6893b6bf9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get latency mean value of the phase execution.  <a href="#a10e14d2699653d7cfaae8d6893b6bf9e">More...</a><br/></td></tr>
+<tr class="separator:a10e14d2699653d7cfaae8d6893b6bf9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44628340b3ad8b62378304881e49ca51"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a44628340b3ad8b62378304881e49ca51">stdv_latency</a> () const noexcept</td></tr>
+<tr class="memdesc:a44628340b3ad8b62378304881e49ca51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get latency standard deviation of the phase execution.  <a href="#a44628340b3ad8b62378304881e49ca51">More...</a><br/></td></tr>
+<tr class="separator:a44628340b3ad8b62378304881e49ca51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c1eccbcd80fa51b6f7d32aca41e4424"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a7c1eccbcd80fa51b6f7d32aca41e4424">avg_time</a> () const noexcept</td></tr>
 <tr class="memdesc:a7c1eccbcd80fa51b6f7d32aca41e4424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get average time of the phase execution.  <a href="#a7c1eccbcd80fa51b6f7d32aca41e4424">More...</a><br/></td></tr>
 <tr class="separator:a7c1eccbcd80fa51b6f7d32aca41e4424"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,6 +226,9 @@ std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a cla
 <tr class="memitem:a3a7c1c40248624ad072bb543e187d734"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#a3a7c1c40248624ad072bb543e187d734">SetThreads</a> (int <a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#afbcd2c0b890db561dd715876a61ffa10">threads</a>)</td></tr>
 <tr class="memdesc:a3a7c1c40248624ad072bb543e187d734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set threads value.  <a href="#a3a7c1c40248624ad072bb543e187d734">More...</a><br/></td></tr>
 <tr class="separator:a3a7c1c40248624ad072bb543e187d734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab48431555aa8f92bc1d6362a5959866b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#ab48431555aa8f92bc1d6362a5959866b">AddLatency</a> (int64_t <a class="el" href="class_cpp_benchmark_1_1_phase_metrics.html#ae66c55cd99fbdfa9447f4b58fc288227">latency</a>) noexcept</td></tr>
+<tr class="memdesc:ab48431555aa8f92bc1d6362a5959866b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add latency value of the current phase.  <a href="#ab48431555aa8f92bc1d6362a5959866b">More...</a><br/></td></tr>
+<tr class="separator:ab48431555aa8f92bc1d6362a5959866b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -237,14 +255,11 @@ Friends</h2></td></tr>
 <li>set custom integer/string values by name </li>
 </ul>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00036">36</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00038">38</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ae3e4e39a436f3f60093b5dd3683e2cc1"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">CppBenchmark::PhaseMetrics::PhaseMetrics </td>
@@ -253,16 +268,11 @@ Friends</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Default constructor. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00042">42</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00017">17</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -317,9 +327,6 @@ Friends</h2></td></tr>
 <a class="anchor" id="a70bbe13f81a473ea25635f77f256bbe6"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">CppBenchmark::PhaseMetrics::~PhaseMetrics </td>
@@ -328,14 +335,9 @@ Friends</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00056">56</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00022">22</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -370,7 +372,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00117">117</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00119">119</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -405,7 +407,7 @@ Friends</h2></td></tr>
 </dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="sort_8cpp-example.html#a9">sort.cpp</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00111">111</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00113">113</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -439,7 +441,41 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00105">105</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00107">107</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab48431555aa8f92bc1d6362a5959866b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppBenchmark::PhaseMetrics::AddLatency </td>
+          <td>(</td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>latency</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add latency value of the current phase. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">latency</td><td>- Latency value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00183">183</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -466,7 +502,7 @@ Friends</h2></td></tr>
 
 <p>Get average time of the phase execution. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00015">15</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00052">52</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -493,7 +529,7 @@ Friends</h2></td></tr>
 
 <p>Get data throughput (bytes / second) </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00046">46</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00083">83</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -520,7 +556,7 @@ Friends</h2></td></tr>
 
 <p>Get custom doubles map. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00095">95</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00097">97</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -547,7 +583,7 @@ Friends</h2></td></tr>
 
 <p>Get custom float map. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00093">93</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00095">95</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -574,7 +610,7 @@ Friends</h2></td></tr>
 
 <p>Get custom integers map. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00085">85</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00087">87</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -601,7 +637,7 @@ Friends</h2></td></tr>
 
 <p>Get custom integers 64 bit map. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00089">89</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00091">91</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -628,7 +664,7 @@ Friends</h2></td></tr>
 
 <p>Get custom strings map. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00097">97</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00099">99</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -655,7 +691,7 @@ Friends</h2></td></tr>
 
 <p>Get custom unsigned integers map. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00087">87</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00089">89</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -682,7 +718,7 @@ Friends</h2></td></tr>
 
 <p>Get custom unsigned integers 64 bit map. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00091">91</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00093">93</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -709,7 +745,7 @@ Friends</h2></td></tr>
 
 <p>Get items throughput (items / second) </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00038">38</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00075">75</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -736,7 +772,61 @@ Friends</h2></td></tr>
 
 <p>Get iterations throughput (iterations / second) </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00030">30</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00067">67</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae66c55cd99fbdfa9447f4b58fc288227"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CppBenchmark::PhaseMetrics::latency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is metrics contains latency values? </p>
+
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00027">27</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4b7e49b9a03b45424fda81153bd7fd61"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t CppBenchmark::PhaseMetrics::max_latency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get latency maximal value of the phase execution. </p>
+
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00037">37</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -763,7 +853,61 @@ Friends</h2></td></tr>
 
 <p>Get maximal time of the phase execution. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00025">25</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00062">62</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a10e14d2699653d7cfaae8d6893b6bf9e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CppBenchmark::PhaseMetrics::mean_latency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get latency mean value of the phase execution. </p>
+
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00042">42</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a436368acaaa3de1e8938299917b2d694"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t CppBenchmark::PhaseMetrics::min_latency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get latency minimal value of the phase execution. </p>
+
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00032">32</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -790,7 +934,7 @@ Friends</h2></td></tr>
 
 <p>Get minimal time of the phase execution. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00020">20</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00057">57</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -883,7 +1027,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00125">125</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00127">127</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -928,7 +1072,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00132">132</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00134">134</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -973,7 +1117,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00139">139</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00141">141</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1018,7 +1162,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00146">146</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00148">148</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1063,7 +1207,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00153">153</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00155">155</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1108,7 +1252,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00160">160</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00162">162</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1153,7 +1297,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00167">167</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00169">169</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1187,7 +1331,34 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00174">174</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00176">176</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a44628340b3ad8b62378304881e49ca51"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CppBenchmark::PhaseMetrics::stdv_latency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get latency standard deviation of the phase execution. </p>
+
+<p>Definition at line <a class="el" href="phase__metrics_8cpp_source.html#l00047">47</a> of file <a class="el" href="phase__metrics_8cpp_source.html">phase_metrics.cpp</a>.</p>
 
 </div>
 </div>
@@ -1212,7 +1383,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00099">99</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00101">101</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1239,7 +1410,7 @@ Friends</h2></td></tr>
 
 <p>Get total bytes processed in the phase. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00075">75</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00077">77</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1266,7 +1437,7 @@ Friends</h2></td></tr>
 
 <p>Get total items processed in the phase. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00073">73</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00075">75</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1293,7 +1464,7 @@ Friends</h2></td></tr>
 
 <p>Get total iterations made in the phase. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00071">71</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00073">73</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1320,7 +1491,7 @@ Friends</h2></td></tr>
 
 <p>Get total time of the phase execution. </p>
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00069">69</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00071">71</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>
@@ -1343,7 +1514,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00038">38</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__metrics_8h_source.html#l00040">40</a> of file <a class="el" href="phase__metrics_8h_source.html">phase_metrics.h</a>.</p>
 
 </div>
 </div>

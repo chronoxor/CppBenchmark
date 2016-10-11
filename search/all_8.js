@@ -6,7 +6,7 @@ var searchData=
   ['initializeconsumer',['InitializeConsumer',['../class_cpp_benchmark_1_1_fixture_p_c.html#ae74d35cf9ae57545908124bc18b474bf',1,'CppBenchmark::FixturePC']]],
   ['initializeproducer',['InitializeProducer',['../class_cpp_benchmark_1_1_fixture_p_c.html#ace95155e6d0e2f2c3c7e2a6e033afe82',1,'CppBenchmark::FixturePC']]],
   ['initializethread',['InitializeThread',['../class_cpp_benchmark_1_1_fixture_threads.html#a596201e3796f2e8908ed0ebeba7e61b8',1,'CppBenchmark::FixtureThreads']]],
-  ['initlatencyhistogram',['InitLatencyHistogram',['../class_cpp_benchmark_1_1_phase_core.html#a14db3b32620c6d699e9bbda8025d3d9f',1,'CppBenchmark::PhaseCore']]],
+  ['initlatencyhistogram',['InitLatencyHistogram',['../class_cpp_benchmark_1_1_phase_core.html#a08981d14d9cd3ce5853be2981dbab75d',1,'CppBenchmark::PhaseCore']]],
   ['is32bitos',['Is32BitOS',['../class_cpp_benchmark_1_1_environment.html#ad228e10d29225a0627b237b57c22159b',1,'CppBenchmark::Environment']]],
   ['is32bitprocess',['Is32BitProcess',['../class_cpp_benchmark_1_1_environment.html#ae309918c9d891ddcb005ba7a13bb879f',1,'CppBenchmark::Environment']]],
   ['is64bitos',['Is64BitOS',['../class_cpp_benchmark_1_1_environment.html#ad16dc2be1ac23488b975c8ac04caf4c2',1,'CppBenchmark::Environment']]],
@@ -16,6 +16,6 @@ var searchData=
   ['islittleendian',['IsLittleEndian',['../class_cpp_benchmark_1_1_environment.html#a73c8ff125ef096c34aa9d5a4e43f12de',1,'CppBenchmark::Environment']]],
   ['isrelease',['IsRelease',['../class_cpp_benchmark_1_1_environment.html#a1b3feb2d04c5ec77679f72b87bc2ce9e',1,'CppBenchmark::Environment']]],
   ['items_5fper_5fsecond',['items_per_second',['../class_cpp_benchmark_1_1_phase_metrics.html#ac6293c3c1467463713e384b73ee29599',1,'CppBenchmark::PhaseMetrics']]],
-  ['iterations',['iterations',['../class_cpp_benchmark_1_1_settings.html#ae62dfcf9dce88a0d85df424490b42805',1,'CppBenchmark::Settings::iterations() const noexcept'],['../class_cpp_benchmark_1_1_settings.html#ab51585f582894997005acebef1f89cc2',1,'CppBenchmark::Settings::Iterations(int64_t iterations)']]],
+  ['iterations',['Iterations',['../class_cpp_benchmark_1_1_settings.html#ab51585f582894997005acebef1f89cc2',1,'CppBenchmark::Settings::Iterations(int64_t iterations)'],['../class_cpp_benchmark_1_1_settings.html#ae62dfcf9dce88a0d85df424490b42805',1,'CppBenchmark::Settings::iterations() const noexcept']]],
   ['iterations_5fper_5fsecond',['iterations_per_second',['../class_cpp_benchmark_1_1_phase_metrics.html#a1687e7e7e1d695ed4d847cf5a1584897',1,'CppBenchmark::PhaseMetrics']]]
 ];

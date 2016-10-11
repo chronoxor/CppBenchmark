@@ -169,9 +169,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a14db3b32620c6d699e9bbda8025d3d9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#a14db3b32620c6d699e9bbda8025d3d9f">InitLatencyHistogram</a> (int64_t lowest, int64_t highest, int significant)</td></tr>
-<tr class="memdesc:a14db3b32620c6d699e9bbda8025d3d9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize latency histogram for the current phase.  <a href="#a14db3b32620c6d699e9bbda8025d3d9f">More...</a><br/></td></tr>
-<tr class="separator:a14db3b32620c6d699e9bbda8025d3d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08981d14d9cd3ce5853be2981dbab75d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#a08981d14d9cd3ce5853be2981dbab75d">InitLatencyHistogram</a> (const std::tuple&lt; int64_t, int64_t, int &gt; &amp;latency) noexcept</td></tr>
+<tr class="memdesc:a08981d14d9cd3ce5853be2981dbab75d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize latency histogram for the current phase.  <a href="#a08981d14d9cd3ce5853be2981dbab75d">More...</a><br/></td></tr>
+<tr class="separator:a08981d14d9cd3ce5853be2981dbab75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea97eb9f1e228a21521856a16d524b5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#aea97eb9f1e228a21521856a16d524b5c">StartCollectingMetrics</a> () noexcept</td></tr>
 <tr class="memdesc:aea97eb9f1e228a21521856a16d524b5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start collecting metrics in the current phase.  <a href="#aea97eb9f1e228a21521856a16d524b5c">More...</a><br/></td></tr>
 <tr class="separator:aea97eb9f1e228a21521856a16d524b5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,12 +181,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:afac9a558c8962f0dab07181ac725032f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#afac9a558c8962f0dab07181ac725032f">MergeMetrics</a> ()</td></tr>
 <tr class="memdesc:afac9a558c8962f0dab07181ac725032f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge phase metrics (current to result)  <a href="#afac9a558c8962f0dab07181ac725032f">More...</a><br/></td></tr>
 <tr class="separator:afac9a558c8962f0dab07181ac725032f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79484aac45e4484819e592a8477c983e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#a79484aac45e4484819e592a8477c983e">MergeMetrics</a> (const <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;phase)</td></tr>
-<tr class="memdesc:a79484aac45e4484819e592a8477c983e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge metrics of the two phases.  <a href="#a79484aac45e4484819e592a8477c983e">More...</a><br/></td></tr>
-<tr class="separator:a79484aac45e4484819e592a8477c983e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5ba90d8dae0b9905fd43ec38dd61659"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#ad5ba90d8dae0b9905fd43ec38dd61659">ResetMetrics</a> ()</td></tr>
-<tr class="memdesc:ad5ba90d8dae0b9905fd43ec38dd61659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset current phase metrics.  <a href="#ad5ba90d8dae0b9905fd43ec38dd61659">More...</a><br/></td></tr>
-<tr class="separator:ad5ba90d8dae0b9905fd43ec38dd61659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addc835feeb6cd78b92e60fa1a4e1fccb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#addc835feeb6cd78b92e60fa1a4e1fccb">MergeMetrics</a> (<a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;phase)</td></tr>
+<tr class="memdesc:addc835feeb6cd78b92e60fa1a4e1fccb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge metrics of the two phases.  <a href="#addc835feeb6cd78b92e60fa1a4e1fccb">More...</a><br/></td></tr>
+<tr class="separator:addc835feeb6cd78b92e60fa1a4e1fccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3837a6d1820748fa92f3feaf5980f971"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#a3837a6d1820748fa92f3feaf5980f971">ResetMetrics</a> () noexcept</td></tr>
+<tr class="memdesc:a3837a6d1820748fa92f3feaf5980f971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset current phase metrics.  <a href="#a3837a6d1820748fa92f3feaf5980f971">More...</a><br/></td></tr>
+<tr class="separator:a3837a6d1820748fa92f3feaf5980f971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -364,7 +364,7 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a14db3b32620c6d699e9bbda8025d3d9f"></a>
+<a class="anchor" id="a08981d14d9cd3ce5853be2981dbab75d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -374,30 +374,14 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">void CppBenchmark::PhaseCore::InitLatencyHistogram </td>
           <td>(</td>
-          <td class="paramtype">int64_t&#160;</td>
-          <td class="paramname"><em>lowest</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const std::tuple&lt; int64_t, int64_t, int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>latency</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int64_t&#160;</td>
-          <td class="paramname"><em>highest</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>significant</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -405,14 +389,12 @@ Friends</h2></td></tr>
 <p>Initialize latency histogram for the current phase. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">lowest</td><td>- The smallest possible value to be put into the histogram </td></tr>
-    <tr><td class="paramname">highest</td><td>- The largest possible value to be put into the histogram </td></tr>
-    <tr><td class="paramname">significant</td><td>- Number of significant figures </td></tr>
+    <tr><td class="paramname">latency</td><td>- Latency histogram parameters </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00083">83</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00081">81</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
@@ -439,11 +421,11 @@ Friends</h2></td></tr>
 
 <p>Merge phase metrics (current to result) </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00094">94</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00092">92</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a79484aac45e4484819e592a8477c983e"></a>
+<a class="anchor" id="addc835feeb6cd78b92e60fa1a4e1fccb"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -453,7 +435,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">void CppBenchmark::PhaseCore::MergeMetrics </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;&#160;</td>
           <td class="paramname"><em>phase</em></td><td>)</td>
           <td></td>
         </tr>
@@ -467,7 +449,7 @@ Friends</h2></td></tr>
 
 <p>Merge metrics of the two phases. </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00097">97</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00095">95</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
@@ -577,7 +559,7 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad5ba90d8dae0b9905fd43ec38dd61659"></a>
+<a class="anchor" id="a3837a6d1820748fa92f3feaf5980f971"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -593,14 +575,14 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Reset current phase metrics. </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00100">100</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00098">98</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
@@ -703,7 +685,7 @@ Friends</h2></td></tr>
 
 <p>Start collecting metrics in the current phase. </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00087">87</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00085">85</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
@@ -806,7 +788,7 @@ Friends</h2></td></tr>
 
 <p>Stop collecting metrics in the current phase. </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00090">90</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00088">88</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
