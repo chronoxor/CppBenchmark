@@ -27,11 +27,13 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
     * [Example 5: Benchmark with parameters](#example-5-benchmark-with-parameters)
     * [Example 6: Benchmark class](#example-6-benchmark-class)
     * [Example 7: Benchmark I/O operations](#example-7-benchmark-io-operations)
-    * [Example 8: Benchmark threads](#example-8-benchmark-threads)
-    * [Example 9: Benchmark threads with fixture](#example-9-benchmark-threads-with-fixture)
-    * [Example 10: Benchmark single producer, single consumer pattern](#example-10-benchmark-single-producer-single-consumer-pattern)
-    * [Example 11: Benchmark multiple producers, multiple consumers pattern](#example-11-benchmark-multiple-producers-multiple-consumers-pattern)
-    * [Example 12: Dynamic benchmarks](#example-12-dynamic-benchmarks)
+    * [Example 8: Benchmark latency with auto update](#example-8-benchmark-latency-with-auto-update)
+    * [Example 9: Benchmark latency with manual update](#example-9-benchmark-latency-with-manual-update)
+    * [Example 10: Benchmark threads](#example-10-benchmark-threads)
+    * [Example 11: Benchmark threads with fixture](#example-11-benchmark-threads-with-fixture)
+    * [Example 12: Benchmark single producer, single consumer pattern](#example-12-benchmark-single-producer-single-consumer-pattern)
+    * [Example 13: Benchmark multiple producers, multiple consumers pattern](#example-13-benchmark-multiple-producers-multiple-consumers-pattern)
+    * [Example 14: Dynamic benchmarks](#example-14-dynamic-benchmarks)
   * [Command line options](#command-line-options)
 
 # Features
@@ -586,7 +588,54 @@ Bytes throughput: 1.035 GiB / second
 ===============================================================================
 ```
 
-## Example 8: Benchmark threads
+## Example 8: Benchmark latency with auto update
+```C++
+#include "cppbenchmark.h"
+
+#include <chrono>
+#include <thread>
+
+const uint64_t iterations = 100;
+const auto settings = CppBenchmark::Settings().Iterations(iterations).Latency(1, 1000000000, 5);
+
+BENCHMARK("sleep", settings)
+{
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+}
+
+BENCHMARK_MAIN()
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: sleep
+Attempts: 5
+Iterations: 100
+-------------------------------------------------------------------------------
+Phase: sleep
+Latency (Min): 10.014 ms / iteration
+Latency (Max): 11.105 ms / iteration
+Latency (Mean): 1.04822e+07
+Latency (StDv): 388453
+Total time: 1.048 s
+Total iterations: 100
+Iterations throughput: 95 / second
+===============================================================================
+```
+
+If the benchmark is launched with '--histograms=1000' parameter then a file
+with [High Dynamic Range (HDR) Histogram](http://hdrhistogram.github.io/HdrHistogram/)
+will be created: [sleep.hdr](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.hdr)
+
+Finally you can use [HdrHistogram Plotter](http://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
+in order to generate and analyze latency histogram:
+
+[Sleep HDR Histogram](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.png)
+
+## Example 9: Benchmark latency with manual update
+
+## Example 10: Benchmark threads
 ```C++
 #include "cppbenchmark.h"
 
@@ -669,7 +718,7 @@ Iterations throughput: 6396501 / second
 ===============================================================================
 ```
 
-## Example 9: Benchmark threads with fixture
+## Example 11: Benchmark threads with fixture
 ```C++
 #include "cppbenchmark.h"
 
@@ -819,7 +868,7 @@ Iterations throughput: 32652780 / second
 ===============================================================================
 ```
 
-## Example 10: Benchmark single producer, single consumer pattern
+## Example 12: Benchmark single producer, single consumer pattern
 ```C++
 #include "cppbenchmark.h"
 
@@ -938,7 +987,7 @@ Iterations throughput: 15557246 / second
 ===============================================================================
 ```
 
-## Example 11: Benchmark multiple producers, multiple consumers pattern
+## Example 13: Benchmark multiple producers, multiple consumers pattern
 ```C++
 #include "cppbenchmark.h"
 
@@ -1131,7 +1180,7 @@ Iterations throughput: 2044668 / second
 ===============================================================================
 ```
 
-## Example 12: Dynamic benchmarks
+## Example 14: Dynamic benchmarks
 Dynamic benchmarks are usefull when you have some working program and want to benchmark some
 critical parts and code fragments. In this case just include cppbenchmark.h header and use
 BENCHCODE_SCOPE(), BENCHCODE_START(), BENCHCODE_STOP(), BENCHCODE_REPORT() macro. All of the
@@ -1278,8 +1327,10 @@ Total time: 1.007 s
 
 # Command line options
 When you create and build a benchmark you can run it with the following command line options:
-* **-h, --help** - Show help
-* **-f, --filter** - Filter benchmarks by the given regexp pattern
-* **-l, --list** - List all avaliable benchmarks
-* **-o, --output** - Output format (console, csv, json). Default: console
+* **--version**  - Show program's version number and exit
+* **-h, --help** - Show this help message and exit
+* **-f FILTER, --filter=FILTER** - Filter benchmarks by the given regexp pattern
+* *-l, --list** - List all avaliable benchmarks
+* **-o OUTPUT, --output=OUTPUT** - Output format (console, csv, json). Default: console
 * **-s, --silent** - Launch in silent mode. No progress will be shown!
+* **-r HISTOGRAMS, --histograms=HISTOGRAMS** - Create High Dynamic Range (HDR) Histogram files with a given resolution. Default: 0
