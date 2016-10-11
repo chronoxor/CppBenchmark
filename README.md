@@ -614,24 +614,25 @@ Attempts: 5
 Iterations: 100
 -------------------------------------------------------------------------------
 Phase: sleep
-Latency (Min): 10.014 ms / iteration
-Latency (Max): 11.105 ms / iteration
-Latency (Mean): 1.04822e+07
-Latency (StDv): 388453
-Total time: 1.048 s
+Latency (Min): 10.013 ms / iteration
+Latency (Max): 11.134 ms / iteration
+Latency (Mean): 1.05137e+07
+Latency (StDv): 381727
+Total time: 1.051 s
 Total iterations: 100
 Iterations throughput: 95 / second
 ===============================================================================
 ```
 
-If the benchmark is launched with '--histograms=1000' parameter then a file
+If the benchmark is launched with '--histograms=100' parameter then a file
 with [High Dynamic Range (HDR) Histogram](http://hdrhistogram.github.io/HdrHistogram/)
 will be created: [sleep.hdr](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.hdr)
 
 Finally you can use [HdrHistogram Plotter](http://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
 in order to generate and analyze latency histogram:
 
-[Sleep HDR Histogram](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.png)
+![Sleep HDR Histogram][sleep]
+[sleep]: https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.png "Sleep HDR Histogram"
 
 ## Example 9: Benchmark latency with manual update
 
