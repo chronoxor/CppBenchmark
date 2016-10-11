@@ -22,4 +22,3 @@
 	path = modules/zlib
 	url = https://github.com/madler/zlib.git
 	branch = master
-	ignore = dirty
