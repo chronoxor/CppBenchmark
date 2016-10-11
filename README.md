@@ -43,8 +43,9 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 * [Benchmark infinite run with cancelation](#example-2-benchmark-with-cancelation)
 * [Benchmark items processing speed](#example-6-benchmark-class)
 * [Benchmark I/O throughput](#example-7-benchmark-io-operations)
-* [Benchmark threads](#example-8-benchmark-threads)
-* [Benchmark producers/consumers pattern](#example-10-benchmark-single-producer-single-consumer-pattern)
+* [Benchmark latency](#example-8-benchmark-latency-with-auto-update) with [High Dynamic Range (HDR) Histograms](http://hdrhistogram.github.io/HdrHistogram/)
+* [Benchmark threads](#example-10-benchmark-threads)
+* [Benchmark producers/consumers pattern](#example-12-benchmark-single-producer-single-consumer-pattern)
 * Different reporting formats: console, csv, json
 * Colored console progress and report
 
@@ -624,9 +625,9 @@ Iterations throughput: 95 / second
 ===============================================================================
 ```
 
-If the benchmark is launched with '--histograms=100' parameter then a file
+If the benchmark is launched with **--histograms=100** parameter then a file
 with [High Dynamic Range (HDR) Histogram](http://hdrhistogram.github.io/HdrHistogram/)
-will be created: [sleep.hdr](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.hdr)
+will be created - [sleep.hdr](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.hdr)
 
 Finally you can use [HdrHistogram Plotter](http://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
 in order to generate and analyze latency histogram:
