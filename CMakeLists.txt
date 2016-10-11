@@ -36,7 +36,6 @@ add_subdirectory("modules")
 
 # Includes
 include_directories("include")
-include_directories("modules/catch/single_include")
 
 # Temporary disable some warnings
 # C4200: nonstandard extension used : zero-sized array in struct/union
@@ -74,6 +73,7 @@ if(NOT CPPBENCHMARK_MODULE)
   file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
   set_source_files_properties(${TESTS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
   add_executable(cppbenchmark-tests ${CATCH} ${TESTS_SOURCE_FILES})
+  target_include_directories(cppbenchmark-tests PRIVATE "modules/catch/single_include")
   target_link_libraries(cppbenchmark-tests cppbenchmark ${SYSTEM})
   set_target_properties(cppbenchmark-tests PROPERTIES FOLDER tests)
   list(APPEND INSTALL_TARGETS cppbenchmark-tests)
