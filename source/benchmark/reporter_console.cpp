@@ -64,14 +64,17 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
     {
         if (metrics.latency())
         {
-            _stream << Color::WHITE << "Latency (Min): " << Color::BROWN << GenerateTimePeriod(metrics.min_latency()) << " / iteration" << std::endl;
-            _stream << Color::WHITE << "Latency (Max): " << Color::BROWN << GenerateTimePeriod(metrics.max_latency()) << " / iteration" << std::endl;
-            _stream << Color::WHITE << "Latency (Mean): " << Color::BROWN << metrics.mean_latency() << std::endl;
-            _stream << Color::WHITE << "Latency (StDv): " << Color::BROWN << metrics.stdv_latency() << std::endl;
+            _stream << Color::WHITE << "Latency (Min): " << Color::YELLOW << GenerateTimePeriod(metrics.min_latency()) << " / iteration" << std::endl;
+            _stream << Color::WHITE << "Latency (Max): " << Color::YELLOW << GenerateTimePeriod(metrics.max_latency()) << " / iteration" << std::endl;
+            _stream << Color::WHITE << "Latency (Mean): " << Color::YELLOW << metrics.mean_latency() << std::endl;
+            _stream << Color::WHITE << "Latency (StDv): " << Color::YELLOW << metrics.stdv_latency() << std::endl;
         }
-        _stream << Color::WHITE << "Average time: " << Color::YELLOW << GenerateTimePeriod(metrics.avg_time()) << " / iteration" << std::endl;
-        _stream << Color::WHITE << "Minimal time: " << Color::YELLOW << GenerateTimePeriod(metrics.min_time()) << " / iteration" << std::endl;
-        _stream << Color::WHITE << "Maximal time: " << Color::YELLOW << GenerateTimePeriod(metrics.max_time()) << " / iteration" << std::endl;
+        else
+        {
+            _stream << Color::WHITE << "Average time: " << Color::YELLOW << GenerateTimePeriod(metrics.avg_time()) << " / iteration" << std::endl;
+            _stream << Color::WHITE << "Minimal time: " << Color::YELLOW << GenerateTimePeriod(metrics.min_time()) << " / iteration" << std::endl;
+            _stream << Color::WHITE << "Maximal time: " << Color::YELLOW << GenerateTimePeriod(metrics.max_time()) << " / iteration" << std::endl;
+        }
     }
     _stream << Color::WHITE << "Total time: " << Color::LIGHTRED << GenerateTimePeriod(metrics.total_time()) << std::endl;
     if (metrics.total_iterations() > 1)

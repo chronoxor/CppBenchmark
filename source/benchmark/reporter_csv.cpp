@@ -27,11 +27,15 @@ void ReporterCSV::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metric
         << metrics.mean_latency() << ','
         << metrics.stdv_latency() << ',';
     }
+    else
+    {
+        _stream
+        << metrics.avg_time() << ','
+        << metrics.min_time() << ','
+        << metrics.max_time() << ',';
+    }
 
     _stream
-    << metrics.avg_time() << ','
-    << metrics.min_time() << ','
-    << metrics.max_time() << ','
     << metrics.total_time() << ','
     << metrics.total_iterations() << ','
     << metrics.total_items() << ','
