@@ -28,7 +28,10 @@ if(NOT TARGET zlib)
     add_definitions(-DNO_FSEEKO)
   endif()
   check_include_file(unistd.h Z_HAVE_UNISTD_H)
-
+  if(Z_HAVE_UNISTD_H)
+    add_definitions(-DZ_HAVE_UNISTD_H)
+  endif()
+  
   # Module definitions
   if(MSVC)
     add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
@@ -55,6 +58,8 @@ if(NOT TARGET zlib)
     # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
     set(${SOURCE_FILES} "zlib/contrib/masmx64/inffas8664.c" "zlib/contrib/masmx64/inffas8664.c")
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
+  else()
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
   endif()
   add_library(zlib ${SOURCE_FILES} ${ASSEMBLER_FILES})
   target_link_libraries(zlib)
