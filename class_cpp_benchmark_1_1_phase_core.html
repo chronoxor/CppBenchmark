@@ -172,6 +172,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a08981d14d9cd3ce5853be2981dbab75d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#a08981d14d9cd3ce5853be2981dbab75d">InitLatencyHistogram</a> (const std::tuple&lt; int64_t, int64_t, int &gt; &amp;latency) noexcept</td></tr>
 <tr class="memdesc:a08981d14d9cd3ce5853be2981dbab75d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize latency histogram for the current phase.  <a href="#a08981d14d9cd3ce5853be2981dbab75d">More...</a><br/></td></tr>
 <tr class="separator:a08981d14d9cd3ce5853be2981dbab75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a325d08bec5b061796eca32d2da0f87ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#a325d08bec5b061796eca32d2da0f87ed">PrintLatencyHistogram</a> (FILE *file, int32_t resolution) const noexcept</td></tr>
+<tr class="memdesc:a325d08bec5b061796eca32d2da0f87ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print result latency histogram.  <a href="#a325d08bec5b061796eca32d2da0f87ed">More...</a><br/></td></tr>
+<tr class="separator:a325d08bec5b061796eca32d2da0f87ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea97eb9f1e228a21521856a16d524b5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html#aea97eb9f1e228a21521856a16d524b5c">StartCollectingMetrics</a> () noexcept</td></tr>
 <tr class="memdesc:aea97eb9f1e228a21521856a16d524b5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start collecting metrics in the current phase.  <a href="#aea97eb9f1e228a21521856a16d524b5c">More...</a><br/></td></tr>
 <tr class="separator:aea97eb9f1e228a21521856a16d524b5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -421,7 +424,7 @@ Friends</h2></td></tr>
 
 <p>Merge phase metrics (current to result) </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00092">92</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00099">99</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
@@ -449,7 +452,7 @@ Friends</h2></td></tr>
 
 <p>Merge metrics of the two phases. </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00095">95</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00102">102</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
@@ -559,6 +562,51 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a325d08bec5b061796eca32d2da0f87ed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppBenchmark::PhaseCore::PrintLatencyHistogram </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>resolution</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print result latency histogram. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>- File to print into </td></tr>
+    <tr><td class="paramname">resolution</td><td>- Histogram resolution </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00088">88</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a3837a6d1820748fa92f3feaf5980f971"></a>
 <div class="memitem">
 <div class="memproto">
@@ -582,7 +630,7 @@ Friends</h2></td></tr>
 
 <p>Reset current phase metrics. </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00098">98</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00105">105</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
@@ -685,7 +733,7 @@ Friends</h2></td></tr>
 
 <p>Start collecting metrics in the current phase. </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00085">85</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00092">92</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>
@@ -788,7 +836,7 @@ Friends</h2></td></tr>
 
 <p>Stop collecting metrics in the current phase. </p>
 
-<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00088">88</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
+<p>Definition at line <a class="el" href="phase__core_8h_source.html#l00095">95</a> of file <a class="el" href="phase__core_8h_source.html">phase_core.h</a>.</p>
 
 </div>
 </div>

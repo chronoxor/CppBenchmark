@@ -16,6 +16,6 @@ var searchData=
   ['islittleendian',['IsLittleEndian',['../class_cpp_benchmark_1_1_environment.html#a73c8ff125ef096c34aa9d5a4e43f12de',1,'CppBenchmark::Environment']]],
   ['isrelease',['IsRelease',['../class_cpp_benchmark_1_1_environment.html#a1b3feb2d04c5ec77679f72b87bc2ce9e',1,'CppBenchmark::Environment']]],
   ['items_5fper_5fsecond',['items_per_second',['../class_cpp_benchmark_1_1_phase_metrics.html#ac6293c3c1467463713e384b73ee29599',1,'CppBenchmark::PhaseMetrics']]],
-  ['iterations',['Iterations',['../class_cpp_benchmark_1_1_settings.html#ab51585f582894997005acebef1f89cc2',1,'CppBenchmark::Settings::Iterations(int64_t iterations)'],['../class_cpp_benchmark_1_1_settings.html#ae62dfcf9dce88a0d85df424490b42805',1,'CppBenchmark::Settings::iterations() const noexcept']]],
+  ['iterations',['iterations',['../class_cpp_benchmark_1_1_settings.html#ae62dfcf9dce88a0d85df424490b42805',1,'CppBenchmark::Settings::iterations() const noexcept'],['../class_cpp_benchmark_1_1_settings.html#ab51585f582894997005acebef1f89cc2',1,'CppBenchmark::Settings::Iterations(int64_t iterations)']]],
   ['iterations_5fper_5fsecond',['iterations_per_second',['../class_cpp_benchmark_1_1_phase_metrics.html#a1687e7e7e1d695ed4d847cf5a1584897',1,'CppBenchmark::PhaseMetrics']]]
 ];
