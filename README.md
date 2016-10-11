@@ -7,8 +7,8 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
 [CppBenchmark API reference](http://chronoxor.github.io/CppBenchmark/index.html)
 
-[![Build status](https://travis-ci.org/chronoxor/CppBenchmark.svg?branch=master)](https://travis-ci.org/chronoxor/CppBenchmark)
-[![Build status](https://ci.appveyor.com/api/projects/status/5xr4pimatmjtxtqq?svg=true)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
+[![Build status](https://img.shields.io/travis/chronoxor/CppBenchmark/master.svg?label=Linux)](https://travis-ci.org/chronoxor/CppBenchmark)
+[![Build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
 
 # Contents
   * [Features](#features)
@@ -1283,7 +1283,7 @@ const int THREADS = 8;
 void init()
 {
     auto benchmark = BENCHCODE_SCOPE("Initialization");
-
+               ..
     std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
