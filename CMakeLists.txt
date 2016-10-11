@@ -38,8 +38,6 @@ add_subdirectory("modules")
 # C4200: nonstandard extension used : zero-sized array in struct/union
 if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
   set(COMMON_COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4200")
-elseif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
-  set(COMMON_COMPILE_FLAGS "")
 endif()
 
 # Library

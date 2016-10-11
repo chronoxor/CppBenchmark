@@ -55,8 +55,6 @@ if(NOT TARGET zlib)
     # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
     set(${SOURCE_FILES} "zlib/contrib/masmx64/inffas8664.c" "zlib/contrib/masmx64/inffas8664.c")
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
-  else()
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
   endif()
   add_library(zlib ${SOURCE_FILES} ${ASSEMBLER_FILES})
   target_link_libraries(zlib)
