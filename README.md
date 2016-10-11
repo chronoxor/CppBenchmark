@@ -1,7 +1,7 @@
 # CppBenchmark
 
-[![Build status](https://img.shields.io/travis/chronoxor/CppBenchmark/master.svg?label=Linux)](https://travis-ci.org/chronoxor/CppBenchmark)
-[![Build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
+[![Linux build status](https://img.shields.io/travis/chronoxor/CppBenchmark/master.svg?label=Linux)](https://travis-ci.org/chronoxor/CppBenchmark)
+[![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
 
 C++ Benchmark Library allows to create performance benchmarks of some code to investigate
 average/minimal/maximal execution time, items processing processing speed, I/O throughput.
