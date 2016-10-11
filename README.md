@@ -1,4 +1,8 @@
 # CppBenchmark
+
+[![Build status](https://img.shields.io/travis/chronoxor/CppBenchmark/master.svg?label=Linux)](https://travis-ci.org/chronoxor/CppBenchmark)
+[![Build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
+
 C++ Benchmark Library allows to create performance benchmarks of some code to investigate
 average/minimal/maximal execution time, items processing processing speed, I/O throughput.
 CppBenchmark library has lots of [features](#features) and allows to make benchmarks for
@@ -6,9 +10,6 @@ CppBenchmark library has lots of [features](#features) and allows to make benchm
 with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
 [CppBenchmark API reference](http://chronoxor.github.io/CppBenchmark/index.html)
-
-[![Build status](https://img.shields.io/travis/chronoxor/CppBenchmark/master.svg?label=Linux)](https://travis-ci.org/chronoxor/CppBenchmark)
-[![Build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
 
 # Contents
   * [Features](#features)
