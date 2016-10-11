@@ -636,6 +636,87 @@ in order to generate and analyze latency histogram:
 [sleep]: https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.png "Sleep HDR Histogram"
 
 ## Example 9: Benchmark latency with manual update
+```C++
+#include "benchmark/cppbenchmark.h"
+
+#include <chrono>
+#include <limits>
+
+const uint64_t iterations = 10000000;
+const auto settings = CppBenchmark::Settings().Iterations(iterations).Latency(1, 1000000000, 5, false);
+
+BENCHMARK("high_resolution_clock", settings)
+{
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static auto latency_timestamp = std::chrono::high_resolution_clock::now();
+    static auto resolution_timestamp = std::chrono::high_resolution_clock::now();
+    static uint64_t count = 0;
+
+    // Get the current timestamp
+    auto current = std::chrono::high_resolution_clock::now();
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = std::chrono::duration_cast<std::chrono::nanoseconds>(current - latency_timestamp).count();
+    if (latency > 0)
+    {
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = std::chrono::duration_cast<std::chrono::nanoseconds>(current - resolution_timestamp).count();
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
+        {
+            minresolution = resolution;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (resolution > maxresolution)
+        {
+            maxresolution = resolution;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        resolution_timestamp = current;
+    }
+}
+```
+
+Report fragment is the following:
+```
+===============================================================================
+Benchmark: high_resolution_clock
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: high_resolution_clock
+Latency (Min): 38 ns / iteration
+Latency (Max): 1.037 ms / iteration
+Latency (Mean): 53.0462
+Latency (StDv): 1136.37
+Total time: 468.924 ms
+Total iterations: 10000000
+Iterations throughput: 21325385 / second
+Custom values:
+	resolution-max: 7262968
+	resolution-min: 311
+===============================================================================
+```
+
+If the benchmark is launched with **--histograms=100** parameter then a file
+with [High Dynamic Range (HDR) Histogram](http://hdrhistogram.github.io/HdrHistogram/)
+will be created - [clock.hdr](https://github.com/chronoxor/CppBenchmark/raw/master/images/clock.hdr)
+
+Finally you can use [HdrHistogram Plotter](http://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
+in order to generate and analyze latency histogram:
+
+![High resolution clock HDR Histogram][clock]
+[clock]: https://github.com/chronoxor/CppBenchmark/raw/master/images/clock.png "High resolution clock HDR Histogram"
 
 ## Example 10: Benchmark threads
 ```C++
