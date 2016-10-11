@@ -473,7 +473,7 @@ BENCHMARK("GetTickCount", settings)
 
 #endif
 
-#if defined(_WIN32) || defined(_WIN64)
+#if (defined(_WIN32) || defined(_WIN64)) && !defined(__CYGWIN__)
 
 BENCHMARK("GetTickCount64", settings)
 {
