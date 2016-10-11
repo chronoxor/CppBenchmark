@@ -1,9 +1,5 @@
 if(NOT TARGET HdrHistogram)
 
-  # Module includes
-  include_directories("zlib")
-  include_directories("${CMAKE_CURRENT_BINARY_DIR}/zlib")
-
   # Module library
   file(GLOB SOURCE_FILES "HdrHistogram/src/*.c")
   if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
@@ -13,6 +9,7 @@ if(NOT TARGET HdrHistogram)
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4146 /wd4200 /wd4244")
   endif()
   add_library(HdrHistogram ${SOURCE_FILES})
+  target_include_directories(HdrHistogram PRIVATE "zlib" PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/zlib")
   target_link_libraries(HdrHistogram zlib)
 
   # Module folder
