@@ -39,7 +39,7 @@ if(NOT TARGET zlib)
   endif()
 
   # Module assembler files
-  if(CMAKE_COMPILER_IS_GNUCC)
+  if(CMAKE_COMPILER_IS_GNUCC AND NOT CYGWIN)
     add_definitions(-DASMV)
     set(ASSEMBLER_FILES "zlib/contrib/amd64/amd64-match.S")
     set_source_files_properties(${ASSEMBLER_FILES} PROPERTIES LANGUAGE C COMPILE_FLAGS -DNO_UNDERLINE)
