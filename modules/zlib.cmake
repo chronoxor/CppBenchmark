@@ -39,7 +39,7 @@ if(NOT TARGET zlib)
   endif()
 
   # Module assembler files
-  if(CMAKE_COMPILER_IS_GNUCC AND NOT CYGWIN)
+  if(NOT MSVC AND NOT CYGWIN)
     add_definitions(-DASMV)
     set(ASSEMBLER_FILES "zlib/contrib/amd64/amd64-match.S")
     set_source_files_properties(${ASSEMBLER_FILES} PROPERTIES LANGUAGE C COMPILE_FLAGS -DNO_UNDERLINE)
@@ -51,15 +51,15 @@ if(NOT TARGET zlib)
 
   # Module library
   file(GLOB SOURCE_FILES "zlib/*.c")
-  if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
+  if(NOT MSVC)
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
+  else()
     # C4127: conditional expression is constant
     # C4131: 'function' : uses old-style declarator
     # C4210: nonstandard extension used : function given file scope
     # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
     set(${SOURCE_FILES} "zlib/contrib/masmx64/inffas8664.c" "zlib/contrib/masmx64/inffas8664.c")
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
-  else()
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "")
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
   endif()
   add_library(zlib ${SOURCE_FILES} ${ASSEMBLER_FILES})
   target_link_libraries(zlib)

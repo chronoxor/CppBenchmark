@@ -22,7 +22,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # Compiler features
 include(SetCompilerFeatures)
-include(SetCompilerWarningAll)
+include(SetCompilerWarnings)
 include(SetPlatformFeatures)
 
 # External packages
@@ -35,16 +35,16 @@ list(APPEND SYSTEM Threads::Threads)
 add_subdirectory("modules")
 
 # Temporary disable some warnings
-# C4200: nonstandard extension used : zero-sized array in struct/union
-if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
-  set(COMMON_COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} /wd4200")
-elseif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
-  set(COMMON_COMPILE_FLAGS "")
+if(NOT MSVC)
+  set(PEDANTIC_COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
+else()
+  # C4200: nonstandard extension used : zero-sized array in struct/union
+  set(PEDANTIC_COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4200")
 endif()
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
-set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
+set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
 add_library(cppbenchmark ${SOURCE_FILES})
 target_include_directories(cppbenchmark PUBLIC "include")
 target_link_libraries(cppbenchmark cpp-optparse HdrHistogram)
@@ -59,7 +59,7 @@ if(NOT CPPBENCHMARK_MODULE)
   foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
     string(REGEX REPLACE "(.*)\\.cpp" "\\1" EXAMPLE_NAME ${EXAMPLE_FILE})
     set(EXAMPLE_TARGET "cppbenchmark-example-${EXAMPLE_NAME}")
-    set_source_files_properties(examples/${EXAMPLE_FILE} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
+    set_source_files_properties(examples/${EXAMPLE_FILE} PROPERTIES COMPILE_FLAGS "${BENCHMARK_COMPILE_FLAGS}")
     add_executable(${EXAMPLE_TARGET} examples/${EXAMPLE_FILE})
     target_include_directories(${EXAMPLE_TARGET} PUBLIC "include")
     target_link_libraries(${EXAMPLE_TARGET} cppbenchmark ${SYSTEM})
@@ -70,7 +70,7 @@ if(NOT CPPBENCHMARK_MODULE)
 
   # Tests
   file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
-  set_source_files_properties(${TESTS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
+  set_source_files_properties(${TESTS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
   add_executable(cppbenchmark-tests ${CATCH} ${TESTS_SOURCE_FILES})
   target_include_directories(cppbenchmark-tests PUBLIC "include" PRIVATE "modules/catch/single_include")
   target_link_libraries(cppbenchmark-tests cppbenchmark ${SYSTEM})
