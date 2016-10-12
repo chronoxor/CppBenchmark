@@ -17,6 +17,8 @@ matrix:
             - cmake
             - doxygen
             - graphviz
+            - libbfd-dev
+            - uuid-dev
     - env: Linux, clang
       os: linux
       compiler: clang
@@ -30,6 +32,8 @@ matrix:
             - cmake
             - doxygen
             - graphviz
+            - libbfd-dev
+            - uuid-dev
     - env: OSX, clang
       os: osx
       osx_image: xcode8
