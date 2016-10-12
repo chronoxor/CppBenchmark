@@ -79,7 +79,7 @@ public:
     int launching() const { return _launching; }
     int launched() const { return _launched; }
 
-    void Launch() { Launcher::Launch(".es."); }
+    void Execute() { Launcher::Launch(".es."); }
 
 protected:
     void onLaunching(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt) override { _launching++; }
@@ -100,8 +100,8 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
     TestLauncher launcher;
     launcher.AddBenchmark(benchmark);
 
-    // Launch
-    launcher.Launch();
+    // Execute benchmarks
+    launcher.Execute();
 
     // Console benchmark report
     std::ostringstream stream_console;

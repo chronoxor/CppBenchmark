@@ -43,8 +43,8 @@ public:
         \param argv - Arguments values
     */
     void Initialize(const int argc, char const* const* const argv);
-    //! Launch benchmarks executions and show progress in console
-    void Launch();
+    //! Execute benchmarks and show progress in console
+    void Execute();
     //! Report benchmarks results in console
     void Report() const;
 

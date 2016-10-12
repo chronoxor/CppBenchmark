@@ -61,7 +61,7 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
     _init = true;
 }
 
-void LauncherConsole::Launch()
+void LauncherConsole::Execute()
 {
     if (_list)
     {

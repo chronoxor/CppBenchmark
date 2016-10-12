@@ -47,7 +47,7 @@ public:
 int main(int argc, char** argv)\
 {\
     CppBenchmark::LauncherConsole::GetInstance().Initialize(argc, argv);\
-    CppBenchmark::LauncherConsole::GetInstance().Launch();\
+    CppBenchmark::LauncherConsole::GetInstance().Execute();\
     CppBenchmark::LauncherConsole::GetInstance().Report();\
     return 0;\
 }
