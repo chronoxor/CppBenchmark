@@ -11,6 +11,7 @@
 #include "benchmark/system.h"
 
 #include <algorithm>
+#include <cstdlib>
 
 #include "../../modules/HdrHistogram/src/hdr_histogram.h"
 
