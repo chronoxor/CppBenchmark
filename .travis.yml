@@ -1,31 +1,31 @@
 # Programming language definition
 language: cpp
 
-# Compilers
-compiler:
-  - gcc
-
-# Operation systems
-os:
-  - linux
+# Build matrix (OS, compiler)
+matrix:
+  include:
+    - env: Linux, gcc
+      os: linux
+      compiler: gcc
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - gcc-5
+          - g++-5
+          - cmake
+          - doxygen
+          - graphviz
+          - libbfd-dev
+          - uuid-dev
+    - env: OSX, clang
+      os: osx
+      osx_image: xcode8
+      compiler: clang
 
 # Using Trusty environment
 sudo: required
 dist: trusty
-
-# Add-ons and packages
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-5
-      - g++-5
-      - cmake
-      - doxygen
-      - graphviz
-      - libbfd-dev
-      - uuid-dev
 
 # Branches to build
 branches:
