@@ -24,8 +24,9 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.6
           packages:
-            - clang
+            - clang-3.6
             - cmake
             - doxygen
             - graphviz
