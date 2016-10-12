@@ -4,40 +4,37 @@ language: cpp
 # Build matrix (OS, compiler)
 matrix:
   include:
-    - env: Linux, gcc
-      os: linux
+    - os: linux
       compiler: gcc
+      env: GCC_VERSION=6
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - gcc-5
-            - g++-5
+            - gcc-6
+            - g++-6
             - cmake
             - doxygen
             - graphviz
             - libbfd-dev
             - uuid-dev
-    - env: Linux, clang
-      os: linux
+    - os: linux
       compiler: clang
+      env: CLANG_VERSION=3.8
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.6
+            - llvm-toolchain-precise-3.8
           packages:
-            - clang-3.6
+            - clang-3.8
             - cmake
             - doxygen
             - graphviz
             - libbfd-dev
             - uuid-dev
-# Temporary disable OSX build
-#    - env: OSX, clang
-#      os: osx
-#      osx_image: xcode8
+#    - os: osx
 #      compiler: clang
 
 # Using Trusty environment
@@ -58,10 +55,10 @@ before_install:
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
   - git config --global push.default simple
+  - if [ "$CXX" = "g++" ]; then export CC="gcc-${GCC_VERSION}" CXX="g++-${GCC_VERSION}"; fi
+  - if [ "$CXX" = "clang++" ]; then export CC="clang-${CLANG_VERSION}" CXX="clang++-${CLANG_VERSION}"; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz; fi
-  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
-  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
 
 # Build scripts
 script: 
