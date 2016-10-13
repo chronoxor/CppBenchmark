@@ -2,10 +2,6 @@
 	path = cmake
 	url = https://github.com/chronoxor/CppCMakeScripts.git
 	branch = master
-[submodule "scripts"]
-	path = scripts
-	url = https://github.com/chronoxor/CppBuildScripts.git
-	branch = master
 [submodule "modules/catch"]
 	path = modules/catch
 	url = https://github.com/philsquared/Catch.git
