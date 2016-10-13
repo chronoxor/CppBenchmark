@@ -63,13 +63,8 @@ before_install:
 
 # Build scripts
 script: 
-  - cd scripts
-  - ./01-generate-Unix.sh
-  - ./02-build-Unix.sh
-  - ./03-tests.sh
-  - ./04-install-Unix.sh
-  - ./05-doxygen-Unix.sh
-  - ./06-clean.sh
+  - cd build
+  - ./unix.sh
 
 # Don't send notifications on success
 notifications:
