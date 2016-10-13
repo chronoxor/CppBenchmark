@@ -48,8 +48,8 @@ cache:
 
 # Build scripts
 build_script:
-  - %cd%
-  - %build%
+  - '%cd%'
+  - '%build%'
 
 # Test scripts
 test: off
