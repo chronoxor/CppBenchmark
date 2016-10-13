@@ -25,17 +25,11 @@ init:
 install:
   - set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
   - set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
-  - git submodule update --init --recursive --remote
 
 # Build scripts
 build_script:
-  - cd scripts
-  - ./01-generate-VisualStudio.bat
-  - ./02-build-VisualStudio.bat
-  - ./03-tests.bat
-  - ./04-install-VisualStudio.bat
-  - ./05-doxygen-VisualStudio.bat
-  - ./06-clean.bat
+  - cd build
+  - ./vs.bat
 
 # Test scripts
 test: off
