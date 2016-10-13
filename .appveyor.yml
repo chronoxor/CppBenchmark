@@ -17,10 +17,10 @@ only_commits:
 environment:
   matrix:
     - type: VisualStudio
-      cd: cd build
+      changedir: cd build
       build: call vs.bat
     - type: Cygwin
-      cd: C:\cygwin64\bin\bash -lc cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null;
+      changedir: C:\cygwin64\bin\bash -lc cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null;
       build: C:\cygwin64\bin\bash -lc cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh
 
 # Allow to fail on first error in matrix
@@ -48,7 +48,7 @@ cache:
 
 # Build scripts
 build_script:
-  - '%cd%'
+  - '%changedir%'
   - '%build%'
 
 # Test scripts
