@@ -16,12 +16,12 @@ only_commits:
 # Build matrix
 environment:
   matrix:
-    - type: VisualStudio
-      changedir: cd build
-      build: call vs.bat
     - type: Cygwin
-      changedir: C:\cygwin64\bin\bash -lc cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null;
-      build: C:\cygwin64\bin\bash -lc cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh
+      changedir: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null;"
+      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
+#    - type: VisualStudio
+#      changedir: cd build
+#      build: call vs.bat
 
 # Allow to fail on first error in matrix
 matrix:
@@ -48,6 +48,8 @@ cache:
 
 # Build scripts
 build_script:
+  - 'echo %changedir%'
+  - 'echo %build%'
   - '%changedir%'
   - '%build%'
 
