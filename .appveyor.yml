@@ -13,6 +13,20 @@ clone_depth: 5
 only_commits:
   message: build
 
+# Build matrix
+environment:
+  matrix:
+    - type: VisualStudio
+      cd: cd build
+      build: call vs.bat
+    - type: Cygwin
+      cd: C:\cygwin64\bin\bash -lc cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null;
+      build: C:\cygwin64\bin\bash -lc cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh
+
+# Allow to fail on first error in matrix
+matrix:
+  fast_finish: true
+
 # Scripts that are called at very beginning, before repo cloning
 init:
   - git config --global user.name "AppVeyor"
@@ -23,14 +37,19 @@ init:
 
 # Scripts that run after cloning repository
 install:
-  - set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
-  - set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
+  - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages doxygen,graphviz
+  - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
+  - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
   - git submodule update --init --recursive --remote
+
+# Cache Cygwin files to speed up build
+cache:
+  - 'C:\cygwin64\var\cache\setup'
 
 # Build scripts
 build_script:
-  - cd build
-  - call vs.bat
+  - %cd%
+  - %build%
 
 # Test scripts
 test: off
