@@ -35,7 +35,6 @@ cache:
 init:
   - ps: 'Start-FileDownload "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"'
   - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --site "http://cygwin.mirror.constant.com" --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz
-  - if "%type%"=="Cygwin" '%command% "cygcheck -dc cygwin"'
   - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
   - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
   - if "%type%"=="VisualStudio" choco install doxygen.portable
