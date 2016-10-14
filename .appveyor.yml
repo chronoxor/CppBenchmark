@@ -27,19 +27,25 @@ environment:
 matrix:
   fast_finish: true
 
+# Cache Cygwin files to speed up build
+cache:
+    - 'C:\cygwin64\var\cache\setup'
+
 # Scripts that are called at very beginning, before repo cloning
 init:
+  - ps: 'Start-FileDownload "http://cygwin.com/setup-x86.exe" -FileName "C:\cygwin64\setup-x86_64.exe"'
+  - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --site "http://cygwin.mirror.constant.com" --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz
+  - if "%type%"=="Cygwin" '%command% "cygcheck -dc cygwin"'
+  - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
+  - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
+  - if "%type%"=="VisualStudio" choco install doxygen.portable
+  - if "%type%"=="VisualStudio" choco install graphviz.portable
   - '%command% "git config --global user.name "AppVeyor""'
   - '%command% "git config --global user.email "team@appveyor.com""'
   - '%command% "git config --global push.default simple"'
-  - choco install doxygen.portable
-  - choco install graphviz.portable
 
 # Scripts that run after cloning repository
 install:
-  - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages doxygen,graphviz
-  - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
-  - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
   - git submodule update --init --recursive --remote
 
 # Build scripts
