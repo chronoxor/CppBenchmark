@@ -13,6 +13,12 @@ clone_depth: 5
 only_commits:
   message: build
 
+# Cache files to speed up build
+cache:
+    - C:\cache\cygwin -> .appveyor.yml
+    - C:\ProgramData\chocolatey\bin -> .appveyor.yml
+    - C:\ProgramData\chocolatey\lib -> .appveyor.yml
+
 # Build matrix
 environment:
   matrix:
@@ -30,15 +36,12 @@ environment:
 matrix:
   fast_finish: true
 
-# Cache Cygwin files to speed up build
-cache:
-    - 'C:\cygwin64\var\cache\setup'
-
 # Scripts that are called at very beginning, before repo cloning
 init:
   - ps: 'Start-FileDownload "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"'
-  - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz
+  - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --root "C:\cygwin64" --local-package-dir "C:\cache\cygwin" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz
   - if "%type%"=="MinGW" set PATH=%PATH:C:\Program Files\Git\usr\bin;=%;C:\tools\mingw64\bin
+  - if "%type%"=="MinGW" set INCLUDE=%INCLUDE%;C:\tools\mingw64\x86_64-w64-mingw32\include
   - if "%type%"=="MinGW" choco install mingw
   - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
   - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
