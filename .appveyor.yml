@@ -30,6 +30,10 @@ environment:
 matrix:
   fast_finish: true
 
+# Cache Cygwin files to speed up build
+cache:
+    - 'C:\cygwin64\var\cache\setup'
+
 # Scripts that are called at very beginning, before repo cloning
 init:
   - ps: 'Start-FileDownload "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"'
