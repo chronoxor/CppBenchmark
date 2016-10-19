@@ -19,6 +19,9 @@ environment:
     - type: Cygwin
       build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
       command: C:\cygwin64\bin\bash -lc
+    - type: MinGW
+      build: call mingw.bat
+      command: cmd /C
     - type: VisualStudio
       build: call vs.bat
       command: cmd /C
@@ -27,14 +30,11 @@ environment:
 matrix:
   fast_finish: true
 
-# Cache Cygwin files to speed up build
-cache:
-    - 'C:\cygwin64\var\cache\setup'
-
 # Scripts that are called at very beginning, before repo cloning
 init:
   - ps: 'Start-FileDownload "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"'
   - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --root "C:\cygwin64" --local-package-dir "C:\cygwin64\var\cache\setup" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz
+  - if "%type%"=="MinGW" choco install mingw
   - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
   - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
   - if "%type%"=="VisualStudio" choco install doxygen.portable
