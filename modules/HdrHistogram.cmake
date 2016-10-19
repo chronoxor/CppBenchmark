@@ -3,7 +3,7 @@ if(NOT TARGET HdrHistogram)
   # Module library
   file(GLOB SOURCE_FILES "HdrHistogram/src/*.c")
   if(NOT MSVC)
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} -Wno-incompatible-pointer-types")
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} -Wno-implicit-function-declaration -Wno-incompatible-pointer-types")
   else()
     # C4146: unary minus operator applied to unsigned type, result still unsigned
     # C4200: nonstandard extension used : zero-sized array in struct/union
