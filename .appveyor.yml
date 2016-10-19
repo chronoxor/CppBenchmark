@@ -38,8 +38,8 @@ init:
   - if "%type%"=="MinGW" choco install mingw
   - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
   - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
-  - if "%type%"=="VisualStudio" choco install doxygen.portable
-  - if "%type%"=="VisualStudio" choco install graphviz.portable
+  - if "%type%"!="Cygwin" choco install doxygen.portable
+  - if "%type%"!="Cygwin" choco install graphviz.portable
   - '%command% "git config --global user.name "AppVeyor""'
   - '%command% "git config --global user.email "team@appveyor.com""'
   - '%command% "git config --global push.default simple"'
