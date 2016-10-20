@@ -36,8 +36,8 @@ environment:
 matrix:
   fast_finish: true
 
-# Scripts that are called at very beginning, before repo cloning
-init:
+# Scripts that run after cloning repository
+install:
   - ps: 'Start-FileDownload "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"'
   - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --root "C:\cygwin64" --local-package-dir "C:\cache\cygwin" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz
   - if "%type%"=="MinGW" set PATH=%PATH:C:\Program Files\Git\usr\bin;=%;C:\tools\mingw64\bin
@@ -50,9 +50,6 @@ init:
   - '%command% "git config --global user.name "AppVeyor""'
   - '%command% "git config --global user.email "team@appveyor.com""'
   - '%command% "git config --global push.default simple"'
-
-# Scripts that run after cloning repository
-install:
   - git submodule update --init --recursive --remote
 
 # Build scripts
