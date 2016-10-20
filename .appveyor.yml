@@ -22,18 +22,15 @@ cache:
 # Build matrix
 environment:
   matrix:
-#    - type: Cygwin
-#      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
-#      command: C:\cygwin64\bin\bash -lc
-#    - type: MinGW
-#      build: call mingw.bat
-#      command: cmd /C
-    - type: MSYS
-      build: call msys.bat
+    - type: Cygwin
+      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
+      command: C:\cygwin64\bin\bash -lc
+    - type: MinGW
+      build: call mingw.bat
       command: cmd /C
-#    - type: VisualStudio
-#      build: call vs.bat
-#      command: cmd /C
+    - type: VisualStudio
+      build: call vs.bat
+      command: cmd /C
 
 # Allow to fail on first error in matrix
 matrix:
@@ -48,8 +45,6 @@ install:
   - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --root "C:\cygwin64" --local-package-dir "C:\cache\cygwin" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz
   - if "%type%"=="MinGW" set PATH=C:\tools\mingw64\bin;%PATH:C:\Program Files\Git\usr\bin;=%
   - if "%type%"=="MinGW" set INCLUDE=C:\tools\mingw64\x86_64-w64-mingw32\include;%INCLUDE%
-  - if "%type%"=="MSYS" set PATH=C:\MinGW\msys\1.0\bin;C:\tools\mingw64\bin;%PATH:C:\Program Files\Git\usr\bin;=%
-  - if "%type%"=="MSYS" set INCLUDE=C:\tools\mingw64\x86_64-w64-mingw32\include;%INCLUDE%
   - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;%INCLUDE%
   - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x64;%LIB%
   - '%command% "git config --global user.name "AppVeyor""'
