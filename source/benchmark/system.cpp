@@ -346,6 +346,7 @@ int64_t System::RamFree()
 
     int64_t used_mem = (vmstat.active_count + vmstat.inactive_count + vmstat.wire_count) * page_size;
     int64_t free_mem = vmstat.free_count * page_size;
+    (void)used_mem;
     return free_mem;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     int64_t pages = sysconf(_SC_AVPHYS_PAGES);
