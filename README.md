@@ -85,13 +85,13 @@ git submodule update --init --recursive --remote
 ## Linux
 ```
 cd build
-unix.sh
+./unix.sh
 ```
 
 ## OSX
 ```
 cd build
-unix.sh
+./unix.sh
 ```
 
 ## Windows (Cygwin)
