@@ -340,7 +340,7 @@ int64_t System::RamFree()
 
     vm_statistics_data_t vmstat;
     mach_msg_type_number_t count = HOST_VM_INFO_COUNT;
-    kern_return_t kernReturn = host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t)&vmstat, &count);
+    kern_return_t kernReturn = host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vmstat, &count);
     if (kernReturn != KERN_SUCCESS)
         return -1;
 
