@@ -74,7 +74,7 @@ uint64_t GetExpressibleSpan(uint32_t numer, uint32_t denom)
 // The clock may run up to 0.1% faster or slower than the "exact" tick count.
 // However, although the bound on the error is the same as for the pragmatic
 // answer, the error is actually minimized over the given accuracy bound.
-uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb, uint64_t base)
+uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
 {
     tb.numer = 0;
     tb.denom = 1;
@@ -97,7 +97,7 @@ uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb, uint64_t base)
         errorTarget = fabs((double)tb.numer / tb.denom - frac) / frac / 8;
     }
 
-    return base + mach_absolute_time();
+    return mach_absolute_time();
 }
 
 #endif
@@ -380,7 +380,7 @@ uint64_t System::Timestamp()
 {
 #if defined(__APPLE__)
     static mach_timebase_info_data_t info;
-    static uint64_t bias = Internals::PrepareTimebaseInfo(info, 86400000000000ull);
+    static uint64_t bias = Internals::PrepareTimebaseInfo(info);
     return (mach_absolute_time() - bias) * info.numer / info.denom;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     struct timespec timestamp = { 0 };
