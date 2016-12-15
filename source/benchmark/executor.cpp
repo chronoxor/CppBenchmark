@@ -31,7 +31,7 @@ public:
         \param settings - Benchmark settings
     */
     explicit DynamicBenchmark(const std::string& name, const TSettings& settings = TSettings())
-            : BenchmarkBase(name, settings)
+        : BenchmarkBase(name, settings)
     {}
     DynamicBenchmark(const DynamicBenchmark&) = delete;
     DynamicBenchmark(DynamicBenchmark&&) = delete;

@@ -18,10 +18,10 @@ class TestBenchmark : public Benchmark
 {
 public:
     explicit TestBenchmark(const std::string& name, const Settings& settings = Settings())
-            : Benchmark(name, settings),
-              _initializations(0),
-              _runs(0),
-              _cleanups(0)
+        : Benchmark(name, settings),
+          _initializations(0),
+          _runs(0),
+          _cleanups(0)
     {
     }
 
