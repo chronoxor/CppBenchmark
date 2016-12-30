@@ -29,7 +29,7 @@ include(SetPlatformFeatures)
 find_package(Threads REQUIRED)
 
 # System link libraries
-list(APPEND SYSLIBS Threads::Threads)
+set(SYSLIBS "Threads::Threads" CACHE INTERNAL "SYSLIBS" FORCE)
 
 # Modules
 add_subdirectory("modules")
@@ -96,10 +96,4 @@ if(NOT CPPBENCHMARK_MODULE)
     endforeach()
   endif()
 
-endif()
-
-# Update parent scope of system link libraries
-get_directory_property(parent PARENT_DIRECTORY)
-if(parent)
-  set(SYSLINK "${SYSLIBS}" PARENT_SCOPE)
 endif()
