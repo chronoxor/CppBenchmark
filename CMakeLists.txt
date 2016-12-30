@@ -25,14 +25,14 @@ include(SetCompilerFeatures)
 include(SetCompilerWarnings)
 include(SetPlatformFeatures)
 
-# External packages
-find_package(Threads REQUIRED)
-
 # Modules
 add_subdirectory("modules")
 
-# System link libraries
-list(APPEND SYSLIBS Threads::Threads)
+# External packages
+find_package(Threads REQUIRED)
+
+# Link libraries
+list(APPEND LINKLIBS Threads::Threads)
 
 # Temporary disable some warnings
 if(NOT MSVC)
@@ -47,10 +47,10 @@ file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
 add_library(cppbenchmark ${SOURCE_FILES})
 target_include_directories(cppbenchmark PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(cppbenchmark cpp-optparse HdrHistogram ${SYSLIBS})
+target_link_libraries(cppbenchmark ${LINKLIBS} cpp-optparse HdrHistogram)
 set_target_properties(cppbenchmark PROPERTIES FOLDER libraries)
-list(APPEND SYSLIBS cppbenchmark)
 list(APPEND INSTALL_TARGETS cppbenchmark)
+list(APPEND LINKLIBS cppbenchmark)
 
 # Additional module components: examples, performance benchmarks, tests, tools and install
 if(NOT CPPBENCHMARK_MODULE)
@@ -63,7 +63,7 @@ if(NOT CPPBENCHMARK_MODULE)
     set_source_files_properties(examples/${EXAMPLE_FILE} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
     add_executable(${EXAMPLE_TARGET} examples/${EXAMPLE_FILE})
     target_include_directories(${EXAMPLE_TARGET} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-    target_link_libraries(${EXAMPLE_TARGET} cppbenchmark ${SYSLIBS})
+    target_link_libraries(${EXAMPLE_TARGET} ${LINKLIBS})
     set_target_properties(${EXAMPLE_TARGET} PROPERTIES FOLDER examples)
     list(APPEND INSTALL_TARGETS ${EXAMPLE_TARGET})
     list(APPEND INSTALL_TARGETS_PDB ${EXAMPLE_TARGET})
@@ -74,7 +74,7 @@ if(NOT CPPBENCHMARK_MODULE)
   set_source_files_properties(${TESTS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
   add_executable(cppbenchmark-tests ${CATCH} ${TESTS_SOURCE_FILES})
   target_include_directories(cppbenchmark-tests PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/modules/catch/single_include")
-  target_link_libraries(cppbenchmark-tests cppbenchmark ${SYSLIBS})
+  target_link_libraries(cppbenchmark-tests ${LINKLIBS})
   set_target_properties(cppbenchmark-tests PROPERTIES FOLDER tests)
   list(APPEND INSTALL_TARGETS cppbenchmark-tests)
   list(APPEND INSTALL_TARGETS_PDB cppbenchmark-tests)
