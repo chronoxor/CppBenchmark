@@ -24,10 +24,15 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(SetCompilerFeatures)
 include(SetCompilerWarnings)
 include(SetPlatformFeatures)
-include(SetSystemLibraries)
+
+# External packages
+find_package(Threads REQUIRED)
 
 # Modules
 add_subdirectory("modules")
+
+# System link libraries
+list(APPEND SYSLIBS Threads::Threads)
 
 # Temporary disable some warnings
 if(NOT MSVC)
