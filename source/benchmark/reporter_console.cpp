@@ -10,7 +10,7 @@
 
 #include "benchmark/console.h"
 #include "benchmark/environment.h"
-#include "version.h"
+#include "benchmark/version.h"
 
 #include <set>
 #include <sstream>

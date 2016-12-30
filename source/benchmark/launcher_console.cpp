@@ -12,7 +12,7 @@
 #include "benchmark/reporter_console.h"
 #include "benchmark/reporter_csv.h"
 #include "benchmark/reporter_json.h"
-#include "version.h"
+#include "benchmark/version.h"
 
 #include <iomanip>
 #include <regex>
