@@ -24,12 +24,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(SetCompilerFeatures)
 include(SetCompilerWarnings)
 include(SetPlatformFeatures)
-
-# External packages
-find_package(Threads REQUIRED)
-
-# System link libraries
-set(SYSLIBS "Threads::Threads" CACHE INTERNAL "SYSLIBS" FORCE)
+include(SetSystemLibraries)
 
 # Modules
 add_subdirectory("modules")
@@ -47,10 +42,10 @@ file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
 add_library(cppbenchmark ${SOURCE_FILES})
 target_include_directories(cppbenchmark PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(cppbenchmark cpp-optparse HdrHistogram)
+target_link_libraries(cppbenchmark cpp-optparse HdrHistogram ${SYSLIBS})
 set_target_properties(cppbenchmark PROPERTIES FOLDER libraries)
-list(APPEND INSTALL_TARGETS cppbenchmark)
 list(APPEND SYSLIBS cppbenchmark)
+list(APPEND INSTALL_TARGETS cppbenchmark)
 
 # Additional module components: examples, performance benchmarks, tests, tools and install
 if(NOT CPPBENCHMARK_MODULE)
