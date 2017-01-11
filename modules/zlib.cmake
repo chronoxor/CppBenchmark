@@ -41,7 +41,7 @@ if(NOT TARGET zlib)
   # Module library
   file(GLOB SOURCE_FILES "zlib/*.c")
   if(NOT MSVC)
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-shift-negative-value")
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-implicit-function-declaration -Wno-shift-negative-value")
   else()
     # C4127: conditional expression is constant
     # C4131: 'function' : uses old-style declarator
