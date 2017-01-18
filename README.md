@@ -44,6 +44,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
   * [Command line options](#command-line-options)
 
 # Features
+* Cross platform (Linux, OSX, Windows)
 * [Micro-benchmarks](#example-1-benchmark-of-a-function-call)
 * Benchmarks with [static fixtures](#example-3-benchmark-with-static-fixture) and [dynamic fixtures](#example-4-benchmark-with-dynamic-fixture)
 * Benchmarks with [parameters](#example-5-benchmark-with-parameters) (single, pair, triple parameters, ranges, ranges with selectors)
