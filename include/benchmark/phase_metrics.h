@@ -85,9 +85,9 @@ public:
     const std::map<std::string, int>& custom_int() const noexcept { return _custom_int; }
     //! Get custom unsigned integers map
     const std::map<std::string, unsigned>& custom_uint() const noexcept { return _custom_uint; }
-    //! Get custom integers 64 bit map
+    //! Get custom integers 64-bit map
     const std::map<std::string, int64_t>& custom_int64() const noexcept { return _custom_int64; }
-    //! Get custom unsigned integers 64 bit map
+    //! Get custom unsigned integers 64-bit map
     const std::map<std::string, uint64_t>& custom_uint64() const noexcept { return _custom_uint64; }
     //! Get custom float map
     const std::map<std::string, float>& custom_flt() const noexcept { return _custom_flt; }
@@ -131,14 +131,14 @@ public:
     */
     void SetCustom(const std::string& name, unsigned value)
     { _custom_uint[name] = value; }
-    //! Set custom integer 64 bit value
+    //! Set custom integer 64-bit value
     /*!
         \param name - Name
         \param value - Value
     */
     void SetCustom(const std::string& name, int64_t value)
     { _custom_int64[name] = value; }
-    //! Set custom unsigned integer 64 bit value
+    //! Set custom unsigned integer 64-bit value
     /*!
         \param name - Name
         \param value - Value
@@ -211,7 +211,7 @@ private:
     void MergeMetrics(PhaseMetrics& metrics);
     void ResetMetrics() noexcept;
 
-    // Calculate (operant * multiplier / divider) with 64 bit unsigned integer values
+    // Calculate (operant * multiplier / divider) with 64-bit unsigned integer values
     static uint64_t MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t divider);
 };
 
