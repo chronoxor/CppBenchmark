@@ -36,7 +36,7 @@ public:
     /*!
         \param benchmark - Benchmark to register
     */
-    void AddBenchmark(std::shared_ptr<BenchmarkBase> benchmark) { _benchmarks.emplace_back(benchmark); }
+    void AddBenchmark(const std::shared_ptr<BenchmarkBase>& benchmark) { _benchmarks.emplace_back(benchmark); }
     //! Clear benchmarks collection
     void ClearAllBenchmarks() { _benchmarks.clear(); }
 
@@ -44,7 +44,7 @@ public:
     /*!
         \param builder - Benchmark builder function
     */
-    void AddBenchmarkBuilder(std::function<std::shared_ptr<BenchmarkBase>()> builder) { _builders.emplace_back(builder); }
+    void AddBenchmarkBuilder(const std::function<std::shared_ptr<BenchmarkBase>()>& builder) { _builders.emplace_back(builder); }
     //! Clear benchmark builders collection
     void ClearAllBenchmarksBuilders() { _builders.clear(); }
 

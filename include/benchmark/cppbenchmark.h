@@ -23,7 +23,7 @@ namespace Internals {
 class BenchmarkRegistrator
 {
 public:
-    explicit BenchmarkRegistrator(std::function<std::shared_ptr<BenchmarkBase>()> builder)
+    explicit BenchmarkRegistrator(const std::function<std::shared_ptr<BenchmarkBase>()>& builder)
     { LauncherConsole::GetInstance().AddBenchmarkBuilder(builder); }
 };
 
