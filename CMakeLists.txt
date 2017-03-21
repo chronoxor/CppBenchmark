@@ -80,7 +80,7 @@ if(NOT CPPBENCHMARK_MODULE)
 
   # CTest
   enable_testing()
-  add_test(cppbenchmark-tests cppbenchmark-tests)
+  add_test(cppbenchmark-tests cppbenchmark-tests --durations yes --order lex)
 
   # Install
   install(TARGETS ${INSTALL_TARGETS}
