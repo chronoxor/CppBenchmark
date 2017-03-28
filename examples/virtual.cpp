@@ -12,6 +12,9 @@ const uint64_t iterations = 1000000000;
 class TesterBase
 {
 public:
+    TesterBase() = default;
+    virtual ~TesterBase() = default;
+
     inline int TestInline(int i) { return i + 1; }
 
 #if (defined(__clang__) || defined(__GNUC__))
