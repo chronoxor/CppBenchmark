@@ -36,13 +36,13 @@ protected:
 
     VirtualFixture()
     {
-        for (int i = 0; i < testers.size(); ++i)
+        for (size_t i = 0; i < testers.size(); ++i)
             testers[i] = (i % 2) ? new TesterBase() : new TesterDerived();
     }
 
     ~VirtualFixture()
     {
-        for (int i = 0; i < testers.size(); ++i)
+        for (size_t i = 0; i < testers.size(); ++i)
             delete testers[i];
     }
 };
