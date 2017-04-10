@@ -24,7 +24,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
     * [Windows (Cygwin)](#windows-cygwin)
     * [Windows (MinGW)](#windows-mingw)
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
-    * [Windows (Visaul Studio 2015)](#windows-visaul-studio-2015)
+    * [Windows (Visaul Studio 2017)](#windows-visaul-studio-2017)
   * [How to create a benchmark?](#how-to-create-a-benchmark)
   * [Benchmark examples](#benchmark-examples)
     * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
@@ -71,7 +71,7 @@ Optional:
 * [Clang](http://clang.llvm.org)
 * [Clion](https://www.jetbrains.com/clion)
 * [MinGW](http://mingw-w64.org/doku.php)
-* [Visual Studio 2015](https://www.visualstudio.com)
+* [Visual Studio 2017](https://www.visualstudio.com)
 
 # How to build?
 
@@ -106,7 +106,7 @@ cd build
 mingw.bat
 ```
 
-## Windows (Visaul Studio 2015)
+## Windows (Visaul Studio 2017)
 ```
 cd build
 vs.bat
