@@ -1,9 +1,6 @@
 # Specify version format
 version: "1.0.0.{build}"
 
-# Image
-image: Visual Studio 2017
-
 # Branches to build
 branches:
   only: 
@@ -35,6 +32,7 @@ environment:
     - type: VisualStudio
       build: call vs.bat
       command: cmd /C
+      image: Visual Studio 2017
 
 # Allow to fail on first error in matrix
 matrix:
