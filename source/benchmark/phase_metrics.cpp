@@ -13,6 +13,10 @@
 #include <algorithm>
 #include <cstdlib>
 
+#if defined(_MSC_VER)
+#include <intrin.h>
+#endif
+
 #include "../../modules/HdrHistogram/src/hdr_histogram.h"
 
 namespace CppBenchmark {
