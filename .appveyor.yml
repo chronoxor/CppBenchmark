@@ -1,6 +1,9 @@
 # Specify version format
 version: "1.0.0.{build}"
 
+# Image to use
+image: Visual Studio 2017
+
 # Branches to build
 branches:
   only: 
@@ -32,7 +35,6 @@ environment:
     - type: VisualStudio
       build: call vs.bat
       command: cmd /C
-      image: Visual Studio 2017
 
 # Allow to fail on first error in matrix
 matrix:
@@ -45,6 +47,7 @@ install:
   # graphviz
   - choco install graphviz.portable
   # cygwin
+  - if "%type%"=="Cygwin" if not exist "C:\cygwin64" mkdir "C:\cygwin64"
   - if "%type%"=="Cygwin" appveyor DownloadFile "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"
   - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --root "C:\cygwin64" --local-package-dir "C:\cache\cygwin" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz
   # mingw
