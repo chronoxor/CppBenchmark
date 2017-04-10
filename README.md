@@ -57,8 +57,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 * Different reporting formats: console, csv, json
 * Colored console progress and report
 
-![Console colored report][console]
-[console]: https://github.com/chronoxor/CppBenchmark/raw/master/images/console.png "Console colored report"
+![Console colored report](https://github.com/chronoxor/CppBenchmark/raw/master/images/console.png)
 
 # Requirements
 * Linux
@@ -641,8 +640,7 @@ will be created - [sleep.hdr](https://github.com/chronoxor/CppBenchmark/raw/mast
 Finally you can use [HdrHistogram Plotter](http://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
 in order to generate and analyze latency histogram:
 
-![Sleep HDR Histogram][sleep]
-[sleep]: https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.png "Sleep HDR Histogram"
+![Sleep HDR Histogram](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.png)
 
 ## Example 9: Benchmark latency with manual update
 ```C++
@@ -724,8 +722,7 @@ will be created - [clock.hdr](https://github.com/chronoxor/CppBenchmark/raw/mast
 Finally you can use [HdrHistogram Plotter](http://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
 in order to generate and analyze latency histogram:
 
-![High resolution clock HDR Histogram][clock]
-[clock]: https://github.com/chronoxor/CppBenchmark/raw/master/images/clock.png "High resolution clock HDR Histogram"
+![High resolution clock HDR Histogram](https://github.com/chronoxor/CppBenchmark/raw/master/images/clock.png)
 
 ## Example 10: Benchmark threads
 ```C++
@@ -1367,7 +1364,7 @@ int main(int argc, char** argv)
 ```
 
 Report fragment is the following:
-```
+```..
 ===============================================================================
 Benchmark: Initialization
 Attempts: 1
