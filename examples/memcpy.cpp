@@ -4,6 +4,7 @@
 
 #include "benchmark/cppbenchmark.h"
 
+#include <cstring>
 #include <vector>
 
 const uint64_t iterations = 1000000;
@@ -42,7 +43,7 @@ BENCHMARK_FIXTURE(MemoryCopyFixture, "memcpy() " + std::to_string(chunks) + " * 
     uint8_t destination[chunk_size_to];
     for (auto source : buffers)
     {
-        memcpy(destination, source, size);
+        std::memcpy(destination, source, size);
         context.metrics().AddBytes(size);
     }
 }
@@ -51,8 +52,8 @@ BENCHMARK("memmove", settings)
 {
     size_t size = context.x();
     uint8_t buffer[chunk_size_to];
-    memmove(buffer, buffer + size / 4, size / 2);
-    memmove(buffer + size / 2, buffer + size / 4, size / 2);
+    std::memmove(buffer, buffer + size / 4, size / 2);
+    std::memmove(buffer + size / 2, buffer + size / 4, size / 2);
     context.metrics().AddBytes(context.x());
 }
 
