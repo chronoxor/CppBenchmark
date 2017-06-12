@@ -4,6 +4,8 @@
 
 #include "benchmark/cppbenchmark.h"
 
+#include <cstdlib>
+#include <cstring>
 #include <vector>
 
 const uint64_t iterations = 1000000;
@@ -19,7 +21,7 @@ protected:
     MemoryCopyFixture()
     {
         // Create memory buffer
-        buffer = (uint8_t*)malloc(chunk_size_to);
+        buffer = (uint8_t*)std::malloc(chunk_size_to);
         // Prepare memory buffer
         for (int j = 0; j < chunk_size_to; ++j)
             buffer[j] = (uint8_t)j;
@@ -28,7 +30,7 @@ protected:
     ~MemoryCopyFixture()
     {
         // Delete memory buffer
-        free(buffer);
+        std::free(buffer);
     }
 };
 
@@ -37,7 +39,7 @@ BENCHMARK_FIXTURE(MemoryCopyFixture, "memcpy", settings)
     uint64_t crc = 0;
     size_t size = context.x();
     uint8_t local[chunk_size_to];
-    memcpy(local, buffer, size);
+    std::memcpy(local, buffer, size);
     crc += local[0];
     context.metrics().AddBytes(size);
     context.metrics().SetCustom("CRC", crc);
@@ -48,8 +50,8 @@ BENCHMARK("memmove", settings)
     uint64_t crc = 0;
     size_t size = context.x();
     uint8_t buffer[chunk_size_to];
-    memmove(buffer, buffer + size / 4, size / 2);
-    memmove(buffer + size / 2, buffer + size / 4, size / 2);
+    std::memmove(buffer, buffer + size / 4, size / 2);
+    std::memmove(buffer + size / 2, buffer + size / 4, size / 2);
     crc = buffer[0];
     context.metrics().AddBytes(context.x());
     context.metrics().SetCustom("CRC", crc);
