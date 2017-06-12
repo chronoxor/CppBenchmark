@@ -52,7 +52,7 @@ protected:
 
 BENCHMARK_FIXTURE(VirtualFixture, "Inline call")
 {
-    int crc = 0;
+    uint64_t crc = 0;
     for (uint64_t i = 0; i < iterations; ++i)
         crc += testers[i % testers.size()]->TestInline((int)i);
     context.metrics().AddIterations(iterations - 1);
@@ -61,7 +61,7 @@ BENCHMARK_FIXTURE(VirtualFixture, "Inline call")
 
 BENCHMARK_FIXTURE(VirtualFixture, "Direct call")
 {
-    int crc = 0;
+    uint64_t crc = 0;
     for (uint64_t i = 0; i < iterations; ++i)
         crc += testers[i % testers.size()]->TestDirect((int)i);
     context.metrics().AddIterations(iterations - 1);
@@ -70,7 +70,7 @@ BENCHMARK_FIXTURE(VirtualFixture, "Direct call")
 
 BENCHMARK_FIXTURE(VirtualFixture, "Virtual call")
 {
-    int crc = 0;
+    uint64_t crc = 0;
     for (uint64_t i = 0; i < iterations; ++i)
         crc += testers[i % testers.size()]->TestVirtual((int)i);
     context.metrics().AddIterations(iterations - 1);

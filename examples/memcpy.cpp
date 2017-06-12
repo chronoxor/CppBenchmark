@@ -9,51 +9,50 @@
 const uint64_t iterations = 1000000;
 const int chunk_size_from = 1024;
 const int chunk_size_to = 65536;
-const int chunks = 100;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
 class MemoryCopyFixture
 {
 protected:
-    std::vector<uint8_t*> buffers;
+    uint8_t* buffer;
 
     MemoryCopyFixture()
     {
-        // Create memory chunks
-        for (int i = 0; i < chunks; ++i)
-        {
-            uint8_t* buffer = (uint8_t*)malloc(chunk_size_to);
-            buffers.push_back(buffer);
-        }
+        // Create memory buffer
+        buffer = (uint8_t*)malloc(chunk_size_to);
+        // Prepare memory buffer
+        for (int j = 0; j < chunk_size_to; ++j)
+            buffer[j] = (uint8_t)j;
     }
 
     ~MemoryCopyFixture()
     {
-        // Delete memory chunks
-        for (auto buffer : buffers)
-            free(buffer);
-        buffers.clear();
+        // Delete memory buffer
+        free(buffer);
     }
 };
 
-BENCHMARK_FIXTURE(MemoryCopyFixture, "memcpy() " + std::to_string(chunks) + " * ", settings)
+BENCHMARK_FIXTURE(MemoryCopyFixture, "memcpy", settings)
 {
+    uint64_t crc = 0;
     size_t size = context.x();
-    uint8_t destination[chunk_size_to];
-    for (auto source : buffers)
-    {
-        memcpy(destination, source, size);
-        context.metrics().AddBytes(size);
-    }
+    uint8_t local[chunk_size_to];
+    memcpy(local, buffer, size);
+    crc += local[0];
+    context.metrics().AddBytes(size);
+    context.metrics().SetCustom("CRC", crc);
 }
 
 BENCHMARK("memmove", settings)
 {
+    uint64_t crc = 0;
     size_t size = context.x();
     uint8_t buffer[chunk_size_to];
     memmove(buffer, buffer + size / 4, size / 2);
     memmove(buffer + size / 2, buffer + size / 4, size / 2);
+    crc = buffer[0];
     context.metrics().AddBytes(context.x());
+    context.metrics().SetCustom("CRC", crc);
 }
 
 BENCHMARK_MAIN()
