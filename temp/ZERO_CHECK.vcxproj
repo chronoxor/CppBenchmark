@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{BAB60496-8F13-3B9D-A426-626D646C9328}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ZERO_CHECK</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\a6e1e9a3a6f7286cfaa16030700d0660\generate.stamp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+Z:\Soft\Development\CMake\bin\cmake.exe -HZ:/Projects/CppProjects/CppBenchmark -BZ:/Projects/CppProjects/CppBenchmark/temp --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/a6e1e9a3a6f7286cfaa16030700d0660/generate.stamp.rule;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerWarnings.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetPlatformFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\catch.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\cpp-optparse.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\zlib.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCXXCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeRCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckCSourceCompiles.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckFunctionExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFileCXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckLibraryExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckSymbolExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckTypeSize.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindDoxygen.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindThreads.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp;Z:\Projects\CppProjects\CppBenchmark\temp\modules\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+Z:\Soft\Development\CMake\bin\cmake.exe -HZ:/Projects/CppProjects/CppBenchmark -BZ:/Projects/CppProjects/CppBenchmark/temp --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/a6e1e9a3a6f7286cfaa16030700d0660/generate.stamp.rule;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerWarnings.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetPlatformFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\catch.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\cpp-optparse.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\zlib.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCXXCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeRCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckCSourceCompiles.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckFunctionExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFileCXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckLibraryExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckSymbolExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckTypeSize.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindDoxygen.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindThreads.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp;Z:\Projects\CppProjects\CppBenchmark\temp\modules\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+Z:\Soft\Development\CMake\bin\cmake.exe -HZ:/Projects/CppProjects/CppBenchmark -BZ:/Projects/CppProjects/CppBenchmark/temp --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/a6e1e9a3a6f7286cfaa16030700d0660/generate.stamp.rule;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerWarnings.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetPlatformFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\catch.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\cpp-optparse.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\zlib.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCXXCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeRCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckCSourceCompiles.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckFunctionExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFileCXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckLibraryExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckSymbolExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckTypeSize.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindDoxygen.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindThreads.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp;Z:\Projects\CppProjects\CppBenchmark\temp\modules\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+Z:\Soft\Development\CMake\bin\cmake.exe -HZ:/Projects/CppProjects/CppBenchmark -BZ:/Projects/CppProjects/CppBenchmark/temp --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/a6e1e9a3a6f7286cfaa16030700d0660/generate.stamp.rule;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerWarnings.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetPlatformFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\catch.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\cpp-optparse.cmake;Z:\Projects\CppProjects\CppBenchmark\modules\zlib.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCXXCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeRCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckCSourceCompiles.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckFunctionExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFileCXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckLibraryExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckSymbolExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckTypeSize.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindDoxygen.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindThreads.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp;Z:\Projects\CppProjects\CppBenchmark\temp\modules\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

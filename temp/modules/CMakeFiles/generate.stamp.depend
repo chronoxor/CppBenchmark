@@ -1,0 +1,12 @@
+# CMake generation dependency list for this directory.
+Z:/Projects/CppProjects/CppBenchmark/modules/CMakeLists.txt
+Z:/Projects/CppProjects/CppBenchmark/modules/catch.cmake
+Z:/Projects/CppProjects/CppBenchmark/modules/cpp-optparse.cmake
+Z:/Projects/CppProjects/CppBenchmark/modules/HdrHistogram.cmake
+Z:/Projects/CppProjects/CppBenchmark/modules/zlib.cmake
+Z:/Soft/Development/CMake/share/cmake-3.7/Modules/CheckTypeSize.cmake
+Z:/Soft/Development/CMake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+Z:/Soft/Development/CMake/share/cmake-3.7/Modules/CheckIncludeFileCXX.cmake
+Z:/Soft/Development/CMake/share/cmake-3.7/Modules/CheckFunctionExists.cmake
+Z:/Soft/Development/CMake/share/cmake-3.7/Modules/CheckIncludeFile.cmake
+Z:/Soft/Development/CMake/share/cmake-3.7/Modules/CheckCSourceCompiles.cmake

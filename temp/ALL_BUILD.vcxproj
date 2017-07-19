@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{446D3965-CC7D-3044-B568-37094DAEF4DA}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule Z:/Projects/CppProjects/CppBenchmark/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+Z:\Soft\Development\CMake\bin\cmake.exe -HZ:/Projects/CppProjects/CppBenchmark -BZ:/Projects/CppProjects/CppBenchmark/temp --check-stamp-file Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Z:/Projects/CppProjects/CppBenchmark/CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCXXCompiler.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeRCCompiler.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindDoxygen.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerWarnings.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetPlatformFeatures.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindThreads.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckLibraryExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckSymbolExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule Z:/Projects/CppProjects/CppBenchmark/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+Z:\Soft\Development\CMake\bin\cmake.exe -HZ:/Projects/CppProjects/CppBenchmark -BZ:/Projects/CppProjects/CppBenchmark/temp --check-stamp-file Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Z:/Projects/CppProjects/CppBenchmark/CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCXXCompiler.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeRCCompiler.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindDoxygen.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerWarnings.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetPlatformFeatures.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindThreads.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckLibraryExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckSymbolExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule Z:/Projects/CppProjects/CppBenchmark/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+Z:\Soft\Development\CMake\bin\cmake.exe -HZ:/Projects/CppProjects/CppBenchmark -BZ:/Projects/CppProjects/CppBenchmark/temp --check-stamp-file Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Z:/Projects/CppProjects/CppBenchmark/CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCXXCompiler.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeRCCompiler.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindDoxygen.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerWarnings.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetPlatformFeatures.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindThreads.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckLibraryExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckSymbolExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule Z:/Projects/CppProjects/CppBenchmark/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+Z:\Soft\Development\CMake\bin\cmake.exe -HZ:/Projects/CppProjects/CppBenchmark -BZ:/Projects/CppProjects/CppBenchmark/temp --check-stamp-file Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Z:/Projects/CppProjects/CppBenchmark/CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCCompiler.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeCXXCompiler.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\3.7.1\CMakeRCCompiler.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindDoxygen.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerFeatures.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetCompilerWarnings.cmake;Z:\Projects\CppProjects\CppBenchmark\cmake\SetPlatformFeatures.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindThreads.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckLibraryExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckSymbolExists.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckIncludeFile.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/ZERO_CHECK.vcxproj">
+      <Project>BAB60496-8F13-3B9D-A426-626D646C9328</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/modules/HdrHistogram.vcxproj">
+      <Project>49F981B6-EEAE-3CDC-AB16-2A51D8A43ADC</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/modules/cpp-optparse.vcxproj">
+      <Project>FC249DDA-C08C-3B06-A372-CE986031E5BE</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark.vcxproj">
+      <Project>192E394F-8A00-3110-97ED-A3D7C508E11B</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-atomic.vcxproj">
+      <Project>FC57E4C3-B64D-385D-A1FF-FD7B5B101244</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-containers.vcxproj">
+      <Project>9E62F828-49DB-3546-BCF9-3E9945C4C82B</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-executor.vcxproj">
+      <Project>740402FF-AE14-3842-A6FB-A5B73E3B1220</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-fpu.vcxproj">
+      <Project>57E974A8-4FD7-3D1F-94AA-C6021AD2C390</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-fwrite.vcxproj">
+      <Project>2E3865EE-B057-35B3-B74D-9D5FDF05045B</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-iterators.vcxproj">
+      <Project>0412C1A8-1991-3F22-A6D2-0626FA4D6DD9</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-memcpy.vcxproj">
+      <Project>423D76DA-C27B-3C14-9FCE-04A2544F2CF6</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-mpmc.vcxproj">
+      <Project>94699C80-CF36-363C-B009-D1C5A6255D2E</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-mpsc.vcxproj">
+      <Project>E4EE7290-E42E-3EC6-AF5B-2A7D843E6764</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-random.vcxproj">
+      <Project>3C6D4B88-825A-3667-9AE6-A92936BD0D20</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-sleep.vcxproj">
+      <Project>CE37E7F0-DE89-391C-9F60-BB820C9FAE53</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-sort.vcxproj">
+      <Project>546D923A-CFCB-3426-B867-481DF233F2B2</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-spsc.vcxproj">
+      <Project>CD5D522A-4641-3E90-A950-D56AF9284C46</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-threads.vcxproj">
+      <Project>11C0C16A-0FEC-3EFE-989D-49D8E7FB145B</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-timers.vcxproj">
+      <Project>93010981-9E75-3E4A-9FA0-4D57768549E7</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-example-virtual.vcxproj">
+      <Project>247881D6-BD25-3200-999E-7F7DD3A690CE</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/cppbenchmark-tests.vcxproj">
+      <Project>B35FEE36-ED2C-3C48-8AAE-9D69CAA198AF</Project>
+    </ProjectReference>
+    <ProjectReference Include="Z:/Projects/CppProjects/CppBenchmark/temp/modules/zlib.vcxproj">
+      <Project>47971369-89DF-3B39-9625-A64A17DA4479</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

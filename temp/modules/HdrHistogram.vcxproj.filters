@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram\src\hdr_encoding.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram\src\hdr_histogram.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram\src\hdr_histogram_log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram\src\hdr_interval_recorder.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram\src\hdr_thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram\src\hdr_time.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\modules\HdrHistogram\src\hdr_writer_reader_phaser.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Z:\Projects\CppProjects\CppBenchmark\modules\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8CBD54F3-A035-3F90-BA27-50B16274D8FF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\barrier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\benchmark.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\benchmark_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\benchmark_pc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\benchmark_threads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\context_pc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\context_threads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\environment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\executor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\launcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\launcher_console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\phase_core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\phase_metrics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\phase_scope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\reporter_console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\reporter_csv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\reporter_json.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Z:\Projects\CppProjects\CppBenchmark\source\benchmark\system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Z:\Projects\CppProjects\CppBenchmark\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8CBD54F3-A035-3F90-BA27-50B16274D8FF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

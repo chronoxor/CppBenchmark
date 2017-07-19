@@ -1,0 +1,222 @@
+Determining size of off64_t failed with the following output:
+Change Dir: Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_4af7c.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 11.05.2017 14:05:58.
+The target "_ConvertPdbFiles" listed in a BeforeTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,37)" does not exist in the project, and will be ignored.
+The target "_CollectPdbFiles" listed in an AfterTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,70)" does not exist in the project, and will be ignored.
+The target "_CollectMdbFiles" listed in a BeforeTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,38)" does not exist in the project, and will be ignored.
+The target "_CopyMdbFiles" listed in an AfterTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,71)" does not exist in the project, and will be ignored.
+Project "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_4af7c.dir\Debug\".
+  Creating directory "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_4af7c.dir\Debug\cmTC_4af7c.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_4af7c.dir\Debug\cmTC_4af7c.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Zi /W4 /WX /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D _LARGEFILE64_SOURCE=1 /D HAVE_SYS_TYPES_H /D HAVE_STDINT_H /D HAVE_STDDEF_H /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4af7c.dir\Debug\\" /Fd"cmTC_4af7c.dir\Debug\vc140.pdb" /Gd /TC /errorReport:queue Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W4 /WX /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D _LARGEFILE64_SOURCE=1 /D HAVE_SYS_TYPES_H /D HAVE_STDINT_H /D HAVE_STDDEF_H /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4af7c.dir\Debug\\" /Fd"cmTC_4af7c.dir\Debug\vc140.pdb" /Gd /TC /errorReport:queue Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c
+  
+  OFF64_T.c
+Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(19): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(20): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(21): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(22): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(23): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+Done Building Project "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(19): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+  Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(20): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+  Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(21): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+  Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(22): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+  Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CheckTypeSize\OFF64_T.c(23): error C2065: 'off64_t': undeclared identifier [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_4af7c.vcxproj]
+
+    0 Warning(s)
+    5 Error(s)
+
+Time Elapsed 00:00:00.48
+
+Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/CheckTypeSize/OFF64_T.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#endif
+
+#define SIZE (sizeof(off64_t))
+char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the function fseeko exists failed with the following output:
+Change Dir: Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_55b38.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 11.05.2017 14:05:59.
+The target "_ConvertPdbFiles" listed in a BeforeTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,37)" does not exist in the project, and will be ignored.
+The target "_CollectPdbFiles" listed in an AfterTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,70)" does not exist in the project, and will be ignored.
+The target "_CollectMdbFiles" listed in a BeforeTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,38)" does not exist in the project, and will be ignored.
+The target "_CopyMdbFiles" listed in an AfterTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,71)" does not exist in the project, and will be ignored.
+Project "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_55b38.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_55b38.dir\Debug\".
+  Creating directory "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_55b38.dir\Debug\cmTC_55b38.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_55b38.dir\Debug\cmTC_55b38.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Zi /W4 /WX /Od /Ob0 /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=fseeko /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_55b38.dir\Debug\\" /Fd"cmTC_55b38.dir\Debug\vc140.pdb" /Gd /TC /errorReport:queue "Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckFunctionExists.c"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W4 /WX /Od /Ob0 /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=fseeko /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_55b38.dir\Debug\\" /Fd"cmTC_55b38.dir\Debug\vc140.pdb" /Gd /TC /errorReport:queue "Z:\Soft\Development\CMake\share\cmake-3.7\Modules\CheckFunctionExists.c"
+  
+  CheckFunctionExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:QUEUE /OUT:"Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\Debug\cmTC_55b38.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/CMakeTmp/Debug/cmTC_55b38.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/CMakeTmp/Debug/cmTC_55b38.lib" /MACHINE:X64  /machine:x64 cmTC_55b38.dir\Debug\CheckFunctionExists.obj
+CheckFunctionExists.obj : error LNK2019: unresolved external symbol fseeko referenced in function main [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_55b38.vcxproj]
+Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\Debug\cmTC_55b38.exe : fatal error LNK1120: 1 unresolved externals [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_55b38.vcxproj]
+Done Building Project "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_55b38.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_55b38.vcxproj" (default target) (1) ->
+(Link target) -> 
+  CheckFunctionExists.obj : error LNK2019: unresolved external symbol fseeko referenced in function main [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_55b38.vcxproj]
+  Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\Debug\cmTC_55b38.exe : fatal error LNK1120: 1 unresolved externals [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_55b38.vcxproj]
+
+    0 Warning(s)
+    2 Error(s)
+
+Time Elapsed 00:00:00.60
+
+
+Determining if the include file unistd.h exists failed with the following output:
+Change Dir: Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_564ee.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 11.05.2017 14:06:00.
+The target "_ConvertPdbFiles" listed in a BeforeTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,37)" does not exist in the project, and will be ignored.
+The target "_CollectPdbFiles" listed in an AfterTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,70)" does not exist in the project, and will be ignored.
+The target "_CollectMdbFiles" listed in a BeforeTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,38)" does not exist in the project, and will be ignored.
+The target "_CopyMdbFiles" listed in an AfterTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,71)" does not exist in the project, and will be ignored.
+Project "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_564ee.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_564ee.dir\Debug\".
+  Creating directory "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_564ee.dir\Debug\cmTC_564ee.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_564ee.dir\Debug\cmTC_564ee.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Zi /W4 /WX /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_564ee.dir\Debug\\" /Fd"cmTC_564ee.dir\Debug\vc140.pdb" /Gd /TC /errorReport:queue Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W4 /WX /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_564ee.dir\Debug\\" /Fd"cmTC_564ee.dir\Debug\vc140.pdb" /Gd /TC /errorReport:queue Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+  
+  CheckIncludeFile.c
+Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_564ee.vcxproj]
+Done Building Project "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_564ee.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_564ee.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_564ee.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.44
+
+
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: Z:/Projects/CppProjects/CppBenchmark/temp/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_488a0.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 11.05.2017 14:06:01.
+The target "_ConvertPdbFiles" listed in a BeforeTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,37)" does not exist in the project, and will be ignored.
+The target "_CollectPdbFiles" listed in an AfterTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (34,70)" does not exist in the project, and will be ignored.
+The target "_CollectMdbFiles" listed in a BeforeTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,38)" does not exist in the project, and will be ignored.
+The target "_CopyMdbFiles" listed in an AfterTargets attribute at "C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportAfter\Xamarin.Common.targets (41,71)" does not exist in the project, and will be ignored.
+Project "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_488a0.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_488a0.dir\Debug\".
+  Creating directory "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_488a0.dir\Debug\cmTC_488a0.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_488a0.dir\Debug\cmTC_488a0.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Zi /W4 /WX /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_488a0.dir\Debug\\" /Fd"cmTC_488a0.dir\Debug\vc140.pdb" /Gd /TC /errorReport:queue Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W4 /WX /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_488a0.dir\Debug\\" /Fd"cmTC_488a0.dir\Debug\vc140.pdb" /Gd /TC /errorReport:queue Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+  
+  CheckIncludeFile.c
+Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_488a0.vcxproj]
+Done Building Project "Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_488a0.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_488a0.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory [Z:\Projects\CppProjects\CppBenchmark\temp\CMakeFiles\CMakeTmp\cmTC_488a0.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.44
+
+
