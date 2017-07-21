@@ -27,7 +27,7 @@ GitHub: https://github.com/chronoxor/CppBenchmark
 
 /*!
     \namespace CppBenchmark
-    \brief C++ benchmark project definitions
+    \brief C++ Benchmark project definitions
 */
 namespace CppBenchmark {
 
