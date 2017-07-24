@@ -42,11 +42,11 @@ public:
     */
     explicit BenchmarkThreads(const std::string& name, const TSettings& settings) : BenchmarkBase(name, settings) {}
     BenchmarkThreads(const BenchmarkThreads&) = delete;
-    BenchmarkThreads(BenchmarkThreads&&) = delete;
+    BenchmarkThreads(BenchmarkThreads&&) noexcept = delete;
     virtual ~BenchmarkThreads() = default;
 
     BenchmarkThreads& operator=(const BenchmarkThreads&) = delete;
-    BenchmarkThreads& operator=(BenchmarkThreads&&) = delete;
+    BenchmarkThreads& operator=(BenchmarkThreads&&) noexcept = delete;
 
 protected:
     //! Thread run method

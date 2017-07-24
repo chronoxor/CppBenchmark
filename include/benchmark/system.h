@@ -22,11 +22,11 @@ class System
 public:
     System() = delete;
     System(const System&) = delete;
-    System(System&&) = delete;
+    System(System&&) noexcept = delete;
     ~System() = delete;
 
     System& operator=(const System&) = delete;
-    System& operator=(System&&) = delete;
+    System& operator=(System&&) noexcept = delete;
 
     //! CPU architecture string
     static std::string CpuArchitecture();

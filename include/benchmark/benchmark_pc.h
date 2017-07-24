@@ -42,11 +42,11 @@ public:
     */
     explicit BenchmarkPC(const std::string& name, const TSettings& settings) : BenchmarkBase(name, settings) {}
     BenchmarkPC(const BenchmarkPC&) = delete;
-    BenchmarkPC(BenchmarkPC&&) = delete;
+    BenchmarkPC(BenchmarkPC&&) noexcept = delete;
     virtual ~BenchmarkPC() = default;
 
     BenchmarkPC& operator=(const BenchmarkPC&) = delete;
-    BenchmarkPC& operator=(BenchmarkPC&&) = delete;
+    BenchmarkPC& operator=(BenchmarkPC&&) noexcept = delete;
 
 protected:
     //! Producer run method

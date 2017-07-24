@@ -22,11 +22,11 @@ class Executor
 {
 public:
     Executor(const Executor&) = delete;
-    Executor(Executor&&) = delete;
+    Executor(Executor&&) noexcept = delete;
     ~Executor() = default;
 
     Executor& operator=(const Executor&) = delete;
-    Executor& operator=(Executor&&) = delete;
+    Executor& operator=(Executor&&) noexcept = delete;
 
     //! Start a new dynamic benchmark with a given name
     /*!

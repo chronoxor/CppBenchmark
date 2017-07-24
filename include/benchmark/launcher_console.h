@@ -22,11 +22,11 @@ class LauncherConsole : public Launcher
 {
 public:
     LauncherConsole(const LauncherConsole&) = delete;
-    LauncherConsole(LauncherConsole&&) = delete;
+    LauncherConsole(LauncherConsole&&) noexcept = delete;
     virtual ~LauncherConsole() = default;
 
     LauncherConsole& operator=(const LauncherConsole&) = delete;
-    LauncherConsole& operator=(LauncherConsole&&) = delete;
+    LauncherConsole& operator=(LauncherConsole&&) noexcept = delete;
 
     //! Get singleton instance
     static LauncherConsole& GetInstance()

@@ -26,11 +26,11 @@ class Launcher : public LauncherHandler
 public:
     Launcher() = default;
     Launcher(const Launcher&) = delete;
-    Launcher(Launcher&&) = delete;
+    Launcher(Launcher&&) noexcept = delete;
     virtual ~Launcher() = default;
 
     Launcher& operator=(const Launcher&) = delete;
-    Launcher& operator=(Launcher&&) = delete;
+    Launcher& operator=(Launcher&&) noexcept = delete;
 
     //! Add the given benchmark to the benchmarks collection
     /*!

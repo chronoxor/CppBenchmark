@@ -38,11 +38,11 @@ public:
     */
     explicit Benchmark(const std::string& name, const TSettings& settings) : BenchmarkBase(name, settings) {}
     Benchmark(const Benchmark&) = delete;
-    Benchmark(Benchmark&&) = delete;
+    Benchmark(Benchmark&&) noexcept = delete;
     virtual ~Benchmark() = default;
 
     Benchmark& operator=(const Benchmark&) = delete;
-    Benchmark& operator=(Benchmark&&) = delete;
+    Benchmark& operator=(Benchmark&&) noexcept = delete;
 
 protected:
     //! Benchmark run method

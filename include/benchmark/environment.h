@@ -24,11 +24,11 @@ class Environment
 public:
     Environment() = delete;
     Environment(const Environment&) = delete;
-    Environment(Environment&&) = delete;
+    Environment(Environment&&) noexcept = delete;
     ~Environment() = delete;
 
     Environment& operator=(const Environment&) = delete;
-    Environment& operator=(Environment&&) = delete;
+    Environment& operator=(Environment&&) noexcept = delete;
 
     //! Is 32-bit OS?
     static bool Is32BitOS();
