@@ -1,7 +1,7 @@
 var searchData=
 [
   ['barrier',['Barrier',['../class_cpp_benchmark_1_1_barrier.html',1,'CppBenchmark']]],
-  ['barrier',['Barrier',['../class_cpp_benchmark_1_1_barrier.html#ac173c74ce81792fcb88e636cdc84b078',1,'CppBenchmark::Barrier::Barrier(int threads) noexcept'],['../class_cpp_benchmark_1_1_barrier.html#ad147e8ce8233f744594c3d33fb82f460',1,'CppBenchmark::Barrier::Barrier(const Barrier &amp;)=delete'],['../class_cpp_benchmark_1_1_barrier.html#aa5a38e5f044d5d9eb9b47673adfb8f68',1,'CppBenchmark::Barrier::Barrier(Barrier &amp;&amp;) noexcept=default']]],
+  ['barrier',['Barrier',['../class_cpp_benchmark_1_1_barrier.html#ac173c74ce81792fcb88e636cdc84b078',1,'CppBenchmark::Barrier::Barrier(int threads) noexcept'],['../class_cpp_benchmark_1_1_barrier.html#ad147e8ce8233f744594c3d33fb82f460',1,'CppBenchmark::Barrier::Barrier(const Barrier &amp;)=delete'],['../class_cpp_benchmark_1_1_barrier.html#a9c121d0878ef3e052f0d9f55b7ec65a5',1,'CppBenchmark::Barrier::Barrier(Barrier &amp;&amp;)=default']]],
   ['barrier_2ecpp',['barrier.cpp',['../barrier_8cpp.html',1,'']]],
   ['barrier_2eh',['barrier.h',['../barrier_8h.html',1,'']]],
   ['benchcode_5freport',['BENCHCODE_REPORT',['../cppbenchmark_8h.html#a8b25f56abde76836480849a3eef4d547',1,'cppbenchmark.h']]],
@@ -35,5 +35,5 @@ var searchData=
   ['black',['BLACK',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69a08d0012388564e95c3b4a7407cf04965',1,'CppBenchmark']]],
   ['blue',['BLUE',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69a1b3e1ee9bff86431dea6b181365ba65f',1,'CppBenchmark']]],
   ['brown',['BROWN',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69a493cacf6f6a2ae4798b319b8b9ba9488',1,'CppBenchmark']]],
-  ['bytes_5fper_5fsecond',['bytes_per_second',['../class_cpp_benchmark_1_1_phase_metrics.html#a7b3e5a7ba016462e42ed820eab57f693',1,'CppBenchmark::PhaseMetrics']]]
+  ['bytes_5fper_5fsecond',['bytes_per_second',['../class_cpp_benchmark_1_1_phase_metrics.html#ac5ac97efaa647406625a4e358d1aa646',1,'CppBenchmark::PhaseMetrics']]]
 ];
