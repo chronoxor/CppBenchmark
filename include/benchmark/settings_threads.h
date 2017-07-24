@@ -33,12 +33,12 @@ public:
     SettingsThreads(int64_t iterations, int threads) : SettingsThreads(iterations) { Threads(threads); }
     SettingsThreads(const Settings& settings) : Settings(settings) {}
     SettingsThreads(const SettingsThreads&) = default;
-    SettingsThreads(Settings&& settings) : Settings(settings) {}
-    SettingsThreads(SettingsThreads&&) = default;
+    SettingsThreads(Settings&& settings) noexcept : Settings(std::move(settings)) {}
+    SettingsThreads(SettingsThreads&&) noexcept = default;
     ~SettingsThreads() = default;
 
     SettingsThreads& operator=(const SettingsThreads&) = default;
-    SettingsThreads& operator=(SettingsThreads&&) = default;
+    SettingsThreads& operator=(SettingsThreads&&) noexcept = default;
 };
 
 } // namespace CppBenchmark

@@ -34,12 +34,12 @@ public:
     SettingsPC(int64_t iterations, int producers, int consumers) : SettingsPC(iterations) { PC(producers, consumers); }
     SettingsPC(const Settings& settings) : Settings(settings) {}
     SettingsPC(const SettingsPC&) = default;
-    SettingsPC(Settings&& settings) : Settings(settings) {}
-    SettingsPC(SettingsPC&&) = default;
+    SettingsPC(Settings&& settings) noexcept : Settings(std::move(settings)) {}
+    SettingsPC(SettingsPC&&) noexcept = default;
     ~SettingsPC() = default;
 
     SettingsPC& operator=(const SettingsPC&) = default;
-    SettingsPC& operator=(SettingsPC&&) = default;
+    SettingsPC& operator=(SettingsPC&&) noexcept = default;
 };
 
 } // namespace CppBenchmark

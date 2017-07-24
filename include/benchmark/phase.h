@@ -27,11 +27,11 @@ class Phase
 public:
     Phase() noexcept = default;
     Phase(const Phase&) = default;
-    Phase(Phase&&) = default;
+    Phase(Phase&&) noexcept = default;
     virtual ~Phase() = default;
 
     Phase& operator=(const Phase&) = default;
-    Phase& operator=(Phase&&) = default;
+    Phase& operator=(Phase&&) noexcept = default;
 
     //! Get phase name
     virtual const std::string& name() const noexcept = 0;

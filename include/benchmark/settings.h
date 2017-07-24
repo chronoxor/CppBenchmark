@@ -45,11 +45,11 @@ public:
           _latency_auto(false)
     {}
     Settings(const Settings&) = default;
-    Settings(Settings&&) = default;
+    Settings(Settings&&) noexcept = default;
     ~Settings() = default;
 
     Settings& operator=(const Settings&) = default;
-    Settings& operator=(Settings&&) = default;
+    Settings& operator=(Settings&&) noexcept = default;
 
     //! Get count of independent benchmark attempts
     int attempts() const noexcept { return _attempts; }

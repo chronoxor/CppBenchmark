@@ -27,11 +27,11 @@ class LauncherHandler
 public:
     LauncherHandler() = default;
     LauncherHandler(const LauncherHandler&) = default;
-    LauncherHandler(LauncherHandler&&) = default;
+    LauncherHandler(LauncherHandler&&) noexcept = default;
     virtual ~LauncherHandler() = default;
 
     LauncherHandler& operator=(const LauncherHandler&) = default;
-    LauncherHandler& operator=(LauncherHandler&&) = default;
+    LauncherHandler& operator=(LauncherHandler&&) noexcept = default;
 
 protected:
     //! Handle benchmark launching notification
