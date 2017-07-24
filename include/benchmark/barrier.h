@@ -32,11 +32,11 @@ public:
     */
     explicit Barrier(int threads) noexcept;
     Barrier(const Barrier&) = delete;
-    Barrier(Barrier&&) noexcept = default;
+    Barrier(Barrier&&) = default;
     ~Barrier() = default;
 
     Barrier& operator=(const Barrier&) = delete;
-    Barrier& operator=(Barrier&&) noexcept = default;
+    Barrier& operator=(Barrier&&) = default;
 
     //! Wait at the barrier until all other threads reach this barrier
     /*!
