@@ -6,7 +6,7 @@ matrix:
   include:
     - os: linux
       compiler: gcc
-      env: OS=linux COMPILER=gcc GCC_VERSION=6
+      env: OS=linux COMPILER=gcc GCC_VERSION=7
       addons:
         apt:
           sources:
@@ -21,7 +21,7 @@ matrix:
             - uuid-dev
     - os: linux
       compiler: clang
-      env: OS=linux COMPILER=clang CLANG_VERSION=3.9
+      env: OS=linux COMPILER=clang CLANG_VERSION=4.0
       addons:
         apt:
           sources:
