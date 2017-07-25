@@ -21,14 +21,14 @@ matrix:
             - uuid-dev
     - os: linux
       compiler: clang
-      env: OS=linux COMPILER=clang CLANG_VERSION=3.9
+      env: OS=linux COMPILER=clang CLANG_VERSION=4.0
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.9
+            - llvm-toolchain-trusty-4.0
           packages:
-            - clang-3.9
+            - clang-4.0
             - libc++-dev
             - libc++abi-dev
             - cmake
