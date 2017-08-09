@@ -24,7 +24,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
     * [Windows (Cygwin)](#windows-cygwin)
     * [Windows (MinGW)](#windows-mingw)
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
-    * [Windows (Visaul Studio)](#windows-visaul-studio)
+    * [Windows (Visual Studio)](#windows-visual-studio)
   * [How to create a benchmark?](#how-to-create-a-benchmark)
   * [Benchmark examples](#benchmark-examples)
     * [Example 1: Benchmark of a function call](#example-1-benchmark-of-a-function-call)
@@ -106,7 +106,7 @@ cd build
 mingw.bat
 ```
 
-## Windows (Visaul Studio)
+## Windows (Visual Studio)
 ```
 cd build
 vs.bat
@@ -1419,7 +1419,7 @@ When you create and build a benchmark you can run it with the following command 
 * **--version**  - Show program's version number and exit
 * **-h, --help** - Show this help message and exit
 * **-f FILTER, --filter=FILTER** - Filter benchmarks by the given regexp pattern
-* *-l, --list** - List all avaliable benchmarks
+* **-l, --list** - List all avaliable benchmarks
 * **-o OUTPUT, --output=OUTPUT** - Output format (console, csv, json). Default: console
 * **-s, --silent** - Launch in silent mode. No progress will be shown!
 * **-r HISTOGRAMS, --histograms=HISTOGRAMS** - Create High Dynamic Range (HDR) Histogram files with a given resolution. Default: 0
