@@ -270,7 +270,7 @@ int64_t System::CpuClockSpeed()
     {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
-            return (int64_t)(atof(matches[2].str().c_str()) * 1000 * 1000);
+            return (int64_t)(atof(matches[2].str().c_str()) * 1000000);
     }
 
     return -1;
@@ -290,7 +290,7 @@ int64_t System::CpuClockSpeed()
     if (lError != ERROR_SUCCESS)
         return -1;
 
-    return dwMHz * 1000 * 1000;
+    return dwMHz * 1000000;
 #else
     #error Unsupported platform
 #endif
@@ -385,7 +385,7 @@ uint64_t System::Timestamp()
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     struct timespec timestamp = { 0 };
     clock_gettime(CLOCK_MONOTONIC, &timestamp);
-    return (timestamp.tv_sec * 1000 * 1000 * 1000) + timestamp.tv_nsec;
+    return (timestamp.tv_sec * 1000000000) + timestamp.tv_nsec;
 #elif defined(_WIN32) || defined(_WIN64)
     static uint64_t offset = 0;
     static LARGE_INTEGER first = { 0 };

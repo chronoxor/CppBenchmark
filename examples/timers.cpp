@@ -76,7 +76,7 @@ BENCHMARK("clock", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = (current - latency_timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
+    uint64_t latency = (current - latency_timestamp) * 1000000000 / CLOCKS_PER_SEC;
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -85,7 +85,7 @@ BENCHMARK("clock", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = (current - resolution_timestamp) * 1000 * 1000 * 1000 / CLOCKS_PER_SEC;
+    uint64_t resolution = (current - resolution_timestamp) * 1000000000 / CLOCKS_PER_SEC;
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -126,7 +126,7 @@ BENCHMARK("clock_gettime-CLOCK_REALTIME", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -135,7 +135,7 @@ BENCHMARK("clock_gettime-CLOCK_REALTIME", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -167,7 +167,7 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -176,7 +176,7 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -210,7 +210,7 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC_COARSE", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -219,7 +219,7 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC_COARSE", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -251,7 +251,7 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC_RAW", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -260,7 +260,7 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC_RAW", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -292,7 +292,7 @@ BENCHMARK("clock_gettime-CLOCK_REALTIME_COARSE", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -301,7 +301,7 @@ BENCHMARK("clock_gettime-CLOCK_REALTIME_COARSE", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -345,7 +345,7 @@ BENCHMARK("gettimeofday", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - latency_timestamp.tv_usec) * 1000;
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_usec - latency_timestamp.tv_usec) * 1000;
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -354,7 +354,7 @@ BENCHMARK("gettimeofday", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000 * 1000 * 1000) + (current.tv_usec - resolution_timestamp.tv_usec) * 1000;
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_usec - resolution_timestamp.tv_usec) * 1000;
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -445,7 +445,7 @@ BENCHMARK("GetTickCount", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = (current - latency_timestamp) * 1000 * 1000;
+    uint64_t latency = (current - latency_timestamp) * 1000000;
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -454,7 +454,7 @@ BENCHMARK("GetTickCount", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = (current - resolution_timestamp) * 1000 * 1000;
+    uint64_t resolution = (current - resolution_timestamp) * 1000000;
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -490,7 +490,7 @@ BENCHMARK("GetTickCount64", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = (current - latency_timestamp) * 1000 * 1000;
+    uint64_t latency = (current - latency_timestamp) * 1000000;
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -499,7 +499,7 @@ BENCHMARK("GetTickCount64", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = (current - resolution_timestamp) * 1000 * 1000;
+    uint64_t resolution = (current - resolution_timestamp) * 1000000;
     if (resolution > 0)
     {
         if (resolution < minresolution)
@@ -550,7 +550,7 @@ BENCHMARK("QueryPerformanceCounter", settings)
     ++count;
 
     // Register latency metrics
-    uint64_t latency = (current.QuadPart - latency_timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
+    uint64_t latency = (current.QuadPart - latency_timestamp.QuadPart) * 1000000000 / frequency.QuadPart;
     if (latency > 0)
     {
         context.metrics().AddLatency(latency / count);
@@ -559,7 +559,7 @@ BENCHMARK("QueryPerformanceCounter", settings)
     }
 
     // Register resolution metrics
-    uint64_t resolution = (current.QuadPart - resolution_timestamp.QuadPart) * 1000 * 1000 * 1000 / frequency.QuadPart;
+    uint64_t resolution = (current.QuadPart - resolution_timestamp.QuadPart) * 1000000000 / frequency.QuadPart;
     if (resolution > 0)
     {
         if (resolution < minresolution)
