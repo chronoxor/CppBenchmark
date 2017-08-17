@@ -7,6 +7,9 @@
 #include <chrono>
 #include <limits>
 
+#if defined(__APPLE__)
+#include <mach/mach_time.h>
+#endif
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__CYGWIN__)
 #include <time.h>
 #include <sys/time.h>
@@ -277,16 +280,27 @@ BENCHMARK("clock_gettime_nsec_np-CLOCK_MONOTONIC", settings)
     }
 }
 
-BENCHMARK("clock_gettime_nsec_np-CLOCK_MONOTONIC_RAW", settings)
+uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
+{
+    kern_return_t mtiStatus = mach_timebase_info(&tb);
+    if (mtiStatus != KERN_SUCCESS)
+        return 0;
+
+    return mach_absolute_time();
+}
+
+BENCHMARK("mach_absolute_time", settings)
 {
     static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
     static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static uint64_t latency_timestamp = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW);
-    static uint64_t resolution_timestamp = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW);
+    static mach_timebase_info_data_t info;
+    static uint64_t bias = PrepareTimebaseInfo(info);
+    static uint64_t latency_timestamp = ((mach_absolute_time() - bias) * info.numer) / info.denom;
+    static uint64_t resolution_timestamp = ((mach_absolute_time() - bias) * info.numer) / info.denom;
     static uint64_t count = 0;
 
     // Get the current timestamp
-    struct uint64_t current = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW);
+    struct uint64_t current = ((mach_absolute_time() - bias) * info.numer) / info.denom;
 
     // Update iterations counter
     ++count;
@@ -302,133 +316,6 @@ BENCHMARK("clock_gettime_nsec_np-CLOCK_MONOTONIC_RAW", settings)
 
     // Register resolution metrics
     uint64_t resolution = current - resolution_timestamp;
-    if (resolution > 0)
-    {
-        if (resolution < minresolution)
-        {
-            minresolution = resolution;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (resolution > maxresolution)
-        {
-            maxresolution = resolution;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        resolution_timestamp = current;
-    }
-}
-
-#endif
-
-#if defined(linux) || defined(__linux) || defined(__linux__)
-
-BENCHMARK("clock_gettime-CLOCK_REALTIME_COARSE", settings)
-{
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static struct timespec latency_timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
-    static struct timespec resolution_timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
-    static uint64_t count = 0;
-
-    // Get the current timestamp
-    struct timespec current = clock_gettime(CLOCK_REALTIME_COARSE);
-
-    // Update iterations counter
-    ++count;
-
-    // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
-    if (latency > 0)
-    {
-        context.metrics().AddLatency(latency / count);
-        latency_timestamp = current;
-        count = 0;
-    }
-
-    // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
-    if (resolution > 0)
-    {
-        if (resolution < minresolution)
-        {
-            minresolution = resolution;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (resolution > maxresolution)
-        {
-            maxresolution = resolution;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        resolution_timestamp = current;
-    }
-}
-
-BENCHMARK("clock_gettime-CLOCK_MONOTONIC_COARSE", settings)
-{
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static struct timespec latency_timestamp = clock_gettime(CLOCK_MONOTONIC_COARSE);
-    static struct timespec resolution_timestamp = clock_gettime(CLOCK_MONOTONIC_COARSE);
-    static uint64_t count = 0;
-
-    // Get the current timestamp
-    struct timespec current = clock_gettime(CLOCK_MONOTONIC_COARSE);
-
-    // Update iterations counter
-    ++count;
-
-    // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
-    if (latency > 0)
-    {
-        context.metrics().AddLatency(latency / count);
-        latency_timestamp = current;
-        count = 0;
-    }
-
-    // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
-    if (resolution > 0)
-    {
-        if (resolution < minresolution)
-        {
-            minresolution = resolution;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (resolution > maxresolution)
-        {
-            maxresolution = resolution;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        resolution_timestamp = current;
-    }
-}
-
-BENCHMARK("clock_gettime-CLOCK_MONOTONIC_RAW", settings)
-{
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static struct timespec latency_timestamp = clock_gettime(CLOCK_MONOTONIC_RAW);
-    static struct timespec resolution_timestamp = clock_gettime(CLOCK_MONOTONIC_RAW);
-    static uint64_t count = 0;
-
-    // Get the current timestamp
-    struct timespec current = clock_gettime(CLOCK_MONOTONIC_RAW);
-
-    // Update iterations counter
-    ++count;
-
-    // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
-    if (latency > 0)
-    {
-        context.metrics().AddLatency(latency / count);
-        latency_timestamp = current;
-        count = 0;
-    }
-
-    // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
     if (resolution > 0)
     {
         if (resolution < minresolution)
