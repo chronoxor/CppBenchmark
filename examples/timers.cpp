@@ -8,8 +8,8 @@
 #include <limits>
 
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) || defined(__CYGWIN__)
-#include <sys/time.h>
 #include <time.h>
+#include <sys/time.h>
 #endif
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 #include <windows.h>
@@ -102,7 +102,7 @@ BENCHMARK("clock", settings)
     }
 }
 
-#if defined(linux) || defined(__linux) || defined(__linux__) || defined(__CYGWIN__)
+#if defined(linux) || defined(__linux) || defined(__linux__) || defined(__APPLE__) || defined(__CYGWIN__)
 
 struct timespec clock_gettime(clockid_t clockid)
 {
@@ -193,7 +193,175 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC", settings)
     }
 }
 
-#if !defined(__CYGWIN__)
+#if defined(__APPLE__)
+
+BENCHMARK("clock_gettime_nsec_np-CLOCK_REALTIME", settings)
+{
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t latency_timestamp = clock_gettime_nsec_np(CLOCK_REALTIME);
+    static uint64_t resolution_timestamp = clock_gettime_nsec_np(CLOCK_REALTIME);
+    static uint64_t count = 0;
+
+    // Get the current timestamp
+    struct uint64_t current = clock_gettime_nsec_np(CLOCK_REALTIME);
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = current - latency_timestamp;
+    if (latency > 0)
+    {
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = current - resolution_timestamp;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
+        {
+            minresolution = resolution;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (resolution > maxresolution)
+        {
+            maxresolution = resolution;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        resolution_timestamp = current;
+    }
+}
+
+BENCHMARK("clock_gettime_nsec_np-CLOCK_MONOTONIC", settings)
+{
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t latency_timestamp = clock_gettime_nsec_np(CLOCK_MONOTONIC);
+    static uint64_t resolution_timestamp = clock_gettime_nsec_np(CLOCK_MONOTONIC);
+    static uint64_t count = 0;
+
+    // Get the current timestamp
+    struct uint64_t current = clock_gettime_nsec_np(CLOCK_MONOTONIC);
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = current - latency_timestamp;
+    if (latency > 0)
+    {
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = current - resolution_timestamp;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
+        {
+            minresolution = resolution;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (resolution > maxresolution)
+        {
+            maxresolution = resolution;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        resolution_timestamp = current;
+    }
+}
+
+BENCHMARK("clock_gettime_nsec_np-CLOCK_MONOTONIC_RAW", settings)
+{
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static uint64_t latency_timestamp = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW);
+    static uint64_t resolution_timestamp = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW);
+    static uint64_t count = 0;
+
+    // Get the current timestamp
+    struct uint64_t current = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW);
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = current - latency_timestamp;
+    if (latency > 0)
+    {
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = current - resolution_timestamp;
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
+        {
+            minresolution = resolution;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (resolution > maxresolution)
+        {
+            maxresolution = resolution;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        resolution_timestamp = current;
+    }
+}
+
+#endif
+
+#if defined(linux) || defined(__linux) || defined(__linux__)
+
+BENCHMARK("clock_gettime-CLOCK_REALTIME_COARSE", settings)
+{
+    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
+    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
+    static struct timespec latency_timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
+    static struct timespec resolution_timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
+    static uint64_t count = 0;
+
+    // Get the current timestamp
+    struct timespec current = clock_gettime(CLOCK_REALTIME_COARSE);
+
+    // Update iterations counter
+    ++count;
+
+    // Register latency metrics
+    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
+    if (latency > 0)
+    {
+        context.metrics().AddLatency(latency / count);
+        latency_timestamp = current;
+        count = 0;
+    }
+
+    // Register resolution metrics
+    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
+    if (resolution > 0)
+    {
+        if (resolution < minresolution)
+        {
+            minresolution = resolution;
+            context.metrics().SetCustom("resolution-min", minresolution);
+        }
+        if (resolution > maxresolution)
+        {
+            maxresolution = resolution;
+            context.metrics().SetCustom("resolution-max", maxresolution);
+        }
+        resolution_timestamp = current;
+    }
+}
 
 BENCHMARK("clock_gettime-CLOCK_MONOTONIC_COARSE", settings)
 {
@@ -246,47 +414,6 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC_RAW", settings)
 
     // Get the current timestamp
     struct timespec current = clock_gettime(CLOCK_MONOTONIC_RAW);
-
-    // Update iterations counter
-    ++count;
-
-    // Register latency metrics
-    uint64_t latency = ((current.tv_sec - latency_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - latency_timestamp.tv_nsec);
-    if (latency > 0)
-    {
-        context.metrics().AddLatency(latency / count);
-        latency_timestamp = current;
-        count = 0;
-    }
-
-    // Register resolution metrics
-    uint64_t resolution = ((current.tv_sec - resolution_timestamp.tv_sec) * 1000000000) + (current.tv_nsec - resolution_timestamp.tv_nsec);
-    if (resolution > 0)
-    {
-        if (resolution < minresolution)
-        {
-            minresolution = resolution;
-            context.metrics().SetCustom("resolution-min", minresolution);
-        }
-        if (resolution > maxresolution)
-        {
-            maxresolution = resolution;
-            context.metrics().SetCustom("resolution-max", maxresolution);
-        }
-        resolution_timestamp = current;
-    }
-}
-
-BENCHMARK("clock_gettime-CLOCK_REALTIME_COARSE", settings)
-{
-    static uint64_t minresolution = std::numeric_limits<uint64_t>::max();
-    static uint64_t maxresolution = std::numeric_limits<uint64_t>::min();
-    static struct timespec latency_timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
-    static struct timespec resolution_timestamp = clock_gettime(CLOCK_REALTIME_COARSE);
-    static uint64_t count = 0;
-
-    // Get the current timestamp
-    struct timespec current = clock_gettime(CLOCK_REALTIME_COARSE);
 
     // Update iterations counter
     ++count;
