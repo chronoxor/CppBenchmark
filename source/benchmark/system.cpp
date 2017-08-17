@@ -9,8 +9,11 @@
 #include "benchmark/system.h"
 
 #if defined(__APPLE__)
-#include <time.h>
+#include <mach/mach.h>
+#include <mach/mach_time.h>
 #include <sys/sysctl.h>
+#include <math.h>
+#include <pthread.h>
 #elif defined(unix) || defined(__unix) || defined(__unix__)
 #include <pthread.h>
 #include <unistd.h>
@@ -26,6 +29,78 @@ namespace CppBenchmark {
 
 //! @cond INTERNALS
 namespace Internals {
+
+#if defined(__APPLE__)
+
+uint32_t CeilLog2(uint32_t x)
+{
+    uint32_t result = 0;
+
+    --x;
+    while (x > 0)
+    {
+        ++result;
+        x >>= 1;
+    }
+
+    return result;
+}
+
+// This function returns the rational number inside the given interval with
+// the smallest denominator (and smallest numerator breaks ties; correctness
+// proof neglects floating-point errors).
+mach_timebase_info_data_t BestFrac(double a, double b)
+{
+    if (floor(a) < floor(b))
+    {
+        mach_timebase_info_data_t rv = { (uint32_t)ceil(a), 1 };
+        return rv;
+    }
+
+    double m = floor(a);
+    mach_timebase_info_data_t next = BestFrac(1 / (b - m), 1 / (a - m));
+    mach_timebase_info_data_t rv = { (int)m * next.numer + next.denom, next.numer };
+    return rv;
+}
+
+// This is just less than the smallest thing we can multiply numer by without
+// overflowing. CeilLog2(numer) = 64 - number of leading zeros of numer
+uint64_t GetExpressibleSpan(uint32_t numer, uint32_t denom)
+{
+  uint64_t maxDiffWithoutOverflow = ((uint64_t)1 << (64 - CeilLog2(numer))) - 1;
+  return maxDiffWithoutOverflow * numer / denom;
+}
+
+// The clock may run up to 0.1% faster or slower than the "exact" tick count.
+// However, although the bound on the error is the same as for the pragmatic
+// answer, the error is actually minimized over the given accuracy bound.
+uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
+{
+    tb.numer = 0;
+    tb.denom = 1;
+
+    kern_return_t mtiStatus = mach_timebase_info(&tb);
+    if (mtiStatus != KERN_SUCCESS)
+        return 0;
+
+    double frac = (double)tb.numer / tb.denom;
+    uint64_t spanTarget = 315360000000000000llu;
+    if (GetExpressibleSpan(tb.numer, tb.denom) >= spanTarget)
+        return 0;
+
+    for (double errorTarget = 1 / 1024.0; errorTarget > 0.000001;)
+    {
+        mach_timebase_info_data_t newFrac = BestFrac((1 - errorTarget) * frac, (1 + errorTarget) * frac);
+        if (GetExpressibleSpan(newFrac.numer, newFrac.denom) < spanTarget)
+            break;
+        tb = newFrac;
+        errorTarget = fabs((double)tb.numer / tb.denom - frac) / frac / 8;
+    }
+
+    return mach_absolute_time();
+}
+
+#endif
 
 #if defined(_WIN32) || defined(_WIN64)
 
@@ -304,7 +379,9 @@ uint64_t System::CurrentThreadId()
 uint64_t System::Timestamp()
 {
 #if defined(__APPLE__)
-    return clock_gettime_nsec_np(CLOCK_MONOTONIC);
+    static mach_timebase_info_data_t info;
+    static uint64_t bias = Internals::PrepareTimebaseInfo(info);
+    return (mach_absolute_time() - bias) * info.numer / info.denom;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
     struct timespec timestamp = { 0 };
     clock_gettime(CLOCK_MONOTONIC, &timestamp);
