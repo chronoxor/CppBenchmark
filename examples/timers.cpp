@@ -207,7 +207,7 @@ BENCHMARK("clock_gettime_nsec_np-CLOCK_REALTIME", settings)
     static uint64_t count = 0;
 
     // Get the current timestamp
-    struct uint64_t current = clock_gettime_nsec_np(CLOCK_REALTIME);
+    uint64_t current = clock_gettime_nsec_np(CLOCK_REALTIME);
 
     // Update iterations counter
     ++count;
@@ -248,7 +248,7 @@ BENCHMARK("clock_gettime_nsec_np-CLOCK_MONOTONIC", settings)
     static uint64_t count = 0;
 
     // Get the current timestamp
-    struct uint64_t current = clock_gettime_nsec_np(CLOCK_MONOTONIC);
+    uint64_t current = clock_gettime_nsec_np(CLOCK_MONOTONIC);
 
     // Update iterations counter
     ++count;
@@ -300,7 +300,7 @@ BENCHMARK("mach_absolute_time", settings)
     static uint64_t count = 0;
 
     // Get the current timestamp
-    struct uint64_t current = ((mach_absolute_time() - bias) * info.numer) / info.denom;
+    uint64_t current = ((mach_absolute_time() - bias) * info.numer) / info.denom;
 
     // Update iterations counter
     ++count;
