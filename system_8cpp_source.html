@@ -465,7 +465,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="preprocessor">#if defined(__APPLE__)</span></div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="preprocessor"></span>    <span class="keyword">static</span> mach_timebase_info_data_t info;</div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keyword">static</span> uint64_t bias = Internals::PrepareTimebaseInfo(info);</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keywordflow">return</span> (mach_absolute_time() - bias) * info.numer / info.denom;</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keywordflow">return</span> ((mach_absolute_time() - bias) * info.numer) / info.denom;</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="preprocessor">#elif defined(unix) || defined(__unix) || defined(__unix__)</span></div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="preprocessor"></span>    <span class="keyword">struct </span>timespec timestamp = { 0 };</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    clock_gettime(CLOCK_MONOTONIC, &amp;timestamp);</div>
