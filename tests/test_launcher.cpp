@@ -14,6 +14,8 @@
 
 using namespace CppBenchmark;
 
+namespace {
+
 class TestBenchmark : public Benchmark
 {
 public:
@@ -89,6 +91,8 @@ private:
     int _launching;
     int _launched;
 };
+
+} // namespace
 
 TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
 {
