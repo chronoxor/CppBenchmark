@@ -97,7 +97,7 @@ uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
         errorTarget = fabs((double)tb.numer / tb.denom - frac) / frac / 8;
     }
 
-    return mach_absolute_time();
+    return 0;
 }
 
 #endif
