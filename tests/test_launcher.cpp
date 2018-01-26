@@ -10,6 +10,7 @@
 #include "benchmark/reporter_json.h"
 
 #include <chrono>
+#include <sstream>
 #include <thread>
 
 using namespace CppBenchmark;
