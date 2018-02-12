@@ -34,14 +34,6 @@ add_subdirectory("modules")
 # Link libraries
 list(APPEND LINKLIBS Threads::Threads)
 
-# Temporary disable some warnings
-if(NOT MSVC)
-  set(PEDANTIC_COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
-else()
-  # C4200: nonstandard extension used : zero-sized array in struct/union
-  set(PEDANTIC_COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4200")
-endif()
-
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
