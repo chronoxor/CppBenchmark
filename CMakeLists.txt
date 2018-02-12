@@ -29,6 +29,7 @@ include(SetPlatformFeatures)
 find_package(Threads REQUIRED)
 
 # Modules
+include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/modules")
 add_subdirectory("modules")
 
 # Link libraries
