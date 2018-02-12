@@ -25,14 +25,14 @@ include(SetCompilerFeatures)
 include(SetCompilerWarnings)
 include(SetPlatformFeatures)
 
-# Modules
-add_subdirectory("modules")
-
 # External packages
 find_package(Threads REQUIRED)
 
 # Link libraries
 list(APPEND LINKLIBS Threads::Threads)
+
+# Modules
+add_subdirectory("modules")
 
 # Temporary disable some warnings
 if(NOT MSVC)
