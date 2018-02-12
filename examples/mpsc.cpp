@@ -4,6 +4,10 @@
 
 #include "benchmark/cppbenchmark.h"
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+#endif
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable: 4127) // C4127: conditional expression is constant
@@ -14,6 +18,9 @@
 #include "lockfree/lock-bounded-queue.hpp"
 #include "lockfree/mpmc-bounded-queue.hpp"
 #include "lockfree/mpsc-queue.hpp"
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
