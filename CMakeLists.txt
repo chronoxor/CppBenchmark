@@ -34,12 +34,6 @@ add_subdirectory("modules")
 # Link libraries
 list(APPEND LINKLIBS Threads::Threads)
 
-# System directories
-include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/examples/cameron")
-include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/examples/folly")
-include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/examples/lockfree")
-include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/modules")
-
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
