@@ -28,11 +28,11 @@ include(SetPlatformFeatures)
 # External packages
 find_package(Threads REQUIRED)
 
-# Link libraries
-list(APPEND LINKLIBS Threads::Threads)
-
 # Modules
 add_subdirectory("modules")
+
+# Link libraries
+list(APPEND LINKLIBS Threads::Threads)
 
 # Temporary disable some warnings
 if(NOT MSVC)
