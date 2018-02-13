@@ -10,7 +10,7 @@ if(NOT TARGET HdrHistogram)
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4146 /wd4244")
   endif()
   add_library(HdrHistogram ${SOURCE_FILES})
-  target_include_directories(HdrHistogram PRIVATE "zlib" PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/zlib")
+  target_include_directories(HdrHistogram PRIVATE "zlib")
   target_link_libraries(HdrHistogram zlib)
 
   # Module folder
