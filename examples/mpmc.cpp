@@ -4,24 +4,11 @@
 
 #include "benchmark/cppbenchmark.h"
 
-#if defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wshadow"
-#elif defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4127) // C4127: conditional expression is constant
-#pragma warning(disable: 4702) // C4702: unreachable code
-#endif
 #include "cameron/blockingconcurrentqueue.h"
 #include "cameron/concurrentqueue.h"
 #include "cameron/concurrentqueue.h"
 #include "lockfree/lock-bounded-queue.hpp"
 #include "lockfree/mpmc-bounded-queue.hpp"
-#if defined(__GNUC__)
-#pragma GCC diagnostic pop
-#elif defined(_MSC_VER)
-#pragma warning(pop)
-#endif
 
 #include <atomic>
 #include <memory>
