@@ -41,11 +41,11 @@ public:
     //! Default constructor
     PhaseMetrics();
     PhaseMetrics(const PhaseMetrics&) = default;
-    PhaseMetrics(PhaseMetrics&&) noexcept = default;
+    PhaseMetrics(PhaseMetrics&&) = default;
     ~PhaseMetrics();
 
     PhaseMetrics& operator=(const PhaseMetrics&) = default;
-    PhaseMetrics& operator=(PhaseMetrics&&) noexcept = default;
+    PhaseMetrics& operator=(PhaseMetrics&&) = default;
 
     //! Is metrics contains latency values?
     bool latency() const noexcept;
