@@ -4,10 +4,15 @@
 
 #include "benchmark/cppbenchmark.h"
 
+#pragma GCC system_header
 #include "cameron/blockingconcurrentqueue.h"
+#pragma GCC system_header
 #include "cameron/concurrentqueue.h"
+#pragma GCC system_header
 #include "cameron/concurrentqueue.h"
+#pragma GCC system_header
 #include "lockfree/lock-bounded-queue.hpp"
+#pragma GCC system_header
 #include "lockfree/mpmc-bounded-queue.hpp"
 
 #include <atomic>

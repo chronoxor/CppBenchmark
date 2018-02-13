@@ -34,9 +34,6 @@ add_subdirectory("modules")
 # Link libraries
 list(APPEND LINKLIBS Threads::Threads)
 
-# System directories
-include_directories(BEFORE SYSTEM "modules" "examples/cameron" "examples/folly" "examples/lockfree")
-
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
