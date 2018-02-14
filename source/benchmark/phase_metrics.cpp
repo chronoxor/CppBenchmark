@@ -17,7 +17,7 @@
 #include <intrin.h>
 #endif
 
-#include <HdrHistogram/src/hdr_histogram.h>
+#include <hdr_histogram.h>
 
 namespace CppBenchmark {
 
