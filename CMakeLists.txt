@@ -47,7 +47,7 @@ set_target_properties(cppbenchmark PROPERTIES FOLDER libraries)
 list(APPEND INSTALL_TARGETS cppbenchmark)
 list(APPEND LINKLIBS cppbenchmark)
 
-# Additional module components: examples, performance benchmarks, tests, tools and install
+# Additional module components: benchmarks, examples, plugins, tests, tools and install
 if(NOT CPPBENCHMARK_MODULE)
 
   # Examples
