@@ -119,6 +119,7 @@ void PhaseMetrics::FreeLatencyHistogram() noexcept
 {
     if (_latency != nullptr)
     {
+        free(((hdr_histogram*)_latency)->counts);
         free(_latency);
         _latency = nullptr;
     }
