@@ -1,4 +1,4 @@
-## Specify version format
+# Specify version format
 version: "1.0.0.{build}"
 
 # Image to use
