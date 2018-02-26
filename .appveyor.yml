@@ -71,5 +71,4 @@ build_script:
   - '%build%'
 
 # Test scripts
-
 test: off
