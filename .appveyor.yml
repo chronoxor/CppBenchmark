@@ -40,6 +40,8 @@ matrix:
 
 # Scripts that run after cloning repository
 install:
+  # Chocolatey
+  - choco upgrade chocolatey
   # Doxygen
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force doxygen.portable
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force ghostscript
