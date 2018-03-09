@@ -21,7 +21,7 @@ matrix:
             - uuid-dev
     - os: linux
       compiler: clang
-      env: OS=linux COMPILER=clang CLANG_VERSION=5.0
+      env: OS=linux COMPILER=clang CLANG_VERSION=6.0
       addons:
         apt:
           sources:
