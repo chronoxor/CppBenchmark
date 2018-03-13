@@ -18,7 +18,7 @@ void BenchmarkBase::InitBenchmarkContext(Context& context)
     std::shared_ptr<PhaseCore> result;
 
     // Find or create root phase for the given context
-    auto it = std::find_if(_phases.begin(), _phases.end(), [&name] (std::shared_ptr<PhaseCore>& item) { return item->name() == name; });
+    auto it = std::find_if(_phases.begin(), _phases.end(), [&name] (const std::shared_ptr<PhaseCore>& item) { return item->name() == name; });
     if (it == _phases.end())
     {
         result = std::make_shared<PhaseCore>(name);

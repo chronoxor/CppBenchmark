@@ -55,7 +55,7 @@ std::shared_ptr<Phase> Executor::StartBenchmark(const std::string& benchmark)
         std::lock_guard<std::mutex> lock(instance._mutex);
 
         // Find or create a dynamic benchmark with the given name
-        auto it = std::find_if(instance._benchmarks.begin(), instance._benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item)
+        auto it = std::find_if(instance._benchmarks.begin(), instance._benchmarks.end(), [&benchmark](const std::shared_ptr<PhaseCore>& item)
         {
             return ((item->name() == benchmark) && (item->_thread == System::CurrentThreadId()));
         });
@@ -86,7 +86,7 @@ void Executor::StopBenchmark(const std::string& benchmark)
         std::lock_guard<std::mutex> lock(instance._mutex);
 
         // Find dynamic benchmark with the given name
-        auto it = std::find_if(instance._benchmarks.begin(), instance._benchmarks.end(), [&benchmark](std::shared_ptr<PhaseCore>& item)
+        auto it = std::find_if(instance._benchmarks.begin(), instance._benchmarks.end(), [&benchmark](const std::shared_ptr<PhaseCore>& item)
         {
             return ((item->name() == benchmark) && (item->_thread == System::CurrentThreadId()));
         });

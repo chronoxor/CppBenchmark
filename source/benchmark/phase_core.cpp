@@ -17,7 +17,7 @@ std::shared_ptr<Phase> PhaseCore::StartPhase(const std::string& phase)
     std::shared_ptr<PhaseCore> result;
 
     // Find or create a sub phase with the given name
-    auto it = std::find_if(_child.begin(), _child.end(), [&phase](std::shared_ptr<PhaseCore>& item) { return item->name() == phase; });
+    auto it = std::find_if(_child.begin(), _child.end(), [&phase](const std::shared_ptr<PhaseCore>& item) { return item->name() == phase; });
     if (it == _child.end())
     {
         result = std::make_shared<PhaseCore>(phase);
@@ -44,7 +44,7 @@ std::shared_ptr<Phase> PhaseCore::StartPhaseThreadSafe(const std::string& phase)
         std::lock_guard<std::mutex> lock(_mutex);
 
         // Find or create a sub phase with the given name
-        auto it = std::find_if(_child.begin(), _child.end(), [&phase](std::shared_ptr<PhaseCore>& item)
+        auto it = std::find_if(_child.begin(), _child.end(), [&phase](const std::shared_ptr<PhaseCore>& item)
         {
             return ((item->name() == phase) && (item->_thread == System::CurrentThreadId()));
         });
