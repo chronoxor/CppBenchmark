@@ -74,7 +74,6 @@ before_install:
   - if [ "$OS" != "osx" ] && [ "$COMPILER" = "clang" ]; then make cxx -j2; fi
   - if [ "$OS" != "osx" ] && [ "$COMPILER" = "clang" ]; then sudo make install-cxxabi install-cxx; fi
   - if [ "$OS" != "osx" ] && [ "$COMPILER" = "clang" ]; then popd; fi
-  - if [ "$OS" != "osx" ] && [ "$COMPILER" = "clang" ]; then export PATH=/usr/include/c++/v1:${PATH}; fi
   # brew, doxygen, graphviz
   - if [ "$OS" == "osx" ]; then brew update; fi
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
