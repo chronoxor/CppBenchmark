@@ -31,6 +31,8 @@ matrix:
             - clang-6.0
             - libc++-dev
             - libc++abi-dev
+            - gcc-7
+            - g++-7
             - cmake
             - doxygen
             - graphviz
