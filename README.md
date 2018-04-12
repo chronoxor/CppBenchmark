@@ -1183,7 +1183,7 @@ BENCHMARK_CLASS(MutexQueueBenchmark, "std::mutex+std::queue<int>", settings)
 BENCHMARK_MAIN()
 ```
 
-Report fragment is the following:..
+Report fragment is the following:
 ```
 ===============================================================================
 Benchmark: std::mutex+std::queue<int>
@@ -1289,7 +1289,7 @@ const int THREADS = 8;
 void init()
 {
     auto benchmark = BENCHCODE_SCOPE("Initialization");
-               ..
+
     std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
@@ -1364,7 +1364,7 @@ int main(int argc, char** argv)
 ```
 
 Report fragment is the following:
-```..
+```
 ===============================================================================
 Benchmark: Initialization
 Attempts: 1
