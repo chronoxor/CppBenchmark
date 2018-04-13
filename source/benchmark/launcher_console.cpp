@@ -27,10 +27,11 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
 
     const char* output[] = { "console", "csv", "json" };
 
+    parser.add_option("-h", "--help").help("Show help");
     parser.add_option("-f", "--filter").help("Filter benchmarks by the given regexp pattern");
     parser.add_option("-l", "--list").action("store_true").help("List all avaliable benchmarks");
     parser.add_option("-o", "--output").choices(&output[0], &output[3]).set_default(output[0]).help("Output format (console, csv, json). Default: %default");
-    parser.add_option("-s", "--silent").action("store_true").help("Launch in silent mode. No progress will be shown!");
+    parser.add_option("-q", "--quiet").action("store_true").help("Launch in quiet mode. No progress will be shown!");
     parser.add_option("-r", "--histograms").action("store").type("int").set_default(0).help("Create High Dynamic Range (HDR) Histogram files with a given resolution. Default: %default");
 
     optparse::Values options = parser.parse_args(argc, argv);
