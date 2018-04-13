@@ -53,6 +53,7 @@ if(NOT TARGET zlib)
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244 /wd4245 /wd4267")
   endif()
   add_library(zlib ${SOURCE_FILES} ${ASSEMBLER_FILES})
+  target_include_directories(zlib PUBLIC "zlib")
   target_link_libraries(zlib)
 
   # Module folder
