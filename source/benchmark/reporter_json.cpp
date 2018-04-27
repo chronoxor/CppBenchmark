@@ -162,10 +162,10 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
     if (metrics.total_bytes() > 0)
         _stream << Internals::indent7 << "\"bytes_per_second\": " << metrics.bytes_per_second() << "\n";
     _stream << Internals::indent7 << "\"custom\": [";
-    if ((metrics.custom_int().size() > 0) || (metrics.custom_uint().size() > 0) ||
-        (metrics.custom_int64().size() > 0) || (metrics.custom_uint64().size() > 0) ||
-        (metrics.custom_flt().size() > 0) || (metrics.custom_dbl().size() > 0) ||
-        (metrics.custom_str().size() > 0))
+    if (!metrics.custom_int().empty() || !metrics.custom_uint().empty() ||
+        !metrics.custom_int64().empty() || !metrics.custom_uint64().empty() ||
+        !metrics.custom_flt().empty() || !metrics.custom_dbl().empty() ||
+        !metrics.custom_str().empty())
     {
         std::set<std::string> names;
         for (auto& it : metrics.custom_int())

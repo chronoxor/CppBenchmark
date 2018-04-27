@@ -67,7 +67,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark threads
                 for (int i = 0; i < threads; ++i)
                 {
-                    _threads.push_back(std::thread([this, &barrier, &context, latency_params, latency_auto, threads, infinite, iterations]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, threads, infinite, iterations]()
                     {
                         // Clone thread context
                         ContextThreads thread_context(context);
@@ -122,7 +122,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
 
                         // Update thread safe phase metrics
                         UpdateBenchmarkMetrics(*thread_context._current);
-                    }));
+                    });
                 }
 
                 // Wait for all threads

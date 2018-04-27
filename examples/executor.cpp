@@ -73,7 +73,7 @@ int main(int argc, char** argv)
     // Start parallel calculations
     std::vector<std::thread> threads;
     for (int i = 0; i < THREADS; ++i)
-        threads.push_back(std::thread(calculate));
+        threads.emplace_back(calculate);
 
     // Wait for all threads
     for (auto& thread : threads)

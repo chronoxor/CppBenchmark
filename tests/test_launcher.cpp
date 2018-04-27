@@ -127,9 +127,9 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
     std::string report_json = stream_json.str();
 
     // Test benchmark reports
-    REQUIRE(report_console.size() > 0);
-    REQUIRE(report_csv.size() > 0);
-    REQUIRE(report_json.size() > 0);
+    REQUIRE(!report_console.empty());
+    REQUIRE(!report_csv.empty());
+    REQUIRE(!report_json.empty());
 
     // Test benchmark state
     REQUIRE(benchmark->initializations() == (int)(settings.params().size() * settings.attempts()));
