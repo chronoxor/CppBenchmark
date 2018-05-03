@@ -380,6 +380,16 @@ std::string Environment::EndLine()
 #endif
 }
 
+std::string Environment::UnixEndLine()
+{
+    return "\n";
+}
+
+std::string Environment::WindowsEndLine()
+{
+    return "\r\n";
+}
+
 time_t Environment::Timestamp()
 {
     return std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());

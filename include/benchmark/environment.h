@@ -56,6 +56,11 @@ public:
     //! Get text end line separator
     static std::string EndLine();
 
+    //! Get Unix text end line separator
+    static std::string UnixEndLine();
+    //! Get Windows text end line separator
+    static std::string WindowsEndLine();
+
     //! Get the current time in seconds
     static time_t Timestamp();
 };
