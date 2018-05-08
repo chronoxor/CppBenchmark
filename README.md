@@ -70,6 +70,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 Optional:
 * [Clang](http://clang.llvm.org)
 * [Clion](https://www.jetbrains.com/clion)
+* [Cygwin](https://cygwin.com)
 * [MinGW](http://mingw-w64.org/doku.php)
 * [Visual Studio](https://www.visualstudio.com)
 
