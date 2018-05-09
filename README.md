@@ -12,7 +12,7 @@ CppBenchmark library has lots of [features](#features) and allows to make benchm
 [different kind of scenarios](#benchmark-examples) such as micro-benchmarks, benchmarks
 with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
-[CppBenchmark API reference](http://chronoxor.github.io/CppBenchmark/index.html)
+[CppBenchmark API reference](https://chronoxor.github.io/CppBenchmark/index.html)
 
 # Contents
   * [Features](#features)
@@ -51,7 +51,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 * [Benchmark infinite run with cancelation](#example-2-benchmark-with-cancelation)
 * [Benchmark items processing speed](#example-6-benchmark-class)
 * [Benchmark I/O throughput](#example-7-benchmark-io-operations)
-* [Benchmark latency](#example-8-benchmark-latency-with-auto-update) with [High Dynamic Range (HDR) Histograms](http://hdrhistogram.github.io/HdrHistogram/)
+* [Benchmark latency](#example-8-benchmark-latency-with-auto-update) with [High Dynamic Range (HDR) Histograms](https://hdrhistogram.github.io/HdrHistogram/)
 * [Benchmark threads](#example-10-benchmark-threads)
 * [Benchmark producers/consumers pattern](#example-12-benchmark-single-producer-single-consumer-pattern)
 * Different reporting formats: console, csv, json
@@ -63,15 +63,15 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 * Linux
 * OSX
 * Windows 7 / Windows 10
-* [CMake](http://www.cmake.org)
+* [CMake](https://www.cmake.org)
 * [GIT](https://git-scm.com)
 * [GCC](https://gcc.gnu.org)
 
 Optional:
-* [Clang](http://clang.llvm.org)
+* [Clang](https://clang.llvm.org)
 * [Clion](https://www.jetbrains.com/clion)
 * [Cygwin](https://cygwin.com)
-* [MinGW](http://mingw-w64.org/doku.php)
+* [MinGW](https://mingw-w64.org/doku.php)
 * [Visual Studio](https://www.visualstudio.com)
 
 # How to build?
@@ -635,10 +635,10 @@ Iterations throughput: 95 / second
 ```
 
 If the benchmark is launched with **--histograms=100** parameter then a file
-with [High Dynamic Range (HDR) Histogram](http://hdrhistogram.github.io/HdrHistogram/)
+with [High Dynamic Range (HDR) Histogram](https://hdrhistogram.github.io/HdrHistogram/)
 will be created - [sleep.hdr](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.hdr)
 
-Finally you can use [HdrHistogram Plotter](http://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
+Finally you can use [HdrHistogram Plotter](https://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
 in order to generate and analyze latency histogram:
 
 ![Sleep HDR Histogram](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.png)
@@ -717,10 +717,10 @@ Custom values:
 ```
 
 If the benchmark is launched with **--histograms=100** parameter then a file
-with [High Dynamic Range (HDR) Histogram](http://hdrhistogram.github.io/HdrHistogram/)
+with [High Dynamic Range (HDR) Histogram](https://hdrhistogram.github.io/HdrHistogram/)
 will be created - [clock.hdr](https://github.com/chronoxor/CppBenchmark/raw/master/images/clock.hdr)
 
-Finally you can use [HdrHistogram Plotter](http://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
+Finally you can use [HdrHistogram Plotter](https://hdrhistogram.github.io/HdrHistogram/plotFiles.html)
 in order to generate and analyze latency histogram:
 
 ![High resolution clock HDR Histogram](https://github.com/chronoxor/CppBenchmark/raw/master/images/clock.png)
