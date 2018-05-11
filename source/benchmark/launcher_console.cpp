@@ -46,7 +46,7 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
     if (options.get("help"))
     {
         parser.print_help();
-        parser.exit();
+        return 0;
     }
 
     // Setup console launcher parameters
