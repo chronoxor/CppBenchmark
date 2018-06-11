@@ -138,7 +138,11 @@ std::string System::CpuArchitecture()
     static std::regex pattern("model name(.*): (.*)");
 
     std::string line;
+#if defined(__CYGWIN__)
+    std::ifstream stream("/proc/cpuinfo\n");
+#else
     std::ifstream stream("/proc/cpuinfo");
+#endif
     while (getline(stream, line))
     {
         std::smatch matches;
@@ -265,7 +269,11 @@ int64_t System::CpuClockSpeed()
     static std::regex pattern("cpu MHz(.*): (.*)");
 
     std::string line;
+#if defined(__CYGWIN__)
+    std::ifstream stream("/proc/cpuinfo\n");
+#else
     std::ifstream stream("/proc/cpuinfo");
+#endif
     while (getline(stream, line))
     {
         std::smatch matches;
