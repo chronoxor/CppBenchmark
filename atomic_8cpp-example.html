@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;atomic&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keyword">const</span> uint64_t iterations = 100000000;</div>
+<div class="line"><span class="keyword">const</span> uint64_t operations = 100000000;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><span class="keyword">class </span>AtomicFixture</div>
@@ -101,22 +101,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    T z;</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><a name="a0"></a><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(AtomicFixture&lt;int32_t&gt;, <span class="stringliteral">&quot;std::atomic&lt;int32_t&gt;.CAS()&quot;</span>, iterations)</div>
+<div class="line"><a name="a0"></a><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(AtomicFixture&lt;int32_t&gt;, <span class="stringliteral">&quot;std::atomic&lt;int32_t&gt;.CAS()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    x.compare_exchange_strong(y, z, std::memory_order_acq_rel);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(AtomicFixture&lt;int64_t&gt;, <span class="stringliteral">&quot;std::atomic&lt;int64_t&gt;.CAS()&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(AtomicFixture&lt;int64_t&gt;, <span class="stringliteral">&quot;std::atomic&lt;int64_t&gt;.CAS()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    x.compare_exchange_strong(y, z, std::memory_order_acq_rel);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(AtomicFixture&lt;int32_t&gt;, <span class="stringliteral">&quot;std::atomic&lt;int32_t&gt;.FAA()&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(AtomicFixture&lt;int32_t&gt;, <span class="stringliteral">&quot;std::atomic&lt;int32_t&gt;.FAA()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    x.fetch_add(y, std::memory_order_acq_rel);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(AtomicFixture&lt;int64_t&gt;, <span class="stringliteral">&quot;std::atomic&lt;int64_t&gt;.FAA()&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(AtomicFixture&lt;int64_t&gt;, <span class="stringliteral">&quot;std::atomic&lt;int64_t&gt;.FAA()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    x.fetch_add(y, std::memory_order_acq_rel);</div>
 <div class="line">}</div>

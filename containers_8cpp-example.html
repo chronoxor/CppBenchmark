@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><span class="preprocessor">#include &lt;list&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keyword">const</span> uint64_t iterations = 10000000;</div>
+<div class="line"><span class="keyword">const</span> uint64_t operations = 10000000;</div>
 <div class="line"></div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><span class="keyword">class </span>ContainerFixture : <span class="keyword">public</span> <span class="keyword">virtual</span> <a name="_a0"></a><a class="code" href="class_cpp_benchmark_1_1_fixture.html">CppBenchmark::Fixture</a></div>
@@ -104,17 +104,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    <span class="keywordtype">void</span> <a name="a3"></a><a class="code" href="class_cpp_benchmark_1_1_fixture.html#a5436824d6a8d00158f634f015b648648">Cleanup</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override </span>{ container.clear(); }</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><a name="a4"></a><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::list&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::list&lt;int&gt;.push_back()&quot;</span>, iterations)</div>
+<div class="line"><a name="a4"></a><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::list&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::list&lt;int&gt;.push_back()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    container.push_back(0);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::vector&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::vector&lt;int&gt;.push_back()&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::vector&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::vector&lt;int&gt;.push_back()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    container.push_back(0);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::deque&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::deque&lt;int&gt;.push_back()&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a0f6d96f753913ed57b68fdb3646c3f2f">BENCHMARK_FIXTURE</a>(ContainerFixture&lt;std::deque&lt;int&gt;&gt;, <span class="stringliteral">&quot;std::deque&lt;int&gt;.push_back()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    container.push_back(0);</div>
 <div class="line">}</div>

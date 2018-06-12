@@ -172,12 +172,12 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab8910619ff2e0fe47a019b1b6b669c9a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ab8910619ff2e0fe47a019b1b6b669c9a">UpdateBenchmarkNames</a> (<a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;phase, const std::string &amp;<a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a6ccdaeb2e0d8dc8869375db401142670">name</a>)</td></tr>
 <tr class="memdesc:ab8910619ff2e0fe47a019b1b6b669c9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update benchmark names for the given benchmark phase.  <a href="#ab8910619ff2e0fe47a019b1b6b669c9a">More...</a><br/></td></tr>
 <tr class="separator:ab8910619ff2e0fe47a019b1b6b669c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15d414f36a5ef03b9e5f6679109776f5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a15d414f36a5ef03b9e5f6679109776f5">UpdateBenchmarkIterations</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &gt;&gt; &amp;phases)</td></tr>
-<tr class="memdesc:a15d414f36a5ef03b9e5f6679109776f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update benchmark iterations for the given benchmark phases collection.  <a href="#a15d414f36a5ef03b9e5f6679109776f5">More...</a><br/></td></tr>
-<tr class="separator:a15d414f36a5ef03b9e5f6679109776f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba22e6ec132e2ea8eb67942676541c7e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#aba22e6ec132e2ea8eb67942676541c7e">UpdateBenchmarkIterations</a> (<a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;phase)</td></tr>
-<tr class="memdesc:aba22e6ec132e2ea8eb67942676541c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update benchmark iterations for the given benchmark phase.  <a href="#aba22e6ec132e2ea8eb67942676541c7e">More...</a><br/></td></tr>
-<tr class="separator:aba22e6ec132e2ea8eb67942676541c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada15eaff6784163da961fc04eb54898c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#ada15eaff6784163da961fc04eb54898c">UpdateBenchmarkOperations</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &gt;&gt; &amp;phases)</td></tr>
+<tr class="memdesc:ada15eaff6784163da961fc04eb54898c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update benchmark operations for the given benchmark phases collection.  <a href="#ada15eaff6784163da961fc04eb54898c">More...</a><br/></td></tr>
+<tr class="separator:ada15eaff6784163da961fc04eb54898c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dd425712713dacfd0d17b0a47ab8010"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_benchmark_1_1_benchmark_base.html#a5dd425712713dacfd0d17b0a47ab8010">UpdateBenchmarkOperations</a> (<a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;phase)</td></tr>
+<tr class="memdesc:a5dd425712713dacfd0d17b0a47ab8010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update benchmark operations for the given benchmark phase.  <a href="#a5dd425712713dacfd0d17b0a47ab8010">More...</a><br/></td></tr>
+<tr class="separator:a5dd425712713dacfd0d17b0a47ab8010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -588,74 +588,6 @@ template&lt;typename... Types&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a15d414f36a5ef03b9e5f6679109776f5"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CppBenchmark::BenchmarkBase::UpdateBenchmarkIterations </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>phases</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Update benchmark iterations for the given benchmark phases collection. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">phases</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> phases collection </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="benchmark__base_8cpp_source.html#l00091">91</a> of file <a class="el" href="benchmark__base_8cpp_source.html">benchmark_base.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aba22e6ec132e2ea8eb67942676541c7e"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CppBenchmark::BenchmarkBase::UpdateBenchmarkIterations </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;&#160;</td>
-          <td class="paramname"><em>phase</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Update benchmark iterations for the given benchmark phase. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">phase</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> phase </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="benchmark__base_8cpp_source.html#l00097">97</a> of file <a class="el" href="benchmark__base_8cpp_source.html">benchmark_base.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="af879b2d68f3ee199f1d63fd853c703b4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -800,6 +732,74 @@ template&lt;typename... Types&gt; </div>
 </dl>
 
 <p>Definition at line <a class="el" href="benchmark__base_8cpp_source.html#l00084">84</a> of file <a class="el" href="benchmark__base_8cpp_source.html">benchmark_base.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ada15eaff6784163da961fc04eb54898c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppBenchmark::BenchmarkBase::UpdateBenchmarkOperations </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>phases</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update benchmark operations for the given benchmark phases collection. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phases</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> phases collection </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="benchmark__base_8cpp_source.html#l00091">91</a> of file <a class="el" href="benchmark__base_8cpp_source.html">benchmark_base.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5dd425712713dacfd0d17b0a47ab8010"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppBenchmark::BenchmarkBase::UpdateBenchmarkOperations </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_cpp_benchmark_1_1_phase_core.html">PhaseCore</a> &amp;&#160;</td>
+          <td class="paramname"><em>phase</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update benchmark operations for the given benchmark phase. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">phase</td><td>- <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> phase </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="benchmark__base_8cpp_source.html#l00097">97</a> of file <a class="el" href="benchmark__base_8cpp_source.html">benchmark_base.cpp</a>.</p>
 
 </div>
 </div>

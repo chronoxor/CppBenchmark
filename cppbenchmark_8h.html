@@ -411,7 +411,7 @@ Macros</h2></td></tr>
 <p>Benchmark register macro. </p>
 <p>Register a new benchmark with a given name and settings. Next to the definition you should provide a benchmark code.</p>
 <p>Example: </p>
-<div class="fragment"><div class="line"><span class="comment">// This benchmark will call MyTest() function in 1000000 iterations</span></div>
+<div class="fragment"><div class="line"><span class="comment">// This benchmark will call MyTest() function in 1000000 operations</span></div>
 <div class="line"><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;MyTestBenchmark&quot;</span>, 1000000)</div>
 <div class="line">{</div>
 <div class="line">    MyTest();</div>
@@ -459,7 +459,7 @@ Macros</h2></td></tr>
 <div class="line">    <span class="keywordtype">void</span> Cleanup(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override </span>{ container.clear(); }</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><span class="comment">// This benchmark will measure VectorBenchmark with 1000000 iterations</span></div>
+<div class="line"><span class="comment">// This benchmark will measure VectorBenchmark with 1000000 operations</span></div>
 <div class="line"><a class="code" href="cppbenchmark_8h.html#a0367deec9b5fa69ebfae9a1cacd25014">BENCHMARK_CLASS</a>(VectorBenchmark, <span class="stringliteral">&quot;VectorPushBackBenchmark&quot;</span>, 1000000)</div>
 </div><!-- fragment --> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="mpmc_8cpp-example.html#a12">mpmc.cpp</a>, <a class="el" href="mpsc_8cpp-example.html#a12">mpsc.cpp</a>, <a class="el" href="sort_8cpp-example.html#a10">sort.cpp</a>, and <a class="el" href="spsc_8cpp-example.html#a12">spsc.cpp</a>.</dd>
 </dl>

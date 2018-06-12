@@ -143,19 +143,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <a class="code" href="class_cpp_benchmark_1_1_fixture_p_c.html#a24612363ac4bf3f2972f4012b8947f1d">Initialize</a>(context);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keywordtype">bool</span> infinite = <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a315cc5c5c5526f4a9c65564417cfb14f">_settings</a>.<a class="code" href="class_cpp_benchmark_1_1_settings.html#a4483244712ac587dedb6e680d43a8d9f">infinite</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                int64_t iterations = <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a315cc5c5c5526f4a9c65564417cfb14f">_settings</a>.<a class="code" href="class_cpp_benchmark_1_1_settings.html#ae62dfcf9dce88a0d85df424490b42805">iterations</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                int64_t operations = <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a315cc5c5c5526f4a9c65564417cfb14f">_settings</a>.<a class="code" href="class_cpp_benchmark_1_1_settings.html#a98f18229b9752ca8bceb2807f30d8a0f">operations</a>();</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="comment">// Prepare barrier for producers &amp; consumers threads</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                Barrier barrier(producers + consumers);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="comment">// Start benchmark root phase iteration</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="comment">// Start benchmark root phase operation</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                context._current-&gt;StartCollectingMetrics();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                context._metrics-&gt;AddIterations(1);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                context._metrics-&gt;AddOperations(1);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="comment">// Start benchmark producers</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; producers; ++i)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    _threads.emplace_back([<span class="keyword">this</span>, &amp;barrier, &amp;context, latency_params, latency_auto, producers, infinite, iterations]()</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    _threads.emplace_back([<span class="keyword">this</span>, &amp;barrier, &amp;context, latency_params, latency_auto, producers, infinite, operations]()</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    {</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                        <span class="comment">// Clone producer context</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        ContextPC producer_context(context);</div>
@@ -167,7 +167,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        <span class="comment">// Update producer context</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        producer_context._current = producer_phase_core;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        producer_context._metrics = &amp;producer_phase_core-&gt;current();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        producer_context._metrics-&gt;AddIterations(-1);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        producer_context._metrics-&gt;AddOperations(-1);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                        producer_context._metrics-&gt;SetThreads(producers);</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                        <span class="comment">// Initialize latency histogram of the current phase</span></div>
@@ -177,16 +177,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                        <a class="code" href="class_cpp_benchmark_1_1_fixture_p_c.html#ace95155e6d0e2f2c3c7e2a6e033afe82">InitializeProducer</a>(producer_context);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        <span class="keywordtype">bool</span> producer_infinite = infinite;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        int64_t producer_iterations = iterations;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        int64_t producer_operations = operations;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                        <span class="comment">// Wait for other threads at the barrier</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                        barrier.Wait();</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                        producer_context._current-&gt;StartCollectingMetrics();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        <span class="keywordflow">while</span> (!producer_context.produce_stopped() &amp;&amp; !producer_context.canceled() &amp;&amp; (producer_infinite || (producer_iterations &gt; 0)))</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        <span class="keywordflow">while</span> (!producer_context.produce_stopped() &amp;&amp; !producer_context.canceled() &amp;&amp; (producer_infinite || (producer_operations &gt; 0)))</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                            <span class="comment">// Add new metrics iteration</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                            producer_context._metrics-&gt;AddIterations(1);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                            <span class="comment">// Add new metrics operation</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                            producer_context._metrics-&gt;AddOperations(1);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                            <span class="comment">// Store timestamp for automatic latency update</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                            uint64_t timestamp = 0;</div>
@@ -200,8 +200,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                            <span class="keywordflow">if</span> (latency_auto)</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                                producer_context._metrics-&gt;AddLatency(<a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>() - timestamp);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                            <span class="comment">// Decrement iteration counters</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                            producer_iterations -= 1;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                            <span class="comment">// Decrement operation counters</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                            producer_operations -= 1;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                        }</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                        producer_context._current-&gt;StopCollectingMetrics();</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
@@ -228,7 +228,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                        <span class="comment">// Update consumer context</span></div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                        consumer_context._current = consumer_phase_core;</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                        consumer_context._metrics = &amp;consumer_phase_core-&gt;current();</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                        consumer_context._metrics-&gt;AddIterations(-1);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                        consumer_context._metrics-&gt;AddOperations(-1);</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                        consumer_context._metrics-&gt;SetThreads(consumers);</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                        <span class="comment">// Initialize latency histogram of the current phase</span></div>
@@ -243,8 +243,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                        consumer_context._current-&gt;StartCollectingMetrics();</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                        <span class="keywordflow">while</span> (!consumer_context.consume_stopped() &amp;&amp; !consumer_context.canceled())</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                        {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                            <span class="comment">// Add new metrics iteration</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                            consumer_context._metrics-&gt;AddIterations(1);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                            <span class="comment">// Add new metrics operation</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                            consumer_context._metrics-&gt;AddOperations(1);</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                            <span class="comment">// Store timestamp for automatic latency update</span></div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                            uint64_t timestamp = 0;</div>
@@ -275,7 +275,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                <span class="comment">// Clear threads collection</span></div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                _threads.clear();</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                <span class="comment">// Stop benchmark root phase iteration</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                <span class="comment">// Stop benchmark root phase operation</span></div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                context._current-&gt;StopCollectingMetrics();</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                <span class="comment">// Call cleanup benchmark methods...</span></div>
@@ -313,7 +313,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="class_cpp_benchmark_1_1_benchmark_base_html_a315cc5c5c5526f4a9c65564417cfb14f"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark_base.html#a315cc5c5c5526f4a9c65564417cfb14f">CppBenchmark::BenchmarkBase::_settings</a></div><div class="ttdeci">Settings _settings</div><div class="ttdoc">Benchmark settings. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__base_8h_source.html#l00065">benchmark_base.h:65</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_benchmark_base_html_a92c0dc956655875a27f3b9e97fd3bb7a"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark_base.html#a92c0dc956655875a27f3b9e97fd3bb7a">CppBenchmark::BenchmarkBase::UpdateBenchmarkThreads</a></div><div class="ttdeci">static void UpdateBenchmarkThreads(std::vector&lt; std::shared_ptr&lt; PhaseCore &gt;&gt; &amp;phases)</div><div class="ttdoc">Update benchmark threads metrics for the given benchmark phases collection. </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__base_8cpp_source.html#l00049">benchmark_base.cpp:49</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_fixture_p_c_html_af0a1698e09dcb545858144ad289ec526"><div class="ttname"><a href="class_cpp_benchmark_1_1_fixture_p_c.html#af0a1698e09dcb545858144ad289ec526">CppBenchmark::FixturePC::CleanupConsumer</a></div><div class="ttdeci">virtual void CleanupConsumer(ContextPC &amp;context)</div><div class="ttdoc">Cleanup consumer. </div><div class="ttdef"><b>Definition:</b> <a href="fixture__pc_8h_source.html#l00074">fixture_pc.h:74</a></div></div>
-<div class="ttc" id="class_cpp_benchmark_1_1_settings_html_ae62dfcf9dce88a0d85df424490b42805"><div class="ttname"><a href="class_cpp_benchmark_1_1_settings.html#ae62dfcf9dce88a0d85df424490b42805">CppBenchmark::Settings::iterations</a></div><div class="ttdeci">int64_t iterations() const noexcept</div><div class="ttdoc">Get count of iterations. </div><div class="ttdef"><b>Definition:</b> <a href="settings_8h_source.html#l00059">settings.h:59</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_fixture_p_c_html_ace95155e6d0e2f2c3c7e2a6e033afe82"><div class="ttname"><a href="class_cpp_benchmark_1_1_fixture_p_c.html#ace95155e6d0e2f2c3c7e2a6e033afe82">CppBenchmark::FixturePC::InitializeProducer</a></div><div class="ttdeci">virtual void InitializeProducer(ContextPC &amp;context)</div><div class="ttdoc">Initialize producer. </div><div class="ttdef"><b>Definition:</b> <a href="fixture__pc_8h_source.html#l00053">fixture_pc.h:53</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_settings_html_a8b83e6676855b74fc2f4777578a773a8"><div class="ttname"><a href="class_cpp_benchmark_1_1_settings.html#a8b83e6676855b74fc2f4777578a773a8">CppBenchmark::Settings::latency</a></div><div class="ttdeci">const std::tuple&lt; int64_t, int64_t, int &gt; &amp; latency() const noexcept</div><div class="ttdoc">Get latency parameters. </div><div class="ttdef"><b>Definition:</b> <a href="settings_8h_source.html#l00067">settings.h:67</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_settings_html_aa9b21de0f913b5f1f073e461caebb376"><div class="ttname"><a href="class_cpp_benchmark_1_1_settings.html#aa9b21de0f913b5f1f073e461caebb376">CppBenchmark::Settings::pc</a></div><div class="ttdeci">const std::vector&lt; std::tuple&lt; int, int &gt; &gt; &amp; pc() const noexcept</div><div class="ttdoc">Get collection of independent producers/consumers counts in a benchmark plan. </div><div class="ttdef"><b>Definition:</b> <a href="settings_8h_source.html#l00063">settings.h:63</a></div></div>
@@ -325,8 +324,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="benchmark__pc_8h_html"><div class="ttname"><a href="benchmark__pc_8h.html">benchmark_pc.h</a></div><div class="ttdoc">Producers/Consumers benchmark base definition. </div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_settings_html_a04368657da262580878c6bc3b846fca9"><div class="ttname"><a href="class_cpp_benchmark_1_1_settings.html#a04368657da262580878c6bc3b846fca9">CppBenchmark::Settings::params</a></div><div class="ttdeci">const std::vector&lt; std::tuple&lt; int, int, int &gt; &gt; &amp; params() const noexcept</div><div class="ttdoc">Get collection of independent parameters in a benchmark plan. </div><div class="ttdef"><b>Definition:</b> <a href="settings_8h_source.html#l00065">settings.h:65</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_benchmark_p_c_html_ac768c043726ac03bb516d9bf3505c51f"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark_p_c.html#ac768c043726ac03bb516d9bf3505c51f">CppBenchmark::BenchmarkPC::RunProducer</a></div><div class="ttdeci">virtual void RunProducer(ContextPC &amp;context)=0</div><div class="ttdoc">Producer run method. </div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_settings_html_a98f18229b9752ca8bceb2807f30d8a0f"><div class="ttname"><a href="class_cpp_benchmark_1_1_settings.html#a98f18229b9752ca8bceb2807f30d8a0f">CppBenchmark::Settings::operations</a></div><div class="ttdeci">int64_t operations() const noexcept</div><div class="ttdoc">Get count of operations. </div><div class="ttdef"><b>Definition:</b> <a href="settings_8h_source.html#l00059">settings.h:59</a></div></div>
 <div class="ttc" id="class_cpp_benchmark_1_1_fixture_p_c_html_a24612363ac4bf3f2972f4012b8947f1d"><div class="ttname"><a href="class_cpp_benchmark_1_1_fixture_p_c.html#a24612363ac4bf3f2972f4012b8947f1d">CppBenchmark::FixturePC::Initialize</a></div><div class="ttdeci">virtual void Initialize(ContextPC &amp;context)</div><div class="ttdoc">Initialize benchmark. </div><div class="ttdef"><b>Definition:</b> <a href="fixture__pc_8h_source.html#l00038">fixture_pc.h:38</a></div></div>
-<div class="ttc" id="class_cpp_benchmark_1_1_settings_html_a4483244712ac587dedb6e680d43a8d9f"><div class="ttname"><a href="class_cpp_benchmark_1_1_settings.html#a4483244712ac587dedb6e680d43a8d9f">CppBenchmark::Settings::infinite</a></div><div class="ttdeci">bool infinite() const noexcept</div><div class="ttdoc">Is benchmark running with infinite count of iterations (until cancel)? </div><div class="ttdef"><b>Definition:</b> <a href="settings_8h_source.html#l00057">settings.h:57</a></div></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_settings_html_a4483244712ac587dedb6e680d43a8d9f"><div class="ttname"><a href="class_cpp_benchmark_1_1_settings.html#a4483244712ac587dedb6e680d43a8d9f">CppBenchmark::Settings::infinite</a></div><div class="ttdeci">bool infinite() const noexcept</div><div class="ttdoc">Is benchmark running with infinite count of operations (until cancel)? </div><div class="ttdef"><b>Definition:</b> <a href="settings_8h_source.html#l00057">settings.h:57</a></div></div>
 <div class="ttc" id="barrier_8h_html"><div class="ttname"><a href="barrier_8h.html">barrier.h</a></div><div class="ttdoc">Barrier synchronization primitive definition. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

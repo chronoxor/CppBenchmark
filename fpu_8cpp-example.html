@@ -90,21 +90,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keyword">const</span> uint64_t iterations = 1000000000;</div>
+<div class="line"><span class="keyword">const</span> uint64_t operations = 1000000000;</div>
 <div class="line"></div>
-<div class="line"><a name="a0"></a><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;sin()&quot;</span>, iterations)</div>
+<div class="line"><a name="a0"></a><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;sin()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">static</span> <span class="keywordtype">double</span> sum = 0;</div>
 <div class="line">    sum += sin(123.456);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;cos()&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;cos()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">static</span> <span class="keywordtype">double</span> sum = 0;</div>
 <div class="line">    sum += cos(123.456);</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;tan()&quot;</span>, iterations)</div>
+<div class="line"><a class="code" href="cppbenchmark_8h.html#a8155a21ede70a871be3fe8c3ec0390ac">BENCHMARK</a>(<span class="stringliteral">&quot;tan()&quot;</span>, operations)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">static</span> <span class="keywordtype">double</span> sum = 0;</div>
 <div class="line">    sum += tan(123.456);</div>
