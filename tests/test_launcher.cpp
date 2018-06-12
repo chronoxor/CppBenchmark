@@ -98,7 +98,7 @@ private:
 TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
 {
     // Prepare benchmark
-    Settings settings = Settings().Attempts(5).Iterations(10).TripleRange(0, 1, 0, 1, 0, 1);
+    Settings settings = Settings().Attempts(5).Operations(10).TripleRange(0, 1, 0, 1, 0, 1);
     std::shared_ptr<TestBenchmark> benchmark = std::make_shared<TestBenchmark>("Test", settings);
 
     // Prepare launcher
@@ -133,7 +133,7 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
 
     // Test benchmark state
     REQUIRE(benchmark->initializations() == (int)(settings.params().size() * settings.attempts()));
-    REQUIRE(benchmark->runs() == (settings.params().size() * settings.attempts() * settings.iterations()));
+    REQUIRE(benchmark->runs() == (settings.params().size() * settings.attempts() * settings.operations()));
     REQUIRE(benchmark->cleanups() == benchmark->initializations());
 
     // Test launcher state

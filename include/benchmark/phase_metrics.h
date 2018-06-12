@@ -23,12 +23,12 @@ namespace CppBenchmark {
     - Minimal time of the phase execution
     - Maximal time of the phase execution
     - Total time of the phase execution
-    - Total iterations made in the phase
+    - Total operations made in the phase
     - Total items processed in the phase
     - Total bytes processed in the phase
 
     If the phase metrics is accessed from benchmark running Context you can update some metrics values:
-    - increase iterations count with AddIterations() method
+    - increase operations count with AddOperations() method
     - register processed items with AddItems() method
     - register processed bytes with AddBytes() method
     - set custom integer/string values by name
@@ -67,15 +67,15 @@ public:
 
     //! Get total time of the phase execution
     int64_t total_time() const noexcept { return _total_time; }
-    //! Get total iterations made in the phase
-    int64_t total_iterations() const noexcept { return _total_iterations; }
+    //! Get total operations made in the phase
+    int64_t total_operations() const noexcept { return _total_operations; }
     //! Get total items processed in the phase
     int64_t total_items() const noexcept { return _total_items; }
     //! Get total bytes processed in the phase
     int64_t total_bytes() const noexcept { return _total_bytes; }
 
-    //! Get iterations throughput (iterations / second)
-    int64_t iterations_per_second() const noexcept;
+    //! Get operations throughput (operations / second)
+    int64_t operations_per_second() const noexcept;
     //! Get items throughput (items / second)
     int64_t items_per_second() const noexcept;
     //! Get data throughput (bytes / second)
@@ -98,12 +98,12 @@ public:
 
     int threads() const noexcept { return _threads; }
 
-    //! Increase iterations count of the current phase
+    //! Increase operations count of the current phase
     /*!
-        \param iterations - Iterations count
+        \param operations - Operations count
     */
-    void AddIterations(int64_t iterations) noexcept
-    { _total_iterations += iterations; }
+    void AddOperations(int64_t operations) noexcept
+    { _total_operations += operations; }
     //! Register processed items in the current phase
     /*!
         \param items - Items count
@@ -185,7 +185,7 @@ private:
     int64_t _min_time;
     int64_t _max_time;
     int64_t _total_time;
-    int64_t _total_iterations;
+    int64_t _total_operations;
     int64_t _total_items;
     int64_t _total_bytes;
     std::map<std::string, int> _custom_int;

@@ -58,7 +58,7 @@ int main(int argc, char** argv)\
 
     Example:
     \code{.cpp}
-    // This benchmark will call MyTest() function in 1000000 iterations
+    // This benchmark will call MyTest() function in 1000000 operations
     BENCHMARK("MyTestBenchmark", 1000000)
     {
         MyTest();
@@ -251,7 +251,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(Cont
         void Cleanup(CppBenchmark::Context& context) override { container.clear(); }
     };
 
-    // This benchmark will measure VectorBenchmark with 1000000 iterations
+    // This benchmark will measure VectorBenchmark with 1000000 operations
     BENCHMARK_CLASS(VectorBenchmark, "VectorPushBackBenchmark", 1000000)
     \endcode
 */

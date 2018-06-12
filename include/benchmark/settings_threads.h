@@ -15,22 +15,22 @@ namespace CppBenchmark {
 
 //! Threads benchmark settings
 /*!
-    Constructs benchmark settings by providing count of iterations and count of running threads.
+    Constructs benchmark settings by providing count of operations and count of running threads.
 */
 class SettingsThreads : public Settings
 {
 public:
-    //! Initialize settings with the given count of iterations
+    //! Initialize settings with the given count of operations
     /*!
-        \param iterations - Count of iterations (default is 1)
+        \param operations - Count of operations (default is 1)
     */
-    SettingsThreads(int64_t iterations = 1) : Settings(iterations) {}
-    //! Initialize settings with the given count of iterations and count of running threads
+    SettingsThreads(int64_t operations = 1) : Settings(operations) {}
+    //! Initialize settings with the given count of operations and count of running threads
     /*!
-        \param iterations - Count of iterations
+        \param operations - Count of operations
         \param threads - Count of running threads
     */
-    SettingsThreads(int64_t iterations, int threads) : SettingsThreads(iterations) { Threads(threads); }
+    SettingsThreads(int64_t operations, int threads) : SettingsThreads(operations) { Threads(threads); }
     SettingsThreads(const Settings& settings) : Settings(settings) {}
     SettingsThreads(const SettingsThreads&) = default;
     SettingsThreads(Settings&& settings) noexcept : Settings(std::move(settings)) {}

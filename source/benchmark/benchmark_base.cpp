@@ -88,17 +88,17 @@ void BenchmarkBase::UpdateBenchmarkNames(PhaseCore& phase, const std::string& na
     phase._name = name;
 }
 
-void BenchmarkBase::UpdateBenchmarkIterations(std::vector<std::shared_ptr<PhaseCore>>& phases)
+void BenchmarkBase::UpdateBenchmarkOperations(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
     for (auto& phase : phases)
-        UpdateBenchmarkIterations(*phase);
+        UpdateBenchmarkOperations(*phase);
 }
 
-void BenchmarkBase::UpdateBenchmarkIterations(PhaseCore& phase)
+void BenchmarkBase::UpdateBenchmarkOperations(PhaseCore& phase)
 {
-    phase._metrics_result.AddIterations(-1);
+    phase._metrics_result.AddOperations(-1);
     for (auto& child : phase._child)
-        phase._metrics_result.AddIterations(child->metrics().threads() * child->metrics().total_iterations());
+        phase._metrics_result.AddOperations(child->metrics().threads() * child->metrics().total_operations());
 }
 
 } // namespace CppBenchmark

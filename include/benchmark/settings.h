@@ -19,7 +19,7 @@ namespace CppBenchmark {
 /*!
     Provides interface to all benchmark settings:
     - Independent benchmark attempts
-    - Count of iterations
+    - Count of operations
     - Add count of running threads to the benchmark running plan
     - Add count of producers/consumers to the benchmark running plan
     - Add parameters (single, pair, triple) to the benchmark running plan
@@ -33,14 +33,14 @@ class Settings
     friend class BenchmarkThreads;
 
 public:
-    //! Initialize settings with the given count of iterations
+    //! Initialize settings with the given count of operations
     /*!
-        \param iterations - Count of iterations (default is 1)
+        \param operations - Count of operations (default is 1)
     */
-    Settings(int64_t iterations = 1)
+    Settings(int64_t operations = 1)
         : _attempts(5),
           _infinite(false),
-          _iterations(iterations),
+          _operations(operations),
           _latency_params(std::make_tuple(0, 0, 0)),
           _latency_auto(false)
     {}
@@ -53,10 +53,10 @@ public:
 
     //! Get count of independent benchmark attempts
     int attempts() const noexcept { return _attempts; }
-    //! Is benchmark running with infinite count of iterations (until cancel)?
+    //! Is benchmark running with infinite count of operations (until cancel)?
     bool infinite() const noexcept { return _infinite; }
-    //! Get count of iterations
-    int64_t iterations() const noexcept { return _iterations; }
+    //! Get count of operations
+    int64_t operations() const noexcept { return _operations; }
     //! Get collection of independent threads counts in a benchmark plan
     const std::vector<int>& threads() const noexcept { return _threads; }
     //! Get collection of independent producers/consumers counts in a benchmark plan
@@ -77,17 +77,17 @@ public:
     */
     Settings& Attempts(int attempts);
 
-    //! Set infinite benchmark iterations flag
+    //! Set infinite benchmark operations flag
     /*!
-        Benchmark will be launched in infinite iterations loop until Context.Cancel() method is called.
+        Benchmark will be launched in infinite operations loop until Context.Cancel() method is called.
     */
     Settings& Infinite();
-    //! Set count of iterations
+    //! Set count of operations
     /*!
-        \param iterations - Count of iterations (must be positive)
+        \param operations - Count of operations (must be positive)
         \return Reference to the current settings instance
     */
-    Settings& Iterations(int64_t iterations);
+    Settings& Operations(int64_t operations);
 
     //! Add new threads count to the benchmark running plan
     /*!
@@ -275,7 +275,7 @@ public:
 private:
     int _attempts;
     bool _infinite;
-    int64_t _iterations;
+    int64_t _operations;
     std::vector<int> _threads;
     std::vector<std::tuple<int, int>> _pc;
     std::vector<std::tuple<int, int, int>> _params;

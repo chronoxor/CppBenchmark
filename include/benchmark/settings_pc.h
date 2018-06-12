@@ -15,23 +15,23 @@ namespace CppBenchmark {
 
 //! Producers/Consumers benchmark settings
 /*!
-    Constructs benchmark settings by providing count of iterations and count of producers/consumers.
+    Constructs benchmark settings by providing count of operations and count of producers/consumers.
 */
 class SettingsPC : public Settings
 {
 public:
-    //! Initialize settings with the given count of iterations
+    //! Initialize settings with the given count of operations
     /*!
-        \param iterations - Count of iterations (default is 1)
+        \param operations - Count of operations (default is 1)
     */
-    SettingsPC(int64_t iterations = 1) : Settings(iterations) {}
-    //! Initialize settings with the given count of iterations and count of producers/consumers
+    SettingsPC(int64_t operations = 1) : Settings(operations) {}
+    //! Initialize settings with the given count of operations and count of producers/consumers
     /*!
-        \param iterations - Count of iterations
+        \param operations - Count of operations
         \param producers - Count of producers
         \param consumers - Count of consumers
     */
-    SettingsPC(int64_t iterations, int producers, int consumers) : SettingsPC(iterations) { PC(producers, consumers); }
+    SettingsPC(int64_t operations, int producers, int consumers) : SettingsPC(operations) { PC(producers, consumers); }
     SettingsPC(const Settings& settings) : Settings(settings) {}
     SettingsPC(const SettingsPC&) = default;
     SettingsPC(Settings&& settings) noexcept : Settings(std::move(settings)) {}

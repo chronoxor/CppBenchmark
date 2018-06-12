@@ -97,7 +97,7 @@ void ReporterJSON::ReportBenchmark(const BenchmarkBase& benchmark, const Setting
     _stream << Internals::indent4 << "\"name\": \"" << benchmark.name() << "\",\n";
     _stream << Internals::indent4 << "\"attempts\": " << settings.attempts() << ",\n";
     if (!settings.infinite())
-        _stream << Internals::indent4 << "\"iterations\": " << settings.iterations() << ",\n";
+        _stream << Internals::indent4 << "\"operations\": " << settings.operations() << ",\n";
 }
 
 void ReporterJSON::ReportPhasesHeader()
@@ -132,7 +132,7 @@ void ReporterJSON::ReportPhaseFooter()
 void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
 {
     _stream << Internals::indent7 << "\"name\": \"" << phase.name() << "\",\n";
-    if (metrics.total_iterations() > 1)
+    if (metrics.total_operations() > 1)
     {
         if (metrics.latency())
         {
@@ -149,14 +149,14 @@ void ReporterJSON::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metri
         }
     }
     _stream << Internals::indent7 << "\"total_time\": " << metrics.total_time() << ",\n";
-    if (metrics.total_iterations() > 1)
-        _stream << Internals::indent7 << "\"total_iterations\": " << metrics.total_iterations() << ",\n";
+    if (metrics.total_operations() > 1)
+        _stream << Internals::indent7 << "\"total_operations\": " << metrics.total_operations() << ",\n";
     if (metrics.total_items() > 0)
         _stream << Internals::indent7 << "\"total_items\": " << metrics.total_items() << ",\n";
     if (metrics.total_bytes() > 0)
         _stream << Internals::indent7 << "\"total_bytes\": " << metrics.total_bytes() << ",\n";
-    if (metrics.total_iterations() > 1)
-        _stream << Internals::indent7 << "\"iterations_per_second\": " << metrics.iterations_per_second() << ",\n";
+    if (metrics.total_operations() > 1)
+        _stream << Internals::indent7 << "\"operations_per_second\": " << metrics.operations_per_second() << ",\n";
     if (metrics.total_items() > 0)
         _stream << Internals::indent7 << "\"items_per_second\": " << metrics.items_per_second() << ",\n";
     if (metrics.total_bytes() > 0)

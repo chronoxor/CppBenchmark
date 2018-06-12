@@ -20,8 +20,8 @@
 #undef min
 #endif
 
-const uint64_t iterations = 10000000;
-const auto settings = CppBenchmark::Settings().Iterations(iterations).Latency(1, 1000000000, 5, false);
+const uint64_t operations = 10000000;
+const auto settings = CppBenchmark::Settings().Operations(operations).Latency(1, 1000000000, 5, false);
 
 BENCHMARK("high_resolution_clock", settings)
 {
@@ -34,7 +34,7 @@ BENCHMARK("high_resolution_clock", settings)
     // Get the current timestamp
     auto current = std::chrono::high_resolution_clock::now();
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -75,7 +75,7 @@ BENCHMARK("clock", settings)
     // Get the current timestamp
     clock_t current = clock();
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -125,7 +125,7 @@ BENCHMARK("clock_gettime-CLOCK_REALTIME", settings)
     // Get the current timestamp
     struct timespec current = clock_gettime(CLOCK_REALTIME);
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -166,7 +166,7 @@ BENCHMARK("clock_gettime-CLOCK_MONOTONIC", settings)
     // Get the current timestamp
     struct timespec current = clock_gettime(CLOCK_MONOTONIC);
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -209,7 +209,7 @@ BENCHMARK("clock_gettime_nsec_np-CLOCK_REALTIME", settings)
     // Get the current timestamp
     uint64_t current = clock_gettime_nsec_np(CLOCK_REALTIME);
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -250,7 +250,7 @@ BENCHMARK("clock_gettime_nsec_np-CLOCK_MONOTONIC", settings)
     // Get the current timestamp
     uint64_t current = clock_gettime_nsec_np(CLOCK_MONOTONIC);
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -302,7 +302,7 @@ BENCHMARK("mach_absolute_time", settings)
     // Get the current timestamp
     uint64_t current = ((mach_absolute_time() - bias) * info.numer) / info.denom;
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -355,7 +355,7 @@ BENCHMARK("gettimeofday", settings)
     // Get the current timestamp
     struct timeval current = mygettimeofday();
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -410,7 +410,7 @@ BENCHMARK("GetSystemTimePreciseAsFileTime", settings)
     if (resolution_timestamp == 0)
         resolution_timestamp = current;
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -455,7 +455,7 @@ BENCHMARK("GetTickCount", settings)
     // Get the current timestamp
     DWORD current = GetTickCount();
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -500,7 +500,7 @@ BENCHMARK("GetTickCount64", settings)
     // Get the current timestamp
     ULONGLONG current = GetTickCount64();
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -560,7 +560,7 @@ BENCHMARK("QueryPerformanceCounter", settings)
     // Get the current timestamp
     LARGE_INTEGER current = QueryPerformanceCounter();
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -605,7 +605,7 @@ BENCHMARK("RDTSC", settings)
     // Get the current timestamp
     uint64_t current = __rdtsc();
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics

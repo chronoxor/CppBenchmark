@@ -46,7 +46,7 @@ public:
 
     //! Benchmark mutable metrics
     /*!
-        Benchmark mutable metrics can be used to increase iterations count with PhaseMetrics.AddIterations()
+        Benchmark mutable metrics can be used to increase operations count with PhaseMetrics.AddOperations()
         method, register processed items with PhaseMetrics.AddItems() method, register processed bytes with
         PhaseMetrics.AddBytes() method.
     */

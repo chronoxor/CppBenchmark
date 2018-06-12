@@ -68,11 +68,11 @@ std::shared_ptr<Phase> Executor::StartBenchmark(const std::string& benchmark)
             result = *it;
     }
 
-    // Start new iteration for the child dynamic benchmark
+    // Start new operation for the child dynamic benchmark
     result->StartCollectingMetrics();
 
-    // Add new metrics iteration
-    result->_metrics_current.AddIterations(1);
+    // Add new metrics operation
+    result->_metrics_current.AddOperations(1);
 
     return result;
 }

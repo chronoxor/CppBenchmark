@@ -7,8 +7,8 @@
 #include <chrono>
 #include <thread>
 
-const uint64_t iterations = 100;
-const auto settings = CppBenchmark::Settings().Iterations(iterations).Latency(1, 1000000000, 5);
+const uint64_t operations = 100;
+const auto settings = CppBenchmark::Settings().Operations(operations).Latency(1, 1000000000, 5);
 
 BENCHMARK("sleep", settings)
 {

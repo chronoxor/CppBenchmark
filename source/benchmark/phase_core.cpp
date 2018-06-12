@@ -26,11 +26,11 @@ std::shared_ptr<Phase> PhaseCore::StartPhase(const std::string& phase)
     else
         result = *it;
 
-    // Start new iteration for the child phase
+    // Start new operation for the child phase
     result->StartCollectingMetrics();
 
-    // Add new metrics iteration
-    result->_metrics_current.AddIterations(1);
+    // Add new metrics operation
+    result->_metrics_current.AddOperations(1);
 
     return result;
 }
@@ -57,11 +57,11 @@ std::shared_ptr<Phase> PhaseCore::StartPhaseThreadSafe(const std::string& phase)
             result = *it;
     }
 
-    // Start new iteration for the child phase
+    // Start new operation for the child phase
     result->StartCollectingMetrics();
 
-    // Add new metrics iteration
-    result->_metrics_current.AddIterations(1);
+    // Add new metrics operation
+    result->_metrics_current.AddOperations(1);
 
     return result;
 }

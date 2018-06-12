@@ -22,10 +22,10 @@ Settings& Settings::Infinite()
     return *this;
 }
 
-Settings& Settings::Iterations(int64_t iterations)
+Settings& Settings::Operations(int64_t operations)
 {
     _infinite = false;
-    _iterations = (iterations > 0) ? iterations : 1;
+    _operations = (operations > 0) ? operations : 1;
     return *this;
 }
 

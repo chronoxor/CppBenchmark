@@ -145,15 +145,15 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: sin
 Attempts: 5
-Iterations: 1000000000
+Operations: 1000000000
 -------------------------------------------------------------------------------
 Phase: sin()
-Average time: 2 ns / iteration
-Minimal time: 2 ns / iteration
-Maximal time: 2 ns / iteration
+Average time: 2 ns/op
+Minimal time: 2 ns/op
+Maximal time: 2 ns/op
 Total time: 2.428 s
-Total iterations: 1000000000
-Iterations throughput: 411732889 / second
+Total operations: 1000000000
+Operations throughput: 411732889 ops/s
 ===============================================================================
 ```
 
@@ -162,7 +162,7 @@ Iterations throughput: 411732889 / second
 #include "cppbenchmark.h"
 
 // Benchmark rand() call until it returns 0.
-// Benchmark will print iterations count required to get 'rand() == 0' case.
+// Benchmark will print operations count required to get 'rand() == 0' case.
 // Make 10 attemtps and choose one with the best time result.
 BENCHMARK("rand-till-zero", Settings().Infinite().Attempts(10))
 {
@@ -180,18 +180,18 @@ Benchmark: rand-till-zero
 Attempts: 10
 -------------------------------------------------------------------------------
 Phase: rand-till-zero()
-Average time: 25 ns / iteration
-Minimal time: 25 ns / iteration
-Maximal time: 513 ns / iteration
+Average time: 25 ns/op
+Minimal time: 25 ns/op
+Maximal time: 513 ns/op
 Total time: 94.234 mcs
-Total iterations: 3716
-Iterations throughput: 39433750 / second
+Total operations: 3716
+Operations throughput: 39433750 ops/s
 ===============================================================================
 ```
 
 ## Example 3: Benchmark with static fixture
 Static fixture will be constructed once per each benchmark, will be the same for
-each attempt / iteration and will be destructed at the end of the benchmark.
+each attempt / operation and will be destructed at the end of the benchmark.
 
 ```C++
 #include "macros.h"
@@ -199,7 +199,7 @@ each attempt / iteration and will be destructed at the end of the benchmark.
 #include <list>
 #include <vector>
 
-const int iterations = 1000;
+const int operations = 1000;
 
 template <typename T>
 class ContainerFixture
@@ -214,25 +214,25 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.forward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.forward", operations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.backward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.backward", operations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.forward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.forward", operations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.backward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.backward", operations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
@@ -246,51 +246,51 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: std::list<int>.forward
 Attempts: 5
-Iterations: 1000
+Operations: 1000
 -------------------------------------------------------------------------------
 Phase: std::list<int>.forward()
-Average time: 6.055 ms / iteration
-Minimal time: 6.055 ms / iteration
-Maximal time: 6.337 ms / iteration
+Average time: 6.055 ms/op
+Minimal time: 6.055 ms/op
+Maximal time: 6.337 ms/op
 Total time: 6.055 s
-Total iterations: 1000
-Iterations throughput: 165 / second
+Total operations: 1000
+Operations throughput: 165 ops/s
 ===============================================================================
 Benchmark: std::list<int>.backward
 Attempts: 5
-Iterations: 1000
+Operations: 1000
 -------------------------------------------------------------------------------
 Phase: std::list<int>.backward()
-Average time: 6.075 ms / iteration
-Minimal time: 6.075 ms / iteration
-Maximal time: 6.935 ms / iteration
+Average time: 6.075 ms/op
+Minimal time: 6.075 ms/op
+Maximal time: 6.935 ms/op
 Total time: 6.075 s
-Total iterations: 1000
-Iterations throughput: 164 / second
+Total operations: 1000
+Operations throughput: 164 ops/s
 ===============================================================================
 Benchmark: std::vector<int>.forward
 Attempts: 5
-Iterations: 1000
+Operations: 1000
 -------------------------------------------------------------------------------
 Phase: std::vector<int>.forward()
-Average time: 663.003 mcs / iteration
-Minimal time: 663.003 mcs / iteration
-Maximal time: 678.439 mcs / iteration
+Average time: 663.003 mcs/op
+Minimal time: 663.003 mcs/op
+Maximal time: 678.439 mcs/op
 Total time: 663.003 ms
-Total iterations: 1000
-Iterations throughput: 1508 / second
+Total operations: 1000
+Operations throughput: 1508 ops/s
 ===============================================================================
 Benchmark: std::vector<int>.backward
 Attempts: 5
-Iterations: 1000
+Operations: 1000
 -------------------------------------------------------------------------------
 Phase: std::vector<int>.backward()
-Average time: 667.515 mcs / iteration
-Minimal time: 667.515 mcs / iteration
-Maximal time: 681.929 mcs / iteration
+Average time: 667.515 mcs/op
+Minimal time: 667.515 mcs/op
+Maximal time: 681.929 mcs/op
 Total time: 667.515 ms
-Total iterations: 1000
-Iterations throughput: 1498 / second
+Total operations: 1000
+Operations throughput: 1498 ops/s
 ===============================================================================
 ```
 
@@ -306,7 +306,7 @@ context in dynamic fixture methods.
 #include <list>
 #include <vector>
 
-const int iterations = 10000000;
+const int operations = 10000000;
 
 template <typename T>
 class ContainerFixture : public virtual CppBenchmark::Fixture
@@ -318,17 +318,17 @@ protected:
     void Cleanup(CppBenchmark::Context& context) override { container.clear(); }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back", operations)
 {
     container.push_back(0);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.push_back", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.push_back", operations)
 {
     container.push_back(0);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::deque<int>>, "std::deque<int>.push_back", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::deque<int>>, "std::deque<int>.push_back", operations)
 {
     container.push_back(0);
 }
@@ -341,39 +341,39 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: std::list<int>.push_back
 Attempts: 5
-Iterations: 10000000
+Operations: 10000000
 -------------------------------------------------------------------------------
 Phase: std::list<int>.push_back()
-Average time: 50 ns / iteration
-Minimal time: 50 ns / iteration
-Maximal time: 53 ns / iteration
+Average time: 50 ns/op
+Minimal time: 50 ns/op
+Maximal time: 53 ns/op
 Total time: 505.169 ms
-Total iterations: 10000000
-Iterations throughput: 19795348 / second
+Total operations: 10000000
+Operations throughput: 19795348 ops/s
 ===============================================================================
 Benchmark: std::vector<int>.push_back
 Attempts: 5
-Iterations: 10000000
+Operations: 10000000
 -------------------------------------------------------------------------------
 Phase: std::vector<int>.push_back()
-Average time: 9 ns / iteration
-Minimal time: 9 ns / iteration
-Maximal time: 10 ns / iteration
+Average time: 9 ns/op
+Minimal time: 9 ns/op
+Maximal time: 10 ns/op
 Total time: 97.252 ms
-Total iterations: 10000000
-Iterations throughput: 102824688 / second
+Total operations: 10000000
+Operations throughput: 102824688 ops/s
 ===============================================================================
 Benchmark: std::deque<int>.push_back
 Attempts: 5
-Iterations: 10000000
+Operations: 10000000
 -------------------------------------------------------------------------------
 Phase: std::deque<int>.push_back()
-Average time: 21 ns / iteration
-Minimal time: 21 ns / iteration
-Maximal time: 22 ns / iteration
+Average time: 21 ns/op
+Minimal time: 21 ns/op
+Maximal time: 22 ns/op
 Total time: 218.826 ms
-Total iterations: 10000000
-Iterations throughput: 45698221 / second
+Total operations: 10000000
+Operations throughput: 45698221 ops/s
 ===============================================================================
 ```
 
@@ -420,17 +420,17 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: std::sort
 Attempts: 5
-Iterations: 1
+Operations: 1
 -------------------------------------------------------------------------------
 Phase: std::sort(1000000)
 Total time: 66.976 ms
 Total items: 1000000
-Items throughput: 14930626 / second
+Items throughput: 14930626 ops/s
 -------------------------------------------------------------------------------
 Phase: std::sort(10000000)
 Total time: 644.141 ms
 Total items: 10000000
-Items throughput: 15524528 / second
+Items throughput: 15524528 ops/s
 ===============================================================================
 ```
 
@@ -481,12 +481,12 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: std::sort
 Attempts: 5
-Iterations: 1
+Operations: 1
 -------------------------------------------------------------------------------
 Phase: std::sort(10000000)
 Total time: 648.461 ms
 Total items: 10000000
-Items throughput: 15421124 / second
+Items throughput: 15421124 ops/s
 ===============================================================================
 ```
 
@@ -498,14 +498,14 @@ You can use AddBytes() method of a benchmark context metrics to register process
 
 #include <array>
 
-const int iterations = 100000;
+const int operations = 100000;
 const int chunk_size_from = 32;
 const int chunk_size_to = 4096;
 
-// Create settings for the benchmark which will make 100000 iterations for each chunk size
+// Create settings for the benchmark which will make 100000 operations for each chunk size
 // scaled from 32 bytes to 4096 bytes (32, 64, 128, 256, 512, 1024, 2048, 4096).
 const auto settings = CppBenchmark::Settings()
-    .Iterations(iterations)
+    .Operations(operations)
     .ParamRange(
         chunk_size_from, chunk_size_to, [](int from, int to, int& result)
         {
@@ -543,7 +543,7 @@ BENCHMARK_FIXTURE(FileFixture, "fwrite", settings)
     fwrite(buffer.data(), sizeof(char), context.x(), file);
     context.metrics().AddBytes(context.x());
 }
-
+                            ..
 BENCHMARK_MAIN()
 ```
 
@@ -552,49 +552,49 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: fwrite
 Attempts: 5
-Iterations: 100000
+Operations: 100000
 -------------------------------------------------------------------------------
 Phase: fwrite(32)
-Average time: 66 ns / iteration
-Minimal time: 66 ns / iteration
-Maximal time: 78 ns / iteration
+Average time: 66 ns/op
+Minimal time: 66 ns/op
+Maximal time: 78 ns/op
 Total time: 6.608 ms
-Total iterations: 100000
+Total operations: 100000
 Total bytes: 3.053 MiB
-Iterations throughput: 15131818 / second
-Bytes throughput: 461.805 MiB / second
+Operations throughput: 15131818 ops/s
+Bytes throughput: 461.805 MiB/s
 -------------------------------------------------------------------------------
 Phase: fwrite(64)
-Average time: 93 ns / iteration
-Minimal time: 93 ns / iteration
-Maximal time: 134 ns / iteration
+Average time: 93 ns/op
+Minimal time: 93 ns/op
+Maximal time: 134 ns/op
 Total time: 9.380 ms
-Total iterations: 100000
+Total operations: 100000
 Total bytes: 6.106 MiB
-Iterations throughput: 10660950 / second
-Bytes throughput: 650.709 MiB / second
+Operations throughput: 10660950 ops/s
+Bytes throughput: 650.709 MiB/s
 -------------------------------------------------------------------------------
 ...
 -------------------------------------------------------------------------------
 Phase: fwrite(2048)
-Average time: 1.846 mcs / iteration
-Minimal time: 1.846 mcs / iteration
-Maximal time: 2.299 mcs / iteration
+Average time: 1.846 mcs/op
+Minimal time: 1.846 mcs/op
+Maximal time: 2.299 mcs/op
 Total time: 184.605 ms
-Total iterations: 100000
+Total operations: 100000
 Total bytes: 195.320 MiB
-Iterations throughput: 541696 / second
-Bytes throughput: 1.034 GiB / second
+Operations throughput: 541696 ops/s
+Bytes throughput: 1.034 GiB/s
 -------------------------------------------------------------------------------
 Phase: fwrite(4096)
-Average time: 3.687 mcs / iteration
-Minimal time: 3.687 mcs / iteration
-Maximal time: 4.617 mcs / iteration
+Average time: 3.687 mcs/op
+Minimal time: 3.687 mcs/op
+Maximal time: 4.617 mcs/op
 Total time: 368.788 ms
-Total iterations: 100000
+Total operations: 100000
 Total bytes: 390.640 MiB
-Iterations throughput: 271157 / second
-Bytes throughput: 1.035 GiB / second
+Operations throughput: 271157 ops/s
+Bytes throughput: 1.035 GiB/s
 ===============================================================================
 ```
 
@@ -605,8 +605,8 @@ Bytes throughput: 1.035 GiB / second
 #include <chrono>
 #include <thread>
 
-const uint64_t iterations = 100;
-const auto settings = CppBenchmark::Settings().Iterations(iterations).Latency(1, 1000000000, 5);
+const uint64_t operations = 100;
+const auto settings = CppBenchmark::Settings().Operations(operations).Latency(1, 1000000000, 5);
 
 BENCHMARK("sleep", settings)
 {
@@ -621,16 +621,16 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: sleep
 Attempts: 5
-Iterations: 100
+Operations: 100
 -------------------------------------------------------------------------------
 Phase: sleep
-Latency (Min): 10.013 ms / iteration
-Latency (Max): 11.134 ms / iteration
+Latency (Min): 10.013 ms/op
+Latency (Max): 11.134 ms/op
 Latency (Mean): 1.05137e+07
 Latency (StDv): 381727
 Total time: 1.051 s
-Total iterations: 100
-Iterations throughput: 95 / second
+Total operations: 100
+Operations throughput: 95 ops/s
 ===============================================================================
 ```
 
@@ -650,8 +650,8 @@ in order to generate and analyze latency histogram:
 #include <chrono>
 #include <limits>
 
-const uint64_t iterations = 10000000;
-const auto settings = CppBenchmark::Settings().Iterations(iterations).Latency(1, 1000000000, 5, false);
+const uint64_t operations = 10000000;
+const auto settings = CppBenchmark::Settings().Operations(operations).Latency(1, 1000000000, 5, false);
 
 BENCHMARK("high_resolution_clock", settings)
 {
@@ -664,7 +664,7 @@ BENCHMARK("high_resolution_clock", settings)
     // Get the current timestamp
     auto current = std::chrono::high_resolution_clock::now();
 
-    // Update iterations counter
+    // Update operations counter
     ++count;
 
     // Register latency metrics
@@ -700,16 +700,16 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: high_resolution_clock
 Attempts: 5
-Iterations: 10000000
+Operations: 10000000
 -------------------------------------------------------------------------------
 Phase: high_resolution_clock
-Latency (Min): 38 ns / iteration
-Latency (Max): 1.037 ms / iteration
+Latency (Min): 38 ns/op
+Latency (Max): 1.037 ms/op
 Latency (Mean): 53.0462
 Latency (StDv): 1136.37
 Total time: 468.924 ms
-Total iterations: 10000000
-Iterations throughput: 21325385 / second
+Total operations: 10000000
+Operations throughput: 21325385 ops/s
 Custom values:
 	resolution-max: 7262968
 	resolution-min: 311
@@ -731,12 +731,12 @@ in order to generate and analyze latency histogram:
 
 #include <atomic>
 
-const int iterations = 10000000;
+const int operations = 10000000;
 
-// Create settings for the benchmark which will make 10000000 iterations for each
+// Create settings for the benchmark which will make 10000000 operations for each
 // set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
 const auto settings = CppBenchmark::Settings()
-    .Iterations(iterations)
+    .Operations(operations)
     .ThreadsRange(
         1, 8, [](int from, int to, int& result)
         {
@@ -760,51 +760,51 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: std::atomic++
 Attempts: 5
-Iterations: 10000000
+Operations: 10000000
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:1)
 Total time: 63.254 ms
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:1).thread
-Average time: 6 ns / iteration
-Minimal time: 6 ns / iteration
-Maximal time: 7 ns / iteration
+Average time: 6 ns/op
+Minimal time: 6 ns/op
+Maximal time: 7 ns/op
 Total time: 62.809 ms
-Total iterations: 10000000
-Iterations throughput: 159210567 / second
+Total operations: 10000000
+Operations throughput: 159210567 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:2)
 Total time: 362.933 ms
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:2).thread
-Average time: 36 ns / iteration
-Minimal time: 36 ns / iteration
-Maximal time: 53 ns / iteration
+Average time: 36 ns/op
+Minimal time: 36 ns/op
+Maximal time: 53 ns/op
 Total time: 361.762 ms
-Total iterations: 10000000
-Iterations throughput: 27642410 / second
+Total operations: 10000000
+Operations throughput: 27642410 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:4)
 Total time: 927.259 ms
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:4).thread
-Average time: 89 ns / iteration
-Minimal time: 89 ns / iteration
-Maximal time: 94 ns / iteration
+Average time: 89 ns/op
+Minimal time: 89 ns/op
+Maximal time: 94 ns/op
 Total time: 898.358 ms
-Total iterations: 10000000
-Iterations throughput: 11131419 / second
+Total operations: 10000000
+Operations throughput: 11131419 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:8)
 Total time: 1.723 s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:8).thread
-Average time: 156 ns / iteration
-Minimal time: 156 ns / iteration
-Maximal time: 173 ns / iteration
+Average time: 156 ns/op
+Minimal time: 156 ns/op
+Maximal time: 173 ns/op
 Total time: 1.563 s
-Total iterations: 10000000
-Iterations throughput: 6396501 / second
+Total operations: 10000000
+Operations throughput: 6396501 ops/s
 ===============================================================================
 ```
 
@@ -815,12 +815,12 @@ Iterations throughput: 6396501 / second
 #include <array>
 #include <atomic>
 
-const int iterations = 10000000;
+const int operations = 10000000;
 
-// Create settings for the benchmark which will make 10000000 iterations for each
+// Create settings for the benchmark which will make 10000000 operations for each
 // set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
 const auto settings = CppBenchmark::Settings()
-    .Iterations(iterations)
+    .Operations(operations)
     .ThreadsRange(
         1, 8, [](int from, int to, int& result)
         {
@@ -872,89 +872,89 @@ Phase: Global counter(threads:1)
 Total time: 63.303 ms
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:1).thread
-Average time: 6 ns / iteration
-Minimal time: 6 ns / iteration
-Maximal time: 6 ns / iteration
+Average time: 6 ns/op
+Minimal time: 6 ns/op
+Maximal time: 6 ns/op
 Total time: 63.165 ms
-Total iterations: 10000000
-Iterations throughput: 158313134 / second
+Total operations: 10000000
+Operations throughput: 158313134 ops/s
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:2)
 Total time: 237.676 ms
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:2).thread
-Average time: 23 ns / iteration
-Minimal time: 23 ns / iteration
-Maximal time: 27 ns / iteration
+Average time: 23 ns/op
+Minimal time: 23 ns/op
+Maximal time: 27 ns/op
 Total time: 236.504 ms
-Total iterations: 10000000
-Iterations throughput: 42282550 / second
+Total operations: 10000000
+Operations throughput: 42282550 ops/s
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:4)
 Total time: 669.396 ms
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:4).thread
-Average time: 65 ns / iteration
-Minimal time: 65 ns / iteration
-Maximal time: 68 ns / iteration
+Average time: 65 ns/op
+Minimal time: 65 ns/op
+Maximal time: 68 ns/op
 Total time: 652.646 ms
-Total iterations: 10000000
-Iterations throughput: 15322241 / second
+Total operations: 10000000
+Operations throughput: 15322241 ops/s
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:8)
 Total time: 1.362 s
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:8).thread
-Average time: 129 ns / iteration
-Minimal time: 129 ns / iteration
-Maximal time: 138 ns / iteration
+Average time: 129 ns/op
+Minimal time: 129 ns/op
+Maximal time: 138 ns/op
 Total time: 1.297 s
-Total iterations: 10000000
-Iterations throughput: 7706848 / second
+Total operations: 10000000
+Operations throughput: 7706848 ops/s
 ===============================================================================
 Phase: Thread local counter(threads:1)
 Total time: 41.325 ms
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:1).thread
-Average time: 4 ns / iteration
-Minimal time: 4 ns / iteration
-Maximal time: 4 ns / iteration
+Average time: 4 ns/op
+Minimal time: 4 ns/op
+Maximal time: 4 ns/op
 Total time: 41.175 ms
-Total iterations: 10000000
-Iterations throughput: 242865244 / second
+Total operations: 10000000
+Operations throughput: 242865244 ops/s
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:2)
 Total time: 83.360 ms
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:2).thread
-Average time: 8 ns / iteration
-Minimal time: 8 ns / iteration
-Maximal time: 12 ns / iteration
+Average time: 8 ns/op
+Minimal time: 8 ns/op
+Maximal time: 12 ns/op
 Total time: 80.003 ms
-Total iterations: 10000000
-Iterations throughput: 124994748 / second
+Total operations: 10000000
+Operations throughput: 124994748 ops/s
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:4)
 Total time: 231.836 ms
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:4).thread
-Average time: 21 ns / iteration
-Minimal time: 21 ns / iteration
-Maximal time: 23 ns / iteration
+Average time: 21 ns/op
+Minimal time: 21 ns/op
+Maximal time: 23 ns/op
 Total time: 218.354 ms
-Total iterations: 10000000
-Iterations throughput: 45797028 / second
+Total operations: 10000000
+Operations throughput: 45797028 ops/s
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:8)
 Total time: 412.714 ms
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:8).thread
-Average time: 30 ns / iteration
-Minimal time: 30 ns / iteration
-Maximal time: 42 ns / iteration
+Average time: 30 ns/op
+Minimal time: 30 ns/op
+Maximal time: 42 ns/op
 Total time: 306.252 ms
-Total iterations: 10000000
-Iterations throughput: 32652780 / second
+Total operations: 10000000
+Operations throughput: 32652780 ops/s
 ===============================================================================
 ```
 
@@ -1060,20 +1060,20 @@ Phase: std::mutex+std::queue<int>(producers:1,consumers:1)
 Total time: 652.176 ms
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:1).producer
-Average time: 50 ns / iteration
-Minimal time: 50 ns / iteration
-Maximal time: 53 ns / iteration
+Average time: 50 ns/op
+Minimal time: 50 ns/op
+Maximal time: 53 ns/op
 Total time: 509.201 ms
-Total iterations: 10000001
-Iterations throughput: 19638574 / second
+Total operations: 10000001
+Operations throughput: 19638574 ops/s
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:1).consumer
-Average time: 64 ns / iteration
-Minimal time: 64 ns / iteration
-Maximal time: 67 ns / iteration
+Average time: 64 ns/op
+Minimal time: 64 ns/op
+Maximal time: 67 ns/op
 Total time: 650.805 ms
-Total iterations: 10124742
-Iterations throughput: 15557246 / second
+Total operations: 10124742
+Operations throughput: 15557246 ops/s
 ===============================================================================
 ```
 
@@ -1194,39 +1194,39 @@ Phase: std::mutex+std::queue<int>(producers:1,consumers:1)
 Total time: 681.430 ms
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:1).producer
-Average time: 42 ns / iteration
-Minimal time: 42 ns / iteration
-Maximal time: 120 ns / iteration
+Average time: 42 ns/op
+Minimal time: 42 ns/op
+Maximal time: 120 ns/op
 Total time: 427.075 ms
-Total iterations: 10000001
-Iterations throughput: 23415052 / second
+Total operations: 10000001
+Operations throughput: 23415052 ops/s
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:1).consumer
-Average time: 67 ns / iteration
-Minimal time: 67 ns / iteration
-Maximal time: 120 ns / iteration
+Average time: 67 ns/op
+Minimal time: 67 ns/op
+Maximal time: 120 ns/op
 Total time: 679.235 ms
-Total iterations: 10000001
-Iterations throughput: 14722437 / second
+Total operations: 10000001
+Operations throughput: 14722437 ops/s
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:2)
 Total time: 623.887 ms
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:2).producer
-Average time: 58 ns / iteration
-Minimal time: 58 ns / iteration
-Maximal time: 103 ns / iteration
+Average time: 58 ns/op
+Minimal time: 58 ns/op
+Maximal time: 103 ns/op
 Total time: 582.786 ms
-Total iterations: 10000001
-Iterations throughput: 17158941 / second
+Total operations: 10000001
+Operations throughput: 17158941 ops/s
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:1,consumers:2).consumer
-Average time: 125 ns / iteration
-Minimal time: 125 ns / iteration
-Maximal time: 208 ns / iteration
+Average time: 125 ns/op
+Minimal time: 125 ns/op
+Maximal time: 208 ns/op
 Total time: 622.654 ms
-Total iterations: 4963799
-Iterations throughput: 7971989 / second
+Total operations: 4963799
+Operations throughput: 7971989 ops/s
 -------------------------------------------------------------------------------
 ...
 -------------------------------------------------------------------------------
@@ -1234,39 +1234,39 @@ Phase: std::mutex+std::queue<int>(producers:8,consumers:4)
 Total time: 820.237 ms
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:8,consumers:4).producer
-Average time: 835 ns / iteration
-Minimal time: 835 ns / iteration
-Maximal time: 1.032 mcs / iteration
+Average time: 835 ns/op
+Minimal time: 835 ns/op
+Maximal time: 1.032 mcs/op
 Total time: 606.745 ms
-Total iterations: 725823
-Iterations throughput: 1196256 / second
+Total operations: 725823
+Operations throughput: 1196256 ops/s
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:8,consumers:4).consumer
-Average time: 213 ns / iteration
-Minimal time: 213 ns / iteration
-Maximal time: 264 ns / iteration
+Average time: 213 ns/op
+Minimal time: 213 ns/op
+Maximal time: 264 ns/op
 Total time: 755.649 ms
-Total iterations: 3543116
-Iterations throughput: 4688834 / second
+Total operations: 3543116
+Operations throughput: 4688834 ops/s
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:8,consumers:8)
 Total time: 824.811 ms
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:8,consumers:8).producer
-Average time: 485 ns / iteration
-Minimal time: 485 ns / iteration
-Maximal time: 565 ns / iteration
+Average time: 485 ns/op
+Minimal time: 485 ns/op
+Maximal time: 565 ns/op
 Total time: 743.897 ms
-Total iterations: 1533043
-Iterations throughput: 2060824 / second
+Total operations: 1533043
+Operations throughput: 2060824 ops/s
 -------------------------------------------------------------------------------
 Phase: std::mutex+std::queue<int>(producers:8,consumers:8).consumer
-Average time: 489 ns / iteration
-Minimal time: 489 ns / iteration
-Maximal time: 648 ns / iteration
+Average time: 489 ns/op
+Minimal time: 489 ns/op
+Maximal time: 648 ns/op
 Total time: 676.364 ms
-Total iterations: 1382941
-Iterations throughput: 2044668 / second
+Total operations: 1382941
+Operations throughput: 2044668 ops/s
 ===============================================================================
 ```
 
@@ -1369,25 +1369,25 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: Initialization
 Attempts: 1
-Iterations: 1
+Operations: 1
 -------------------------------------------------------------------------------
 Phase: Initialization
 Total time: 2.002 s
 ===============================================================================
 Benchmark: Calculate
 Attempts: 1
-Iterations: 1
+Operations: 1
 -------------------------------------------------------------------------------
 Phase: Calculate
 Total time: 2.200 s
 -------------------------------------------------------------------------------
 Phase: Calculate.1
-Average time: 100.113 ms / iteration
-Minimal time: 93.337 ms / iteration
-Maximal time: 107.303 ms / iteration
+Average time: 100.113 ms/op
+Minimal time: 93.337 ms/op
+Maximal time: 107.303 ms/op
 Total time: 500.565 ms
-Total iterations: 5
-Iterations throughput: 9 / second
+Total operations: 5
+Operations throughput: 9 ops/s
 -------------------------------------------------------------------------------
 Phase: Calculate.2
 Total time: 499.420 ms
@@ -1399,16 +1399,16 @@ Phase: Calculate.2.2
 Total time: 299.755 ms
 -------------------------------------------------------------------------------
 Phase: Calculate.3
-Average time: 399.920 ms / iteration
-Minimal time: 399.726 ms / iteration
-Maximal time: 400.365 ms / iteration
+Average time: 399.920 ms/op
+Minimal time: 399.726 ms/op
+Maximal time: 400.365 ms/op
 Total time: 1.199 s
-Total iterations: 3
-Iterations throughput: 2 / second
+Total operations: 3
+Operations throughput: 2 ops/s
 ===============================================================================
 Benchmark: Cleanup
 Attempts: 1
-Iterations: 1
+Operations: 1
 -------------------------------------------------------------------------------
 Phase: Cleanup
 Total time: 1.007 s

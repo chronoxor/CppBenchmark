@@ -53,42 +53,42 @@ void ReporterConsole::ReportBenchmark(const BenchmarkBase& benchmark, const Sett
     _stream << Color::WHITE << "Benchmark: " << Color::LIGHTCYAN << benchmark.name() << std::endl;
     _stream << Color::WHITE << "Attempts: " << Color::DARKGREY << settings.attempts() << std::endl;
     if (!settings.infinite())
-        _stream << Color::WHITE << "Iterations: " << Color::DARKGREY << settings.iterations() << std::endl;
+        _stream << Color::WHITE << "Operations: " << Color::DARKGREY << settings.operations() << std::endl;
 }
 
 void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& metrics)
 {
     _stream << Color::DARKGREY << GenerateSeparator('-') << std::endl;
     _stream << Color::WHITE << "Phase: " << Color::LIGHTCYAN << phase.name() << std::endl;
-    if (metrics.total_iterations() > 1)
+    if (metrics.total_operations() > 1)
     {
         if (metrics.latency())
         {
-            _stream << Color::WHITE << "Latency (Min): " << Color::YELLOW << GenerateTimePeriod(metrics.min_latency()) << " / iteration" << std::endl;
-            _stream << Color::WHITE << "Latency (Max): " << Color::YELLOW << GenerateTimePeriod(metrics.max_latency()) << " / iteration" << std::endl;
+            _stream << Color::WHITE << "Latency (Min): " << Color::YELLOW << GenerateTimePeriod(metrics.min_latency()) << "/op" << std::endl;
+            _stream << Color::WHITE << "Latency (Max): " << Color::YELLOW << GenerateTimePeriod(metrics.max_latency()) << "/op" << std::endl;
             _stream << Color::WHITE << "Latency (Mean): " << Color::YELLOW << metrics.mean_latency() << std::endl;
             _stream << Color::WHITE << "Latency (StDv): " << Color::YELLOW << metrics.stdv_latency() << std::endl;
         }
         else
         {
-            _stream << Color::WHITE << "Average time: " << Color::YELLOW << GenerateTimePeriod(metrics.avg_time()) << " / iteration" << std::endl;
-            _stream << Color::WHITE << "Minimal time: " << Color::YELLOW << GenerateTimePeriod(metrics.min_time()) << " / iteration" << std::endl;
-            _stream << Color::WHITE << "Maximal time: " << Color::YELLOW << GenerateTimePeriod(metrics.max_time()) << " / iteration" << std::endl;
+            _stream << Color::WHITE << "Average time: " << Color::YELLOW << GenerateTimePeriod(metrics.avg_time()) << "/op" << std::endl;
+            _stream << Color::WHITE << "Minimal time: " << Color::YELLOW << GenerateTimePeriod(metrics.min_time()) << "/op" << std::endl;
+            _stream << Color::WHITE << "Maximal time: " << Color::YELLOW << GenerateTimePeriod(metrics.max_time()) << "/op" << std::endl;
         }
     }
     _stream << Color::WHITE << "Total time: " << Color::LIGHTRED << GenerateTimePeriod(metrics.total_time()) << std::endl;
-    if (metrics.total_iterations() > 1)
-        _stream << Color::WHITE << "Total iterations: " << Color::LIGHTGREEN << metrics.total_iterations() << std::endl;
+    if (metrics.total_operations() > 1)
+        _stream << Color::WHITE << "Total operations: " << Color::LIGHTGREEN << metrics.total_operations() << std::endl;
     if (metrics.total_items() > 0)
         _stream << Color::WHITE << "Total items: " << Color::LIGHTMAGENTA << metrics.total_items() << std::endl;
     if (metrics.total_bytes() > 0)
         _stream << Color::WHITE << "Total bytes: " << Color::MAGENTA << GenerateDataSize(metrics.total_bytes()) << std::endl;
-    if (metrics.total_iterations() > 1)
-        _stream << Color::WHITE << "Iterations throughput: " << Color::LIGHTGREEN << metrics.iterations_per_second() << " / second" << std::endl;
+    if (metrics.total_operations() > 1)
+        _stream << Color::WHITE << "Operations throughput: " << Color::LIGHTGREEN << metrics.operations_per_second() << " ops/s" << std::endl;
     if (metrics.total_items() > 0)
-        _stream << Color::WHITE << "Items throughput: " << Color::LIGHTMAGENTA << metrics.items_per_second() << " / second" << std::endl;
+        _stream << Color::WHITE << "Items throughput: " << Color::LIGHTMAGENTA << metrics.items_per_second() << " items/s" << std::endl;
     if (metrics.total_bytes() > 0)
-        _stream << Color::WHITE << "Bytes throughput: " << Color::MAGENTA << GenerateDataSize(metrics.bytes_per_second()) << " / second" << std::endl;
+        _stream << Color::WHITE << "Bytes throughput: " << Color::MAGENTA << GenerateDataSize(metrics.bytes_per_second()) << "/s" << std::endl;
     if ((metrics.custom_int().size() > 0) || (metrics.custom_uint().size() > 0) ||
         (metrics.custom_int64().size() > 0) || (metrics.custom_uint64().size() > 0) ||
         (metrics.custom_flt().size() > 0) || (metrics.custom_dbl().size() > 0) ||

@@ -58,25 +58,25 @@ double PhaseMetrics::stdv_latency() const noexcept
 
 int64_t PhaseMetrics::avg_time() const noexcept
 {
-    return (_total_iterations > 0) ? (_total_time / _total_iterations) : 0;
+    return (_total_operations > 0) ? (_total_time / _total_operations) : 0;
 }
 
 int64_t PhaseMetrics::min_time() const noexcept
 {
-    return (_total_iterations > 0) ? (_min_time / _total_iterations) : _min_time;
+    return (_total_operations > 0) ? (_min_time / _total_operations) : _min_time;
 }
 
 int64_t PhaseMetrics::max_time() const noexcept
 {
-    return (_total_iterations > 0) ? (_max_time / _total_iterations) : _max_time;
+    return (_total_operations > 0) ? (_max_time / _total_operations) : _max_time;
 }
 
-int64_t PhaseMetrics::iterations_per_second() const noexcept
+int64_t PhaseMetrics::operations_per_second() const noexcept
 {
     if (_total_time <= 0)
         return 0;
 
-    return System::MulDiv64(_total_iterations, 1000000000, _total_time);
+    return System::MulDiv64(_total_operations, 1000000000, _total_time);
 }
 
 int64_t PhaseMetrics::items_per_second() const noexcept
@@ -132,13 +132,13 @@ void PhaseMetrics::AddLatency(int64_t latency) noexcept
 
 void PhaseMetrics::StartCollecting() noexcept
 {
-    _iterstamp = _total_iterations;
+    _iterstamp = _total_operations;
     _timestamp = System::Timestamp();
 }
 
 void PhaseMetrics::StopCollecting() noexcept
 {
-    // Get iterations count & duration
+    // Get operations count & duration
     int64_t total_duration = System::Timestamp() - _timestamp;
 
     // Update time counters
@@ -168,12 +168,12 @@ void PhaseMetrics::MergeMetrics(PhaseMetrics& metrics)
     _custom_dbl.insert(metrics._custom_dbl.begin(), metrics._custom_dbl.end());
     _custom_str.insert(metrics._custom_str.begin(), metrics._custom_str.end());
 
-    // Choose best total time with iterations, items and bytes
+    // Choose best total time with operations, items and bytes
     if (metrics._total_time < _total_time)
     {
         std::swap(_latency, metrics._latency);
         _total_time = metrics._total_time;
-        _total_iterations = metrics._total_iterations;
+        _total_operations = metrics._total_operations;
         _total_items = metrics._total_items;
         _total_bytes = metrics._total_bytes;
         // Overwrite metrics custom tables
@@ -202,7 +202,7 @@ void PhaseMetrics::ResetMetrics() noexcept
     _min_time = std::numeric_limits<int64_t>::max();
     _max_time = std::numeric_limits<int64_t>::min();
     _total_time = 0;
-    _total_iterations = 0;
+    _total_operations = 0;
     _total_items = 0;
     _total_bytes = 0;
     _iterstamp = 0;

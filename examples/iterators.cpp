@@ -7,7 +7,7 @@
 #include <list>
 #include <vector>
 
-const uint64_t iterations = 1000;
+const uint64_t operations = 1000;
 
 template <typename T>
 class ContainerFixture
@@ -22,25 +22,25 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>-forward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>-forward", operations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>-backward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>-backward", operations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>-forward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>-forward", operations)
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>-backward", iterations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>-backward", operations)
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);

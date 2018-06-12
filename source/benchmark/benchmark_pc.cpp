@@ -57,19 +57,19 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 Initialize(context);
 
                 bool infinite = _settings.infinite();
-                int64_t iterations = _settings.iterations();
+                int64_t operations = _settings.operations();
 
                 // Prepare barrier for producers & consumers threads
                 Barrier barrier(producers + consumers);
 
-                // Start benchmark root phase iteration
+                // Start benchmark root phase operation
                 context._current->StartCollectingMetrics();
-                context._metrics->AddIterations(1);
+                context._metrics->AddOperations(1);
 
                 // Start benchmark producers
                 for (int i = 0; i < producers; ++i)
                 {
-                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, producers, infinite, iterations]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, producers, infinite, operations]()
                     {
                         // Clone producer context
                         ContextPC producer_context(context);
@@ -81,7 +81,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         // Update producer context
                         producer_context._current = producer_phase_core;
                         producer_context._metrics = &producer_phase_core->current();
-                        producer_context._metrics->AddIterations(-1);
+                        producer_context._metrics->AddOperations(-1);
                         producer_context._metrics->SetThreads(producers);
 
                         // Initialize latency histogram of the current phase
@@ -91,16 +91,16 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         InitializeProducer(producer_context);
 
                         bool producer_infinite = infinite;
-                        int64_t producer_iterations = iterations;
+                        int64_t producer_operations = operations;
 
                         // Wait for other threads at the barrier
                         barrier.Wait();
 
                         producer_context._current->StartCollectingMetrics();
-                        while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_iterations > 0)))
+                        while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_operations > 0)))
                         {
-                            // Add new metrics iteration
-                            producer_context._metrics->AddIterations(1);
+                            // Add new metrics operation
+                            producer_context._metrics->AddOperations(1);
 
                             // Store timestamp for automatic latency update
                             uint64_t timestamp = 0;
@@ -114,8 +114,8 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                             if (latency_auto)
                                 producer_context._metrics->AddLatency(System::Timestamp() - timestamp);
 
-                            // Decrement iteration counters
-                            producer_iterations -= 1;
+                            // Decrement operation counters
+                            producer_operations -= 1;
                         }
                         producer_context._current->StopCollectingMetrics();
 
@@ -142,7 +142,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         // Update consumer context
                         consumer_context._current = consumer_phase_core;
                         consumer_context._metrics = &consumer_phase_core->current();
-                        consumer_context._metrics->AddIterations(-1);
+                        consumer_context._metrics->AddOperations(-1);
                         consumer_context._metrics->SetThreads(consumers);
 
                         // Initialize latency histogram of the current phase
@@ -157,8 +157,8 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         consumer_context._current->StartCollectingMetrics();
                         while (!consumer_context.consume_stopped() && !consumer_context.canceled())
                         {
-                            // Add new metrics iteration
-                            consumer_context._metrics->AddIterations(1);
+                            // Add new metrics operation
+                            consumer_context._metrics->AddOperations(1);
 
                             // Store timestamp for automatic latency update
                             uint64_t timestamp = 0;
@@ -189,7 +189,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Clear threads collection
                 _threads.clear();
 
-                // Stop benchmark root phase iteration
+                // Stop benchmark root phase operation
                 context._current->StopCollectingMetrics();
 
                 // Call cleanup benchmark methods...

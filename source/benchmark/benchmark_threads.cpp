@@ -55,19 +55,19 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 Initialize(context);
 
                 bool infinite = _settings.infinite();
-                int64_t iterations = _settings.iterations();
+                int64_t operations = _settings.operations();
 
                 // Prepare barrier for benchmark threads
                 Barrier barrier(threads);
 
-                // Start benchmark root phase iteration
+                // Start benchmark root phase operation
                 context._current->StartCollectingMetrics();
-                context._metrics->AddIterations(1);
+                context._metrics->AddOperations(1);
 
                 // Start benchmark threads
                 for (int i = 0; i < threads; ++i)
                 {
-                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, threads, infinite, iterations]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, threads, infinite, operations]()
                     {
                         // Clone thread context
                         ContextThreads thread_context(context);
@@ -79,7 +79,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                         // Update thread context
                         thread_context._current = thread_phase_core;
                         thread_context._metrics = &thread_phase_core->current();
-                        thread_context._metrics->AddIterations(-1);
+                        thread_context._metrics->AddOperations(-1);
                         thread_context._metrics->SetThreads(threads);
 
                         // Initialize latency histogram of the current phase
@@ -89,16 +89,16 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                         InitializeThread(thread_context);
 
                         bool thread_infinite = infinite;
-                        int64_t thread_iterations = iterations;
+                        int64_t thread_operations = operations;
 
                         // Wait for other threads at the barrier
                         barrier.Wait();
 
                         thread_context._current->StartCollectingMetrics();
-                        while (!thread_context.canceled() && (thread_infinite || (thread_iterations > 0)))
+                        while (!thread_context.canceled() && (thread_infinite || (thread_operations > 0)))
                         {
-                            // Add new metrics iteration
-                            thread_context._metrics->AddIterations(1);
+                            // Add new metrics operation
+                            thread_context._metrics->AddOperations(1);
 
                             // Store timestamp for automatic latency update
                             uint64_t timestamp = 0;
@@ -112,8 +112,8 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                             if (latency_auto)
                                 thread_context._metrics->AddLatency(System::Timestamp() - timestamp);
 
-                            // Decrement iteration counters
-                            thread_iterations -= 1;
+                            // Decrement operation counters
+                            thread_operations -= 1;
                         }
                         thread_context._current->StopCollectingMetrics();
 
@@ -132,7 +132,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 // Clear threads collection
                 _threads.clear();
 
-                // Stop benchmark root phase iteration
+                // Stop benchmark root phase operation
                 context._current->StopCollectingMetrics();
 
                 // Call cleanup benchmark method...
@@ -154,8 +154,8 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
     // Update benchmark names
     UpdateBenchmarkNames(_phases);
 
-    // Update benchmark iterations
-    UpdateBenchmarkIterations(_phases);
+    // Update benchmark operations
+    UpdateBenchmarkOperations(_phases);
 
     // Update benchmark launched flag
     _launched = true;

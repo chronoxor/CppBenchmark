@@ -47,13 +47,13 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
             Initialize(context);
 
             bool infinite = _settings.infinite();
-            int64_t iterations = _settings.iterations();
+            int64_t operations = _settings.operations();
 
             context._current->StartCollectingMetrics();
-            while (!context.canceled() && (infinite || (iterations > 0)))
+            while (!context.canceled() && (infinite || (operations > 0)))
             {
-                // Add new metrics iteration
-                context._metrics->AddIterations(1);
+                // Add new metrics operation
+                context._metrics->AddOperations(1);
 
                 // Store timestamp for automatic latency update
                 uint64_t timestamp = 0;
@@ -67,8 +67,8 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
                 if (latency_auto)
                     context._metrics->AddLatency(System::Timestamp() - timestamp);
 
-                // Decrement iteration counters
-                iterations -= 1;
+                // Decrement operation counters
+                operations -= 1;
             }
             context._current->StopCollectingMetrics();
 
