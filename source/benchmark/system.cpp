@@ -102,6 +102,19 @@ uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
 
 #endif
 
+#if defined(__CYGWIN__)
+
+std::istream& getline_workaround(std::istream& is, std::string& str)
+{
+    char ch;
+    str.clear();
+    while (stream.get(ch) && (ch != '\n'))
+        str.push_back(ch);
+    return stream;
+}
+
+#endif
+
 #if defined(_WIN32) || defined(_WIN64)
 
 // Helper function to count set bits in the processor mask
@@ -139,7 +152,11 @@ std::string System::CpuArchitecture()
 
     std::string line;
     std::ifstream stream("/proc/cpuinfo");
+#if defined(__CYGWIN__)
+    while (getline_workaround(stream, line))
+#else
     while (getline(stream, line))
+#endif
     {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
@@ -266,7 +283,11 @@ int64_t System::CpuClockSpeed()
 
     std::string line;
     std::ifstream stream("/proc/cpuinfo");
+#if defined(__CYGWIN__)
+    while (getline_workaround(stream, line))
+#else
     while (getline(stream, line))
+#endif
     {
         std::smatch matches;
         if (std::regex_match(line, matches, pattern))
