@@ -104,7 +104,7 @@ uint64_t PrepareTimebaseInfo(mach_timebase_info_data_t& tb)
 
 #if defined(__CYGWIN__)
 
-std::istream& getline_workaround(std::istream& is, std::string& str)
+std::istream& getline_workaround(std::istream& stream, std::string& str)
 {
     char ch;
     str.clear();
