@@ -77,38 +77,38 @@ Optional:
 # How to build?
 
 ## Clone repository with submodules
-```
+```shell
 git clone https://github.com/chronoxor/CppBenchmark.git CppBenchmark
 cd CppBenchmark
 git submodule update --init --recursive --remote
 ```
 
 ## Linux
-```
+```shell
 cd build
 ./unix.sh
 ```
 
 ## OSX
-```
+```shell
 cd build
 ./unix.sh
 ```
 
 ## Windows (Cygwin)
-```
+```shell
 cd build
 cygwin.bat
 ```
 
 ## Windows (MinGW)
-```
+```shell
 cd build
 mingw.bat
 ```
 
 ## Windows (Visual Studio)
-```
+```shell
 cd build
 vs.bat
 ```
@@ -125,7 +125,7 @@ vs.bat
 # Benchmark examples
 
 ## Example 1: Benchmark of a function call
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <math.h>
@@ -158,7 +158,7 @@ Operations throughput: 411732889 ops/s
 ```
 
 ## Example 2: Benchmark with cancelation
-```C++
+```c++
 #include "cppbenchmark.h"
 
 // Benchmark rand() call until it returns 0.
@@ -193,7 +193,7 @@ Operations throughput: 39433750 ops/s
 Static fixture will be constructed once per each benchmark, will be the same for
 each attempt / operation and will be destructed at the end of the benchmark.
 
-```C++
+```c++
 #include "macros.h"
 
 #include <list>
@@ -299,7 +299,7 @@ Dynamic fixture can be used to prepare benchmark before each attempt with
 Initialize() / Cleanup() methods. You can access to the current benchmark
 context in dynamic fixture methods.
 
-```C++
+```c++
 #include "macros.h"
 
 #include <deque>
@@ -383,7 +383,7 @@ syntax. Parameters can be single, pair or tripple, provided as a value, as a
 range, or with a range and selector function. Benchmark will be launched for
 each parameters combination.
 
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <algorithm>
@@ -439,7 +439,7 @@ You can also create a benchmark by inheriting from CppBenchmark::Benchmark class
 and implementing Run() method. You can use AddItems() method of a benchmark context
 metrics to register processed items.
 
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <algorithm>
@@ -493,7 +493,7 @@ Items throughput: 15421124 ops/s
 ## Example 7: Benchmark I/O operations
 You can use AddBytes() method of a benchmark context metrics to register processed data.
 
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <array>
@@ -543,7 +543,7 @@ BENCHMARK_FIXTURE(FileFixture, "fwrite", settings)
     fwrite(buffer.data(), sizeof(char), context.x(), file);
     context.metrics().AddBytes(context.x());
 }
-                            ..
+
 BENCHMARK_MAIN()
 ```
 
@@ -599,7 +599,7 @@ Bytes throughput: 1.035 GiB/s
 ```
 
 ## Example 8: Benchmark latency with auto update
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <chrono>
@@ -644,7 +644,7 @@ in order to generate and analyze latency histogram:
 ![Sleep HDR Histogram](https://github.com/chronoxor/CppBenchmark/raw/master/images/sleep.png)
 
 ## Example 9: Benchmark latency with manual update
-```C++
+```c++
 #include "benchmark/cppbenchmark.h"
 
 #include <chrono>
@@ -726,7 +726,7 @@ in order to generate and analyze latency histogram:
 ![High resolution clock HDR Histogram](https://github.com/chronoxor/CppBenchmark/raw/master/images/clock.png)
 
 ## Example 10: Benchmark threads
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <atomic>
@@ -809,7 +809,7 @@ Operations throughput: 6396501 ops/s
 ```
 
 ## Example 11: Benchmark threads with fixture
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <array>
@@ -959,7 +959,7 @@ Operations throughput: 32652780 ops/s
 ```
 
 ## Example 12: Benchmark single producer, single consumer pattern
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <mutex>
@@ -1078,7 +1078,7 @@ Operations throughput: 15557246 ops/s
 ```
 
 ## Example 13: Benchmark multiple producers, multiple consumers pattern
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <mutex>
@@ -1278,7 +1278,7 @@ macro are easy access to methods of the static [Executor](http://chronoxor.githu
 which you may use directly as a singleton. All functionality provided for dynamic benchmarks is
 thread-safe synchronizied with mutex (each call will lose some ns).
 
-```C++
+```c++
 #include "cppbenchmark.h"
 
 #include <chrono>
