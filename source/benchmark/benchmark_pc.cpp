@@ -58,6 +58,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 
                 bool infinite = _settings.infinite();
                 int64_t operations = _settings.operations();
+                int64_t timeout = _settings.timeout() * 1000000000;
 
                 // Prepare barrier for producers & consumers threads
                 Barrier barrier(producers + consumers);
@@ -69,7 +70,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark producers
                 for (int i = 0; i < producers; ++i)
                 {
-                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, producers, infinite, operations]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, producers, infinite, operations, timeout]()
                     {
                         // Clone producer context
                         ContextPC producer_context(context);
@@ -92,27 +93,38 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
 
                         bool producer_infinite = infinite;
                         int64_t producer_operations = operations;
+                        int64_t producer_timeout = timeout;
 
                         // Wait for other threads at the barrier
                         barrier.Wait();
 
                         producer_context._current->StartCollectingMetrics();
-                        while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_operations > 0)))
+                        while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_operations > 0) || (producer_timeout > 0)))
                         {
                             // Add new metrics operation
                             producer_context._metrics->AddOperations(1);
 
-                            // Store timestamp for automatic latency update
+                            // Store the timestamp for benchmark timeout and the automatic latency update
                             uint64_t timestamp = 0;
-                            if (latency_auto)
+                            if ((timeout > 0) || latency_auto)
                                 timestamp = System::Timestamp();
 
                             // Run producer method...
                             RunProducer(producer_context);
 
-                            // Automatic latency update
-                            if (latency_auto)
-                                producer_context._metrics->AddLatency(System::Timestamp() - timestamp);
+                            // Update the benchmark timeout and/or latency metrics
+                            if ((timeout > 0) || latency_auto)
+                            {
+                                // Calculate the single benchmark timespan
+                                int64_t timespan = System::Timestamp() - timestamp;
+
+                                // Benchmark timeout update
+                                producer_timeout -= timespan;
+
+                                // Automatic latency update
+                                if (latency_auto)
+                                    producer_context._metrics->AddLatency(timespan);
+                            }
 
                             // Decrement operation counters
                             producer_operations -= 1;

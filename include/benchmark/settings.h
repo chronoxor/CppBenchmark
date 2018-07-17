@@ -18,8 +18,9 @@ namespace CppBenchmark {
 //! Benchmark settings
 /*!
     Provides interface to all benchmark settings:
-    - Independent benchmark attempts
-    - Count of operations
+    - Independent benchmark attempts (default is 5)
+    - Count of operations (default is 0)
+    - Benchmark timeout in seconds (default is 5)
     - Add count of running threads to the benchmark running plan
     - Add count of producers/consumers to the benchmark running plan
     - Add parameters (single, pair, triple) to the benchmark running plan
@@ -33,17 +34,13 @@ class Settings
     friend class BenchmarkThreads;
 
 public:
+    //! Initialize settings with the default benchmark timeout (5 seconds)
+    Settings();
     //! Initialize settings with the given count of operations
     /*!
-        \param operations - Count of operations (default is 1)
+        \param operations - Count of operations
     */
-    Settings(int64_t operations = 1)
-        : _attempts(5),
-          _infinite(false),
-          _operations(operations),
-          _latency_params(std::make_tuple(0, 0, 0)),
-          _latency_auto(false)
-    {}
+    Settings(int64_t operations);
     Settings(const Settings&) = default;
     Settings(Settings&&) noexcept = default;
     ~Settings() = default;
@@ -57,6 +54,8 @@ public:
     bool infinite() const noexcept { return _infinite; }
     //! Get count of operations
     int64_t operations() const noexcept { return _operations; }
+    //! Get benchmark timeout in milliseconds
+    int64_t timeout() const noexcept { return _timeout; }
     //! Get collection of independent threads counts in a benchmark plan
     const std::vector<int>& threads() const noexcept { return _threads; }
     //! Get collection of independent producers/consumers counts in a benchmark plan
@@ -88,6 +87,12 @@ public:
         \return Reference to the current settings instance
     */
     Settings& Operations(int64_t operations);
+    //! Set benchmark timeout in milliseconds
+    /*!
+        \param timeout - Benchmark timeout in milliseconds (must be positive)
+        \return Reference to the current settings instance
+    */
+    Settings& Timeout(int64_t timeout);
 
     //! Add new threads count to the benchmark running plan
     /*!
@@ -276,6 +281,7 @@ private:
     int _attempts;
     bool _infinite;
     int64_t _operations;
+    int64_t _timeout;
     std::vector<int> _threads;
     std::vector<std::tuple<int, int>> _pc;
     std::vector<std::tuple<int, int, int>> _params;

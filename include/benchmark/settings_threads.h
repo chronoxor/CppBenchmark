@@ -20,17 +20,19 @@ namespace CppBenchmark {
 class SettingsThreads : public Settings
 {
 public:
-    //! Initialize settings with the given count of operations
+    //! Initialize settings with the default benchmark timeout (5 seconds)
+    SettingsThreads() : Settings() {}
+    //! Initialize settings with the given count of running threads
     /*!
-        \param operations - Count of operations (default is 1)
-    */
-    SettingsThreads(int64_t operations = 1) : Settings(operations) {}
-    //! Initialize settings with the given count of operations and count of running threads
-    /*!
-        \param operations - Count of operations
         \param threads - Count of running threads
     */
-    SettingsThreads(int64_t operations, int threads) : SettingsThreads(operations) { Threads(threads); }
+    SettingsThreads(int threads) : Settings() { Threads(threads); }
+    //! Initialize settings with the given count of running threads and the given count of operations
+    /*!
+        \param threads - Count of running threads
+        \param operations - Count of operations
+    */
+    SettingsThreads(int threads, int64_t operations) : Settings(operations) { Threads(threads); }
     SettingsThreads(const Settings& settings) : Settings(settings) {}
     SettingsThreads(const SettingsThreads&) = default;
     SettingsThreads(Settings&& settings) noexcept : Settings(std::move(settings)) {}

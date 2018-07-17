@@ -199,8 +199,6 @@ each attempt / operation and will be destructed at the end of the benchmark.
 #include <list>
 #include <vector>
 
-const int operations = 1000;
-
 template <typename T>
 class ContainerFixture
 {
@@ -214,25 +212,25 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.forward", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.forward")
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.backward", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.backward")
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.forward", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.forward")
 {
     for (auto it = container.begin(); it != container.end(); ++it)
         ++(*it);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.backward", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.backward")
 {
     for (auto it = container.rbegin(); it != container.rend(); ++it)
         ++(*it);

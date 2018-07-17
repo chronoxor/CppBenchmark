@@ -20,18 +20,21 @@ namespace CppBenchmark {
 class SettingsPC : public Settings
 {
 public:
-    //! Initialize settings with the given count of operations
+    //! Initialize settings with the default benchmark timeout (5 seconds)
+    SettingsPC() : Settings() {}
+    //! Initialize settings with the given count of producers/consumers
     /*!
-        \param operations - Count of operations (default is 1)
-    */
-    SettingsPC(int64_t operations = 1) : Settings(operations) {}
-    //! Initialize settings with the given count of operations and count of producers/consumers
-    /*!
-        \param operations - Count of operations
         \param producers - Count of producers
         \param consumers - Count of consumers
     */
-    SettingsPC(int64_t operations, int producers, int consumers) : SettingsPC(operations) { PC(producers, consumers); }
+    SettingsPC(int producers, int consumers) : Settings() { PC(producers, consumers); }
+    //! Initialize settings with the given count of producers/consumers and the given count of operations
+    /*!
+        \param producers - Count of producers
+        \param consumers - Count of consumers
+        \param operations - Count of operations
+    */
+    SettingsPC(int producers, int consumers, int64_t operations) : Settings(operations) { PC(producers, consumers); }
     SettingsPC(const Settings& settings) : Settings(settings) {}
     SettingsPC(const SettingsPC&) = default;
     SettingsPC(Settings&& settings) noexcept : Settings(std::move(settings)) {}

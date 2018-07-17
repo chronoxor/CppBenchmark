@@ -48,24 +48,35 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
 
             bool infinite = _settings.infinite();
             int64_t operations = _settings.operations();
+            int64_t timeout = _settings.timeout() * 1000000000;
 
             context._current->StartCollectingMetrics();
-            while (!context.canceled() && (infinite || (operations > 0)))
+            while (!context.canceled() && (infinite || (operations > 0) || (timeout > 0)))
             {
                 // Add new metrics operation
                 context._metrics->AddOperations(1);
 
-                // Store timestamp for automatic latency update
+                // Store the timestamp for benchmark timeout and the automatic latency update
                 uint64_t timestamp = 0;
-                if (latency_auto)
+                if ((timeout > 0) || latency_auto)
                     timestamp = System::Timestamp();
 
                 // Run benchmark method...
                 Run(context);
 
-                // Automatic latency update
-                if (latency_auto)
-                    context._metrics->AddLatency(System::Timestamp() - timestamp);
+                // Update the benchmark timeout and/or latency metrics
+                if ((timeout > 0) || latency_auto)
+                {
+                    // Calculate the single benchmark timespan
+                    int64_t timespan = System::Timestamp() - timestamp;
+
+                    // Benchmark timeout update
+                    timeout -= timespan;
+
+                    // Automatic latency update
+                    if (latency_auto)
+                        context._metrics->AddLatency(timespan);
+                }
 
                 // Decrement operation counters
                 operations -= 1;

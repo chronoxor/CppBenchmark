@@ -147,7 +147,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::Run(Context& c
     Example:
     \code{.cpp}
     // This benchmark will output random value in std::cout 1000000 times in 4 concurrent threads environment
-    BENCHMARK_THREADS("ThreadsConsoleBenchmark", 1000000, 4)
+    BENCHMARK_THREADS("ThreadsConsoleBenchmark", 4, 1000000)
     {
         std::count << rand();
     }
@@ -185,7 +185,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(CppB
     };
 
     // This benchmark will increment atomic counter 1000000 times in 4 concurrent threads environment
-    BENCHMARK_THREADS_PRESET(AtomicPreset, "ThreadsAtomicIncrementBenchmark", 1000000, 4)
+    BENCHMARK_THREADS_PRESET(AtomicPreset, "ThreadsAtomicIncrementBenchmark", 4, 1000000)
     {
         counter++;
     }
@@ -215,7 +215,7 @@ void CppBenchmark::BENCHMARK_INTERNAL_UNIQUE_NAME(__benchmark__)::RunThread(CppB
     };
 
     // This benchmark will increment atomic counter 1000000 times in 4 concurrent threads environment
-    BENCHMARK_THREADS_FIXTURE(AtomicFixture, "ThreadsAtomicIncrementBenchmark", 1000000, 4)
+    BENCHMARK_THREADS_FIXTURE(AtomicFixture, "ThreadsAtomicIncrementBenchmark", 4, 1000000)
     {
         counter++;
     }

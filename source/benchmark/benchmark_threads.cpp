@@ -56,6 +56,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
 
                 bool infinite = _settings.infinite();
                 int64_t operations = _settings.operations();
+                int64_t timeout = _settings.timeout() * 1000000000;
 
                 // Prepare barrier for benchmark threads
                 Barrier barrier(threads);
@@ -67,7 +68,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark threads
                 for (int i = 0; i < threads; ++i)
                 {
-                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, threads, infinite, operations]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, threads, infinite, operations, timeout]()
                     {
                         // Clone thread context
                         ContextThreads thread_context(context);
@@ -90,27 +91,38 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
 
                         bool thread_infinite = infinite;
                         int64_t thread_operations = operations;
+                        int64_t thread_timeout = timeout;
 
                         // Wait for other threads at the barrier
                         barrier.Wait();
 
                         thread_context._current->StartCollectingMetrics();
-                        while (!thread_context.canceled() && (thread_infinite || (thread_operations > 0)))
+                        while (!thread_context.canceled() && (thread_infinite || (thread_operations > 0) || (thread_timeout > 0)))
                         {
                             // Add new metrics operation
                             thread_context._metrics->AddOperations(1);
 
-                            // Store timestamp for automatic latency update
+                            // Store the timestamp for benchmark timeout and the automatic latency update
                             uint64_t timestamp = 0;
-                            if (latency_auto)
+                            if ((timeout > 0) || latency_auto)
                                 timestamp = System::Timestamp();
 
                             // Run thread method...
                             RunThread(thread_context);
 
-                            // Automatic latency update
-                            if (latency_auto)
-                                thread_context._metrics->AddLatency(System::Timestamp() - timestamp);
+                            // Update the benchmark timeout and/or latency metrics
+                            if ((timeout > 0) || latency_auto)
+                            {
+                                // Calculate the single benchmark timespan
+                                int64_t timespan = System::Timestamp() - timestamp;
+
+                                // Benchmark timeout update
+                                thread_timeout -= timespan;
+
+                                // Automatic latency update
+                                if (latency_auto)
+                                    thread_context._metrics->AddLatency(timespan);
+                            }
 
                             // Decrement operation counters
                             thread_operations -= 1;
