@@ -36,6 +36,8 @@ Settings& Settings::Attempts(int attempts)
 Settings& Settings::Infinite()
 {
     _infinite = true;
+    _operations = 0;
+    _timeout = 0;
     return *this;
 }
 
@@ -43,12 +45,14 @@ Settings& Settings::Operations(int64_t operations)
 {
     _infinite = false;
     _operations = (operations > 0) ? operations : 1;
+    _timeout = 0;
     return *this;
 }
 
 Settings& Settings::Timeout(int64_t timeout)
 {
     _infinite = false;
+    _operations = 0;
     _timeout = (timeout > 0) ? timeout : 5;
     return *this;
 }
