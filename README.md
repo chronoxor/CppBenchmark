@@ -116,7 +116,7 @@ vs.bat
 # How to create a benchmark?
 1. [Build CppBenchmark library](#how-to-build)
 2. Create a new *.cpp file
-3. Insert #include "cppbenchmark.h"
+3. Insert #include "benchmark/cppbenchmark.h"
 4. Add benchmark code (examples for different scenarios you can find below)
 5. Insert BENCHMARK_MAIN() at the end
 6. Compile the *.cpp file and link it with CppBenchmark library
@@ -126,13 +126,13 @@ vs.bat
 
 ## Example 1: Benchmark of a function call
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <math.h>
 
-// Benchmark sin() call for 1000000000 times.
+// Benchmark sin() call for 5 seconds (by default).
 // Make 5 attemtps (by default) and choose one with the best time result.
-BENCHMARK("sin", 1000000000)
+BENCHMARK("sin")
 {
     sin(123.456);
 }
@@ -143,23 +143,23 @@ BENCHMARK_MAIN()
 Report fragment is the following:
 ```
 ===============================================================================
-Benchmark: sin
+Benchmark: sin()
 Attempts: 5
-Operations: 1000000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: sin()
-Average time: 2 ns/op
-Minimal time: 2 ns/op
-Maximal time: 2 ns/op
-Total time: 2.428 s
-Total operations: 1000000000
-Operations throughput: 411732889 ops/s
+Average time: 6 ns/op
+Minimal time: 6 ns/op
+Maximal time: 6 ns/op
+Total time: 858.903 ms
+Total operations: 130842248
+Operations throughput: 152336350 ops/s
 ===============================================================================
 ```
 
 ## Example 2: Benchmark with cancelation
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 // Benchmark rand() call until it returns 0.
 // Benchmark will print operations count required to get 'rand() == 0' case.
@@ -176,16 +176,16 @@ BENCHMARK_MAIN()
 Report fragment is the following:
 ```
 ===============================================================================
-Benchmark: rand-till-zero
+Benchmark: rand()-till-zero
 Attempts: 10
 -------------------------------------------------------------------------------
-Phase: rand-till-zero()
-Average time: 25 ns/op
-Minimal time: 25 ns/op
-Maximal time: 513 ns/op
-Total time: 94.234 mcs
-Total operations: 3716
-Operations throughput: 39433750 ops/s
+Phase: rand()-till-zero
+Average time: 15 ns/op
+Minimal time: 15 ns/op
+Maximal time: 92 ns/op
+Total time: 159.936 mcs
+Total operations: 10493
+Operations throughput: 65607492 ops/s
 ===============================================================================
 ```
 
@@ -242,53 +242,53 @@ BENCHMARK_MAIN()
 Report fragment is the following:
 ```
 ===============================================================================
-Benchmark: std::list<int>.forward
+Benchmark: std::list<int>-forward
 Attempts: 5
-Operations: 1000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: std::list<int>.forward()
-Average time: 6.055 ms/op
-Minimal time: 6.055 ms/op
-Maximal time: 6.337 ms/op
-Total time: 6.055 s
-Total operations: 1000
-Operations throughput: 165 ops/s
+Phase: std::list<int>-forward
+Average time: 6.332 ms/op
+Minimal time: 6.332 ms/op
+Maximal time: 6.998 ms/op
+Total time: 4.958 s
+Total operations: 783
+Operations throughput: 157 ops/s
 ===============================================================================
-Benchmark: std::list<int>.backward
+Benchmark: std::list<int>-backward
 Attempts: 5
-Operations: 1000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: std::list<int>.backward()
-Average time: 6.075 ms/op
-Minimal time: 6.075 ms/op
-Maximal time: 6.935 ms/op
-Total time: 6.075 s
-Total operations: 1000
-Operations throughput: 164 ops/s
+Phase: std::list<int>-backward
+Average time: 7.883 ms/op
+Minimal time: 7.883 ms/op
+Maximal time: 8.196 ms/op
+Total time: 4.911 s
+Total operations: 623
+Operations throughput: 126 ops/s
 ===============================================================================
-Benchmark: std::vector<int>.forward
+Benchmark: std::vector<int>-forward
 Attempts: 5
-Operations: 1000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: std::vector<int>.forward()
-Average time: 663.003 mcs/op
-Minimal time: 663.003 mcs/op
-Maximal time: 678.439 mcs/op
-Total time: 663.003 ms
-Total operations: 1000
-Operations throughput: 1508 ops/s
+Phase: std::vector<int>-forward
+Average time: 298.114 mcs/op
+Minimal time: 298.114 mcs/op
+Maximal time: 308.209 mcs/op
+Total time: 4.852 s
+Total operations: 16276
+Operations throughput: 3354 ops/s
 ===============================================================================
-Benchmark: std::vector<int>.backward
+Benchmark: std::vector<int>-backward
 Attempts: 5
-Operations: 1000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: std::vector<int>.backward()
-Average time: 667.515 mcs/op
-Minimal time: 667.515 mcs/op
-Maximal time: 681.929 mcs/op
-Total time: 667.515 ms
-Total operations: 1000
-Operations throughput: 1498 ops/s
+Phase: std::vector<int>-backward
+Average time: 316.412 mcs/op
+Minimal time: 316.412 mcs/op
+Maximal time: 350.224 mcs/op
+Total time: 4.869 s
+Total operations: 15390
+Operations throughput: 3160 ops/s
 ===============================================================================
 ```
 
@@ -304,8 +304,6 @@ context in dynamic fixture methods.
 #include <list>
 #include <vector>
 
-const int operations = 10000000;
-
 template <typename T>
 class ContainerFixture : public virtual CppBenchmark::Fixture
 {
@@ -316,17 +314,17 @@ protected:
     void Cleanup(CppBenchmark::Context& context) override { container.clear(); }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back")
 {
     container.push_back(0);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.push_back", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.push_back")
 {
     container.push_back(0);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::deque<int>>, "std::deque<int>.push_back", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::deque<int>>, "std::deque<int>.push_back")
 {
     container.push_back(0);
 }
@@ -337,41 +335,41 @@ BENCHMARK_MAIN()
 Report fragment is the following:
 ```
 ===============================================================================
-Benchmark: std::list<int>.push_back
+Benchmark: std::list<int>.push_back()
 Attempts: 5
-Operations: 10000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: std::list<int>.push_back()
-Average time: 50 ns/op
-Minimal time: 50 ns/op
-Maximal time: 53 ns/op
-Total time: 505.169 ms
-Total operations: 10000000
-Operations throughput: 19795348 ops/s
+Average time: 35 ns/op
+Minimal time: 35 ns/op
+Maximal time: 39 ns/op
+Total time: 2.720 s
+Total operations: 76213307
+Operations throughput: 28009633 ops/s
 ===============================================================================
-Benchmark: std::vector<int>.push_back
+Benchmark: std::vector<int>.push_back()
 Attempts: 5
-Operations: 10000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: std::vector<int>.push_back()
-Average time: 9 ns/op
-Minimal time: 9 ns/op
-Maximal time: 10 ns/op
-Total time: 97.252 ms
-Total operations: 10000000
-Operations throughput: 102824688 ops/s
+Average time: 5 ns/op
+Minimal time: 5 ns/op
+Maximal time: 5 ns/op
+Total time: 722.837 ms
+Total operations: 126890166
+Operations throughput: 175544557 ops/s
 ===============================================================================
-Benchmark: std::deque<int>.push_back
+Benchmark: std::deque<int>.push_back()
 Attempts: 5
-Operations: 10000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: std::deque<int>.push_back()
-Average time: 21 ns/op
-Minimal time: 21 ns/op
-Maximal time: 22 ns/op
-Total time: 218.826 ms
-Total operations: 10000000
-Operations throughput: 45698221 ops/s
+Average time: 12 ns/op
+Minimal time: 12 ns/op
+Maximal time: 12 ns/op
+Total time: 1.319 s
+Total operations: 105369784
+Operations throughput: 79858488 ops/s
 ===============================================================================
 ```
 
@@ -382,7 +380,7 @@ range, or with a range and selector function. Benchmark will be launched for
 each parameters combination.
 
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <algorithm>
 #include <vector>
@@ -438,7 +436,7 @@ and implementing Run() method. You can use AddItems() method of a benchmark cont
 metrics to register processed items.
 
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <algorithm>
 #include <vector>
@@ -492,18 +490,16 @@ Items throughput: 15421124 ops/s
 You can use AddBytes() method of a benchmark context metrics to register processed data.
 
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <array>
 
-const int operations = 100000;
 const int chunk_size_from = 32;
 const int chunk_size_to = 4096;
 
-// Create settings for the benchmark which will make 100000 operations for each chunk size
+// Create settings for the benchmark which will launch for each chunk size
 // scaled from 32 bytes to 4096 bytes (32, 64, 128, 256, 512, 1024, 2048, 4096).
 const auto settings = CppBenchmark::Settings()
-    .Operations(operations)
     .ParamRange(
         chunk_size_from, chunk_size_to, [](int from, int to, int& result)
         {
@@ -548,63 +544,62 @@ BENCHMARK_MAIN()
 Report fragment is the following:
 ```
 ===============================================================================
-Benchmark: fwrite
+Benchmark: fwrite()
 Attempts: 5
-Operations: 100000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: fwrite(32)
-Average time: 66 ns/op
-Minimal time: 66 ns/op
-Maximal time: 78 ns/op
-Total time: 6.608 ms
-Total operations: 100000
-Total bytes: 3.053 MiB
-Operations throughput: 15131818 ops/s
-Bytes throughput: 461.805 MiB/s
+Phase: fwrite()(32)
+Average time: 55 ns/op
+Minimal time: 55 ns/op
+Maximal time: 108 ns/op
+Total time: 2.821 s
+Total operations: 50703513
+Total bytes: 1.523 GiB
+Operations throughput: 17968501 ops/s
+Bytes throughput: 548.363 MiB/s
 -------------------------------------------------------------------------------
-Phase: fwrite(64)
+Phase: fwrite()(64)
 Average time: 93 ns/op
 Minimal time: 93 ns/op
-Maximal time: 134 ns/op
-Total time: 9.380 ms
-Total operations: 100000
-Total bytes: 6.106 MiB
-Operations throughput: 10660950 ops/s
-Bytes throughput: 650.709 MiB/s
+Maximal time: 162 ns/op
+Total time: 3.820 s
+Total operations: 40744084
+Total bytes: 2.438 GiB
+Operations throughput: 10665202 ops/s
+Bytes throughput: 650.975 MiB/s
 -------------------------------------------------------------------------------
 ...
 -------------------------------------------------------------------------------
-Phase: fwrite(2048)
-Average time: 1.846 mcs/op
-Minimal time: 1.846 mcs/op
-Maximal time: 2.299 mcs/op
-Total time: 184.605 ms
-Total operations: 100000
-Total bytes: 195.320 MiB
-Operations throughput: 541696 ops/s
-Bytes throughput: 1.034 GiB/s
+Phase: fwrite()(2048)
+Average time: 8.805 mcs/op
+Minimal time: 8.805 mcs/op
+Maximal time: 11.895 mcs/op
+Total time: 3.968 s
+Total operations: 450686
+Total bytes: 880.252 MiB
+Operations throughput: 113569 ops/s
+Bytes throughput: 221.835 MiB/s
 -------------------------------------------------------------------------------
-Phase: fwrite(4096)
-Average time: 3.687 mcs/op
-Minimal time: 3.687 mcs/op
-Maximal time: 4.617 mcs/op
-Total time: 368.788 ms
-Total operations: 100000
-Total bytes: 390.640 MiB
-Operations throughput: 271157 ops/s
-Bytes throughput: 1.035 GiB/s
+Phase: fwrite()(4096)
+Average time: 19.485 mcs/op
+Minimal time: 19.485 mcs/op
+Maximal time: 20.887 mcs/op
+Total time: 4.906 s
+Total operations: 251821
+Total bytes: 983.692 MiB
+Operations throughput: 51319 ops/s
+Bytes throughput: 200.478 MiB/s
 ===============================================================================
 ```
 
 ## Example 8: Benchmark latency with auto update
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <chrono>
 #include <thread>
 
-const uint64_t operations = 100;
-const auto settings = CppBenchmark::Settings().Operations(operations).Latency(1, 1000000000, 5);
+const auto settings = CppBenchmark::Settings().Latency(1, 1000000000, 5);
 
 BENCHMARK("sleep", settings)
 {
@@ -619,16 +614,16 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: sleep
 Attempts: 5
-Operations: 100
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: sleep
-Latency (Min): 10.013 ms/op
-Latency (Max): 11.134 ms/op
-Latency (Mean): 1.05137e+07
-Latency (StDv): 381727
-Total time: 1.051 s
-Total operations: 100
-Operations throughput: 95 ops/s
+Latency (Min): 10.014 ms/op
+Latency (Max): 11.377 ms/op
+Latency (Mean): 1.04928e+07
+Latency (StDv): 364511
+Total time: 4.985 s
+Total operations: 571
+Operations throughput: 114 ops/s
 ===============================================================================
 ```
 
@@ -648,8 +643,7 @@ in order to generate and analyze latency histogram:
 #include <chrono>
 #include <limits>
 
-const uint64_t operations = 10000000;
-const auto settings = CppBenchmark::Settings().Operations(operations).Latency(1, 1000000000, 5, false);
+const auto settings = CppBenchmark::Settings().Operations(10000000).Latency(1, 1000000000, 5, false);
 
 BENCHMARK("high_resolution_clock", settings)
 {
@@ -725,16 +719,13 @@ in order to generate and analyze latency histogram:
 
 ## Example 10: Benchmark threads
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <atomic>
 
-const int operations = 10000000;
-
-// Create settings for the benchmark which will make 10000000 operations for each
+// Create settings for the benchmark which will launch for each
 // set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
 const auto settings = CppBenchmark::Settings()
-    .Operations(operations)
     .ThreadsRange(
         1, 8, [](int from, int to, int& result)
         {
@@ -758,67 +749,84 @@ Report fragment is the following:
 ===============================================================================
 Benchmark: std::atomic++
 Attempts: 5
-Operations: 10000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:1)
-Total time: 63.254 ms
+Average time: 19 ns/op
+Minimal time: 19 ns/op
+Maximal time: 20 ns/op
+Total time: 2.124 s
+Total operations: 111355461
+Operations throughput: 52425884 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:1).thread
-Average time: 6 ns/op
-Minimal time: 6 ns/op
-Maximal time: 7 ns/op
-Total time: 62.809 ms
-Total operations: 10000000
-Operations throughput: 159210567 ops/s
+Average time: 5 ns/op
+Minimal time: 5 ns/op
+Maximal time: 5 ns/op
+Total time: 586.191 ms
+Total operations: 111355461
+Operations throughput: 189964343 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:2)
-Total time: 362.933 ms
+Average time: 20 ns/op
+Minimal time: 20 ns/op
+Maximal time: 24 ns/op
+Total time: 3.907 s
+Total operations: 188624150
+Operations throughput: 48270817 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:2).thread
-Average time: 36 ns/op
-Minimal time: 36 ns/op
-Maximal time: 53 ns/op
-Total time: 361.762 ms
-Total operations: 10000000
-Operations throughput: 27642410 ops/s
+Average time: 23 ns/op
+Minimal time: 23 ns/op
+Maximal time: 30 ns/op
+Total time: 2.179 s
+Total operations: 94312075
+Operations throughput: 43270119 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:4)
-Total time: 927.259 ms
+Average time: 18 ns/op
+Minimal time: 18 ns/op
+Maximal time: 19 ns/op
+Total time: 6.875 s
+Total operations: 365529364
+Operations throughput: 53160207 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:4).thread
-Average time: 89 ns/op
-Minimal time: 89 ns/op
-Maximal time: 94 ns/op
-Total time: 898.358 ms
-Total operations: 10000000
-Operations throughput: 11131419 ops/s
+Average time: 56 ns/op
+Minimal time: 56 ns/op
+Maximal time: 60 ns/op
+Total time: 5.142 s
+Total operations: 91382341
+Operations throughput: 17771705 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:8)
-Total time: 1.723 s
+Average time: 23 ns/op
+Minimal time: 23 ns/op
+Maximal time: 25 ns/op
+Total time: 7.667 s
+Total operations: 330867224
+Operations throughput: 43153297 ops/s
 -------------------------------------------------------------------------------
 Phase: std::atomic++(threads:8).thread
-Average time: 156 ns/op
-Minimal time: 156 ns/op
-Maximal time: 173 ns/op
-Total time: 1.563 s
-Total operations: 10000000
-Operations throughput: 6396501 ops/s
+Average time: 105 ns/op
+Minimal time: 105 ns/op
+Maximal time: 167 ns/op
+Total time: 4.367 s
+Total operations: 41358403
+Operations throughput: 9468527 ops/s
 ===============================================================================
 ```
 
 ## Example 11: Benchmark threads with fixture
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <array>
 #include <atomic>
 
-const int operations = 10000000;
-
-// Create settings for the benchmark which will make 10000000 operations for each
+// Create settings for the benchmark which will launch for each
 // set of threads scaled from 1 thread to 8 threads (1, 2, 4, 8).
 const auto settings = CppBenchmark::Settings()
-    .Operations(operations)
     .ThreadsRange(
         1, 8, [](int from, int to, int& result)
         {
@@ -839,12 +847,12 @@ class Fixture2 : public virtual CppBenchmark::FixtureThreads
 protected:
     std::array<int, 8> counter;
 
-    void InitializeThread(CppBenchmark::ContextThread& context) override
+    void InitializeThread(CppBenchmark::ContextThreads& context) override
     {
         counter[CppBenchmark::System::CurrentThreadId() % counter.size()] = 0;
     }
 
-    void CleanupThread(CppBenchmark::ContextThread& context) override
+    void CleanupThread(CppBenchmark::ContextThreads& context) override
     {
         // Thread cleanup code can be placed here...
     }
@@ -866,99 +874,83 @@ BENCHMARK_MAIN()
 Report fragment is the following:
 ```
 ===============================================================================
-Phase: Global counter(threads:1)
-Total time: 63.303 ms
+Benchmark: Global counter
+Attempts: 5
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:1).thread
-Average time: 6 ns/op
-Minimal time: 6 ns/op
-Maximal time: 6 ns/op
-Total time: 63.165 ms
-Total operations: 10000000
-Operations throughput: 158313134 ops/s
--------------------------------------------------------------------------------
-Phase: Global counter(threads:2)
-Total time: 237.676 ms
+Average time: 5 ns/op
+Minimal time: 5 ns/op
+Maximal time: 5 ns/op
+Total time: 629.639 ms
+Total operations: 119518816
+Operations throughput: 189821077 ops/s
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:2).thread
-Average time: 23 ns/op
-Minimal time: 23 ns/op
-Maximal time: 27 ns/op
-Total time: 236.504 ms
-Total operations: 10000000
-Operations throughput: 42282550 ops/s
--------------------------------------------------------------------------------
-Phase: Global counter(threads:4)
-Total time: 669.396 ms
+Average time: 18 ns/op
+Minimal time: 18 ns/op
+Maximal time: 24 ns/op
+Total time: 1.860 s
+Total operations: 101568823
+Operations throughput: 54581734 ops/s
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:4).thread
-Average time: 65 ns/op
-Minimal time: 65 ns/op
-Maximal time: 68 ns/op
-Total time: 652.646 ms
-Total operations: 10000000
-Operations throughput: 15322241 ops/s
--------------------------------------------------------------------------------
-Phase: Global counter(threads:8)
-Total time: 1.362 s
+Average time: 57 ns/op
+Minimal time: 57 ns/op
+Maximal time: 66 ns/op
+Total time: 4.552 s
+Total operations: 79503346
+Operations throughput: 17464897 ops/s
 -------------------------------------------------------------------------------
 Phase: Global counter(threads:8).thread
-Average time: 129 ns/op
-Minimal time: 129 ns/op
-Maximal time: 138 ns/op
-Total time: 1.297 s
-Total operations: 10000000
-Operations throughput: 7706848 ops/s
+Average time: 103 ns/op
+Minimal time: 103 ns/op
+Maximal time: 143 ns/op
+Total time: 4.601 s
+Total operations: 44597477
+Operations throughput: 9690967 ops/s
 ===============================================================================
-Phase: Thread local counter(threads:1)
-Total time: 41.325 ms
+Benchmark: Thread local counter
+Attempts: 5
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:1).thread
 Average time: 4 ns/op
 Minimal time: 4 ns/op
 Maximal time: 4 ns/op
-Total time: 41.175 ms
-Total operations: 10000000
-Operations throughput: 242865244 ops/s
--------------------------------------------------------------------------------
-Phase: Thread local counter(threads:2)
-Total time: 83.360 ms
+Total time: 739.689 ms
+Total operations: 166432112
+Operations throughput: 225002770 ops/s
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:2).thread
-Average time: 8 ns/op
-Minimal time: 8 ns/op
-Maximal time: 12 ns/op
-Total time: 80.003 ms
-Total operations: 10000000
-Operations throughput: 124994748 ops/s
--------------------------------------------------------------------------------
-Phase: Thread local counter(threads:4)
-Total time: 231.836 ms
+Average time: 9 ns/op
+Minimal time: 9 ns/op
+Maximal time: 10 ns/op
+Total time: 1.061 s
+Total operations: 113102777
+Operations throughput: 106564314 ops/s
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:4).thread
-Average time: 21 ns/op
-Minimal time: 21 ns/op
-Maximal time: 23 ns/op
-Total time: 218.354 ms
-Total operations: 10000000
-Operations throughput: 45797028 ops/s
--------------------------------------------------------------------------------
-Phase: Thread local counter(threads:8)
-Total time: 412.714 ms
+Average time: 20 ns/op
+Minimal time: 20 ns/op
+Maximal time: 21 ns/op
+Total time: 1.944 s
+Total operations: 94786108
+Operations throughput: 48757481 ops/s
 -------------------------------------------------------------------------------
 Phase: Thread local counter(threads:8).thread
-Average time: 30 ns/op
-Minimal time: 30 ns/op
-Maximal time: 42 ns/op
-Total time: 306.252 ms
-Total operations: 10000000
-Operations throughput: 32652780 ops/s
+Average time: 25 ns/op
+Minimal time: 25 ns/op
+Maximal time: 39 ns/op
+Total time: 1.784 s
+Total operations: 71185751
+Operations throughput: 39887088 ops/s
 ===============================================================================
 ```
 
 ## Example 12: Benchmark single producer, single consumer pattern
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <mutex>
 #include <queue>
@@ -1077,7 +1069,7 @@ Operations throughput: 15557246 ops/s
 
 ## Example 13: Benchmark multiple producers, multiple consumers pattern
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <mutex>
 #include <queue>
@@ -1277,7 +1269,7 @@ which you may use directly as a singleton. All functionality provided for dynami
 thread-safe synchronizied with mutex (each call will lose some ns).
 
 ```c++
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include <chrono>
 #include <thread>
