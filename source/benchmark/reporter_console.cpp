@@ -52,7 +52,9 @@ void ReporterConsole::ReportBenchmark(const BenchmarkBase& benchmark, const Sett
     _stream << Color::DARKGREY << GenerateSeparator('=') << std::endl;
     _stream << Color::WHITE << "Benchmark: " << Color::LIGHTCYAN << benchmark.name() << std::endl;
     _stream << Color::WHITE << "Attempts: " << Color::DARKGREY << settings.attempts() << std::endl;
-    if (!settings.infinite())
+    if (settings.duration() > 0)
+        _stream << Color::WHITE << "Duration: " << Color::DARKGREY << settings.duration() << " seconds" << std::endl;
+    if (settings.operations() > 0)
         _stream << Color::WHITE << "Operations: " << Color::DARKGREY << settings.operations() << std::endl;
 }
 

@@ -50,7 +50,7 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(VirtualFixture, "Inline call")
+BENCHMARK_FIXTURE(VirtualFixture, "Inline call", 1)
 {
     uint64_t crc = 0;
     for (uint64_t i = 0; i < operations; ++i)
@@ -59,7 +59,7 @@ BENCHMARK_FIXTURE(VirtualFixture, "Inline call")
     context.metrics().SetCustom("CRC", crc);
 }
 
-BENCHMARK_FIXTURE(VirtualFixture, "Direct call")
+BENCHMARK_FIXTURE(VirtualFixture, "Direct call", 1)
 {
     uint64_t crc = 0;
     for (uint64_t i = 0; i < operations; ++i)
@@ -68,7 +68,7 @@ BENCHMARK_FIXTURE(VirtualFixture, "Direct call")
     context.metrics().SetCustom("CRC", crc);
 }
 
-BENCHMARK_FIXTURE(VirtualFixture, "Virtual call")
+BENCHMARK_FIXTURE(VirtualFixture, "Virtual call", 1)
 {
     uint64_t crc = 0;
     for (uint64_t i = 0; i < operations; ++i)

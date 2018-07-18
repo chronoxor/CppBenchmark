@@ -20,8 +20,7 @@
 #undef min
 #endif
 
-const uint64_t operations = 10000000;
-const auto settings = CppBenchmark::Settings().Operations(operations).Latency(1, 1000000000, 5, false);
+const auto settings = CppBenchmark::Settings().Operations(10000000).Latency(1, 1000000000, 5, false);
 
 BENCHMARK("high_resolution_clock", settings)
 {

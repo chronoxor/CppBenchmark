@@ -6,21 +6,19 @@
 
 #include <cmath>
 
-const uint64_t operations = 1000000000;
-
-BENCHMARK("sin()", operations)
+BENCHMARK("sin()")
 {
     static double sum = 0;
     sum += sin(123.456);
 }
 
-BENCHMARK("cos()", operations)
+BENCHMARK("cos()")
 {
     static double sum = 0;
     sum += cos(123.456);
 }
 
-BENCHMARK("tan()", operations)
+BENCHMARK("tan()")
 {
     static double sum = 0;
     sum += tan(123.456);

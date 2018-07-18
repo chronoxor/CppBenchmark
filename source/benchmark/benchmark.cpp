@@ -47,36 +47,51 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
             Initialize(context);
 
             bool infinite = _settings.infinite();
+            int64_t duration = _settings.duration();
             int64_t operations = _settings.operations();
-            int64_t timeout = _settings.timeout() * 1000000000;
+
+            uint64_t timestamp = 0;
+
+            // Calculate the approximate count of operations which can be performed for the given duration
+            if (duration > 0)
+            {
+                uint64_t count = 0;
+                uint64_t timespan = 0;
+
+                // Collect data for one second...
+                for (; timespan < 1000000000; ++count)
+                {
+                    // Add new metrics operation
+                    context._metrics->AddOperations(1);
+
+                    timestamp = System::Timestamp();
+
+                    // Run benchmark method...
+                    Run(context);
+
+                    timespan += System::Timestamp() - timestamp;
+                }
+
+                // Approximate operations count
+                operations = (1000000000ull * count * duration) / timespan;
+            }
 
             context._current->StartCollectingMetrics();
-            while (!context.canceled() && (infinite || (operations > 0) || (timeout > 0)))
+            while (!context.canceled() && (infinite || (operations > 0)))
             {
                 // Add new metrics operation
                 context._metrics->AddOperations(1);
 
-                // Store the timestamp for benchmark timeout and the automatic latency update
-                uint64_t timestamp = 0;
-                if ((timeout > 0) || latency_auto)
+                // Store the timestamp for the automatic latency update
+                if (latency_auto)
                     timestamp = System::Timestamp();
 
                 // Run benchmark method...
                 Run(context);
 
-                // Update the benchmark timeout and/or latency metrics
-                if ((timeout > 0) || latency_auto)
-                {
-                    // Calculate the single benchmark timespan
-                    int64_t timespan = System::Timestamp() - timestamp;
-
-                    // Benchmark timeout update
-                    timeout -= timespan;
-
-                    // Automatic latency update
-                    if (latency_auto)
-                        context._metrics->AddLatency(timespan);
-                }
+                // Update latency metrics
+                if (latency_auto)
+                    context._metrics->AddLatency(System::Timestamp() - timestamp);
 
                 // Decrement operation counters
                 operations -= 1;

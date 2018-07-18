@@ -8,8 +8,6 @@
 #include <list>
 #include <vector>
 
-const uint64_t operations = 10000000;
-
 template <typename T>
 class ContainerFixture : public virtual CppBenchmark::Fixture
 {
@@ -20,17 +18,17 @@ protected:
     void Cleanup(CppBenchmark::Context& context) override { container.clear(); }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back()", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::list<int>>, "std::list<int>.push_back()")
 {
     container.push_back(0);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.push_back()", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::vector<int>>, "std::vector<int>.push_back()")
 {
     container.push_back(0);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture<std::deque<int>>, "std::deque<int>.push_back()", operations)
+BENCHMARK_FIXTURE(ContainerFixture<std::deque<int>>, "std::deque<int>.push_back()")
 {
     container.push_back(0);
 }

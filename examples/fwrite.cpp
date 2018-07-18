@@ -6,10 +6,9 @@
 
 #include <array>
 
-const uint64_t operations = 100000;
 const int chunk_size_from = 32;
 const int chunk_size_to = 4096;
-const auto settings = CppBenchmark::Settings().Operations(operations).ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
+const auto settings = CppBenchmark::Settings().ParamRange(chunk_size_from, chunk_size_to, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
 class FileFixture
 {

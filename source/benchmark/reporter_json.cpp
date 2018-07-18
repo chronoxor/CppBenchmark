@@ -96,7 +96,9 @@ void ReporterJSON::ReportBenchmark(const BenchmarkBase& benchmark, const Setting
 {
     _stream << Internals::indent4 << "\"name\": \"" << benchmark.name() << "\",\n";
     _stream << Internals::indent4 << "\"attempts\": " << settings.attempts() << ",\n";
-    if (!settings.infinite())
+    if (settings.duration() > 0)
+        _stream << Internals::indent4 << "\"duration\": " << settings.duration() << ",\n";
+    if (settings.operations() > 0)
         _stream << Internals::indent4 << "\"operations\": " << settings.operations() << ",\n";
 }
 

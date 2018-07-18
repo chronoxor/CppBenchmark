@@ -4,7 +4,7 @@
 
 #include "benchmark/cppbenchmark.h"
 
-BENCHMARK("rand()", 100000000)
+BENCHMARK("rand()")
 {
     rand();
 }

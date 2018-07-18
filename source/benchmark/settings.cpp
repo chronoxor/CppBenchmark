@@ -13,12 +13,12 @@ namespace CppBenchmark {
 Settings::Settings()
     : _attempts(5),
       _infinite(false),
+      _duration(0),
       _operations(0),
-      _timeout(0),
       _latency_params(std::make_tuple(0, 0, 0)),
       _latency_auto(false)
 {
-    Timeout(0);
+    Duration(0);
 }
 
 Settings::Settings(int64_t operations)
@@ -36,24 +36,24 @@ Settings& Settings::Attempts(int attempts)
 Settings& Settings::Infinite()
 {
     _infinite = true;
+    _duration = 0;
     _operations = 0;
-    _timeout = 0;
     return *this;
 }
 
 Settings& Settings::Operations(int64_t operations)
 {
     _infinite = false;
+    _duration = 0;
     _operations = (operations > 0) ? operations : 1;
-    _timeout = 0;
     return *this;
 }
 
-Settings& Settings::Timeout(int64_t timeout)
+Settings& Settings::Duration(int64_t duration)
 {
     _infinite = false;
+    _duration = (duration > 0) ? duration : 5;
     _operations = 0;
-    _timeout = (timeout > 0) ? timeout : 5;
     return *this;
 }
 

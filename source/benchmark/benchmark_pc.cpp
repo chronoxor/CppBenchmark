@@ -57,8 +57,8 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 Initialize(context);
 
                 bool infinite = _settings.infinite();
+                int64_t duration = _settings.duration();
                 int64_t operations = _settings.operations();
-                int64_t timeout = _settings.timeout() * 1000000000;
 
                 // Prepare barrier for producers & consumers threads
                 Barrier barrier(producers + consumers);
@@ -70,7 +70,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark producers
                 for (int i = 0; i < producers; ++i)
                 {
-                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, producers, infinite, operations, timeout]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, producers, infinite, operations, duration]()
                     {
                         // Clone producer context
                         ContextPC producer_context(context);
@@ -92,39 +92,54 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         InitializeProducer(producer_context);
 
                         bool producer_infinite = infinite;
+                        int64_t producer_duration = duration;
                         int64_t producer_operations = operations;
-                        int64_t producer_timeout = timeout;
+
+                        uint64_t timestamp = 0;
 
                         // Wait for other threads at the barrier
                         barrier.Wait();
 
+                        // Calculate the approximate count of operations which can be performed for the given duration
+                        if (producer_duration > 0)
+                        {
+                            uint64_t count = 0;
+                            uint64_t timespan = 0;
+
+                            // Collect data for one second...
+                            for (; timespan < 1000000000; ++count)
+                            {
+                                // Add new metrics operation
+                                producer_context._metrics->AddOperations(1);
+
+                                timestamp = System::Timestamp();
+
+                                // Run producer method...
+                                RunProducer(producer_context);
+
+                                timespan += System::Timestamp() - timestamp;
+                            }
+
+                            // Approximate operations count
+                            producer_operations = (1000000000ull * count * producer_duration) / timespan;
+                        }
+
                         producer_context._current->StartCollectingMetrics();
-                        while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_operations > 0) || (producer_timeout > 0)))
+                        while (!producer_context.produce_stopped() && !producer_context.canceled() && (producer_infinite || (producer_operations > 0)))
                         {
                             // Add new metrics operation
                             producer_context._metrics->AddOperations(1);
 
-                            // Store the timestamp for benchmark timeout and the automatic latency update
-                            uint64_t timestamp = 0;
-                            if ((timeout > 0) || latency_auto)
+                            // Store the timestamp for the automatic latency update
+                            if (latency_auto)
                                 timestamp = System::Timestamp();
 
                             // Run producer method...
                             RunProducer(producer_context);
 
-                            // Update the benchmark timeout and/or latency metrics
-                            if ((timeout > 0) || latency_auto)
-                            {
-                                // Calculate the single benchmark timespan
-                                int64_t timespan = System::Timestamp() - timestamp;
-
-                                // Benchmark timeout update
-                                producer_timeout -= timespan;
-
-                                // Automatic latency update
-                                if (latency_auto)
-                                    producer_context._metrics->AddLatency(timespan);
-                            }
+                            // Update latency metrics
+                            if (latency_auto)
+                                producer_context._metrics->AddLatency(System::Timestamp() - timestamp);
 
                             // Decrement operation counters
                             producer_operations -= 1;

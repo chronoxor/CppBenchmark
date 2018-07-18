@@ -20,7 +20,7 @@ namespace CppBenchmark {
 class SettingsThreads : public Settings
 {
 public:
-    //! Initialize settings with the default benchmark timeout (5 seconds)
+    //! Initialize settings with the default benchmark duration (5 seconds)
     SettingsThreads() : Settings() {}
     //! Initialize settings with the given count of running threads
     /*!
