@@ -1,5 +1,5 @@
 /*!
-    \file console.h
+    \file console.inl
     \brief Console management inline implementation
     \author Ivan Shynkarenka
     \date 29.07.2015
