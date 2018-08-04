@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>CppBenchmark: source/benchmark/console.cpp File Reference</title>
+<title>CppBenchmark: include/benchmark/console.inl Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,37 +83,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_b2f33c71d4aa5e7af42a1ca61ff5af1b.html">source</a></li><li class="navelem"><a class="el" href="dir_945a61f4109b9401622b0049f8aef4e7.html">benchmark</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_b0fbd03d1d68fbed92a2b8794268c173.html">benchmark</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">console.cpp File Reference</div>  </div>
+<div class="title">console.inl</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Console management implementation.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="console_8h_source.html">benchmark/console.h</a>&quot;</code><br/>
-</div>
-<p><a href="console_8cpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespace_cpp_benchmark"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_benchmark.html">CppBenchmark</a></td></tr>
-<tr class="memdesc:namespace_cpp_benchmark"><td class="mdescLeft">&#160;</td><td class="mdescRight">C++ <a class="el" href="class_cpp_benchmark_1_1_benchmark.html" title="Benchmark class. ">Benchmark</a> project definitions. <br/></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Console management implementation. </p>
-<dl class="section author"><dt>Author</dt><dd>Ivan Shynkarenka </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>29.07.2015 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>MIT License </dd></dl>
-
-<p>Definition in file <a class="el" href="console_8cpp_source.html">console.cpp</a>.</p>
-</div></div><!-- contents -->
+<a href="console_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>CppBenchmark {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> TOutputStream&gt;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespace_cpp_benchmark.html#a48ed4362cbedfdd001d95459891d97ea">   12</a></span>&#160;<span class="keyword">inline</span> TOutputStream&amp; <a class="code" href="namespace_cpp_benchmark.html#a48ed4362cbedfdd001d95459891d97ea">operator&lt;&lt;</a>(TOutputStream&amp; stream, <a class="code" href="namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69">Color</a> color)</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="class_cpp_benchmark_1_1_console.html#af8f8bbe059e689455683b800fcc30565">Console::SetColor</a>(color);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> stream;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> TOutputStream&gt;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="namespace_cpp_benchmark.html#ae479897a038ef03d8afdf83d64fdfafc">   19</a></span>&#160;<span class="keyword">inline</span> TOutputStream&amp; operator&lt;&lt;(TOutputStream&amp; stream, std::pair&lt;Color, Color&gt; colors)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_cpp_benchmark_1_1_console.html#af8f8bbe059e689455683b800fcc30565">Console::SetColor</a>(colors.first, colors.second);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> stream;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
+<div class="ttc" id="class_cpp_benchmark_1_1_console_html_af8f8bbe059e689455683b800fcc30565"><div class="ttname"><a href="class_cpp_benchmark_1_1_console.html#af8f8bbe059e689455683b800fcc30565">CppBenchmark::Console::SetColor</a></div><div class="ttdeci">static void SetColor(Color color, Color background=Color::BLACK)</div><div class="ttdoc">Set console text color. </div><div class="ttdef"><b>Definition:</b> <a href="console_8cpp_source.html#l00019">console.cpp:19</a></div></div>
+<div class="ttc" id="namespace_cpp_benchmark_html_a48ed4362cbedfdd001d95459891d97ea"><div class="ttname"><a href="namespace_cpp_benchmark.html#a48ed4362cbedfdd001d95459891d97ea">CppBenchmark::operator&lt;&lt;</a></div><div class="ttdeci">TOutputStream &amp; operator&lt;&lt;(TOutputStream &amp;stream, Color color)</div><div class="ttdoc">Stream manipulator: change console text color. </div><div class="ttdef"><b>Definition:</b> <a href="console_8inl_source.html#l00012">console.inl:12</a></div></div>
+<div class="ttc" id="namespace_cpp_benchmark_html_ae3813b3f9ddc837dcb6312cc3f609f69"><div class="ttname"><a href="namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69">CppBenchmark::Color</a></div><div class="ttdeci">Color</div><div class="ttdoc">Supported console colors. </div><div class="ttdef"><b>Definition:</b> <a href="console_8h_source.html#l00017">console.h:17</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
