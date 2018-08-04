@@ -40,7 +40,8 @@ enum class Color
     \param color - Console text color
     \return Output stream
 */
-std::ostream& operator<<(std::ostream& stream, Color color);
+template <class TOutputStream>
+TOutputStream& operator<<(TOutputStream& stream, Color color);
 
 //! Stream manipulator: change console text and background colors
 /*!
@@ -48,7 +49,8 @@ std::ostream& operator<<(std::ostream& stream, Color color);
     \param colors - Console text and background colors
     \return Output stream
 */
-std::ostream& operator<<(std::ostream& stream, std::pair<Color, Color> colors);
+template <class TOutputStream>
+TOutputStream& operator<<(TOutputStream& stream, std::pair<Color, Color> colors);
 
 //! Console management static class
 /*!
@@ -75,5 +77,7 @@ public:
 };
 
 } // namespace CppBenchmark
+
+#include "console.inl"
 
 #endif // CPPBENCHMARK_CONSOLE_H

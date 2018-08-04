@@ -16,18 +16,6 @@
 
 namespace CppBenchmark {
 
-std::ostream& operator<<(std::ostream& stream, Color color)
-{
-    Console::SetColor(color);
-    return stream;
-}
-
-std::ostream& operator<<(std::ostream& stream, std::pair<Color, Color> colors)
-{
-    Console::SetColor(colors.first, colors.second);
-    return stream;
-}
-
 void Console::SetColor(Color color, Color background)
 {
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
