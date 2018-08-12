@@ -40,9 +40,7 @@ if(NOT TARGET zlib)
 
   # Module library
   file(GLOB SOURCE_FILES "zlib/*.c")
-  if(NOT MSVC)
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-implicit-function-declaration -Wno-shift-negative-value")
-  else()
+  if(MSVC)
     # C4127: conditional expression is constant
     # C4131: 'function' : uses old-style declarator
     # C4210: nonstandard extension used : function given file scope
@@ -51,6 +49,8 @@ if(NOT TARGET zlib)
     # C4267: 'var' : conversion from 'size_t' to 'type', possible loss of data
     set(${SOURCE_FILES} "zlib/contrib/masmx64/inffas8664.c" "zlib/contrib/masmx64/inffas8664.c")
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244 /wd4245 /wd4267")
+  else()
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-implicit-function-declaration -Wno-shift-negative-value")
   endif()
   add_library(zlib ${SOURCE_FILES} ${ASSEMBLER_FILES})
   target_include_directories(zlib PUBLIC "zlib")
