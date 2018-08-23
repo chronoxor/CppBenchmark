@@ -61,7 +61,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 
 # Requirements
 * Linux (gcc g++ cmake doxygen graphviz)
-* OSX
+* OSX (clang cmake doxygen graphviz)
 * Windows 7 / Windows 10
 * [cmake](https://www.cmake.org)
 * [git](https://git-scm.com)
