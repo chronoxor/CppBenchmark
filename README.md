@@ -78,7 +78,7 @@ Optional:
 
 ## Clone repository with submodules
 ```shell
-git clone https://github.com/chronoxor/CppBenchmark.git CppBenchmark
+git clone https://github.com/chronoxor/CppBenchmark.git
 cd CppBenchmark
 git submodule update --init --recursive --remote
 ```
