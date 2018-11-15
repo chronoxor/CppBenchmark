@@ -1,0 +1,7 @@
+bin/* linguist-vendored
+build/* linguist-vendored
+cmake/* linguist-vendored
+documents/* linguist-vendored
+images/* linguist-vendored
+modules/* linguist-vendored
+temp/* linguist-vendored
