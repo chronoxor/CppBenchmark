@@ -61,7 +61,7 @@ private:
     std::string _filter;
     std::string _output;
 
-    LauncherConsole() : _init(false), _list(false), _silent(false), _filter(""), _output("console") {}
+    LauncherConsole() : _init(false), _list(false), _silent(false), _histograms(0), _filter(""), _output("console") {}
 };
 
 } // namespace CppBenchmark

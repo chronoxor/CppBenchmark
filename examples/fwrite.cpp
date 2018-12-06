@@ -16,7 +16,7 @@ protected:
     FILE* file;
     std::array<uint8_t, chunk_size_to> buffer;
 
-    FileFixture()
+    FileFixture() : file(nullptr), buffer()
     {
         // Open file for binary write
         file = fopen("fwrite.out", "wb");

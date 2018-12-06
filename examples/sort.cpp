@@ -263,7 +263,7 @@ private:
             if ((index + index1 >= size))
                 index1 = chunk;
             // Check bounds of right chunk
-            if ((index + chunk + index2 >= size))
+            if (index + chunk + index2 >= size)
                 index2 = chunk;
 
             // Check if we use right or left chunk for merge

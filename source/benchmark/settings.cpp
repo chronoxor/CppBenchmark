@@ -69,10 +69,8 @@ Settings& Settings::ThreadsRange(int from, int to)
     if ((from > 0) && (to > 0))
     {
         if (from > to)
-        {
-            from = to;
-            to = from;
-        }
+            std::swap(from, to);
+
         for (int i = from; i <= to; ++i)
             _threads.emplace_back(i);
     }
@@ -84,10 +82,8 @@ Settings& Settings::ThreadsRange(int from, int to, const std::function<int (int,
     if ((from > 0) && (to > 0))
     {
         if (from > to)
-        {
-            from = to;
-            to = from;
-        }
+            std::swap(from, to);
+
         // Select the first value
         int current = from;
         int result = selector(from, to, current);
@@ -113,15 +109,11 @@ Settings& Settings::PCRange(int producers_from, int producers_to, int consumers_
     if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0))
     {
         if (producers_from > producers_to)
-        {
-            producers_from = producers_to;
-            producers_to = producers_from;
-        }
+            std::swap(producers_from, producers_to);
+
         if (consumers_from > consumers_to)
-        {
-            consumers_from = consumers_to;
-            consumers_to = consumers_from;
-        }
+            std::swap(consumers_from, consumers_to);
+
         for (int i = producers_from; i <= producers_to; ++i)
             for (int j = consumers_from; j <= consumers_to; ++j)
                 _pc.emplace_back(i, j);
@@ -135,15 +127,11 @@ Settings& Settings::PCRange(int producers_from, int producers_to, const std::fun
     if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0))
     {
         if (producers_from > producers_to)
-        {
-            producers_from = producers_to;
-            producers_to = producers_from;
-        }
+            std::swap(producers_from, producers_to);
+
         if (consumers_from > consumers_to)
-        {
-            consumers_from = consumers_to;
-            consumers_to = consumers_from;
-        }
+            std::swap(consumers_from, consumers_to);
+
         // Select the first value
         int current1 = producers_from;
         int result1 = producers_selector(producers_from, producers_to, current1);
@@ -177,10 +165,8 @@ Settings& Settings::ParamRange(int from, int to)
     if ((from >= 0) && (to >= 0))
     {
         if (from > to)
-        {
-            from = to;
-            to = from;
-        }
+            std::swap(from, to);
+
         for (int i = from; i <= to; ++i)
             _params.emplace_back(i, -1, -1);
     }
@@ -192,10 +178,8 @@ Settings& Settings::ParamRange(int from, int to, const std::function<int (int, i
     if ((from >= 0) && (to >= 0))
     {
         if (from > to)
-        {
-            from = to;
-            to = from;
-        }
+            std::swap(from, to);
+
         // Select the first value
         int current = from;
         int result = selector(from, to, current);
@@ -221,15 +205,11 @@ Settings& Settings::PairRange(int from1, int to1, int from2, int to2)
     if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0))
     {
         if (from1 > to1)
-        {
-            from1 = to1;
-            to1 = from1;
-        }
+            std::swap(from1, to1);
+
         if (from2 > to2)
-        {
-            from2 = to2;
-            to2 = from2;
-        }
+            std::swap(from2, to2);
+
         for (int i = from1; i <= to1; ++i)
             for (int j = from2; j <= to2; ++j)
                 _params.emplace_back(i, j, -1);
@@ -243,15 +223,11 @@ Settings& Settings::PairRange(int from1, int to1, const std::function<int (int, 
     if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0))
     {
         if (from1 > to1)
-        {
-            from1 = to1;
-            to1 = from1;
-        }
+            std::swap(from1, to1);
+
         if (from2 > to2)
-        {
-            from2 = to2;
-            to2 = from2;
-        }
+            std::swap(from2, to2);
+
         // Select the first value
         int current1 = from1;
         int result1 = selector1(from1, to1, current1);
@@ -285,20 +261,14 @@ Settings& Settings::TripleRange(int from1, int to1, int from2, int to2, int from
     if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0))
     {
         if (from1 > to1)
-        {
-            from1 = to1;
-            to1 = from1;
-        }
+            std::swap(from1, to1);
+
         if (from2 > to2)
-        {
-            from2 = to2;
-            to2 = from2;
-        }
+            std::swap(from2, to2);
+
         if (from3 > to3)
-        {
-            from3 = to3;
-            to3 = from3;
-        }
+            std::swap(from3, to3);
+
         for (int i = from1; i <= to1; ++i)
             for (int j = from2; j <= to2; ++j)
                 for (int k = from3; k <= to3; ++k)
@@ -314,20 +284,14 @@ Settings& Settings::TripleRange(int from1, int to1, const std::function<int (int
     if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0))
     {
         if (from1 > to1)
-        {
-            from1 = to1;
-            to1 = from1;
-        }
+            std::swap(from1, to1);
+
         if (from2 > to2)
-        {
-            from2 = to2;
-            to2 = from2;
-        }
+            std::swap(from2, to2);
+
         if (from3 > to3)
-        {
-            from3 = to3;
-            to3 = from3;
-        }
+            std::swap(from3, to3);
+
         // Select the first value
         int current1 = from1;
         int result1 = selector1(from1, to1, current1);
