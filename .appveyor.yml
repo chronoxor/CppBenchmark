@@ -40,7 +40,7 @@ install:
   # Chocolatey
   - choco upgrade chocolatey
   # Doxygen
-  - choco install --cache "C:\ProgramData\chocolatey\cache" --force doxygen.portable
+  - choco install --cache "C:\ProgramData\chocolatey\cache" --force doxygen.install
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force ghostscript
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force graphviz
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force miktex
