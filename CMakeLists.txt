@@ -26,6 +26,11 @@ include(SetCompilerWarnings)
 include(SetPlatformFeatures)
 include(SystemInformation)
 
+# Conan packages
+include(${CMAKE_CURRENT_SOURCE_DIR}/conan/conanbuildinfo.cmake)
+conan_basic_setup()
+list(APPEND LINKLIBS ${CONAN_LIBS})
+
 # External packages
 find_package(Threads REQUIRED)
 
