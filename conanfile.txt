@@ -1,0 +1,6 @@
+[requires]
+catch2/[>=2.5.0]@bincrafters/stable
+zlib/[>=1.2.11]@conan/stable
+
+[generators]
+cmake
