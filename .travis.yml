@@ -65,7 +65,7 @@ before_install:
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
   - if [ "$OS" == "osx" ]; then brew install graphviz; fi
   # Doxygen support
-#  - export doxygen=yes
+  - export doxygen=yes
 
 # Build scripts
 script: 
