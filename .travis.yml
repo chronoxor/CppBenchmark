@@ -26,7 +26,7 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-7.0
+            - llvm-toolchain-trusty-7
           packages:
             - clang-7.0
             - libstdc++-8-dev
