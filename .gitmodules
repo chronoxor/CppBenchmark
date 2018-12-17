@@ -6,6 +6,10 @@
 	path = cmake
 	url = https://github.com/chronoxor/CppCMakeScripts.git
 	branch = master
+[submodule "modules/Catch2"]
+	path = modules/Catch2
+	url = https://github.com/catchorg/Catch2.git
+	branch = master
 [submodule "modules/cpp-optparse"]
 	path = modules/cpp-optparse
 	url = https://github.com/weisslj/cpp-optparse.git
@@ -13,4 +17,8 @@
 [submodule "modules/HdrHistogram"]
 	path = modules/HdrHistogram
 	url = https://github.com/HdrHistogram/HdrHistogram_c.git
+	branch = master
+[submodule "modules/zlib"]
+	path = modules/zlib
+	url = https://github.com/madler/zlib.git
 	branch = master

@@ -1,5 +1,4 @@
 # Temporary directories
 .idea
 cmake-build-*
-conan
 temp
