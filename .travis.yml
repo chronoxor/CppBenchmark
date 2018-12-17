@@ -21,14 +21,14 @@ matrix:
             - uuid-dev
     - os: linux
       compiler: clang
-      env: OS=linux COMPILER=clang CLANG_VERSION=6.0
+      env: OS=linux COMPILER=clang CLANG_VERSION=7.0
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-6.0
+            - llvm-toolchain-trusty-7.0
           packages:
-            - clang-6.0
+            - clang-7.0
             - libstdc++-8-dev
             - cmake
             - doxygen
@@ -65,7 +65,7 @@ before_install:
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
   - if [ "$OS" == "osx" ]; then brew install graphviz; fi
   # Doxygen support
-  - export doxygen=yes
+#  - export doxygen=yes
 
 # Build scripts
 script: 
