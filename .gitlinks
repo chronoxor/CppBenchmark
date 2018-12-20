@@ -2,7 +2,7 @@
 Catch2 modules/Catch2 https://github.com/catchorg/Catch2.git master
 cpp-optparse modules/cpp-optparse https://github.com/weisslj/cpp-optparse.git master
 HdrHistogram modules/HdrHistogram https://github.com/HdrHistogram/HdrHistogram_c.git master
-zlib modules/zlib https://github.com/madler/zlib.git master
+zlib modules/zlib https://github.com/madler/zlib.git develo
 
 # Scripts
 build build https://github.com/chronoxor/CppBuildScripts.git master
