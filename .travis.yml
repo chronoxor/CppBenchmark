@@ -40,7 +40,7 @@ matrix:
       env: OS=osx COMPILER=clang
     - os: windows
       compiler: vs
-      env: OS=windows COMPILER=vs
+      env: OS=windows COMPILER=cl
 
 # OS environment
 sudo: required
@@ -80,7 +80,7 @@ before_install:
 script: 
   - cd build
   - if [ "$OS" != "windows" ]; then ./unix.sh; fi
-  - if [ "$OS" == "windows" ] && [ "$COMPILER" = "vs" ]; then ./vs.bat; fi
+  - if [ "$OS" == "windows" ] && [ "$COMPILER" = "cl" ]; then ./vs.bat; fi
 
 # Don't send notifications on success
 notifications:
