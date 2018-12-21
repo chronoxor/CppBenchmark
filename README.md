@@ -71,11 +71,11 @@ Optional:
 
 # How to build?
 
-### Update repository with gil (git links) tool
+### Setup repository with [gil (git links) tool](https://github.com/chronoxor/gil#setup)
 ```shell
 git clone https://github.com/chronoxor/CppBenchmark.git
 cd CppBenchmark
-git submodule update --init --recursive --remote
+gil update
 ```
 
 ### Linux

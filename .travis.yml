@@ -38,8 +38,11 @@ matrix:
     - os: osx
       compiler: clang
       env: OS=osx COMPILER=clang
+    - os: windows
+      compiler: vs
+      env: OS=windows COMPILER=vs
 
-# Using Trusty environment
+# OS environment
 sudo: required
 dist: xenial
 
@@ -73,7 +76,8 @@ before_install:
 # Build scripts
 script: 
   - cd build
-  - ./unix.sh
+  - if [ "$OS" != "windows" ]; then ./unix.sh; fi
+  - if [ "$OS" == "windows" ] && [ "$COMPILER" = "vs" ]; then ./vs.bat; fi
 
 # Don't send notifications on success
 notifications:
