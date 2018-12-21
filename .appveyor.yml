@@ -13,20 +13,15 @@ branches:
 only_commits:
   message: build
 
-# Cache files to speed up build
-cache:
-    - C:\mingw.7z -> .appveyor.yml
-    - C:\cache\cygwin -> .appveyor.yml
-
 # Build matrix
 environment:
   matrix:
 #    - type: Cygwin
 #      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
 #      command: C:\cygwin64\bin\bash -lc
-    - type: MinGW
-      build: call mingw.bat
-      command: cmd /C
+#    - type: MinGW
+#      build: call mingw.bat
+#      command: cmd /C
     - type: VisualStudio
       build: call vs.bat
       command: cmd /C
@@ -40,11 +35,10 @@ install:
   # Chocolatey
   - choco upgrade chocolatey
   # Doxygen
-#  - choco install --cache "C:\ProgramData\chocolatey\cache" --force doxygen.install
-#  - choco install --cache "C:\ProgramData\chocolatey\cache" --force ghostscript
-#  - choco install --cache "C:\ProgramData\chocolatey\cache" --force graphviz
-#  - choco install --cache "C:\ProgramData\chocolatey\cache" --force miktex
-#  - set doxygen=yes
+  #- choco install doxygen.install
+  #- choco install ghostscript
+  #- choco install graphviz
+  #- choco install miktex
   # Cygwin
   - if "%type%"=="Cygwin" if not exist "C:\cygwin64" mkdir "C:\cygwin64"
   - if "%type%"=="Cygwin" appveyor-retry appveyor DownloadFile "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"
@@ -60,12 +54,18 @@ install:
 #  - if "%type%"=="VisualStudio" set PATH=C:\Program Files\MiKTeX 2.9\miktex\bin\x64;C:\Program Files\gs\gs9.22\bin;%PATH%
 #  - if "%type%"=="VisualStudio" set INCLUDE=C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\shared;%INCLUDE%
 # - if "%type%"=="VisualStudio" set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.17134.0\um\x64;%LIB%
+  # cmake
+  - cmake --version
+  # doxygen support
+  #- set doxygen=yes
   # git
   - '%command% "cmake --version"'
   - '%command% "git config --global user.name "AppVeyor""'
   - '%command% "git config --global user.email "team@appveyor.com""'
   - '%command% "git config --global push.default simple"'
-  - git submodule update --init --recursive --remote
+  # gil
+  - '%command% "git clone https://github.com/chronoxor/gil.git"'
+  - '%command% ".\gil\gil.bat update"'
 
 # Build scripts
 build_script:
