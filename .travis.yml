@@ -38,9 +38,6 @@ matrix:
     - os: osx
       compiler: clang
       env: OS=osx COMPILER=clang
-    - os: windows
-      compiler: vs
-      env: OS=windows COMPILER=cl
 
 # OS environment
 sudo: required
@@ -61,9 +58,6 @@ before_install:
   - if [ "$OS" == "osx" ]; then brew update; fi
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
   - if [ "$OS" == "osx" ]; then brew install graphviz; fi
-  # choco
-  - if [ "$OS" == "windows" ]; then choco upgrade chocolatey; fi
-  - if [ "$OS" == "windows" ]; then choco install python; fi
   # cmake
   - cmake --version
   # doxygen support
@@ -74,13 +68,12 @@ before_install:
   - git config --global push.default simple
   # gil
   - git clone https://github.com/chronoxor/gil.git
-  - if [ "$OS" != "windows" ]; then ./gil/gil.sh update; else ./gil/gil.bat update; fi
+  - ./gil/gil.sh update
 
 # Build scripts
 script: 
   - cd build
-  - if [ "$OS" != "windows" ]; then ./unix.sh; fi
-  - if [ "$OS" == "windows" ] && [ "$COMPILER" = "cl" ]; then ./vs.bat; fi
+  - ./unix.sh
 
 # Don't send notifications on success
 notifications:
