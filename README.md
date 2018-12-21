@@ -60,7 +60,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 * [gcc](https://gcc.gnu.org)
 * [git](https://git-scm.com)
 * [gil](https://github.com/chronoxor/gil.git)
-* [python](https://www.python.org)
+* [python3](https://www.python.org)
 
 Optional:
 * [clang](https://clang.llvm.org)
