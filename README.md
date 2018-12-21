@@ -53,12 +53,14 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 ![Console colored report](https://github.com/chronoxor/CppBenchmark/raw/master/images/console.png)
 
 # Requirements
-* Linux (gcc g++ cmake doxygen graphviz)
-* OSX (clang cmake doxygen graphviz)
+* Linux (gcc g++ cmake doxygen graphviz python)
+* OSX (clang cmake doxygen graphviz python)
 * Windows 10
 * [cmake](https://www.cmake.org)
-* [git](https://git-scm.com)
 * [gcc](https://gcc.gnu.org)
+* [git](https://git-scm.com)
+* [gil](https://github.com/chronoxor/gil.git)
+* [python](https://www.python.org)
 
 Optional:
 * [clang](https://clang.llvm.org)

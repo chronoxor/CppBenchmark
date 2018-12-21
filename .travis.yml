@@ -15,6 +15,7 @@ matrix:
             - gcc-8
             - g++-8
             - cmake
+            - python3
             - doxygen
             - graphviz
             - binutils-dev
@@ -31,6 +32,7 @@ matrix:
             - clang-7
             - libstdc++-8-dev
             - cmake
+            - python3
             - doxygen
             - graphviz
             - binutils-dev
