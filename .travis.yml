@@ -63,7 +63,7 @@ before_install:
   - git config --global push.default simple
   # gil
   - git clone https://github.com/chronoxor/gil.git
-  - if [ "$OS" != "windows" ]; then ./gil/gil.sh update; else ./gil/gil.bat update fi
+  - if [ "$OS" != "windows" ]; then ./gil/gil.sh update; else ./gil/gil.bat update; fi
   # gcc
   - if [ "$OS" != "osx" ] && [ "$COMPILER" = "gcc" ]; then export CC="gcc-${GCC_VERSION}" CXX="g++-${GCC_VERSION}"; fi
   # clang, libc++, libc++abi
