@@ -72,6 +72,9 @@ before_install:
   - if [ "$OS" == "osx" ]; then brew update; fi
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
   - if [ "$OS" == "osx" ]; then brew install graphviz; fi
+  # choco
+  - if [ "$OS" == "windows" ]; then choco upgrade chocolatey; fi
+  - if [ "$OS" == "windows" ]; then choco install python; fi
 
 # Build scripts
 script: 
