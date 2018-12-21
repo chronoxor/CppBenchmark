@@ -53,17 +53,6 @@ branches:
 
 # Scripts that run before install
 before_install:
-  # cmake
-  - cmake --version
-  # doxygen support
-  - export doxygen=yes
-  # git
-  - git config --global user.name "Travis CI"
-  - git config --global user.email "travis@travis-ci.org"
-  - git config --global push.default simple
-  # gil
-  - git clone https://github.com/chronoxor/gil.git
-  - if [ "$OS" != "windows" ]; then ./gil/gil.sh update; else ./gil/gil.bat update; fi
   # gcc
   - if [ "$OS" != "osx" ] && [ "$COMPILER" = "gcc" ]; then export CC="gcc-${GCC_VERSION}" CXX="g++-${GCC_VERSION}"; fi
   # clang, libc++, libc++abi
@@ -75,6 +64,17 @@ before_install:
   # choco
   - if [ "$OS" == "windows" ]; then choco upgrade chocolatey; fi
   - if [ "$OS" == "windows" ]; then choco install python; fi
+  # cmake
+  - cmake --version
+  # doxygen support
+  - export doxygen=yes
+  # git
+  - git config --global user.name "Travis CI"
+  - git config --global user.email "travis@travis-ci.org"
+  - git config --global push.default simple
+  # gil
+  - git clone https://github.com/chronoxor/gil.git
+  - if [ "$OS" != "windows" ]; then ./gil/gil.sh update; else ./gil/gil.bat update; fi
 
 # Build scripts
 script: 
