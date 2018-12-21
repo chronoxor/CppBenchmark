@@ -35,10 +35,10 @@ install:
   # Chocolatey
   - choco upgrade chocolatey
   # Doxygen
-  #- choco install doxygen.install
-  #- choco install ghostscript
-  #- choco install graphviz
-  #- choco install miktex
+  - choco install doxygen.install
+  - choco install ghostscript
+  - choco install graphviz
+  - choco install miktex
   # Cygwin
   - if "%type%"=="Cygwin" if not exist "C:\cygwin64" mkdir "C:\cygwin64"
   - if "%type%"=="Cygwin" appveyor-retry appveyor DownloadFile "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"
@@ -57,7 +57,7 @@ install:
   # CMake
   - cmake --version
   # Doxygen support
-  #- set doxygen=yes
+  - set doxygen=yes
   # git
   - '%command% "cmake --version"'
   - '%command% "git config --global user.name "AppVeyor""'
