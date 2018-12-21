@@ -71,7 +71,7 @@ Optional:
 
 # How to build?
 
-### Clone repository with submodules
+### Update repository with gil (git links) tool
 ```shell
 git clone https://github.com/chronoxor/CppBenchmark.git
 cd CppBenchmark
