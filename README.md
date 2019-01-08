@@ -71,7 +71,12 @@ Optional:
 
 # How to build?
 
-### Setup repository with [gil (git links) tool](https://github.com/chronoxor/gil#setup)
+### Install [gil (git links) tool](https://github.com/chronoxor/gil)
+```shell
+pip3 install gil
+```
+
+### Setup repository
 ```shell
 git clone https://github.com/chronoxor/CppBenchmark.git
 cd CppBenchmark
