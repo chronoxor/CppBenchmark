@@ -27,11 +27,11 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
 
     const char* output[] = { "console", "csv", "json" };
 
-    parser.add_option("-f", "--filter").help("Filter benchmarks by the given regexp pattern");
-    parser.add_option("-l", "--list").action("store_true").help("List all avaliable benchmarks");
-    parser.add_option("-o", "--output").choices(&output[0], &output[3]).set_default(output[0]).help("Output format (console, csv, json). Default: %default");
-    parser.add_option("-q", "--quiet").action("store_true").help("Launch in quiet mode. No progress will be shown!");
-    parser.add_option("-r", "--histograms").action("store").type("int").set_default(0).help("Create High Dynamic Range (HDR) Histogram files with a given resolution. Default: %default");
+    parser.add_option("-f", "--filter").dest("filter").help("Filter benchmarks by the given regexp pattern");
+    parser.add_option("-l", "--list").dest("list").action("store_true").help("List all avaliable benchmarks");
+    parser.add_option("-o", "--output").dest("output").choices(&output[0], &output[3]).set_default(output[0]).help("Output format (console, csv, json). Default: %default");
+    parser.add_option("-q", "--quiet").dest("quiet").action("store_true").help("Launch in quiet mode. No progress will be shown!");
+    parser.add_option("-r", "--histograms").dest("histograms").action("store").type("int").set_default(0).help("Create High Dynamic Range (HDR) Histogram files with a given resolution. Default: %default");
 
     optparse::Values options = parser.parse_args(argc, argv);
 
@@ -50,7 +50,7 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
 
     // Setup console launcher parameters
     _list = options.get("list");
-    _silent = options.get("silent");
+    _quiet = options.get("quiet");
     _histograms = (int32_t)options.get("histograms");
     if (options.is_set("filter"))
         _filter = options["filter"];
@@ -106,7 +106,7 @@ void LauncherConsole::Report() const
 
 void LauncherConsole::onLaunching(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt)
 {
-    if (_silent)
+    if (_quiet)
         return;
 
     std::cerr << Color::DARKGREY << "[" << std::setw(3) << (100 * current / total) << "%] " << Color::GREY << "Launching " << Color::LIGHTCYAN << benchmark.name() << context.description() << Color::GREY << ". Attempt " << Color::WHITE << attempt << Color::GREY << "...";
@@ -114,7 +114,7 @@ void LauncherConsole::onLaunching(int current, int total, const BenchmarkBase& b
 
 void LauncherConsole::onLaunched(int current, int total, const BenchmarkBase& benchmark, const Context& context, int attempt)
 {
-    if (_silent)
+    if (_quiet)
         return;
 
     std::cerr << Color::LIGHTGREEN << "Done!" << std::endl;
