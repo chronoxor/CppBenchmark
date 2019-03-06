@@ -56,12 +56,12 @@ protected:
 private:
     bool _init;
     bool _list;
-    bool _silent;
+    bool _quiet;
     int32_t _histograms;
     std::string _filter;
     std::string _output;
 
-    LauncherConsole() : _init(false), _list(false), _silent(false), _histograms(0), _filter(""), _output("console") {}
+    LauncherConsole() : _init(false), _list(false), _quiet(false), _histograms(0), _filter(""), _output("console") {}
 };
 
 } // namespace CppBenchmark
