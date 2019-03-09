@@ -44,7 +44,7 @@ public:
     /*!
         \param builder - Benchmark builder function
     */
-    void AddBenchmarkBuilder(const std::function<std::shared_ptr<BenchmarkBase>()>& builder) { _builders.emplace_back(builder); }
+    void AddBenchmarkBuilder(const std::function<std::shared_ptr<BenchmarkBase>()>& builder) { if (builder) _builders.emplace_back(builder); }
     //! Clear benchmark builders collection
     void ClearAllBenchmarksBuilders() { _builders.clear(); }
 

@@ -21,8 +21,7 @@ void Launcher::Launch(const std::string& pattern)
 
     // Build pending benchmark
     for (auto& builder : _builders)
-        if (builder)
-            AddBenchmark(builder());
+        AddBenchmark(builder());
 
     // Filter benchmarks
     std::regex matcher(pattern);

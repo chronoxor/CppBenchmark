@@ -79,7 +79,7 @@ Settings& Settings::ThreadsRange(int from, int to)
 
 Settings& Settings::ThreadsRange(int from, int to, const std::function<int (int, int, int&)>& selector)
 {
-    if ((from > 0) && (to > 0))
+    if ((from > 0) && (to > 0) && selector)
     {
         if (from > to)
             std::swap(from, to);
@@ -124,7 +124,7 @@ Settings& Settings::PCRange(int producers_from, int producers_to, int consumers_
 Settings& Settings::PCRange(int producers_from, int producers_to, const std::function<int (int, int, int&)>& producers_selector,
                             int consumers_from, int consumers_to, const std::function<int (int, int, int&)>& consumers_selector)
 {
-    if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0))
+    if ((producers_from > 0) && (producers_to > 0) && (consumers_from > 0) && (consumers_to > 0) && producers_selector && consumers_selector)
     {
         if (producers_from > producers_to)
             std::swap(producers_from, producers_to);
@@ -175,7 +175,7 @@ Settings& Settings::ParamRange(int from, int to)
 
 Settings& Settings::ParamRange(int from, int to, const std::function<int (int, int, int&)>& selector)
 {
-    if ((from >= 0) && (to >= 0))
+    if ((from >= 0) && (to >= 0) && selector)
     {
         if (from > to)
             std::swap(from, to);
@@ -220,7 +220,7 @@ Settings& Settings::PairRange(int from1, int to1, int from2, int to2)
 Settings& Settings::PairRange(int from1, int to1, const std::function<int (int, int, int&)>& selector1,
                               int from2, int to2, const std::function<int (int, int, int&)>& selector2)
 {
-    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0))
+    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && selector1 && selector2)
     {
         if (from1 > to1)
             std::swap(from1, to1);
@@ -281,7 +281,7 @@ Settings& Settings::TripleRange(int from1, int to1, const std::function<int (int
                                 int from2, int to2, const std::function<int (int, int, int&)>& selector2,
                                 int from3, int to3, const std::function<int (int, int, int&)>& selector3)
 {
-    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0))
+    if ((from1 >= 0) && (to1 >= 0) && (from2 >= 0) && (to2 >= 0) && (from3 >= 0) && (to3 >= 0) && selector1 && selector2 && selector3)
     {
         if (from1 > to1)
             std::swap(from1, to1);
