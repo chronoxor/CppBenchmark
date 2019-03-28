@@ -20,12 +20,12 @@ void Launcher::Launch(const std::string& pattern)
     std::vector<std::shared_ptr<BenchmarkBase>> benchmarks;
 
     // Build pending benchmark
-    for (auto& builder : _builders)
+    for (const auto& builder : _builders)
         AddBenchmark(builder());
 
     // Filter benchmarks
     std::regex matcher(pattern);
-    for (auto& benchmark : _benchmarks)
+    for (const auto& benchmark : _benchmarks)
     {
         // Match benchmark name with the given pattern
         if (pattern.empty() || std::regex_match(benchmark->name(), matcher))
@@ -36,7 +36,7 @@ void Launcher::Launch(const std::string& pattern)
     }
 
     // Launch filtered benchmarks
-    for (auto& benchmark : benchmarks)
+    for (const auto& benchmark : benchmarks)
         benchmark->Launch(current, total, *this);
 }
 
@@ -49,7 +49,7 @@ void Launcher::Report(Reporter& reporter) const
     reporter.ReportBenchmarksHeader();
 
     // For all registered benchmarks...
-    for (auto& benchmark : _benchmarks)
+    for (const auto& benchmark : _benchmarks)
     {
         // Filter performed benchmarks
         if (benchmark->_launched)
@@ -58,7 +58,7 @@ void Launcher::Report(Reporter& reporter) const
             reporter.ReportBenchmarkHeader();
             reporter.ReportBenchmark(*benchmark, benchmark->settings());
             reporter.ReportPhasesHeader();
-            for (auto& root_phase : benchmark->_phases)
+            for (const auto& root_phase : benchmark->_phases)
                 ReportPhase(reporter, *root_phase, root_phase->name());
             reporter.ReportPhasesFooter();
             reporter.ReportBenchmarkFooter();
@@ -75,7 +75,7 @@ void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
     reporter.ReportPhaseHeader();
     reporter.ReportPhase(phase, phase.metrics());
     reporter.ReportPhaseFooter();
-    for (auto& child : phase._child)
+    for (const auto& child : phase._child)
     {
         std::string child_name = name + "." + child->name();
         ReportPhase(reporter, *child, child_name);
@@ -85,13 +85,13 @@ void Launcher::ReportPhase(Reporter& reporter, const PhaseCore& phase, const std
 void Launcher::ReportHistograms(int32_t resolution) const
 {
     // For all registered benchmarks...
-    for (auto& benchmark : _benchmarks)
+    for (const auto& benchmark : _benchmarks)
     {
         // Filter performed benchmarks
         if (benchmark->_launched)
         {
             // Report benchmark histograms
-            for (auto& root_phase : benchmark->_phases)
+            for (const auto& root_phase : benchmark->_phases)
                 ReportPhaseHistograms(resolution, *root_phase, root_phase->name());
         }
     }
@@ -100,7 +100,7 @@ void Launcher::ReportHistograms(int32_t resolution) const
 void Launcher::ReportPhaseHistograms(int32_t resolution, const PhaseCore& phase, const std::string& name) const
 {
     ReportPhaseHistogram(resolution, phase, name);
-    for (auto& child : phase._child)
+    for (const auto& child : phase._child)
     {
         std::string child_name = name + "." + child->name();
         ReportPhaseHistograms(resolution, *child, child_name);
@@ -115,7 +115,7 @@ void Launcher::ReportPhaseHistogram(int32_t resolution, const PhaseCore& phase, 
 
         // Validate filename
         std::string filename(name + ".hdr");
-        for (auto& ch : filename)
+        for (auto ch : filename)
             if ((ch != '\\') && (ch != '/') && (std::find(deprecated, deprecated + sizeof(deprecated), ch) != (deprecated + sizeof(deprecated))))
                 ch = '_';
 

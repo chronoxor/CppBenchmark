@@ -98,21 +98,21 @@ void ReporterConsole::ReportPhase(const PhaseCore& phase, const PhaseMetrics& me
     {
         _stream << Color::WHITE << "Custom values: " << std::endl;
         std::set<std::string> names;
-        for (auto& it : metrics.custom_int())
+        for (const auto& it : metrics.custom_int())
             names.insert(it.first);
-        for (auto& it : metrics.custom_uint())
+        for (const auto& it : metrics.custom_uint())
             names.insert(it.first);
-        for (auto& it : metrics.custom_int64())
+        for (const auto& it : metrics.custom_int64())
             names.insert(it.first);
-        for (auto& it : metrics.custom_uint64())
+        for (const auto& it : metrics.custom_uint64())
             names.insert(it.first);
-        for (auto& it : metrics.custom_flt())
+        for (const auto& it : metrics.custom_flt())
             names.insert(it.first);
-        for (auto& it : metrics.custom_dbl())
+        for (const auto& it : metrics.custom_dbl())
             names.insert(it.first);
-        for (auto& it : metrics.custom_str())
+        for (const auto& it : metrics.custom_str())
             names.insert(it.first);
-        for (auto& name : names)
+        for (const auto& name : names)
         {
             auto it_int = metrics.custom_int().find(name);
             if (it_int != metrics.custom_int().end())

@@ -177,19 +177,19 @@ void PhaseMetrics::MergeMetrics(PhaseMetrics& metrics)
         _total_items = metrics._total_items;
         _total_bytes = metrics._total_bytes;
         // Overwrite metrics custom tables
-        for (auto& it : metrics._custom_int)
+        for (const auto& it : metrics._custom_int)
             _custom_int[it.first] = it.second;
-        for (auto& it : metrics._custom_uint)
+        for (const auto& it : metrics._custom_uint)
             _custom_uint[it.first] = it.second;
-        for (auto& it : metrics._custom_int64)
+        for (const auto& it : metrics._custom_int64)
             _custom_int64[it.first] = it.second;
-        for (auto& it : metrics._custom_uint64)
+        for (const auto& it : metrics._custom_uint64)
             _custom_uint64[it.first] = it.second;
-        for (auto& it : metrics._custom_flt)
+        for (const auto& it : metrics._custom_flt)
             _custom_flt[it.first] = it.second;
-        for (auto& it : metrics._custom_dbl)
+        for (const auto& it : metrics._custom_dbl)
             _custom_dbl[it.first] = it.second;
-        for (auto& it : metrics._custom_str)
+        for (const auto& it : metrics._custom_str)
             _custom_str[it.first] = it.second;
         // Overwrite metrics threads value
         _threads = metrics._threads;

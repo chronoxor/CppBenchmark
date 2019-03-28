@@ -67,7 +67,7 @@ void LauncherConsole::Execute()
     {
         // List all suitable benchmarks
         std::regex matcher(_filter);
-        for (auto& benchmark : _benchmarks)
+        for (const auto& benchmark : _benchmarks)
         {
             // Match benchmark name with the given pattern
             if (_filter.empty() || std::regex_match(benchmark->name(), matcher))

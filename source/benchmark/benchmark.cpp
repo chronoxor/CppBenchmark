@@ -27,7 +27,7 @@ void Benchmark::Launch(int& current, int total, LauncherHandler& handler)
             _settings._params.emplace_back(-1, -1, -1);
 
         // Run benchmark for every input parameter (single, pair, triple)
-        for (auto& param : _settings.params())
+        for (const auto& param : _settings.params())
         {
             // Prepare benchmark context
             Context context(std::get<0>(param), std::get<1>(param), std::get<2>(param));

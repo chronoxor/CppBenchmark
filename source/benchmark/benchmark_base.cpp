@@ -34,13 +34,13 @@ void BenchmarkBase::InitBenchmarkContext(Context& context)
 
 void BenchmarkBase::UpdateBenchmarkMetrics(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto& phase : phases)
+    for (const auto& phase : phases)
         UpdateBenchmarkMetrics(*phase);
 }
 
 void BenchmarkBase::UpdateBenchmarkMetrics(PhaseCore& phase)
 {
-    for (auto& child : phase._child)
+    for (const auto& child : phase._child)
         UpdateBenchmarkMetrics(*child);
     phase.MergeMetrics();
     phase.ResetMetrics();
@@ -71,33 +71,33 @@ void BenchmarkBase::UpdateBenchmarkThreads(std::vector<std::shared_ptr<PhaseCore
     phases.erase(std::remove_if(phases.begin(), phases.end(), [](const std::shared_ptr<PhaseCore>& p) { return p->_thread == 0; }), phases.end());
 
     // Perform the same operation for child phases
-    for (auto& phase : phases)
+    for (const auto& phase : phases)
         UpdateBenchmarkThreads(phase->_child);
 }
 
 void BenchmarkBase::UpdateBenchmarkNames(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto& phase : phases)
+    for (const auto& phase : phases)
         UpdateBenchmarkNames(*phase, phase->name());
 }
 
 void BenchmarkBase::UpdateBenchmarkNames(PhaseCore& phase, const std::string& name)
 {
-    for (auto& child : phase._child)
+    for (const auto& child : phase._child)
         UpdateBenchmarkNames(*child, name + "." + child->name());
     phase._name = name;
 }
 
 void BenchmarkBase::UpdateBenchmarkOperations(std::vector<std::shared_ptr<PhaseCore>>& phases)
 {
-    for (auto& phase : phases)
+    for (const auto& phase : phases)
         UpdateBenchmarkOperations(*phase);
 }
 
 void BenchmarkBase::UpdateBenchmarkOperations(PhaseCore& phase)
 {
     phase._metrics_result.AddOperations(-1);
-    for (auto& child : phase._child)
+    for (const auto& child : phase._child)
         phase._metrics_result.AddOperations(child->metrics().threads() * child->metrics().total_operations());
 }
 
