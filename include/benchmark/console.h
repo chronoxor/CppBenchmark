@@ -62,11 +62,11 @@ class Console
 public:
     Console() = delete;
     Console(const Console&) = delete;
-    Console(Console&&) noexcept = delete;
+    Console(Console&&) = delete;
     ~Console() = delete;
 
     Console& operator=(const Console&) = delete;
-    Console& operator=(Console&&) noexcept = delete;
+    Console& operator=(Console&&) = delete;
 
     //! Set console text color
     /*!

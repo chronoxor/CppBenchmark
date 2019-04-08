@@ -40,11 +40,11 @@ public:
     explicit PhaseCore(const std::string& name) : _name(name), _thread(System::CurrentThreadId())
     { _metrics_result._total_time = std::numeric_limits<int64_t>::max(); }
     PhaseCore(const PhaseCore&) = delete;
-    PhaseCore(PhaseCore&&) noexcept = delete;
+    PhaseCore(PhaseCore&&) = delete;
     virtual ~PhaseCore() = default;
 
     PhaseCore& operator=(const PhaseCore&) = delete;
-    PhaseCore& operator=(PhaseCore&&) noexcept = delete;
+    PhaseCore& operator=(PhaseCore&&) = delete;
 
     //! Current benchmark phase metrics
     PhaseMetrics& current() { return _metrics_current; }

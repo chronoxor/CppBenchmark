@@ -22,11 +22,11 @@ class Reporter
 public:
     Reporter() = default;
     Reporter(const Reporter&) = delete;
-    Reporter(Reporter&&) noexcept = delete;
+    Reporter(Reporter&&) = delete;
     virtual ~Reporter() = default;
 
     Reporter& operator=(const Reporter&) = delete;
-    Reporter& operator=(Reporter&&) noexcept = delete;
+    Reporter& operator=(Reporter&&) = delete;
 
     //! Report header
     virtual void ReportHeader() {}

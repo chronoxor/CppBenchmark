@@ -45,11 +45,11 @@ public:
         : _launched(false), _name(name), _settings(settings)
     {}
     BenchmarkBase(const BenchmarkBase&) = delete;
-    BenchmarkBase(BenchmarkBase&&) noexcept = delete;
+    BenchmarkBase(BenchmarkBase&&) = delete;
     virtual ~BenchmarkBase() = default;
 
     BenchmarkBase& operator=(const BenchmarkBase&) = delete;
-    BenchmarkBase& operator=(BenchmarkBase&&) noexcept = delete;
+    BenchmarkBase& operator=(BenchmarkBase&&) = delete;
 
     //! Get benchmark name
     const std::string& name() const { return _name; }

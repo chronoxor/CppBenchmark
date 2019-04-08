@@ -32,11 +32,11 @@ public:
     */
     ReporterCSV(std::ostream& stream = std::cout) : _stream(stream) {}
     ReporterCSV(const ReporterCSV&) = delete;
-    ReporterCSV(ReporterCSV&&) noexcept = delete;
+    ReporterCSV(ReporterCSV&&) = delete;
     virtual ~ReporterCSV() = default;
 
     ReporterCSV& operator=(const ReporterCSV&) = delete;
-    ReporterCSV& operator=(ReporterCSV&&) noexcept = delete;
+    ReporterCSV& operator=(ReporterCSV&&) = delete;
 
     // Implementation of Reporter
     void ReportHeader() override;
