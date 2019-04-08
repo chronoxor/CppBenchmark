@@ -34,11 +34,11 @@ public:
         : BenchmarkBase(name, settings)
     {}
     DynamicBenchmark(const DynamicBenchmark&) = delete;
-    DynamicBenchmark(DynamicBenchmark&&) noexcept = delete;
+    DynamicBenchmark(DynamicBenchmark&&) = delete;
     virtual ~DynamicBenchmark() = default;
 
     DynamicBenchmark& operator=(const DynamicBenchmark&) = delete;
-    DynamicBenchmark& operator=(DynamicBenchmark&&) noexcept = delete;
+    DynamicBenchmark& operator=(DynamicBenchmark&&) = delete;
 };
 
 } // namespace Internals
