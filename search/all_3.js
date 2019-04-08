@@ -10,7 +10,7 @@ var searchData=
   ['clearallbenchmarksbuilders',['ClearAllBenchmarksBuilders',['../class_cpp_benchmark_1_1_launcher.html#afaf2569794ffc93919fa30e32f886b7b',1,'CppBenchmark::Launcher']]],
   ['color',['Color',['../namespace_cpp_benchmark.html#ae3813b3f9ddc837dcb6312cc3f609f69',1,'CppBenchmark']]],
   ['console',['Console',['../class_cpp_benchmark_1_1_console.html',1,'CppBenchmark']]],
-  ['console',['Console',['../class_cpp_benchmark_1_1_console.html#a7ea9e2321ea194ea119f524c0dc3f021',1,'CppBenchmark::Console::Console()=delete'],['../class_cpp_benchmark_1_1_console.html#a30c7357b50f63c9332e8d1c4eed665e0',1,'CppBenchmark::Console::Console(const Console &amp;)=delete'],['../class_cpp_benchmark_1_1_console.html#ab5e8a42e6bf74aad4424cebd46a96730',1,'CppBenchmark::Console::Console(Console &amp;&amp;) noexcept=delete']]],
+  ['console',['Console',['../class_cpp_benchmark_1_1_console.html#a7ea9e2321ea194ea119f524c0dc3f021',1,'CppBenchmark::Console::Console()=delete'],['../class_cpp_benchmark_1_1_console.html#a30c7357b50f63c9332e8d1c4eed665e0',1,'CppBenchmark::Console::Console(const Console &amp;)=delete'],['../class_cpp_benchmark_1_1_console.html#a51e9ee63ecd62f031fdf509244471ffa',1,'CppBenchmark::Console::Console(Console &amp;&amp;)=delete']]],
   ['console_2ecpp',['console.cpp',['../console_8cpp.html',1,'']]],
   ['console_2eh',['console.h',['../console_8h.html',1,'']]],
   ['console_2einl',['console.inl',['../console_8inl.html',1,'']]],

@@ -27,7 +27,7 @@ var searchData=
   ['stopphase',['StopPhase',['../class_cpp_benchmark_1_1_context.html#a03ec29fd9e96d75004ce5e453b6c8358',1,'CppBenchmark::Context::StopPhase()'],['../class_cpp_benchmark_1_1_phase.html#aaa1efb55fed38a19b620167be438e1f6',1,'CppBenchmark::Phase::StopPhase()'],['../class_cpp_benchmark_1_1_phase_core.html#a144b1000dd5ccf453317c13550f506c8',1,'CppBenchmark::PhaseCore::StopPhase()'],['../class_cpp_benchmark_1_1_phase_scope.html#a6e0ac5151b67f6196c983d74780c4a6b',1,'CppBenchmark::PhaseScope::StopPhase()']]],
   ['stopproduce',['StopProduce',['../class_cpp_benchmark_1_1_context_p_c.html#af219a476631d6b2b4cfce64efbc208ac',1,'CppBenchmark::ContextPC']]],
   ['system',['System',['../class_cpp_benchmark_1_1_system.html',1,'CppBenchmark']]],
-  ['system',['System',['../class_cpp_benchmark_1_1_system.html#a77291823ad71cb7c8393215480c0a4ad',1,'CppBenchmark::System::System()=delete'],['../class_cpp_benchmark_1_1_system.html#a8baa3ea15be47eabbfae15cd1b0e366e',1,'CppBenchmark::System::System(const System &amp;)=delete'],['../class_cpp_benchmark_1_1_system.html#a5c506bbc42ce22fe2fff53463166b42a',1,'CppBenchmark::System::System(System &amp;&amp;) noexcept=delete']]],
+  ['system',['System',['../class_cpp_benchmark_1_1_system.html#a77291823ad71cb7c8393215480c0a4ad',1,'CppBenchmark::System::System()=delete'],['../class_cpp_benchmark_1_1_system.html#a8baa3ea15be47eabbfae15cd1b0e366e',1,'CppBenchmark::System::System(const System &amp;)=delete'],['../class_cpp_benchmark_1_1_system.html#a220a6004074cc4778f36c0305a39dbd0',1,'CppBenchmark::System::System(System &amp;&amp;)=delete']]],
   ['system_2ecpp',['system.cpp',['../system_8cpp.html',1,'']]],
   ['system_2eh',['system.h',['../system_8h.html',1,'']]]
 ];
