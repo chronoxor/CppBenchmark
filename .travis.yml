@@ -31,7 +31,6 @@ matrix:
             - llvm-toolchain-xenial-8
           packages:
             - clang-8
-            - libstdc++-8-dev
             - cmake
             - doxygen
             - graphviz
