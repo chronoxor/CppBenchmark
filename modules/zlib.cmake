@@ -43,12 +43,11 @@ if(NOT TARGET zlib)
   if(MSVC)
     # C4127: conditional expression is constant
     # C4131: 'function' : uses old-style declarator
-    # C4210: nonstandard extension used : function given file scope
     # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
     # C4245: 'conversion' : conversion from 'type1' to 'type2', signed/unsigned mismatch
     # C4267: 'var' : conversion from 'size_t' to 'type', possible loss of data
     set(${SOURCE_FILES} "zlib/contrib/masmx64/inffas8664.c" "zlib/contrib/masmx64/inffas8664.c")
-    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244 /wd4245 /wd4267")
+    set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4127 /wd4131 /wd4244 /wd4245 /wd4267")
   else()
     set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-implicit-function-declaration -Wno-shift-negative-value")
   endif()
