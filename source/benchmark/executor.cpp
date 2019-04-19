@@ -52,7 +52,7 @@ std::shared_ptr<Phase> Executor::StartBenchmark(const std::string& benchmark)
 
     // Update dynamic benchmarks collection under lock guard...
     {
-        std::lock_guard<std::mutex> lock(instance._mutex);
+        std::scoped_lock lock(instance._mutex);
 
         // Find or create a dynamic benchmark with the given name
         auto it = std::find_if(instance._benchmarks.begin(), instance._benchmarks.end(), [&benchmark](const std::shared_ptr<PhaseCore>& item)
@@ -83,7 +83,7 @@ void Executor::StopBenchmark(const std::string& benchmark)
 
     // Update dynamic benchmarks collection under lock guard...
     {
-        std::lock_guard<std::mutex> lock(instance._mutex);
+        std::scoped_lock lock(instance._mutex);
 
         // Find dynamic benchmark with the given name
         auto it = std::find_if(instance._benchmarks.begin(), instance._benchmarks.end(), [&benchmark](const std::shared_ptr<PhaseCore>& item)
@@ -99,7 +99,7 @@ void Executor::Report(Reporter& reporter)
 {
     Executor& instance = GetInstance();
 
-    std::lock_guard<std::mutex> lock(instance._mutex);
+    std::scoped_lock lock(instance._mutex);
 
     BenchmarkBase::UpdateBenchmarkMetrics(instance._benchmarks);
     BenchmarkBase::UpdateBenchmarkThreads(instance._benchmarks);

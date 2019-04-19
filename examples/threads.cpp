@@ -40,7 +40,7 @@ BENCHMARK_THREADS_FIXTURE(AtomicFixture, "std::atomic++", settings)
 
 BENCHMARK_THREADS_FIXTURE(MutexFixture, "std::mutex++", settings)
 {
-    std::lock_guard<std::mutex> lock(mutex);
+    std::scoped_lock lock(mutex);
     ++counter;
 }
 

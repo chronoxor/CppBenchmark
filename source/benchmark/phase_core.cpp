@@ -41,7 +41,7 @@ std::shared_ptr<Phase> PhaseCore::StartPhaseThreadSafe(const std::string& phase)
 
     // Update phase collection under lock guard...
     {
-        std::lock_guard<std::mutex> lock(_mutex);
+        std::scoped_lock lock(_mutex);
 
         // Find or create a sub phase with the given name
         auto it = std::find_if(_child.begin(), _child.end(), [&phase](const std::shared_ptr<PhaseCore>& item)
