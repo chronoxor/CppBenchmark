@@ -1,7 +1,5 @@
 # Temporary directories
 .idea
-bin/*
-!bin/.gitignore
 build
 cmake
 cmake-build-*
