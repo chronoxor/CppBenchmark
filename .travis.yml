@@ -6,7 +6,7 @@ matrix:
   include:
     - os: linux
       compiler: gcc
-      env: OS=linux COMPILER=gcc GCC_VERSION=8
+      env: OS=linux COMPILER=gcc GCC_VERSION=9
       addons:
         apt:
           sources:
