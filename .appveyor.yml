@@ -34,11 +34,6 @@ matrix:
 install:
   # Chocolatey
   - choco upgrade chocolatey
-  # Doxygen
-  - choco install doxygen.install
-  - choco install ghostscript
-  - choco install graphviz
-  - choco install miktex
   # Cygwin
   - if "%type%"=="Cygwin" if not exist "C:\cygwin64" mkdir "C:\cygwin64"
   - if "%type%"=="Cygwin" appveyor-retry appveyor DownloadFile "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"
@@ -50,8 +45,6 @@ install:
   - if "%type%"=="MinGW" set INCLUDE=C:\mingw64\x86_64-w64-mingw32\include;%INCLUDE%
   # CMake
   - '%command% "cmake --version"'
-  # Doxygen support
-  - set doxygen=yes
   # gil
   - set PATH=C:\Python37;C:\Python37\Scripts;%PATH%
   - pip3 install gil
