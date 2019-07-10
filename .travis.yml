@@ -14,7 +14,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r-test
+            - ubuntu-toolchain-r/test
           packages:
             - gcc-9
             - g++-9
@@ -78,7 +78,7 @@ before_install:
   - git config --global user.email "travis@travis-ci.org"
   - git config --global push.default simple
   # python & pip
-  - pyenv global system 3.7.1
+  - if [ "$OS" != "osx" ]; then pyenv global system 3.7.1; fi
   - pip3 install --upgrade pip
   # gil
   - pip3 install gil
