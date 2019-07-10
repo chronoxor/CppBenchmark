@@ -10,7 +10,7 @@ matrix:
     - name: "Linux (GCC compiler)"
       os: linux
       compiler: gcc
-      env: OS=linux COMPILER=gcc GCC_VERSION=9
+      env: OS=linux COMPILER=gcc GCC_VERSION=9 PYTHON=3.7.1
       addons:
         apt:
           sources:
@@ -27,11 +27,10 @@ matrix:
             - python3-setuptools
             - uuid-dev
           update: true
-      python: 3.7
     - name: "Linux (Clang compiler)"
       os: linux
       compiler: clang
-      env: OS=linux COMPILER=clang CLANG_VERSION=8
+      env: OS=linux COMPILER=clang CLANG_VERSION=8 PYTHON=3.7.1
       addons:
         apt:
           sources:
@@ -49,7 +48,6 @@ matrix:
             - python3-setuptools
             - uuid-dev
           update: true
-      python: 3.7
     - name: "MacOS"
       os: osx
       compiler: clang
