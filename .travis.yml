@@ -9,7 +9,7 @@ matrix:
   include:
     - os: linux
       compiler: gcc
-      env: OS=linux COMPILER=gcc GCC_VERSION=9
+      env: OS=linux COMPILER=gcc GCC_VERSION=9 PYTHON=3.7
       addons:
         apt:
           sources:
@@ -21,12 +21,13 @@ matrix:
             - doxygen
             - graphviz
             - binutils-dev
+            - python3
             - python3-pip
             - python3-setuptools
             - uuid-dev
     - os: linux
       compiler: clang
-      env: OS=linux COMPILER=clang CLANG_VERSION=8
+      env: OS=linux COMPILER=clang CLANG_VERSION=8 PYTHON=3.7
       addons:
         apt:
           sources:
@@ -39,13 +40,14 @@ matrix:
             - doxygen
             - graphviz
             - binutils-dev
+            - python3
             - python3-pip
             - python3-setuptools
             - uuid-dev
     - os: osx
       compiler: clang
       env: OS=osx COMPILER=clang
-      osx_image: xcode10.2
+      osx_image: xcode11
 
 # Branches to build
 branches:
