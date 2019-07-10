@@ -10,7 +10,7 @@ matrix:
     - name: "Linux (GCC compiler)"
       os: linux
       compiler: gcc
-      env: OS=linux COMPILER=gcc GCC_VERSION=9 PYTHON=3.7.1
+      env: OS=linux COMPILER=gcc GCC_VERSION=9
       addons:
         apt:
           sources:
@@ -30,7 +30,7 @@ matrix:
     - name: "Linux (Clang compiler)"
       os: linux
       compiler: clang
-      env: OS=linux COMPILER=clang CLANG_VERSION=8 PYTHON=3.7.1
+      env: OS=linux COMPILER=clang CLANG_VERSION=8
       addons:
         apt:
           sources:
@@ -77,8 +77,10 @@ before_install:
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
   - git config --global push.default simple
-  # gil
+  # python & pip
+  - pyenv global system 3.7.1
   - pip3 install --upgrade pip
+  # gil
   - pip3 install gil
   - gil update
 
