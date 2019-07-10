@@ -2,7 +2,7 @@
 language: cpp
 
 # OS environment
-dist: bionic
+dist: xenial
 
 # Build matrix (OS, compiler)
 matrix:
@@ -14,7 +14,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ppa:ubuntu-toolchain-r/test
+            - ubuntu-toolchain-r-test
           packages:
             - gcc-9
             - g++-9
@@ -34,7 +34,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ppa:ubuntu-toolchain-r/test
+            - ubuntu-toolchain-r-test
             - llvm-toolchain-bionic-8
           packages:
             - clang-8
@@ -77,9 +77,6 @@ before_install:
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
   - git config --global push.default simple
-  # python & pip
-  - if [ "$OS" != "osx" ]; then pyenv global 3.7; fi
-  - pip3 install --upgrade pip
   # gil
   - pip3 install gil
   - gil update
