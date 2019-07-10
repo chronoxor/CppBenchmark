@@ -14,7 +14,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r/test
+            - ppa:ubuntu-toolchain-r/test
           packages:
             - gcc-9
             - g++-9
@@ -34,7 +34,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r-test
+            - ppa:ubuntu-toolchain-r/test
             - llvm-toolchain-bionic-8
           packages:
             - clang-8
@@ -78,6 +78,7 @@ before_install:
   - git config --global user.email "travis@travis-ci.org"
   - git config --global push.default simple
   # python & pip
+  - pyenv versions
   - if [ "$OS" != "osx" ]; then pyenv global system 3.7.1; fi
   - pip3 install --upgrade pip
   # gil
