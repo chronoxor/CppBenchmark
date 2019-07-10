@@ -7,7 +7,8 @@ dist: bionic
 # Build matrix (OS, compiler)
 matrix:
   include:
-    - os: linux
+    - name: "Linux (GCC compiler)"
+      os: linux
       compiler: gcc
       env: OS=linux COMPILER=gcc GCC_VERSION=9
       addons:
@@ -26,7 +27,9 @@ matrix:
             - python3-setuptools
             - uuid-dev
           update: true
-    - os: linux
+      python: 3.7
+    - name: "Linux (Clang compiler)"
+      os: linux
       compiler: clang
       env: OS=linux COMPILER=clang CLANG_VERSION=8
       addons:
@@ -46,7 +49,9 @@ matrix:
             - python3-setuptools
             - uuid-dev
           update: true
-    - os: osx
+      python: 3.7
+    - name: "MacOS"
+      os: osx
       compiler: clang
       env: OS=osx COMPILER=clang
       osx_image: xcode11
@@ -75,6 +80,7 @@ before_install:
   - git config --global user.email "travis@travis-ci.org"
   - git config --global push.default simple
   # gil
+  - pip3 install --upgrade pip
   - pip3 install gil
   - gil update
 
