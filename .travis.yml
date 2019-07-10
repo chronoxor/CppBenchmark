@@ -78,8 +78,7 @@ before_install:
   - git config --global user.email "travis@travis-ci.org"
   - git config --global push.default simple
   # python & pip
-  - pyenv versions
-  - if [ "$OS" != "osx" ]; then pyenv global system 3.7.1; fi
+  - if [ "$OS" != "osx" ]; then pyenv global 3.7; fi
   - pip3 install --upgrade pip
   # gil
   - pip3 install gil
