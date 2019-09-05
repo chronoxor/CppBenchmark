@@ -14,7 +14,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r-test
+            - ubuntu-toolchain-r/test
           packages:
             - gcc-9
             - g++-9
@@ -34,7 +34,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r-test
+            - ubuntu-toolchain-r/test
             - llvm-toolchain-bionic-8
           packages:
             - clang-8
