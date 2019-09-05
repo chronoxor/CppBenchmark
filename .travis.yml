@@ -2,7 +2,7 @@
 language: cpp
 
 # OS environment
-dist: xenial
+dist: bionic
 
 # Build matrix (OS, compiler)
 matrix:
@@ -35,7 +35,7 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-xenial-8
+            - llvm-toolchain-bionic-8
           packages:
             - clang-8
             - libstdc++-8-dev
