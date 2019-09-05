@@ -34,8 +34,7 @@ matrix:
       addons:
         apt:
           sources:
-            - sourceline: 'ppa:ubuntu-toolchain-r/test'
-            - sourceline: 'llvm-toolchain-bionic-8'
+            - llvm-toolchain-bionic-8
           packages:
             - clang-8
             - libstdc++-8-dev
