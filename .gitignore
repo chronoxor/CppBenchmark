@@ -6,6 +6,10 @@ build
 cmake
 cmake-build-*
 
+# Ctags files
+tags
+tags.idx
+
 # Modules
 modules/*
 !modules/CMakeLists.txt
@@ -14,7 +18,3 @@ modules/*
 # Temporary
 .idea
 temp
-
-# Ctags files
-tags
-tags.idx
