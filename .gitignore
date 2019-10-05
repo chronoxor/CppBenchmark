@@ -1,11 +1,18 @@
-# Temporary directories
-.idea
+# Build
+build
+
+# CMake
 build
 cmake
 cmake-build-*
+
+# Modules
 modules/*
 !modules/CMakeLists.txt
 !modules/*.cmake
+
+# Temporary
+.idea
 temp
 
 # Ctags files
