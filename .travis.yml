@@ -30,7 +30,7 @@ matrix:
     - name: "Linux (Clang compiler)"
       os: linux
       compiler: clang
-      env: OS=linux COMPILER=clang CLANG_VERSION=9
+      env: OS=linux COMPILER=clang CLANG_VERSION=10
       addons:
         apt:
           sources:
