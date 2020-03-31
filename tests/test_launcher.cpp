@@ -133,7 +133,7 @@ TEST_CASE("Launcher complex test", "[CppBenchmark][Launcher][Reporter]")
 
     // Test benchmark state
     REQUIRE(benchmark->initializations() == (int)(settings.params().size() * settings.attempts()));
-    REQUIRE(benchmark->runs() == (settings.params().size() * settings.attempts() * settings.operations()));
+    REQUIRE(benchmark->runs() == (int)(settings.params().size() * settings.attempts() * settings.operations()));
     REQUIRE(benchmark->cleanups() == benchmark->initializations());
 
     // Test launcher state
