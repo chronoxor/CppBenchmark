@@ -9,6 +9,7 @@
 #ifndef CPPBENCHMARK_SETTINGS_H
 #define CPPBENCHMARK_SETTINGS_H
 
+#include <cstdint>
 #include <functional>
 #include <tuple>
 #include <vector>
