@@ -2,6 +2,7 @@ if(NOT TARGET HdrHistogram)
 
   # Module library
   file(GLOB SOURCE_FILES "HdrHistogram/src/*.c")
+  list(FILTER SOURCE_FILES EXCLUDE REGEX ".*/hdr_histogram_log_no_op.c")
   if(MSVC)
     # C4057: 'operator' : 'identifier1' indirection to slightly different base types from 'identifier2'
     # C4146: unary minus operator applied to unsigned type, result still unsigned
