@@ -26,7 +26,7 @@ void ReporterConsole::ReportHeader()
 void ReporterConsole::ReportSystem()
 {
     _stream << Color::DARKGREY << GenerateSeparator('=') << std::endl;
-    _stream << Color::WHITE << "CPU architecutre: " << Color::LIGHTCYAN << System::CpuArchitecture() << std::endl;
+    _stream << Color::WHITE << "CPU architecture: " << Color::LIGHTCYAN << System::CpuArchitecture() << std::endl;
     _stream << Color::WHITE << "CPU logical cores: " << Color::LIGHTGREEN << System::CpuLogicalCores() << std::endl;
     _stream << Color::WHITE << "CPU physical cores: " << Color::LIGHTGREEN << System::CpuPhysicalCores() << std::endl;
     _stream << Color::WHITE << "CPU clock speed: " << Color::LIGHTGREEN << GenerateClockSpeed(System::CpuClockSpeed()) << std::endl;
@@ -41,7 +41,7 @@ void ReporterConsole::ReportEnvironment()
     _stream << Color::WHITE << "OS version: " << Color::DARKGREY << Environment::OSVersion() << std::endl;
     _stream << Color::WHITE << "OS bits: " << Color::DARKGREY << (Environment::Is64BitOS() ? "64-bit" : (Environment::Is32BitOS() ? "32-bit" : "<unknown>")) << std::endl;
     _stream << Color::WHITE << "Process bits: " << Color::DARKGREY << (Environment::Is64BitProcess() ? "64-bit" : (Environment::Is32BitProcess() ? "32-bit" : "<unknown>")) << std::endl;
-    _stream << Color::WHITE << "Process configuaraion: " << Color::DARKGREY << (Environment::IsDebug() ? "debug" : (Environment::IsRelease() ? "release" : "<unknown>")) << std::endl;
+    _stream << Color::WHITE << "Process configuration: " << Color::DARKGREY << (Environment::IsDebug() ? "debug" : (Environment::IsRelease() ? "release" : "<unknown>")) << std::endl;
     time_t timestamp = Environment::Timestamp();
     _stream << Color::WHITE << "Local timestamp: " << Color::DARKGREY << std::asctime(std::localtime(&timestamp));
     _stream << Color::WHITE << "UTC timestamp: " << Color::DARKGREY << std::asctime(std::gmtime(&timestamp));
