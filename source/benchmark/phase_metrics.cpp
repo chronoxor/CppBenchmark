@@ -63,12 +63,12 @@ int64_t PhaseMetrics::avg_time() const noexcept
 
 int64_t PhaseMetrics::min_time() const noexcept
 {
-    return (_total_operations > 0) ? (_min_time / _total_operations) : _min_time;
+    return _min_time;
 }
 
 int64_t PhaseMetrics::max_time() const noexcept
 {
-    return (_total_operations > 0) ? (_max_time / _total_operations) : _max_time;
+    return _max_time;
 }
 
 int64_t PhaseMetrics::operations_per_second() const noexcept
