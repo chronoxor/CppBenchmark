@@ -43,7 +43,7 @@ if(NOT TARGET zlib)
   if(MSVC)
     list(APPEND ${SOURCE_FILES} "zlib/contrib/masmx64/inffas8664.c")
   endif()
-  add_library(zlib ${SOURCE_FILES} ${ASSEMBLER_FILES})
+  add_library(zlib ${SOURCE_FILES})
   if(MSVC)
     # C4127: conditional expression is constant
     # C4131: 'function' : uses old-style declarator
