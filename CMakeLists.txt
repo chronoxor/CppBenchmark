@@ -13,7 +13,7 @@ if(DOXYGEN_FOUND)
   if(NOT TARGET ${DOXYGEN})
     add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "Doxyfile" WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/documents")
     add_custom_target(${DOXYGEN} DEPENDS "Doxyfile")
-    set_target_properties(${DOXYGEN} PROPERTIES FOLDER doxygen)
+    set_target_properties(${DOXYGEN} PROPERTIES FOLDER "doxygen")
   endif()
 endif()
 
