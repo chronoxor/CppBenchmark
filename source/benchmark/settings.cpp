@@ -90,6 +90,7 @@ Settings& Settings::ThreadsRange(int from, int to, const std::function<int (int,
         while ((result >= from) && (result <= to))
         {
             _threads.emplace_back(result);
+
             // Select the next value
             result = selector(from, to, current);
         }
@@ -143,9 +144,11 @@ Settings& Settings::PCRange(int producers_from, int producers_to, const std::fun
             while ((result2 >= consumers_from) && (result2 <= consumers_to))
             {
                 _pc.emplace_back(result1, result2);
+
                 // Select the next value
                 result2 = consumers_selector(consumers_from, consumers_to, current2);
             }
+
             // Select the next value
             result1 = producers_selector(producers_from, producers_to, current1);
         }
@@ -186,6 +189,7 @@ Settings& Settings::ParamRange(int from, int to, const std::function<int (int, i
         while ((result >= from) && (result <= to))
         {
             _params.emplace_back(result, -1, -1);
+
             // Select the next value
             result = selector(from, to, current);
         }
@@ -239,9 +243,11 @@ Settings& Settings::PairRange(int from1, int to1, const std::function<int (int, 
             while ((result2 >= from2) && (result2 <= to2))
             {
                 _params.emplace_back(result1, result2, -1);
+
                 // Select the next value
                 result2 = selector2(from2, to2, current2);
             }
+
             // Select the next value
             result1 = selector1(from1, to1, current1);
         }
@@ -308,12 +314,15 @@ Settings& Settings::TripleRange(int from1, int to1, const std::function<int (int
                 while ((result3 >= from3) && (result3 <= to3))
                 {
                     _params.emplace_back(result1, result2, result3);
+
                     // Select the next value
                     result3 = selector3(from3, to3, current3);
                 }
+
                 // Select the next value
                 result2 = selector2(from2, to2, current2);
             }
+
             // Select the next value
             result1 = selector1(from1, to1, current1);
         }

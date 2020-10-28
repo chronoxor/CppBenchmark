@@ -63,12 +63,12 @@ int64_t PhaseMetrics::avg_time() const noexcept
 
 int64_t PhaseMetrics::min_time() const noexcept
 {
-    return (_total_operations > 0) ? (_min_time / _total_operations) : _min_time;
+    return _min_time;
 }
 
 int64_t PhaseMetrics::max_time() const noexcept
 {
-    return (_total_operations > 0) ? (_max_time / _total_operations) : _max_time;
+    return _max_time;
 }
 
 int64_t PhaseMetrics::operations_per_second() const noexcept
@@ -176,6 +176,7 @@ void PhaseMetrics::MergeMetrics(PhaseMetrics& metrics)
         _total_operations = metrics._total_operations;
         _total_items = metrics._total_items;
         _total_bytes = metrics._total_bytes;
+
         // Overwrite metrics custom tables
         for (const auto& it : metrics._custom_int)
             _custom_int[it.first] = it.second;
@@ -191,6 +192,7 @@ void PhaseMetrics::MergeMetrics(PhaseMetrics& metrics)
             _custom_dbl[it.first] = it.second;
         for (const auto& it : metrics._custom_str)
             _custom_str[it.first] = it.second;
+
         // Overwrite metrics threads value
         _threads = metrics._threads;
     }
