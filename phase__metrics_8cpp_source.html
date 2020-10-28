@@ -129,12 +129,12 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_cpp_benchmark_1_1_phase_metrics.html#a32ebb07fdbff7d502db371abe88d1561">   64</a></span>&#160;int64_t <a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#a32ebb07fdbff7d502db371abe88d1561">PhaseMetrics::min_time</a>() const noexcept</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> (_total_operations &gt; 0) ? (_min_time / _total_operations) : _min_time;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> _min_time;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_cpp_benchmark_1_1_phase_metrics.html#a82cff61d5e76291d3ce3ba06d44c4593">   69</a></span>&#160;int64_t <a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#a82cff61d5e76291d3ce3ba06d44c4593">PhaseMetrics::max_time</a>() const noexcept</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> (_total_operations &gt; 0) ? (_max_time / _total_operations) : _max_time;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> _max_time;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_cpp_benchmark_1_1_phase_metrics.html#acb794e4cc8ebf0d0c0cc3b7b208a063b">   74</a></span>&#160;int64_t <a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#acb794e4cc8ebf0d0c0cc3b7b208a063b">PhaseMetrics::operations_per_second</a>() const noexcept</div>
@@ -242,41 +242,43 @@ $(function() {
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        _total_operations = metrics._total_operations;</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        _total_items = metrics._total_items;</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        _total_bytes = metrics._total_bytes;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="comment">// Overwrite metrics custom tables</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_int)</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            _custom_int[it.first] = it.second;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_uint)</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            _custom_uint[it.first] = it.second;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_int64)</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            _custom_int64[it.first] = it.second;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_uint64)</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            _custom_uint64[it.first] = it.second;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_flt)</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            _custom_flt[it.first] = it.second;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_dbl)</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            _custom_dbl[it.first] = it.second;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_str)</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            _custom_str[it.first] = it.second;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="comment">// Overwrite metrics threads value</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        _threads = metrics._threads;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    }</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keywordtype">void</span> PhaseMetrics::ResetMetrics() noexcept</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;{</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    FreeLatencyHistogram();</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    _min_time = std::numeric_limits&lt;int64_t&gt;::max();</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    _max_time = std::numeric_limits&lt;int64_t&gt;::min();</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    _total_time = 0;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    _total_operations = 0;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    _total_items = 0;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    _total_bytes = 0;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    _iterstamp = 0;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    _timestamp = 0;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    _threads = 1;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;}</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="comment">// Overwrite metrics custom tables</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_int)</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            _custom_int[it.first] = it.second;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_uint)</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            _custom_uint[it.first] = it.second;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_int64)</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            _custom_int64[it.first] = it.second;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_uint64)</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            _custom_uint64[it.first] = it.second;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_flt)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            _custom_flt[it.first] = it.second;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_dbl)</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            _custom_dbl[it.first] = it.second;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; it : metrics._custom_str)</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            _custom_str[it.first] = it.second;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="comment">// Overwrite metrics threads value</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        _threads = metrics._threads;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keywordtype">void</span> PhaseMetrics::ResetMetrics() noexcept</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;{</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    FreeLatencyHistogram();</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    _min_time = std::numeric_limits&lt;int64_t&gt;::max();</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    _max_time = std::numeric_limits&lt;int64_t&gt;::min();</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    _total_time = 0;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    _total_operations = 0;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    _total_items = 0;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    _total_bytes = 0;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    _iterstamp = 0;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    _timestamp = 0;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    _threads = 1;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_cpp_benchmark_1_1_phase_metrics_html_a7c1eccbcd80fa51b6f7d32aca41e4424"><div class="ttname"><a href="class_cpp_benchmark_1_1_phase_metrics.html#a7c1eccbcd80fa51b6f7d32aca41e4424">CppBenchmark::PhaseMetrics::avg_time</a></div><div class="ttdeci">int64_t avg_time() const noexcept</div><div class="ttdoc">Get average time of the phase execution.</div><div class="ttdef"><b>Definition:</b> <a href="phase__metrics_8cpp_source.html#l00059">phase_metrics.cpp:59</a></div></div>
 <div class="ttc" id="anamespace_cpp_benchmark_html"><div class="ttname"><a href="namespace_cpp_benchmark.html">CppBenchmark</a></div><div class="ttdoc">C++ Benchmark project definitions.</div><div class="ttdef"><b>Definition:</b> <a href="barrier_8h_source.html#l00015">barrier.h:15</a></div></div>
