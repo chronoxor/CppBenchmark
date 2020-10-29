@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['infinite_129',['infinite',['../class_cpp_benchmark_1_1_settings.html#a4483244712ac587dedb6e680d43a8d9f',1,'CppBenchmark::Settings::infinite() const noexcept'],['../class_cpp_benchmark_1_1_settings.html#a367635efe01172d1dcbed3323e6fe74e',1,'CppBenchmark::Settings::Infinite()']]],
+  ['infinite_129',['Infinite',['../class_cpp_benchmark_1_1_settings.html#a367635efe01172d1dcbed3323e6fe74e',1,'CppBenchmark::Settings::Infinite()'],['../class_cpp_benchmark_1_1_settings.html#a4483244712ac587dedb6e680d43a8d9f',1,'CppBenchmark::Settings::infinite() const noexcept']]],
   ['initbenchmarkcontext_130',['InitBenchmarkContext',['../class_cpp_benchmark_1_1_benchmark_base.html#a9279e2f3ae93ace0d22ba81e01f896b5',1,'CppBenchmark::BenchmarkBase']]],
   ['initialize_131',['Initialize',['../class_cpp_benchmark_1_1_fixture.html#a53dc414574cb40710ad95c2266bb607d',1,'CppBenchmark::Fixture::Initialize()'],['../class_cpp_benchmark_1_1_fixture_p_c.html#a24612363ac4bf3f2972f4012b8947f1d',1,'CppBenchmark::FixturePC::Initialize()'],['../class_cpp_benchmark_1_1_fixture_threads.html#a3becfcd255076e3319f5dc51fbcae72c',1,'CppBenchmark::FixtureThreads::Initialize()'],['../class_cpp_benchmark_1_1_launcher_console.html#ab51e0742e808f719303608dbac4bab19',1,'CppBenchmark::LauncherConsole::Initialize()']]],
   ['initializeconsumer_132',['InitializeConsumer',['../class_cpp_benchmark_1_1_fixture_p_c.html#ae74d35cf9ae57545908124bc18b474bf',1,'CppBenchmark::FixturePC']]],
