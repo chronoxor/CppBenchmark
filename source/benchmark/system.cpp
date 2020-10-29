@@ -442,8 +442,7 @@ uint64_t System::MulDiv64(uint64_t operant, uint64_t multiplier, uint64_t divide
         unsigned long DW[4];
     } var128, quotient;
 
-    // Change semantics for intermediate results for Full Div
-    // by renaming the vars
+    // Change semantics for intermediate results for Full Div by renaming the vars
     #define REMAINDER quotient
     #define QUOTIENT edi
 
