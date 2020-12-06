@@ -1,11 +1,11 @@
 # CppBenchmark
 
-[![Linux build status](https://img.shields.io/travis/chronoxor/CppBenchmark/master.svg?label=Linux)](https://travis-ci.com/chronoxor/CppBenchmark)
-[![OSX build status](https://img.shields.io/travis/chronoxor/CppBenchmark/master.svg?label=OSX)](https://travis-ci.com/chronoxor/CppBenchmark)
-[![Cygwin build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
-[![MSYS2 build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=MSYS2)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
-[![MinGW build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=MinGW)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
-[![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/CppBenchmark/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
+[![Linux build status](https://img.shields.io/travis/com/chronoxor/CppBenchmark/master?label=Linux)](https://travis-ci.com/chronoxor/CppBenchmark)
+[![OSX build status](https://img.shields.io/travis/com/chronoxor/CppBenchmark/master?label=OSX)](https://travis-ci.com/chronoxor/CppBenchmark)
+[![Cygwin build status](https://img.shields.io/appveyor/build/chronoxor/CppBenchmark/master?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
+[![MSYS2 build status](https://img.shields.io/appveyor/build/chronoxor/CppBenchmark/master?label=MSYS2)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
+[![MinGW build status](https://img.shields.io/appveyor/build/chronoxor/CppBenchmark/master?label=MinGW)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
+[![Windows build status](https://img.shields.io/appveyor/build/chronoxor/CppBenchmark/master?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppBenchmark)
 
 C++ Benchmark Library allows to create performance benchmarks of some code to investigate
 average/minimal/maximal execution time, items processing processing speed, I/O throughput.
