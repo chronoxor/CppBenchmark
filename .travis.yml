@@ -36,7 +36,7 @@ matrix:
           sources:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
-            - clang-10
+            - clang-11
             - cmake
             - doxygen
             - graphviz
