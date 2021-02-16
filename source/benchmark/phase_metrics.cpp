@@ -138,15 +138,20 @@ void PhaseMetrics::StartCollecting() noexcept
 
 void PhaseMetrics::StopCollecting() noexcept
 {
-    // Get operations count & duration
-    int64_t total_duration = System::Timestamp() - _timestamp;
+    // Get iterations count & duration of the phase
+    int64_t iterations = _total_operations - _iterstamp;
+    int64_t duration = System::Timestamp() - _timestamp;
+
+    // Get min & max time of the phase
+    int64_t min_time = (iterations > 0) ? (duration / iterations) : std::numeric_limits<int64_t>::max();
+    int64_t max_time = (iterations > 0) ? (duration / iterations) : std::numeric_limits<int64_t>::min();
 
     // Update time counters
-    if (total_duration < _min_time)
-        _min_time = total_duration;
-    if (total_duration > _max_time)
-        _max_time = total_duration;
-    _total_time += total_duration;
+    if (min_time < _min_time)
+        _min_time = min_time;
+    if (max_time > _max_time)
+        _max_time = max_time;
+    _total_time += duration;
 }
 
 void PhaseMetrics::MergeMetrics(PhaseMetrics& metrics)
