@@ -32,7 +32,7 @@ GitHub: https://github.com/chronoxor/CppBenchmark
 namespace CppBenchmark {
 
 //! Project version
-const char version[] = "1.0.0.0";
+const char version[] = "1.0.1.0";
 
 } // namespace CppBenchmark
 
