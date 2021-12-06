@@ -50,6 +50,13 @@ jobs:
           toolchain: cygwin
 
     steps:
+      # Build Linux dependencies
+      - name: "Setup: Linux"
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          sudo apt update
+          sudo apt install gcc-${{ matrix.version }} g++-${{ matrix.version }}
+
       # git checkout
       - uses: actions/checkout@v2
 
