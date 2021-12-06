@@ -53,7 +53,7 @@ jobs:
 
       # gcc
       - name: "Setup gcc"
-        if: matrix.toolchain == 'gcc'
+        if: startsWith(matrix.os, 'ubuntu') && (matrix.toolchain == 'gcc')
         uses: egor-tensin/setup-gcc@v1
         with:
           version: 11
@@ -62,7 +62,7 @@ jobs:
       # clang
       - name: "Setup clang"
         if: matrix.toolchain == 'clang'
-        uses: egor-tensin/setup-clang@v1
+        if: startsWith(matrix.os, 'ubuntu') && (matrix.toolchain == 'clang')
         with:
           version: 13
           platform: x64
