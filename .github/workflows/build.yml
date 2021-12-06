@@ -90,3 +90,10 @@ jobs:
         run: |
           cd build
           ./unix.sh
+
+      # Build step: MacOS
+      - name: "Build step: MacOS"
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          cd build
+          ./unix.sh

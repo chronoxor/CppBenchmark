@@ -8,19 +8,20 @@
 
 BENCHMARK("sin()")
 {
-    static double sum = 0;
+    [[maybe_unused]] static double sum = 0;
     sum += sin(123.456);
+
 }
 
 BENCHMARK("cos()")
 {
-    static double sum = 0;
+    [[maybe_unused]] static double sum = 0;
     sum += cos(123.456);
 }
 
 BENCHMARK("tan()")
 {
-    static double sum = 0;
+    [[maybe_unused]] static double sum = 0;
     sum += tan(123.456);
 }
 
