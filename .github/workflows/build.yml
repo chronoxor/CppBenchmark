@@ -26,10 +26,12 @@ jobs:
         - name: "Linux (GCC)"
           os: ubuntu-latest
           toolchain: gcc
+          version: 11
         # Linux with clang toolchain
         - name: "Linux (Clang)"
           os: ubuntu-latest
           toolchain: clang
+          version: 13
         # MacOS with clang toolchain
         - name: "MacOS"
           os: macos-latest
@@ -65,8 +67,18 @@ jobs:
       - name: "Build step: Linux (GCC)"
         if: startsWith(matrix.os, 'ubuntu') && (matrix.toolchain == 'gcc')
         env:
-          CC: gcc
-          CXX: g++
+          CC: gcc-${{ matrix.version }}
+          CXX: g++-${{ matrix.version }}
+        run: |
+          cd build
+          ./unix.sh
+
+      # Build step: Linux (Clang)
+      - name: "Build step: Linux (Clang)"
+        if: startsWith(matrix.os, 'ubuntu') && (matrix.toolchain == 'clang')
+        env:
+          CC: clang-${{ matrix.version }}
+          CXX: clang++-${{ matrix.version }}
         run: |
           cd build
           ./unix.sh
