@@ -64,8 +64,8 @@ jobs:
       # gil
       - name: "Setup gil tool"
         run: |
-          pip3 install gil
-          gil update
+#          pip3 install gil
+#          gil update
 
       # Build step: Linux (GCC)
       - name: "Build step: Linux (GCC)"
@@ -74,7 +74,7 @@ jobs:
           CC: gcc
           CXX: g++
         run: |
-          echo ${{ matrix.os }}
-          echo ${{ matrix.toolchain }}
+          echo ${{matrix.os}}
+          echo ${{matrix.toolchain}}
 #          cd build
 #          ./unix.sh
