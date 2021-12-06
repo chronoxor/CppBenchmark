@@ -10,8 +10,8 @@ on:
 
 jobs:
   build:
-    name: ${ {matrix.config.name} }
-    runs-on: ${ {matrix.config.os} }
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
 
     # Build matrix (Linux, MacOS, Windows)
     strategy:
