@@ -69,7 +69,7 @@ jobs:
 
       # Build step: Linux (GCC)
       - name: "Build step: Linux (GCC)"
-        if: ${{ startsWith(matrix.os, 'ubuntu') && matrix.toolchain == 'gcc' }}
+        if: ${{ matrix.toolchain == 'gcc' }}
         env:
           CC: gcc
           CXX: g++
