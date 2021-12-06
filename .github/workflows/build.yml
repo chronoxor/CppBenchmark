@@ -74,5 +74,7 @@ jobs:
           CC: gcc
           CXX: g++
         run: |
-          cd build
-          ./unix.sh
+          echo ${{ matrix.os }}
+          echo ${{ matrix.toolchain }}
+#          cd build
+#          ./unix.sh
