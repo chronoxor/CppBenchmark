@@ -1,4 +1,4 @@
-name: Build Windows (Visual Studio)
+name: Windows (Visual Studio)
 
 on:
   push:
@@ -7,16 +7,14 @@ on:
 
 jobs:
   build:
-    name: "Windows (Visual Studio)"
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@v2
 
       - name: "Setup Visual Studio"
-        uses: egor-tensin/vs-shell@v2
+        uses: microsoft/setup-msbuild@v1.1
         with:
-          arch: x64
+          msbuild-architecture: x64
 
       - name: "Setup cmake"
         run: cmake --version

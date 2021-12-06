@@ -1,4 +1,4 @@
-name: Build MacOS
+name: MacOS
 
 on:
   push:
@@ -7,9 +7,7 @@ on:
 
 jobs:
   build:
-    name: "MacOS"
     runs-on: macos-latest
-
     steps:
       - uses: actions/checkout@v2
 

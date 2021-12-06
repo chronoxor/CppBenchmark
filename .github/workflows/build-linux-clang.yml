@@ -1,4 +1,4 @@
-name: Build Linux (Clang)
+name: Linux (Clang)
 
 on:
   push:
@@ -7,9 +7,7 @@ on:
 
 jobs:
   build:
-    name: "Linux (Clang)"
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 

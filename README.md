@@ -1,8 +1,8 @@
 # CppBenchmark
 
-![Build Linux (GCC)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-gcc.yml/badge.svg)
-![Build Linux (Clang)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-clang.yml/badge.svg)
-![Build MacOS](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-macos.yml/badge.svg)
+![Linux (GCC)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-gcc.yml/badge.svg)
+![Linux (Clang)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-clang.yml/badge.svg)
+![MacOS](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-macos.yml/badge.svg)
 ![Windows (Visual Studio)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-msvc.yml/badge.svg)
 ![Windows (MinGW)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-mingw.yml/badge.svg)
 ![Windows (Cygwin)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-cygwin.yml/badge.svg)
