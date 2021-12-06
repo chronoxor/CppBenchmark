@@ -1,0 +1,22 @@
+# GitHub workflow name
+name: Build
+
+# Build on push & pull request commands in master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    # Build matrix (Linux, MacOS, Windows)
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Display CMake version
+        run: cmake --version
