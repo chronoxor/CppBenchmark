@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cppbenchmark_343',['CppBenchmark',['../namespace_cpp_benchmark.html',1,'']]]
+  ['cppbenchmark_0',['CppBenchmark',['../namespace_cpp_benchmark.html',1,'']]]
 ];
