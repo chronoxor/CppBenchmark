@@ -54,5 +54,15 @@ jobs:
           }
 
     steps:
+      # git checkout
+      - uses: actions/checkout@v2
+
+      # cmake
       - name: Display CMake version
         run: cmake --version
+
+      # gil
+      - name: Setup gil tool (https://github.com/chronoxor/gil)
+        run: |
+          pip3 install gil
+          gil update
