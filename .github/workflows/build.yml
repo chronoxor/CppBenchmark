@@ -50,18 +50,18 @@ jobs:
           toolchain: cygwin
 
     steps:
-      # Build Linux dependencies
-      - name: "Setup: Linux"
-        if: startsWith(matrix.os, 'ubuntu')
-        run: |
-          sudo apt update
-          sudo apt install gcc-${{ matrix.version }} g++-${{ matrix.version }}
-
       # git checkout
       - uses: actions/checkout@v2
 
+      # gcc, clang
+      - name: "Setup gcc, clang"
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          sudo apt update
+          sudo apt install ${{ matrix.toolchain }}-${{ matrix.version }} ${{ matrix.toolchain }}++-${{ matrix.version }}
+
       # cmake
-      - name: "Display CMake version"
+      - name: "Setup cmake"
         run: cmake --version
 
       # gil
