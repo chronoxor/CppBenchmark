@@ -23,28 +23,28 @@ jobs:
       matrix:
         include:
         # Linux with gcc toolchain
-        - name: "Linux (GCC)",
-          os: ubuntu-latest,
+        - name: "Linux (GCC)"
+          os: ubuntu-latest
           toolchain: gcc
         # Linux with clang toolchain
-        - name: "Linux (Clang)",
-          os: ubuntu-latest,
+        - name: "Linux (Clang)"
+          os: ubuntu-latest
           toolchain: clang
         # MacOS with clang toolchain
-        - name: "MacOS",
-          os: macos-latest,
+        - name: "MacOS"
+          os: macos-latest
           toolchain: clang 
         # Windows with Visual Studio toolchain
-        - name: "Windows (Visual Studio)",
-          os: windows-latest,
+        - name: "Windows (Visual Studio)"
+          os: windows-latest
           toolchain: msvc
         # Windows with MinGW toolchain
-        - name: "Windows (MinGW)",
-          os: windows-latest,
+        - name: "Windows (MinGW)"
+          os: windows-latest
           toolchain: mingw
         # Windows with Cygwin toolchain
-        - name: "Windows (Cygwin)",
-          os: windows-latest,
+        - name: "Windows (Cygwin)"
+          os: windows-latest
           toolchain: cygwin
 
     steps:
