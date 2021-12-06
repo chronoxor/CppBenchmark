@@ -58,7 +58,7 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           sudo apt update
-          sudo apt install ${{ matrix.toolchain }}-${{ matrix.version }} ${{ matrix.toolchain }}++-${{ matrix.version }}
+          sudo apt install gcc-11 clang-13
 
       # cmake
       - name: "Setup cmake"
