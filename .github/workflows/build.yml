@@ -58,18 +58,18 @@ jobs:
       - uses: actions/checkout@v2
 
       # cmake
-      - name: Display CMake version
+      - name: "Display CMake version"
         run: cmake --version
 
       # gil
-      - name: Setup gil tool
+      - name: "Setup gil tool"
         run: |
           pip3 install gil
           gil update
 
       # Build step: Linux (GCC)
-      - name: Build step: Linux (GCC)
-        if: ${{ startsWith(matrix.os, "ubuntu") }}
+      - name: "Build step: Linux (GCC)"
+        if: ${{ startsWith(matrix.os, "ubuntu") && matrix.toolchain == "gcc" }}
         env:
           CC: gcc
           CXX: g++
