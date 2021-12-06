@@ -25,32 +25,32 @@ jobs:
         - { 
             name: "Linux (GCC)",
             os: ubuntu-latest,
-            toolchain: "gcc" 
+            toolchain: gcc
           }
         - { 
             name: "Linux (Clang)",
             os: ubuntu-latest,
-            toolchain: "clang"
+            toolchain: clang
           }
         - { 
             name: "MacOS",
             os: macos-latest,
-            toolchain: "clang" 
+            toolchain: clang 
           }
         - { 
             name: "Windows (Visual Studio)",
             os: windows-latest,
-            toolchain: "msvc" 
+            toolchain: msvc
           }
         - { 
             name: "Windows (MinGW)",
             os: windows-latest,
-            toolchain: "mingw" 
+            toolchain: mingw
           }
         - { 
             name: "Windows (Cygwin)",
             os: windows-latest,
-            toolchain: "cygwin" 
+            toolchain: cygwin
           }
 
     steps:
@@ -62,7 +62,17 @@ jobs:
         run: cmake --version
 
       # gil
-      - name: Setup gil tool (https://github.com/chronoxor/gil)
+      - name: Setup gil tool
         run: |
           pip3 install gil
           gil update
+
+      # Build step: Linux (GCC)
+      - name: Build step: Linux (GCC)
+        if: ${{ startsWith(matrix.os, "ubuntu") && matrix.toolchain == "gcc" }}
+        env:
+          CC: gcc
+          CXX: g++
+        run: |
+          cd build
+          ./unix.sh
