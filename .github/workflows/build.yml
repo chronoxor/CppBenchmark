@@ -21,37 +21,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        config:
-        - { 
-            name: "Linux (GCC)",
-            os: ubuntu-latest,
-            toolchain: gcc
-          }
-        - { 
-            name: "Linux (Clang)",
-            os: ubuntu-latest,
-            toolchain: clang
-          }
-        - { 
-            name: "MacOS",
-            os: macos-latest,
-            toolchain: clang 
-          }
-        - { 
-            name: "Windows (Visual Studio)",
-            os: windows-latest,
-            toolchain: msvc
-          }
-        - { 
-            name: "Windows (MinGW)",
-            os: windows-latest,
-            toolchain: mingw
-          }
-        - { 
-            name: "Windows (Cygwin)",
-            os: windows-latest,
-            toolchain: cygwin
-          }
+        include:
+        # Linux with gcc toolchain
+        - name: "Linux (GCC)",
+          os: ubuntu-latest,
+          toolchain: gcc
+        # Linux with clang toolchain
+        - name: "Linux (Clang)",
+          os: ubuntu-latest,
+          toolchain: clang
+        # MacOS with clang toolchain
+        - name: "MacOS",
+          os: macos-latest,
+          toolchain: clang 
+        # Windows with Visual Studio toolchain
+        - name: "Windows (Visual Studio)",
+          os: windows-latest,
+          toolchain: msvc
+        # Windows with MinGW toolchain
+        - name: "Windows (MinGW)",
+          os: windows-latest,
+          toolchain: mingw
+        # Windows with Cygwin toolchain
+        - name: "Windows (Cygwin)",
+          os: windows-latest,
+          toolchain: cygwin
 
     steps:
       # git checkout
