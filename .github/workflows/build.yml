@@ -10,44 +10,44 @@ on:
 
 jobs:
   build:
+    name: ${ {matrix.config.name} }
+    runs-on: ${ {matrix.config.os} }
+
     # Build matrix (Linux, MacOS, Windows)
     strategy:
       fail-fast: false
       matrix:
         config:
         - { 
-            name: "Linux (GCC)"
-            os: ubuntu-latest
+            name: "Linux (GCC)",
+            os: ubuntu-latest,
             toolchain: "gcc" 
           }
         - { 
-            name: "Linux (Clang)"
-            os: ubuntu-latest
+            name: "Linux (Clang)",
+            os: ubuntu-latest,
             toolchain: "clang"
           }
         - { 
-            name: "MacOS"
-            os: macos-latest
+            name: "MacOS",
+            os: macos-latest,
             toolchain: "clang" 
           }
         - { 
-            name: "Windows (Visual Studio)"
-            os: windows-latest
+            name: "Windows (Visual Studio)",
+            os: windows-latest,
             toolchain: "msvc" 
           }
         - { 
-            name: "Windows (MinGW)"
-            os: windows-latest
+            name: "Windows (MinGW)",
+            os: windows-latest,
             toolchain: "mingw" 
           }
         - { 
-            name: "Windows (Cygwin)"
-            os: windows-latest
+            name: "Windows (Cygwin)",
+            os: windows-latest,
             toolchain: "cygwin" 
           }
-
-    name: ${ {matrix.config.name} }
-    runs-on: ${ {matrix.config.os} }
 
     steps:
       - name: Display CMake version
