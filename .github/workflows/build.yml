@@ -12,7 +12,9 @@ jobs:
   build:
     # Build matrix (Linux, MacOS, Windows)
     strategy:
+      fail-fast: false
       matrix:
+        config:
         - { 
             name: "Linux (GCC)"
             os: ubuntu-latest
