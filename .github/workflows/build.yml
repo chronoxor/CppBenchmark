@@ -61,7 +61,6 @@ jobs:
 
       # clang
       - name: "Setup clang"
-        if: matrix.toolchain == 'clang'
         if: startsWith(matrix.os, 'ubuntu') && (matrix.toolchain == 'clang')
         with:
           version: 13
