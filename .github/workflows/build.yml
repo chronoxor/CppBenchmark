@@ -1,12 +1,16 @@
 # GitHub workflow name
 name: Build
 
-# Build on push & pull request commands in master branch
+# Build events
 on:
+  # Git push in master branch
   push:
     branches: [ master ]
+  # Git pull request in master branch
   pull_request:
     branches: [ master ]
+  # Manually triggered
+  workflow_dispatch:
 
 jobs:
   build:
