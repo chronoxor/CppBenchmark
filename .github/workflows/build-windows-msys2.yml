@@ -21,19 +21,20 @@ jobs:
             cmake
             gcc
             git
+            python3-pip
 
       - name: "Setup cmake"
-        shell: msys2 {0}
+        shell: msys2 '{0}'
         run: cmake --version
 
       - name: "Setup gil tool"
-        shell: msys2 {0}
+        shell: msys2 '{0}'
         run: |
           pip3 install gil
           gil update
 
       - name: "Build"
-        shell: msys2 {0}
+        shell: msys2 '{0}'
         run: |
           cd build
           ./unix.sh
