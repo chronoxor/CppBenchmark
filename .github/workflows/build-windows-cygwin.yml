@@ -10,8 +10,12 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: C:\tools\cygwin\bin\bash.exe --login -o igncr '{0}'
+        shell: C:\tools\cygwin\bin\bash.exe --login '{0}'
     steps:
+      - name: "Setup git"
+        shell: cmd
+        run: git config --global core.autocrlf input
+
       - uses: actions/checkout@v2
 
       - name: "Setup Cygwin"
