@@ -24,6 +24,7 @@ jobs:
         run: cmake --version
 
       - name: "Setup gil tool"
+        shell: cmd
         run: |
           pip3 install gil
           gil update
