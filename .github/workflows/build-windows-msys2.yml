@@ -22,7 +22,6 @@ jobs:
           update: true
           install: >-
             base-devel
-            git
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-gcc
             python3-pip
@@ -36,9 +35,6 @@ jobs:
           gil update
 
       - name: "Build"
-        env:
-          INCLUDE: C:\msys64\usr\include\w32api;%INCLUDE%
-          LIB: C:\msys64\usr\lib\w32api;%LIB%
         run: |
           cd build
           ./unix.sh
