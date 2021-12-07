@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: C:\tools\cygwin\bin\bash.exe --login -o igncr '{0}'
+        shell: C:\tools\cygwin\bin\bash.exe -lc '{0}'
     steps:
       - uses: actions/checkout@v2
 
