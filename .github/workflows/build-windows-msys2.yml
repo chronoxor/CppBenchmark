@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    defaults:
+      run:
+        msys2 '{0}'
     steps:
       - uses: actions/checkout@v2
 
@@ -15,6 +18,7 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           msystem: mingw64
+          location: C:\msys64
           update: true
           install: >-
             base-devel
@@ -24,17 +28,14 @@ jobs:
             python3-pip
 
       - name: "Setup cmake"
-        shell: msys2 '{0}'
         run: cmake --version
 
       - name: "Setup gil tool"
-        shell: msys2 '{0}'
         run: |
           pip3 install gil
           gil update
 
       - name: "Build"
-        shell: msys2 '{0}'
         env:
           INCLUDE: C:\msys64\usr\include\w32api;%INCLUDE%
           LIB: C:\msys64\usr\lib\w32api;%LIB%
