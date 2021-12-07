@@ -35,4 +35,6 @@ jobs:
 
       - name: "Build"
         run: |
-          cd $GITHUB_WORKSPACE/build; exec 0</dev/null; ./unix.sh
+          cd $GITHUB_WORKSPACE
+          cd build
+          ./unix.sh

@@ -25,6 +25,7 @@ jobs:
             cmake
             gcc
             git
+            mingw-w64-x86_64-toolchain
             python3-pip
 
       - name: "Setup cmake"
