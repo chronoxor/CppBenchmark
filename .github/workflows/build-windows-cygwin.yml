@@ -31,5 +31,6 @@ jobs:
 
       - name: "Build"
         run: |
+          cd $GITHUB_WORKSPACE
           cd build
           ./unix.sh
