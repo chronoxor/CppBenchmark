@@ -18,17 +18,17 @@ jobs:
           packages: cmake gcc-g++
 
       - name: "Setup cmake"
-        shell: C:\tools\cygwin\bin\bash -lc '{0}'
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         run: cmake --version
 
       - name: "Setup gil tool"
-        shell: C:\tools\cygwin\bin\bash -lc '{0}'
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         run: |
           pip3 install gil
           gil update
 
       - name: "Build"
-        shell: C:\tools\cygwin\bin\bash -lc '{0}'
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
         run: |
           cd build
           ./unix.sh
