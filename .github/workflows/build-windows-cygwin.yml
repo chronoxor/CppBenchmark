@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: C:\tools\cygwin\bin\bash.exe -lc '{0}'
+        shell: C:\tools\cygwin\bin\bash.exe --login -o igncr '{0}'
     steps:
       - uses: actions/checkout@v2
 
@@ -31,6 +31,4 @@ jobs:
 
       - name: "Build"
         run: |
-          cd $GITHUB_WORKSPACE
-          cd build
-          ./unix.sh
+          cd $GITHUB_WORKSPACE/build; exec 0</dev/null; ./unix.sh
