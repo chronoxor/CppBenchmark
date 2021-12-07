@@ -19,12 +19,9 @@ jobs:
         with:
           msystem: mingw64
           location: C:\msys64
-#          update: true
+          update: true
           install: >-
-#            base-devel
             cmake
-#            gcc
-#            git
             python3-pip
 
       - name: "Setup cmake"
