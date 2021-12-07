@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: C:\tools\cygwin\bin\bash.exe -lc '{0}'
+        shell: C:\tools\cygwin\bin\bash.exe --login -lc '{0}'
     steps:
       - name: "Setup git"
         shell: cmd
