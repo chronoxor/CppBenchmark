@@ -18,14 +18,14 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           msystem: mingw64
-#          location: C:\msys64
+          location: C:\msys64
 #          update: true
-#          install: >-
+          install: >-
 #            base-devel
-#            cmake
+            cmake
 #            gcc
 #            git
-#            python3-pip
+            python3-pip
 
       - name: "Setup cmake"
         run: cmake --version
