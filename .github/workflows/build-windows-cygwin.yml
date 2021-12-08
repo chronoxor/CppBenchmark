@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: C:\tools\cygwin\bin\bash.exe --login -o igncr '{0}'
+        shell: C:\tools\cygwin\bin\bash.exe --login -i -o igncr '{0}'
     steps:
       - name: "Setup git"
         shell: cmd
@@ -35,6 +35,5 @@ jobs:
 
       - name: "Build"
         run: |
-          cd $GITHUB_WORKSPACE
-          cd build
+          cd $GITHUB_WORKSPACE/build
           ./unix.sh
