@@ -27,15 +27,14 @@ jobs:
 
       - name: "Setup git"
         run: |
-          git config --global user.name "GitHub"
-          git config --global user.email "github@github.com"
-          git config --global push.default simple
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: "Doxygen"
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo ${GITHUB_TOKEN}
           cd build/Unix
           ./01-generate.sh
           ./05-doxygen.sh
