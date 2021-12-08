@@ -20,14 +20,21 @@ jobs:
           doxygen --version
           dot -V
 
-      - name: "Setup gil tool"
+      - name: "Setup gil"
         run: |
           pip3 install gil
           gil update
+
+      - name: "Setup git"
+        run: |
+          git config --global user.name "GitHub"
+          git config --global user.email "github@github.com"
+          git config --global push.default simple
 
       - name: "Doxygen"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd build/Unix
+          ./01-generate.sh
           ./05-doxygen.sh
