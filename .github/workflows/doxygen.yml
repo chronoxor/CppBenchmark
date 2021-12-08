@@ -16,6 +16,7 @@ jobs:
 
       - name: "Setup doxygen"
         run: |
+          sudo apt-get -y install doxygen graphviz
           doxygen --version
           dot -V
 
