@@ -377,8 +377,10 @@ std::string Environment::OSVersion()
             os << ", Intel Itanium";
         else if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_ARM)
             os << ", ARM";
+#if !defined(__MINGW32__) && !defined(__MINGW64__)
         else if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_ARM64)
             os << ", ARM64";
+#endif
     }
 
     return os.str();
