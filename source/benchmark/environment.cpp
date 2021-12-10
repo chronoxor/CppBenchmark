@@ -179,9 +179,21 @@ std::string Environment::OSVersion()
             if (osvi.dwMinorVersion == 0)
             {
                 if (osvi.wProductType == VER_NT_WORKSTATION)
-                    os << "Windows 10 ";
+                {
+                    if (osvi.dwBuildNumber >= 22000)
+                        os << " Windows 11";
+                    else
+                        os << " Windows 10";
+                }
                 else
-                    os << "Windows Server 2016 ";
+                {
+                    if (osvi.dwBuildNumber >= 20348)
+                        os << " Windows Server 2022";
+                    else if (osvi.dwBuildNumber >= 17763)
+                        os << " Windows Server 2019";
+                    else
+                        os << " Windows Server 2016";
+                }
             }
         }
         else if (osvi.dwMajorVersion == 6)
@@ -357,10 +369,16 @@ std::string Environment::OSVersion()
     // Windows architecture
     if ( osvi.dwMajorVersion >= 6 )
     {
-        if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64)
-            os <<  ", 64-bit";
-        else if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_INTEL)
+        if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL)
             os << ", 32-bit";
+        else if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
+            os << ", 64-bit";
+        else if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_IA64)
+            os << ", Intel Itanium";
+        else if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_ARM)
+            os << ", ARM";
+        else if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_ARM64)
+            os << ", ARM64";
     }
 
     return os.str();
