@@ -9,6 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: "Setup git"
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
       - uses: actions/checkout@v2
 
       - name: "Setup cmake"
@@ -24,11 +29,6 @@ jobs:
         run: |
           pip3 install gil
           gil update
-
-      - name: "Setup git"
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: "Doxygen"
         env:
