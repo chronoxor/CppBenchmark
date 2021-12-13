@@ -68,7 +68,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark threads
                 for (int i = 0; i < threads; ++i)
                 {
-                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, threads, infinite, operations, duration]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, threads, infinite, operations, duration, i]()
                     {
                         // Clone thread context
                         ContextThreads thread_context(context);

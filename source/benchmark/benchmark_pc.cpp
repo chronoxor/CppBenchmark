@@ -70,7 +70,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark producers
                 for (int i = 0; i < producers; ++i)
                 {
-                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, producers, infinite, operations, duration]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, producers, infinite, operations, duration, i]()
                     {
                         // Clone producer context
                         ContextPC producer_context(context);
@@ -157,7 +157,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                 // Start benchmark consumers
                 for (int i = 0; i < consumers; ++i)
                 {
-                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, consumers]()
+                    _threads.emplace_back([this, &barrier, &context, latency_params, latency_auto, consumers, i]()
                     {
                         // Clone consumer context
                         ContextPC consumer_context(context);
