@@ -76,7 +76,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         ContextPC producer_context(context);
 
                         // Create and start thread safe phase
-                        std::shared_ptr<Phase> producer_phase = context.StartPhaseThreadSafe("producer");
+                        std::shared_ptr<Phase> producer_phase = context.StartPhaseThreadSafe("producer-" + std::to_string(i));
                         PhaseCore* producer_phase_core = dynamic_cast<PhaseCore*>(producer_phase.get());
 
                         // Update producer context
@@ -163,7 +163,7 @@ void BenchmarkPC::Launch(int& current, int total, LauncherHandler& handler)
                         ContextPC consumer_context(context);
 
                         // Create and start thread safe phase
-                        std::shared_ptr<Phase> consumer_phase = context.StartPhaseThreadSafe("consumer");
+                        std::shared_ptr<Phase> consumer_phase = context.StartPhaseThreadSafe("consumer-" + std::to_string(i));
                         PhaseCore* consumer_phase_core = dynamic_cast<PhaseCore*>(consumer_phase.get());
 
                         // Update consumer context

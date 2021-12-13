@@ -74,7 +74,7 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                         ContextThreads thread_context(context);
 
                         // Create and start thread safe phase
-                        std::shared_ptr<Phase> thread_phase = context.StartPhaseThreadSafe("thread");
+                        std::shared_ptr<Phase> thread_phase = context.StartPhaseThreadSafe("thread-" + std::to_string(i));
                         PhaseCore* thread_phase_core = dynamic_cast<PhaseCore*>(thread_phase.get());
 
                         // Update thread context
