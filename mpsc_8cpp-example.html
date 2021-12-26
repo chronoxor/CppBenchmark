@@ -76,7 +76,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#if defined(__GNUC__)</span></div>
 <div class="line"><span class="preprocessor">#pragma GCC diagnostic push</span></div>
-<div class="line"><span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wshadow&quot;</span></div>
+<div class="line"><span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wshadow&quot; // GCC: warning: declaration of &#39;expression&#39; shadows a a parameter or member</span></div>
 <div class="line"><span class="preprocessor">#elif defined(_MSC_VER)</span></div>
 <div class="line"><span class="preprocessor">#pragma warning(push)</span></div>
 <div class="line"><span class="preprocessor">#pragma warning(disable: 4127) // C4127: conditional expression is constant</span></div>
