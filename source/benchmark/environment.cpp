@@ -161,8 +161,8 @@ std::string Environment::OSVersion()
 #pragma warning(disable: 4996) // C4996: 'function': was declared deprecated
 #endif
         BOOL bOsVersionInfoEx = GetVersionExW((OSVERSIONINFOW*)&osvi);
-    if (bOsVersionInfoEx == 0)
-        return "<windows>";
+        if (bOsVersionInfoEx == 0)
+            return "<windows>";
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
@@ -317,14 +317,14 @@ std::string Environment::OSVersion()
             os << "Windows Server 2003, ";
         if (osvi.wProductType != VER_NT_WORKSTATION)
         {
-            if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_IA64)
+            if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_IA64)
             {
                 if (osvi.wSuiteMask & VER_SUITE_DATACENTER)
                     os << "Datacenter Edition for Itanium-based Systems";
                 else if (osvi.wSuiteMask & VER_SUITE_ENTERPRISE)
                     os << "Enterprise Edition for Itanium-based Systems";
             }
-            else if (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64)
+            else if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
             {
                 if (osvi.wSuiteMask & VER_SUITE_DATACENTER)
                     os << "Datacenter x64 Edition";
@@ -382,7 +382,7 @@ std::string Environment::OSVersion()
     os << " (build " << osvi.dwBuildNumber << ")";
 
     // Windows architecture
-    if ( osvi.dwMajorVersion >= 6 )
+    if (osvi.dwMajorVersion >= 6)
     {
         if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL)
             os << ", 32-bit";
