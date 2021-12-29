@@ -9,20 +9,23 @@
 #include "benchmark/environment.h"
 
 #include <chrono>
+#include <codecvt>
 #include <cstring>
+#include <locale>
 #include <sstream>
 
 #if defined(__APPLE__)
 #include <sys/sysctl.h>
-#elif defined(__CYGWIN__)
-#include <sys/utsname.h>
 #elif defined(unix) || defined(__unix) || defined(__unix__)
 #include <sys/stat.h>
+#include <sys/utsname.h>
 #include <fstream>
 #include <regex>
 #endif
 #if defined(_WIN32) || defined(_WIN64) || defined(__CYGWIN__)
 #include <windows.h>
+#include <winternl.h>
+#define STATUS_SUCCESS 0x00000000
 #endif
 
 namespace CppBenchmark {
@@ -137,23 +140,33 @@ std::string Environment::OSVersion()
 
     return "<linux>";
 #elif defined(_WIN32) || defined(_WIN64)
+    static NTSTATUS(__stdcall *RtlGetVersion)(OUT PRTL_OSVERSIONINFOEXW lpVersionInformation) = (NTSTATUS(__stdcall*)(PRTL_OSVERSIONINFOEXW))GetProcAddress(GetModuleHandle("ntdll.dll"), "RtlGetVersion");
     static void(__stdcall *GetNativeSystemInfo)(OUT LPSYSTEM_INFO lpSystemInfo) = (void(__stdcall*)(LPSYSTEM_INFO))GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNativeSystemInfo");
     static BOOL(__stdcall *GetProductInfo)(IN DWORD dwOSMajorVersion, IN DWORD dwOSMinorVersion, IN DWORD dwSpMajorVersion, IN DWORD dwSpMinorVersion, OUT PDWORD pdwReturnedProductType) = (BOOL(__stdcall*)(DWORD, DWORD, DWORD, DWORD, PDWORD))GetProcAddress(GetModuleHandle("kernel32.dll"), "GetProductInfo");
 
-    OSVERSIONINFOEX osvi;
-    ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
-    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+    OSVERSIONINFOEXW osvi;
+    ZeroMemory(&osvi, sizeof(OSVERSIONINFOEXW));
+    osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEXW);
 
+    if (RtlGetVersion != nullptr)
+    {
+        NTSTATUS ntRtlGetVersionStatus = RtlGetVersion(&osvi);
+        if (ntRtlGetVersionStatus != STATUS_SUCCESS)
+            return "<windows>";
+    }
+    else
+    {
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable: 4996) // C4996: 'function': was declared deprecated
 #endif
-    BOOL bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*)&osvi);
+        BOOL bOsVersionInfoEx = GetVersionExW((OSVERSIONINFOW*)&osvi);
     if (bOsVersionInfoEx == 0)
         return "<windows>";
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
+    }
 
     SYSTEM_INFO si;
     ZeroMemory(&si, sizeof(SYSTEM_INFO));
@@ -181,18 +194,18 @@ std::string Environment::OSVersion()
                 if (osvi.wProductType == VER_NT_WORKSTATION)
                 {
                     if (osvi.dwBuildNumber >= 22000)
-                        os << " Windows 11";
+                        os << "Windows 11 ";
                     else
-                        os << " Windows 10";
+                        os << "Windows 10 ";
                 }
                 else
                 {
                     if (osvi.dwBuildNumber >= 20348)
-                        os << " Windows Server 2022";
+                        os << "Windows Server 2022 ";
                     else if (osvi.dwBuildNumber >= 17763)
-                        os << " Windows Server 2019";
+                        os << "Windows Server 2019 ";
                     else
-                        os << " Windows Server 2016";
+                        os << "Windows Server 2016 ";
                 }
             }
         }
@@ -298,7 +311,7 @@ std::string Environment::OSVersion()
             os << "Windows Storage Server 2003";
         else if (osvi.wSuiteMask & VER_SUITE_WH_SERVER)
             os << "Windows Home Server";
-        else if ((osvi.wProductType == VER_NT_WORKSTATION) && (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64))
+        else if ((osvi.wProductType == VER_NT_WORKSTATION) && (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64))
             os << "Windows XP Professional x64 Edition";
         else
             os << "Windows Server 2003, ";
@@ -360,8 +373,10 @@ std::string Environment::OSVersion()
     }
 
     // Windows Service Pack version
-    if (std::strlen(osvi.szCSDVersion) > 0)
-        os << " " << osvi.szCSDVersion;
+    std::wstring sp_version(osvi.szCSDVersion);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> convert;
+    if (std::wcslen(osvi.szCSDVersion) > 0)
+        os << " " << convert.to_bytes(sp_version.data(), sp_version.data() + sp_version.size());
 
     // Windows build
     os << " (build " << osvi.dwBuildNumber << ")";
