@@ -227,8 +227,8 @@ $(function() {
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">#pragma warning(disable: 4996) // C4996: &#39;function&#39;: was declared deprecated</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        BOOL bOsVersionInfoEx = GetVersionExW((OSVERSIONINFOW*)&amp;osvi);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">if</span> (bOsVersionInfoEx == 0)</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;windows&gt;&quot;</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordflow">if</span> (bOsVersionInfoEx == 0)</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;windows&gt;&quot;</span>;</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">#if defined(_MSC_VER)</span></div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#pragma warning(pop)</span></div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -383,14 +383,14 @@ $(function() {
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;            os &lt;&lt; <span class="stringliteral">&quot;Windows Server 2003, &quot;</span>;</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keywordflow">if</span> (osvi.wProductType != VER_NT_WORKSTATION)</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        {</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            <span class="keywordflow">if</span> (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_IA64)</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            <span class="keywordflow">if</span> (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_IA64)</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            {</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                <span class="keywordflow">if</span> (osvi.wSuiteMask &amp; VER_SUITE_DATACENTER)</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                    os &lt;&lt; <span class="stringliteral">&quot;Datacenter Edition for Itanium-based Systems&quot;</span>;</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (osvi.wSuiteMask &amp; VER_SUITE_ENTERPRISE)</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                    os &lt;&lt; <span class="stringliteral">&quot;Enterprise Edition for Itanium-based Systems&quot;</span>;</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            }</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64)</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            {</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                <span class="keywordflow">if</span> (osvi.wSuiteMask &amp; VER_SUITE_DATACENTER)</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                    os &lt;&lt; <span class="stringliteral">&quot;Datacenter x64 Edition&quot;</span>;</div>
@@ -448,7 +448,7 @@ $(function() {
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot; (build &quot;</span> &lt;&lt; osvi.dwBuildNumber &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160; </div>
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="comment">// Windows architecture</span></div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">if</span> ( osvi.dwMajorVersion &gt;= 6 )</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">if</span> (osvi.dwMajorVersion &gt;= 6)</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    {</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <span class="keywordflow">if</span> (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL)</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            os &lt;&lt; <span class="stringliteral">&quot;, 32-bit&quot;</span>;</div>
