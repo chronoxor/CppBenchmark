@@ -8,7 +8,7 @@
 ![Windows (Cygwin)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-cygwin.yml/badge.svg)
 ![Windows (MinGW)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-mingw.yml/badge.svg)
 ![Windows (MSYS2)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-msys2.yml/badge.svg)
-![Windows (Visual Studio)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-msvc.yml/badge.svg)
+![Windows (Visual Studio)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-vs.yml/badge.svg)
 
 C++ Benchmark Library allows to create performance benchmarks of some code to investigate
 average/minimal/maximal execution time, items processing processing speed, I/O throughput.
