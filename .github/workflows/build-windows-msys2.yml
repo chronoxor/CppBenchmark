@@ -17,6 +17,7 @@ jobs:
       - name: "Setup MSYS2"
         uses: msys2/setup-msys2@v2
         with:
+          release: false
           install: >-
             git
             python3-pip
@@ -36,7 +37,7 @@ jobs:
         env:
           INCLUDE: C:\msys64\usr\include\w32api
           LIB: C:\msys64\usr\lib\w32api
-          PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin
+          PATH: C:\msys64\mingw64\bin:C:\msys64\usr\bin
         run: |
           cd build
           ./unix.sh
