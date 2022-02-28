@@ -37,6 +37,7 @@ jobs:
         env:
           INCLUDE: C:\msys64\usr\include\w32api
           LIB: C:\msys64\usr\lib\w32api
+          CMAKE_MAKE_PROGRAM: C:\msys64\usr\bin\make
         run: |
           cd build
           ./unix.sh
