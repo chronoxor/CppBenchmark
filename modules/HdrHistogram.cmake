@@ -12,7 +12,7 @@ if(NOT TARGET HdrHistogram)
   else()
     set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-char-subscripts -Wno-format -Wno-implicit-function-declaration -Wno-incompatible-pointer-types")
   endif()
-  target_include_directories(HdrHistogram PUBLIC "HdrHistogram/src")
+  target_include_directories(HdrHistogram PUBLIC "HdrHistogram/include")
   target_link_libraries(HdrHistogram zlib)
 
   # Module folder
