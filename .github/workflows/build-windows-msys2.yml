@@ -19,8 +19,9 @@ jobs:
         with:
           release: false
           install: >-
-            cmake
             git
+            make
+            cmake
             python3-pip
             msys2-w32api-runtime
             msys2-w32api-runtime
