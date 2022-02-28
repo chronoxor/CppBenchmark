@@ -21,8 +21,7 @@ jobs:
             git
             python3-pip
             mingw-w64-x86_64-cmake
-            mingw-w64-x86_64-make
-            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-toolchain
             msys2-w32api-runtime
 
       - name: "Setup cmake"
@@ -37,6 +36,7 @@ jobs:
         env:
           INCLUDE: C:\msys64\usr\include\w32api
           LIB: C:\msys64\usr\lib\w32api
+          PATH: C:\msys64\mingw64\bin
         run: |
           cd build
           ./unix.sh
