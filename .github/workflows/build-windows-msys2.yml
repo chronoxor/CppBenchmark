@@ -19,7 +19,10 @@ jobs:
         with:
           install: >-
             base-devel
+            gcc
             git
+            make
+            cmake
             python3-pip
             msys2-w32api-runtime
             msys2-w32api-runtime
