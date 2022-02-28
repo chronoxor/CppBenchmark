@@ -17,11 +17,11 @@
 #include <intrin.h>
 #endif
 
-#include <hdr_histogram.h>
+#include <hdr/hdr_histogram.h>
 
 namespace CppBenchmark {
 
-PhaseMetrics::PhaseMetrics() : _latency(nullptr)
+PhaseMetrics::PhaseMetrics() : _histogram(nullptr)
 {
     ResetMetrics();
 }
@@ -33,27 +33,27 @@ PhaseMetrics::~PhaseMetrics()
 
 bool PhaseMetrics::latency() const noexcept
 {
-    return (_latency != nullptr);
+    return (_histogram != nullptr);
 }
 
 int64_t PhaseMetrics::min_latency() const noexcept
 {
-    return latency() ? hdr_min((const hdr_histogram*)_latency) : 0;
+    return latency() ? hdr_min((const hdr_histogram*)_histogram) : 0;
 }
 
 int64_t PhaseMetrics::max_latency() const noexcept
 {
-    return latency() ? hdr_max((const hdr_histogram*)_latency) : 0;
+    return latency() ? hdr_max((const hdr_histogram*)_histogram) : 0;
 }
 
 double PhaseMetrics::mean_latency() const noexcept
 {
-    return latency() ? hdr_mean((const hdr_histogram*)_latency) : 0;
+    return latency() ? hdr_mean((const hdr_histogram*)_histogram) : 0;
 }
 
 double PhaseMetrics::stdv_latency() const noexcept
 {
-    return latency() ? hdr_stddev((const hdr_histogram*)_latency) : 0;
+    return latency() ? hdr_stddev((const hdr_histogram*)_histogram) : 0;
 }
 
 int64_t PhaseMetrics::avg_time() const noexcept
@@ -102,32 +102,32 @@ void PhaseMetrics::InitLatencyHistogram(const std::tuple<int64_t, int64_t, int>&
     int significant = std::get<2>(latency);
 
     FreeLatencyHistogram();
-    int result = hdr_init(lowest, highest, significant, ((hdr_histogram**)&_latency));
+    int result = hdr_init(lowest, highest, significant, ((hdr_histogram**)&_histogram));
     if (result != 0)
-        _latency = nullptr;
+        _histogram = nullptr;
 }
 
 void PhaseMetrics::PrintLatencyHistogram(FILE* file, int32_t resolution) const noexcept
 {
-    if ((_latency != nullptr) && (file != nullptr))
+    if ((_histogram != nullptr) && (file != nullptr))
     {
-        hdr_percentiles_print((hdr_histogram*)_latency, file, resolution, 1.0, CLASSIC);
+        hdr_percentiles_print((hdr_histogram*)_histogram, file, resolution, 1.0, CLASSIC);
     }
 }
 
 void PhaseMetrics::FreeLatencyHistogram() noexcept
 {
-    if (_latency != nullptr)
+    if (_histogram != nullptr)
     {
-        hdr_close((hdr_histogram*)_latency);
-        _latency = nullptr;
+        hdr_close((hdr_histogram*)_histogram);
+        _histogram = nullptr;
     }
 }
 
 void PhaseMetrics::AddLatency(int64_t latency) noexcept
 {
-    if (_latency != nullptr)
-        hdr_record_values((hdr_histogram*)_latency, latency, 1);
+    if (_histogram != nullptr)
+        hdr_record_values((hdr_histogram*)_histogram, latency, 1);
 }
 
 void PhaseMetrics::StartCollecting() noexcept
@@ -176,7 +176,7 @@ void PhaseMetrics::MergeMetrics(PhaseMetrics& metrics)
     // Choose best total time with operations, items and bytes
     if (metrics._total_time < _total_time)
     {
-        std::swap(_latency, metrics._latency);
+        std::swap(_histogram, metrics._histogram);
         _total_time = metrics._total_time;
         _total_operations = metrics._total_operations;
         _total_items = metrics._total_items;

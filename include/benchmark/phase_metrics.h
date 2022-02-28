@@ -181,7 +181,7 @@ public:
     void AddLatency(int64_t latency) noexcept;
 
 private:
-    void* _latency;
+    void* _histogram;
     int64_t _min_time;
     int64_t _max_time;
     int64_t _total_time;

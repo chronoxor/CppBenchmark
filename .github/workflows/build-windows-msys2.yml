@@ -39,4 +39,4 @@ jobs:
           LIB: C:\msys64\usr\lib\w32api
         run: |
           cd build
-          ./unix.sh
+          ./msys.sh
