@@ -18,11 +18,11 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           install: >-
-            cmake
-            make
             gcc
             git
+            make
             python3-pip
+            mingw-w64-x86_64-cmake
             msys2-w32api-runtime
 
       - name: "Setup cmake"
@@ -35,8 +35,6 @@ jobs:
 
       - name: "Build"
         env:
-          CC: gcc 
-          CXX: g++
           INCLUDE: C:\msys64\usr\include\w32api
           LIB: C:\msys64\usr\lib\w32api
         run: |
