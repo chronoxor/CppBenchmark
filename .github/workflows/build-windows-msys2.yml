@@ -18,13 +18,9 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           install: >-
-            base-devel
-            gcc
             git
-            make
-            cmake
             python3-pip
-            msys2-w32api-runtime
+            mingw-w64-cmake
             msys2-w32api-runtime
 
       - name: "Setup cmake"
