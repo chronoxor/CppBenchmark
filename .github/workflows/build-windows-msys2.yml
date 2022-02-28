@@ -36,7 +36,7 @@ jobs:
         env:
           INCLUDE: C:\msys64\usr\include\w32api
           LIB: C:\msys64\usr\lib\w32api
-          PATH: C:\msys64\mingw64\bin
+          PATH: C:\msys64\mingw64\bin;C:\msys64\usr\bin
         run: |
           cd build
           ./unix.sh
