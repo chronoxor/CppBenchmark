@@ -17,12 +17,13 @@ jobs:
       - name: "Setup MSYS2"
         uses: msys2/setup-msys2@v2
         with:
+          release: false
           install: >-
-            gcc
             git
             make
             python3-pip
             mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-gcc
             msys2-w32api-runtime
 
       - name: "Setup cmake"
