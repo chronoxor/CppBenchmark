@@ -76,11 +76,6 @@ Optional:
 
 # How to build?
 
-### Linux: install required packages
-```shell
-sudo apt-get install -y python3 binutils-dev uuid-dev
-```
-
 ### Install [gil (git links) tool](https://github.com/chronoxor/gil)
 ```shell
 pip3 install gil
