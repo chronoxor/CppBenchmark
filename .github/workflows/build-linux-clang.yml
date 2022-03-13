@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: "Setup binutils-dev"
+      - name: "Setup required packages"
         run: sudo apt-get install -y python3 binutils-dev uuid-dev
 
       - name: "Setup clang"
