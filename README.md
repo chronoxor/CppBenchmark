@@ -59,7 +59,7 @@ with fixtures and parameters, threads benchmarks, produsers/consummers pattern.
 # Requirements
 * Linux
 * MacOS
-* Windows 10
+* Windows
 * [cmake](https://www.cmake.org)
 * [gcc](https://gcc.gnu.org)
 * [git](https://git-scm.com)
@@ -75,6 +75,11 @@ Optional:
 * [Visual Studio](https://www.visualstudio.com)
 
 # How to build?
+
+### Linux: install required packages
+```shell
+sudo apt-get install -y python3 binutils-dev uuid-dev
+```
 
 ### Install [gil (git links) tool](https://github.com/chronoxor/gil)
 ```shell
