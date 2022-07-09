@@ -7,14 +7,9 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 project(cppbenchmark)
 
 # Doxygen
-find_package(Doxygen)
+find_package(Doxygen OPTIONAL_COMPONENTS dot)
 if(DOXYGEN_FOUND)
-  set(DOXYGEN "doxygen")
-  if(NOT TARGET ${DOXYGEN})
-    add_custom_command(OUTPUT "Doxyfile" COMMAND ${DOXYGEN_EXECUTABLE} "Doxyfile" WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/documents")
-    add_custom_target(${DOXYGEN} DEPENDS "Doxyfile")
-    set_target_properties(${DOXYGEN} PROPERTIES FOLDER "doxygen")
-  endif()
+  doxygen_add_docs(doxygen WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/documents" COMMENT "Generate documentation using Doxygen tool")
 endif()
 
 # CMake module path
