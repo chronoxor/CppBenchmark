@@ -31,7 +31,7 @@ jobs:
         env:
           INCLUDE: C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\x86_64-w64-mingw32\include
           LIB: C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\x86_64-w64-mingw32\lib
-          PATH: C:\Program Files\doxygen;c:\Program Files\graphviz\bin
+          PATH: C:\Program Files\doxygen;c:\Program Files\graphviz\bin;%PATH%
         run: |
           cd build
           ./mingw.bat
