@@ -19,7 +19,7 @@ jobs:
 
       - name: "Setup Doxygen & Graphviz"
         run: |
-          choco install doxygen
+          choco install doxygen.install
           choco install graphviz
 
       - name: "Setup gil"
