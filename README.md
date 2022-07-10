@@ -1,4 +1,4 @@
- CppBenchmark
+# CppBenchmark
 
 [![Linux (clang)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-clang.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-clang.yml)
 [![Linux (gcc)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-gcc.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-gcc.yml)
