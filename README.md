@@ -6,7 +6,8 @@
 [![MacOS](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-macos.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-macos.yml)
 <br/>
 [![Windows (Cygwin)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-cygwin.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-cygwin.yml)
-[![Windows (MSYS2/MinGW)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-msys2.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-msys2.yml)
+[![Windows (MSYS2)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-msys2.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-msys2.yml)
+[![Windows (MinGW)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-mingw.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-mingw.yml)
 [![Windows (Visual Studio)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-vs.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-vs.yml)
 
 C++ Benchmark Library allows to create performance benchmarks of some code to investigate
@@ -70,6 +71,7 @@ Optional:
 * [CLion](https://www.jetbrains.com/clion)
 * [Cygwin](https://cygwin.com)
 * [MSYS2](https://www.msys2.org)
+* [MinGW](https://mingw-w64.org/doku.php)
 * [Visual Studio](https://www.visualstudio.com)
 
 # How to build?
@@ -104,10 +106,16 @@ cd build
 unix.bat
 ```
 
-### Windows (MSYS2/MinGW)
+### Windows (MSYS2)
 ```shell
 cd build
 unix.bat
+```
+
+### Windows (MinGW)
+```shell
+cd build
+mingw.bat
 ```
 
 ### Windows (Visual Studio)
