@@ -19,6 +19,7 @@ jobs:
 
       - name: "Setup Doxygen & Graphviz"
         run: |
+          where cmake
           choco install doxygen.install
           choco install graphviz
 
@@ -31,7 +32,7 @@ jobs:
         env:
           INCLUDE: C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\x86_64-w64-mingw32\include
           LIB: C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\x86_64-w64-mingw32\lib
-          PATH: C:\Program Files\doxygen;c:\Program Files\graphviz\bin;%GITHUB_PATH%
+          PATH: C:\Program Files\doxygen;c:\Program Files\graphviz\bin
         run: |
           cd build
           ./mingw.bat
