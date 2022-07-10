@@ -1,4 +1,4 @@
-name: Windows (MSYS2)
+name: Windows (MSYS2/MinGW)
 
 on:
   push:
