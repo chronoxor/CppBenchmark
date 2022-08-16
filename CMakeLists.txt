@@ -26,6 +26,9 @@ include(SetCompilerWarnings)
 include(SetPlatformFeatures)
 include(SystemInformation)
 
+# Compiler options
+add_compile_options(-w)
+
 # External packages
 find_package(Threads REQUIRED)
 
