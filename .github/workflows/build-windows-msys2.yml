@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: msys2 {0}
+        shell: C:\msys64\usr\bin\bash.exe {0}
     steps:
       - uses: actions/checkout@v2
 
