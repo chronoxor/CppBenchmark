@@ -89,7 +89,6 @@ $(function() {
 <div class="line">    <span class="keywordtype">void</span> <a name="a1"></a><a class="code" href="class_cpp_benchmark_1_1_fixture.html#a53dc414574cb40710ad95c2266bb607d">Initialize</a>(<a name="_a2"></a><a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
 <div class="line">        items.resize(context.<a name="a3"></a><a class="code" href="class_cpp_benchmark_1_1_context.html#a40fef89b43336b12fcf0cfcb72900946">x</a>());</div>
-<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordtype">void</span> <a name="a4"></a><a class="code" href="class_cpp_benchmark_1_1_fixture.html#a5436824d6a8d00158f634f015b648648">Cleanup</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
@@ -106,6 +105,10 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a name="a7"></a><a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Sort items</span></div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; items.size(); ++i)</div>
 <div class="line">        {</div>
 <div class="line">            <span class="comment">// Set the current item as minimal</span></div>
@@ -133,6 +136,9 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
 <div class="line">        <span class="comment">// Iterate through all items to get the current bound</span></div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; items.size(); ++i)</div>
 <div class="line">        {</div>
@@ -159,6 +165,9 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
 <div class="line">        <span class="comment">// Start values of left and right bound</span></div>
 <div class="line">        <span class="keywordtype">size_t</span> left = 1;</div>
 <div class="line">        <span class="keywordtype">size_t</span> right = items.size();</div>
@@ -198,6 +207,9 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
 <div class="line">        <span class="comment">// Current index</span></div>
 <div class="line">        <span class="keywordtype">size_t</span> i = 1;</div>
 <div class="line">        <span class="comment">// Jump index</span></div>
@@ -239,6 +251,10 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Sort items</span></div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; items.size(); ++i)</div>
 <div class="line">        {</div>
 <div class="line">            <span class="comment">// Take the next item</span></div>
@@ -261,6 +277,9 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
 <div class="line">        <span class="comment">// Calculate initial distance</span></div>
 <div class="line">        <span class="keywordtype">size_t</span> d = 1;</div>
 <div class="line">        <span class="keywordflow">while</span> (d &lt; items.size())</div>
@@ -302,6 +321,9 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
 <div class="line">        <span class="comment">// Use temporary array</span></div>
 <div class="line">        std::vector&lt;int&gt; temp(items.size());</div>
 <div class="line"> </div>
@@ -361,6 +383,10 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Sort items</span></div>
 <div class="line">        <span class="keywordflow">if</span> (items.size() &gt; 0)</div>
 <div class="line">            QuickSortInternal(items, 1, items.size());</div>
 <div class="line">        context.<a class="code" href="class_cpp_benchmark_1_1_context.html#a7f3b6da52954eb49b791ebce41e53e16">metrics</a>().<a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#a91dd543cfcffb02cacbbd966d38ac402">AddItems</a>(items.size());</div>
@@ -412,6 +438,10 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Sort items</span></div>
 <div class="line">        <span class="keywordflow">if</span> (items.size() &gt; 0)</div>
 <div class="line">            QuickSort3Internal(items, 1, items.size());</div>
 <div class="line">        context.<a class="code" href="class_cpp_benchmark_1_1_context.html#a7f3b6da52954eb49b791ebce41e53e16">metrics</a>().<a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#a91dd543cfcffb02cacbbd966d38ac402">AddItems</a>(items.size());</div>
@@ -487,6 +517,9 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
 <div class="line">        <span class="comment">// Cache radix queue for all digits</span></div>
 <div class="line">        std::queue&lt;int&gt; radix_queue[10];</div>
 <div class="line"> </div>
@@ -545,6 +578,10 @@ $(function() {
 <div class="line"><span class="keyword">protected</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(<a class="code" href="class_cpp_benchmark_1_1_context.html">CppBenchmark::Context</a>&amp; context)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Generate items to sort</span></div>
+<div class="line">        std::generate(items.begin(), items.end(), rand);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Sort items</span></div>
 <div class="line">        std::sort(items.begin(), items.end());</div>
 <div class="line">        context.<a class="code" href="class_cpp_benchmark_1_1_context.html#a7f3b6da52954eb49b791ebce41e53e16">metrics</a>().<a class="code" href="class_cpp_benchmark_1_1_phase_metrics.html#a91dd543cfcffb02cacbbd966d38ac402">AddItems</a>(items.size());</div>
 <div class="line">    }</div>
