@@ -60,8 +60,10 @@ private:
     int32_t _histograms;
     std::string _filter;
     std::string _output;
+    std::string _fileoutput;
+    bool _isfileoutput;
 
-    LauncherConsole() : _init(false), _list(false), _quiet(false), _histograms(0), _filter(""), _output("console") {}
+    LauncherConsole() : _init(false), _list(false), _quiet(false), _histograms(0), _filter(""), _output("console") , _fileoutput(""), _isfileoutput(false) {}
 };
 
 } // namespace CppBenchmark

@@ -16,6 +16,7 @@
 
 #include <iomanip>
 #include <regex>
+#include <fstream>
 
 #include <OptionParser.h>
 
@@ -32,6 +33,7 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
     parser.add_option("-o", "--output").dest("output").choices(&output[0], &output[3]).set_default(output[0]).help("Output format (console, csv, json). Default: %default");
     parser.add_option("-q", "--quiet").dest("quiet").action("store_true").help("Launch in quiet mode. No progress will be shown!");
     parser.add_option("-r", "--histograms").dest("histograms").action("store").type("int").set_default(0).help("Create High Dynamic Range (HDR) Histogram files with a given resolution. Default: %default");
+    parser.add_option("-w", "--fileoutput").dest("fileoutput").help("Specify file output for report. If file cannot be opened, standard output will be used (std::cout).");
 
     optparse::Values options = parser.parse_args(argc, argv);
 
@@ -56,6 +58,11 @@ void LauncherConsole::Initialize(const int argc, char const* const* const argv)
         _filter = options["filter"];
     if (options.is_set("output"))
         _output = options["output"];
+    if (options.is_set("fileoutput"))
+    {
+	    _fileoutput = options["fileoutput"];
+        _isfileoutput = true;
+    }
 
     // Update initialization flag
     _init = true;
@@ -83,21 +90,52 @@ void LauncherConsole::Execute()
 
 void LauncherConsole::Report() const
 {
+    std::ofstream outFile;
+    if (_isfileoutput)
+        outFile.open(_fileoutput.c_str());
+
     if (_output == "console")
     {
-        ReporterConsole reporter(std::cout);
-        Launcher::Report(reporter);
+		if (_isfileoutput && outFile)
+		{
+			ReporterConsole reporter(outFile);
+			Launcher::Report(reporter);
+		}
+		else
+		{
+			ReporterConsole reporter(std::cout);
+			Launcher::Report(reporter);
+		}
     }
     else if (_output == "csv")
     {
-        ReporterCSV reporter(std::cout);
-        Launcher::Report(reporter);
+        if (_isfileoutput && outFile)
+        {
+            ReporterCSV reporter(outFile);
+            Launcher::Report(reporter);
+        }
+        else
+        {
+            ReporterCSV reporter(std::cout);
+            Launcher::Report(reporter);
+        }
     }
     else if (_output == "json")
     {
-        ReporterJSON reporter(std::cout);
-        Launcher::Report(reporter);
+        if (_isfileoutput && outFile)
+        {
+            ReporterJSON reporter(outFile);
+            Launcher::Report(reporter);
+        }
+        else
+        {
+            ReporterJSON reporter(std::cout);
+            Launcher::Report(reporter);
+        }
     }
+
+    if (outFile.is_open())
+        outFile.close();
 
     // Report histograms
     if (_histograms > 0)
