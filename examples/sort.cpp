@@ -19,7 +19,6 @@ protected:
     void Initialize(CppBenchmark::Context& context) override
     {
         items.resize(context.x());
-        std::generate(items.begin(), items.end(), rand);
     }
 
     void Cleanup(CppBenchmark::Context& context) override
@@ -36,6 +35,10 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
+        // Sort items
         for (size_t i = 0; i < items.size(); ++i)
         {
             // Set the current item as minimal
@@ -63,6 +66,9 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
         // Iterate through all items to get the current bound
         for (size_t i = 0; i < items.size(); ++i)
         {
@@ -89,6 +95,9 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
         // Start values of left and right bound
         size_t left = 1;
         size_t right = items.size();
@@ -128,6 +137,9 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
         // Current index
         size_t i = 1;
         // Jump index
@@ -169,6 +181,10 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
+        // Sort items
         for (size_t i = 1; i < items.size(); ++i)
         {
             // Take the next item
@@ -191,6 +207,9 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
         // Calculate initial distance
         size_t d = 1;
         while (d < items.size())
@@ -232,6 +251,9 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
         // Use temporary array
         std::vector<int> temp(items.size());
 
@@ -291,6 +313,10 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
+        // Sort items
         if (items.size() > 0)
             QuickSortInternal(items, 1, items.size());
         context.metrics().AddItems(items.size());
@@ -342,6 +368,10 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
+        // Sort items
         if (items.size() > 0)
             QuickSort3Internal(items, 1, items.size());
         context.metrics().AddItems(items.size());
@@ -417,6 +447,9 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
         // Cache radix queue for all digits
         std::queue<int> radix_queue[10];
 
@@ -475,6 +508,10 @@ public:
 protected:
     void Run(CppBenchmark::Context& context) override
     {
+        // Generate items to sort
+        std::generate(items.begin(), items.end(), rand);
+
+        // Sort items
         std::sort(items.begin(), items.end());
         context.metrics().AddItems(items.size());
     }
