@@ -1423,5 +1423,5 @@ When you create and build a benchmark you can run it with the following command 
 * **-f FILTER, --filter=FILTER** - Filter benchmarks by the given regexp pattern
 * **-l, --list** - List all avaliable benchmarks
 * **-o OUTPUT, --output=OUTPUT** - Output format (console, csv, json). Default: console
-* **-s, --silent** - Launch in silent mode. No progress will be shown!
+* **-q, --quiet** - Launch in quiet mode. No progress will be shown!
 * **-r HISTOGRAMS, --histograms=HISTOGRAMS** - Create High Dynamic Range (HDR) Histogram files with a given resolution. Default: 0
