@@ -15,14 +15,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-          check-latest: true
 
       - name: "Setup cmake"
         run: cmake --version
 
       - name: "Setup gil"
         run: |
-          echo $PATH
           pip3 install gil
           gil update
 
