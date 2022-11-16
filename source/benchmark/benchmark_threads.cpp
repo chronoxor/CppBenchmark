@@ -107,9 +107,6 @@ void BenchmarkThreads::Launch(int& current, int total, LauncherHandler& handler)
                             // Collect data for one second...
                             for (; timespan < 1000000000; ++count)
                             {
-                                // Add new metrics operation
-                                thread_context._metrics->AddOperations(1);
-
                                 timestamp = System::Timestamp();
 
                                 // Run thread method...
