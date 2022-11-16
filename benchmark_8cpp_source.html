@@ -127,65 +127,62 @@ $(function() {
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="comment">// Collect data for one second...</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keywordflow">for</span> (; timespan &lt; 1000000000; ++count)</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <span class="comment">// Add new metrics operation</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    context._metrics-&gt;AddOperations(1);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    timestamp = <a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    timestamp = <a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    <span class="comment">// Run benchmark method...</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(context);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="comment">// Run benchmark method...</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(context);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    timespan += <a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>() - timestamp;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    timespan += <a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>() - timestamp;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="comment">// Approximate operations count</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                operations = (1000000000ull * count * duration) / timespan;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            context._current-&gt;StartCollectingMetrics();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">while</span> (!context.canceled() &amp;&amp; (infinite || (operations &gt; 0)))</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="comment">// Add new metrics operation</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                context._metrics-&gt;AddOperations(1);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="comment">// Store the timestamp for the automatic latency update</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordflow">if</span> (latency_auto)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    timestamp = <a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="comment">// Approximate operations count</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                operations = (1000000000ull * count * duration) / timespan;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            context._current-&gt;StartCollectingMetrics();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">while</span> (!context.canceled() &amp;&amp; (infinite || (operations &gt; 0)))</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="comment">// Add new metrics operation</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                context._metrics-&gt;AddOperations(1);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="comment">// Store the timestamp for the automatic latency update</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keywordflow">if</span> (latency_auto)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    timestamp = <a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="comment">// Run benchmark method...</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(context);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="comment">// Run benchmark method...</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                <a class="code" href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">Run</a>(context);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="comment">// Update latency metrics</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="keywordflow">if</span> (latency_auto)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    context._metrics-&gt;AddLatency(<a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>() - timestamp);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="comment">// Decrement operation counters</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                operations -= 1;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            context._current-&gt;StopCollectingMetrics();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="comment">// Update latency metrics</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                <span class="keywordflow">if</span> (latency_auto)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    context._metrics-&gt;AddLatency(<a class="code" href="class_cpp_benchmark_1_1_system.html#a56167f231b914524ec284ee5cfc55077">System::Timestamp</a>() - timestamp);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="comment">// Decrement operation counters</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                operations -= 1;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            context._current-&gt;StopCollectingMetrics();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="comment">// Call cleanup benchmark method...</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <a class="code" href="class_cpp_benchmark_1_1_fixture.html#a5436824d6a8d00158f634f015b648648">Cleanup</a>(context);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="comment">// Call cleanup benchmark method...</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <a class="code" href="class_cpp_benchmark_1_1_fixture.html#a5436824d6a8d00158f634f015b648648">Cleanup</a>(context);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="comment">// Call launched notification...</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            handler.onLaunched(current, total, *<span class="keyword">this</span>, context, attempt);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">// Update benchmark root metrics for the current attempt</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#af879b2d68f3ee199f1d63fd853c703b4">UpdateBenchmarkMetrics</a>(<a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#afe756a93c2776cb4e7fb6bb402c4b49e">_phases</a>);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="comment">// Call launched notification...</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            handler.onLaunched(current, total, *<span class="keyword">this</span>, context, attempt);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="comment">// Update benchmark root metrics for the current attempt</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#af879b2d68f3ee199f1d63fd853c703b4">UpdateBenchmarkMetrics</a>(<a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#afe756a93c2776cb4e7fb6bb402c4b49e">_phases</a>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="comment">// Update benchmark threads</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a92c0dc956655875a27f3b9e97fd3bb7a">UpdateBenchmarkThreads</a>(<a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#afe756a93c2776cb4e7fb6bb402c4b49e">_phases</a>);</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">// Update benchmark threads</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a92c0dc956655875a27f3b9e97fd3bb7a">UpdateBenchmarkThreads</a>(<a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#afe756a93c2776cb4e7fb6bb402c4b49e">_phases</a>);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">// Update benchmark names</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a4ddcc2b2860c4fd74715dbc59977eb0e">UpdateBenchmarkNames</a>(<a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#afe756a93c2776cb4e7fb6bb402c4b49e">_phases</a>);</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">// Update benchmark names</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a4ddcc2b2860c4fd74715dbc59977eb0e">UpdateBenchmarkNames</a>(<a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#afe756a93c2776cb4e7fb6bb402c4b49e">_phases</a>);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="comment">// Update benchmark launched flag</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a121785709c73cf3e26f380dfce2dd43f">_launched</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">// Update benchmark launched flag</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="class_cpp_benchmark_1_1_benchmark_base.html#a121785709c73cf3e26f380dfce2dd43f">_launched</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;} <span class="comment">// namespace CppBenchmark</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_cpp_benchmark_1_1_benchmark_base_html_a4ddcc2b2860c4fd74715dbc59977eb0e"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark_base.html#a4ddcc2b2860c4fd74715dbc59977eb0e">CppBenchmark::BenchmarkBase::UpdateBenchmarkNames</a></div><div class="ttdeci">static void UpdateBenchmarkNames(std::vector&lt; std::shared_ptr&lt; PhaseCore &gt;&gt; &amp;phases)</div><div class="ttdoc">Update benchmark names for the given benchmark phases collection.</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__base_8cpp_source.html#l00078">benchmark_base.cpp:78</a></div></div>
 <div class="ttc" id="aclass_cpp_benchmark_1_1_benchmark_html_abdbc6bd6fc8d8b6ab89af58af984242c"><div class="ttname"><a href="class_cpp_benchmark_1_1_benchmark.html#abdbc6bd6fc8d8b6ab89af58af984242c">CppBenchmark::Benchmark::Run</a></div><div class="ttdeci">virtual void Run(Context &amp;context)=0</div><div class="ttdoc">Benchmark run method.</div></div>
