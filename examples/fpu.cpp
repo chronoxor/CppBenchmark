@@ -10,7 +10,6 @@ BENCHMARK("sin()")
 {
     [[maybe_unused]] static double sum = 0;
     sum += sin(123.456);
-
 }
 
 BENCHMARK("cos()")
