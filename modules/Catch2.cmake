@@ -1,4 +1,4 @@
-if(NOT Catch2)
+if(NOT TARGET Catch2)
 
   # Module subdirectory
   add_subdirectory("Catch2")

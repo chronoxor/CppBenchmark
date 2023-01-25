@@ -10,7 +10,7 @@ if(NOT TARGET HdrHistogram)
     # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
     set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4057 /wd4146 /wd4244")
   else()
-    set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-char-subscripts -Wno-format -Wno-implicit-function-declaration -Wno-incompatible-pointer-types")
+    set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-char-subscripts -Wno-format -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-restrict")
   endif()
   target_include_directories(HdrHistogram PUBLIC "HdrHistogram/include")
   target_link_libraries(HdrHistogram zlib)
