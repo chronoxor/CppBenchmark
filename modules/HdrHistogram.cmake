@@ -9,8 +9,10 @@ if(NOT TARGET HdrHistogram)
     # C4146: unary minus operator applied to unsigned type, result still unsigned
     # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
     set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4057 /wd4146 /wd4244")
+  elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-restrict")
   else()
-    set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-char-subscripts -Wno-format -Wno-implicit-function-declaration -Wno-incompatible-pointer-types -Wno-restrict")
+    set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
   endif()
   target_include_directories(HdrHistogram PUBLIC "HdrHistogram/include")
   target_link_libraries(HdrHistogram zlib)
