@@ -1,5 +1,5 @@
 # Modules
-Catch2 modules/Catch2 https://github.com/catchorg/Catch2.git v2.x
+Catch2 modules/Catch2 https://github.com/catchorg/Catch2.git devel
 cpp-optparse modules/cpp-optparse https://github.com/weisslj/cpp-optparse.git master
 HdrHistogram modules/HdrHistogram https://github.com/HdrHistogram/HdrHistogram_c.git main
 zlib modules/zlib https://github.com/madler/zlib.git master
