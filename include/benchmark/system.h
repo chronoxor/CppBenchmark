@@ -9,6 +9,7 @@
 #ifndef CPPBENCHMARK_SYSTEM_H
 #define CPPBENCHMARK_SYSTEM_H
 
+#include <cstdint>
 #include <string>
 
 namespace CppBenchmark {
