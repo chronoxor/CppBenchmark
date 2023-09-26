@@ -1,8 +1,8 @@
 # CppBenchmark
 
+[![Release](https://img.shields.io/github/release/chronoxor/CppBenchmark.svg?sort=semver)](https://github.com/chronoxor/CppBenchmark/releases)
 [![Linux (clang)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-clang.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-clang.yml)
 [![Linux (gcc)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-gcc.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-gcc.yml)
-<br/>
 [![MacOS](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-macos.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-macos.yml)
 <br/>
 [![Windows (Cygwin)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-cygwin.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-windows-cygwin.yml)
