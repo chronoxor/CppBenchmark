@@ -1,6 +1,8 @@
 # CppBenchmark
 
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Release](https://img.shields.io/github/release/chronoxor/CppBenchmark.svg?sort=semver)](https://github.com/chronoxor/CppBenchmark/releases)
+<br/>
 [![Linux (clang)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-clang.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-clang.yml)
 [![Linux (gcc)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-gcc.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-linux-gcc.yml)
 [![MacOS](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-macos.yml/badge.svg)](https://github.com/chronoxor/CppBenchmark/actions/workflows/build-macos.yml)
