@@ -21,13 +21,13 @@ jobs:
           release: false
           install: >-
             git
+            make
             mingw-w64-ucrt-x86_64-cmake
             mingw-w64-ucrt-x86_64-gcc
             mingw-w64-ucrt-x86_64-doxygen
             mingw-w64-ucrt-x86_64-graphviz
-            mingw-w64-ucrt-x86_64-make
-            mingw-w64-ucrt-x86_64-python-pip
             msys2-w32api-runtime
+            python-pip
 
       - name: "Setup cmake"
         run: cmake --version
