@@ -194,8 +194,18 @@ std::pair<int, int> System::CpuTotalCores()
 
     return std::make_pair(logical, physical);
 #elif defined(unix) || defined(__unix) || defined(__unix__)
-    long processors = sysconf(_SC_NPROCESSORS_ONLN);
-    return std::make_pair(processors, processors);
+    std::set<int> unique_cores;
+    std::ifstream cpuinfo("/proc/cpuinfo");
+    std::string line;
+    while (std::getline(cpuinfo, line)) {
+        if (line.find("core id") != std::string::npos) {
+            const int core_id = std::stoi(line.substr(line.find(":") + 1));
+            unique_cores.insert(core_id);
+        }
+    }
+    const int physical = unique_cores.size();
+    const long logical = sysconf(_SC_NPROCESSORS_ONLN);
+    return std::make_pair(logical, physical);
 #elif defined(_WIN32) || defined(_WIN64)
     BOOL allocated = FALSE;
     PSYSTEM_LOGICAL_PROCESSOR_INFORMATION pBuffer = nullptr;
