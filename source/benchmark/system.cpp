@@ -256,9 +256,15 @@ int64_t System::CpuClockSpeed()
 {
 #if defined(__APPLE__)
     uint64_t frequency = 0;
-    size_t size = sizeof(frequency);
-    if (sysctlbyname("hw.cpufrequency", &frequency, &size, nullptr, 0) == 0)
+    size_t frequency_size = sizeof(frequency);
+    if (sysctlbyname("hw.cpufrequency", &frequency, &frequency_size, nullptr, 0) == 0)
         return frequency;
+
+    // On Apple Silicon fallback to hw.tbfrequency and kern.clockrate.hz
+    struct clockinfo clockrate;
+    size_t clockrate_size = sizeof(clockrate);
+    if ((sysctlbyname("hw.tbfrequency", &frequency, &frequency_size, NULL, 0) == 0) && (sysctlbyname("kern.clockrate", &clockrate, &clockrate_size, NULL, 0) == 0)) 
+        return frequency * clockrate.hz;
 
     return -1;
 #elif defined(unix) || defined(__unix) || defined(__unix__)
