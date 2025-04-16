@@ -209,7 +209,7 @@ std::pair<int, int> System::CpuTotalCores()
     }
 
     size_t logical = cores.size();
-    long physical = sysconf(_SC_N2PROCESSORS_ONLN);
+    long physical = sysconf(_SC_NPROCESSORS_ONLN);
     return std::make_pair(logical, physical);
 #elif defined(_WIN32) || defined(_WIN64)
     BOOL allocated = FALSE;
