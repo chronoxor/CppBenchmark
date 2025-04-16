@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <fstream>
 #include <regex>
+#include <set>
 #endif
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
