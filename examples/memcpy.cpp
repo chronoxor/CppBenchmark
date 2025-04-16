@@ -49,6 +49,7 @@ BENCHMARK("memmove", settings)
     uint64_t crc = 0;
     size_t size = context.x();
     uint8_t buffer[chunk_size_to];
+    std::memset(buffer, 0, size);
     std::memmove(buffer, buffer + size / 4, size / 2);
     std::memmove(buffer + size / 2, buffer + size / 4, size / 2);
     crc = buffer[0];
