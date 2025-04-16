@@ -28,6 +28,7 @@ jobs:
             mingw-w64-ucrt-x86_64-graphviz
             msys2-w32api-runtime
             python-pip
+            python-gil
 
       - name: "Setup cmake"
         run: cmake --version
