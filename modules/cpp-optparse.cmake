@@ -9,7 +9,7 @@ if(NOT TARGET cpp-optparse)
     set_target_properties(cpp-optparse PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4244 /wd4996")
   elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # Warning "<ciso646> is deprecated in C++17, use <version> to detect implementation-specific macros
-    set_target_properties(cpp-optparse PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wdeprecated-declarations")
+    set_target_properties(cpp-optparse PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-c++17-extensions")
   else()
     set_target_properties(cpp-optparse PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
   endif()
