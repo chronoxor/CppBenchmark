@@ -8,6 +8,11 @@
 
 #include "benchmark/environment.h"
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations" // GCC: warning: 'wstring_convert' is deprecated
+#endif
+
 #include <chrono>
 #include <codecvt>
 #include <cstring>
@@ -431,3 +436,7 @@ time_t Environment::Timestamp()
 }
 
 } // namespace CppBenchmark
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
