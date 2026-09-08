@@ -24,8 +24,6 @@ jobs:
           check-sig: false
           platform: x86_64
           packages: automake make cmake gcc-g++ doxygen graphviz libssl-devel libuuid-devel
-          site: http://kernel.org
-          upgrade: false
 
       - name: "Setup cmake"
         run: cmake --version
