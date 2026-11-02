@@ -15,7 +15,7 @@ if(NOT TARGET HdrHistogram)
     set_target_properties(HdrHistogram PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
   endif()
   target_include_directories(HdrHistogram PUBLIC "HdrHistogram/include")
-  target_link_libraries(HdrHistogram zlib)
+  target_link_libraries(HdrHistogram zlibstatic)
 
   # Module folder
   set_target_properties(HdrHistogram PROPERTIES FOLDER "modules/HdrHistogram")
